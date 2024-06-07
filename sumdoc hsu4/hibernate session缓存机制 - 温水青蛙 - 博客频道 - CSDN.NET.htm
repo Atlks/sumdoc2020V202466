@@ -1,0 +1,975 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+     
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    
+<head>
+
+    <script id="allmobilize" charset="utf-8" src="http://a.yunshipei.com/46aae4d1e2371e4aa769798941cef698/allmobilize.min.js"></script>
+ <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+
+    <title>hibernate session缓存机制 - 温水青蛙
+        - 博客频道 - CSDN.NET</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="Hibernate向我们提供的主要的操纵数据库的接口,Session就是其中的一个,它提供了基本的增,删,改,查方法.而且具有一个缓存机制,能够按照某个时间点,按照缓存中的持久化对象属性的变化来更新数据库,着就是Session的缓存清理过程.在Hibernate中对象分为三个状态,临时,持久化,游离.如果我们希望JAVA里的一个对象一直存在,就必须有一个变量一直引用着这个对象.当这个变量没了.对象" />
+    <script src="http://static.blog.csdn.net/scripts/jquery.js" type="text/javascript"></script>
+    <script type="text/javascript" src="http://static.blog.csdn.net/scripts/ad.js?v=1.1"></script>
+        <!--new top-->
+               <link rel="stylesheet" href="http://static.csdn.net/public/common/toolbar/css/index.css">        <!--new top-->
+
+    <link rel="Stylesheet" type="text/css" href="http://static.blog.csdn.net/skin/default/css/style.css?v=1.1" />
+    <link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" href="/dongnan591172113/rss/list" />
+    <link rel="shortcut icon" href="http://csdnimg.cn/public/favicon.ico" />
+    <link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+ 
+
+
+</head>
+<body>
+    
+   
+      <!--new top-->
+    <script id="toolbar-tpl-scriptId" fixed="true" prod="blog" skin="black" src="http://static.csdn.net/public/common/toolbar/js/html.js" type="text/javascript"></script>
+     <!--new top-->
+    <div id="container">
+        <div id="header">
+    <div class="header">
+        <div id="blog_title">
+            <h2>
+                <a href="http://blog.csdn.net/dongnan591172113">温水青蛙</a></h2>
+            <h3></h3>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+</div>
+<div id="navigator">
+    <div class="navigator_bg">
+    </div>
+    <div class="navigator">
+        <ul>
+                <li id="btnContents"><a href="http://blog.csdn.net/dongnan591172113?viewmode=contents"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_mulu'])">
+                    <img src="http://static.blog.csdn.net/images/ico_list.gif">目录视图</span></a></li>
+                <li id="btnView"><a href="http://blog.csdn.net/dongnan591172113?viewmode=list"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_zhaiyao'])">
+                    <img src="http://static.blog.csdn.net/images/ico_summary.gif">摘要视图</span></a></li>
+                <li id="btnRss"><a href="http://blog.csdn.net/dongnan591172113/rss/list"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_RSS'])">
+                    <img src="http://static.blog.csdn.net/images/ico_rss.gif">订阅</span></a></li>                
+
+            </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    var username = "dongnan591172113";
+    var _blogger = username;
+    var blog_address = "http://blog.csdn.net/dongnan591172113";
+    var static_host = "http://static.blog.csdn.net";
+    var currentUserName = "";  
+</script>
+
+        <div id="body">
+            <div id="main">
+                <div class="main">
+                        <div class="ad_class">
+<div class="notice tracking-ad" data-mod='popu_3' > 
+
+<a href="http://bbs.csdn.net/topics/390812950?page=2#post-398116601"target="_blank">
+<font color=blue>博客专家福利
+</font></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<a href="http://bbs.csdn.net/topics/390863850">
+<font color=red>【限时活动】建专辑得大奖</font></a>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<a href="http://www.csdn.net/article/2014-09-10/2821606">
+<font color=blue>专访荣浩：流程的永恒之道
+</font></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="http://blog.csdn.net/blogdevteam/article/details/38657235"><font color=red>当青春遇上互联网，能否点燃你的创业梦
+</font></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="http://blog.csdn.net/blogdevteam/article/details/38418263">
+<font color=blue>推荐有礼--找出您心中的技术大牛
+</font></a>
+
+
+</div>                        </div>
+                        
+
+  
+<link href="http://static.blog.csdn.net/css/comment1.css" type="text/css" rel="stylesheet" />
+<link href="http://static.blog.csdn.net/css/style1.css" type="text/css" rel="stylesheet" />
+<script language='JavaScript' type='text/javascript' src='http://download.csdn.net/js/jquery.cookie.js'></script>
+<script type="text/javascript" src="http://csdnimg.cn/rabbit/search-service/main.js"></script>
+<div id="article_details" class="details">
+    <div class="article_title">   
+         <span class="ico ico_type_Repost"></span>
+
+
+    <h1>
+        <span class="link_title"><a href="/dongnan591172113/article/details/7943652">
+        hibernate session缓存机制
+        </a></span>
+    </h1>
+</div>
+
+    <div class="article_manage">
+        <span class="link_categories">
+        分类：
+            <a href="/dongnan591172113/article/category/1165981" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_fenlei']);">hibernate</a> 
+        </span>
+    <span class="link_postdate">2012-09-04 20:20</span>
+    <span class="link_view" title="阅读次数">1001人阅读</span>
+    <span class="link_comments" title="评论次数"><a href="#comments" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_pinglun'])">评论</a>(0)</span>
+    <span class="link_collect"><a href="javascript:void(0);" onclick="javascript:_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shoucang']);collectArticle('hibernate session缓存机制','7943652');return false;" title="收藏">收藏</a></span>
+    <span class="link_report"><a href="#report"  onclick="javascript:_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_jubao']);report(7943652,2);return false;" title="举报">举报</a></span>
+    
+</div>
+<div class="tag2box"><a href='http://www.csdn.net/tag/session' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">session</a><a href='http://www.csdn.net/tag/hibernate' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">hibernate</a><a href='http://www.csdn.net/tag/%e6%95%b0%e6%8d%ae%e5%ba%93' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">数据库</a><a href='http://www.csdn.net/tag/java' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">java</a><a href='http://www.csdn.net/tag/sql' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">sql</a><a href='http://www.csdn.net/tag/null' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">null</a></div>
+
+  
+    
+<div id="article_content" class="article_content">
+
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="color:rgb(75,75,75); font-size:18px"><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Hibernate</span><span style="color:rgb(75,75,75); font-size:18px; font-family:宋体">向我们提供的主要的操纵数据库的接口</span><span style="color:rgb(75,75,75); font-size:18px; font-family:Georgia">,Session</span><span style="color:rgb(75,75,75); font-size:18px; font-family:宋体">就是其中的一个</span><span style="color:rgb(75,75,75); font-size:18px; font-family:Georgia">,</span><span style="color:rgb(75,75,75); font-size:18px; font-family:宋体">它提供了基本的增</span><span style="color:rgb(75,75,75); font-size:18px; font-family:Georgia">,</span><span style="color:rgb(75,75,75); font-size:18px; font-family:宋体">删</span><span style="color:rgb(75,75,75); font-size:18px; font-family:Georgia">,</span><span style="color:rgb(75,75,75); font-size:18px; font-family:宋体">改</span><span style="color:rgb(75,75,75); font-size:18px; font-family:Georgia">,</span><span style="color:rgb(75,75,75); font-size:18px; font-family:宋体">查方法</span><span style="color:rgb(75,75,75); font-size:18px; font-family:Georgia">.</span><span style="color:rgb(75,75,75); font-size:18px; font-family:宋体">而且具有一个缓存机制</span><span style="color:rgb(75,75,75); font-size:18px; font-family:Georgia">,</span><span style="color:rgb(75,75,75); font-size:18px; font-family:宋体">能够按照某个时间点</span><span style="color:rgb(75,75,75); font-size:18px; font-family:Georgia">,</span><span style="color:rgb(75,75,75); font-size:18px; font-family:宋体">按照缓存中的持久化对象属性的变化来更新数据库</span><span style="color:rgb(75,75,75); font-size:18px; font-family:Georgia">,</span><span style="color:rgb(75,75,75); font-size:18px; font-family:宋体">着就是</span><span style="color:rgb(75,75,75); font-size:18px; font-family:Georgia">Session</span><span style="color:rgb(75,75,75); font-size:18px; font-family:宋体">的缓存清理过程</span><span style="color:rgb(75,75,75); font-size:18px; font-family:Georgia">.</span><span style="color:rgb(75,75,75); font-size:18px; font-family:宋体">在</span><span style="color:rgb(75,75,75); font-size:18px; font-family:Georgia">Hibernate</span><span style="color:rgb(75,75,75); font-size:18px; font-family:宋体">中对象分为三个状态</span><span style="color:rgb(75,75,75); font-size:18px; font-family:Georgia">,</span><span style="color:rgb(75,75,75); font-size:18px; font-family:宋体">临时</span><span style="color:rgb(75,75,75); font-size:18px; font-family:Georgia">,</span><span style="color:rgb(75,75,75); font-size:18px; font-family:宋体">持久化</span><span style="color:rgb(75,75,75); font-size:18px; font-family:Georgia">,</span><span style="color:rgb(75,75,75); font-size:18px; font-family:宋体">游离</span><span style="color:rgb(75,75,75); font-size:18px; font-family:Georgia">.</span><span style="color:rgb(75,75,75); font-size:18px; font-family:宋体">如果我们希望</span><span style="color:rgb(75,75,75); font-size:18px; font-family:Georgia">JAVA</span><span style="color:rgb(75,75,75); font-size:18px; font-family:宋体">里的一个对象一直存在</span><span style="color:rgb(75,75,75); font-size:18px; font-family:Georgia">,</span><span style="color:rgb(75,75,75); font-size:18px; font-family:宋体">就必须有一个变量一直引用着这个对象</span><span style="color:rgb(75,75,75); font-size:18px; font-family:Georgia">.</span><span style="color:rgb(75,75,75); font-size:18px; font-family:宋体">当这个变量没了</span><span style="color:rgb(75,75,75); font-size:18px; font-family:Georgia">.</span><span style="color:rgb(75,75,75); font-size:18px; font-family:宋体">对象也就被</span><span style="color:rgb(75,75,75); font-size:18px; font-family:Georgia">JVM</span><span style="color:rgb(75,75,75); font-size:18px; font-family:宋体">回收了</span><span style="color:rgb(75,75,75); font-size:18px; font-family:Georgia">.这篇博客我们就带大家一起来看一下session的缓存机制，也就是hibernate的一级缓存，还有hibernate三种对象状态的详细情况。</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;当Session的save()方法持久化一个Customer对象时，Customer对象被加入到Session的缓存中，以后即使应用程序中的引用变量不再引用Customer对象，只要Session的缓存还没有被清空，Customer对象仍然处于生命周期中。&nbsp;当Session的load()方法试图从数据库中加载一个Customer对象时，Session先判断缓存中是否已经存在这个Customer对象，如果存在，就不需要再到数据库中检索。&nbsp;这样就大大提高了hibernate查询的时间效率，只有当事务提交，session关闭之后，session缓存才会失效
+ &nbsp; &nbsp; &nbsp;</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">下面我们来通过一段代码来理解一下session缓存： &nbsp; &nbsp; &nbsp; &nbsp;</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">&nbsp;test</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px"></span></p>
+<div class="dp-highlighter bg_java" style="font-family:Consolas,'Courier New',Courier,mono,serif; background-color:rgb(85,85,85); width:959.2999877929688px; overflow:auto; padding-top:1px; margin:18px 0px!important; line-height:26px">
+<div class="bar" style="padding-left:45px">
+<div class="tools" style="padding:3px 8px 10px 10px; font-size:9px; line-height:normal; font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; color:silver; border-left-width:3px; border-left-style:solid; border-left-color:rgb(153,153,153)">
+<strong>[java]</strong>&nbsp;<a href="http://blog.csdn.net/csh624366188/article/details/7612142#" class="ViewSource" title="view plain" style="color:rgb(204,204,204); text-decoration:none; background-color:inherit; border:none; padding:0px; margin:0px 10px 0px 0px; font-size:9px">view
+ plain</a><a href="http://blog.csdn.net/csh624366188/article/details/7612142#" class="CopyToClipboard" title="copy" style="color:rgb(204,204,204); text-decoration:none; background-color:inherit; border:none; padding:0px; margin:0px 10px 0px 0px; font-size:9px">copy</a><a href="http://blog.csdn.net/csh624366188/article/details/7612142#" class="PrintSource" title="print" style="color:rgb(204,204,204); text-decoration:none; background-color:inherit; border:none; padding:0px; margin:0px 10px 0px 0px; font-size:9px">print</a><a href="http://blog.csdn.net/csh624366188/article/details/7612142#" class="About" title="?" style="color:rgb(204,204,204); text-decoration:none; background-color:inherit; border:none; padding:0px; margin:0px 10px 0px 0px; font-size:9px">?</a>
+<div style="position:absolute; left:428px; top:758px; width:29px; height:14px; z-index:99">
+</div>
+</div>
+</div>
+<ol start="1" class="dp-j" style="margin:0px 0px 1px 45px!important; padding:0px; border:none; list-style-position:initial; background-color:rgb(255,255,255); color:rgb(0,204,0)">
+<li class="alt" style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit"><span style="margin:0px; padding:0px; border:none; background-color:inherit">tx&nbsp;=&nbsp;session.beginTransaction();&nbsp;&nbsp;&nbsp;</span></span></li><li style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">Customer&nbsp;c1=<span class="keyword" style="margin:0px; padding:0px; border:none; color:rgb(102,204,255); background-color:inherit; font-weight:bold">new</span><span style="margin:0px; padding:0px; border:none; background-color:inherit">&nbsp;Customer(“zhangsan&quot;,</span><span class="keyword" style="margin:0px; padding:0px; border:none; color:rgb(102,204,255); background-color:inherit; font-weight:bold">new</span><span style="margin:0px; padding:0px; border:none; background-color:inherit">&nbsp;HashSet());&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt" style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit"><span class="comment" style="margin:0px; padding:0px; border:none; color:rgb(153,204,0); background-color:inherit">//Customer对象被持久化，并且加入到Session的缓存中&nbsp;</span><span style="margin:0px; padding:0px; border:none; background-color:inherit">&nbsp;&nbsp;</span></span></li><li style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">session.save(c1);&nbsp;&nbsp;&nbsp;</span></li><li class="alt" style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">Long&nbsp;id=c1.getId();&nbsp;&nbsp;&nbsp;</span></li><li style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit"><span class="comment" style="margin:0px; padding:0px; border:none; color:rgb(153,204,0); background-color:inherit">//c1变量不再引用Customer对象&nbsp;</span><span style="margin:0px; padding:0px; border:none; background-color:inherit">&nbsp;&nbsp;</span></span></li><li class="alt" style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">c1=<span class="keyword" style="margin:0px; padding:0px; border:none; color:rgb(102,204,255); background-color:inherit; font-weight:bold">null</span><span style="margin:0px; padding:0px; border:none; background-color:inherit">;&nbsp;&nbsp;&nbsp;</span></span></li><li style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit"><span class="comment" style="margin:0px; padding:0px; border:none; color:rgb(153,204,0); background-color:inherit">//从Session缓存中读取Customer对象，使c2变量引用Customer对象&nbsp;</span><span style="margin:0px; padding:0px; border:none; background-color:inherit">&nbsp;&nbsp;</span></span></li><li class="alt" style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">Customer&nbsp;c2=(Customer)session.load(Customer.<span class="keyword" style="margin:0px; padding:0px; border:none; color:rgb(102,204,255); background-color:inherit; font-weight:bold">class</span><span style="margin:0px; padding:0px; border:none; background-color:inherit">,id);&nbsp;&nbsp;&nbsp;</span></span></li><li style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">tx.commit();&nbsp;&nbsp;&nbsp;</span></li><li class="alt" style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit"><span class="comment" style="margin:0px; padding:0px; border:none; color:rgb(153,204,0); background-color:inherit">//关闭Session，清空缓存&nbsp;</span><span style="margin:0px; padding:0px; border:none; background-color:inherit">&nbsp;&nbsp;</span></span></li><li style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">session.close();&nbsp;&nbsp;&nbsp;</span></li><li class="alt" style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit"><span class="comment" style="margin:0px; padding:0px; border:none; color:rgb(153,204,0); background-color:inherit">//访问Customer对象&nbsp;</span><span style="margin:0px; padding:0px; border:none; background-color:inherit">&nbsp;&nbsp;</span></span></li><li style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">System.out.println(c2.getName());&nbsp;&nbsp;&nbsp;</span></li><li class="alt" style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit"><span class="comment" style="margin:0px; padding:0px; border:none; color:rgb(153,204,0); background-color:inherit">//&nbsp;c2变量不再引用Customer对象,此时Customer对象结束生命周期。&nbsp;</span><span style="margin:0px; padding:0px; border:none; background-color:inherit">&nbsp;&nbsp;</span></span></li><li style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">c2=<span class="keyword" style="margin:0px; padding:0px; border:none; color:rgb(102,204,255); background-color:inherit; font-weight:bold">null</span><span style="margin:0px; padding:0px; border:none; background-color:inherit">;&nbsp;&nbsp;&nbsp;</span></span></li></ol>
+</div>
+<br style="font-family:Arial; font-size:14px; line-height:26px">
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;当<span style="font-family:'Times New Roman'">session</span><span style="font-family:宋体">调用</span><span style="font-family:'Times New Roman'">save</span><span style="font-family:宋体">保存一个对象时，这个对象就被加载到</span><span style="font-family:'Times New Roman'">session</span><span style="font-family:宋体">缓存当中，其实调用</span><span style="font-family:'Times New Roman'">save</span><span style="font-family:宋体">方法这里有个细节，很多人都忽略了这个细节，就是</span><span style="font-family:'Times New Roman'">save</span><span style="font-family:宋体">方法有一个返回&#20540;，返回一个</span><span style="font-family:'Times New Roman'">seriaseble</span><span style="font-family:宋体">接口类型的数据，我们知道像基本数据类型的包装类型都实现了这个接口，其实这个返回&#20540;我们可以理解为保存对象的</span><span style="font-family:'Times New Roman'">id</span><span style="font-family:宋体">，我们在很多时候都能用到这个返回&#20540;，这是一个应该注意的地方。当对象被</span><span style="font-family:'Times New Roman'">save</span><span style="font-family:宋体">到缓存中时，我们就可以调用对象的</span><span style="font-family:'Times New Roman'">getid</span><span style="font-family:宋体">方法来获得他的</span><span style="font-family:'Times New Roman'">id</span><span style="font-family:宋体">了。在上面的示例中我们可以看到，虽然</span><span style="font-family:'Times New Roman'">c1</span><span style="font-family:宋体">被复位</span><span style="font-family:'Times New Roman'">null</span><span style="font-family:宋体">了，但是此时在</span><span style="font-family:'Times New Roman'">session</span><span style="font-family:宋体">缓存里面还是有一个变量指向着该对象，所以该对象才不被垃圾回收器回收，当我们在此利用该对象的</span><span style="font-family:'Times New Roman'">id</span><span style="font-family:宋体">去用</span><span style="font-family:'Times New Roman'">load</span><span style="font-family:宋体">查询时，其实还是去到</span><span style="font-family:'Times New Roman'">session</span><span style="font-family:宋体">缓存去找并且返回该对象，当</span><span style="font-family:'Times New Roman'">session</span><span style="font-family:宋体">关闭后。缓存清空。</span></span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">下面我们在来看一个例子，来看一下<span style="font-family:'Times New Roman'">get</span><span style="font-family:宋体">和</span><span style="font-family:'Times New Roman'">load</span><span style="font-family:宋体">的另一个不同点：</span></span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px"></span></p>
+<div class="dp-highlighter bg_java" style="font-family:Consolas,'Courier New',Courier,mono,serif; background-color:rgb(85,85,85); width:959.2999877929688px; overflow:auto; padding-top:1px; margin:18px 0px!important; line-height:26px">
+<div class="bar" style="padding-left:45px">
+<div class="tools" style="padding:3px 8px 10px 10px; font-size:9px; line-height:normal; font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; color:silver; border-left-width:3px; border-left-style:solid; border-left-color:rgb(153,153,153)">
+<strong>[java]</strong>&nbsp;<a href="http://blog.csdn.net/csh624366188/article/details/7612142#" class="ViewSource" title="view plain" style="color:rgb(204,204,204); text-decoration:none; background-color:inherit; border:none; padding:0px; margin:0px 10px 0px 0px; font-size:9px">view
+ plain</a><a href="http://blog.csdn.net/csh624366188/article/details/7612142#" class="CopyToClipboard" title="copy" style="color:rgb(204,204,204); text-decoration:none; background-color:inherit; border:none; padding:0px; margin:0px 10px 0px 0px; font-size:9px">copy</a><a href="http://blog.csdn.net/csh624366188/article/details/7612142#" class="PrintSource" title="print" style="color:rgb(204,204,204); text-decoration:none; background-color:inherit; border:none; padding:0px; margin:0px 10px 0px 0px; font-size:9px">print</a><a href="http://blog.csdn.net/csh624366188/article/details/7612142#" class="About" title="?" style="color:rgb(204,204,204); text-decoration:none; background-color:inherit; border:none; padding:0px; margin:0px 10px 0px 0px; font-size:9px">?</a>
+<div style="position:absolute; left:428px; top:1319px; width:29px; height:14px; z-index:99">
+</div>
+</div>
+</div>
+<ol start="1" class="dp-j" style="margin:0px 0px 1px 45px!important; padding:0px; border:none; list-style-position:initial; background-color:rgb(255,255,255); color:rgb(0,204,0)">
+<li class="alt" style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit"><span style="margin:0px; padding:0px; border:none; background-color:inherit">tx&nbsp;=&nbsp;session.beginTransaction();&nbsp;&nbsp;&nbsp;</span></span></li><li style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">Customer&nbsp;c1=(Customer)session.load(Customer.<span class="keyword" style="margin:0px; padding:0px; border:none; color:rgb(102,204,255); background-color:inherit; font-weight:bold">class</span><span style="margin:0px; padding:0px; border:none; background-color:inherit">,</span><span class="keyword" style="margin:0px; padding:0px; border:none; color:rgb(102,204,255); background-color:inherit; font-weight:bold">new</span><span style="margin:0px; padding:0px; border:none; background-color:inherit">&nbsp;Long(</span><span class="number" style="margin:0px; padding:0px; border:none; color:rgb(192,0,0); background-color:inherit">1</span><span style="margin:0px; padding:0px; border:none; background-color:inherit">));&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt" style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">Customer&nbsp;c2=(Customer)session.load(Customer.<span class="keyword" style="margin:0px; padding:0px; border:none; color:rgb(102,204,255); background-color:inherit; font-weight:bold">class</span><span style="margin:0px; padding:0px; border:none; background-color:inherit">,</span><span class="keyword" style="margin:0px; padding:0px; border:none; color:rgb(102,204,255); background-color:inherit; font-weight:bold">new</span><span style="margin:0px; padding:0px; border:none; background-color:inherit">&nbsp;Long(</span><span class="number" style="margin:0px; padding:0px; border:none; color:rgb(192,0,0); background-color:inherit">1</span><span style="margin:0px; padding:0px; border:none; background-color:inherit">));&nbsp;&nbsp;&nbsp;</span></span></li><li style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">System.out.println(c1==c2);&nbsp;<span class="comment" style="margin:0px; padding:0px; border:none; color:rgb(153,204,0); background-color:inherit">//&nbsp;true&nbsp;or&nbsp;false&nbsp;??&nbsp;</span><span style="margin:0px; padding:0px; border:none; background-color:inherit">&nbsp;&nbsp;</span></span></li><li class="alt" style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">tx.commit();&nbsp;&nbsp;&nbsp;</span></li><li style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">session.close();&nbsp;&nbsp;&nbsp;</span></li></ol>
+</div>
+<br style="font-family:Arial; font-size:14px; line-height:26px">
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;很明显，这个示例最后打印出来的是true<span style="font-family:宋体">，因为他们获得的是同一个实例，我们具体来分析一下，我们在运行这段代码时，细心的童鞋应该会发现，利用</span><span style="font-family:'Times New Roman'">load</span><span style="font-family:宋体">去查询对象时，没有生成</span><span style="font-family:'Times New Roman'">sql</span><span style="font-family:宋体">语句，这是为什么呢？既然查询到结果了，为什么没有生成出来</span><span style="font-family:'Times New Roman'">sql</span><span style="font-family:宋体">语句呢。这就是我们要说的</span><span style="font-family:'Times New Roman'">load</span><span style="font-family:宋体">和</span><span style="font-family:'Times New Roman'">get</span><span style="font-family:宋体">方法的第二个不同的地方了，</span><span style="font-family:'Times New Roman'">load</span><span style="font-family:宋体">方法在查询时，其实是获得的该对象的一个代理的对象，当我们用到查询到的对象时，他才会去数据库进行查询，如上，如果我们调用</span><span style="font-family:'Times New Roman'">c1.getName</span><span style="font-family:宋体">方法，这时就会打印出</span><span style="font-family:'Times New Roman'">sql</span><span style="font-family:宋体">语句来，这时候他才真正的去数据库查询，而</span><span style="font-family:'Times New Roman'">get</span><span style="font-family:宋体">方法，他在执行</span><span style="font-family:'Times New Roman'">get</span><span style="font-family:宋体">的方法的时候就会去数据库查询，产生</span><span style="font-family:'Times New Roman'">sql</span><span style="font-family:宋体">语句</span></span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px; color:rgb(255,0,0)"><strong>Session<span style="font-family:宋体">缓存的作用</span></strong></span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">（1）减少访问数据库的频率。应用程序从内存中读取持久化对象的速度显然比到数据库中查询数据的速度快多了，因此Session的缓存可以提高数据访问的性能。&nbsp;</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">（2）保证缓存中的对象与数据库中的相关记录保持同步。当缓存中持久化对象的状态发生了变化，Session并不会立即执行相关的SQL语句，这使得Session能够把几条相关的SQL语句合并为一条SQL语句，以便减少访问数据库的次数，从而提高应用程序的性能。&nbsp;</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px; color:rgb(255,0,0)"><strong>Session的清理缓存</strong></span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">清理缓存是指按照缓存中对象的状态的变化来同步更新数据库，下面我们还是具体来看一段代码：以下程序代码对Customer的name属性修改了两次：&nbsp;</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px"></span></p>
+<div class="dp-highlighter bg_java" style="font-family:Consolas,'Courier New',Courier,mono,serif; background-color:rgb(85,85,85); width:959.2999877929688px; overflow:auto; padding-top:1px; margin:18px 0px!important; line-height:26px">
+<div class="bar" style="padding-left:45px">
+<div class="tools" style="padding:3px 8px 10px 10px; font-size:9px; line-height:normal; font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; color:silver; border-left-width:3px; border-left-style:solid; border-left-color:rgb(153,153,153)">
+<strong>[java]</strong>&nbsp;<a href="http://blog.csdn.net/csh624366188/article/details/7612142#" class="ViewSource" title="view plain" style="color:rgb(204,204,204); text-decoration:none; background-color:inherit; border:none; padding:0px; margin:0px 10px 0px 0px; font-size:9px">view
+ plain</a><a href="http://blog.csdn.net/csh624366188/article/details/7612142#" class="CopyToClipboard" title="copy" style="color:rgb(204,204,204); text-decoration:none; background-color:inherit; border:none; padding:0px; margin:0px 10px 0px 0px; font-size:9px">copy</a><a href="http://blog.csdn.net/csh624366188/article/details/7612142#" class="PrintSource" title="print" style="color:rgb(204,204,204); text-decoration:none; background-color:inherit; border:none; padding:0px; margin:0px 10px 0px 0px; font-size:9px">print</a><a href="http://blog.csdn.net/csh624366188/article/details/7612142#" class="About" title="?" style="color:rgb(204,204,204); text-decoration:none; background-color:inherit; border:none; padding:0px; margin:0px 10px 0px 0px; font-size:9px">?</a>
+<div style="position:absolute; left:428px; top:1882px; width:29px; height:14px; z-index:99">
+</div>
+</div>
+</div>
+<ol start="1" class="dp-j" style="margin:0px 0px 1px 45px!important; padding:0px; border:none; list-style-position:initial; background-color:rgb(255,255,255); color:rgb(0,204,0)">
+<li class="alt" style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit"><span style="margin:0px; padding:0px; border:none; background-color:inherit">tx&nbsp;=&nbsp;session.beginTransaction();&nbsp;&nbsp;&nbsp;</span></span></li><li style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">Customer&nbsp;customer=(Customer)session.load(Customer.<span class="keyword" style="margin:0px; padding:0px; border:none; color:rgb(102,204,255); background-color:inherit; font-weight:bold">class</span><span style="margin:0px; padding:0px; border:none; background-color:inherit">,&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt" style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit"><span class="keyword" style="margin:0px; padding:0px; border:none; color:rgb(102,204,255); background-color:inherit; font-weight:bold">new</span><span style="margin:0px; padding:0px; border:none; background-color:inherit">&nbsp;Long(</span><span class="number" style="margin:0px; padding:0px; border:none; color:rgb(192,0,0); background-color:inherit">1</span><span style="margin:0px; padding:0px; border:none; background-color:inherit">));&nbsp;&nbsp;&nbsp;</span></span></li><li style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">customer.setName(<span class="string" style="margin:0px; padding:0px; border:none; color:rgb(255,153,0); background-color:inherit">&quot;Jack&quot;</span><span style="margin:0px; padding:0px; border:none; background-color:inherit">);&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt" style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">customer.setName(<span class="string" style="margin:0px; padding:0px; border:none; color:rgb(255,153,0); background-color:inherit">&quot;Mike&quot;</span><span style="margin:0px; padding:0px; border:none; background-color:inherit">);&nbsp;&nbsp;&nbsp;</span></span></li><li style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">tx.commit();&nbsp;&nbsp;&nbsp;</span></li></ol>
+</div>
+<br style="font-family:Arial; font-size:14px; line-height:26px">
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">当Session清理缓存时，只需执行一条update语句：&nbsp;</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">update&nbsp;CUSTOMERS&nbsp;set&nbsp;NAME=&nbsp;'Mike'……&nbsp;where&nbsp;ID=1;&nbsp;</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">其实第一次调用setName<span style="font-family:宋体">是无意义的，完全可以省略掉。</span></span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">Session<span style="font-family:宋体">缓存在什么时候才清理呢？我们来看一下：</span></span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px; color:rgb(255,0,0)"><strong>Session会在下面的时间点清理缓存：&nbsp;</strong></span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">1.当应用程序调用org.hibernate.Transaction的commit()方法的时候，commit()方法先清理缓存，然后再向数据库提交事务。&nbsp;</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">2.当应用程序显式调用Session的flush()方法的时候，其实这个方法我们几乎很少用到，因为我们一般都是在完成一个事务才去清理缓存，提交数据更改，这样我们直接提交事务就可以。</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px; color:rgb(255,0,0)"><strong>Hibernate中java对象的三种状态：</strong></span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">1<span style="font-family:宋体">、</span>临时状态（transient）：刚刚用new语句创建，还没有被持久化，不处于Session的缓存中。处于临时状态的Java对象被称为临时对象。&nbsp;</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">2、持久化状态（persistent）：已经被持久化，加入到Session的缓存中。处于持久化状态的Java对象被称为持久化对象。&nbsp;</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">3、游离状态（detached）：已经被持久化，但不再处于Session的缓存中。处于游离状态的Java对象被称为游离对象。&nbsp;</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px; color:rgb(0,0,153)"><strong>持久化状态和临时状态的不同点在于：</strong></span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">1、对象持久化状态时，他已经和数据库打交道了，在数据库里面存在着该对象的一条记录。</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">2、持久化状态的对象存在于<span style="font-family:'Times New Roman'">session</span><span style="font-family:宋体">的缓存当中。</span></span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">3、持久化状态的对象有自己的<span style="font-family:'Times New Roman'">OID</span><span style="font-family:宋体">。</span></span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">游离状态的对象与持久化状态的对象不同体现在游离状态的对象已经不处于<span style="font-family:'Times New Roman'">session</span><span style="font-family:宋体">的缓存当中，并且在数据库里面已经不存在该对象的记录，但是他依然有自己的</span><span style="font-family:'Times New Roman'">OID</span><span style="font-family:宋体">。</span></span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px; color:rgb(255,0,0)"><strong>对象的状态转换</strong></span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<img src="http://my.csdn.net/uploads/201205/29/1338263329_7294.jpg" alt="" style="border:none"></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们一起来分析一下这个状态转换图，首先一个对象被new<span style="font-family:宋体">出来之后，他是出于临时状态的，然后调用</span><span style="font-family:'Times New Roman'">save</span><span style="font-family:宋体">或者</span><span style="font-family:'Times New Roman'">saveOrUpdate</span><span style="font-family:宋体">方法把对象转换为持久化状态，这里的</span><span style="font-family:'Times New Roman'">saveOrUpdate</span><span style="font-family:宋体">方法其实是一个偷懒的方法，我们以前用的所有的</span><span style="font-family:'Times New Roman'">save</span><span style="font-family:宋体">方法的地方都可以修改为该方法，这个方法是在保存数据之前先查看一下这个对象是什么状态，如果是临时状态就保存，如果是游离状态就进行更新。持久化状态转换成游离状态可以是在</span><span style="font-family:'Times New Roman'">session</span><span style="font-family:宋体">关闭或者被清理缓存时，在或者就是调用</span><span style="font-family:'Times New Roman'">evict</span><span style="font-family:宋体">方法，这个方法就是强行把对象从</span><span style="font-family:'Times New Roman'">session</span><span style="font-family:宋体">缓存中清除。游离状态装换为持久化状态可以调用</span><span style="font-family:'Times New Roman'">update</span><span style="font-family:宋体">方法，其实</span><span style="font-family:'Times New Roman'">update</span><span style="font-family:宋体">方法主要的功能就是把对象从游离状态装换成持久化状态的，因为一般的更新其实不用这个方法也可以。</span></span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px; color:rgb(0,0,153)"><strong>下面我们举一个具体实例的看一下状态转换过程：</strong></span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px; color:rgb(0,0,153)"><strong>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<img src="http://my.csdn.net/uploads/201205/29/1338263406_8235.jpg" alt="" style="border:none"><br>
+</strong></span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个图需要大家仔细的理解一下，他很好的体现了对象生命周期的进程和对象状态的转换。</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">下面我们在用一个示例来看一下session<span style="font-family:宋体">的</span><span style="font-family:'Times New Roman'">update</span><span style="font-family:宋体">方法是怎么把一个游离状态的对象装换成持久化的：</span></span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px"></span></p>
+<div class="dp-highlighter bg_java" style="font-family:Consolas,'Courier New',Courier,mono,serif; background-color:rgb(85,85,85); width:959.2999877929688px; overflow:auto; padding-top:1px; margin:18px 0px!important; line-height:26px">
+<div class="bar" style="padding-left:45px">
+<div class="tools" style="padding:3px 8px 10px 10px; font-size:9px; line-height:normal; font-family:Verdana,Geneva,Arial,Helvetica,sans-serif; color:silver; border-left-width:3px; border-left-style:solid; border-left-color:rgb(153,153,153)">
+<strong>[java]</strong>&nbsp;<a href="http://blog.csdn.net/csh624366188/article/details/7612142#" class="ViewSource" title="view plain" style="color:rgb(204,204,204); text-decoration:none; background-color:inherit; border:none; padding:0px; margin:0px 10px 0px 0px; font-size:9px">view
+ plain</a><a href="http://blog.csdn.net/csh624366188/article/details/7612142#" class="CopyToClipboard" title="copy" style="color:rgb(204,204,204); text-decoration:none; background-color:inherit; border:none; padding:0px; margin:0px 10px 0px 0px; font-size:9px">copy</a><a href="http://blog.csdn.net/csh624366188/article/details/7612142#" class="PrintSource" title="print" style="color:rgb(204,204,204); text-decoration:none; background-color:inherit; border:none; padding:0px; margin:0px 10px 0px 0px; font-size:9px">print</a><a href="http://blog.csdn.net/csh624366188/article/details/7612142#" class="About" title="?" style="color:rgb(204,204,204); text-decoration:none; background-color:inherit; border:none; padding:0px; margin:0px 10px 0px 0px; font-size:9px">?</a>
+<div style="position:absolute; left:428px; top:3425px; width:29px; height:14px; z-index:99">
+</div>
+</div>
+</div>
+<ol start="1" class="dp-j" style="margin:0px 0px 1px 45px!important; padding:0px; border:none; list-style-position:initial; background-color:rgb(255,255,255); color:rgb(0,204,0)">
+<li class="alt" style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit"><span style="margin:0px; padding:0px; border:none; background-color:inherit">Customer&nbsp;customer=</span><span class="keyword" style="margin:0px; padding:0px; border:none; color:rgb(102,204,255); background-color:inherit; font-weight:bold">new</span><span style="margin:0px; padding:0px; border:none; background-color:inherit">&nbsp;Customer();&nbsp;&nbsp;&nbsp;</span></span></li><li style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">customer.setName(<span class="string" style="margin:0px; padding:0px; border:none; color:rgb(255,153,0); background-color:inherit">&quot;Tom&quot;</span><span style="margin:0px; padding:0px; border:none; background-color:inherit">);&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt" style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">Session&nbsp;session1=sessionFactory.openSession();&nbsp;&nbsp;&nbsp;</span></li><li style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">Transaction&nbsp;tx1&nbsp;=&nbsp;session1.beginTransaction();&nbsp;&nbsp;&nbsp;</span></li><li class="alt" style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">session1.save(customer);&nbsp;&nbsp;&nbsp;</span></li><li style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">tx1.commit();&nbsp;&nbsp;&nbsp;</span></li><li class="alt" style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">session1.close();&nbsp;<span class="comment" style="margin:0px; padding:0px; border:none; color:rgb(153,204,0); background-color:inherit">//此时Customer对象变为游离对象&nbsp;</span><span style="margin:0px; padding:0px; border:none; background-color:inherit">&nbsp;&nbsp;</span></span></li><li style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">Session&nbsp;session2=sessionFactory.openSession();&nbsp;&nbsp;&nbsp;</span></li><li class="alt" style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">Transaction&nbsp;tx2&nbsp;=&nbsp;session2.beginTransaction();&nbsp;&nbsp;&nbsp;</span></li><li style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">customer.setName(“zhangsan&quot;)&nbsp;<span class="comment" style="margin:0px; padding:0px; border:none; color:rgb(153,204,0); background-color:inherit">//在和session2关联之前修改Customer对象的属性&nbsp;</span><span style="margin:0px; padding:0px; border:none; background-color:inherit">&nbsp;&nbsp;</span></span></li><li class="alt" style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">session2.update(customer);&nbsp;&nbsp;&nbsp;</span></li><li style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">customer.setName(“lisi&quot;);&nbsp;<span class="comment" style="margin:0px; padding:0px; border:none; color:rgb(153,204,0); background-color:inherit">//在和session2关联之后修改Customer对象的属性&nbsp;</span><span style="margin:0px; padding:0px; border:none; background-color:inherit">&nbsp;&nbsp;</span></span></li><li class="alt" style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">tx2.commit();&nbsp;&nbsp;&nbsp;</span></li><li style="margin:0px!important; padding:0px 3px 0px 10px!important; border-style:none none none solid; border-left-width:3px; border-left-color:rgb(153,153,153); list-style:decimal-leading-zero outside; background-color:rgb(85,85,85); color:rgb(255,153,153); line-height:18px">
+<span style="margin:0px; padding:0px; border:none; color:rgb(0,204,0); background-color:inherit">session2.close();&nbsp;&nbsp;&nbsp;</span></li></ol>
+</div>
+<br style="font-family:Arial; font-size:14px; line-height:26px">
+<br style="font-family:Arial; font-size:14px; line-height:26px">
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">&nbsp; &nbsp; &nbsp; 当session1<span style="font-family:宋体">保存完对象，然后事务关闭时，对象就变为游离状态了，此时我们在打开一个</span><span style="font-family:Verdana">session</span><span style="font-family:宋体">，利用</span><span style="font-family:Verdana">update</span><span style="font-family:宋体">方法，在把对象和</span><span style="font-family:Verdana">session</span><span style="font-family:宋体">关联起来，然后修改他的属性，提交事务之后，游离状态的对象一样可以修改保存到数据库中，这里虽然修改了两次对象的属性，但只会发送一条</span><span style="font-family:Verdana">sql</span><span style="font-family:宋体">语句，因为</span><span style="font-family:Verdana">update</span><span style="font-family:宋体">在修改对象数据时，只有在事务提交时，他才会发送</span><span style="font-family:Verdana">sql</span><span style="font-family:宋体">语句进行提交。所以只有最后一条修改信息管用。</span></span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">总结一下Session的update()方法完成以下操作：&nbsp;</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">（1）把Customer对象重新加入到Session缓存中，使它变为持久化对象。&nbsp;</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">（2）计划执行一个update语句。&#20540;得注意的是<span style="color:rgb(255,0,0)">，</span><strong><span style="color:rgb(255,0,0)">Session</span><span style="color:rgb(255,0,0)">只有在清理缓存的时候才会执行</span><span style="color:rgb(255,0,0)">update</span><span style="color:rgb(255,0,0)">语句</span></strong>，并且在执行时才会把Customer对象当前的属性&#20540;组装到update语句中。因此，即使程序中多次修改了Customer对象的属性，在清理缓存时只会执行一次update语句。&nbsp;</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">Web<span style="font-family:宋体">应用程序客户层和业务逻辑层之间传递临时对象和有利对象的过程：</span></span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<img src="http://my.csdn.net/uploads/201205/29/1338263444_4099.jpg" alt="" style="border:none"></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px; color:rgb(255,0,0)"><strong>Session的二级缓存&nbsp;</strong></span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">Hibernate提供了两级缓存，第一级缓存是Session的缓存。由于Session对象的生命周期通常对应一个数据库事务或者一个应用事务，因此它的缓存是事务范围的缓存。第一级缓存是必须的，不允许而且事实上也无法被卸除。在第一级缓存中，持久化类的每个实例都具有惟一的OID。&nbsp;第二级缓存是一个可插拔的缓存插件，它由SessionFactory负责管理。由于SessionFactory对象的生命周期和应用程序的整个进程对应，因此第二级缓存是进程范围的缓存。这个缓存中存放的是对象的散装数据。第二级缓存是可选的，可以在每个类或每个集合的粒度上配置第二级缓存。&nbsp;</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">Hibernate二级缓存结构</span></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Arial; font-size:14px; line-height:26px">
+<span style="font-size:18px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<img src="http://my.csdn.net/uploads/201205/29/1338263489_9766.jpg" alt="" style="border:none"></span></p>
+
+</div>
+
+
+
+
+<!-- Baidu Button BEGIN -->
+
+<div class="bdsharebuttonbox" style="float: right;">
+<a href="#" class="bds_more" data-cmd="more" style="background-position:0 0 !important; background-image: url(http://bdimg.share.baidu.com/static/api/img/share/icons_0_16.png?v=d754dcc0.png) !important"></a>
+<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"  style="background-position:0 -52px !important"></a>
+<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"style="background-position:0 -104px !important"></a>
+<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"style="background-position:0 -260px !important"></a>
+<a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"style="background-position:0 -208px !important"></a>
+<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"style="background-position:0 -1612px !important" ></a>
+</div>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+<!-- Baidu Button END -->
+
+<!--192.168.100.33-->
+<ul class="article_next_prev">
+            <li class="prev_article"><span  onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian']);location.href='/dongnan591172113/article/details/7943595';">上一篇</span><a href="/dongnan591172113/article/details/7943595" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian'])">spring之JDBC访问数据库及配置详解</a></li>
+            <li class="next_article"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian']);location.href='/dongnan591172113/article/details/8028047';">下一篇</span><a href="/dongnan591172113/article/details/8028047" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian'])">线程安全（一）</a></li>
+</ul>
+
+<!-- Baidu Button BEGIN -->
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=1536434" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+    document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->
+
+
+</div>
+      <dl class="blog-associat-tag">
+        <dt>主题推荐</dt>
+        <dd>
+                <a href="http://www.csdn.net/tag/缓存机制" target="_blank" class="blog-tage-red" >缓存机制</a> 
+                <a href="http://www.csdn.net/tag/hibernate" target="_blank" class="blog-tage-red" >hibernate</a> 
+                <a href="http://www.csdn.net/tag/session" target="_blank" class="blog-tage-red" >session</a> 
+                <a href="http://www.csdn.net/tag/应用程序" target="_blank" class="blog-tage-red" >应用程序</a> 
+                <a href="http://www.csdn.net/tag/实例" target="_blank" class="blog-tage-red" >实例</a> 
+        </dd>
+    </dl> 
+
+
+<dl class="blog-ass-articl tracking-ad"  data-mod="popu_36" id="res-relatived"> 
+     <dt><span>猜你在找</span></dt>    
+</dl>
+
+<script type="text/javascript">
+    var searchtitletags = 'hibernate session缓存机制' + ',' + '缓存机制,hibernate,session,应用程序,实例';
+    searchService({
+        index: 'blog',
+        query: searchtitletags,
+        from: 10,
+        size: 10,
+        appendTo: '#res-relatived',
+        url: 'recommend',
+        his: 2,
+        client: "blog_cf_enhance",
+        tmpl: '<dd style="background:url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px;"><a href="#{ url }" title="#{ title }" strategy="#{ strategy }">#{ title }</a></dd>'
+    });
+
+ </script>   
+
+
+    <div id="ad_cen">
+   
+          <script type="text/javascript">
+              new Ad(4, 'ad_cen');
+          </script>
+    </div>
+<div class="comment_class">
+    <div id="comment_title" class="panel_head">
+        <span class="see_comment">查看评论</span><a name="comments"></a></div>
+    <div id="comment_list">
+    </div>
+    <div id="comment_bar">
+    </div>
+    <div id="comment_form">
+    </div>
+
+    <div class="announce">
+        * 以上用户言论只代表其个人观点，不代表CSDN网站的观点或立场<a name="reply"></a><a name="quote"></a></div>
+</div>
+
+<script type="text/javascript">
+    var fileName = '7943652';
+    var commentscount = 0;
+    var islock = false
+</script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/comment.js"></script>
+    <div id="ad_bot">
+    </div>
+    <script type="text/javascript">
+    new Ad(5, 'ad_bot');
+    </script>
+<div id="report_dialog">
+</div>
+
+<div id="d-top"  style="bottom:60px;">
+      
+
+       <a id="quick-reply" class="btn btn-top q-reply" title="快速回复" style="display:none;">
+            <img src="http://static.blog.csdn.net/images/blog-icon-reply.png" alt="快速回复">
+        </a>    
+
+    <a id="d-top-a" class="btn btn-top backtop"  style="display: none;" title="返回顶部" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_huidaodingbu'])" style="">         
+         <img src="http://static.blog.csdn.net/images/top.png" alt="TOP">
+    </a>
+</div>
+<script type="text/javascript">
+    $(function ()
+    {
+        $("#ad_frm_0").height("90px");
+        
+        setTimeout(function(){
+            $("#ad_frm_2").height("200px");
+        },1000);
+        
+
+        if($("#comment_content").length>0)
+        {
+            $("#quick-reply").show();
+
+            $("#quick-reply").click(function(){
+                setEditorFocus();
+            });
+        }       
+     
+        var d_top = $('#d-top-a');
+        document.onscroll = function ()
+        {
+            var scrTop = (document.body.scrollTop || document.documentElement.scrollTop);
+            if (scrTop > 500)
+            {
+                d_top.show();
+            } else
+            {
+                d_top.hide();
+            }
+        }
+        $('#d-top-a').click(function ()
+        {
+            scrollTo(0, 0);
+            this.blur();
+            return false;
+        });
+    });
+  
+</script>
+<style type="text/css">
+    .tag_list
+    {
+        background: none repeat scroll 0 0 #FFFFFF;
+        border: 1px solid #D7CBC1;
+        color: #000000;
+        font-size: 12px;
+        line-height: 20px;
+        list-style: none outside none;
+        margin: 10px 2% 0 1%;
+        padding: 1px;
+    }
+    .tag_list h5
+    {
+        background: none repeat scroll 0 0 #E0DBD3;
+        color: #47381C;
+        font-size: 12px;
+        height: 24px;
+        line-height: 24px;
+        padding: 0 5px;
+        margin: 0;
+    }
+    .tag_list h5 a
+    {
+        color: #47381C;
+    }
+    .classify
+    {
+        margin: 10px 0;
+        padding: 4px 12px 8px;
+    }
+    .classify a
+    {
+        margin-right: 20px;
+        white-space: nowrap;
+    }
+</style>
+<div class="tag_list">
+    <h5>
+        <a href="http://www.csdn.net/tag/" target="_blank">核心技术类目</a></h5>
+    <div class="classify">
+<a title="全部主题" href="http://www.csdn.net/tag" target="_blank" onclick="LogClickCount(this,336);">全部主题</a>
+<a title="Hadoop" href="http://g.csdn.net/5272865" target="_blank" onclick="LogClickCount(this,336);">Hadoop</a>
+<a title="AWS" href="http://g.csdn.net/5272866" target="_blank" onclick="LogClickCount(this,336);">AWS</a>
+<a title="移动游戏" href="http://g.csdn.net/5272870" target="_blank" onclick="LogClickCount(this,336);">移动游戏</a>
+<a title="Java" href="http://g.csdn.net/5272871" target="_blank" onclick="LogClickCount(this,336);">Java</a>
+<a title="Android" href="http://g.csdn.net/5272872" target="_blank" onclick="LogClickCount(this,336);">Android</a>
+<a title="iOS" href="http://g.csdn.net/5272873" target="_blank" onclick="LogClickCount(this,336);">iOS</a>
+<a title="Swift" href="http://g.csdn.net/5272868" target="_blank" onclick="LogClickCount(this,336);">Swift</a>
+<a title="智能硬件" href="http://g.csdn.net/5272869" target="_blank" onclick="LogClickCount(this,336);">智能硬件</a>
+<a title="Docker" href="http://g.csdn.net/5272867" target="_blank" onclick="LogClickCount(this,336);">Docker</a>
+<a title="OpenStack" href="http://g.csdn.net/5272925" target="_blank" onclick="LogClickCount(this,336);">OpenStack</a>
+<a title="VPN" href="http://www.csdn.net/tag/vpn" target="_blank" onclick="LogClickCount(this,336);">VPN</a>
+<a title="Spark" href="http://g.csdn.net/5272924" target="_blank" onclick="LogClickCount(this,336);">Spark</a>
+<a title="ERP" href="http://www.csdn.net/tag/erp" target="_blank" onclick="LogClickCount(this,336);">ERP</a>
+<a title="IE10" href="http://www.csdn.net/tag/ie10" target="_blank" onclick="LogClickCount(this,336);">IE10</a>
+<a title="Eclipse" href="http://www.csdn.net/tag/eclipse" target="_blank" onclick="LogClickCount(this,336);">Eclipse</a>
+<a title="CRM" href="http://www.csdn.net/tag/crm" target="_blank" onclick="LogClickCount(this,336);">CRM</a>
+<a title="JavaScript" href="http://www.csdn.net/tag/javascript" target="_blank" onclick="LogClickCount(this,336);">JavaScript</a>
+<a title="数据库" href="http://www.csdn.net/tag/数据库" target="_blank" onclick="LogClickCount(this,336);">数据库</a>
+<a title="Ubuntu" href="http://www.csdn.net/tag/ubuntu" target="_blank" onclick="LogClickCount(this,336);">Ubuntu</a>
+<a title="NFC" href="http://www.csdn.net/tag/nfc" target="_blank" onclick="LogClickCount(this,336);">NFC</a>
+<a title="WAP" href="http://www.csdn.net/tag/wap" target="_blank" onclick="LogClickCount(this,336);">WAP</a>
+<a title="jQuery" href="http://www.csdn.net/tag/jquery" target="_blank" onclick="LogClickCount(this,336);">jQuery</a>
+<a title="BI" href="http://www.csdn.net/tag/bi" target="_blank" onclick="LogClickCount(this,336);">BI</a>
+<a title="HTML5" href="http://www.csdn.net/tag/html5" target="_blank" onclick="LogClickCount(this,336);">HTML5</a>
+<a title="Spring" href="http://www.csdn.net/tag/spring" target="_blank" onclick="LogClickCount(this,336);">Spring</a>
+<a title="Apache" href="http://www.csdn.net/tag/apache" target="_blank" onclick="LogClickCount(this,336);">Apache</a>
+<a title=".NET" href="http://www.csdn.net/tag/.net" target="_blank" onclick="LogClickCount(this,336);">.NET</a>
+<a title="API" href="http://www.csdn.net/tag/api" target="_blank" onclick="LogClickCount(this,336);">API</a>
+<a title="HTML" href="http://www.csdn.net/tag/html" target="_blank" onclick="LogClickCount(this,336);">HTML</a>
+<a title="SDK" href="http://www.csdn.net/tag/sdk" target="_blank" onclick="LogClickCount(this,336);">SDK</a>
+<a title="IIS" href="http://www.csdn.net/tag/iis" target="_blank" onclick="LogClickCount(this,336);">IIS</a>
+<a title="Fedora" href="http://www.csdn.net/tag/fedora" target="_blank" onclick="LogClickCount(this,336);">Fedora</a>
+<a title="XML" href="http://www.csdn.net/tag/xml" target="_blank" onclick="LogClickCount(this,336);">XML</a>
+<a title="LBS" href="http://www.csdn.net/tag/lbs" target="_blank" onclick="LogClickCount(this,336);">LBS</a>
+<a title="Unity" href="http://www.csdn.net/tag/unity" target="_blank" onclick="LogClickCount(this,336);">Unity</a>
+<a title="Splashtop" href="http://www.csdn.net/tag/splashtop" target="_blank" onclick="LogClickCount(this,336);">Splashtop</a>
+<a title="UML" href="http://www.csdn.net/tag/uml" target="_blank" onclick="LogClickCount(this,336);">UML</a>
+<a title="components" href="http://www.csdn.net/tag/components" target="_blank" onclick="LogClickCount(this,336);">components</a>
+<a title="Windows Mobile" href="http://www.csdn.net/tag/windowsmobile" target="_blank" onclick="LogClickCount(this,336);">Windows Mobile</a>
+<a title="Rails" href="http://www.csdn.net/tag/rails" target="_blank" onclick="LogClickCount(this,336);">Rails</a>
+<a title="QEMU" href="http://www.csdn.net/tag/qemu" target="_blank" onclick="LogClickCount(this,336);">QEMU</a>
+<a title="KDE" href="http://www.csdn.net/tag/kde" target="_blank" onclick="LogClickCount(this,336);">KDE</a>
+<a title="Cassandra" href="http://www.csdn.net/tag/cassandra" target="_blank" onclick="LogClickCount(this,336);">Cassandra</a>
+<a title="CloudStack" href="http://www.csdn.net/tag/cloudstack" target="_blank" onclick="LogClickCount(this,336);">CloudStack</a>
+<a title="FTC" href="http://www.csdn.net/tag/ftc" target="_blank" onclick="LogClickCount(this,336);">FTC</a>
+<a title="coremail" href="http://www.csdn.net/tag/coremail" target="_blank" onclick="LogClickCount(this,336);">coremail</a>
+<a title="OPhone " href="http://www.csdn.net/tag/ophone " target="_blank" onclick="LogClickCount(this,336);">OPhone </a>
+<a title="CouchBase" href="http://www.csdn.net/tag/couchbase" target="_blank" onclick="LogClickCount(this,336);">CouchBase</a>
+<a title="云计算" href="http://www.csdn.net/tag/云计算" target="_blank" onclick="LogClickCount(this,336);">云计算</a>
+<a title="iOS6" href="http://www.csdn.net/tag/iOS6" target="_blank" onclick="LogClickCount(this,336);">iOS6</a>
+<a title="Rackspace " href="http://www.csdn.net/tag/rackspace " target="_blank" onclick="LogClickCount(this,336);">Rackspace </a>
+<a title="Web App" href="http://www.csdn.net/tag/webapp" target="_blank" onclick="LogClickCount(this,336);">Web App</a>
+<a title="SpringSide" href="http://www.csdn.net/tag/springside" target="_blank" onclick="LogClickCount(this,336);">SpringSide</a>
+<a title="Maemo" href="http://www.csdn.net/tag/maemo" target="_blank" onclick="LogClickCount(this,336);">Maemo</a>
+<a title="Compuware" href="http://www.csdn.net/tag/compuware" target="_blank" onclick="LogClickCount(this,336);">Compuware</a>
+<a title="大数据" href="http://www.csdn.net/tag/大数据" target="_blank" onclick="LogClickCount(this,336);">大数据</a>
+<a title="aptech" href="http://www.csdn.net/tag/aptech" target="_blank" onclick="LogClickCount(this,336);">aptech</a>
+<a title="Perl" href="http://www.csdn.net/tag/perl" target="_blank" onclick="LogClickCount(this,336);">Perl</a>
+<a title="Tornado" href="http://www.csdn.net/tag/tornado" target="_blank" onclick="LogClickCount(this,336);">Tornado</a>
+<a title="Ruby" href="http://www.csdn.net/tag/ruby" target="_blank" onclick="LogClickCount(this,336);">Ruby</a>
+<a title="Hibernate" href="http://www.csdn.net/hibernate" target="_blank" onclick="LogClickCount(this,336);">Hibernate</a>
+<a title="ThinkPHP" href="http://www.csdn.net/tag/thinkphp" target="_blank" onclick="LogClickCount(this,336);">ThinkPHP</a>
+<a title="HBase" href="http://www.csdn.net/tag/hbase" target="_blank" onclick="LogClickCount(this,336);">HBase</a>
+<a title="Pure" href="http://www.csdn.net/tag/pure" target="_blank" onclick="LogClickCount(this,336);">Pure</a>
+<a title="Solr" href="http://www.csdn.net/tag/solr" target="_blank" onclick="LogClickCount(this,336);">Solr</a>
+<a title="Angular" href="http://www.csdn.net/tag/angular" target="_blank" onclick="LogClickCount(this,336);">Angular</a>
+<a title="Cloud Foundry" href="http://www.csdn.net/tag/cloudfoundry" target="_blank" onclick="LogClickCount(this,336);">Cloud Foundry</a>
+<a title="Redis" href="http://www.csdn.net/tag/redis" target="_blank" onclick="LogClickCount(this,336);">Redis</a>
+<a title="Scala" href="http://www.csdn.net/tag/scala" target="_blank" onclick="LogClickCount(this,336);">Scala</a>
+<a title="Django" href="http://www.csdn.net/tag/django" target="_blank" onclick="LogClickCount(this,336);">Django</a>
+<a title="Bootstrap" href="http://www.csdn.net/tag/bootstrap" target="_blank" onclick="LogClickCount(this,336);">Bootstrap</a>
+    </div>
+</div>
+
+
+                        <div class="clear">
+                        </div>
+                    </div>                   
+                
+            </div>
+            <div id="side">
+    <div class="side">
+<div id="panel_Profile" class="panel">
+<ul class="panel_head"><span>个人资料</span></ul>
+<ul class="panel_body profile">
+<div id="blog_userface">
+    <a href="http://my.csdn.net/dongnan591172113" target="_blank">
+    <img src="http://avatar.csdn.net/D/B/6/1_dongnan591172113.jpg" title="访问我的空间" style="max-width:90%"/>
+    </a>
+    <br />
+    <span><a href="http://my.csdn.net/dongnan591172113" class="user_name" target="_blank">dongnan591172113</a></span>
+</div>
+<div class="interact">
+<a href="javascript:void(0);" class="attent" id="span_add_follow" title="[加关注]" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_guanzhu'])"></a>
+<a href="javascript:void(0);" class="letter" onclick="loginto(1)" title="[发私信]" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_sixin'])"></a>
+</div>
+<div id="blog_medal">
+</div>
+<ul id="blog_rank">
+    <li>访问：<span>26695次</span></li>
+    <li>积分：<span>696分</span></li>
+    <li>排名：<span>千里之外</span></li>
+</ul>
+<ul id="blog_statistics">
+    <li>原创：<span>31篇</span></li>
+    <li>转载：<span>71篇</span></li>
+    <li>译文：<span>4篇</span></li>
+    <li>评论：<span>2条</span></li>
+</ul>
+</ul>
+</div>
+
+
+<div class="panel" id="panel_Search">
+    <ul class="panel_head"><span>文章搜索</span></ul>
+    <ul class="panel_body">
+        <form id="frmSearch" action="http://so.csdn.net/search" class="form_search" target="_blank">
+        <span><input id="inputSearch" type="text" class="blogsearch" title="请输入关键字" /></span>
+        <input id="btnSubmit" type="button" value="搜索" title="search in blog" />
+        <input type="hidden" name="q" id="inputQ" />
+        <input type="hidden" name="t" value="blog" />
+        <a id="btnSearchBlog" target="_blank"></a>
+        </form>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {           
+            search();
+        });
+
+        $("#frmSearch").submit(function () {
+            search();
+            return false;
+        });
+
+        function search()
+        {
+            var url = "http://so.csdn.net/so/search/s.do?q=" + encodeURIComponent($("#inputSearch").val()) + "&u=" + username + "&t=blog";
+            window.location.href = url;
+        }   
+    });
+</script><div id="panel_Category" class="panel">
+<ul class="panel_head"><span>文章分类</span></ul>
+<ul class="panel_body">
+             <li>
+                <a href="http://blog.csdn.net/dongnan591172113/article/category/1165979" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">JSP</a><span>(3)</span>
+            </li>
+             <li>
+                <a href="http://blog.csdn.net/dongnan591172113/article/category/1165980" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">spring</a><span>(4)</span>
+            </li>
+             <li>
+                <a href="http://blog.csdn.net/dongnan591172113/article/category/1165981" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">hibernate</a><span>(11)</span>
+            </li>
+             <li>
+                <a href="http://blog.csdn.net/dongnan591172113/article/category/1166100" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">jquery</a><span>(3)</span>
+            </li>
+             <li>
+                <a href="http://blog.csdn.net/dongnan591172113/article/category/1166175" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">CSS</a><span>(2)</span>
+            </li>
+             <li>
+                <a href="http://blog.csdn.net/dongnan591172113/article/category/1166368" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">JavaScript</a><span>(6)</span>
+            </li>
+             <li>
+                <a href="http://blog.csdn.net/dongnan591172113/article/category/1169895" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">JSTL</a><span>(1)</span>
+            </li>
+             <li>
+                <a href="http://blog.csdn.net/dongnan591172113/article/category/1172198" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">开发工具</a><span>(4)</span>
+            </li>
+             <li>
+                <a href="http://blog.csdn.net/dongnan591172113/article/category/1198436" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">java</a><span>(18)</span>
+            </li>
+             <li>
+                <a href="http://blog.csdn.net/dongnan591172113/article/category/1352736" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">设计模式</a><span>(17)</span>
+            </li>
+             <li>
+                <a href="http://blog.csdn.net/dongnan591172113/article/category/1393310" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">solr</a><span>(6)</span>
+            </li>
+             <li>
+                <a href="http://blog.csdn.net/dongnan591172113/article/category/1399971" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">SOA</a><span>(1)</span>
+            </li>
+             <li>
+                <a href="http://blog.csdn.net/dongnan591172113/article/category/1928717" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">database</a><span>(6)</span>
+            </li>
+             <li>
+                <a href="http://blog.csdn.net/dongnan591172113/article/category/1932801" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">数据结构</a><span>(0)</span>
+            </li>
+             <li>
+                <a href="http://blog.csdn.net/dongnan591172113/article/category/1998135" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">mysql</a><span>(4)</span>
+            </li>
+             <li>
+                <a href="http://blog.csdn.net/dongnan591172113/article/category/1998335" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">svn</a><span>(1)</span>
+            </li>
+             <li>
+                <a href="http://blog.csdn.net/dongnan591172113/article/category/2064965" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">apple</a><span>(1)</span>
+            </li>
+             <li>
+                <a href="http://blog.csdn.net/dongnan591172113/article/category/2142209" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">linux</a><span>(1)</span>
+            </li>
+             <li>
+                <a href="http://blog.csdn.net/dongnan591172113/article/category/2142823" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">oracle</a><span>(6)</span>
+            </li>
+             <li>
+                <a href="http://blog.csdn.net/dongnan591172113/article/category/2212093" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">xml</a><span>(1)</span>
+            </li>
+             <li>
+                <a href="http://blog.csdn.net/dongnan591172113/article/category/2329345" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">android</a><span>(8)</span>
+            </li>
+</ul>
+</div><div id="panel_Archive" class="panel">
+<ul class="panel_head"><span>文章存档</span></ul>
+<ul class="panel_body">
+<div id="archive_list">
+<!--归档统计-->
+<li><a href="http://blog.csdn.net/dongnan591172113/article/month/2014/08">2014年08月</a><span>(2)</span></li><li><a href="http://blog.csdn.net/dongnan591172113/article/month/2014/07">2014年07月</a><span>(1)</span></li><li><a href="http://blog.csdn.net/dongnan591172113/article/month/2014/06">2014年06月</a><span>(8)</span></li><li><a href="http://blog.csdn.net/dongnan591172113/article/month/2014/05">2014年05月</a><span>(5)</span></li><li><a href="http://blog.csdn.net/dongnan591172113/article/month/2014/04">2014年04月</a><span>(10)</span></li><li><a href="http://blog.csdn.net/dongnan591172113/article/month/2014/03">2014年03月</a><span>(15)</span></li><li><a href="http://blog.csdn.net/dongnan591172113/article/month/2014/02">2014年02月</a><span>(9)</span></li><li><a href="http://blog.csdn.net/dongnan591172113/article/month/2013/08">2013年08月</a><span>(1)</span></li><li><a href="http://blog.csdn.net/dongnan591172113/article/month/2013/06">2013年06月</a><span>(2)</span></li><li><a href="http://blog.csdn.net/dongnan591172113/article/month/2013/04">2013年04月</a><span>(11)</span></li><li><a href="http://blog.csdn.net/dongnan591172113/article/month/2013/03">2013年03月</a><span>(9)</span></li><li><a href="http://blog.csdn.net/dongnan591172113/article/month/2013/02">2013年02月</a><span>(4)</span></li><li><a href="http://blog.csdn.net/dongnan591172113/article/month/2012/12">2012年12月</a><span>(1)</span></li><li><a href="http://blog.csdn.net/dongnan591172113/article/month/2012/10">2012年10月</a><span>(3)</span></li><li><a href="http://blog.csdn.net/dongnan591172113/article/month/2012/09">2012年09月</a><span>(7)</span></li><li><a href="http://blog.csdn.net/dongnan591172113/article/month/2012/08">2012年08月</a><span>(5)</span></li><li><a href="http://blog.csdn.net/dongnan591172113/article/month/2012/06">2012年06月</a><span>(12)</span></li><li><a href="http://blog.csdn.net/dongnan591172113/article/month/2010/07">2010年07月</a><span>(1)</span></li>
+</div>
+</ul>
+</div>
+<div id="hotarticls" class="panel">
+<ul class="panel_head">
+    <span>       
+阅读排行    </span>
+</ul>
+
+<ul class="panel_body itemlist">
+<li>
+<a href="/dongnan591172113/article/details/7685164" title="maven仓库配置">maven仓库配置</a><span>(6880)</span>
+</li>
+<li>
+<a href="/dongnan591172113/article/details/8771441" title="java设计模式--事件监听器模式和观察者模式">java设计模式--事件监听器模式和观察者模式</a><span>(3683)</span>
+</li>
+<li>
+<a href="/dongnan591172113/article/details/7943652" title="hibernate session缓存机制">hibernate session缓存机制</a><span>(986)</span>
+</li>
+<li>
+<a href="/dongnan591172113/article/details/7685055" title="maven快速入门">maven快速入门</a><span>(727)</span>
+</li>
+<li>
+<a href="/dongnan591172113/article/details/8800660" title="深入Solr实战">深入Solr实战</a><span>(682)</span>
+</li>
+<li>
+<a href="/dongnan591172113/article/details/8052868" title="Spring具体事务处理器的实现">Spring具体事务处理器的实现</a><span>(501)</span>
+</li>
+<li>
+<a href="/dongnan591172113/article/details/8051204" title="hibernate 基于JPA的事务管理">hibernate 基于JPA的事务管理</a><span>(365)</span>
+</li>
+<li>
+<a href="/dongnan591172113/article/details/8768253" title="java集合之ArrayList">java集合之ArrayList</a><span>(274)</span>
+</li>
+<li>
+<a href="/dongnan591172113/article/details/7942939" title="http session">http session</a><span>(273)</span>
+</li>
+<li>
+<a href="/dongnan591172113/article/details/23362541" title="solr4+tomcat部署安装">solr4+tomcat部署安装</a><span>(262)</span>
+</li>
+</ul>
+</div>
+<div id="hotarticls2" class="panel">
+<ul class="panel_head"><span>评论排行</span></ul>
+<ul class="panel_body itemlist">
+<li>
+<a href="/dongnan591172113/article/details/8771441" title="java设计模式--事件监听器模式和观察者模式">java设计模式--事件监听器模式和观察者模式</a><span>(3)</span>
+</li>
+<li>
+<a href="/dongnan591172113/article/details/9168325" title="java中匿名内部类的两种实现方式">java中匿名内部类的两种实现方式</a><span>(0)</span>
+</li>
+<li>
+<a href="/dongnan591172113/article/details/20221991" title="Hibernate get和load区别">Hibernate get和load区别</a><span>(0)</span>
+</li>
+<li>
+<a href="/dongnan591172113/article/details/20297331" title="ibatis与hibernate有什么区别">ibatis与hibernate有什么区别</a><span>(0)</span>
+</li>
+<li>
+<a href="/dongnan591172113/article/details/20356601" title="mysql 获取当前日期及格式化">mysql 获取当前日期及格式化</a><span>(0)</span>
+</li>
+<li>
+<a href="/dongnan591172113/article/details/20357805" title="svn cleanup">svn cleanup</a><span>(0)</span>
+</li>
+<li>
+<a href="/dongnan591172113/article/details/20358419" title="MYSQL的优化">MYSQL的优化</a><span>(0)</span>
+</li>
+<li>
+<a href="/dongnan591172113/article/details/20360661" title="mysql中limit的用法详解[数据分页常用]">mysql中limit的用法详解[数据分页常用]</a><span>(0)</span>
+</li>
+<li>
+<a href="/dongnan591172113/article/details/20718175" title="别再说iOS7是扁平化设计了，好吗？">别再说iOS7是扁平化设计了，好吗？</a><span>(0)</span>
+</li>
+<li>
+<a href="/dongnan591172113/article/details/21190245" title="Head First设计模式-简单工厂模式">Head First设计模式-简单工厂模式</a><span>(0)</span>
+</li>
+</ul>
+</div>
+<div id="homepageArticles" class="panel tracking-ad" data-mod="popu_4">
+<ul class="panel_head"><span>推荐文章</span></ul>
+<ul class="panel_body" id="ad_commend"></ul>
+</div>
+<script type="text/javascript">
+ new Ad(12, 'ad_commend');
+</script><div id="newcomments" class="panel">
+<ul class="panel_head"><span>最新评论</span></ul>
+<ul class="panel_body itemlist">
+    <li>
+   
+         <a href="/dongnan591172113/article/details/8771441#comments">java设计模式--事件监听器模式和观察者模式</a>
+    <p style="margin:0px;"><a href="/zhangwude2301" class="user_name">zhangwude2301</a>:
+1.怎么感觉两个模式没有差别呢？都是A(事件源/被观察者)在一定场合下需要调用B（监听者/观察者）来...
+    </p>
+    </li>
+    <li>
+   
+         <a href="/dongnan591172113/article/details/8771441#comments">java设计模式--事件监听器模式和观察者模式</a>
+    <p style="margin:0px;"><a href="/zhangwude2301" class="user_name">zhangwude2301</a>:
+1.怎么感觉两个模式没有差别呢？都是A(事件源/被观察者)在一定场合下需要调用B（监听者/观察者）来...
+    </p>
+    </li>
+    <li>
+   
+         <a href="/dongnan591172113/article/details/8771441#comments">java设计模式--事件监听器模式和观察者模式</a>
+    <p style="margin:0px;"><a href="/a603366062" class="user_name">a603366062</a>:
+可以自己定义些接口,来实现,这样更加有助于理解.
+    </p>
+    </li>
+</ul>
+</div>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+
+            <div class="clear">
+            </div>
+        </div>
+        
+
+<script type="text/javascript" src="http://csdnimg.cn/rabbit/cnick/cnick.js"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/newblog.min.js"></script>
+
+
+<script type="text/javascript" src="http://medal.blog.csdn.net/showblogmedal.ashx?blogid=883424"></script>
+<script type="text/javascript">
+    document.write('<script type="text/javascript" src="http://csdnimg.cn/pubfooter/js/publib_footer.js?' + Math.floor(new Date() / 120000).toString(36) + '="></' + 'script>');
+</script>
+    <script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+<script type="text/javascript">document.write("<img src=http://counter.csdn.net/pv.aspx?id=24 border=0 width=0 height=0>");</script>
+<script type="text/javascript" src="http://www.csdn.net/ui/scripts/Csdn/counter.js"></script>
+<script type="text/javascript" src="http://ad.csdn.net/scripts/ad-blog.js"></script>
+<script type="text/javascript" src="http://zz.csdn.net/js/count.js"></script>
+<script type="text/javascript">
+    $(function () {
+        function __get_code_toolbar(snippet_id) {
+            return $("<a href='https://code.csdn.net/snippets/"
+                    + snippet_id
+                    + "' target='_blank' title='在CODE上查看代码片' style='text-indent:0;'><img src='https://code.csdn.net/assets/CODE_ico.png' width=12 height=12 alt='在CODE上查看代码片' style='position:relative;top:1px;left:2px;'/></a>"
+                    + "<a href='https://code.csdn.net/snippets/"
+                    + snippet_id
+                    + "/fork' target='_blank' title='派生到我的代码片'  style='text-indent:0;'><img src='https://code.csdn.net/assets/ico_fork.svg' width=12 height=12 alt='派生到我的代码片' style='position:relative;top:2px;left:2px;'/></a>");
+        }
+        
+        $("[code_snippet_id]").each(function () {
+            __s_id = $(this).attr("code_snippet_id");
+            if (__s_id != null && __s_id != "" && __s_id != 0 && parseInt(__s_id) > 70020) {
+                __code_tool = __get_code_toolbar(__s_id);
+                $(this).prev().find(".tools").append(__code_tool);
+            }
+        });
+    });
+</script>
+
+    </div>
+      <!--new top-->
+    
+    <script id="csdn-toolbar-id" btnId="header_notice_num" wrapId="note1" count="5" subCount="5" type="text/javascript" src="http://static.csdn.net/public/common/toolbar/js/toolbar.js"></script>     <!--new top-->
+</body>
+</html>

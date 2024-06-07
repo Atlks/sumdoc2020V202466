@@ -1,0 +1,11 @@
+[DEFAULT]
+BASEURL=http://www.fx-audio.net/
+[InternetShortcut]
+URL=http://somusic.taobao.com/
+Modified=C0B7CA2F9339C90106
+IconFile=C:\Windows\system32\SHELL32.dll
+IconIndex=220
+IDList=
+HotKey=0
+[{000214A0-0000-0000-C000-000000000046}]
+Prop3=19,2

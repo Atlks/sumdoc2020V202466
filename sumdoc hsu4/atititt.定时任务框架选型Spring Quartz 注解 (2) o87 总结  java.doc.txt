@@ -1,0 +1,40 @@
+_atititt.å®æ¶ä»»å¡æ¡æ¶éåSpring_Quartz_æ³¨è§£_(2)_o87_æ»ç»_  java
+
+11
+11
+11
+22
+22
+2
+添加定时心跳输出
+private void pushTask() {
+		logger.info("------PrgrmNoticer runing...");
+定时任务不能启动的debug
+查看log  --Scanning --Identified /Ignored 
+
+ 添加到scan目录会有Scanning file  ,,,
+组件类会Identified candidate component class:
+普通类Ignored because not matching any filter:
+
+作者::老哇的爪子Attilax艾龙，EMAIL:1466519819@qq.com
+转载请注明来源： http://blog.csdn.net/attilax
+
+1668 DEBUG [2014-08-06 02:49:57]   Scanning file [D:\workspace\vodx\WebRoot\WEB-INF\classes\com\focustar\push\TaskNoticer.class]   DEBUG  [thrd:main]    loger:org.springframework.context.annotation.ClassPathBeanDefinitionScanner   (org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider.findCandidateComponents.233) 
+1670 DEBUG [2014-08-06 02:49:57]   Identified candidate component class: file [D:\workspace\vodx\WebRoot\WEB-INF\classes\com\focustar\push\TaskNoticer.class]   DEBUG  [thrd:main]    loger:org.springframework.context.annotation.ClassPathBeanDefinitionScanner   (org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider.findCandidateComponents.244) 
+
+查看是否lozyload
+@Lazy(false)
+@Component public class PrgrmNoticer {
+
+ @Scheduled(fixedDelay = 7 * 1000)// per 5 sec
+	private void pushTask() {
+
+only false  lazy load tsainen  run
+贝儿,load and exe yg meth ya bsin...也不行
+
+PrgrmNoticer pn = (PrgrmNoticer) SpringUtil.getBean("prgrmNoticer");
+		System.out.println(pn); 
+		pn.t();
+参考
+atititt.java定时任务框架选型Spring Quartz 注解总结 - attilax的专栏 - 博客频道 - CSDN.NET.htm
+

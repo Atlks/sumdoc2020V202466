@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION;TYPE=WORK:3.0
+FN;CHARSET=UTF-8:纽约时报中文网
+N;CHARSET=UTF-8:纽约时报中文网;;;;
+PROFILE:VCARD
+ADR;CHARSET=UTF-8:;;620 Eighth Avenue;New York;New York;10018;USA
+EMAIL:cn.help@nytimes.com
+ORG;CHARSET=UTF-8:The New York Times
+URL:https://cn.nytimes.com/
+END:VCARD

@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+<head>
+<meta charset='utf-8'>
+<meta content='IE=edge' http-equiv='X-UA-Compatible'>
+<meta content='码云,代码托管,git,Git@OSC,gitee.com,开源,项目管理,版本控制,开源代码,代码分享,项目协作,开源项目托管,免费代码托管,Git代码托管,Git托管服务' name='Keywords'>
+<meta content='attilax2 Star 的项目' name='Description'>
+<title>
+我 Star 的项目 - attilax2 (attilax) - 码云 Gitee.com
+</title>
+<link href="https://assets.gitee.com/assets/favicon-950947d692935bf7e0b1629a69cd89ed.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+<link href="https://assets.gitee.com/assets/application-58d273e640a9413fe148336dc0af746f.css" media="screen" rel="stylesheet" type="text/css" />
+<script src="https://assets.gitee.com/assets/application-f9f860c1730e831ab6c77971b110c24b.js" type="text/javascript"></script>
+<script src="https://assets.gitee.com/assets/lib/jquery.timeago.zh-CN-bcd91c2c27a815fa9a395595874b592b.js" type="text/javascript"></script>
+
+<meta content="authenticity_token" name="csrf-param" />
+<meta content="UPv1Zrctm+wzcxUdxqD9IhZyi76vVu55oo4WxCx1jLA=" name="csrf-token" />
+<script type="text/javascript">
+//<![CDATA[
+window.gon = {};gon.locale="zh-CN";
+//]]>
+</script>
+<script src="//res.wx.qq.com/open/js/jweixin-1.2.0.js" type="text/javascript"></script>
+<script>
+  var title = document.title.replace(/( - Gitee| - 码云)$/, ''),
+    imgUrl = '',
+    imgUrlEl = document.querySelector('meta[itemprop=image]')
+  if (imgUrlEl) {
+    imgUrl = imgUrlEl.getAttribute('content')
+  } else {
+    imgUrl = "https://gitee.com//logo_4wechat.png"
+  }
+  wx.config({
+    debug: false,
+    appId: "wxff219d611a159737",
+    timestamp: "1525747621",
+    nonceStr: "b13e6df461ce381207c4e74486625973",
+    signature: "6f2330ce522c967f9741fd9a274b4e42b094531b",
+    jsApiList: [
+      'onMenuShareTimeline',
+      'onMenuShareAppMessage'
+    ]
+  });
+  wx.ready(function () {
+    wx.onMenuShareTimeline({
+      title: title, // 分享标题
+      link: "https://gitee.com/attilax/starred", // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+      imgUrl: imgUrl // 分享图标
+    });
+    wx.onMenuShareAppMessage({
+      title: title, // 分享标题
+      link: "https://gitee.com/attilax/starred", // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+      desc: document.querySelector('meta[name=Description]').getAttribute('content'),
+      imgUrl: imgUrl // 分享图标
+    });
+  });
+  wx.error(function(res){
+    console.error('err', res)
+  });
+</script>
+
+<script type='text/x-mathjax-config'>
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [["$$","$$"],["\\[","\\]"]],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    ignoreClass: "container|files",
+    processClass: "markdown-body"
+  }
+});
+</script>
+<script src="https://gitee.com/uploads/resources/MathJax-2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+
+<!--[if lt IE 10]>
+<script>
+    window.location.href = "/incompatible.html";
+</script>
+<![endif]-->
+</head>
+
+<script src="https://assets.gitee.com/assets/dashboard/app-edec7b021f1b47ceba8eca83c42129af.js" type="text/javascript"></script>
+<script src="https://assets.gitee.com/assets/profiles/app-bc1d1b5d59933f585e4eb1f6c60053b3.js" type="text/javascript"></script>
+<body class='git-user ui_basic profile' id='users-stared_projects'>
+<header class='common-header fixed noborder' id='git-header-nav'>
+<div class='ui container'>
+<div class='ui menu'>
+<div class='item gitosc-logo'>
+<a href="/"><img class='ui inline image' height='28' src='/logo.svg?20171024' width='95'>
+</a></div>
+<a href="/explore" class="item " title="开源软件">开源软件
+</a><a href="/enterprises" class="item " title="企业版">企业版
+<sup class='ui red label'>
+特惠
+</sup>
+</a><a href="https://blog.gitee.com/" class="item" id="gitee-blog" target="_blank" title="博客">博客
+</a><div class='dropdown item loading ui' id='my-gitee-dropdown'>
+<a href="/attilax/events">我的码云</a>
+<i class='dropdown icon'></i>
+<div class='menu'>
+<div class='header user-enterprises'>
+<a href="/attilax/enterprises" class="pull-right" target="_blank">全部</a>
+企业
+<span class='count'></span>
+</div>
+<div class='disabled item tip user-enterprises'>
+无企业
+</div>
+<div class='header user-groups'>
+<a href="/attilax/groups" class="pull-right" target="_blank">全部</a>
+组织
+<span class='count'></span>
+</div>
+<div class='disabled item tip user-groups'>
+无组织
+</div>
+<div class='header user-projects'>
+<a href="/attilax/projects" class="pull-right" target="_blank">全部</a>
+项目
+<span class='count'></span>
+</div>
+<div class='disabled item tip user-projects'>
+无项目
+</div>
+</div>
+</div>
+<div class='right menu userbar' id='git-nav-user-bar'>
+<div class='item'>
+<form accept-charset="UTF-8" action="/search" autocomplete="on" data-text-filter="搜索格式不正确" data-text-require="搜索关键字不能少于1个" id="navbar-search-form" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+<div class='ui mini fluid input'>
+<input id="navbar-search-input" name="search" placeholder="搜索项目、代码片段..." type="text" value="" />
+<input id="group_id" name="group_id" type="hidden" />
+<input id="project_id" name="project_id" type="hidden" />
+<input id="navbar-search-type" name="type" type="hidden" />
+</div>
+</form>
+
+
+</div>
+<div class='item ui dropdown empty' data-count-path='/notifications/unread_count' data-mark-notice-path='/notifications/mark' id='notice-dropdown'>
+<a href="/notifications" class="remind-button"><i class='iconfont icon-remind'></i>
+<div class='notice-count total'></div>
+</a><div class='notice-dropdown-panel menu'>
+<div class='notice-dropdown-panel-header'>
+<div class='tab active' data-data-path='/notifications/notices?scope=referer' data-html-path='/notifications/referer' data-scope='referer'>
+<div class='content'>
+@ 我
+<div class='notice-count referer'></div>
+</div>
+</div>
+<div class='tab' data-data-path='/notifications/notices?scope=infos' data-html-path='/notifications/infos' data-scope='infos'>
+<div class='content'>
+通知
+<div class='notice-count infos'></div>
+</div>
+</div>
+<div class='tab' data-data-path='/notifications/notices?scope=messages' data-html-path='/notifications/messages' data-scope='messages'>
+<div class='content'>
+私信
+<div class='notice-count messages'></div>
+</div>
+</div>
+</div>
+<div class='item notice-dropdown-panel-container'>
+<div class='ui dimmer over active'>
+<div class='ui loader'></div>
+</div>
+<div class='notice-list'></div>
+<div class='notice-dropdown-panel-blank'>
+暂没有新消息
+</div>
+</div>
+<div class='notice-dropdown-panel-footer'>
+<div class='action'>
+<div class='side left'>
+<a href="javascript: void(0);" class="mark-notices">全部标记为已读
+</a></div>
+<div class='side right'>
+<a href="javascript: void(0);" class="load-all" target="_blank">查看全部
+</a></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class='ui dropdown link item' id='git-nav-create'>
+<i class='iconfont icon-add-thin'></i>
+<div class='right menu'>
+<a href="/projects/new" class="item"><i class='add square icon'></i>
+新建项目
+</a><a href="/attilax/codes/new" class="item"><i class='code icon'></i>
+发布代码片段
+</a><a href="/organizations/new" class="item"><i class='group icon'></i>
+创建组织
+</a><a href="/enterprises/new" class="item"><i class='icon iconfont icon-enterprise'></i>
+开通企业版
+</a><a href="/projects/oauth_github" class="item"><i class='github icon'></i>
+从 GitHub 导入项目
+</a><a href="/projects/csdn_code" class="item"><i class='iconfont icon-logo_csdn icon'></i>
+CODE 一键迁移
+</a></div>
+</div>
+<div class='ui dropdown item' id='git-nav-user'>
+<a href="/attilax/events"><img avatar="attilax2" class="ui avatar image attilax-avatar" />
+</a><i class='dropdown icon'></i>
+<div class='right menu'>
+<a href="/attilax/events" class="item"><div class='mayun-icon my-ic-user-home my-ic-user-home-dims'></div>
+个人主页
+</a><a href="/profile" class="item"><div class='mayun-icon my-ic-edit my-ic-edit-dims'></div>
+设置
+</a><div class='divider'></div>
+<a href="/gists" class="item"><div class='iconfont icon-snippet2'></div>
+代码片段
+</a><a href="http://git.mydoc.io/" class="item" target="_blank"><div class='mayun-icon my-ic-help my-ic-help-dims'></div>
+帮助
+</a><div class='divider'></div>
+<a href="/logout" class="item destroy-user-session" data-method="delete" rel="nofollow"><div class='mayun-icon my-ic-exit my-ic-exit-dims'></div>
+退出
+</a></div>
+</div>
+<script>
+  $('.destroy-user-session').click(function() {
+    $.cookie('access_token', null, { path: '/' });
+  })
+</script>
+
+</div>
+</div>
+</div>
+</header>
+<script>
+  Gitee.initNavbar()
+  Gitee.initRepoRemoteWay()
+</script>
+
+<div class='fixed-notice-messages'>
+<div class='ui container'>
+<div class='flash-messages' id='messages-container'></div>
+</div>
+</div>
+<script>
+  (function() {
+    $(function() {
+      var $error_box, alertTip, notify_content, notify_options, setCookie, template;
+  
+      template = '<div data-notify="container" class="ui {0} message" role="alert">' + '<i data-notify="dismiss" class="close icon"></i>' + '<span data-notify="message">{2}</span>' + '</div>';
+      notify_content = null;
+      notify_options = {};
+      alertTip = '';
+      $error_box = $(".flash_error.flash_error_box");
+      if (notify_options.type === 'error' && $error_box.length > 0 && !$.isEmptyObject(notify_content.message)) {
+        if (notify_content.message === 'captcha_fail') {
+          alertTip = "验证码不正确";
+        } else if (notify_content.message === 'not_found_in_database') {
+          alertTip = "帐号或者密码错误";
+        } else if (notify_content.message === 'not_found_and_show_captcha') {
+          alertTip = "帐号或者密码错误";
+        } else {
+          alertTip = notify_content.message;
+        }
+        $error_box.html(alertTip).show();
+      } else if (notify_content) {
+        notify_options.delay = 3000;
+        notify_options.template = template;
+        notify_options.offset = {
+          x: 10,
+          y: 30
+        };
+        notify_options.element = '#messages-container';
+        $.notify(notify_content, notify_options);
+      }
+      setCookie = function(name, value) {
+        $.cookie(name, value, {
+          path: '/',
+          expires: 365
+        });
+      };
+      $('#remove-bulletin').on('click', function() {
+        setCookie('remove_bulletin', "gitee-maintain-1516115940");
+        $('#git-bulletin').hide();
+      });
+      return $('#remove-member-bulletin').on('click', function() {
+        setCookie('remove_member_bulletin', "gitee_member_bulletin");
+        $(this).parent().hide();
+      });
+    });
+  
+  }).call(this);
+</script>
+
+<!--[if lt IE 10]>
+<script>
+  window.location.href = "/incompatible.html"
+</script>
+<![endif]-->
+
+<div class='ui container' id='user-show-detail'>
+<div class='ui custom grid'>
+<div class='five wide column'>
+<div class='git-user-header'>
+<div class='git-user-profile'>
+<div class='git-user-avatar git-avatar-container'>
+<img avatar="attilax2" class="avatar attilax-avatar" id="avatar-change" />
+<div class='over-avatar' id='git-avatar-settings'>更换头像</div>
+<div class='modal small ui user' id='git-avatar-modal'>
+<i class='iconfont icon-close close'></i>
+<div class='header'>
+更换头像
+</div>
+<div class='content'>
+<div class='image-box'>
+<div class='thumb-box'></div>
+<div class='spinner' style='display: none;'>Loading...</div>
+</div>
+<div class='preview-box pull-right'>
+<div>预览</div>
+<ul>
+<li>
+<div class='ui'>
+<img avatar="attilax2" class="cropped" height="100" width="100" />
+</div>
+<span class='text-muted'>100 x 100</span>
+</li>
+<li>
+<div class='ui'>
+<img avatar="attilax2" class="cropped" height="50" width="50" />
+</div>
+<span class='text-muted'>50 x 50</span>
+</li>
+</ul>
+</div>
+<div class='actions'>
+<input accept='image/jpg, image/jpeg, image/png' id='avatar-input' type='file'>
+<div class='pull-left zoom-group'>
+<i class='fa fa-plus-square-o' id='zoom-in'></i>
+<i class='fa fa-minus-square-o' id='zoom-out'></i>
+</div>
+<div class='pull-right avatar-buttons'>
+<div class='ui button blank' id='upload-avatar'>
+上传
+</div>
+<div class='ui button orange' id='confirm-avatar'>
+确定
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    $(window).load(function() {
+      var $avatarInput, $avatarModal, $cropper, $imageBox, options, preview, updatePage;
+  
+      $avatarModal = $('#git-avatar-modal');
+      $('#git-avatar-settings').click(function() {
+        $avatarModal.modal('show');
+        return false;
+      });
+      $avatarModal.find('.close').click(function() {
+        return $avatarModal.modal('hide');
+      });
+      options = {
+        thumbBox: '.thumb-box',
+        spinner: '.spinner',
+        imgSrc: 'avatar.png'
+      };
+      $cropper = null;
+      preview = function() {
+        var img;
+  
+        if ($cropper) {
+          img = $cropper.getDataURL();
+          return $('.cropped').each(function() {
+            return $(this).attr('src', img);
+          });
+        }
+      };
+      $imageBox = $('.image-box');
+      $imageBox.on('click', preview);
+      $imageBox.on('mousedown', preview);
+      $imageBox.on('mousewheel DOMMouseScroll', preview);
+      $avatarInput = $('#avatar-input');
+      $avatarInput.on('change', function() {
+        var reader;
+  
+        reader = new FileReader();
+        reader.onload = function(e) {
+          options.imgSrc = e.target.result;
+          $cropper = $imageBox.cropbox(options);
+          if ($cropper) {
+            $cropper.zoomIn() && $cropper.zoomOut();
+            preview();
+            return $('.zoom-group').show();
+          }
+        };
+        return reader.readAsDataURL(this.files[0]);
+      });
+      $('#zoom-in').on('click', function() {
+        $cropper.zoomIn();
+        return preview();
+      });
+      $('#zoom-out').on('click', function() {
+        $cropper.zoomOut();
+        return preview();
+      });
+      $('#upload-avatar').on('click', function() {
+        return $avatarInput.click();
+      });
+      $('#confirm-avatar').on('click', function() {
+        var img;
+  
+        if ($cropper) {
+          img = $cropper.getDataURL();
+          return $.ajax({
+            type: "POST",
+            url: '/profile/upload_portrait_with_base64',
+            data: {
+              avatar: img
+            },
+            success: function(data) {
+              $avatarModal.modal('hide');
+              if (data === 'success') {
+                Flash.show("头像更新成功");
+                return updatePage(img);
+              } else {
+                return Flash.show("更新失败，请稍后再试");
+              }
+            }
+          });
+        }
+      });
+      return updatePage = function(newAvatar) {
+        $imageBox.css('background-image', '');
+        $avatarInput.val('');
+        $('.zoom-group').hide();
+        return $('.attilax-avatar').each(function() {
+          return $(this).attr('src', newAvatar);
+        });
+      };
+    });
+  
+  }).call(this);
+</script>
+
+<div class='user-info' style='overflow: hidden; text-overflow: ellipsis;'>
+<a href="/attilax" class="git-user-name-link">attilax2</a>
+<span>attilax</span>
+</div>
+<a href="/profile" class="edit-profile-btn" title="设置"><i class='iconfont icon-edit'></i>
+</a></div>
+<div class='clear'></div>
+<div class='git-user-infodata'>
+<div class='ui grid'>
+<div class='four wide column'>
+<a href="/attilax/followers"><div class='follow-num' id='followers-number'>
+1
+</div>
+<span class='follow-txt'>
+Followers
+</span>
+</a></div>
+<div class='four wide column'>
+<a href="/attilax/starred"><div class='follow-num'>
+0
+</div>
+<span class='follow-txt'>
+Stars
+</span>
+</a></div>
+<div class='four wide column'>
+<a href="/attilax/following"><div class='follow-num'>
+0
+</div>
+<span class='follow-txt'>
+Following
+</span>
+</a></div>
+<div class='four wide column'>
+<a href="/attilax/watched"><div class='follow-num'>
+39
+</div>
+<span class='follow-txt'>
+Watches
+</span>
+</a></div>
+</div>
+<div class='clear'></div>
+</div>
+<div class='ui divider git-user-infodata-divider hidden'></div>
+<div class='git-user-bio'>
+<i class='iconfont icon-introduction'></i>
+<span title='博客 http://blog.csdn.net/attilax&#x000A;http://www.cnblogs.com/attilax/&#x000A;微博  http://weibo.com/u/5941179815&#x000A;提供相关技术咨询，以及解决方案编制，编制相关标准化规范草案，软件培训与技术点体系建设，知识图谱体系化，提供软件行业顾问布道，12年的软件行业背景，欢迎有志于软件行业的同仁们互相交流，&#x000A;Uke公司总群  UKE HQ UKE科技总部('>
+博客 http://blog.csdn.net/attilax
+http://www.cnblogs.com/attilax/
+微博  http://weibo.com/u/5941179815
+提供相关技术咨询，以及解决方案编制，编制相关标准化规范草案，软件培训与技术点体系建设，知识图谱体系化，提供软件行业顾问布道，12年的软件行业背景，欢迎有志于软件行业的同仁们互相交流，
+Uke公司总群  UKE HQ UKE科技总部(
+</span>
+</div>
+<div class='git-user-bio'>
+<i class='iconfont icon-weibo'></i>
+<a href='http://weibo.com/u/5941179815' target='_blank' title='http://weibo.com/u/5941179815'>http://weibo.com/u/5941179815</a>
+</div>
+<div class='git-user-bio'>
+<i class='iconfont icon-blog'></i>
+<a href='http://blog.csdn.net/attilax' target='_blank' title='http://blog.csdn.net/attilax'>http://blog.csdn.net/attilax</a>
+</div>
+<div class='git-user-bio'>
+<i class='iconfont icon-time'></i>
+<span class='join-time'>加入于</span>
+<span class='join-time timeago' title='2016-03-02 17:23:40 +0800'>
+2016-03-02 17:23
+</span>
+</div>
+</div>
+</div>
+<script>
+  var $followersNumber = $('#followers-number');
+  $('.follow-or-unfollow-btn').click(function() {
+    var $this = $(this);
+    var thisBtn = this;
+    if ($this.hasClass('active-btn')) {
+      $.ajax({
+        url: "/attilax/follow",
+        type: "POST",
+        success: function(res) {
+          if (res.code == 1) {
+            $this.removeClass('active-btn');
+            thisBtn.childNodes[1].nodeValue = "取消关注";
+            $followersNumber.text(res.data.followers_count);
+          }
+        }
+      })
+    } else {
+      $.ajax({
+        url: "/attilax/unfollow",
+        type: "POST",
+        success: function(res) {
+          if (res.code == 1) {
+            $this.addClass('active-btn');
+            thisBtn.childNodes[1].nodeValue = "关注";
+            $followersNumber.text(res.data.followers_count);
+          }
+        }
+      })
+    }
+  })
+</script>
+
+<div class='ui top fluid text git-dashboard-prjgroup-menu'>
+<a class='active item' data-tab='projects' id='dashboard-sidebar-item-zh-CN'>
+项目
+</a>
+<a class='item' data-tab='groups' id='dashboard-sidebar-item-zh-CN'>
+组织
+</a>
+<a class='item' data-tab='enterprises' id='dashboard-sidebar-item-zh-CN'>
+企业
+</a>
+</div>
+<div class='active aligned attached bottom project-team-tab segment tab ui' data-tab='projects'>
+<div class='ui secondary pointing menu git-dashboard-project-menu'>
+<a class='active item' data-tab='public'>
+Public
+</a>
+<a class='item' data-tab='forks'>
+Forks
+</a>
+<a class='item' data-tab='private'>
+Private
+</a>
+<div class='right menu float-right plus-icon'>
+<a href="/projects/new" class="item add_projects" title="创建项目"><div class='ui transparent icon'>
+<i class='iconfont icon-add'></i>
+</div>
+</a></div>
+</div>
+<div class='project-list'>
+<div class='active attached bottom project_team segment tab ui' data-tab='public'>
+<table class='ui table unstackable'>
+<tr>
+<td>
+<div class='ui icon input search-project'>
+<input class='typeahead' placeholder='Search...' type='text'>
+<i class='iconfont icon-search'></i>
+</div>
+</td>
+</tr>
+<tr class='project' data-path='attilax/atiplat_eeJS'>
+<td class='project-content'>
+<i class="iconfont icon-project-public" title="这是一个公开项目"></i> <a href="/attilax/atiplat_eeJS" class="repository" style="padding-bottom: 0px" target="_blank" title="atiplat_eeJS">atiplat_eeJS</a>
+</td>
+</tr>
+<tr class='project' data-path='attilax/miditool'>
+<td class='project-content'>
+<i class="iconfont icon-project-public" title="这是一个公开项目"></i> <a href="/attilax/miditool" class="repository" style="padding-bottom: 0px" target="_blank" title="miditool">miditool</a>
+</td>
+</tr>
+<tr class='project' data-path='attilax/honurse'>
+<td class='project-content'>
+<i class="iconfont icon-project-public" title="这是一个公开项目"></i> <a href="/attilax/honurse" class="repository" style="padding-bottom: 0px" target="_blank" title="honurse">honurse</a>
+</td>
+</tr>
+<tr class='project' data-path='attilax/hislogmonitor'>
+<td class='project-content'>
+<i class="iconfont icon-project-public" title="这是一个公开项目"></i> <a href="/attilax/hislogmonitor" class="repository" style="padding-bottom: 0px" target="_blank" title="hislogmonitor">hislogmonitor</a>
+</td>
+</tr>
+<tr class='project' data-path='attilax/atiplat_img'>
+<td class='project-content'>
+<i class="iconfont icon-project-public" title="这是一个公开项目"></i> <a href="/attilax/atiplat_img" class="repository" style="padding-bottom: 0px" target="_blank" title="atiplat_img">atiplat_img</a>
+</td>
+</tr>
+<tr class='hide projects-empty'>
+<td class='center aligned'>
+<div class='nothing_here_message' style='font-size:14px'>
+暂未加入任何公有项目
+</div>
+</td>
+</tr>
+<tr>
+<td class='right aligned scan-more'>
+<a href="/attilax/projects">查看更多
+<i class='angle double right icon'></i>
+</a></td>
+</tr>
+</table>
+</div>
+<div class='ui bottom attached tab project_team segment' data-tab='forks'>
+<table class='ui table unstackable'>
+<tr>
+<td>
+<div class='ui icon input search-project'>
+<input class='typeahead' placeholder='Search...' type='text'>
+<i class='iconfont icon-search'></i>
+</div>
+</td>
+</tr>
+<tr class='project' data-path='attilax/OneFox'>
+<td class='project-content'>
+<i class="iconfont icon-fork" title="这是一个公开的fork项目"></i> <a href="/attilax/OneFox" class="repository" style="padding-bottom: 0px" target="_blank" title="OneFox">OneFox</a>
+</td>
+</tr>
+<tr class='hide projects-empty'>
+<td class='center aligned'>
+<div class='nothing_here_message'>暂无fork项目</div>
+</td>
+</tr>
+</table>
+</div>
+<div class='ui bottom attached tab project_team segment' data-tab='private'>
+<table class='ui table unstackable'>
+<tr>
+<td>
+<div class='ui icon input search-project'>
+<input class='typeahead' placeholder='Search...' type='text'>
+<i class='iconfont icon-search'></i>
+</div>
+</td>
+</tr>
+<tr class='project' data-path='attilax/clinical'>
+<td class='project-content'>
+<i class="iconfont icon-lock" title="这是一个私有项目"></i> <a href="/attilax/clinical" class="repository" style="padding-bottom: 0px" target="_blank" title="clinical">clinical</a>
+</td>
+</tr>
+<tr class='project' data-path='attilax/clidoctorweb'>
+<td class='project-content'>
+<i class="iconfont icon-lock" title="这是一个私有项目"></i> <a href="/attilax/clidoctorweb" class="repository" style="padding-bottom: 0px" target="_blank" title="clidoctorweb">clidoctorweb</a>
+</td>
+</tr>
+<tr class='project' data-path='attilax/yunprint'>
+<td class='project-content'>
+<i class="iconfont icon-lock" title="这是一个私有项目"></i> <a href="/attilax/yunprint" class="repository" style="padding-bottom: 0px" target="_blank" title="yunprint">yunprint</a>
+</td>
+</tr>
+<tr class='project' data-path='attilax/timebook'>
+<td class='project-content'>
+<i class="iconfont icon-lock" title="这是一个私有项目"></i> <a href="/attilax/timebook" class="repository" style="padding-bottom: 0px" target="_blank" title="timebook">timebook</a>
+</td>
+</tr>
+<tr class='hide projects-empty'>
+<td class='center aligned'>
+<div class='nothing_here_message' style='font-size:14px'>
+暂未加入任何私有项目
+<a href="/projects/new">新建一个
+</a></div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<script>
+  $(document).ready(function() {
+    $('.git-dashboard-project-menu .add_projects').popup();
+    $('.git-dashboard-project-menu .item').tab();
+    $('.main.container .menu .dropdown').dropdown({on: 'hover'});
+  });
+</script>
+<script>
+  (function() {
+    var projectMatcher, truncate;
+  
+    truncate = function(str, maxlen) {
+      if (str.length > maxlen) {
+        return str.substr(0, maxlen) + "...";
+      }
+      return str;
+    };
+  
+    projectMatcher = function(projects) {
+      var findMatches;
+  
+      return findMatches = function(q, cb) {
+        var matches, substrRegex;
+  
+        matches = void 0;
+        substrRegex = void 0;
+        matches = [];
+        substrRegex = new RegExp(q, "i");
+        $.each(projects, function(i, project) {
+          if (substrRegex.test(project.name)) {
+            return matches.push(project);
+          }
+        });
+        return cb(matches);
+      };
+    };
+  
+    $(function() {
+      var projects;
+  
+      projects = [
+        {
+          "name": "atiplat_eeJS",
+          "fullname": "attilax2/atiplat_eeJS",
+          "url": "/attilax/atiplat_eeJS"
+        }, {
+          "name": "miditool",
+          "fullname": "attilax2/miditool",
+          "url": "/attilax/miditool"
+        }, {
+          "name": "honurse",
+          "fullname": "attilax2/honurse",
+          "url": "/attilax/honurse"
+        }, {
+          "name": "hislogmonitor",
+          "fullname": "attilax2/hislogmonitor",
+          "url": "/attilax/hislogmonitor"
+        }, {
+          "name": "atiplat_img",
+          "fullname": "attilax2/atiplat_img",
+          "url": "/attilax/atiplat_img"
+        }, {
+          "name": "oplog java",
+          "fullname": "attilax2/oplog java",
+          "url": "/attilax/oplog-java"
+        }, {
+          "name": "clinical",
+          "fullname": "attilax2/clinical",
+          "url": "/attilax/clinical"
+        }, {
+          "name": "clidoctorweb",
+          "fullname": "attilax2/clidoctorweb",
+          "url": "/attilax/clidoctorweb"
+        }, {
+          "name": "atiplat_ee",
+          "fullname": "attilax2/atiplat_ee",
+          "url": "/attilax/atiplat_ee"
+        }, {
+          "name": "dbsdk_oracle",
+          "fullname": "attilax2/dbsdk_oracle",
+          "url": "/attilax/dbsdk_oracle"
+        }, {
+          "name": "ukesite",
+          "fullname": "attilax2/ukesite",
+          "url": "/attilax/ukesite"
+        }, {
+          "name": "ati_wordutil",
+          "fullname": "attilax2/ati_wordutil",
+          "url": "/attilax/ati_wordutil"
+        }, {
+          "name": "doc2016",
+          "fullname": "attilax2/doc2016",
+          "url": "/attilax/doc2016"
+        }, {
+          "name": "attilaxAkbar",
+          "fullname": "attilax2/attilaxAkbar",
+          "url": "/attilax/attilaxakbar"
+        }, {
+          "name": "uke",
+          "fullname": "attilax2/uke",
+          "url": "/attilax/uke"
+        }, {
+          "name": "OneFox",
+          "fullname": "attilax2/OneFox",
+          "url": "/attilax/OneFox"
+        }, {
+          "name": "yunprint",
+          "fullname": "attilax2/yunprint",
+          "url": "/attilax/yunprint"
+        }, {
+          "name": "ati_img",
+          "fullname": "uke\u7ec4\u7ec7/ati_img",
+          "url": "/ukegroup/ati_img"
+        }, {
+          "name": "timebook",
+          "fullname": "attilax2/timebook",
+          "url": "/attilax/timebook"
+        }, {
+          "name": "atiplat_ocrJS",
+          "fullname": "attilax2/atiplat_ocrJS",
+          "url": "/attilax/atiplat_ocrjs"
+        }, {
+          "name": "atiplat_poster",
+          "fullname": "attilax2/atiplat_poster",
+          "url": "/attilax/atiplat_poster"
+        }, {
+          "name": "wificamera",
+          "fullname": "attilax2/wificamera",
+          "url": "/attilax/wificamera"
+        }, {
+          "name": "atiplat_sdk",
+          "fullname": "attilax2/atiplat_sdk",
+          "url": "/attilax/atiplat_sdk"
+        }, {
+          "name": "atiplat_spiderJs",
+          "fullname": "attilax2/atiplat_spiderJs",
+          "url": "/attilax/atiplat_spiderJs"
+        }, {
+          "name": "atiplat_restapi",
+          "fullname": "attilax2/atiplat_restapi",
+          "url": "/attilax/atiplat_restapi"
+        }, {
+          "name": "ati_codelib_js",
+          "fullname": "attilax2/ati_codelib_js",
+          "url": "/attilax/ati_codelib_js"
+        }, {
+          "name": "oa_process_parse",
+          "fullname": "attilax2/oa_process_parse",
+          "url": "/attilax/oa_process_parse"
+        }, {
+          "name": "atiplat_vod_only",
+          "fullname": "attilax2/atiplat_vod_only",
+          "url": "/attilax/atiplat_vod_only"
+        }, {
+          "name": "atiplat_imgJS",
+          "fullname": "attilax2/atiplat_imgJS",
+          "url": "/attilax/atiplat_imgJS"
+        }, {
+          "name": "atiplat_spider",
+          "fullname": "attilax2/atiplat_spider",
+          "url": "/attilax/atiplat_spider"
+        }, {
+          "name": "atiplat_shwashwa",
+          "fullname": "attilax2/atiplat_shwashwa",
+          "url": "/attilax/atiplat_shwashwa"
+        }, {
+          "name": "atiplat_vodWechatVer",
+          "fullname": "attilax2/atiplat_vodWechatVer",
+          "url": "/attilax/atiplat_vodWechatVer"
+        }, {
+          "name": "atiplat_ocr",
+          "fullname": "attilax2/atiplat_ocr",
+          "url": "/attilax/atiplat_ocr"
+        }, {
+          "name": "atiplat_ipc_onvif",
+          "fullname": "attilax2/atiplat_ipc_onvif",
+          "url": "/attilax/atiplat_ipc_onvif"
+        }, {
+          "name": "wechatSdk",
+          "fullname": "attilax2/wechatSdk",
+          "url": "/attilax/wechatSdk"
+        }, {
+          "name": "atiplat_wechat",
+          "fullname": "attilax2/atiplat_wechat",
+          "url": "/attilax/atiplat_wechat"
+        }, {
+          "name": "atiplat_search",
+          "fullname": "attilax2/atiplat_search",
+          "url": "/attilax/atiplat_search"
+        }, {
+          "name": "atiplat_segment",
+          "fullname": "attilax2/atiplat_segment",
+          "url": "/attilax/atiplat_segment"
+        }, {
+          "name": "AtiPlatf_codelib",
+          "fullname": "attilax2/AtiPlatf_codelib",
+          "url": "/attilax/AtiPlatf_codelib"
+        }, {
+          "name": "atiplat_barcode",
+          "fullname": "attilax2/atiplat_barcode",
+          "url": "/attilax/atiplat_barcode"
+        }, {
+          "name": "atiplat_cashregister",
+          "fullname": "attilax2/atiplat_cashregister",
+          "url": "/attilax/atiplat_cashregister"
+        }, {
+          "name": "atiplat_push",
+          "fullname": "attilax2/atiplat_push",
+          "url": "/attilax/atiplat_push"
+        }, {
+          "name": "atiplat_vod",
+          "fullname": "attilax2/atiplat_vod",
+          "url": "/attilax/atiplat_vod"
+        }, {
+          "name": "AtiPlat_sikuli_360",
+          "fullname": "attilax2/AtiPlat_sikuli_360",
+          "url": "/attilax/AtiPlat_sikuli_360"
+        }, {
+          "name": "atiplat_vodcp",
+          "fullname": "attilax2/atiplat_vodcp",
+          "url": "/attilax/atiplat_vodcp"
+        }
+      ];
+      $(".search-project .typeahead").typeahead({
+        hint: false,
+        highlight: true,
+        minLength: 1
+      }, {
+        name: "projects",
+        displayKey: "fullname",
+        source: projectMatcher(projects),
+        templates: {
+          suggestion: function(project) {
+            return '<a href="' + project.url + '"><p>' + truncate(project.fullname, 30) + '</p></a>';
+          }
+        }
+      });
+      return $('.tt-input').on('keydown', function(e) {
+        var _this;
+  
+        if (e.keyCode === 13 && $(this).val().indexOf('/') !== -1) {
+          _this = this;
+          return projects.forEach((function(e) {
+            if (e.fullname === $(_this).val()) {
+              return window.location.href = e.url;
+            }
+          }));
+        }
+      });
+    });
+  
+  }).call(this);
+</script>
+<style>
+  .ui.text.top.tabular.menu{padding-bottom:0px;margin:8px 2px 4px 0px;border:0px;width:100%}.ui.text.top.tabular.menu .item{padding:0.5em 0.5em;border-radius:4px;color:#222222;margin:0em}.ui.text.top.tabular.menu .plus-icon{padding:0.5rem 0rem;border-radius:5px;margin-right:0rem}.ui.text.top.tabular.menu .item.active{color:#000;background-color:#efefef}.ui.tab.project_team.segment{border:none;padding:0px;margin:0 -3px}.ui.tab.project_team.segment .iconfont{color:#989dad}.ui.tab.project_team.segment i.octicon{margin:auto 3px}.ui.tab.project_team.segment .project-title-home{line-height:1}.ui.tab.project_team.segment .search-project,.ui.tab.project_team.segment .search-project .twitter-typeahead,.ui.tab.project_team.segment .search-project .twitter-typeahead input{width:100%}.ui.table{color:#333;border:none}.ui.table tr:first-child td{padding:4px 0px 4px 2px}.ui.table tr td{padding:0.8rem 0;border-top:none !important}.ui.table tr.project:hover{background-color:#fafafa}.ui.table a:hover{color:#056bc3}.recent-update{font-size:0.8rem;margin-top:2px;color:#999;float:right}.git-dashboard-project-menu{border-width:1px !important}.git-dashboard-project-menu .item{padding-left:0 !important;padding-right:0 !important;margin:0 30px -2px 0 !important}.git-dashboard-project-menu a.active{border-width:1px !important;padding-left:0 !important;font-weight:bolder;border-color:rgba(0,0,0,0.4) !important}.git-dashboard-project-menu .float-right.plus-icon a.add_projects{margin-right:0 !important}.search-project input.typeahead{width:250px}
+</style>
+
+</div>
+<div class='aligned attached bottom center project-team-tab segment tab ui' data-tab='groups'>
+<table class='ui table unstackable user-sidebar-list'>
+<tbody>
+<tr>
+<td>
+<a href="/ukegroup" class="group"><span class='well-title'>uke组织</span>
+</a><span class='float-right light team-group-member'>
+管理员
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+<script>
+  (function() {
+    var groupMatcher, truncate;
+  
+    truncate = function(str, maxlen) {
+      if (str.length > maxlen) {
+        return str.substr(0, maxlen) + "...";
+      }
+      return str;
+    };
+  
+    groupMatcher = function(groups) {
+      var findMatches;
+  
+      return findMatches = function(q, cb) {
+        var matches, substrRegex;
+  
+        matches = void 0;
+        substrRegex = void 0;
+        matches = [];
+        substrRegex = new RegExp(q, "i");
+        $.each(groups, function(i, group) {
+          if (substrRegex.test(group.name)) {
+            return matches.push(group);
+          }
+        });
+        return cb(matches);
+      };
+    };
+  
+    $(function() {
+      var groups;
+  
+      groups = [
+        {
+          "owner": "attilax",
+          "name": "uke\u7ec4\u7ec7",
+          "path": "ukegroup"
+        }
+      ];
+      $("#group_options .typeahead").typeahead({
+        hint: false,
+        highlight: true,
+        minLength: 1
+      }, {
+        name: "groups",
+        displayKey: "name",
+        source: groupMatcher(groups),
+        templates: {
+          suggestion: function(group) {
+            return '<a href="/' + group.path + '"><p>' + truncate(group.name, 30) + '</p></a>';
+          }
+        }
+      });
+      return $("#group_options input").keydown(function(e) {
+        if (e.which === 13) {
+          location.href = "/" + $(this).val();
+        }
+      });
+    });
+  
+  }).call(this);
+</script>
+
+</div>
+<div class='aligned attached bottom center project-team-tab segment tab ui' data-tab='enterprises'>
+<table class='ui table unstackable user-sidebar-list'>
+<tbody>
+<tr>
+<td class='center aligned'>
+<div class='nothing_here_message'>暂时没有创建或加入任何企业</div>
+</td>
+</tr>
+<tr>
+<td class='center aligned'>
+<span>
+<a href="/enterprises/new?type=user_upgrade"><i class='icon plus'></i>
+企业
+</a></span>
+</td>
+</tr>
+</tbody>
+</table>
+<script>
+  (function() {
+    var enterpriseMatcher, truncate;
+  
+    truncate = function(str, maxlen) {
+      if (str.length > maxlen) {
+        return str.substr(0, maxlen) + "...";
+      }
+      return str;
+    };
+  
+    enterpriseMatcher = function(enterprises) {
+      var findMatches;
+  
+      return findMatches = function(q, cb) {
+        var matches, substrRegex;
+  
+        matches = void 0;
+        substrRegex = void 0;
+        matches = [];
+        substrRegex = new RegExp(q, "i");
+        $.each(enterprises, function(i, enterprise) {
+          if (substrRegex.test(enterprise.name)) {
+            return matches.push(enterprise);
+          }
+        });
+        return cb(matches);
+      };
+    };
+  
+    $(function() {
+      var enterprises;
+  
+      enterprises = [];
+      $("#enterprise_options .typeahead").typeahead({
+        hint: false,
+        highlight: true,
+        minLength: 1
+      }, {
+        name: "enterprises",
+        displayKey: "name",
+        source: enterpriseMatcher(enterprises),
+        templates: {
+          suggestion: function(enterprise) {
+            return '<a href="/' + enterprise.path + '"><p>' + truncate(enterprise.name, 30) + '</p></a>';
+          }
+        }
+      });
+      return $("#enterprise_options input").keydown(function(e) {
+        if (e.which === 13) {
+          location.href = "/" + $(this).val();
+        }
+      });
+    });
+  
+  }).call(this);
+</script>
+
+</div>
+<script>
+  $(document).ready(function(){
+    $('.git-dashboard-prjgroup-menu .item').tab();
+  });
+</script>
+<style>
+  #dashboard-sidebar-item-en{padding-left:6px !important;padding-right:0 !important;margin-right:15px}.ui.segment.project-team-tab{padding:11px 20px;margin:0px;border-radius:4px !important;border:1px solid #E3E9ED !important}.ui.segment.project-team-tab .ui.segment,.ui.segment.project-team-tab .ui.segment.attached,.ui.segment.project-team-tab .ui.tertiary.segment,.ui.segment.project-team-tab .ui.message{-webkit-box-shadow:0 0 0 0 !important;box-shadow:0 0 0 0 !important}.ui.segment.project-team-tab .table.ui{-webkit-box-shadow:0 0 0 0;box-shadow:0 0 0 0;border-radius:0px;border:none}.ui.segment.project-team-tab .right.aligned a:hover{color:#537c8d}.git-dashboard-prjgroup-menu{margin:5px 0 14px 0;padding-bottom:9px;-webkit-box-shadow:inset 0px -1px 0px 0px #DEDEDF;box-shadow:inset 0px -1px 0px 0px #DEDEDF}.git-dashboard-prjgroup-menu .item{line-height:1.43;padding:0.7em 1em;margin-right:20px;margin-left:0px;padding-left:2px !important;padding-right:2px !important;color:#333;margin-left:0}.git-dashboard-prjgroup-menu .active{color:#fe7300;padding:0.7em 1em;border-bottom:2px solid #fe7300}.project-team-tab i.icon-search{top:9px;right:7px;color:#8c92a4;position:absolute}.project-team-tab .scan-more{padding-bottom:0 !important}.project-team-tab .ui.table tr td{padding:0.6rem 0}.project-team-tab .ui.table{margin-bottom:0}.user-sidebar-list i.icon-enterprise-badge{position:absolute;margin-top:2px;margin-left:4px}.user-sidebar-list i.iconfont.icon-search{top:9px;right:7px;color:#8c92a4;position:absolute}.user-sidebar-list .options input.typeahead{width:250px}.user-sidebar-list .team-group-member{font-size:0.8rem;margin-top:2px;color:#999;float:right}
+</style>
+
+<div class='clearfix'></div>
+<a href='/enterprises?from=gea-user-A'>
+<div class='ent-poster user'>
+<div class='carousel slide' data-interval='5000' data-ride='carousel'>
+<div class='carousel-inner'>
+<div class='item img-1 active'>
+<img src='/index/ent_poster/banner_5_1_a.png'>
+</div>
+<div class='item img-2'>
+<img src='/index/ent_poster/banner_5_2_a.png'>
+</div>
+<div class='item img-3'>
+<img src='/index/ent_poster/banner_5_3_a.png'>
+</div>
+</div>
+</div>
+</div>
+</a>
+
+</div>
+<div class='eleven wide column git-user-twl-col'>
+<div class='git-user-sidebar'>
+<div class='ui secondary pointing menu' id='git-user-sidebar-menu-zh-CN'>
+<a href="/attilax" class="item "><i class='iconfont icon-snippet'></i>
+概览
+</a><a href="/attilax/events" class="item "><i class='iconfont icon-activities'></i>
+动态
+</a><a href="/attilax/projects" class="item project "><i class='iconfont icon-projects'></i>
+项目
+<span class='ui mini circular label'>
+45
+</span>
+</a><a href="/attilax/codes" class="item "><i class='iconfont icon-code'></i>
+代码片段
+<span class='ui mini circular label'>
+1
+</span>
+</a><a href="/attilax/pull_requests" class="item "><i class='iconfont icon-pull-request'></i>
+PR
+<span class='ui mini circular label'>
+1
+</span>
+</a><a href="/attilax/issues" class="item "><i class='iconfont icon-issue'></i>
+任务
+<span class='ui mini circular label'>
+2
+</span>
+</a></div>
+</div>
+
+<div class='row git-user-content'>
+<div class='project-list'>
+<div class='git-user-content-header user-page-header'>
+<h3 class='git-user-pagetitle'>
+我 Star 的项目
+<span id='projects-count'>
+</span>
+</h3>
+<div class='ui top left pointing dropdown small gradient button link item git-user-selection-dropdown'>
+<div class='text'>
+最近更新
+</div>
+<i class='icon dropdown'></i>
+<div class='menu'>
+<a href="/attilax/starred" class="item">最近更新</a>
+<a href="/attilax/starred?sort=stars.created_at+desc" class="item">最新Star</a>
+<a href="/attilax/starred?sort=stars.created_at" class="item">最早Star</a>
+<a href="/attilax/starred?sort=projects.name" class="item">项目名称</a>
+</div>
+</div>
+<div class='git-user-serach-prj'>
+<div class='ui left small icon search input' id='search_project'>
+<div class='ui icon input'>
+<input class='prompt' id='search-projects' placeholder='快速搜索...' type='text'>
+<i class='iconfont icon-search icon'></i>
+</div>
+</div>
+</div>
+<script>
+  $('#search-projects').on('keydown', function(e) {
+    if(e.keyCode == 13) {
+      var searchContent = $(this).val()
+      $.ajax({
+        type: 'GET',
+        url: "/attilax/starred",
+        dataType: 'script',
+        beforeSend: function() {
+          $('#search_project').find('.ui.icon.input').addClass('loading')
+        },
+        complete: function() {
+          $('#search_project').find('.ui.icon.input').removeClass('loading')
+        },
+        data: {
+          search: searchContent
+        }
+      });
+    }
+  })
+</script>
+
+</div>
+<div class='ui divider'></div>
+<div class='medium-shared-no-data'>
+<div class='message blank-message-notice'>
+<i class='icon ban'></i>
+<p>无数据</p>
+</div>
+
+</div>
+</div>
+</div>
+<footer class='ui grid page'>
+<div class='column center aligned' id='projects-paginate'>
+
+</div>
+</footer>
+
+</div>
+</div>
+</div>
+<footer id='git-footer-main'>
+<div class='ui container'>
+<div class='ui two column grid'>
+<div class='column'>
+<p><a href="https://gitee.com/" target="_blank">© Gitee.com  </a></p>
+<div class='ui three column grid' id='footer-left'>
+<div class='column'>
+<div class='ui link list'>
+<div class='item'>
+<a href="/about_us" class="item">关于我们</a>
+</div>
+<div class='item'>
+<a href="/terms" class="item">使用条款</a>
+</div>
+<div class='item'>
+<a href="http://git.mydoc.io" class="item">帮助文档</a>
+</div>
+</div>
+</div>
+<div class='column'>
+<div class='ui link list'>
+<div class='item'>
+<a href="/api/v5/swagger" class="item">OpenAPI</a>
+</div>
+<div class='item'>
+<a href="/gitee-stars" class="item">码云封面人物</a>
+</div>
+<div class='item'>
+<a href="/appclient" class="item">APP与插件下载</a>
+</div>
+</div>
+</div>
+<div class='column'>
+<div class='ui link list'>
+<div class='item'>
+<a href="/links.html" class="item">合作伙伴</a>
+</div>
+<div class='item'>
+<a href="https://gitee.com/git-osc/" class="item">更新日志</a>
+</div>
+<div class='item'>
+<a href="/oschina/git-osc/issues" class="item">意见与建议</a>
+</div>
+<div class='item'>
+<a href="/gists" class="item">代码片段</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='column right aligned followus'>
+<div class='qrcode weixin'>
+<img alt="Qrcode-weixin" src="https://assets.gitee.com/assets/qrcode-weixin-8ab7378f5545710bdb3ad5c9d17fedfe.jpg" />
+<p class='weixin-text'>微信公众号</p>
+</div>
+<div class='phone-and-qq column'>
+<div class='ui list'>
+<div class='item'>
+400-898-2008 转2
+</div>
+<div class='item' id='git-footer-email'>
+git#oschina.cn
+</div>
+<div class='item qq-and-weibo'>
+<a href="//shang.qq.com/wpa/qunwpa?idkey=0d6c2fc0b5b71ac33405dd575bb490bf1a50e3c9a9f694e8a689cb59ee7dacc3" class="icon-popup" title="点击加入码云官方三群"><i class='iconfont icon-logo-qq'></i>
+<span>三群：655903986</span>
+</a><a href="http://weibo.com/mayunOSC" class="icon-popup" target="_blank" title="关注码云微博"><i class='iconfont icon-logo-weibo'></i>
+<span>码云Gitee</span>
+</a></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='bottombar'>
+<div class='ui container'>
+<div class='ui grid'>
+<div class='five wide column partner'>
+本站带宽由 <a href="https://www.anchnet.com/" target="_blank" title="anchnet"><img alt="51idc" src="/51idc.png" /></a> 提供
+</div>
+<div class='eleven wide column right aligned'>
+<div class='copyright'>
+<a href="http://www.miitbeian.gov.cn/">粤ICP备12009483号-8</a>
+深圳市奥思网络科技有限公司版权所有
+</div>
+<i class='icon world'></i>
+<a href="/language/zh-CN">简 体
+</a>/
+<a href="/language/zh-TW">繁 體
+</a>/
+<a href="/language/en">English
+</a></div>
+</div>
+</div>
+</div>
+</footer>
+<script>
+  Gitee.initFooter()
+  $('.icon-popup').popup({ position: 'bottom center' });
+</script>
+<div class='side-toolbar'>
+<div class='button share-link'>
+<i class='iconfont icon-share'></i>
+</div>
+<div class='ui popup'>
+<div class='header'>
+分享到
+</div>
+<div class='bdsharebuttonbox'>
+<a class='item bds_weixin' data-cmd='weixin' title='分享到微信'>weixin</a>
+<a class='item bds_tsina' data-cmd='tsina' title='分享到新浪微博'>sina</a>
+<a class='item bds_sqq' data-cmd='sqq' title='分享到QQ好友'>qq</a>
+<a class='item bds_qzone' data-cmd='qzone' title='分享到QQ空间'>qzone</a>
+</div>
+</div>
+<div class='button gotop popup' data-content='回到顶部' id='gotop'>
+<i class='iconfont icon-top'></i>
+</div>
+</div>
+<script>
+  Gitee.initSideToolbar({})
+</script>
+<script>
+  window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"分享到新浪微博","bdMini":"1","bdMiniList":["bdxc","tqf","douban","bdhome","sqq","thx","ibaidu","meilishuo","mogujie","diandian","huaban","duitang","hx","fx","youdao","sdo","qingbiji","people","xinhua","mail","isohu","yaolan","wealink","ty","iguba","fbook","twi","linkedin","h163","evernotecn","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"32"},"share":{}};
+</script>
+<script src="/bd_share/static/api/js/share.js" type="text/javascript"></script>
+
+
+<style>
+  .float-left-box{display:none;position:fixed;left:0;bottom:0;z-index:99}.float-left-box .close-left{position:absolute;top:20px;left:25px;cursor:pointer}.float-left-box .float-people{width:200px;padding:10px}
+</style>
+<div class='float-left-box'>
+<a href='/gitee-stars/8' target='_blank'>
+<img alt="8_float_left_people" class="float-people" src="https://assets.gitee.com/assets/gitee_stars/8_float_left_people-7fe98d40d7e8e865b9daf0910630d7e8.png" />
+<img alt="8_float_left_close" class="close-left" src="https://assets.gitee.com/assets/gitee_stars/8_float_left_close-d94fcd666b835df721ff11f43c481498.png" />
+</a>
+</div>
+<script>
+  var giteeStarsWidget = $('.float-left-box')
+  if ($.cookie('visit-gitee-8') == 1) {
+    giteeStarsWidget.hide()
+  } else {
+    giteeStarsWidget.show()
+  }
+  $('.close-left').on('click', function(e) {
+    e.preventDefault()
+    $.cookie('visit-gitee-8', 1, { path: '/', expires: 30})
+    giteeStarsWidget.hide()
+  })
+</script>
+
+</body>
+</html>

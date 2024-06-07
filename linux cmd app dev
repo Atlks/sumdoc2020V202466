@@ -1,0 +1,29 @@
+   gcloud functions deploy NAME       --source https://source.developers.google.com/projects/my-projfun/repos/REPOSITORY_ID/moveable-aliases/master/paths/SOURCE \
+      --runtime RUNTIME \
+      TRIGGER... \
+      [FLAGS...]
+	  
+	  
+	      gcloud functions deploy NAME \
+      --source https://source.developers.google.com/projects/PROJECT_ID/repos/REPOSITORY_ID/moveable-aliases/master/paths/SOURCE \
+      --runtime RUNTIME \
+      TRIGGER... \
+      [FLAGS...]
+    
+keyboard_arrow_right
+分支
+分支
+master
+
+sudo apt install git
+http://35.194.136.32:8888/flw
+git clone https://github.com/attilax520/spdjs.git
+git pull
+nodejs url2rssGoogle.js
+ npm install request
+ npm install  cheerio
+  npm install feed
+   npm install  log4js
+  "http": "0.0.0",
+        "line-reader": "^0.4.0",
+        "log4js": "^6.1.2",

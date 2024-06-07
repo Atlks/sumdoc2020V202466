@@ -1,0 +1,1492 @@
+<!--STATUS OK-->
+<base href="http://www.wujianrong.com/archives/2007/02/springhibernatestruts_1.html"><meta http-equiv="Content-Type" Content="text/html; charset=gb2312">
+<form action=http://www.baidu.com/s><table bgcolor=ffffff border=0 width=100% cellpadding=0>
+<tr>
+<td width=254><a href=http://www.baidu.com><img src=http://img.baidu.com/img/logo-kz.gif border=0 alt=到百度首页></a></td>
+<td><font size=-1 color=black>
+<input name=wd size=30 style="font-size:16px;font-family:Verdana,Arial,Helvetica,sans-serif;"> 
+<input type=submit value=百度一下></font>
+</td>
+</tr>
+<tr>
+<td colspan=2><font size=-1 color=black>您的查询字词都已标明如下：<B style='color:black;background-color:#ffff66'><a href=http://cache.baidu.com/c?word=java%2C%D2%B5%CE%F1%3B%B2%E3%3B%B4%FA%C2%EB&url=http%3A//www%2Ewujianrong%2Ecom/archives/2007/02/springhibernatestruts%5F1%2Ehtml&p=8b2a951cc8df11a05ab0d06d50&user=baidu#baidusnap0>java</a>&nbsp;</B><B style='color:black;background-color:#A0FFFF'><a href=http://cache.baidu.com/c?word=java%2C%D2%B5%CE%F1%3B%B2%E3%3B%B4%FA%C2%EB&url=http%3A//www%2Ewujianrong%2Ecom/archives/2007/02/springhibernatestruts%5F1%2Ehtml&p=8b2a951cc8df11a05ab0d06d50&user=baidu#baidusnap1>业务层</a>&nbsp;</B><B style='color:black;background-color:#ff9999'><a href=http://cache.baidu.com/c?word=java%2C%D2%B5%CE%F1%3B%B2%E3%3B%B4%FA%C2%EB&url=http%3A//www%2Ewujianrong%2Ecom/archives/2007/02/springhibernatestruts%5F1%2Ehtml&p=8b2a951cc8df11a05ab0d06d50&user=baidu#baidusnap3>代码</a>&nbsp;</B> (点击查询词，可以跳到它在文中首次出现的位置)
+<br>
+
+
+
+如果打开速度慢，您可以尝试打开<a href="http://cache.baidu.com/c?word=java%2C%D2%B5%CE%F1%3B%B2%E3%3B%B4%FA%C2%EB&url=http%3A//www%2Ewujianrong%2Ecom/archives/2007/02/springhibernatestruts%5F1%2Ehtml&p=8b2a951cc8df11a05ab0d06d50&user=baidu&im=0"><font color="blue" style="text-decoration:underline">无图片的快照</font></a>；
+
+如果您想保存该页面，可以<a onclick="window.open('http://cang.baidu.com/do/add?it='+encodeURIComponent(document.title)+'&amp;iu='+encodeURIComponent(location.href)+'&amp;fr=ps#nw=1','_s','scrollbars=no,width=600,height=450,right=75,top=20,status=no,resizable=yes'); return false;" href="http://cang.baidu.com/do/add" target=_blank><font color="blue" style="text-decoration:underline">添加到搜藏</font></a><br>
+<font color=gray>(百度和网页<a href="http://www.wujianrong.com/archives/2007/02/springhibernatestruts_1.html"><font color=blue>http://www.wujianrong.com/archives/2007/02/springhibernatestruts_1.html</font></a>的作者无关，不对其内容负责。百度快照谨为网络故障时之索引，不代表被搜索网站的即时页面。)</font></font>
+</td>
+</tr></table>
+</form>
+<hr><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <meta name="generator" content="Movable Type 3.35" />
+
+   <link rel="stylesheet" href="http://www.wujianrong.com/styles-site.css" type="text/css" />
+   <link rel="alternate" type="application/atom+xml" title="Atom" href="http://www.wujianrong.com/atom.xml" />
+   <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.wujianrong.com/index.xml" />
+   <link rel="shortcut icon" href="http://www.wujianrong.com/wujianrong.ico" type="image/x-icon" />
+   <link rel="bookmark" href="http://www.wujianrong.com/wujianrong.ico" type="image/x-icon" />
+   <title>用spring、Hibernate、Struts组建轻量级架构 - 城市胡同</title>
+
+   <link rel="start" href="http://www.wujianrong.com/" title="Home" />
+   <link rel="prev" href="http://www.wujianrong.com/archives/2007/02/fasttrack_your_web_apps_with_r.html" title="Fast-track your Web apps with Ruby on Rails" />
+   <link rel="next" href="http://www.wujianrong.com/archives/2007/02/twiki.html" title="TWiki安装" />
+
+   <!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/"
+         xmlns:dc="http://purl.org/dc/elements/1.1/">
+<rdf:Description
+    rdf:about="http://www.wujianrong.com/archives/2007/02/springhibernatestruts_1.html"
+    trackback:ping="http://www.wujianrong.com/mt-tb.cgi/4561"
+    dc:title="用spring、Hibernate、Struts组建轻量级架构"
+    dc:identifier="http://www.wujianrong.com/archives/2007/02/springhibernatestruts_1.html"
+    dc:subject="J2EE"
+    dc:description=" 前言 在java 的应用领域，有许多成熟的开源软件,利用它们一样可以打造优越、灵巧的应用框架，本文首先将先介绍 所要构建的系统结构和借助的开源产品。然后逐一讲解各开源软件的具体运用。希望本文能给那些正在学习这些 开源软件的同行提供参考。续该文之后笔者将结合这些开源软件，借助实际项目，做更深入的应用讲解。 本文中涉及到的例子、源代码均经过本人调试，且正常运行的，但是不否定这其中有不合理的使用。运行环境： win2000 adivance server + tomcat5.0.25 + mysql-4.0.14-nt..."
+    dc:creator=""
+    dc:date="2007-02-08T23:56:12+08:00" />
+</rdf:RDF>
+-->
+
+
+   
+
+   
+   
+   
+   
+   
+   
+   
+</head>
+
+<body>
+	<div id="head">
+		<div id="head_left">
+			<div class="blog_name"><a href="http://www.wujianrong.com/" accesskey="1">城市胡同</a></div>
+			<div class="blog_description">展现技术动态 记录生活点滴</div>
+		</div>
+		<div id="head_right">
+<!-- SiteSearch Google -->
+<form method="get" action="http://www.google.com/custom" target="google_window">
+<table border="0">
+<tr><td nowrap="nowrap" valign="top" align="left" height="32">
+
+</td>
+<td nowrap="nowrap">
+<input type="hidden" name="domains" value="www.wujianrong.com"></input>
+<label for="sbi" style="display: none">输入您的搜索字词</label>
+<input type="text" name="q" size="25" maxlength="255" value="" id="sbi"></input>
+<label for="sbb" style="display: none">提交搜索表单</label>
+<input type="submit" name="sa" value="Google 搜索" id="sbb"></input>
+</td></tr>
+<tr>
+<td>&nbsp;</td>
+<td nowrap="nowrap">
+<table>
+<tr>
+<td>
+<input type="radio" name="sitesearch" value="" checked id="ss0"></input>
+<label for="ss0" title="搜索网络"><font size="-1" color="#000000">Web</font></label></td>
+<td>
+<input type="radio" name="sitesearch" value="www.wujianrong.com" id="ss1"></input>
+<label for="ss1" title="搜索 www.wujianrong.com"><font size="-1" color="#000000">www.wujianrong.com</font></label></td>
+</tr>
+</table>
+<input type="hidden" name="client" value="pub-8908527459010687"></input>
+<input type="hidden" name="forid" value="1"></input>
+<input type="hidden" name="ie" value="UTF-8"></input>
+<input type="hidden" name="oe" value="UTF-8"></input>
+<input type="hidden" name="cof" value="GALT:#008000;GL:1;DIV:#99C9FF;VLC:663399;AH:center;BGC:FFFFFF;LBGC:336699;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;LH:32;LW:32;L:http://www.wujianrong.com/wjr.gif;S:http://www.wujianrong.com;LP:1;FORID:1"></input>
+<input type="hidden" name="hl" value="zh-CN"></input>
+</td></tr></table>
+</form>
+<!-- SiteSearch Google -->
+		</div>
+	</div>
+	<div id="main_detail">
+		<div id="main_detail_left">
+			<div class="left_box">
+				<div class="nav">
+					<a href="http://www.wujianrong.com/archives/2007/02/fasttrack_your_web_apps_with_r.html">&laquo; Fast-track your Web apps with Ruby on Rails</a> |
+                        <a href="http://www.wujianrong.com/">首页</a>
+                        | <a href="http://www.wujianrong.com/archives/2007/02/twiki.html">TWiki安装 &raquo;</a>
+				</div>
+				<div class="left_title">用spring、Hibernate、Struts组建轻量级架构</div>
+				<div class="left_content">
+<div>
+
+
+</div>
+							<div class="toc">
+<h2 class="title">前言</h2>
+<p> 在<a name=baidusnap0></a><B style='color:black;background-color:#ffff66'>java</B> 的应用领域，有许多成熟的开源软件,利用它们一样可以打造优越、灵巧的应用框架，本文首先将先介绍 所要构建的系统结构和借助的开源产品。然后逐一讲解各开源软件的具体运用。希望本文能给那些正在学习这些 开源软件的同行提供参考。续该文之后笔者将结合这些开源软件，借助实际项目，做更深入的应用讲解。  </p>
+<p> 本文中涉及到的例子、源<a name=baidusnap3></a><B style='color:black;background-color:#ff9999'>代码</B>均经过本人调试，且正常运行的，但是不否定这其中有不合理的使用。运行环境： win2000 adivance server + tomcat5.0.25 + mysql-4.0.14-nt</p>
+</div>
+			
+			                           <div id="more" class="entry-more">
+                              <p> <strong>目录</strong> </p>
+<dl><dt><span class="preface"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#preface"><span style="color: rgb(136, 136, 136);">前言</span></a></span> </dt><dt><span class="chapter"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#Framework"><span style="color: rgb(136, 136, 136);">1. 整体框架</span></a></span> </dt><dd><dl><dt><span class="sect1"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e66"><span style="color: rgb(136, 136, 136);">1.1. UI层</span></a></span> </dt><dt><span class="sect1"><a name=baidusnap1></a><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e85"><span style="color: rgb(136, 136, 136);">1.2. <B style='color:black;background-color:#A0FFFF'>业务层</B></span></a></span> </dt><dt><span class="sect1"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e94"><span style="color: rgb(136, 136, 136);">1.3. 数据持久层</span></a></span> </dt><dt><span class="sect1"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e103"><span style="color: rgb(136, 136, 136);">1.4. 域对象层</span></a></span></dt></dl></dd><dt><span class="chapter"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#struts"><span style="color: rgb(136, 136, 136);">2. Struts</span></a></span> </dt><dd><dl><dt><span class="sect1"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e111"><span style="color: rgb(136, 136, 136);">2.1. 概述</span></a></span> </dt><dt><span class="sect1"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e133"><span style="color: rgb(136, 136, 136);">2.2. 快速入门</span></a></span> </dt><dt><span class="sect1"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e208"><span style="color: rgb(136, 136, 136);">2.3. ActionForm</span></a></span> </dt><dt><span class="sect1"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e234"><span style="color: rgb(136, 136, 136);">2.4. Action</span></a></span> </dt><dt><span class="sect1"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e246"><span style="color: rgb(136, 136, 136);">2.5. 客户端验证</span></a></span></dt></dl></dd><dt><span class="chapter"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#springFramework"><span style="color: rgb(136, 136, 136);">3. springFramework</span></a></span> </dt><dd><dl><dt><span class="sect1"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e308"><span style="color: rgb(136, 136, 136);">3.1. 概述</span></a></span> </dt><dt><span class="sect1"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e320"><span style="color: rgb(136, 136, 136);">3.2. 为什么使用Spring</span></a></span> </dt><dt><span class="sect1"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e329"><span style="color: rgb(136, 136, 136);">3.3. 快速入门</span></a></span> </dt><dt><span class="sect1"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#spring_web"><span style="color: rgb(136, 136, 136);">3.4. 搭建Web应用环境</span></a></span> </dt><dt><span class="sect1"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e407"><span style="color: rgb(136, 136, 136);">3.5. Spring IOC</span></a></span> </dt><dt><span class="sect1"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e509"><span style="color: rgb(136, 136, 136);">3.6. Spring AOP</span></a></span></dt></dl></dd><dt><span class="chapter"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#hibernate"><span style="color: rgb(136, 136, 136);">4. hibernate</span></a></span> </dt><dd><dl><dt><span class="sect1"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e609"><span style="color: rgb(136, 136, 136);">4.1. 概述</span></a></span> </dt><dt><span class="sect1"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e618"><span style="color: rgb(136, 136, 136);">4.2. 为什么使用Hibernate</span></a></span> </dt><dt><span class="sect1"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e639"><span style="color: rgb(136, 136, 136);">4.3. 快速入门</span></a></span> </dt><dt><span class="sect1"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e758"><span style="color: rgb(136, 136, 136);">4.4. 工具的配合使用</span></a></span> </dt><dd><dl><dt><span class="sect2"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e763"><span style="color: rgb(136, 136, 136);">4.4.1. 生成影射文件</span></a></span> </dt><dt><span class="sect2"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e838"><span style="color: rgb(136, 136, 136);">4.4.2. 生成映射对象</span></a></span> </dt><dt><span class="sect2"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e877"><span style="color: rgb(136, 136, 136);">4.4.3. 根据映射对象生成映射文件</span></a></span></dt></dl></dd><dt><span class="sect1"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e901"><span style="color: rgb(136, 136, 136);">4.5. 专用词</span></a></span> </dt><dd><dl><dt><span class="sect2"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e906"><span style="color: rgb(136, 136, 136);">4.5.1. cascade(级联)</span></a></span> </dt><dt><span class="sect2"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e911"><span style="color: rgb(136, 136, 136);">4.5.2. inverse(反转)</span></a></span> </dt><dt><span class="sect2"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e916"><span style="color: rgb(136, 136, 136);">4.5.3. Lazy Loading(延时装载)</span></a></span></dt></dl></dd><dt><span class="sect1"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e921"><span style="color: rgb(136, 136, 136);">4.6. 一对一表关联操作</span></a></span> </dt><dt><span class="sect1"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e1082"><span style="color: rgb(136, 136, 136);">4.7. 多对一表关联操作</span></a></span> </dt><dt><span class="sect1"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e1134"><span style="color: rgb(136, 136, 136);">4.8. 一对多表关联操作</span></a></span> </dt><dt><span class="sect1"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#many_to_many"><span style="color: rgb(136, 136, 136);">4.9. 多对多表关联操作</span></a></span> </dt><dt><span class="sect1"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e1333"><span style="color: rgb(136, 136, 136);">4.10. 与spring的结合使用</span></a></span> </dt><dt><span class="sect1"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e1365"><span style="color: rgb(136, 136, 136);">4.11. Hibernate DAO</span></a></span></dt></dl></dd><dt><span class="chapter"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#log4j"><span style="color: rgb(136, 136, 136);">5. log4j</span></a></span> </dt><dd><dl><dt><span class="sect1"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e1437"><span style="color: rgb(136, 136, 136);">5.1. 概述</span></a></span> </dt><dt><span class="sect1"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#d0e1442"><span style="color: rgb(136, 136, 136);">5.2. 快速入门</span></a></span></dt></dl></dd></dl>
+<div class="preface">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title"><a name="preface"></a></h2>
+</div>
+</div>
+</div>
+</div>
+<div class="chapter">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title"><a name="Framework"></a>第&nbsp;1&nbsp;章&nbsp;整体框架</h2>
+</div>
+</div>
+</div>
+<p> 笔者在项目中所搭建的架构参考了 &ldquo;Mark Eagle&rdquo; 的<a target="_top" href="http://www.onjava.com/pub/a/onjava/%20%20%202004/04/07/wiringwebapps.html?page=1"><em class="citetitle"><span style="color: rgb(0, 51, 153);">《Wiring Your Web Application with Open Source <B style='color:black;background-color:#ffff66'>Java</B>》 </span></em></a>一文中所阐述的架构思想。  </p>
+<div class="figure"> <a name="d0e35"></a>
+<div> <img alt="架构图：引用《Wiring Your Web Application with Open Source Java》一文" src="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/images/framework.gif" /> </div>
+<p class="title"> <strong>图&nbsp;1.1.&nbsp;架构图：引用《Wiring Your Web Application with Open Source <B style='color:black;background-color:#ffff66'>Java</B>》一文</strong> </p>
+</div>
+<p> 从架构图中可以看出系统分为四层：  </p>
+<div class="itemizedlist">
+<ul>
+    <li>
+    <p> 	UI层：借助Struts实现 	</p>
+    </li>
+    <li>
+    <p> 	<B style='color:black;background-color:#A0FFFF'>业务层</B>：借助SpringFramework进行业务组件的组装关联。 	</p>
+    </li>
+    <li>
+    <p> 	数据持久层：借助Hibernate实现 	</p>
+    </li>
+    <li>
+    <p> 	域对象层：将所有域对象划分在一个层面 	</p>
+    </li>
+</ul>
+</div>
+<p> 为什么采用这样的四层架构？  </p>
+<div class="itemizedlist">
+<ul>
+    <li>
+    <p> 	通过成熟的开源产品实现各层，同自己编写<B style='color:black;background-color:#ff9999'>代码</B>实现，相比之下能缩短开发周期，且架构所用到的开源产品均有 很广泛的用户群，经受过实践的考验，质量和性能更有保障。  	</p>
+    </li>
+    <li>
+    <p> 	层与层之间松散耦合，增加<B style='color:black;background-color:#ff9999'>代码</B>重用率。  	</p>
+    </li>
+    <li>
+    <p> 	各层分工明确，这样也利于团队的明确分工。  	</p>
+    </li>
+</ul>
+</div>
+<div class="sect1">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both;"><a name="d0e66"></a>1.1.&nbsp;UI层</h2>
+</div>
+</div>
+</div>
+<p> UI 是User Interface的缩写，这一层是面向用户的界面，是用户与系统之间交互的媒介。如，用户在界面发送请求， 系统接收请求，进行处理，然后通过界面将结果呈现于用户。这一过程包括了用户动作、数据传递、界面显示。大 家熟悉的MVC模式就是将这三者分离，减少三者耦合。  </p>
+<p> 我们在该层借助了Struts来实现：  </p>
+<div class="itemizedlist">
+<ul>
+    <li>
+    <p> 	用ActionForm类封装与用户互动的数据元素。  	</p>
+    </li>
+    <li>
+    <p> 	用Action类实现业务逻辑、动作处理、链接转向。实现MVC中的C  	</p>
+    </li>
+    <li>
+    <p> 	借助Struts标签来完成数据呈现。实现MVC中的V。  	</p>
+    </li>
+</ul>
+</div>
+<p> 关于struts具体的应用请参考相关章节。  </p>
+</div>
+<div class="sect1">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both;"><a name="d0e85"></a>1.2.&nbsp;<B style='color:black;background-color:#A0FFFF'>业务层</B></h2>
+</div>
+</div>
+</div>
+<p> 在 实际的项目开发中，每个领域都会有自己独特的业务逻辑，正因为这样，致使项目中<B style='color:black;background-color:#ff9999'>代码</B>高度耦合，原本有可能被重用的<B style='color:black;background-color:#ff9999'>代码</B> 或功能，因为与具体的业务逻辑绑定在一块而导致很难被重用。因此我们将实现这些具体逻辑的<B style='color:black;background-color:#ff9999'>代码</B>抽取出来分为单独的一层， 其目的是希望通过层，来降低它与系统其他部分的耦合度。  </p>
+<p> 现实中世界是变化的，既然该层实现的是现实中具体的业务逻辑，那该层的实现<B style='color:black;background-color:#ff9999'>代码</B> 不可避免的会发生变更。怎样让该层适应 最大的变化，做到最小的改动?通常我们在编码的时候会尽量考虑到同一业务多种实现的兼容和可扩展的能力。因此我们在 该层借助了Spring，通过依赖注入、AOP应用、面向接口编程，来降低业务组件之间的耦合度，增强系统扩展性。  </p>
+<p> 关于Spring的具体使用请参考相关章节。  </p>
+</div>
+<div class="sect1">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both;"><a name="d0e94"></a>1.3.&nbsp;数据持久层</h2>
+</div>
+</div>
+</div>
+<p> 开发中与数据库进行数据交互必不可少，通常我们归为CRUD（添加、读取、修改、删除），这些操作占据了系统开发中大部分的时间， 同时我们还需要考虑与数据库交互的性能问题，如连接池、数据缓存等等。因此该层实现我们借助了Hibernate。  </p>
+<p> Hibernate 是一个ORM工具，它不仅仅是实现了数据库访问性能优化和与数据库交互的常用操作（CRUD），还将数据表与对象进行了 关联，让我们可以脱离数据表，而直接针对对象来与数据库交互，我们不再需要用字符串去描述表中字段，不再需要一个个&rdquo;+&ldquo;号去 组装Sql语句。这使得编码中可书写性提高。  </p>
+<p> 该层的具体实现,请参看Hibernate相关章节。  </p>
+</div>
+<div class="sect1">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both;"><a name="d0e103"></a>1.4.&nbsp;域对象层</h2>
+</div>
+</div>
+</div>
+<p> 该 层应该说是ORM思想的产物，ORM用对象关联数据表，我们将这些对象的集合归为一个专门的层即Domain Layer。 域对象是各层之间数据通信的载体。实际上域对象也是一个完完全全的业务对象，如User对象、Book对象。通过对业 务的对象化，这有利于业务逻辑的重用。  </p>
+</div>
+</div>
+<div class="chapter">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title"><a name="struts"></a>第&nbsp;2&nbsp;章&nbsp;Struts</h2>
+</div>
+</div>
+</div>
+<div class="sect1">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both;"><a name="d0e111"></a>2.1.&nbsp;概述</h2>
+</div>
+</div>
+</div>
+<p> Struts是用于实现Web项目中UI层的开源产品，是MVC模式的经典实现案例。它属于Apache组织中的开源产品之一， 我们可以从官方网站<a target="_top" href="http://struts.apache.org/"><span style="color: rgb(0, 51, 153);">http://struts.apache.org</span></a>得到其所有资料及源码。  </p>
+<p> 为什么使用Struts？  </p>
+<div class="itemizedlist">
+<ul>
+    <li>
+    <p> 	Struts将业务数据、页面显示、动作处理进行分离，这有利各部分的维护。  	</p>
+    </li>
+    <li>
+    <p> 	Struts采用Front Controller模式来实现动作处理，让所有的动作请求都是经过一个统一入口， 然后进行分发。这样方便我们在入口中加入一些全局控制<B style='color:black;background-color:#ff9999'>代码</B>的实现，如安全控制、日志管理、国际化 编码等。  	</p>
+    </li>
+    <li>
+    <p> 	通过Struts提供的ActionForm封装web form 中的元素，使重用web表单成为可能。  	</p>
+    </li>
+    <li>
+    <p> 	借助Struts Validator框架帮助完成web层的验证工作，通常情况下我们不用再去为每个web页面写其验证<B style='color:black;background-color:#ff9999'>代码</B>，只需通 过配置即可实现。这也减少了我们的开发量，由于验证<B style='color:black;background-color:#ff9999'>代码</B>的集中管理，也为维护带来便利。  	</p>
+    </li>
+</ul>
+</div>
+</div>
+<div class="sect1">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both;"><a name="d0e133"></a>2.2.&nbsp;快速入门</h2>
+</div>
+</div>
+</div>
+<p> 1、下载Struts,将其相关jar包引用到Web项目。  </p>
+<p> 2、在web项目的web.xml中配置Action影射，将相应请求动作交给Struts提供的ActionServlet类进行统一控制。  </p>
+<div class="example"> <a name="d0e140"></a>
+<p class="title"> <strong>例&nbsp;2.1.&nbsp;web.xml</strong> </p>
+<pre class="programlisting"> &lt;servlet&gt;<br /><br />    	&lt;servlet-name&gt;action&lt;/servlet-name&gt;<br /><br />    	&lt;servlet-class&gt;org.apache.struts.action.ActionServlet&lt;/servlet-class&gt;<br /><br />    	&lt;init-param&gt;<br /><br />        	&lt;param-name&gt;config&lt;/param-name&gt;<br /><br />        	&lt;param-value&gt;/WEB-INF/struts-config.xml&lt;/param-value&gt;<br /><br />    	&lt;/init-param&gt;<br /><br />    	&lt;init-param&gt;<br /><br />        	&lt;param-name&gt;debug&lt;/param-name&gt;<br /><br />        	&lt;param-value&gt;2&lt;/param-value&gt;<br /><br />    	&lt;/init-param&gt;<br /><br />    	&lt;load-on-startup&gt;2&lt;/load-on-startup&gt;<br /><br /> &lt;/servlet&gt;<br /><br /> &lt;servlet-mapping&gt;<br /><br />        &lt;servlet-name&gt;action&lt;/servlet-name&gt;<br /><br />        &lt;url-pattern&gt;*.do&lt;/url-pattern&gt;<br /><br /> &lt;/servlet-mapping&gt;  <br /><br /> <br /><br />			<br /></pre>
+</div>
+<p> 在web.xml中定义了所有带.do后缀的文件请求都会触发ActionServlet类。在url-pattern节点可以灵活定义 适合自身的映射表达式，如，对某个目录下请求的映射：/myDirectory/*.do  </p>
+<p> 在配置org.apache.struts.action.ActionServlet类时设置一些参数其含义如下：  </p>
+<div class="itemizedlist">
+<ul>
+    <li>
+    <p> 	config:制定Struts配置文件路径，默认为/WEB-INF/struts-config.xml  	</p>
+    </li>
+    <li>
+    <p> 	debug：设定日志记录级别。  	</p>
+    </li>
+</ul>
+</div>
+<p> 3、在web.xm配置所需要用到的的Struts标签文件  </p>
+<div class="example"> <a name="d0e158"></a>
+<p class="title"> <strong>例&nbsp;2.2.&nbsp;web.xml</strong> </p>
+<pre class="programlisting"> &lt;taglib&gt;<br /><br />    &lt;taglib-uri&gt;struts-bean.tld&lt;/taglib-uri&gt;<br /><br />    &lt;taglib-location&gt;/WEB-INF/struts-bean.tld&lt;/taglib-location&gt;<br /><br /> &lt;/taglib&gt;<br /><br /> &lt;taglib&gt;<br /><br />    &lt;taglib-uri&gt;struts-html.tld&lt;/taglib-uri&gt;<br /><br />    &lt;taglib-location&gt;/WEB-INF/struts-html.tld&lt;/taglib-location&gt;<br /><br /> &lt;/taglib&gt;<br /><br /> &lt;taglib&gt;<br /><br />    &lt;taglib-uri&gt;struts-logic.tld&lt;/taglib-uri&gt;<br /><br />    &lt;taglib-location&gt;/WEB-INF/struts-logic.tld&lt;/taglib-location&gt;<br /><br /> &lt;/taglib&gt;<br /><br /> &lt;taglib&gt;<br /><br />    &lt;taglib-uri&gt;struts-template.tld&lt;/taglib-uri&gt;<br /><br />    &lt;taglib-location&gt;/WEB-INF/struts-template.tld&lt;/taglib-location&gt;<br /><br /> &lt;/taglib&gt;<br /><br /> &lt;taglib&gt;<br /><br />    &lt;taglib-uri&gt;struts-tiles.tld&lt;/taglib-uri&gt;<br /><br />    &lt;taglib-location&gt;/WEB-INF/struts-tiles.tld&lt;/taglib-location&gt;<br /><br /> &lt;/taglib&gt;<br /><br />  &lt;taglib&gt;<br /><br />    &lt;taglib-uri&gt;c.tld&lt;/taglib-uri&gt;<br /><br />    &lt;taglib-location&gt;/WEB-INF/c.tld&lt;/taglib-location&gt;<br /><br /> &lt;/taglib&gt;<br /><br /> &lt;taglib&gt;<br /><br />    &lt;taglib-uri&gt;Validate.tld&lt;/taglib-uri&gt;<br /><br />    &lt;taglib-location&gt;/WEB-INF/Validate.tld&lt;/taglib-location&gt;<br /><br /> &lt;/taglib&gt;<br /><br /><br /><br />			<br /></pre>
+</div>
+<p> 4、建立ActionForm、Action。  </p>
+<div class="example"> <a name="d0e165"></a>
+<p class="title"> <strong>例&nbsp;2.3.&nbsp;struts-config.xml</strong> </p>
+<pre class="programlisting">&lt;struts-config&gt;<br /><br />	<br /><br />	&lt;form-beans&gt;<br /><br />		&lt;form-bean name=&quot;helloWorldForm&quot; type =&quot;struts.test.HelloWorldForm&quot;&gt;<br /><br />			&lt;form-property name=&quot;name&quot; type=&quot;<B style='color:black;background-color:#ffff66'>java</B>.lang.String&quot; /&gt;<br /><br />		&lt;/form-bean&gt;<br /><br />	&lt;/form-beans&gt;<br /><br /><br /><br />	&lt;action-mappings&gt;<br /><br />		&lt;action path=&quot;/helloWorld&quot;  name=&quot;helloWorldForm&quot; type=&quot;struts.test.HelloWorldAction&quot;<br /><br />		scope=&quot;request&quot; input=&quot;/HelloWorld.jsp&quot; validate=&quot;false&quot; /&gt;<br /><br />   &lt;/action-mappings&gt;  <br /><br />   <br /><br />&lt;/struts-config&gt;<br /><br /><br /><br />			<br /></pre>
+</div>
+<div class="example"> <a name="d0e170"></a>
+<p class="title"> <strong>例&nbsp;2.4.&nbsp;HelloWorldForm.<B style='color:black;background-color:#ffff66'>java</B></strong> </p>
+<pre class="programlisting">public class HelloWorldForm extends ActionForm <br /><br />{<br /><br />	private String name = null;<br /><br />		<br /><br />	public String getName()<br /><br />	{<br /><br />		return this.name;<br /><br />	}<br /><br />	public void setName(String name)<br /><br />	{<br /><br />		this.name = name;<br /><br />	}<br /><br />}			<br /><br />			<br /></pre>
+</div>
+<div class="example"> <a name="d0e175"></a>
+<p class="title"> <strong>例&nbsp;2.5.&nbsp;HelloWorldAction.<B style='color:black;background-color:#ffff66'>java</B></strong> </p>
+<pre class="programlisting">public class HelloWorldAction extends Action <br /><br />{<br /><br /><br /><br />	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,<br /><br />			HttpServletResponse response) throws Exception<br /><br />	{<br /><br />		HelloWorldForm loginForm = (HelloWorldForm)form;<br /><br />		String name = loginForm.getName();<br /><br />		request.setAttribute(&quot;HelloWorldForm&quot;,loginForm);<br /><br />		return mapping.getInputForward();<br /><br />	}<br /><br /><br /><br />}<br /><br />			<br /></pre>
+</div>
+<p> 5、视图呈现  </p>
+<div class="example"> <a name="d0e182"></a>
+<p class="title"> <strong>例&nbsp;2.6.&nbsp;HelloWorld.jsp</strong> </p>
+<pre class="programlisting">&lt;%@page language=&quot;<B style='color:black;background-color:#ffff66'>java</B>&quot; contentType = &quot;text/html;charset=GBK&quot;%&gt; <br /><br />&lt;%@ taglib uri=&quot;struts-html.tld&quot; prefix=&quot;html&quot; %&gt;<br /><br />&lt;%@ taglib uri=&quot;struts-tiles.tld&quot; prefix=&quot;tiles&quot; %&gt;<br /><br />&lt;%@ taglib uri=&quot;struts-bean.tld&quot; prefix=&quot;bean&quot; %&gt;<br /><br />&lt;table border=&quot;1&quot;&gt;<br /><br />	&lt;tr&gt;<br /><br />		&lt;html:form action=&quot;helloWorld.do&quot; method=&quot;post&quot;&gt;<br /><br />		&lt;td&gt;<br /><br />			&lt;table&gt;<br /><br />				&lt;tr&gt;<br /><br />					&lt;td&gt;用户名：&lt;/td&gt;<br /><br />					&lt;td&gt;&lt;html:text property=&quot;name&quot; /&gt;&lt;/td&gt;<br /><br />				&lt;/tr&gt;<br /><br />				&lt;tr colspan=&quot;2&quot;&gt;<br /><br />					&lt;td&gt;&lt;html:submit property=&quot;show&quot; value=&quot;提交&quot; /&gt;&lt;/td&gt;<br /><br />				&lt;/tr&gt;<br /><br />			&lt;/table&gt;<br /><br />		&lt;/td&gt;<br /><br />		&lt;/html:form&gt;<br /><br />	&lt;/tr&gt;<br /><br />&lt;/table&gt;<br /><br />&lt;bean:write name=&quot;name&quot; /&gt;<br /><br /><br /><br />			<br /></pre>
+</div>
+<p> 6、演示效果  </p>
+<div class="figure"> <a name="d0e189"></a>
+<div> <img alt="访问Helloworld.jsp" src="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/images/struts01.gif" /> </div>
+<p class="title"> <strong>图&nbsp;2.1.&nbsp;访问Helloworld.jsp</strong> </p>
+</div>
+<p> 本章演示了一个简单的示例，在文本框输入内容，提交后显示其内容。功能虽然很简单但是涉及到了struts应用的大部分知识：  </p>
+<div class="itemizedlist">
+<ul>
+    <li>
+    <p> 	在web.xml中配置Action影射规则，如，*.do文件的请求触发Action。  	</p>
+    </li>
+    <li>
+    <p> 	ActionFrom中的属性对应到表单域中表单元素，如，jsp页面名为name的Text，对应到ActionForm中name属性。  	</p>
+    </li>
+    <li>
+    <p> 	继承Action类后即可实现具体的控制器，如，HelloAction类接受到请求后将ActionForm对象存放到request 范围，然后转发给配置的链接地址。  	</p>
+    </li>
+    <li>
+    <p> 	借助struts提供的标签进行视图呈现。如，bean:write 标签访问ActionForm对象的属性值。  	</p>
+    </li>
+</ul>
+</div>
+</div>
+<div class="sect1">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both;"><a name="d0e208"></a>2.3.&nbsp;ActionForm</h2>
+</div>
+</div>
+</div>
+<p> ActionFrom是用来传输表单数据的对象，通过配置文件可以关联到对应的Action,实现在UI层与<B style='color:black;background-color:#A0FFFF'>业务层</B>之间的数据传输。 实现机制如下：  </p>
+<div class="itemizedlist">
+<ul>
+    <li>
+    <p> 	Struts 	提供了一个org.apache.struts.action.ActionForm类，里面实现了将请求表单中的元素赋值给其具体的 	实现类属性。因此自定义ActionForm类时，只需继承该类即可。在自定义ActionForm类时请保证其属性名称与所对应 表单名称一致。  	</p>
+    </li>
+    <li>
+    <p> 	当触发Action时，通过配置文件匹配到对应的ActionFrom实例，以参数形式传入。  	</p>
+    </li>
+</ul>
+</div>
+<p> ActionForm 的实现虽然简单，但是随着界面的增加，ActionForm类也会增加，造成<B style='color:black;background-color:#ff9999'>代码</B>膨胀。在Struts1.1以上版本提供了 ActionForm的另一个实现类，org.apache.struts.action.DynaActionForm，该类充当所有 ActionForm的代理类，只需在 配置ActionFrom时指定用该类实现即可：  </p>
+<div class="example"> <a name="d0e222"></a>
+<p class="title"> <strong>例&nbsp;2.7.&nbsp;struts-config.xml</strong> </p>
+<pre class="programlisting">&lt;form-beans&gt;<br /><br />		&lt;form-bean name=&quot;helloWorldForm&quot; type =&quot;org.apache.struts.action.DynaActionForm&quot;&gt;<br /><br />			&lt;form-property name=&quot;name&quot; type=&quot;<B style='color:black;background-color:#ffff66'>java</B>.lang.String&quot; /&gt;<br /><br />		&lt;/form-bean&gt;<br /><br />&lt;/form-beans&gt;<br /><br /><br /><br />			<br /></pre>
+</div>
+<p> 在访问helloWorldForm实例时如下：  </p>
+<div class="example"> <a name="d0e229"></a>
+<p class="title"> <strong>例&nbsp;2.8.&nbsp;HelloAction.<B style='color:black;background-color:#ffff66'>java</B></strong> </p>
+<pre class="programlisting">public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,<br /><br />			HttpServletResponse response) throws Exception<br /><br />{<br /><br />	DynaActionForm dynaForm = (DynaActionForm)form;<br /><br />	String name =(String)dynaForm.get(&quot;name&quot;);<br /><br />	return null;<br /><br />}<br /><br />			<br /></pre>
+</div>
+</div>
+<div class="sect1">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both;"><a name="d0e234"></a>2.4.&nbsp;Action</h2>
+</div>
+</div>
+</div>
+<p> Action充当了控制器的角色，每个请求都会触发到Action类，我们在这里处理逻辑业务，分发数据，链接转向。 其实现机制：  </p>
+<div class="itemizedlist">
+<ul>
+    <li>
+    <p> 	在web.xml 	配置影射规则，符合其影射条件的请求都会交给org.apache.struts.action.ActionServlet类处理， 	在该类中将会实现org.apache.struts.action.Action类中的相应方法。在自定义Action类时只需继承该类， 	即可让自定义的Action得到触发。  	</p>
+    </li>
+    <li>
+    <p> 	execute()方法中 ActionMapping、ActionForm实例通过读取配置文件获得。  	</p>
+    </li>
+</ul>
+</div>
+</div>
+<div class="sect1">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both;"><a name="d0e246"></a>2.5.&nbsp;客户端验证</h2>
+</div>
+</div>
+</div>
+<p> 在UI中对用户提交的数据作验证是必不可少的，Struts也提供了相应的实现。下面将演示一个登录界面的校验：  </p>
+<p> 1、在配置文件中申明校验实现类，Struts中校验工作通过org.apache.struts.validator.ValidatorPlugIn类实现。  </p>
+<div class="example"> <a name="d0e253"></a>
+<p class="title"> <strong>例&nbsp;2.9.&nbsp;struts-config.xml</strong> </p>
+<pre class="programlisting"> &lt;plug-in className=&quot;org.apache.struts.validator.ValidatorPlugIn&quot;&gt;<br /><br />    &lt;set-property property=&quot;pathnames&quot; value=&quot;/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml&quot;/&gt;<br /><br /> &lt;/plug-in&gt;<br /><br /> <br /><br />			<br /></pre>
+</div>
+<p> 在实例化ValidatorPlugIn类时会装载validator-rules.xml、validation.xml文件，这些文件中包含了验证规则 和要被验证的具体表单信息。  </p>
+<p> 2、完善校验规则文件。在validator-rules.xml中定义了常用的客户端验证规则，如，不为空，只允许 数字等。特殊的实现需要在此扩充。  </p>
+<p> 3、定义要被验证的表单信息。  </p>
+<div class="example"> <a name="d0e264"></a>
+<p class="title"> <strong>例&nbsp;2.10.&nbsp;validation.xml</strong> </p>
+<pre class="programlisting">&lt;form-validation&gt;<br /><br />	&lt;formset&gt;<br /><br />		&lt;form name=&quot;loginForm&quot;&gt;		<a name="validation1.1"></a>(1)<br /><br />			&lt;field property=&quot;name&quot; page=&quot;0&quot; depends=&quot;required&quot;&gt;	<a name="validation1.2"></a>(2)<br /><br />				&lt;arg0 key=&quot;register.username&quot;/&gt;	<a name="validation1.3"></a>(3)<br /><br />			&lt;/field&gt;<br /><br />        &lt;/form&gt;     <br /><br />  &lt;/formset&gt;<br /><br />&lt;/form-validation&gt;<br /><br />			<br /></pre>
+</div>
+<div class="calloutlist">
+<table border="0" summary="Callout list">
+    <tbody>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#validation1.1"><span style="color: rgb(136, 136, 136);">(1)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			定义要被验证的ActionForm名称。  			</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#validation1.2"><span style="color: rgb(136, 136, 136);">(2)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			定义要被验证的具体属性，及规则。depends=&quot;required&quot;指明将调用validator-rules.xml中的required规则。  			</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#validation1.3"><span style="color: rgb(136, 136, 136);">(3)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			从资源文件中匹配具体的验证信息。  			</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<p> 4、建立存放验证提示信息的资源文件。如当用户名为空时显示提示信息&ldquo;必须填写用户名&rdquo;  </p>
+<div class="example"> <a name="d0e287"></a>
+<p class="title"> <strong>例&nbsp;2.11.&nbsp;ApplicationResources_zh_CN.properties</strong> </p>
+<pre class="programlisting"> register.username=\u7528\u6237\u540d<br /><br />			<br /></pre>
+</div>
+<p> 5、在界面设置触发条件，如onsubmit时响应验证动作。  </p>
+<div class="example"> <a name="d0e294"></a>
+<p class="title"> <strong>例&nbsp;2.12.&nbsp;Login.jsp</strong> </p>
+<pre class="programlisting">&lt;%@page language=&quot;<B style='color:black;background-color:#ffff66'>java</B>&quot; contentType = &quot;text/html;charset=GBK&quot;%&gt; <br /><br />&lt;%@ taglib uri=&quot;struts-html.tld&quot; prefix=&quot;html&quot; %&gt;<br /><br />&lt;table border=&quot;1&quot;&gt;<br /><br />	&lt;tr&gt;<br /><br />		&lt;html:form action=&quot;login.do&quot; method=&quot;post&quot; onsubmit=&quot;return validateCheckLoginForm(this);&quot;&gt;<br /><br />		&lt;html:hidden property=&quot;loginType&quot; value=&quot;0&quot;/&gt;<br /><br />		&lt;td&gt;<br /><br />			&lt;table&gt;<br /><br />				&lt;tr&gt;<br /><br />					&lt;td&gt;用户名：&lt;/td&gt;<br /><br />					&lt;td&gt;&lt;html:text property=&quot;name&quot; /&gt;&lt;/td&gt;<br /><br />				&lt;/tr&gt;<br /><br />				&lt;tr&gt;<br /><br />					&lt;td&gt;密码：&lt;/td&gt;<br /><br />					&lt;td&gt;&lt;html:password property=&quot;password&quot; /&gt;&lt;/td&gt;<br /><br />				&lt;/tr&gt;<br /><br />				&lt;tr colspan=&quot;2&quot;&gt;<br /><br />					&lt;td&gt;&lt;html:submit property=&quot;login&quot; value=&quot;登录&quot; /&gt;&lt;/td&gt;<br /><br />				&lt;/tr&gt;<br /><br />			&lt;/table&gt;<br /><br />		&lt;/td&gt;<br /><br />		&lt;/html:form&gt;<br /><br />	&lt;/tr&gt;<br /><br />	  &lt;html:javascript formName=&quot;checkLoginForm&quot;   dynamicJavascript=&quot;true&quot;    staticJavascript=&quot;true&quot;/&gt;<br /><br />&lt;/table&gt;<br /><br /><br /><br />			<br /></pre>
+</div>
+<p> 当用户名为空时点击登录，将出现如下提示：  </p>
+<div class="figure"> <a name="d0e301"></a>
+<div> <img alt="演示效果" src="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/images/struts02.gif" /> </div>
+<p class="title"> <strong>图&nbsp;2.2.&nbsp;演示效果</strong> </p>
+</div>
+</div>
+</div>
+<div class="chapter">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title"><a name="springFramework"></a>第&nbsp;3&nbsp;章&nbsp;springFramework</h2>
+</div>
+</div>
+</div>
+<div class="sect1">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both;"><a name="d0e308"></a>3.1.&nbsp;概述</h2>
+</div>
+</div>
+</div>
+<p> 对spring的描述莫过于作者本人之言 </p>
+<div class="blockquote">
+<table width="100%" cellspacing="0" cellpadding="0" border="0" summary="Block quote" class="blockquote">
+    <tbody>
+        <tr>
+            <td width="10%" valign="top">&nbsp;</td>
+            <td width="80%" valign="top">
+            <p> 			Developing 			software applications is hard enough even with good tools and 			technologies. Implementing applications using platforms which promise 			everything but turn out to be heavy-weight, hard to control and not 			very efficient during the development cycle makes it even harder. 			Spring provides a light-weight solution for building enterprise-ready 			applications, while still supporting the possibility of using 			declarative transaction management, remote access to your logic using 			RMI or webservices, mailing facilities and various options in 			persisting your data to a database. Spring provides an MVC framework, 			transparent ways of integrating AOP into your software and a 			well-structured exception hierarchy including automatic mapping from 			proprietary exception hierarchies. 			即使拥有良好的工具和优秀技术，应用软件开发也是困难重重。如果使用了超重量级，难于控制，不能有效控制开 发周期的平台 			那么就让应用开发变得更为困难。Spring为已建立的企业级应用提供了一个轻量级的解决方案，这个方案包括声明 性事务管理， 			通过RMI或webservices远程访问业务逻辑，mail支持工具以及对于数据和数据库之间持久层的各种配置的支持。 Spring还提供了 			一个MVC应用框架，可以通过集成AOP透明的嵌入你的软件和一个优秀的异常处理体系，这个异常体系可以自动 从属性异常体系 进行映射。  			</p>
+            </td>
+            <td width="10%" valign="top">&nbsp;</td>
+        </tr>
+        <tr>
+            <td width="10%" valign="top">&nbsp;</td>
+            <td valign="top" align="right" colspan="2">--<span class="attribution">springFramework reference</span></td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<p> springFramework 是种非侵入式轻量级框架，允许自由选择和组装各部分功能，还提供和其他软件集成的接口，如与Hibernate、Struts 的集成（后面的章节中会提到）。它提供的功能有Spring IOC、spring AOP、Spring ORM、Spring DAO、Spring MVC.笔者在项目 中用到的主要是IOC和AOP功能，ORM用hibernate取代，MVC用Struts取代。本文讲述springFramework在web环境下 的使用。  </p>
+</div>
+<div class="sect1">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both;"><a name="d0e320"></a>3.2.&nbsp;为什么使用Spring</h2>
+</div>
+</div>
+</div>
+<p> 1、利用延时注入思想组装<B style='color:black;background-color:#ff9999'>代码</B>，提高系统扩展性，灵活性，实现插件式编程。  </p>
+<p> 2、利用AOP思想，集中处理业务逻辑，减少重复<B style='color:black;background-color:#ff9999'>代码</B>，构建优雅的解决方案。  </p>
+<p> 3、利用其对Hibernate的SessionFactory、事务管理的封装，更简洁的应用Hibernate。  </p>
+</div>
+<div class="sect1">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both;"><a name="d0e329"></a>3.3.&nbsp;快速入门</h2>
+</div>
+</div>
+</div>
+<p> 要使用Spring非常简单，来体验下： </p>
+<div class="example"> <a name="d0e334"></a>
+<p class="title"> <strong>例&nbsp;3.1.&nbsp;MyClass.<B style='color:black;background-color:#ffff66'>java</B></strong> </p>
+<pre class="programlisting">public interface MyClass<br /><br />{<br /><br />	public void execute();<br /><br />}<br /><br />			<br /></pre>
+</div>
+<div class="example"> <a name="d0e339"></a>
+<p class="title"> <strong>例&nbsp;3.2.&nbsp;MyClassImpl.<B style='color:black;background-color:#ffff66'>java</B></strong> </p>
+<pre class="programlisting">public class MyClassImpl implements MyClass<br /><br />{<br /><br />	public void execute()<br /><br />	{<br /><br />		...<br /><br />	}<br /><br />}<br /><br />			<br /></pre>
+</div>
+<p> 通过Spring注入MyClassImpl的实例，需在配置文件中做如下配置： </p>
+<div class="example"> <a name="d0e346"></a>
+<p class="title"> <strong>例&nbsp;3.3.&nbsp;SpringConfig.xml</strong> </p>
+<pre class="programlisting">&lt;!DOCTYPE beans PUBLIC &quot;-//SPRING//DTD BEAN//EN&quot; &quot;http://www.springframework.org/dtd/spring-beans.dtd&quot;&gt;<br /><br />&lt;beans default-lazy-init=&quot;false&quot; default-dependency-check=&quot;none&quot; default-autowire=&quot;no&quot;&gt;<br /><br />	&lt;bean id=&quot;myClass&quot; class=&quot;MyClassImpl&quot; /&gt;<br /><br />&lt;/beans&gt;<br /><br /><br /><br />			<br /></pre>
+</div>
+<p> 这样在<B style='color:black;background-color:#ff9999'>代码</B>中就可以通过Spring体验到什么叫延时装载了 </p>
+<div class="example"> <a name="d0e353"></a>
+<p class="title"> <strong>例&nbsp;3.4.&nbsp;</strong> </p>
+<pre class="programlisting">	ApplicationContext ac = new FileSystemXmlApplicationContext(&quot;SpringConfig.xml&quot;);  <a name="spring1.1"></a>(1)<br /><br />	MyClass cls = (MyClass)ac.getBean(&quot;myClass&quot;);						 <a name="spring1.2"></a>(2)	<br /><br />	cls.execute();														<br /><br /><br /><br />				<br /></pre>
+</div>
+<div class="calloutlist">
+<table border="0" summary="Callout list">
+    <tbody>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#spring1.1"><span style="color: rgb(136, 136, 136);">(1)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			载入Spring配置文档，上例中SpringConfig.xml放置在工作路径根目录中。这种引用方式其配制文件只能相对于工作路径 的引用。  			</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#spring1.2"><span style="color: rgb(136, 136, 136);">(2)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			实例化配置的对象，以配置文件的bean节点ID值作为实例引用的关键字。  			</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<p> 上面的例子中得到了实现类的实例，但是<B style='color:black;background-color:#ff9999'>代码</B>中并没有硬编码具体实现类，而是将这种依赖转移到配置文件中。  </p>
+</div>
+<div class="sect1">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both;"><a name="spring_web"></a>3.4.&nbsp;搭建Web应用环境</h2>
+</div>
+</div>
+</div>
+<p> 1、下载springFramework最新版本<a target="_top" href="http://www.springframework.org/"><span style="color: rgb(0, 51, 153);">http://www.springframework.org</span></a>,将springFramework下的*.jar 拷贝到项目lib中，并引用。  </p>
+<p> 2、在Web.xml中配置spring的启动方式。  </p>
+<p> springFramework提供两种形式的web context，基于Listener接口的实现和基于Servlet接口的实现。  </p>
+<div class="example"> <a name="d0e380"></a>
+<p class="title"> <strong>例&nbsp;3.5.&nbsp;web.xml</strong> </p>
+<pre class="programlisting">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;<br /><br />&lt;web-app xmlns=&quot;http://<B style='color:black;background-color:#ffff66'>java</B>.sun.com/xml/ns/j2ee&quot;xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;<br /><br />xsi:schemaLocation=&quot;http://<B style='color:black;background-color:#ffff66'>java</B>.sun.com/xml/ns/j2ee/web-app_2_4.xsd&quot; version=&quot;2.4&quot;&gt;<br /><br />&lt;display-name&gt;Test&lt;/display-name&gt;<br /><br />&lt;context-param&gt;<br /><br />	&lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;<br /><br />	&lt;param-value&gt;/WEB-INF/spring_bean.xml&lt;/param-value&gt;<br /><br />&lt;/context-param&gt;<br /><br />&lt;listener&gt;<br /><br />	&lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;<br /><br />&lt;/listener&gt;<br /><br />&lt;!--<br /><br />&lt;servlet&gt;<br /><br />	&lt;servlet-name&gt;context&lt;/servlet-name&gt;<br /><br />	&lt;servlet-class&gt;org.springframework.web.context.ContextLoaderServlet&lt;/servlet-class&gt;<br /><br />	&lt;load-on-startup&gt;2&lt;/load-on-startup&gt;<br /><br />&lt;/servlet&gt;<br /><br />--&gt;<br /><br />&lt;servlet&gt;<br /><br />	&lt;servlet-name&gt;Init&lt;/servlet-name&gt;<br /><br />	&lt;servlet-class&gt;com.m5.Initializtion&lt;/servlet-class&gt;<br /><br />	&lt;load-on-startup&gt;3&lt;/load-on-startup&gt;<br /><br />&lt;/servlet&gt;<br /><br />&lt;/web-app&gt;<br /><br />			<br /></pre>
+</div>
+<p> tomcat 启动时会装载/WEB-INF/spring_bean.xml文件，如果不指定contextConfigLocation参数， 默认装载/WEB-INF/applicationContext.xml文件。然后在tomcat启动时初始化一个自定义servlet， 在这里实现springFramework的装载。  </p>
+<div class="example"> <a name="d0e387"></a>
+<p class="title"> <strong>例&nbsp;3.6.&nbsp;Initializtion.<B style='color:black;background-color:#ffff66'>java</B></strong> </p>
+<pre class="programlisting">public class Initializtion extends HttpServlet<br /><br />{<br /><br />	public void init(ServletConfig config) throws ServletException<br /><br />	{<br /><br />		WebApplicationContext wac = WebApplicationContextUtils.getRequiredWebApplicationContext<br /><br />		(config.getServletContext()); <br /><br />		super.init(config);	<br /><br />		InitSpring.Init((AbstractApplicationContext)wac);	<a name="co3.1"></a>(1)<br /><br />	}<br /><br />}<br /><br />			<br /></pre>
+</div>
+<div class="calloutlist">
+<table border="0" summary="Callout list">
+    <tbody>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#co3.1"><span style="color: rgb(136, 136, 136);">(1)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			InitSpring是一个符合单例模式的类。 			</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<div class="example"> <a name="d0e398"></a>
+<p class="title"> <strong>例&nbsp;3.7.&nbsp;InitSpring.<B style='color:black;background-color:#ffff66'>java</B></strong> </p>
+<pre class="programlisting">public class InitSpring <br /><br />{<br /><br />	AbstractApplicationContext wac = null;<br /><br />	private static InitSpring instance = new InitSpring();<br /><br />	private InitSpring()<br /><br />	{<br /><br />		<br /><br />	}<br /><br />	<br /><br />	public static void Init(AbstractApplicationContext wac)<br /><br />	{<br /><br />		instance.wac = wac;<br /><br />	}<br /><br />	<br /><br />	public static Object getInstance(String objName)<br /><br />	{<br /><br />		return instance.wac.getBean(objName);<br /><br />	}<br /><br />	<br /><br />	public static Object getInstance(Class objClass)<br /><br />	{<br /><br />		return getInstance(objClass.getName());<br /><br />	}<br /><br />}<br /><br />		<br /></pre>
+</div>
+<p> 经过以上处理，在项目任何一个类中如需得到Spring配置文件中的一个类实例，如下即可：  </p>
+<pre class="programlisting">InitSpring.getObject(beanId);<br /><br />		<br /></pre>
+</div>
+<div class="sect1">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both;"><a name="d0e407"></a>3.5.&nbsp;Spring IOC</h2>
+</div>
+</div>
+</div>
+<p> IOC(Inversion of Control)，译作反转控制，其功能是将类之间的依赖转移到外部的配置文件中， 避免在调用类中硬编码实现类，因此也被称作依赖注入（Dependency Injection）。在以往的开发中， 通常利用工厂模式（Factory）来解决此类问题，其实不管是工厂模式还是依赖注入，调用类与实现类不可 能没有任何依赖，工厂模式中工厂类通常根据参数来判断该实例化哪个实现类，Spring IOC将需要实例的 类在配置文件文件中配置。使用Spring IOC能得到工厂模式同样的效果，而且编码更加简洁。看段<B style='color:black;background-color:#ff9999'>代码</B>比较 一下：  </p>
+<p> 1、用工厂模式来实现  </p>
+<div class="example"> <a name="d0e414"></a>
+<p class="title"> <strong>例&nbsp;3.8.&nbsp;Product.<B style='color:black;background-color:#ffff66'>java</B></strong> </p>
+<pre class="programlisting">public interface Product <br /><br />{<br /><br />	public void execute();<br /><br />}<br /><br />			<br /></pre>
+</div>
+<div class="example"> <a name="d0e419"></a>
+<p class="title"> <strong>例&nbsp;3.9.&nbsp;ConcreteProductA.<B style='color:black;background-color:#ffff66'>java</B></strong> </p>
+<pre class="programlisting">public class ConcreteProductA implements  Product<br /><br />{<br /><br />	public void execute()<br /><br />	{<br /><br />		...<br /><br />	}<br /><br />}<br /><br />			<br /></pre>
+</div>
+<div class="example"> <a name="d0e424"></a>
+<p class="title"> <strong>例&nbsp;3.10.&nbsp;ConcreteProductB.<B style='color:black;background-color:#ffff66'>java</B></strong> </p>
+<pre class="programlisting">public class ConcreteProductB implements  Product<br /><br />{<br /><br />	public void execute()<br /><br />	{<br /><br />		...<br /><br />	}<br /><br />}<br /><br />			<br /></pre>
+</div>
+<div class="example"> <a name="d0e429"></a>
+<p class="title"> <strong>例&nbsp;3.11.&nbsp;Factory.<B style='color:black;background-color:#ffff66'>java</B></strong> </p>
+<pre class="programlisting">public class Factory<br /><br />{<br /><br />	<br /><br />	public Product CreateProduct(object param)<br /><br />	{<br /><br />		return ConstructObjects(param);<br /><br />	}<br /><br />	<br /><br />	private Product ConstructObjects(object param)<br /><br />	{<br /><br />		...<br /><br />	}<br /><br />}<br /><br />			<br /></pre>
+</div>
+<div class="example"> <a name="d0e434"></a>
+<p class="title"> <strong>例&nbsp;3.12.&nbsp;Client.<B style='color:black;background-color:#ffff66'>java</B>(调用类)</strong> </p>
+<pre class="programlisting">public class Client<br /><br />{<br /><br />	public Client()<br /><br />	{<br /><br />		//实例化ConcreteProductA<br /><br />		Product product = Factory.CreateProduct(paramA);<br /><br />		<br /><br />		//实例化ConcreteProductB<br /><br />		Product product = Factory.CreateProduct(paramB);<br /><br />		...<br /><br />	}<br /><br />}<br /><br />			<br /></pre>
+</div>
+<p> 在ConstructObjects方法中设定实例化实现类的逻辑，这样对于调用类来说，不直接实例化实现类，纵然实现类发生变化， 调用<B style='color:black;background-color:#ff9999'>代码</B>仍然可以不作修改，给维护与扩展带来便利。  </p>
+<p> 2、Spring IOC实现  </p>
+<div class="example"> <a name="d0e443"></a>
+<p class="title"> <strong>例&nbsp;3.13.&nbsp;SpringConfig.xml</strong> </p>
+<pre class="programlisting">&lt;bean id=&quot;productA&quot; class=&quot;ConcreteProductA&quot; /&gt;<br /><br />&lt;bean id=&quot;productB&quot; class=&quot;ConcreteProductB&quot; /&gt;<br /><br /><br /><br />			<br /></pre>
+</div>
+<div class="example"> <a name="d0e448"></a>
+<p class="title"> <strong>例&nbsp;3.14.&nbsp;Client.<B style='color:black;background-color:#ffff66'>java</B>(调用类)</strong> </p>
+<pre class="programlisting">public class Client<br /><br />{<br /><br />	public Client()<br /><br />	{<br /><br />		//实例化ConcreteProductA<br /><br />		Product product = (Product)InitSpring.getObject(&quot;productA&quot;);<br /><br />		<br /><br />		//实例化ConcreteProductB<br /><br />		Product product = (Product)InitSpring.getObject(&quot;productB&quot;);<br /><br />		...<br /><br />	}<br /><br />}<br /><br />			<br /></pre>
+</div>
+<p> 调用<B style='color:black;background-color:#ff9999'>代码</B>中没有硬编码实现类，比较工厂模式，少了Factory类。  </p>
+<p> Spring为依赖注入提供三种实现方式：接口注入、设值注入、构造注入。利用这些可以灵活的解决 类之间的依赖关系，让你为所欲为的组装<B style='color:black;background-color:#ff9999'>代码</B>。与其说Spring IOC是一个工具，还不如说搭建了一 个思想的舞台。继续看<B style='color:black;background-color:#ff9999'>代码</B>：  </p>
+<p> 来实现一个操作多个数据源的切换  </p>
+<div class="example"> <a name="d0e459"></a>
+<p class="title"> <strong>例&nbsp;3.15.&nbsp;DataSource.<B style='color:black;background-color:#ffff66'>java</B></strong> </p>
+<pre class="programlisting">public class DataSource<br /><br />{<br /><br />	 private String driverClassName;<br /><br />	 private String url;<br /><br />	 private String username;<br /><br />	 private String password;<br /><br /><br /><br />	 public String getDriverClassName()<br /><br />	 {<br /><br />		return this.driverClassName;<br /><br />	 }<br /><br /><br /><br />	 public void setDriverClassName(String driverClassName)<br /><br />	 {<br /><br />		this.driverClassName = driverClassName;<br /><br />	 }<br /><br /><br /><br />	 public String getUrl()<br /><br />	 {<br /><br />		return this.url;<br /><br />	 }<br /><br /><br /><br />	 public void setUrl(String url)<br /><br />	 {<br /><br />		this.url = url;<br /><br />	 }<br /><br /><br /><br />	 public String getUsername()<br /><br />	 {<br /><br />		return this.Username;<br /><br />	 }<br /><br /><br /><br />	 public void setUsername(String username)<br /><br />	 {<br /><br />		this.username = username;<br /><br />	 }<br /><br /><br /><br />	 public String getPassword()<br /><br />	 {<br /><br />		return this.password;<br /><br />	 }<br /><br /><br /><br />	 public void setPassword(String password)<br /><br />	 {<br /><br />		this.password = password;<br /><br />	 }<br /><br />}<br /><br />			<br /></pre>
+</div>
+<div class="example"> <a name="DataAccessor.java"></a>
+<p class="title"> <strong>例&nbsp;3.16.&nbsp;DataAccessor.<B style='color:black;background-color:#ffff66'>java</B></strong> </p>
+<pre class="programlisting">public class DataAccessor<br /><br />{<br /><br />	private DataSource dataSource;<br /><br />	public void setDriver(DataSource dataSource)<br /><br />	{<br /><br />		this.dataSource = dataSource;<br /><br />	}<br /><br /><br /><br />	public void save(String sql)<br /><br />	{<br /><br />		Statement s = getStatement();<br /><br />		try<br /><br />        {<br /><br />            s.getConnection().setAutoCommit(false);<br /><br />			int rows = s.executeUpdate(sql);<br /><br />        	s.getConnection().commit();<br /><br /><br /><br />		}<br /><br />        catch(Exception e)<br /><br />        {<br /><br />			s.getConnection().rollback();<br /><br />			...	<br /><br />        }<br /><br />		finally<br /><br />		{<br /><br />			...<br /><br />		}<br /><br />	}<br /><br /><br /><br />	private Statement getStatement()<br /><br />	{<br /><br />		Statement s;<br /><br />		try<br /><br />		{<br /><br />			Class.forName(dataSource.getDriverClassName()).newInstance();<br /><br />            <B style='color:black;background-color:#ffff66'>java</B>.sql.Connection conn = <br /><br />			<B style='color:black;background-color:#ffff66'>java</B>.sql.DriverManager.getConnection(dataSource.getUrl(),dataSource.getUser(),dataSource.getPassword());<br /><br />            try<br /><br />            {<br /><br />                s = c.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);<br /><br />            }<br /><br />		}<br /><br />		catch(Exception e)<br /><br />		{<br /><br />			...<br /><br />		}<br /><br />		return s;<br /><br />	}<br /><br />}<br /><br />			<br /></pre>
+</div>
+<div class="example"> <a name="d0e469"></a>
+<p class="title"> <strong>例&nbsp;3.17.&nbsp;BussinessA.<B style='color:black;background-color:#ffff66'>java</B></strong> </p>
+<pre class="programlisting">public class BussinessA<br /><br />{<br /><br />	private DataAccessor dao;<br /><br />	public void setDao(DataAccessor dao)<br /><br />	{<br /><br />		this.dao = dao;<br /><br />	}<br /><br /><br /><br />	public void execute()<br /><br />	{<br /><br />		dao.save(&quot;insert into tb1 ...&quot;);<br /><br />	}<br /><br />}<br /><br />			<br /></pre>
+</div>
+<div class="example"> <a name="d0e474"></a>
+<p class="title"> <strong>例&nbsp;3.18.&nbsp;BussinessB.<B style='color:black;background-color:#ffff66'>java</B></strong> </p>
+<pre class="programlisting">public class BussinessB<br /><br />{<br /><br />	private DataAccessor dao;<br /><br />	public void setDao(DataAccessor dao)<br /><br />	{<br /><br />		this.dao = dao;<br /><br />	}<br /><br /><br /><br />	public void execute()<br /><br />	{<br /><br />		dao.save(&quot;insert into tb2 ...&quot;);<br /><br />	}<br /><br /><br /><br />}<br /><br />			<br /></pre>
+</div>
+<p> 全部<B style='color:black;background-color:#ff9999'>代码</B>就这样了，执行BussinessA.<B style='color:black;background-color:#ffff66'>java</B>、BussinessB.<B style='color:black;background-color:#ffff66'>java</B><B style='color:black;background-color:#ff9999'>代码</B>即可完成数据插入操作，从<B style='color:black;background-color:#ff9999'>代码</B>中看， 这两个类具体操作的是什么数据库？什么样的操作细节？让你失望了，<B style='color:black;background-color:#ff9999'>代码</B>中找不到这样的关联，看配置文件吧：  </p>
+<div class="example"> <a name="d0e481"></a>
+<p class="title"> <strong>例&nbsp;3.19.&nbsp;SpringConfig.xml</strong> </p>
+<pre class="programlisting">&lt;bean id=&quot;dataSourceA&quot; class=&quot;DataSource&quot; destroy-method=&quot;close&quot;&gt;<br /><br />        &lt;property name=&quot;driverClassName&quot;&gt;&lt;value&gt;org.gjt.mm.mysql.Driver&lt;/value&gt;&lt;/property&gt;<br /><br />        &lt;property name=&quot;url&quot;&gt;<br /><br />			&lt;value&gt;jdbc:mysql://localhost:3306/test1?useUnicode=true&amp;characterEncoding=GBK&lt;/value&gt;<br /><br />        &lt;/property&gt;<br /><br />        &lt;property name=&quot;username&quot;&gt;&lt;value&gt;root&lt;/value&gt;&lt;/property&gt;<br /><br />        &lt;property name=&quot;password&quot;&gt;&lt;value&gt;&lt;/value&gt;&lt;/property&gt;<br /><br /> &lt;/bean&gt;<br /><br /><br /><br /> &lt;bean id=&quot;dataSourceB&quot; class=&quot;DataSource&quot; destroy-method=&quot;close&quot;&gt;<br /><br />        &lt;property name=&quot;driverClassName&quot;&gt;&lt;value&gt;org.gjt.mm.mysql.Driver&lt;/value&gt;&lt;/property&gt;<br /><br />        &lt;property name=&quot;url&quot;&gt;<br /><br />			&lt;value&gt;jdbc:mysql://localhost:3306/test2?useUnicode=true&amp;characterEncoding=GBK&lt;/value&gt;<br /><br />        &lt;/property&gt;<br /><br />        &lt;property name=&quot;username&quot;&gt;&lt;value&gt;root&lt;/value&gt;&lt;/property&gt;<br /><br />        &lt;property name=&quot;password&quot;&gt;&lt;value&gt;&lt;/value&gt;&lt;/property&gt;<br /><br /> &lt;/bean&gt;<br /><br /><br /><br />&lt;bean id=&quot;daoA&quot; class=&quot;DataAccessor&quot;&gt;<br /><br />		&lt;property name=&quot;dataSource&quot;&gt;<br /><br />			&lt;ref local=&quot;dataSourceA&quot;/&gt;<br /><br />		&lt;/property&gt;<br /><br />&lt;/bean&gt;<br /><br /><br /><br />&lt;bean id=&quot;daoB&quot; class=&quot;DataAccessor&quot;&gt;<br /><br />		&lt;property name=&quot;dataSource&quot;&gt;<br /><br />			&lt;ref local=&quot;dataSourceB&quot;/&gt;<br /><br />		&lt;/property&gt;<br /><br />&lt;/bean&gt;<br /><br /><br /><br />&lt;bean id=&quot;bussinessA&quot; class=&quot;BussinessA&quot;&gt;<br /><br />		&lt;property name=&quot;dao&quot;&gt;<br /><br />			&lt;ref local=&quot;daoA&quot;/&gt;<br /><br />		&lt;/property&gt;<br /><br />&lt;/bean&gt;<br /><br /><br /><br />&lt;bean id=&quot;bussinessB&quot; class=&quot;BussinessB&quot;&gt;<br /><br />		&lt;property name=&quot;dao&quot;&gt;<br /><br />			&lt;ref local=&quot;daoB&quot;/&gt;<br /><br />		&lt;/property&gt;<br /><br />&lt;/bean&gt;<br /><br /><br /><br />			<br /></pre>
+</div>
+<p> 看完配置文件应该明白了，这里承担了所有的依赖关系。  </p>
+<div class="itemizedlist">
+<ul>
+    <li>
+    <p> 	首先，我们通过设值注入方法设置数据源相关参数 	</p>
+    </li>
+    <li>
+    <p> 	然后，我们将数据源实例注入给数据访问类 	</p>
+    </li>
+    <li>
+    <p> 	最后，我们为每个具体业务类注入相应访问器 	</p>
+    </li>
+</ul>
+</div>
+<p> 是不是感觉想玩积木似的，在组装你的<B style='color:black;background-color:#ff9999'>代码</B>？  </p>
+<div class="example"> <a name="d0e500"></a>
+<p class="title"> <strong>例&nbsp;3.20.&nbsp;DaoTest.<B style='color:black;background-color:#ffff66'>java</B></strong> </p>
+<pre class="programlisting">public void testSave()<br /><br />{<br /><br />	BussinessA bussinessA = (BussinessA)InitSpring.getObject(&quot;bussinessA&quot;);<br /><br />	bussinessA.execute();<br /><br /><br /><br />	bussinessB bussinessB = (BussinessB)InitSpring.getObject(&quot;bussinessB&quot;);<br /><br />	bussinessB.execute();<br /><br />}<br /><br />			<br /></pre>
+</div>
+<p> 执行这段测试<B style='color:black;background-color:#ff9999'>代码</B>，数据库Test1、Test2中tb1、tb2表将分别插入对应的数据，从实现<B style='color:black;background-color:#ff9999'>代码</B>来看操作多个数据库和 操作一个数据库完全一样，即使当数据源，数据访问类不断变化，应用<B style='color:black;background-color:#ff9999'>代码</B>也可以做到不用任何修改。  </p>
+<p> 希望看完本章节的内容能让读者与我共鸣，Spring IOC是一种优雅的思想，借助它发挥你无穷的想象吧。  </p>
+</div>
+<div class="sect1">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both;"><a name="d0e509"></a>3.6.&nbsp;Spring AOP</h2>
+</div>
+</div>
+</div>
+<p> AOP 的全称为Aspect Oriented Programming,译为面向方面编程，针对具体业务领域、业务逻辑。AOP目的是 将复杂逻辑进行分离，抽取共性，让各部分实现实现的功能更为专一。如,Spring AOP思想实现的经典案例&ldquo;事务 管理&rdquo;，每个访问数据库的业务类都有可能用到事务控制，将其事务管理<B style='color:black;background-color:#ff9999'>代码</B>从具体类中抽取出来，放到一个单独的 地方处理，这样大大简化了具体业务类的<B style='color:black;background-color:#ff9999'>代码</B>。如图：  </p>
+<div class="figure"> <a name="d0e514"></a>
+<div> <img alt="AOP分离前" src="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/images/AOP_no.gif" /> </div>
+<p class="title"> <strong>图&nbsp;3.1.&nbsp;AOP分离前</strong> </p>
+</div>
+<div class="figure"> <a name="d0e518"></a>
+<div> <img alt="AOP分离后" src="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/images/AOP.gif" /> </div>
+<p class="title"> <strong>图&nbsp;3.2.&nbsp;AOP分离后</strong> </p>
+</div>
+<p> 从图中能清楚地看出分离的效果，下面继续借助图例来阐述AOP的一些观念  </p>
+<div class="figure"> <a name="d0e524"></a>
+<div> <img alt="事务管理之AOP实现序列图" src="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/images/AOP_time.gif" /> </div>
+<p class="title"> <strong>图&nbsp;3.3.&nbsp;事务管理之AOP实现序列图</strong> </p>
+</div>
+<div class="itemizedlist">
+<ul>
+    <li>
+    <p> 	Aspect（方面）：我们所关注的，可以被抽取的业务逻辑，如图中的&ldquo;事务管理&rdquo;。 	</p>
+    </li>
+    <li>
+    <p> 	JoinPoint（连接点）：程序在执行过程中明确的点，如图中execute()方法。 	</p>
+    </li>
+    <li>
+    <p> 	Advice（通知）：在特定的连接点执行的动作。如在执行execute()方法前的预处理， 在执行完execute() 方法后的后处理。  	</p>
+    </li>
+    <li>
+    <p> 	PointCut（切入点）：如图中在客户调用execute（）时才产生图中所示动作，还也可以 设定产生同样动作的方法，如save（），update（），甚至申明成&ldquo;save.*&rdquo;,这些申明的 集合就称之为切入点。  	</p>
+    </li>
+    <li>
+    <p> 	TargetObject（目标对象）：包含连接点的对象，也称为被代理的对象。如图中的&ldquo;业务组件&rdquo; 	</p>
+    </li>
+</ul>
+</div>
+<p> 理解完概念，接下来看实际例子：  </p>
+<p> 在Spring IOC章节中，<a title="例?3.16.?DataAccessor.java" href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#DataAccessor.java"><span style="color: rgb(136, 136, 136);">DataAccessor.<B style='color:black;background-color:#ffff66'>java</B></span></a>的Save方法中是 未经事务管理分离的实现，我们采用AOP实现后，期望将实现<B style='color:black;background-color:#ff9999'>代码</B>变成如下：  </p>
+<div class="example"> <a name="d0e551"></a>
+<p class="title"> <strong>例&nbsp;3.21.&nbsp;DataAccessor.<B style='color:black;background-color:#ffff66'>java</B></strong> </p>
+<pre class="programlisting">	public void save(String sql)<br /><br />	{<br /><br />			Statement s = getStatement();<br /><br />			int rows = s.executeUpdate(sql);<br /><br />  	}<br /><br />			<br /></pre>
+</div>
+<p> 多么美妙的想法，看实现方法：  </p>
+<p> 1、 AOP中的&ldquo;方面&rdquo;已经明确，即&ldquo;事务管理&rdquo;，通常用拦截器来实现其功能。我们可以通过实现 AOP联盟提供的通用AOP接口MethodInterceptor自定义拦截器。本例借助Spring中提供的 org.springframework.jdbc.datasource.DataSourceTransactionManager事务管理 类实现。  </p>
+<p> 2、&rdquo;目标类&ldquo;我们也已经明确，即DataAccessor.<B style='color:black;background-color:#ffff66'>java</B>。  </p>
+<p> 3、定义切入点，该例中我们期望在执行save方法时做事务管理控制。  </p>
+<p> 4、在SpringConfig.xml文件中进行相关配置  </p>
+<div class="example"> <a name="d0e566"></a>
+<p class="title"> <strong>例&nbsp;3.22.&nbsp;SpringConfig.xml</strong> </p>
+<pre class="programlisting">&lt;bean id=&quot;dataSource&quot; class=&quot;org.apache.commons.dbcp.BasicDataSource&quot; destroy-method=&quot;close&quot;&gt;<br /><br />        &lt;property name=&quot;driverClassName&quot;&gt;&lt;value&gt;org.gjt.mm.mysql.Driver&lt;/value&gt;&lt;/property&gt;<br /><br />        &lt;property name=&quot;url&quot;&gt;<br /><br />			&lt;value&gt;jdbc:mysql://localhost:3306/test1?useUnicode=true&amp;characterEncoding=GBK&lt;/value&gt;<br /><br />        &lt;/property&gt;<br /><br />        &lt;property name=&quot;username&quot;&gt;&lt;value&gt;root&lt;/value&gt;&lt;/property&gt;<br /><br />        &lt;property name=&quot;password&quot;&gt;&lt;value&gt;&lt;/value&gt;&lt;/property&gt;<br /><br /> &lt;/bean&gt;<br /><br /><br /><br />&lt;bean id=&quot;dataAccessor&quot; class=&quot;DataAccessor&quot;&gt;<br /><br />		&lt;property name=&quot;dataSource&quot;&gt;<br /><br />			&lt;ref local=&quot;dataSource&quot;/&gt;<br /><br />		&lt;/property&gt;<br /><br />&lt;/bean&gt;<br /><br /><br /><br />&lt;bean id=&quot;transactionManager&quot;<br /><br />		class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt; <a name="aop1.1"></a>(1)<br /><br />		&lt;property name=&quot;dataSource&quot;&gt;<br /><br />			&lt;ref local=&quot;dataSource&quot; /&gt;<br /><br />		&lt;/property&gt;<br /><br />&lt;/bean&gt;<br /><br /><br /><br />&lt;bean id=&quot;dataAccessorProxy&quot; <br /><br />	class=&quot;org.springframework.transaction.interceptor.TransactionProxyFactoryBean&quot;&gt;	<a name="aop1.2"></a>(2)<br /><br />		&lt;property name=&quot;transactionManager&quot;&gt;						<a name="aop1.3"></a>(3)<br /><br />			&lt;ref bean=&quot;transactionManager&quot; /&gt;<br /><br />		&lt;/property&gt;<br /><br />		&lt;property name=&quot;target&quot;&gt;									<a name="aop1.4"></a>(4)<br /><br />			&lt;ref local=&quot;dataAccessor&quot; /&gt;<br /><br />		&lt;/property&gt;<br /><br />		&lt;property name=&quot;transactionAttributes&quot;&gt;						<a name="aop1.5"></a>(5)<br /><br />			&lt;props&gt;<br /><br />				&lt;prop key=&quot;save&quot;&gt;PROPAGATION_REQUIRED&lt;/prop&gt;<br /><br />			&lt;/props&gt;<br /><br />		&lt;/property&gt;<br /><br />	&lt;/bean&gt;<br /><br />			<br /></pre>
+</div>
+<div class="calloutlist">
+<table border="0" summary="Callout list">
+    <tbody>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#aop1.1"><span style="color: rgb(136, 136, 136);">(1)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			申明事务管理的实现类。  			</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#aop1.2"><span style="color: rgb(136, 136, 136);">(2)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			通过Spring提供的代理工厂类，注入AOP相关实现信息。  			</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#aop1.3"><span style="color: rgb(136, 136, 136);">(3)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			注入事务实现类。  			</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#aop1.4"><span style="color: rgb(136, 136, 136);">(4)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			注入目标类。  			</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#aop1.4"><span style="color: rgb(136, 136, 136);">(4)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			定义切点（save）。  			</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<p> 经 过以上的配置，改动下DataAccessor.<B style='color:black;background-color:#ffff66'>java</B>类的实现，因为这里我们用的dataSource类为Spring提供的 org.apache.commons.dbcp.BasicDataSource，且我们可以通过JdbcTemplate执行相关数据库访问操作。 </p>
+<div class="example"> <a name="d0e599"></a>
+<p class="title"> <strong>例&nbsp;3.23.&nbsp;DataAccessor.<B style='color:black;background-color:#ffff66'>java</B></strong> </p>
+<pre class="programlisting">public class DataAccessor <br /><br />{<br /><br />	private DataSource dataSource;<br /><br />	<br /><br />	public void setDataSource(DataSource dataSource)<br /><br />	{<br /><br />		this.dataSource = dataSource; <br /><br />	}<br /><br />	<br /><br />	public void save()<br /><br />	{<br /><br />		JdbcTemplate template = new JdbcTemplate(this.dataSource);<br /><br />		template.update(&quot;insert into game (name) values ('test')&quot;);<br /><br />	}<br /><br />}<br /><br />		<br /></pre>
+</div>
+<p> save ()中<B style='color:black;background-color:#ff9999'>代码</B>完全是我们所期望完全样子，不用关系异常处理，不用关系事务管理，设想一下，如果项目 中有100百个这样的业务类，那能节省你不少敲这种重复<B style='color:black;background-color:#ff9999'>代码</B>的时间了，最重要的是我们让某个业务逻辑得 到集中处理，便于日后维护与扩展。 这就是借助AOP的好处。以后面对一个复杂的业务逻辑处理时，别忘了 想想是否能借助面向方面的思想去解决问题。  </p>
+</div>
+</div>
+<div class="chapter">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title"><a name="hibernate"></a>第&nbsp;4&nbsp;章&nbsp;hibernate</h2>
+</div>
+</div>
+</div>
+<div class="sect1">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both;"><a name="d0e609"></a>4.1.&nbsp;概述</h2>
+</div>
+</div>
+</div>
+<p> 对象到关系型数据映射（ORM）是架构中热门的话题，hibernate是诸多优秀的ORM工具之一，使用和受推崇程度较高。 国内也有专门的hibernate网站与论坛，其中人气最高当属 <a target="_top" href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/www.hinernate.org.cn"><em class="citetitle"><span style="color: rgb(0, 51, 153);"><B style='color:black;background-color:#ffff66'>java</B>视线论坛</span></em></a>, 感谢他们的无私与辛勤，以致hibernate官方发行包中多了一份中文指南。  </p>
+</div>
+<div class="sect1">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both;"><a name="d0e618"></a>4.2.&nbsp;为什么使用Hibernate</h2>
+</div>
+</div>
+</div>
+<p> 1、减轻了编写Sql语句工作量 </p>
+<div class="example"> <a name="d0e623"></a>
+<p class="title"> <strong>例&nbsp;4.1.&nbsp;传统的数据库访问<B style='color:black;background-color:#ff9999'>代码</B></strong> </p>
+<pre class="programlisting">insert into table (field_1,field_2,field_n) values('&quot;+ field_value1 +&quot;','&quot; + field_value2 + &quot;','&quot; + field_value3 + &quot;'&quot;)<br /><br />			<br /></pre>
+</div>
+<div class="example"> <a name="d0e628"></a>
+<p class="title"> <strong>例&nbsp;4.2.&nbsp;借助Hibernate后数据库访问<B style='color:black;background-color:#ff9999'>代码</B></strong> </p>
+<pre class="programlisting">session.save(table_Object)<br /><br />			<br /></pre>
+</div>
+<p> 由<B style='color:black;background-color:#ff9999'>代码</B>比较可以看出，数据表可以跟对象一样被操作，这样<B style='color:black;background-color:#ff9999'>代码</B>显得更加简洁，可读性也增强。在实际开发中，这里是业务变动 频繁的地方，保证<B style='color:black;background-color:#ff9999'>代码</B>的可读性和易维护，很有价值。  </p>
+<p> 2、Hibernate封装了数据库访问、事务管理、数据缓存等工作。省去了自己去编写这些<B style='color:black;background-color:#ff9999'>代码</B>。  </p>
+<p> 3、将数据表数据映射到对象中，以对象作为传输媒介，能更好的在系统各层传输数据。  </p>
+</div>
+<div class="sect1">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both;"><a name="d0e639"></a>4.3.&nbsp;快速入门</h2>
+</div>
+</div>
+</div>
+<p> 在体验hibernate前，请首先下载hibernate最新发行包，<a target="_top" href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/www.hibernate.org"><span style="color: rgb(0, 51, 153);">www.hibernate.org</span></a>。 然后将hibernate相关jar包加入项目lib，并引用。（本章节的所有例子均以Mysql数据库为例）  </p>
+<p> 1、建立表：  </p>
+<div class="table"> <a name="d0e648"></a>
+<p class="title"> <strong>表&nbsp;4.1.&nbsp;book</strong> </p>
+<table border="1" summary="book">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1 </td>
+            <td>《Basic》 </td>
+            <td>12.00 </td>
+        </tr>
+        <tr>
+            <td>2 </td>
+            <td>《Pasic》 </td>
+            <td>15.00 </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<p> 2、建立映射文件：  </p>
+<div class="example"> <a name="d0e680"></a>
+<p class="title"> <strong>例&nbsp;4.3.&nbsp;book.hbm.xml</strong> </p>
+<pre class="programlisting">&lt;?xml version=&quot;1.0&quot;?&gt;<br /><br />&lt;!DOCTYPE hibernate-mapping PUBLIC<br /><br />    &quot;-//Hibernate/Hibernate Mapping DTD 2.0//EN&quot;<br /><br />    &quot;http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd&quot; &gt;<br /><br />&lt;hibernate-mapping&gt;<br /><br />&lt;class <br /><br />    name=&quot;com.m5.Book&quot;		<a name="book1.1"></a>(1)<br /><br />    table=&quot;book&quot;			<a name="book1.2"></a>(2)<br /><br />&gt;<br /><br /><br /><br />    &lt;id<br /><br />        name=&quot;id&quot;<br /><br />        type=&quot;<B style='color:black;background-color:#ffff66'>java</B>.lang.Integer&quot;<br /><br />        column=&quot;id&quot;<br /><br />    &gt;<br /><br />        &lt;generator class=&quot;native&quot; /&gt;<br /><br />    &lt;/id&gt;<br /><br /><br /><br />    &lt;property<br /><br />        name=&quot;name&quot;<br /><br />        type=&quot;<B style='color:black;background-color:#ffff66'>java</B>.lang.String&quot;<br /><br />        column=&quot;name&quot;<br /><br />        not-null=&quot;true&quot;<br /><br />        length=&quot;100&quot;<br /><br />    /&gt;<br /><br />    &lt;property<br /><br />        name=&quot;price&quot;<br /><br />        type=&quot;long&quot;<br /><br />        column=&quot;price&quot;<br /><br />        not-null=&quot;true&quot;<br /><br />        length=&quot;10&quot;<br /><br />    /&gt;<br /><br />&lt;/class&gt;<br /><br />&lt;/hibernate-mapping&gt;<br /><br />			<br /></pre>
+</div>
+<div class="calloutlist">
+<table border="0" summary="Callout list">
+    <tbody>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#book1.1"><span style="color: rgb(136, 136, 136);">(1)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			对应的映射类.  			</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#book1.2"><span style="color: rgb(136, 136, 136);">(2)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			对应的表。  			</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<p> 通常增一个表就需要增加类似上面的映射文件。（别紧张，这样的工作可以借助工具生成，后续的内容会介绍）。  </p>
+<p> 3、建立影射对象:  </p>
+<div class="example"> <a name="d0e700"></a>
+<p class="title"> <strong>例&nbsp;4.4.&nbsp;book.<B style='color:black;background-color:#ffff66'>java</B></strong> </p>
+<pre class="programlisting">package com.m5;<br /><br />public class Book <br /><br />{<br /><br />	private int id;<br /><br />	private String name;<br /><br />	private long price;<br /><br />	<br /><br />	public Book()<br /><br />	{<br /><br />		<br /><br />	}<br /><br />	<br /><br />	public int getId()<br /><br />	{<br /><br />		return id;<br /><br />	}<br /><br />	<br /><br />	public void setId(int id)<br /><br />	{<br /><br />		this.id = id;<br /><br />	}<br /><br />	<br /><br />	public String getName()<br /><br />	{<br /><br />		return name;<br /><br />	}<br /><br />	<br /><br />	public void setName(String name)<br /><br />	{<br /><br />		this.name = name;<br /><br />	}<br /><br />	<br /><br />	public long getPrice()<br /><br />	{<br /><br />		return price;	<br /><br />	}<br /><br />	<br /><br />	public void setPrice(long price)<br /><br />	{<br /><br />		this.price = price;	<br /><br />	}<br /><br />}<br /><br /><br /><br />			<br /></pre>
+</div>
+<p> 4、建立hibernate的配置文件  </p>
+<div class="example"> <a name="d0e707"></a>
+<p class="title"> <strong>例&nbsp;4.5.&nbsp;hibernate.cfg.xml</strong> </p>
+<pre class="programlisting">&lt;?xml version='1.0' encoding='gb2312'?&gt;<br /><br />&lt;!DOCTYPE hibernate-configuration<br /><br />    PUBLIC &quot;-//Hibernate/Hibernate Configuration DTD//EN&quot;<br /><br />    &quot;http://hibernate.sourceforge.net/hibernate-configuration-2.0.dtd&quot;&gt;<br /><br />&lt;hibernate-configuration&gt;<br /><br />    &lt;session-factory &gt;<br /><br />        &lt;property name=&quot;hibernate.connection.driver_class&quot;&gt;org.gjt.mm.mysql.Driver&lt;/property&gt;  <a name="config1.1"></a>(1)<br /><br />        &lt;property name=&quot;hibernate.connection.url&quot;&gt;<a name="config1.2"></a>(2)	<br /><br />			jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=GBK <br /><br />		&lt;/property&gt;<br /><br />        &lt;property name=&quot;hibernate.connection.username&quot;&gt;root&lt;/property&gt;<br /><br />        &lt;property name=&quot;hibernate.connection.password&quot;&gt;&lt;/property&gt;<br /><br />        &lt;property name=&quot;show_sql&quot;&gt;true&lt;/property&gt;<br /><br />        &lt;property name=&quot;dialect&quot;&gt;net.sf.hibernate.dialect.MySQLDialect&lt;/property&gt;<br /><br />        &lt;property name=&quot;hibernate.cglib.use_reflection_optimizer&quot;&gt;true&lt;/property&gt;<br /><br />        &lt;property name=&quot;hibernate.query.substitutions&quot;&gt;true 1, false 0&lt;/property&gt;<br /><br />        &lt;property name=&quot;hibernate.query.substitutions&quot;&gt;male 1, female 0&lt;/property&gt;<br /><br />       &lt;mapping resource=&quot;book.hbm.xml&quot;/&gt;	<a name="config1.3"></a>(3)<br /><br />    &lt;/session-factory&gt;<br /><br />&lt;/hibernate-configuration&gt;<br /><br />			<br /></pre>
+</div>
+<div class="calloutlist">
+<table border="0" summary="Callout list">
+    <tbody>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#config1.1"><span style="color: rgb(136, 136, 136);">(1)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			指定数据库驱动类，该文件配置的数据库驱动为mysql,hibernate还支持其它的数据库，更改为对应的驱动类即可。  			</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#config1.2"><span style="color: rgb(136, 136, 136);">(2)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			数据库的连接字符串  			</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#config1.3"><span style="color: rgb(136, 136, 136);">(3)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			指定映射文件，该文件配置的book.hbm.xml表明放在类引用路径的根目录。如web项目的classes目录。  			</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<p> 5、数据库访问<B style='color:black;background-color:#ff9999'>代码</B>  </p>
+<div class="example"> <a name="d0e730"></a>
+<p class="title"> <strong>例&nbsp;4.6.&nbsp;MyHibernate.<B style='color:black;background-color:#ffff66'>java</B></strong> </p>
+<pre class="programlisting">import <B style='color:black;background-color:#ffff66'>java</B>.io.File;<br /><br />import net.sf.hibernate.*;<br /><br />import net.sf.hibernate.cfg.Configuration;<br /><br />public class MyHibernate {<br /><br /><br /><br />	public static void main(String[] args) <br /><br />	{<br /><br />		String name = &quot;<B style='color:black;background-color:#ffff66'>java</B>&quot;;<br /><br />		long price = 10;<br /><br />		try<br /><br />		{<br /><br />			File file = new File(&quot;d:\\hibernate.cfg.xml&quot;);	<br /><br />			Configuration config = new Configuration().configure(file);		<a name="hib1.1"></a>(1)<br /><br />			SessionFactory sessionFactory = config.buildSessionFactory();<br /><br />			Session session = sessionFactory.openSession();<br /><br />			Book book = new Book();						<br /><br />			book.setName(name);<br /><br />			book.setPrice(price);<br /><br />			session.save(book);				<a name="hib1.2"></a>(2)<br /><br />			session.flush();<br /><br />		}<br /><br />		catch(Exception ex)<br /><br />		{<br /><br />			System.out.println(ex.toString());<br /><br />		}<br /><br />	}<br /><br />}<br /><br />			<br /></pre>
+</div>
+<div class="calloutlist">
+<table border="0" summary="Callout list">
+    <tbody>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#hib1.1"><span style="color: rgb(136, 136, 136);">(1)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			导入配置文件。  			</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#hib1.2"><span style="color: rgb(136, 136, 136);">(2)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			将book对象进行数据库持久，即完成insert的功能。  			</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<p> 执 行上面的<B style='color:black;background-color:#ff9999'>代码</B>，book数据表将插入一条数据，这就是ORM。hibernate的使用是不是也没有想象中的复杂？当然 实际开发中不仅仅只会有如此简单的数据表操作，后续章节将逐步深入讲述hibernate的使用。希望该例子能让你 对hibernate有了较直观的理解，至少明白hibernate的映射规则：  </p>
+<div class="itemizedlist">
+<ul>
+    <li>
+    <p> 	首先，通过影射文件设定映射类与数据表之间的结构关联。 	</p>
+    </li>
+    <li>
+    <p> 	然后，装载配置文件 	</p>
+    </li>
+    <li>
+    <p> 	最后执行操作，将数据表数据映射到对象，或将对象数据持久到数据表中。 	</p>
+    </li>
+</ul>
+</div>
+</div>
+<div class="sect1">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both;"><a name="d0e758"></a>4.4.&nbsp;工具的配合使用</h2>
+</div>
+</div>
+</div>
+<p> 在写本节前首先感谢夏昕提供的《hibernate开发指南》，该文中详细的介绍了怎样生成映射文件 和值对象，以及开发中借助工具常用的方法。  </p>
+<div class="sect2">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title"><a name="d0e763"></a>4.4.1.&nbsp;生成影射文件</h3>
+</div>
+</div>
+</div>
+<p> 前 面的例子已经介绍了，hibernate完成持久操作需要一个映射文件和影射类。从映射文件可以看出其结构类似 对数据表的描述，我们只要根据数据表就能够找出生成映射文件的规律。于是我们有了工具来替代手动书写， 从而减少工作量，提高开发效率。下面介绍hibernate官方提供的Middlegen-Hibernate工具。  </p>
+<p> 1、下载Middlegen-Hibernate，www.hibernate.org，解压缩到c:\Middlegen目录。  </p>
+<p> 2、修改Middlegen-Hibernate的配置文件，Middlegen-Hibernate通过ant来构建运行（如果对ant不熟悉请先阅读 ant章节的内容），打开根目录的build.xml文件：  </p>
+<div class="example"> <a name="d0e773"></a>
+<p class="title"> <strong>例&nbsp;4.7.&nbsp;build.xml</strong> </p>
+<pre class="programlisting">&lt;?xml version=&quot;1.0&quot;?&gt;<br /><br />&lt;!DOCTYPE project [<br /><br />    &lt;!ENTITY database SYSTEM &quot;file:./config/database/mysql.xml&quot;&gt;		<a name="build1.1"></a>(1)<br /><br />]&gt;<br /><br />&lt;project name=&quot;Middlegen Hibernate&quot; default=&quot;all&quot; basedir=&quot;.&quot;&gt;<br /><br /><br /><br /><br /><br /> <br /><br />   &lt;property file=&quot;${basedir}/build.properties&quot;/&gt;<br /><br />   &lt;property name=&quot;name&quot; value=&quot;MyTest&quot;/&gt;						<a name="build1.2"></a>(2)<br /><br />	<br /><br />	...<br /><br /><br /><br />   &lt;property name=&quot;build.dir&quot;    value=&quot;c:\sample&quot;/&gt;				<a name="build1.3"></a>(3)<br /><br />  <br /><br />	...<br /><br /><br /><br />	  &lt;hibernate<br /><br />		destination=&quot;${build.gen-src.dir}&quot;<br /><br />		package=&quot;com.m5&quot;							<a name="build1.4"></a>(4)					<br /><br />		genXDocletTags=&quot;true&quot;						<a name="build1.5"></a>(5)		<br /><br />		genIntergratedCompositeKeys=&quot;false&quot;<br /><br />		javaTypeMapper=&quot;middlegen.plugins.hibernate.HibernateJavaTypeMapper&quot;/&gt;<br /><br />	<br /><br />	...	<br /><br /><br /><br />&lt;/project&gt;<br /><br />		<br /></pre>
+</div>
+<div class="calloutlist">
+<table border="0" summary="Callout list">
+    <tbody>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#build1.1"><span style="color: rgb(136, 136, 136);">(1)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			改成对应数据库的映射文件，本例以mysql为例，因此引用mysql.xml。  			</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#build1.2"><span style="color: rgb(136, 136, 136);">(2)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			项目名称。  			</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#build1.3"><span style="color: rgb(136, 136, 136);">(3)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			映射文件的输出路径。  			</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#build1.4"><span style="color: rgb(136, 136, 136);">(4)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			对应的包名。  			</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#build1.5"><span style="color: rgb(136, 136, 136);">(5)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			是否生成XDoclet标签，这里设置成true,以便利用映射文件生成值对象。  			</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<p> 3、找到\config\database目录下对应的数据库配置文件，本文用的是mysql，因此打开mysql.xml  </p>
+<div class="example"> <a name="d0e808"></a>
+<p class="title"> <strong>例&nbsp;4.8.&nbsp;mysql.xml</strong> </p>
+<pre class="programlisting">   &lt;property name=&quot;database.script.file&quot;           value=&quot;${src.dir}/sql/${name}-mysql.sql&quot;/&gt;<br /><br />   &lt;property name=&quot;database.driver.file&quot;           value=&quot;${lib.dir}/mysql-connector-<B style='color:black;background-color:#ffff66'>java</B>-3.0.14-production-bin.jar&quot;/&gt;<br /><br />   &lt;property name=&quot;database.driver.classpath&quot;      value=&quot;${database.driver.file}&quot;/&gt;<br /><br />   &lt;property name=&quot;database.driver&quot;                value=&quot;org.gjt.mm.mysql.Driver&quot;/&gt;<br /><br /> <br /><br />   &lt;property name=&quot;database.url&quot; value=&quot;jdbc:mysql://localhost:3306/test?useUnicode=true&amp;<br /><br />   characterEncoding=GBK&quot;/&gt;		<a name="mysql1.1"></a>(1)					<br /><br />   &lt;property name=&quot;database.userid&quot;  value=&quot;root&quot;/&gt;		<a name="mysql1.2"></a>(2)<br /><br />   &lt;property name=&quot;database.password&quot; value=&quot;&quot;/&gt;			<a name="mysql1.3"></a>(3)<br /><br />   <br /><br />   &lt;property name=&quot;database.schema&quot;                value=&quot;&quot;/&gt;<br /><br />   &lt;property name=&quot;database.catalog&quot;               value=&quot;&quot;/&gt;<br /><br />   &lt;property name=&quot;jboss.datasource.mapping&quot;       value=&quot;mySQL&quot;/&gt;<br /><br />			<br /><br />				<br /></pre>
+</div>
+<div class="calloutlist">
+<table border="0" summary="Callout list">
+    <tbody>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#mysql1.1"><span style="color: rgb(136, 136, 136);">(1)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			修改数据库连接字符串。  			</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#mysql1.1"><span style="color: rgb(136, 136, 136);">(1)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			配置数据库用户名。  			</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#mysql1.1"><span style="color: rgb(136, 136, 136);">(1)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			配置数据库密码。  			</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<p> 4、进入Middlegen-Hibernate,运行ant,将会看到如下图的界面：  </p>
+<p> 根据界面的标题进行各项对应的操作，最后单击&ldquo;Generate&rdquo;按钮即可生成映射文件。如，本文以book表为例，生成 book表的映射文件：  </p>
+<div class="example"> <a name="d0e833"></a>
+<p class="title"> <strong>例&nbsp;4.9.&nbsp;book.hbm.xml</strong> </p>
+<pre class="programlisting">&lt;?xml version=&quot;1.0&quot;?&gt;<br /><br />&lt;!DOCTYPE hibernate-mapping PUBLIC<br /><br />    &quot;-//Hibernate/Hibernate Mapping DTD 2.0//EN&quot;<br /><br />    &quot;http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd&quot; &gt;<br /><br />    <br /><br />&lt;hibernate-mapping&gt;<br /><br />&lt;!-- <br /><br />    Created by the Middlegen Hibernate plugin 2.1<br /><br /><br /><br />    http://boss.bekk.no/boss/middlegen/<br /><br />    http://www.hibernate.org/<br /><br />--&gt;<br /><br /><br /><br />&lt;class <br /><br />    name=&quot;com.m5.Book&quot; <br /><br />    table=&quot;book&quot;<br /><br />&gt;<br /><br />    &lt;meta attribute=&quot;class-description&quot; inherit=&quot;false&quot;&gt;<br /><br />       @hibernate.class<br /><br />        table=&quot;book&quot;<br /><br />    &lt;/meta&gt;<br /><br /><br /><br />    &lt;id<br /><br />        name=&quot;id&quot;<br /><br />        type=&quot;<B style='color:black;background-color:#ffff66'>java</B>.lang.Integer&quot;<br /><br />        column=&quot;id&quot;<br /><br />    &gt;<br /><br />        &lt;meta attribute=&quot;field-description&quot;&gt;<br /><br />           @hibernate.id<br /><br />            generator-class=&quot;assigned&quot;<br /><br />            type=&quot;<B style='color:black;background-color:#ffff66'>java</B>.lang.Integer&quot;<br /><br />            column=&quot;id&quot;<br /><br /><br /><br /><br /><br />        &lt;/meta&gt;<br /><br />        &lt;generator class=&quot;assigned&quot; /&gt;<br /><br />    &lt;/id&gt;<br /><br /><br /><br />    &lt;property<br /><br />        name=&quot;name&quot;<br /><br />        type=&quot;<B style='color:black;background-color:#ffff66'>java</B>.lang.String&quot;<br /><br />        column=&quot;name&quot;<br /><br />        not-null=&quot;true&quot;<br /><br />        length=&quot;100&quot;<br /><br />    &gt;<br /><br />        &lt;meta attribute=&quot;field-description&quot;&gt;<br /><br />           @hibernate.property<br /><br />            column=&quot;name&quot;<br /><br />            length=&quot;100&quot;<br /><br />            not-null=&quot;true&quot;<br /><br />        &lt;/meta&gt;    <br /><br />    &lt;/property&gt;<br /><br />    &lt;property<br /><br />        name=&quot;price&quot;<br /><br />        type=&quot;long&quot;<br /><br />        column=&quot;price&quot;<br /><br />        not-null=&quot;true&quot;<br /><br />        length=&quot;10&quot;<br /><br />    &gt;<br /><br />        &lt;meta attribute=&quot;field-description&quot;&gt;<br /><br />           @hibernate.property<br /><br />            column=&quot;price&quot;<br /><br />            length=&quot;10&quot;<br /><br />            not-null=&quot;true&quot;<br /><br />        &lt;/meta&gt;    <br /><br />    &lt;/property&gt;<br /><br /><br /><br />    &lt;!-- Associations --&gt;<br /><br />  <br /><br />&lt;/class&gt;<br /><br />&lt;/hibernate-mapping&gt;<br /><br /><br /><br />				<br /></pre>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title"><a name="d0e838"></a>4.4.2.&nbsp;生成映射对象</h3>
+</div>
+</div>
+</div>
+<p> 从book.hbm.xml 文件中可以发现有类似这样的<B style='color:black;background-color:#ff9999'>代码</B>&ldquo; @hibernate.class table=&lsquo;book&rsquo;&rdquo;，这就是XDoclet 标签。可以通过Hibernate Extension工具包中的hbm2<B style='color:black;background-color:#ffff66'>java</B>工具来转换这些标签生称对应的值对象。  </p>
+<p> 1、下载Hibernate Extension工具包，<a target="_top" href="http://www.hibernate.org/"><span style="color: rgb(0, 51, 153);">http://www.hibernate.org</span></a>  </p>
+<p> 2、hbm2<B style='color:black;background-color:#ffff66'>java</B>对本地类库引用的配置文件为：tools\bin\setenv.bat  </p>
+<div class="example"> <a name="d0e849"></a>
+<p class="title"> <strong>例&nbsp;4.10.&nbsp;setenv.bat</strong> </p>
+<pre class="programlisting">@echo off<br /><br />rem -------------------------------------------------------------------<br /><br />rem Setup environment for hibernate tools<br /><br />rem -------------------------------------------------------------------<br /><br /><br /><br />set JDBC_DRIVER=C:\jars\mysql-connector-<B style='color:black;background-color:#ffff66'>java</B>-3.0.14-production-bin.jar	<a name="setenv1.1"></a>(1)<br /><br />set HIBERNATE_HOME=C:\hibernate-2.1				<a name="setenv1.2"></a>(2)<br /><br /><br /><br />set HIBERNATETOOLS_HOME=%~dp0..<br /><br />echo HIBERNATETOOLS_HOME set to %HIBERNATETOOLS_HOME%<br /><br /><br /><br />if &quot;%HIBERNATE_HOME%&quot; == &quot;&quot; goto noHIBERNATEHome<br /><br /><br /><br />set CORELIB=%HIBERNATE_HOME%\lib<br /><br />set LIB=%HIBERNATETOOLS_HOME%\lib<br /><br />set CP=%CLASSPATH%;%JDBC_DRIVER%;%HIBERNATE_HOME%\hibernate2.jar;%CORELIB%\commons-logging-1.0.4.jar;<br /><br />%CORELIB%\commons-lang-1.0.1.jar;%CORELIB%\cglib-full-2.0.2.jar;%CORELIB%\dom4j-1.4.jar;<br /><br />%CORELIB%\odmg-3.0.jar;%CORELIB%\xml-apis.jar;%CORELIB%\xerces-2.4.0.jar;%CORELIB%\xalan-2.4.0.jar;<br /><br />%LIB%\jdom.jar;%CORELIB%\commons-collections-2.1.1.jar;%LIB%\..\hibernate-tools.jar		<a name="setenv1.3"></a>(3)		<br /><br /><br /><br />if not &quot;%HIBERNATE_HOME%&quot; == &quot;&quot; goto end<br /><br /><br /><br />:noHIBERNATEHome<br /><br />echo HIBERNATE_HOME is not set. Please set HIBERNATE_HOME.<br /><br />goto end<br /><br /><br /><br />:end<br /><br />				<br /></pre>
+</div>
+<div class="calloutlist">
+<table border="0" summary="Callout list">
+    <tbody>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#setenv1.1"><span style="color: rgb(136, 136, 136);">(1)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			对应到本地JDBC_DRIVER jar包路径。  			</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#setenv1.2"><span style="color: rgb(136, 136, 136);">(2)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			hibernate根目录。  			</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#setenv1.3"><span style="color: rgb(136, 136, 136);">(3)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			对hibernate中jar包的引用，hibernate因版本不同而jar包的名字也会有可能不同，因此 请核对。  			</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<p> 3、 进入hbm2<B style='color:black;background-color:#ffff66'>java</B>.bat所在目录，运行 hbm2<B style='color:black;background-color:#ffff66'>java</B> 影射文件路径 --output=输出值对象路径。如： hbm2<B style='color:black;background-color:#ffff66'>java</B> C:\sample\gen-src\com\m5\Book.hbm.xml --output=C:\sample\classes。在 C:\sample\classes目录下生成以包名组织的文件\com\m5\Book.<B style='color:black;background-color:#ffff66'>java</B>  </p>
+<div class="example"> <a name="d0e872"></a>
+<p class="title"> <strong>例&nbsp;4.11.&nbsp;Book</strong> </p>
+<pre class="programlisting">package com.m5;<br /><br /><br /><br />import <B style='color:black;background-color:#ffff66'>java</B>.io.Serializable;<br /><br />import org.apache.commons.lang.builder.ToStringBuilder;<br /><br /><br /><br /><br /><br />/** <br /><br /> <br /><br />*        @hibernate.class<br /><br /> <br /><br />*         table=&quot;book&quot;<br /><br /> <br /><br /><br /><br />*/<br /><br />public class Book implements Serializable {<br /><br /><br /><br />    /** identifier field */<br /><br />    private Integer id;<br /><br /><br /><br />    /** persistent field */<br /><br />    private String name;<br /><br /><br /><br />    /** persistent field */<br /><br />    private long price;<br /><br /><br /><br />    /** full constructor */<br /><br />    public Book(Integer id, String name, long price) {<br /><br />        this.id = id;<br /><br />        this.name = name;<br /><br />        this.price = price;<br /><br />    }<br /><br /><br /><br />    /** default constructor */<br /><br />    public Book() {<br /><br />    }<br /><br /><br /><br />    /** <br /><br />    <br /><br />	*            @hibernate.id<br /><br />    <br /><br />	*             generator-class=&quot;native&quot;<br /><br />    <br /><br />	*             type=&quot;<B style='color:black;background-color:#ffff66'>java</B>.lang.Integer&quot;<br /><br />     <br /><br />	*             column=&quot;id&quot;<br /><br />     <br /><br />	*/<br /><br />    public Integer getId() {<br /><br />        return this.id;<br /><br />    }<br /><br /><br /><br />    public void setId(Integer id) {<br /><br />        this.id = id;<br /><br />    }<br /><br /><br /><br />    /**<br /><br />	*            @hibernate.property<br /><br />     <br /><br />	*             column=&quot;name&quot;<br /><br />     <br /><br />	*             length=&quot;100&quot;<br /><br />     <br /><br />	*             not-null=&quot;true&quot;<br /><br />     <br /><br />	*/<br /><br />    public String getName() {<br /><br />        return this.name;<br /><br />    }<br /><br /><br /><br />    public void setName(String name) {<br /><br />        this.name = name;<br /><br />    }<br /><br /><br /><br />    /** <br /><br /><br /><br />	*            @hibernate.property<br /><br />     <br /><br />	*             column=&quot;price&quot;<br /><br />     <br /><br />	*             length=&quot;10&quot;<br /><br />     <br /><br />	*             not-null=&quot;true&quot;<br /><br />     <br /><br />	*/<br /><br />    public long getPrice() {<br /><br />        return this.price;<br /><br />    }<br /><br /><br /><br />    public void setPrice(long price) {<br /><br />        this.price = price;<br /><br />    }<br /><br /><br /><br />    public String toString() {<br /><br />        return new ToStringBuilder(this)<br /><br />            .append(&quot;id&quot;, getId())<br /><br />            .toString();<br /><br />    }<br /><br /><br /><br />}<br /><br />				<br /></pre>
+</div>
+</div>
+<div class="sect2">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title"><a name="d0e877"></a>4.4.3.&nbsp;根据映射对象生成映射文件</h3>
+</div>
+</div>
+</div>
+<p> 上 节提到了用hbm2<B style='color:black;background-color:#ffff66'>java</B>将影射文件生成映射对象，依靠xdoclet标签完成。xdoclet也是依靠此标签完成与影射文件的 同步。这样实际开发中会带来很大的便利，我们只要维护<B style='color:black;background-color:#ff9999'>代码</B>，而不需要手动维护与影射文件的同步。xdoclet标签 可以由上节讲的方法去转化得来，当然如果熟悉了xdoclet标签，手动完成即可。xdoclet的使用很方便，可以加入我 们已有的ant任务中（如果尚未了解Ant，请参看相关章节）。  </p>
+<p> 1、下载<a target="_top" href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/%EF%BC%88http://xdoclet.sourceforge.net/xdoclet"><em class="citetitle"><span style="color: rgb(0, 51, 153);">xdoclet</span></em></a>。  </p>
+<p> 2、建立构建文件  </p>
+<div class="example"> <a name="d0e890"></a>
+<p class="title"> <strong>例&nbsp;4.12.&nbsp;build.xml</strong> </p>
+<pre class="programlisting">&lt;?xml version=&quot;1.0&quot; encoding=&quot;ISO-8859-1&quot;?&gt;<br /><br />&lt;project name=&quot;XDoclet Examples&quot; default=&quot;hibernate&quot; basedir=&quot;.&quot;&gt;<br /><br />    &lt;property name=&quot;xdoclet.root.dir&quot; value=&quot;c:/xdoclet-1.2.2&quot;/&gt;<br /><br />    &lt;property name=&quot;xdoclet.lib.dir&quot; value=&quot;${xdoclet.root.dir}/lib&quot;/&gt;<br /><br />	&lt;property name=&quot;samples.gen-src.dir&quot; value=&quot;./gen-src&quot;/&gt;<br /><br /><br /><br />    &lt;path id=&quot;classpath&quot;&gt;<br /><br />        &lt;fileset dir=&quot;${xdoclet.lib.dir}&quot;&gt;<br /><br />            &lt;include name=&quot;*.jar&quot;/&gt;<br /><br />        &lt;/fileset&gt;<br /><br />    &lt;/path&gt;<br /><br />     &lt;taskdef<br /><br />        name=&quot;hibernatedoclet&quot;<br /><br />        classname=&quot;xdoclet.modules.hibernate.HibernateDocletTask&quot;<br /><br />        classpathref=&quot;classpath&quot;<br /><br />        /&gt;<br /><br />    &lt;target name=&quot;hibernate&quot; description=&quot;Generate mapping documents&quot;&gt;<br /><br /><br /><br />        &lt;echo&gt;+---------------------------------------------------+&lt;/echo&gt;<br /><br />        &lt;echo&gt;|                                                   |&lt;/echo&gt;<br /><br />        &lt;echo&gt;| R U N N I N G   H I B E R N A T E D O C L E T     |&lt;/echo&gt;<br /><br />        &lt;echo&gt;|                                                   |&lt;/echo&gt;<br /><br />        &lt;echo&gt;+---------------------------------------------------+&lt;/echo&gt;<br /><br /><br /><br />        &lt;hibernatedoclet<br /><br />            destdir=&quot;${samples.gen-src.dir}&quot;<br /><br />            excludedtags=&quot;@version,@author,@todo,@see&quot;<br /><br />            addedtags=&quot;@xdoclet-generated at ${TODAY},@copyright The XDoclet Team,@author XDoclet,@version ${version}&quot;<br /><br />            force=&quot;false&quot;<br /><br />            verbose=&quot;true&quot;&gt;<br /><br /><br /><br />            &lt;fileset dir=&quot;${samples.gen-src.dir}&quot;&gt;<br /><br />                &lt;include name=&quot;com/m5/Book.<B style='color:black;background-color:#ffff66'>java</B>&quot;/&gt;<br /><br />            &lt;/fileset&gt;<br /><br />	        &lt;hibernate version=&quot;2.1&quot;/&gt;<br /><br /><br /><br />        &lt;/hibernatedoclet&gt;<br /><br />    &lt;/target&gt;<br /><br />&lt;/project&gt;<br /><br /><br /><br />				<br /></pre>
+</div>
+<p> build.xml中的目录结构均为笔者环境的，使用时请修改成对应的目录。  </p>
+<p> 3、运行ant，在输出目录生成对应的影射文件。  </p>
+<p> 建 议：如果你觉得hibernate的映射文件放在一个xml文件更为方便，可以通过修改xdoclet的源码， 使其生成的映射文件全部放置在制定的xml文件中，这样生成新的映射文件时不需要去维护hibernate 的配置文件中对影射文件的引用，当然也有弊端，多人开发时，关于版本控制冲突，以及可读性降低。 以上建议仅供参考。  </p>
+</div>
+</div>
+<div class="sect1">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both;"><a name="d0e901"></a>4.5.&nbsp;专用词</h2>
+</div>
+</div>
+</div>
+<p> 在讲述关联关系之前，有必要解释下一些专用词的含义  </p>
+<div class="sect2">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title"><a name="d0e906"></a>4.5.1.&nbsp;cascade(级联)</h3>
+</div>
+</div>
+</div>
+<p> 级 联在编程中经常接触，写过触发器来修改或删除关联表相记录的一定会知道，触发器的作用是当 主控表信息改变时，用来保证其关联表中数据同步更新。比如一个employee存放职员信息，一个 timecard存放职员的考勤信息，当从职员表中删除一个职员时，timecard表中对应的考勤信息 已经没有意义，因为其所属的职员已不存在，如果继续留在timecard表中就成了没用的也称脏数据。 理想的做法是在删除职员信息的同时将该职员信息对应的考勤信息也删除。在hibernate中如果要达到这个 效果只需要设置cascade属性值即可。当然是否进行级联关系要根据实际情况慎重考虑。  </p>
+</div>
+<div class="sect2">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title"><a name="d0e911"></a>4.5.2.&nbsp;inverse(反转)</h3>
+</div>
+</div>
+</div>
+<p> 表 与表之间的关联，我们通常将主动发起关联请求的表称为主动表，被关联的表成为被动表，hibernate中 将此概念冠以在表所对应的对象上，因此将主动发起关联请求的对象称为主动对象或主控对象，被关联的对象 称为被动对象或被控对象。hibernate由主动对象维护关联关系，在实际中经常碰到一个对象的关联角色并不 那么明确，如双向关联，这时inverse值用来标明由谁来维护关联关系。设为true时反转控制角色，即由该 属性关联的对象维护关联关系。  </p>
+</div>
+<div class="sect2">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title"><a name="d0e916"></a>4.5.3.&nbsp;Lazy Loading(延时装载)</h3>
+</div>
+</div>
+</div>
+<p> 延 时装载主要是从性能方面的考虑，对于 &ldquo;select coulmn1 from table&rdquo;和&ldquo;select * from table&rdquo;语句 的性能比较，相信大家不会有异议，第一条的执行性能要高于第二条，当然这个表中字段存储的信息应该能充分 体现出优越性为前提，比如说一个employee表中存放有，职员姓名、年龄、照片等，如果只需要查看姓名和年龄， 那么照片信息就不应该附带出来。表与表之间的关联也应如此，如果不需要用到关联表中的数据就不应该去进行关 联操作，或在需要的时候才启动关联操作。让数据在最恰当的时候才出现，这就是延时装载。  </p>
+</div>
+</div>
+<div class="sect1">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both;"><a name="d0e921"></a>4.6.&nbsp;一对一表关联操作</h2>
+</div>
+</div>
+</div>
+<p> <a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#simple"><span style="color: rgb(136, 136, 136);">前面章节的例子</span></a>是单表的操作，实际开发中表之间的关联操作是必不可少的。 本章以书籍与出版社之间的关联为例,来讲述一对一的关联操作。  </p>
+<p> 一对一关系在hibernate中以one-to-one表示，本例中以Book类为主动连接方，因此在Book.<B style='color:black;background-color:#ffff66'>java</B>中加入 关联Publish的属性。一对一关联在hibernate中有两种方式:  </p>
+<div class="itemizedlist">
+<ul>
+    <li>
+    <p> 	主键关联:不需借助外部字段，直接通过两个表的主键进行关联，因此必须保证两个表的主键值一 致，这通常通常借助foreign标识符生成器策略来完成。简单来说，这种情况就是两个表的主键 相等的内连接。  	</p>
+    </li>
+    <li>
+    <p> 	唯一外键关联：在主动方加入外键进行关联，这样主动方与被动方的影射关系实际上就成了多对一的关联。  	</p>
+    </li>
+</ul>
+</div>
+<p> 为方便查询，在此描述one-to-one节点的属性含义（也可参考hibernate的官方指导手册，有中英文对照很方便）  </p>
+<pre class="programlisting">&lt;one-to-one<br /><br />        name=&quot;propertyName&quot;			<a name="one-to-one1.1"></a>(1)			       <br /><br />        class=&quot;ClassName&quot;			<a name="one-to-one1.2"></a>(2)<br /><br />        cascade=&quot;all|none|save-update|delete&quot;	<a name="one-to-one1.3"></a>(3)<br /><br />        constrained=&quot;true|false&quot;		<a name="one-to-one1.4"></a>(4)<br /><br />        outer-join=&quot;true|false|auto&quot;		<a name="one-to-one1.5"></a>(5)<br /><br />        property-ref=&quot;propertyNameFromAssociatedClass&quot;		<a name="one-to-one1.6"></a>(6)<br /><br />        access=&quot;field|property|ClassName&quot;		<a name="one-to-one1.7"></a>(7)<br /><br />/&gt;<br /><br />		<br /></pre>
+<div class="calloutlist">
+<table border="0" summary="Callout list">
+    <tbody>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#one-to-one1.1"><span style="color: rgb(136, 136, 136);">(1)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			name：映射属性的名称。  			</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#one-to-one1.2"><span style="color: rgb(136, 136, 136);">(2)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			class（可选）：被关联的类的名称，如果省略此属性，则通过反射机制得到与此属性名称一致的类。  			</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#one-to-one1.3"><span style="color: rgb(136, 136, 136);">(3)</span></a> </td>
+            <td valign="top" align="left">
+            <p> cascade（可选）：表明操作是否从父对象级联到被关联的对象，all，为所有变更动作都进行级联操作；none，为 从来不作级联操作；save-update，为insert,update动作时作级联操作。delete，为delete动作时作级联操作。 </p>
+            </td>
+        </tr>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#one-to-one1.4"><span style="color: rgb(136, 136, 136);">(4)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			constrained（可选）：表明该类对应的表对应的数据库表，和被关联的对象所对应的数据库表之间，通过一个外键 引用对主键进行约束。这个选项影响save()和delete()在级联执行时的先后顺序。  			</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#one-to-one1.5"><span style="color: rgb(136, 136, 136);">(5)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			outer-join（可选）：是否允许外连接抓取；默认是auto,关联对象没有采用proxy机制时使用外联接。  			</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#one-to-one1.6"><span style="color: rgb(136, 136, 136);">(6)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			property-ref（可选）：指定关联类的一个属性，这个属性将会和本外键相对应。默认为关联类的主键。  			</p>
+            </td>
+        </tr>
+        <tr>
+            <td width="5%" valign="top" align="left"><a href="file:///F:/%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9/j2ee/j2ee/html_single/index.html#one-to-one1.7"><span style="color: rgb(136, 136, 136);">(7)</span></a> </td>
+            <td valign="top" align="left">
+            <p> 			access（可选）：Hibernate用来访问属性的策略，默认是property.  			</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<p> 首先来看通过主键进行一对一的关联操作：  </p>
+<div class="table"> <a name="d0e980"></a>
+<p class="title"> <strong>表&nbsp;4.2.&nbsp;book</strong> </p>
+<table border="1" summary="book">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1 </td>
+            <td>《Basic》 </td>
+            <td>12.00 </td>
+        </tr>
+        <tr>
+            <td>2 </td>
+            <td>《Pasic》 </td>
+            <td>15.00 </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<div class="table"> <a name="d0e1010"></a>
+<p class="title"> <strong>表&nbsp;4.3.&nbsp;Publish</strong> </p>
+<table border="1" summary="Publish">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>address</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1 </td>
+            <td>机械出版社 </td>
+            <td>北京朝阳区 </td>
+        </tr>
+        <tr>
+            <td>2 </td>
+            <td>教育出版社 </td>
+            <td>北京海底区 </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<p> 1、建立映射文件 </p>
+<div class="example"> <a name="d0e1042"></a>
+<p class="title"> <strong>例&nbsp;4.13.&nbsp;hibernate_map.xml</strong> </p>
+<pre class="programlisting">&lt;hibernate-mapping&gt;<br /><br />	&lt;!--one to one--&gt;<br /><br />     &lt;class name=&quot;hibernate.relation.oneToOne.Book&quot; table=&quot;Book&quot;&gt;<br /><br />		&lt;id name=&quot;id&quot; column=&quot;id&quot; type=&quot;<B style='color:black;background-color:#ffff66'>java</B>.lang.Integer&quot;&gt;<br /><br />			&lt;generator class=&quot;foreign&quot;&gt;<br /><br />				&lt;param name=&quot;property&quot;&gt;publish&lt;/param&gt;<br /><br />			&lt;/generator&gt;<br /><br />		&lt;/id&gt;<br /><br />		&lt;property name=&quot;name&quot; type=&quot;<B style='color:black;background-color:#ffff66'>java</B>.lang.String&quot; column=&quot;name&quot; length=&quot;100&quot; not-null=&quot;true&quot; /&gt;<br /><br />		&lt;property name=&quot;price&quot; type=&quot;long&quot; column=&quot;price&quot; length=&quot;100&quot; not-null=&quot;true&quot; /&gt;<br /><br />		&lt;one-to-one name=&quot;publish&quot; class=&quot;hibernate.relation.oneToOne.Publish&quot; cascade=&quot;none&quot; outer-join=&quot;auto&quot; constrained=&quot;false&quot; /&gt;<br /><br />	 &lt;/class&gt;<br /><br />	<br /><br />	 &lt;class name=&quot;hibernate.relation.oneToOne.Publish&quot; table=&quot;Publish&quot;&gt;<br /><br />		&lt;id name=&quot;id&quot; column=&quot;id&quot; type=&quot;<B style='color:black;background-color:#ffff66'>java</B>.lang.Integer&quot;&gt;<br /><br />			&lt;generator class=&quot;native&quot;&gt;&lt;/generator&gt;<br /><br />		&lt;/id&gt;<br /><br />		&lt;property name=&quot;name&quot; type=&quot;<B style='color:black;background-color:#ffff66'>java</B>.lang.String&quot; column=&quot;name&quot; length=&quot;100&quot; not-null=&quot;true&quot; /&gt;<br /><br />		&lt;property name=&quot;address&quot; type=&quot;<B style='color:black;background-color:#ffff66'>java</B>.lang.String&quot; column=&quot;address&quot; length=&quot;100&quot; not-null=&quot;true&quot; /&gt;<br /><br />	 &lt;/class&gt;<br /><br />&lt;/hibernate-mapping&gt;<br /><br /><br /><br />			<br /></pre>
+</div>
+<p> 2、建立映射类 </p>
+<div class="example"> <a name="d0e1049"></a>
+<p class="title"> <strong>例&nbsp;4.14.&nbsp;Book.<B style='color:black;background-color:#ffff66'>java</B></strong> </p>
+<pre class="programlisting">package hibernate.relation.oneToOne;<br /><br />import <B style='color:black;background-color:#ffff66'>java</B>.io.Serializable;<br /><br />import org.apache.commons.lang.builder.ToStringBuilder;<br /><br />public class Book implements Serializable {<br /><br /><br /><br /><br /><br />    private Integer id;<br /><br />    private String name;<br /><br />    private long price;<br /><br />    private Publish publish = null;<br /><br /><br /><br />    public Book(Integer id, String name, long price) {<br /><br />        this.id = id;<br /><br />        this.name = name;<br /><br />        this.price = price;<br /><br />    }<br /><br /><br /><br />    public Book() {<br /><br />    }<br /><br /><br /><br />    public Integer getId() {<br /><br />        return this.id;<br /><br />    }<br /><br /><br /><br />    public void setId(Integer id) {<br /><br />        this.id = id;<br /><br />    }<br /><br /><br /><br />  <br /><br />    public String getName() {<br /><br />        return this.name;<br /><br />    }<br /><br /><br /><br />    public void setName(String name) {<br /><br />        this.name = name;<br /><br />    }<br /><br />   <br /><br />    public long getPrice() {<br /><br />        return this.price;<br /><br />    }<br /><br /><br /><br />    public void setPrice(long price) {<br /><br />        this.price = price;<br /><br />    }<br /><br />    <br /><br />  <br /><br />    public Publish getPublish()<br /><br />    {<br /><br />    	return this.publish;<br /><br />    }<br /><br />    <br /><br />    public void setPublish(Publish publish)<br /><br />    {<br /><br />    	this.publish = publish;<br /><br />    }<br /><br /><br /><br />    public String toString() {<br /><br />        return new ToStringBuilder(this)<br /><br />            .append(&quot;id&quot;, getId())<br /><br />            .toString();<br /><br />    }<br /><br /><br /><br />}<br /><br />			<br /></pre>
+</div>
+<div class="example"> <a name="d0e1054"></a>
+<p class="title"> <strong>例&nbsp;4.15.&nbsp;Publish.<B style='color:black;background-color:#ffff66'>java</B></strong> </p>
+<pre class="programlisting">package hibernate.relation.oneToOne;<br /><br /><br /><br />import <B style='color:black;background-color:#ffff66'>java</B>.io.Serializable;<br /><br />import org.apache.commons.lang.builder.ToStringBuilder;<br /><br />public class Publish implements Serializable {<br /><br />    private Integer id;<br /><br />    private String name;<br /><br />    private String address;<br /><br />    public Publish(Integer id, String name, String address) {<br /><br />        this.id = id;<br /><br />        this.name = name;<br /><br />        this.address = address;<br /><br />    }<br /><br />    public Publish() {<br /><br />    }<br /><br /><br /><br />    public Integer getId() {<br /><br />        return this.id;<br /><br />    }<br /><br /><br /><br />    public void setId(Integer id) {<br /><br />        this.id = id;<br /><br />    }<br /><br />    public String getName() {<br /><br />        return this.name;<br /><br />    }<br /><br /><br /><br />    public void setName(String name) {<br /><br />        this.name = name;<br /><br />    }<br /><br />    public String getAddress() {<br /><br />        return this.address;<br /><br />    }<br /><br />    public void setAddress(String address) {<br /><br />        this.address = address;<br /><br />    }<br /><br />    public String toString() {<br /><br />        return new ToStringBuilder(this)<br /><br />            .append(&quot;id&quot;, getId())<br /><br />            .toString();<br /><br />    }<br /><br />}<br /><br />			<br /></pre>
+</div>
+<p> 3、演示<B style='color:black;background-color:#ff9999'>代码</B> </p>
+<div class="example"> <a name="d0e1061"></a>
+<p class="title"> <strong>例&nbsp;4.16.&nbsp;BookTest.<B style='color:black;background-color:#ffff66'>java</B></strong> </p>
+<pre class="programlisting">public class BookTest extends TestCase <br /><br />{<br /><br />	private String hql;<br /><br />	private SessionFactory sessionFactory;<br /><br />	private Session session;<br /><br />	private List list;<br /><br />	<br /><br />	protected void setUp() throws Exception <br /><br />	{<br /><br />		File file = new File(&quot;d:\\hibernate.cfg.xml&quot;);<br /><br />		Configuration config = new Configuration().configure(file);<br /><br />		sessionFactory = config.buildSessionFactory();<br /><br />		session = sessionFactory.openSession();<br /><br />	}<br /><br />	<br /><br />	public void testSave() throws HibernateException			<br /><br />	{<br /><br />		Book book = new Book();<br /><br />		book.setName(&quot;《Basic》&quot;);<br /><br />		book.setPrice(Long.parseLong(&quot;12&quot;));<br /><br />		Publish publish = new Publish();<br /><br />		publish.setName(&quot;机械出版社&quot;);<br /><br />		publish.setAddress(&quot;北京朝阳&quot;);<br /><br />		book.setPublish(publish);<br /><br />		session.save(book);<br /><br />		session.flush();<br /><br />	}<br /><br />		<br /><br />	public void tesQuery() throws HibernateException			<br /><br />	{<br /><br />		String publishName = null;<br /><br />		hql = &quot;from hibernate.relation.oneToOne.Book as book where book.id = 1&quot;;<br /><br />		List books = session.find(hql);<br /><br />		for ( int i=0; i &lt; books.size(); i++ )<br /><br />		{<br /><br />			Book book = (Book)books.get(i);<br /><br />			publishName = book.getPublish().getName();<br /><br />			System.out.println(&quot;对应的出版社为：&quot; + publishName);<br /><br />		}<br /><br />	}<br /><br />}<br /><br />			<br /></pre>
+</div>
+<p> 插入时将执行如下语句：  </p>
+<p> Hibernate: insert into Publish (name, address) values (?, ?)  </p>
+<p> Hibernate: insert into Book (name, price, id) values (?, ?, ?)  </p>
+<p> 这是因为我们在Book映射文件中设置了其id值为外键生成策略，所以Hibernate会先插入 Publish,然后用publish的主键值填充Book的主键值，以保证Publish与Book表的主键 值相等。  </p>
+<p> 执行查询语句将执行如下语句：  </p>
+<p> Hibernate: select book0_.id as id, book0_.name as name, book0_.price as price from Book book0_ where (book0_.id=39 )  </p>
+<p> Hibernate: select publish0_.id as id0_, publish0_.name as name0_, publish0_.address as address0_ from Publish publish0_ where publish0_.id=?  </p>
+<p> 以上示例通过Book、publish两个表的主键形成关联，接下来看如何通过外键关联完成该例子。  </p>
+</div>
+<div class="sect1">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both;"><a name="d0e1082"></a>4.7.&nbsp;多对一表关联操作</h2>
+</div>
+</div>
+</div>
+<p> 我们在Book表中添加publishId的外键，用来与publish表形成关联。  </p>
+<div class="table"> <a name="d0e1087"></a>
+<p class="title"> <strong>表&nbsp;4.4.&nbsp;book</strong> </p>
+<table border="1" summary="book">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>publishId</th>
+            <th>name</th>
+            <th>price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1 </td>
+            <td>1 </td>
+            <td>《Basic》 </td>
+            <td>12.00 </td>
+        </tr>
+        <tr>
+            <td>2 </td>
+            <td>2 </td>
+            <td>《Pasic》 </td>
+            <td>15.00 </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<p> 1、建立映射文件 </p>
+<div class="example"> <a name="d0e1125"></a>
+<p class="title"> <strong>例&nbsp;4.17.&nbsp;hibernate_map.xml</strong> </p>
+<pre class="programlisting">&lt;hibernate-mapping&gt;<br /><br />	&lt;!--one to one--&gt;<br /><br />     &lt;class name=&quot;hibernate.relation.oneToOne.Book&quot; table=&quot;Book&quot;&gt;<br /><br />		&lt;id name=&quot;id&quot; column=&quot;id&quot; type=&quot;<B style='color:black;background-color:#ffff66'>java</B>.lang.Integer&quot;&gt;<br /><br />			&lt;generator class=&quot;native&quot; /&gt;<br /><br />		&lt;/id&gt;<br /><br />		&lt;property name=&quot;name&quot; type=&quot;<B style='color:black;background-color:#ffff66'>java</B>.lang.String&quot; column=&quot;name&quot; length=&quot;100&quot; not-null=&quot;true&quot; /&gt;<br /><br />		&lt;property name=&quot;price&quot; type=&quot;long&quot; column=&quot;price&quot; length=&quot;100&quot; not-null=&quot;true&quot; /&gt;<br /><br />		&lt;many-to-one name=&quot;publish&quot; class=&quot;hibernate.relation.oneToOne.Publish&quot; cascade=&quot;all&quot; outer-join=&quot;auto&quot;/&gt;<br /><br />	 &lt;/class&gt;<br /><br />	...<br /><br />&lt;/hibernate-mapping&gt;<br /><br /><br /><br />			<br /></pre>
+</div>
+<p> 只 将book映射文件的one-to-one修改成many-to-one，其他的保持不变，执行BookTest.<B style='color:black;background-color:#ffff66'>java</B>文件，将看到 与one-to-one同样的效果。（注意：cascade=&quot;all&quot;，这里设置级联是必须的，因为在插入book时应该先得到 publishid的值。）  </p>
+<p> 上面的例子都是以Book为主动关联方进行操作，如果需要在操作Publish时获取关联的Book对象， 我们需要在 Publish中加入与Book的关联映射，这样Book与Publish之间就形成了双向关联，这里假设Publish与Book是 一对多的关系，具体操作请看下一章节。  </p>
+</div>
+<div class="sect1">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both;"><a name="d0e1134"></a>4.8.&nbsp;一对多表关联操作</h2>
+</div>
+</div>
+</div>
+<p> 1、在publish映射中加入一对多关系  </p>
+<div class="example"> <a name="d0e1139"></a>
+<p class="title"> <strong>例&nbsp;4.18.&nbsp;hibernate_map.xml</strong> </p>
+<pre class="programlisting">...<br /><br />&lt;class name=&quot;hibernate.relation.oneToOne.Publish&quot; table=&quot;Publish&quot;&gt;<br /><br />		&lt;id name=&quot;id&quot; column=&quot;id&quot; type=&quot;<B style='color:black;background-color:#ffff66'>java</B>.lang.Integer&quot;&gt;<br /><br />			&lt;generator class=&quot;native&quot;&gt;&lt;/generator&gt;<br /><br />		&lt;/id&gt;<br /><br />		&lt;property name=&quot;name&quot; type=&quot;<B style='color:black;background-color:#ffff66'>java</B>.lang.String&quot; column=&quot;name&quot; length=&quot;100&quot; not-null=&quot;true&quot; /&gt;<br /><br />		&lt;property name=&quot;address&quot; type=&quot;<B style='color:black;background-color:#ffff66'>java</B>.lang.String&quot; column=&quot;address&quot; length=&quot;100&quot; not-null=&quot;true&quot; /&gt;<br /><br />		&lt;set name=&quot;book&quot; table=&quot;book&quot; lazy=&quot;false&quot; cascade=&quot;none&quot; sort=&quot;unsorted&quot; inverse=&quot;false&quot;&gt;<br /><br />			&lt;key column=&quot;publishId&quot; /&gt;<br /><br />			&lt;one-to-many class=&quot;hibernate.relation.manyToOne.Book&quot; /&gt;<br /><br />		&lt;/set&gt;<br /><br />&lt;/class&gt;<br /><br /><br /><br />			<br /></pre>
+</div>
+<p> 2、在Publish映射类中加入book属性  </p>
+<div class="example"> <a name="d0e1146"></a>
+<p class="title"> <strong>例&nbsp;4.19.&nbsp;Publish.<B style='color:black;background-color:#ffff66'>java</B></strong> </p>
+<pre class="programlisting">private Set book = new HashSet();<br /><br />public Set getBook()<br /><br />{<br /><br />	return book;<br /><br />}<br /><br />public void setBook(Set book)<br /><br />{<br /><br />	this.book = book;<br /><br />}<br /><br />			<br /></pre>
+</div>
+<p> 这样就能在操作Publish时也能获取到与之关联的Book信息，看测试<B style='color:black;background-color:#ff9999'>代码</B>：  </p>
+<div class="example"> <a name="d0e1153"></a>
+<p class="title"> <strong>例&nbsp;4.20.&nbsp;Publish.<B style='color:black;background-color:#ffff66'>java</B></strong> </p>
+<pre class="programlisting">Publish publish = (Publish)session.get(Publish.class,Integer.valueOf(1));<br /><br />Set books = publish.getBook();<br /><br />for (Iterator it = books.iterator(); it.hasNext();)<br /><br />{<br /><br />	Book book = (Book)it.next();<br /><br />	System.out.println(&quot;对应的书籍为：&quot; + book.getName());<br /><br /> }				<br /><br />			<br /></pre>
+</div>
+<p> 执行上面的<B style='color:black;background-color:#ff9999'>代码</B>显示的结果为：  </p>
+<div class="itemizedlist">
+<ul>
+    <li>
+    <p> 	Hibernate: 	select publish0_.id as id0_, publish0_.name as name0_, 	publish0_.address as address0_ from Publish publish0_ where 	publish0_.id=?  	</p>
+    </li>
+    <li>
+    <p> 	Hibernate: select book0_.id as id__, 	book0_.publishId as publishId__, book0_.id as id0_, book0_.name as 	name0_, book0_.price as price0_, book0_.publishId as publishId0_ from 	Book book0_ where book0_.publishId=?  	</p>
+    </li>
+    <li>
+    <p> 	对应的书籍为：《Basic》  	</p>
+    </li>
+</ul>
+</div>
+</div>
+<div class="sect1">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title" style="clear: both;"><a name="many_to_many"></a>4.9.&nbsp;多对多表关联操作</h2>
+</div>
+</div>
+</div>
+<p> 多 对多的关联在实际的开发中也是经常被用到的，假设现有一个员工表来存放所有员工的信息， 一个福利项目表存放福利明细，要记录每个员工享有的福利明细，同一福利项，多个员工均可享有， 一个员工也可以享有多项福利，这就形成了多对多的关联，在这里我们加入一个福利明细表充当 关联其两者的中间表（多对多的关联一般都是通过中间表进行关联的）。看具体实现：  </p>
+<p> 1、表结构如下：  </p>
+<div class="table"> <a name="d0e1177"></a>
+<p class="title"> <strong>表&nbsp;4.5.&nbsp;Welfare(福利项目表)</strong> </p>
+<table border="1" summary="Welfare(福利项目表)">
+    <thead>
+        <tr>
+            <th>id(主键递增)</th>
+            <th>name</th>
+            <th>money</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1 </td>
+            <td>饭补 </td>
+            <td>250.00 </td>
+        </tr>
+        <tr>
+            <td>2 </td>
+            <td>交通补助 </td>
+            <td>200.00 </td>
+        </tr>
+        <tr>
+            <td>3 </td>
+            <td>岗位补助 </td>
+            <td>500.00</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<div class="table"> <a name="d0e1214"></a>
+<p class="title"> <strong>表&nbsp;4.6.&nbsp;Empolyee（人员表）</strong> </p>
+<table border="1" summary="Empolyee（人员表）">
+    <thead>
+        <tr>
+            <th>id(主键递增)</th>
+            <th>name</th>
+            <th>job</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1 </td>
+            <td>王一 </td>
+            <td>部门经理 </td>
+        </tr>
+        <tr>
+            <td>2 </td>
+            <td>李二 </td>
+            <td>程序员</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<div class="table"> <a name="d0e1244"></a>
+<p class="title"> <strong>表&nbsp;4.7.&nbsp;Empolyee_Welfare(员工福利明细表)</strong> </p>
+<table border="1" summary="Empolyee_Welfare(员工福利明细表)">
+    <thead>
+        <tr>
+            <th>id(主键递增)</th>
+            <th>EmpolyeeID（员工ID）</th>
+            <th>WelfareID（福利项ID）</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1 </td>
+            <td>1（王一） </td>
+            <td>1（饭补） </td>
+        </tr>
+        <tr>
+            <td>2 </td>
+            <td>1（王一） </td>
+            <td>2（交通补助）</td>
+        </tr>
+        <tr>
+            <td>3 </td>
+            <td>1（王一） </td>
+            <td>3（岗位补助）</td>
+        </tr>
+        <tr>
+            <td>4 </td>
+            <td>2（李二） </td>
+            <td>1（饭补） </td>
+        </tr>
+        <tr>
+            <td>5 </td>
+            <td>2（李二） </td>
+            <td>2（交通补助）</td>
+        </tr>
+    </tbody>
+</table>
+</div>
+<p> 2、编写影射文件  </p>
+<div class="example"> <a name="d0e1297"></a>
+<p class="title"> <strong>例&nbsp;4.21.&nbsp;Hibernate_map.xml</strong> </p>
+<pre class="programlisting">&lt;class name=&quot;hibernate.relation.manyToMany.Employee&quot; table=&quot;Employee&quot;&gt;<br /><br />		&lt;id name=&quot;id&quot; column=&quot;id&quot; type=&quot;<B style='color:black;background-color:#ffff66'>java</B>.lang.Integer&quot;&gt;<br /><br />			&lt;generator class=&quot;native&quot;&gt;&lt;/generator&gt;<br /><br />		&lt;/id&gt;<br /><br />		&lt;property name=&quot;name&quot; type=&quot;<B style='color:black;background-color:#ffff66'>java</B>.lang.String&quot; column=&quot;name&quot; length=&quot;100&quot; not-null=&quot;true&quot; /&gt;<br /><br />		&lt;property name=&quot;job&quot; type=&quot;<B style='color:black;background-color:#ffff66'>java</B>.lang.String&quot; column=&quot;job&quot; length=&quot;100&quot; not-null=&quot;true&quot; /&gt;<br /><br />		&lt;set name=&quot;welfare&quot; table=&quot;Empolyee_Welfare&quot; lazy=&quot;false&quot;&gt;<br /><br />			&lt;key column=&quot;EmployeeId&quot; /&gt;<br /><br />			&lt;many-to-many class=&quot;hibernate.relation.manyToMany.Welfare&quot; column=&quot;WelfareId&quot; /&gt;<br /><br />		&lt;/set&gt;<br /><br />&lt;/class

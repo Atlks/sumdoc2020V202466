@@ -1,0 +1,9 @@
+USB2.0 High Speed：理论速度是480Mbps，对应之前的USB2.0；   理论上最高是480Mbps，折合约60MB/s 
+USB2.0 Full Speed：理论速度是12Mbps，也就是过去的USB1.1；   折合1.5MB/s
+
+
+
+
+的USB1.1； 12Mbps   折合1.5MB/s
+
+ATTO Disk Benchmark

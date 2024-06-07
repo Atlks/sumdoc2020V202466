@@ -1,0 +1,12 @@
+微型计算机系统接口技术(usb,agp,pci,div,hdmi)
+
+
+参考
+
+Usb
+Pci
+VGA、DVI、HDMI
+PCI、AGP PCI Express
+显卡发展至今共出现ISA、PCI、AGP等几种接口，所能提供的数据带宽依次增加。而采用下一代的PCI Express接口的显卡也在2004年正式被推出
+
+

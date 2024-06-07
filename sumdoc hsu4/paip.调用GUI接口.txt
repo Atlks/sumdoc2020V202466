@@ -1,0 +1,43 @@
+paip.调用GUI接口.txt
+
+
+作者Attilax ，  EMAIL:1466519819@qq.com ,112237553@qq.com
+来源：attilax的专栏
+地址：http://blog.csdn.net/attilax
+
+
+常见的接口有API，COM,CLI，GUI，HTTP接口等。。
+
+
+其中GUI的调用是相对麻烦的。。
+
+1。基于  UI元素识别器 element identifiers。。。
+-------------------------------------
+一般来说，标准的WINDOWS控件MFC控件，HTML控件都是可以识别的。。可以较容易的调用。。使用WIN API与DOM HTML方式去调用。。
+
+
+2。非主流控件的使用。
+------------------
+主要是DELPHI，SWING，EXT等控件，就比较麻烦了。。还有一些ACTIVEX控件。。需要使用独特的类库来识别它们为对象。。
+
+
+3。坐标方式
+-----------------------
+如果一些无法识别为对象，则只能使用坐标方式了。。使用相对窗口的坐标还是可以接受的。。特别是一个银行网站，支付宝一类的GUI调用只能使用坐标方式了。
+
+
+4。使用工具：
+------------
+按键精灵，AHK，AUTOIT，AAuto。。针对WEB的GUI调用主要使用InternetExplorer.Application这个COM对象了，只适用于IE，可以使用JS来操作，简便啊。。。
+FF，CHROME等WEB GUI调用要使用Selenium了，不过它的主要要用JAVA来写，本身也是基于JDK的，比较庞大点。。
+
+
+
+5.注意事项：
+操作InternetExplorer.Application这个COM对象，如果不起作用，可能360设置了网页安全了，将其取消即可。。
+
+
+
+
+
+ 

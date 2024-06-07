@@ -1,0 +1,65 @@
+atitit.动态生成接口和类asm cglib AOP
+
+#---需要解决的问题
+itfs  a=(itfs)springutil.getben("itfsImp");
+希望更改为 itfsImp a=getben("itfsImp");现在的spring必须要itfs才能调用.
+生成一个接口
+生成一个子类and实现接口.
+参考--(AOP 的利器：ASM 3.0 介绍-----将动态生成类改造成原始类 Account 的子类)
+
+
+#---asm3.0  cglib
+
+随着 AOP（Aspect Oriented Programming）的发展，代码动态生成已然成为 Java 世界中不可或缺的一环。本文将介绍一种小巧轻便的 Java 字节码操控框架 ASM，它能方便地生成和改造 Java 代码。著名的框架，如 Hibernate 和 Spring 在底层都用到了 ASM。比起传统的 Java 字节码操控框架，BCEL 或者 SERP，它具有更符合现代软件模式的编程模型和更迅捷的性能。
+
+Cglib是一个优秀的动态代理框架,它的底层使用ASM在内存中动态的生成被代理类的子类
+GLIB 包是在 ASM 之上的一个高级别的层。对代理那些没 有实现接口的类非常有用。
+基于ASM的开发很复杂，需要了解JVM的底层编码。CGLIB以ASM为基础， 对ASM的功能进行了扩展和封装，提供了更友好的API，部分通用的模版和高级的功能实现。
+CGLIB的具体功能如下：
+
+（1）扩展ASM的Visitor模式。在ASM的Visitor模式的基础上利用ClassEmitter和CodeEmitter将Visitor事件封装为更符合Java开发者习惯的事件。
+
+（2）实现了Java的反射功能。CGLIB不仅可以替代java的反射功能，而且还提供了更强大的功能，例如CGLIB的Enhancer既可以强化子类，也可以扩充接口，与各种Callback配合可以实现许多功能。
+
+（3）Transform编程接口。利用Transform可以很容易的实现各种面向实际需要的Transformer，来执行类转化的Transform过程，为Hibernate提供了底层框架的支持。
+
+
+
+
+
+#------AOP 底层技术比较
+最后，我们比较一下 ASM 和其他实现 AOP 的底层技术：
+表 1. AOP 底层技术比较
+AOP 底层技术	功能	性能	面向接口编程	编程难度
+直接改写 class 文件	完全控制类	无明显性能代价	不要求	高，要求对 class 文件结构和 Java 字节码有深刻了解
+JDK Instrument	完全控制类	无论是否改写，每个类装入时都要执行 hook 程序	不要求	高，要求对 class 文件结构和 Java 字节码有深刻了解
+JDK Proxy	只能改写 method	反射引入性能代价	要求	低
+ASM	几乎能完全控制类	无明显性能代价	不要求	中，能操纵需要改写部分的 Java 字节码
+
+
+#----AOP 的实现方式
+
+装饰模式(Decorator)，指出了使用装饰模式的可能代码改动量比较大的问题；
+使用Proxy方式，不过这种方式可能会有性能问题；cglib
+最终才引出ASM，指出asm是直接生成class类的方式，不会有性能问题，
+
+
+#----class的结构
+AOP 的利器：ASM 3.0 介绍.htm
+
+
+#-------ASMSupport cn框架
+ASMSupport是一个基于ASM实现的一套java字节码操作类库，通过它可以在运行时动态的创建Class，操作起来非常的方便简单，保留java编程的习惯。
+当使用ASM编写的时候 很多情况下需要了解JVM底层的指令的， 并且需要对栈和本地变量显式的进行操作， 如果直接用ASM进行开发势必会付出更多的学习成本和时间成本，并且不易后期的维护。[1]
+此框架正好缓解了上述问题。是程序员编写字节码的时候更易于理解和开发，屏蔽了JVM指令以及栈和本地变量的操作，开发的时候更趋近与直接编写java程序。
+
+
+#-----JAVAssist
+编辑
+Javassist是一个开源的分析、编辑和创建Java字节码的类库。是由东京工业大学的数学和计算机科学系的 Shigeru Chiba （千叶 滋）所创建的。它已加入了开放源代码JBoss 应用服务器项目,通过使用Javassist对字节码操作为JBoss实现动态AOP框架。
+关于java字节码的处理，目前有很多工具，如bcel，asm。不过这些都需要直接跟虚拟机指令打交道。如果你不想了解虚拟机指令，可以采用javassist。javassist是jboss的一个子项目，其主要的优点，在于简单，而且快速。直接使用java编码的形式，而不需要了解虚拟机指令，就能动态改变类的结构，或者动态生成类。
+
+
+参考
+AOP 的利器：ASM 3.0 介绍
+Hibernate底层技术简介 CGLIB - 和申的日志 - 网易博客.htm

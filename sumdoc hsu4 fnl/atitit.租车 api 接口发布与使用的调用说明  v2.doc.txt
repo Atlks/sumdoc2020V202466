@@ -1,0 +1,525 @@
+
+ api 接口发布与使用的调用说明  v2
+
+
+
+
+
+
+
+
+作者：attilax  (1466519819@qq.com)
+日期：2015.1
+版本：v2.0
+
+
+
+
+44
+44
+55
+55
+55
+55
+66
+66
+66
+66
+77
+77
+77
+77
+77
+77
+88
+88
+88
+88
+88
+99
+99
+99
+1010
+1010
+1010
+1111
+1111
+1111
+1111
+1111
+1111
+1212
+1212
+1313
+1313
+1414
+1414
+1414
+1414
+1515
+1515
+15
+
+
+
+change histroty
+1m  v2  接口定义与返回异常处理机制
+主要继承服务端和接口说明1.2
+
+新特性：：
+支持多个接口数据类型：json,xml,yaml 
+主流的try catch 异常处理机制，不再使用返回码机制
+二进制数据的上传(图片等），使用base64转码为字符串处理，统一处理
+接口的数据压缩：zip压缩
+接口的数据加密 Aes,3des 
+增加sign签名防篡改机制 (md5,sha1)
+第三方appid机制
+会话持久：cookie模式,accestoken模式
+版本管理,多版本接口模式管理
+自动更新接口
+
+
+
+
+
+
+ 
+ 
+发布对外http接口：注册api接口子方法处理器（服务端）
+
+在.injectApiHandler()里面添加新的子方法处理器...
+
+主要的添加一行...HandlerChain reg(String subMeth,Handler handler);
+
+
+
+使用实现类的方法注册..
+HandlerChain.reg("xxx", new HandlerImp1());
+
+使用闭包的方式注册:::
+ 		 
+			HandlerChain.reg("xxx", new Handler() {
+
+				@Override public Object handleReq(Object arg) throws Exception {
+					// attilax 老哇的爪子 is6 o7l
+					return " o788 test ...";
+
+				}
+			});
+		 
+ 闭包DSL:::
+导入template。xml模板。。java>editor>template>>import。。。
+输入api   生成一下大陀代码
+
+HandlerChain.reg("xxx", new Handler() {
+
+				@Override public Object handleReq(Object arg) throws Exception {
+					// attilax 老哇的爪子 is6 o7l
+					return " o788 test ...";
+
+				}
+			});
+
+Handler 的接口实现
+一个方法是不实现Handler 接口,使用闭包的方式注册
+在就是实现Handler 接口,使用class的方法注册...
+
+
+
+客户端调用接口overview 
+http请求方式: GET/Post
+_http://host/urlï¼data={method:val1,param:Param}&datatype=json_
+如用原版本，则请求方式不变，尽可能的兼容老接口
+http参数说明
+
+Datatype：：，可选参数，数据类型：默认json，可选xml,urlparam等
+Data：：必选，  实际的数据内容
+Ziptype：可选参数， 预留，压缩方法：：默认zip，可选其他
+Encrytype：可选参数， 预留，加密方法，默认aes，可选3des,ras,des等
+zipEncOrder：  可选参数,指明加密与压缩顺序。默认先加密在压缩
+Sessionid： 可选，session会话持久模式使用
+sessionMode： 可选，  会话模式：默认cookie模式
+Accesstoken：  可选，  Accesstoken模式时需要次参数
+Ver	   否	版本号
+appid	否	appid预留，可暂时不用
+Appsecret 	否	预留，可暂时不用。。 用户唯一凭证密钥，即appsecret
+Sign  	是	签名，为方便开发测试，可暂时不用。但正式版本为了安全，应该使用
+SignType ： 默认md5 方式，可选sha模式
+ Data参数说明
+ 参数名称全部小写 
+参数	是否必须	说明
+method	是	调用的远程接口方法（ 各自模块定义）
+param	是	Json格式实际的参数，
+paramDataType	否	参数的数据类型，默认为json,可选xml,str,urlparam等
+
+
+通过接口的数据格式..
+ datatype：：数据类型：默认json，可选xml,urlparam，yaml等
+
+返回说明（正常情况下）
+正常情况下，服务器会返回下述JSON数据包：
+{param1:val1,param2:val2}
+ 参数含义各模块定义。。。
+
+二进制数据的上传(图片等），使用base64转码为字符串处理，统一处理
+大批量图片、或大体积二进制文件的上传，可用独立接口(ftp等）处理
+接口的数据压缩
+如参数过大，可使用zip压缩
+
+接口的数据加密
+数据内容可加密
+
+
+接口方式说明 基于rpc单url方式
+基于http  json  
+接口实现没有采用restful方式，使用了rpc单url方式，简化开发
+
+restful方式性能更高，但开发相比rpc方式较为繁琐
+
+会话持久模式 cookie模式
+常用的会话持久模式 cookie ，session, AccessToken  等
+
+此处选择cookie模式
+
+
+接口Exception异常处理机制
+ 会返回异常堆栈对象(仍然转换为json字符串格式)
+ 客户端收到后，转换为本地异常，进行处理（日志，重试，静默处理，或抛出到业务层，VIEW层处理）
+
+原版本某些接口如为返回码模式，依然有效。
+ 远程接口方法（通用方法）
+调用操作服务端数据(sql格式)
+
+方法名:sql
+参数:  sql语句
+调用操作服务端数据(hql格式)
+
+方法名:hql
+参数:  hql语句
+
+调用操作服务端数据(对象化map格式)
+查询操作 方法名:queryByMap
+参数:
+{
+	"ClassName": "class123",
+	"conditon": [{
+		"propName": "prop123",
+		"op": "<=",
+		"val": "val123"
+	},
+	{
+		"propName": "prop456",
+		"op": "like",
+		"val": "abc"
+	}]
+}
+
+
+--------update op 方法名:updateByMap
+参数:
+
+{
+ 	"ClassName": "class123",
+	"id": 3456,
+	"set": [{
+		"propName": "prop66",
+		"val": "val123"
+	}],
+	"where": [{
+		"propName": "prop123",
+		"op": "<=",
+		"val": "val123"
+	}]
+}
+
+
+--------delete op  方法名:delByMap
+参数:
+
+ {
+ 	"ClassName": "class123",
+	"id": 3456,
+	"where": [{
+		"propName": "prop123",
+		"op": "<=",
+		"val": "val123"
+	}]
+}
+
+
+调用操作客户端数据(sql式,异步方式)
+通过推送接口推送数据
+
+{
+    "submethod": "sql",
+    "param":"select * from   xxxTAble wherer fld1=11 order by fld2
+",
+    "sign": "xxxxxx"
+}
+
+返回json array    [{...}]
+
+调用操作客户端数据(同步方式)
+通过推送接口推送数据
+
+{
+	"submethod": "sql_syn",
+	"param": {
+		"sql": "select * from   xxxTAble wherer fld1=11 order by fld2",
+		"callback": "call123"
+	},
+	"sign": "xxxxxx"
+}
+
+返回json array    [{...}]
+
+调用操作客户端数据(同步方式)反馈
+ 
+
+调用操作客户端数据(对象化map格式)
+参考操作服务端数据(对象化map格式)
+
+ 
+通用翻页参数
+Page   第几页
+Pagesize   每页多少条数据
+
+  
+远程接口方法
+注：：（1.2版本的接口同样有效），此处尽可能的补充完备接口
+
+SendReg   注册接口方法
+参数：
+
+Username  用户名
+Cp 		手机
+Pwd   密码
+
+SendLogin    登录接口方法	参数：
+Username  登录帐号 （手机号码）
+Password   密码
+
+
+
+addCar添加车辆
+
+
+Lpn：  车牌号(licens plate number)
+Brand:   品牌
+Gearbox：  变速箱
+pickupLocation：  交车地点
+Price ：：   价格
+Displacement ：：  排量
+
+
+
+
+
+Feedback  意见反馈
+contact ：： 联系方式
+Txt：：  内容
+
+
+
+
+GetCarList  找车	参数:
+Keyword：   搜索词
+ 
+
+
+
+	
+GetCar 车辆详细信息查看
+参数:
+infoid：    信息id
+
+ 
+
+
+GetCarListFromFav 收藏找车
+Uid   ：： 用户id
+Keyword：：   搜索词
+
+Booking  一键约车
+参数:
+
+PikeupTime   ：  取车时间
+RetTime	：还车时间
+PikeupLocation  ：取车位置
+priceRang   价格区间
+Gearbox    变速箱
+Cartype     车辆类型 （Compact 经济型，fullsize：舒适性 Luxury:豪华型 ，suv
+，biz 商务型 Dream： 个性型） 
+
+
+
+
+
+版本升级接口
+
+
+ 
+QA：：
+get方式发送参数是需要url编码。
+
+附录： 1.2 版本的接口文档
+
+username为手机号码
+u_password为验证码
+password为密码
+nickname用户名
+
+用户注册接口
+http://localhost:8080/hx_taxi/AppServlet?action=SendReg&username=13933055030&password=123123&nickname=123123
+
+返还json
+{"table":[{"msg":"1"}]}
+
+msg:-1 用户存在
+msg:0 数据库操作出错
+msg:1  成功
+msg:2  用户名为空
+msg:3  密码为空
+
+会员登录接口
+http://localhost:8080/hx_taxi/AppServlet?action=UserLogin&username=13169115963&password=123123&nickname=123123
+
+返还json
+{"table":[{"msg":"1"}]}
+msg:-1 用户不存在
+msg:0 密码错误
+msg:1  成功
+msg:2  用户名不正确
+
+
+用户登录获取验证码接口
+http://localhost:8080/hx_taxi/AppServlet?action=SendLogin&username=13933055030
+
+返还json
+{"table":[{"msg":"1"}]}
+
+msg:-1 用户不存在
+msg:0 数据库操作出错
+msg:1 获取验证码成功
+
+
+用户登录接口
+http://localhost:8080/hx_taxi/AppServlet?action=Login&username=13933055030&u_password=123123&password=123123
+
+返还json
+{"table":[{"msg":"-1"}]}
+
+msg:-1 验证码错误
+msg:0 密码错误
+msg:1 成功
+
+
+
+多车辆列表获取
+page 当前页数
+num  一页分几条记录
+typeid  用于取一条记录时用，值为id
+id    唯一标识
+order  按id排序,值有asc 和desc
+
+http://localhost:8080/hx_taxi/AppServlet?action=GetCarList&page=1&num=2&typeid=&id=&order=desc
+
+{"table":["cars":[{"id":"2","name":"奥迪","pailiang":"12","is_use":"1","seller_note":"","hometown":"北京","workplace":"null","sn":"null","price":"100","daytypes":[{"id":"1","name":"全天可租","typename":"天"}],"user":[],"talks":[],"speedtypes":[{"id":"1","name":"自动档"}],"cartypes":[{"id":"1","name":"经济型"}],"carpics":[{"id":"2","car_id":"2","picname":"22222","picurl":"2222"},{"id":"1","car_id":"2","picname":"123123","picurl":"123123"},{"id":"0","car_id":"2","picname":"22222","picurl":"2222"}],"provinces":[{"id":"2","name":"北京"}],"citys":[{"id":"2","name":"北京"}],"areas":[{"id":"2","name":"浦东"}],"streets":[{"id":"16","name":"徐泾镇"}],"sntypes":[{"id":"1","name":"京A","typename":" "}]},{"id":"3","name":"奥迪","pailiang":"12","is_use":"1","seller_note":"","hometown":"北京","workplace":"null","sn":"null","price":"100","daytypes":[{"id":"1","name":"全天可租","typename":"天"}],"user":[],"talks":[],"speedtypes":[{"id":"1","name":"自动档"}],"cartypes":[{"id":"1","name":"经济型"}],"carpics":[],"provinces":[{"id":"2","name":"北京"}],"citys":[{"id":"2","name":"北京"}],"areas":[{"id":"2","name":"浦东"}],"streets":[],"sntypes":[{"id":"1","name":"京A","typename":" "}]}]]}
+
+
+
+单个车辆获取
+http://localhost:8080/hx_taxi/AppServlet?action=GetCarList&page=1&num=2&typeid=id&id=2&order=desc
+
+返还json
+{"table":["cars":[{"id":"2","name":"奥迪","pailiang":"12","is_use":"1","seller_note":"","hometown":"北京","workplace":"null","sn":"null","price":"100","daytypes":[{"id":"1","name":"全天可租","typename":"天"}],"user":[],"talks":[],"speedtypes":[{"id":"1","name":"自动档"}],"cartypes":[{"id":"1","name":"经济型"}],"carpics":[{"id":"2","car_id":"2","picname":"22222","picurl":"2222"},{"id":"1","car_id":"2","picname":"123123","picurl":"123123"},{"id":"0","car_id":"2","picname":"22222","picurl":"2222"}],"provinces":[{"id":"2","name":"北京"}],"citys":[{"id":"2","name":"北京"}],"areas":[{"id":"2","name":"浦东"}],"streets":[{"id":"16","name":"徐泾镇"}],"sntypes":[{"id":"1","name":"京A","typename":" "}]}]]}
+
+
+获取省份的列表
+&typeid=&id=
+这两个参数为空时所有列表
+&typeid=id&id=2为获取指定id下的省份
+
+http://localhost:8080/hx_taxi/AppServlet?action=GetProvinceList&typeid=&id=
+http://localhost:8080/hx_taxi/AppServlet?action=GetProvinceList&typeid=id&id=2
+
+
+获取城市的列表
+&typeid=&id=
+这两个参数为空时所有城市列表
+&typeid=id&id=2为获取指定id下的城市
+&typeid=province_id&id=3为获取指定省份province_id下的城市
+
+http://localhost:8080/hx_taxi/AppServlet?action=GetCityList&typeid=&id=
+http://localhost:8080/hx_taxi/AppServlet?action=GetCityList&typeid=province_id&id=3
+http://localhost:8080/hx_taxi/AppServlet?action=GetCityList&typeid=id&id=3
+ 
+获取地区的列表
+&typeid=&id=
+这两个参数为空时所有地区列表
+&typeid=id&id=2为获取指定id下的地区
+&typeid=province_id&id=3为获取指定城市city_id下的地区
+
+http://localhost:8080/hx_taxi/AppServlet?action=GetAreaList&typeid=&id=
+http://localhost:8080/hx_taxi/AppServlet?action=GetAreaList&typeid=city_id&id=3
+http://localhost:8080/hx_taxi/AppServlet?action=GetAreaList&typeid=id&id=3
+
+获取街道的列表
+&typeid=&id=
+这两个参数为空时所有街道列表
+&typeid=id&id=2为获取指定id下的街道
+&typeid=province_id&id=3为获取指定地区area_id下的街道
+http://localhost:8080/hx_taxi/AppServlet?action=GetStreetList&typeid=&id=
+http://localhost:8080/hx_taxi/AppServlet?action=GetStreetList&typeid=area_id&id=3
+http://localhost:8080/hx_taxi/AppServlet?action=GetStreetList&typeid=id&id=3
+
+
+获取变速类型的列表
+http://localhost:8080/hx_taxi/AppServlet?action=GetSpeedtypeList
+http://localhost:8080/hx_taxi/AppServlet?action=GetSpeedtypeList&typeid=id&id=1
+
+获取出租类型的列表
+http://localhost:8080/hx_taxi/AppServlet?action=GetDaytypeList
+http://localhost:8080/hx_taxi/AppServlet?action=GetDaytypeList&typeid=id&id=1
+
+获取车类型的列表
+http://localhost:8080/hx_taxi/AppServlet?action=GetCartype
+http://localhost:8080/hx_taxi/AppServlet?action=GetCartype&typeid=id&id=1
+
+
+获取车牌类型的列表
+http://localhost:8080/hx_taxi/AppServlet?action=GetSntype
+http://localhost:8080/hx_taxi/AppServlet?action=GetSntype&typeid=id&id=1
+
+获取会员信息
+http://localhost:8080/hx_taxi/AppServlet?action=GetUser&typeid=username&id=13933055030
+
+
+图片上传接口
+http://localhost:8080/hx_taxi/AppServlet?action=UploadCarPic&typeid=car_id&id=2
+
+http://192.168.56.1:8080/hx_taxi/AppServlet?action=UploadCarPic&typeid=car_id&id=2
+
+意见反馈接口
+
+http://localhost:8080/hx_taxi/AppServlet?action=SaveTalk&user_id=13169115963&content=22220
+
+
+出租车评论接口
+http://localhost:8080/hx_taxi/AppServlet?action=SaveTalk&typeid=car_id&id=2&user_id=13169115963&content=22220
+
+
+车辆图片获取
+http://localhost:8080/hx_taxi/AppServlet?action=GetCarPic&typeid=car_id&id=2
+
+单个图片获取
+http://localhost:8080/hx_taxi/AppServlet?action=GetCarPic&typeid=id&id=2
+
+
+
+
+
+
+
+
+

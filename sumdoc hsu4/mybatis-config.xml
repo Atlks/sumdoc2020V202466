@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+ 
+	<properties>
+		<property name="dialect" value="POSTGRESQL" />
+		<!-- <property name="dialect" value="SQLSERVER"/> -->
+	</properties>
+	<settings>
+		<setting name="cacheEnabled" value="true" />
+		<setting name="lazyLoadingEnabled" value="false" />
+	</settings>
+	<typeAliases>
+		<typeAlias alias="myHashMap" type="com.cnhis.cloudhealth.commons.utils.MyHashMap" />
+		<typeAlias alias="commonMap" type="com.cnhis.cloudhealth.commons.CommonMap"/>
+		<typeAlias alias="defHashMap" type="com.cnhis.cloudhealth.commons.commonSql.mapper.DefHashMap"/>
+		<typeAlias alias="QueryCondition" type="com.cnhis.cloudhealth.commons.commonSql.mapper.QueryCondition"/>
+	</typeAliases>
+	<plugins>
+		<plugin interceptor="com.cnhis.cloudhealth.commons.dao.PaginationInterceptor" />
+		<!-- <plugin interceptor="com.cnhis.onehis.commons.dao.ResultSetHandlerInterceptor"/> -->
+	</plugins>
+	<mappers>
+		
+		<!-- <mapper
+			resource="com/cnhis/cloudhealth/clinical/clidoctor/treatment/mapper/TreatmentMapper.xml" /> -->
+	</mappers>
+</configuration>

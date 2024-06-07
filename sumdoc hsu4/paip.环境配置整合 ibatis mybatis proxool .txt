@@ -1,0 +1,110 @@
+paip.环境配置整合 ibatis mybatis proxool 
+
+索引：
+///////////1.调用
+///////////////2. ibatis 主设置文件  com/mijie/homi/search/util/ibatiascfg.xml
+///////////////////333..(ProxoolDataSourceFactory.java )proxool连接池数据源类，自定义
+
+作者Attilax  艾龙，  EMAIL:1466519819@qq.com
+来源：attilax的专栏
+地址：http://blog.csdn.net/attilax
+
+-----------------------------------
+///////////1.调用
+
+ public static void main(String[] args) throws IOException {
+	    	iniProxool();
+	        
+	            String resource = "com/mijie/homi/search/util/ibatiascfg.xml";
+	            Reader reader;
+
+	            reader = Resources.getResourceAsReader(resource);
+
+	            SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder()
+	                    .build(reader);
+	            SqlSession sqlSession = sqlSessionFactory.openSession();
+	         List li=   sqlSession.selectList("getRecently100", 9999999);
+//	            StudentDao studentDao =sqlSession.getMapper(StudentDao.class);
+//	            Student st = studentDao.getstudent(1);
+	            System.out.println( li.size());
+	            sqlSession.close();
+	       
+
+	}
+	    
+	    
+	    public static void iniProxool() {
+			try {
+				JAXPConfigurator
+						.configure(
+								UserSearchApi.	PROXOOL_XML,
+								false);
+			} catch (ProxoolException e1) {
+
+				e1.printStackTrace();
+			}
+			proxoolController.getnew();
+		}
+		
+///////////////2. ibatis 主设置文件  com/mijie/homi/search/util/ibatiascfg.xml
+
+	<!--proxool连接池数据源类，自定义-->
+		 
+			<typeAlias type="com.mijie.homi.search.util.ProxoolDataSourceFactory"
+				alias="atiProxl" />
+
+	</typeAliases>
+	
+	
+	
+		<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+
+			<dataSource type="atiProxl">
+			</dataSource>
+ 
+		</environment>
+	</environments>
+	
+///////////////////333..(ProxoolDataSourceFactory.java )proxool连接池数据源类，自定义
+
+
+package com.mijie.homi.search.util;
+
+
+
+import java.util.Properties;
+
+import javax.sql.DataSource;
+
+import org.apache.ibatis.datasource.DataSourceFactory;
+import org.logicalcobwebs.proxool.ProxoolDataSource;
+
+public class ProxoolDataSourceFactory implements DataSourceFactory {
+
+	protected ProxoolDataSource dataSource;
+
+	public ProxoolDataSourceFactory() {
+
+	//	this.dataSource = new ProxoolDataSource("adpool");
+		
+		// alias参考proxool.xml 中标签<alias>的值
+		 dataSource = new ProxoolDataSource("maindb");  
+
+	}
+
+	@Override
+	public DataSource getDataSource() {
+
+		return this.dataSource;
+
+	}
+
+	@Override
+	public void setProperties(Properties properties) {
+
+	}
+
+}
+/////////////(end)

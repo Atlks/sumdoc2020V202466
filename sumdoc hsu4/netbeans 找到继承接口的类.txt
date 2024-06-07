@@ -1,0 +1,10 @@
+ 接口》右键》FIND USEAGE 》FIND AL SUBTYPES /FIND DRIRECT SUBTYPE ONLY 。。
+
+如果控制面板更改了国家地区　，则，ＮＢ6.5的界面语言变成英文工团．
+
+工具->选项->字体和颜色->配置文件->earth->确定 
+我刚刚才发现的.....希望有所帮助哟!~~
+
+
+修正错误那个小灯泡。提示乱码。添加以下问题解决。此参数可更改界面字体大小。
+ions="--fontsize 15 -J-Dawt.useSystemAAFontSettings=on 

@@ -1,0 +1,142 @@
+Atitit.spring体系结构大总结
+
+11
+44
+44
+55
+55
+66
+66
+66
+66
+66
+66
+66
+77
+77
+77
+77
+88
+8
+Srping mvc
+
+4.2.1　直接编码方式
+其实，把编码方式单独提出来称作一种方式并不十分恰当。因为不管什么方式，最终都需要编码才能"落实"所有信息并付诸使用。不过，通过这些代码，起码可以让我们更加清楚BeanFactory在底层是如何运作的。
+下面来看一下我们的FX新闻系统相关类是如何注册并绑定的（见代码清单4-4）。
+代码清单4-4　通过编码方式使用BeanFactory实现FX新闻相关类的注册及绑定
+ 
+BeanFactory 只是一个接口，我们最终需要一个该接口的实现来进行实际的Bean的管理，Default- ListableBeanFactory就是这么一个比较通用的BeanFactory实现类。DefaultListableBean- Factory除了间接地实现了BeanFactory接口，还实现了BeanDefinitionRegistry接口，该接口才是在 BeanFactory的实现中担当Bean注册管理的角色。基本上，BeanFactory接口只定义如何访问容器内管理的Bean的方法，各个 BeanFactory的具体实现类负责具体Bean的注册以及管理工作。BeanDefinitionRegistry接口定义抽象了Bean的注册逻 辑。通常情况下，具体的BeanFactory实现类会实现这个接口来管理Bean的注册。它们之间的关系如图4-3所示。 
+
+在bindViaCode方法中，首先针对相应的业务对象构造与其相对应的BeanDefinition，使用了RootBeanDefinition作 为BeanDefinition的实现类。构造完成后，将这些BeanDefinition注册到通过方法参数传进来的 BeanDefinitionRegistry中。之后，因为我们的FXNewsProvider是采用的构造方法注入，所以，需要通过 ConstructorArgument- Values为其注入相关依赖。在这里为了同时说明setter方法注入，也同时展示了在Spring中如何使用代码实现setter方法注入。如果要运 行这段代码，需要把setter方法注入部分的4行代码注释掉。最后，以BeanFactory的形式返回已经注册并绑定了所有相关业务对象的 BeanDefini- tionRegistry实例。
+
+
+public static void main(String[] args) {
+DefaultListableBeanFactory beanRegistry = new DefaultListableBeanFactory(); BeanFactory container = (BeanFactory)bindViaCode(beanRegistry); FXNewsProvider newsProvider = ?
+(FXNewsProvider)container.getBean("djNewsProvider"); newsProvider.getAndPersistNews(); }
+public static BeanFactory bindViaCode(BeanDefinitionRegistry registry) {
+AbstractBeanDefinition newsProvider = ?
+new RootBeanDefinition(FXNewsProvider.class,true); AbstractBeanDefinition newsListener = ?
+new RootBeanDefinition(DowJonesNewsListener.class,true); AbstractBeanDefinition newsPersister = ?
+new RootBeanDefinition(DowJonesNewsPersister.class,true); // 将bean定义注册到容器中
+registry.registerBeanDefinition("djNewsProvider", newsProvider); registry.registerBeanDefinition("djListener", newsListener); registry.registerBeanDefinition("djPersister", newsPersister);
+BeanFactory需要使用的对象注册和依赖绑定信息称为Configuration Metadata。我们这里所展示的，实际上就是组织这些Configuration Metadata的各种方式。因此这个标题才这么长。
+4.2 BeanFactory的对象注册与依赖绑定方式 27
+// 1. 可以通过构造方法注入方式
+ConstructorArgumentValues argValues = new ConstructorArgumentValues(); argValues.addIndexedArgumentValue(0, newsListener); argValues.addIndexedArgumentValue(1, newsPersister); newsProvider.setConstructorArgumentValues(argValues); // 2. 或者通过setter方法注入方式
+MutablePropertyValues propertyValues = new MutablePropertyValues();
+propertyValues.addPropertyValue(new ropertyValue("newsListener",newsListener));
+propertyValues.addPropertyValue(new PropertyValue("newPersistener",newsPersister)); newsProvider.setPropertyValues(propertyValues); // 绑定完成
+return (BeanFactory)registry;
+}
+BeanFactory 只是一个接口，我们最终需要一个该接口的实现来进行实际的Bean的管理，Default- ListableBeanFactory就是这么一个比较通用的BeanFactory实现类。DefaultListableBean- Factory除了间接地实现了BeanFactory接口，还实现了BeanDefinitionRegistry接口，该接口才
+是在 BeanFactory的实现中担当Bean注册管理的角色。基本上，BeanFactory接口只定义如何访问容器内管理的Bean的方法，各个 BeanFactory的具体实现类负责具体Bean的注册以及管理工作。BeanDefinitionRegistry接口定义抽象了Bean的注册逻 辑。通常情况下，具体的BeanFactory实现类会实现这个接口来管理Bean的注册。它们之间的关系如图4-3所示。
+
+
+Ioc
+2.2.1. IoC Service Provider的职责 
+2.2.2. 运筹帷幄的秘密－IoC Service Provider如何管理对象间的依赖关系 
+2.2.2.1. 直接编码方式(register via programming) 
+
+
+ApplicationContext在BeanFactory的基础上构建,区别
+IoC容器选择。
+? ApplicationContext。ApplicationContext在BeanFactory的基础上构建，是相对比较高级的容器实现，除了拥 有BeanFactory的所有支持，ApplicationContext还提供了其他高级特性，比如事件发布、国际化信息支持等，这些会在后面详述。 ApplicationContext所管理的对象，在该类型容器启动之后，默认全部初始化并绑定完成。所以，相对于BeanFactory来 说，ApplicationContext要求更多的系统资源，同时，因为在启动时就完成所有初始化，容器启动时间较之BeanFactory也会长一 些。在那些系统资源充足，并且要求更多功能的场景中，ApplicationContext类型的容器是比较合适的选择。
+通过图4-2，我们可以对BeanFactory和ApplicationContext之间的关系有一个更清晰的认识。
+图4-2 BeanFactory和ApplicationContext继承关系
+注意 ApplicationContext间接继承自BeanFactory，所以说它是构建于BeanFactory之上的IoC容器。此外，你应该注意到了，ApplicationContext还继承了其他三个接口，它们之间的关系，我们将在第5章中详细说明。
+另外，在没有特殊指明的情况下，以BeanFactory为中心所讲述的内容同样适用于Applica- tionContext，这一点需要明确一下，二者有差别的地方会在合适的位臵给出解释。
+
+
+Aop
+3.2.4.1. @AspectJ形式的SpringAOP 
+3.2.4.1.1. @AspectJ形式AOP使用之先睹为快 
+3.2.4. SpringAOP二世 
+3.2.4.1. @AspectJ形式的SpringAOP 
+3.2.4.1.1. @AspectJ形式AOP使用之先睹为快 
+3.2.4.1.1.1. 编程方式织入 
+3.2.4.1.1.2. 通过autoproxy织入 
+3.2.4.1.2. @AspectJ形式的Pointcut 
+3.2.4.1.2.1. @AspectJ形式Pointcut的声明方式 
+3.2.4.1.2.2. @AspectJ形式Pointcut表达式的标志符 
+3.2.4.1.2.3. @AspectJ形式的Pointcut在Spring aop中的真实面目 
+3.2.4.1.3. @AspectJ形式的Advice 
+
+
+spring的定时器
+spring的事务处理
+spring与struts的整合
+spring与hibernate的整合
+spring的持久层封装 使用jdbctemptate访问数据
+
+2.3.1.3.7. 方法注入(Method Injection) 偷梁换柱之术 
+2.3.1.3.7.1. 方法注入(Method Injection) 
+2.3.1.3.7.2. 殊途同归 
+2.3.1.3.7.3. 方法替换(Method Replacement) 
+
+国际化信息支持(I18N MessageSource) 
+2.3.2.2.1. JavaSE提供的国际化支持 
+2.3.2.2.2. MessageSource与ApplicationContext 
+2.3.2.2.2.1. 可用的MessageSource实现(Available MessageSources) 
+2.3.2.2.2.2. MessageSourceAware和MessageSource的注入 
+
+
+Spring框架对JMS的集成(JMS Made Easy With Spring) 
+7.2.1. 说说JMS的身世 
+7.2.2. 使用JMS API进行应用开发的传统套路 
+7.2.3. Spring改进后的JMS实战格斗术 
+7.2.3.1. 消息发送和同步接收(Synchronous Message Sending and Receiving) 
+
+7.4.1. Spring与Quartz 
+7.4.1.1. 初识Quartz 
+7.4.1.2. 融入Spring大家庭的Quartz 
+7.4.1.2.1. Job的实现策略 
+7.4.1.2.2. JobDetail的更多选择 
+7.4.1.2.3. Trigger的可配置化 
+7.4.1.2.4. Scheduler的新家 
+7.4.2. Spring对JDK Timer的集成 
+7.4.2.1. JDK Timer小记 
+7.4.2.2. Spring集成后的JDK Timer 
+7.4.2.2.1. 逃离TimerTask的魔咒 
+7.4.2.2.2. TimerTask的模块化封装 - ScheduledTimerTask 
+7.4.2.2.3. Timer的新家 - TimerFactoryBean 
+7.4.3. Executor的孪生兄弟TaskExecutor 
+7.4.3.1. 可用的TaskExecutor 
+7.4.3.2. TaskExecutor使用实例 
+
+Spring远程方案(Spring Remoting) 
+8.1. 从“对面交谈 ”到“千里传声 ” 
+8.2. Spring Remoting架构分析 
+8.2.1. Spring Remoting之远程访问异常体系 
+
+
+参考
+发布《Spring揭秘》整书目录 - 以简始，以简终 Always Keep Child-Like Wonder - ITeye技术网站.htm
+4.2.1　直接编码方式 - 51CTO.COM.htm
+Spring的IoC容器之BeanFactory-博泰典藏网.htm
+基于Schema的AOP  基于Schema的AOP - Java - ITeye论坛.htm
+（impt,detail） 发布《Spring揭秘》整书目录 - 以简始，以简终 Always Keep Child-Like Wonder - ITeye技术网站.htm
+
+
+ 
+
+

@@ -1,0 +1,123 @@
+{
+  "ideas": {
+    "1": {
+      "id": 1,
+      "title": "flag",
+      "attr": {
+        "position": [
+          -36,
+          -15,
+          1
+        ]
+      },
+      "ideas": {
+        "-1": {
+          "title": "伊斯兰flag",
+          "id": "7.3ae6.2fa7b6ccb-212e.d32f24d0f",
+          "ideas": {
+            "1": {
+              "title": "星月其",
+              "id": "8.3ae6.2fa7b6ccb-212e.d32f24d0f"
+            },
+            "2": {
+              "title": "刀剑经文类",
+              "id": "9.3ae6.2fa7b6ccb-212e.d32f24d0f"
+            }
+          }
+        },
+        "1.5": {
+          "title": "新教三色条纹其",
+          "id": "13.3ae6.2fa7b6ccb-212e.d32f24d0f",
+          "ideas": {
+            "1": {
+              "title": "星条旗系列",
+              "id": "14.3ae6.2fa7b6ccb-212e.d32f24d0f"
+            },
+            "2": {
+              "title": "双条纹",
+              "id": "19.3ae6.2fa7b6ccb-212e.d32f24d0f"
+            },
+            "3": {
+              "title": "三角条纹",
+              "id": "20.3ae6.2fa7b6ccb-212e.d32f24d0f"
+            }
+          },
+          "attr": {}
+        },
+        "1.75": {
+          "title": "基督教十字架旗帜",
+          "ideas": {
+            "2": {
+              "title": "十字架",
+              "id": 4,
+              "ideas": {
+                "1": {
+                  "title": "南十字星",
+                  "id": "15.3ae6.2fa7b6ccb-212e.d32f24d0f"
+                },
+                "0.5": {
+                  "title": "北欧十字",
+                  "id": "18.3ae6.2fa7b6ccb-212e.d32f24d0f",
+                  "attr": {}
+                }
+              }
+            },
+            "3": {
+              "title": "米字旗",
+              "ideas": {
+                "1": {
+                  "title": "英联邦系列旗帜",
+                  "id": 6
+                }
+              },
+              "id": 5
+            },
+            "2.5": {
+              "title": "安德烈斯x十字架",
+              "id": 3,
+              "attr": {}
+            }
+          },
+          "id": 2,
+          "attr": {}
+        },
+        "-11": {
+          "title": "共产主义",
+          "id": "10.3ae6.2fa7b6ccb-212e.d32f24d0f",
+          "ideas": {
+            "1": {
+              "title": "镰刀锤子",
+              "id": "11.3ae6.2fa7b6ccb-212e.d32f24d0f"
+            },
+            "2": {
+              "title": "五角星其",
+              "id": "12.3ae6.2fa7b6ccb-212e.d32f24d0f"
+            }
+          },
+          "attr": {
+            "position": [
+              83,
+              124,
+              1
+            ]
+          }
+        },
+        "-21": {
+          "title": "其他",
+          "id": "16.3ae6.2fa7b6ccb-212e.d32f24d0f",
+          "ideas": {
+            "1": {
+              "title": "太阳旗",
+              "id": "17.3ae6.2fa7b6ccb-212e.d32f24d0f"
+            }
+          },
+          "attr": {}
+        }
+      }
+    }
+  },
+  "formatVersion": 3,
+  "id": "root",
+  "attr": {},
+  "title": ""
+}

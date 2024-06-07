@@ -1,0 +1,12 @@
+Atitit. org.hibernate.exception.GenericJDBCException 必须执行该语句才能获得结果。
+
+现象:   偶然出这个提示...
+
+原因:::数据库资源问题
+
+解决之道::
+
+重启数据库.ok
+
+或者  或许表格锁????
+

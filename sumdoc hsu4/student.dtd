@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="gb2312" ?>
+<!ELEMENT roster (student+)>
+<!ELEMENT student (name,sex,birthday,score,skill+)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT sex (#PCDATA)>
+<!ELEMENT birthday (#PCDATA)>
+<!ELEMENT score (#PCDATA)>
+<!ELEMENT skill (#PCDATA)>
+<!ATTLIST student ID CDATA #REQUIRED>

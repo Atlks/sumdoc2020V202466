@@ -1,0 +1,2667 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class='csdn-bbs'>
+  <head>
+    <meta http-equiv="Cache-Control" content="no-transform" />
+<link rel="alternate" media="handheld" href="#" />
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>java实现音乐频谱或者波形图-CSDN论坛</title>
+    <script src="//csdnimg.cn/release/bbs/assets/tingyun-rum-bbs.js"></script>
+    <link href="//csdnimg.cn/release/bbs/assets/main-cd9eaadbb591e8704713b4899269ddb2.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="//csdnimg.cn/public/themes/default/css/btn.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="//csdnimg.cn/release/bbs/assets/application-514f15ea10f1331852f2449625cedbe2.js" type="text/javascript"></script>
+    <script src="//csdnimg.cn/atsuggest/atsuggest.js" type="text/javascript"></script>
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="Ra7ClklELxwbFyTLKHq2I74FEfQPz3eqNhyOFijF/tE=" name="csrf-token" />
+    <link href="//csdnimg.cn/public/favicon.ico" rel="SHORTCUT ICON">
+<link rel="stylesheet" href="//csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+<script language="javascript" type="text/javascript" src="//csdnimg.cn/asdf/tracking-1.0.0.js"></script>
+<meta name="referrer" content="always">
+<meta name="baidu-site-verification" content="CmcFliesix" />
+        <!-- 请置于所有广告位代码之前 -->
+    <script src="//dup.baidustatic.com/js/ds.js"></script>
+    <link href="//csdnimg.cn/release/bbs/assets/sh-353e52ea73888f7bf72641c9ae8e6a45.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="//csdnimg.cn/release/bbs/assets/sh-83dfe6b3d61bfd8fe4da30e0d7046ae0.js" type="text/javascript"></script>
+    <style>
+        #topic-detail-ad-ul{width:960px;float:left;font-size:1px;margin:0;padding:0}
+        #topic-detail-ad-l{float:left;}
+        #topic-detail-ad-r{float:right;}
+        #topic-detail-ad-ul li{list-style: none;}
+    </style>
+    <script>
+      var _hmt = _hmt || [];
+      (function() {
+       var hm = document.createElement("script");
+       hm.src = "//hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+       var s = document.getElementsByTagName("script")[0];
+       s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+    <script type="text/javascript" src="https://static.mediav.com/js/mvf_news_feed.js"></script>
+
+
+    <script type="text/javascript">
+        window.bbsInfoflag = true;
+        // 快速回复
+        $(document).ready(function () {
+            $("#com-quick-reply-bbs").bind("click", function(){
+                //_gaq.push(['_trackEvent','function', 'onclick', 'BBS_articles_youhuifu']);
+                $("#post_body").focus();
+                window.scrollTo(0, $(document).height());
+            });
+        });
+    </script>
+        <link ref="canonical" href="//bbs.csdn.net/topics/310260314">
+
+
+  </head>
+  <body id='topics-show'>
+  <!-- 自动推送工具代码-->
+  <script>
+      (function(){
+          var bp = document.createElement('script');
+          var curProtocol = window.location.protocol.split(':')[0];
+          if (curProtocol === 'https') {
+              bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+          }
+          else {
+              bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+          }
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(bp, s);
+      })();
+
+  </script>
+    <!-- <script type="text/javascript" src="http://c.csdnimg.cn/pubnav/js/pub_topnav_2011.js"></script> -->
+
+<!--全屏-->
+<ins data-revive-zoneid="149" data-revive-id="8c38e720de1c90a6f6ff52f3f89c4d57"></ins>
+<!--全屏-->
+
+
+
+    <style>
+
+  .news-nav .container {
+    MARGIN: 0px auto;width:1170px; FONT-FAMILY: "Microsoft YaHei";
+    padding:0;
+  }
+  .nav-bar{
+    font-size :16px;
+    color:#fff;
+    float:left;
+  }
+  .nav-bar a{
+    padding: 0;
+    display: inline-block;
+    line-height: 44px;
+    margin-right: 32px;
+    color: #4f4f4f;
+    text-decoration: none;
+    font-family: "Microsoft YaHei";
+  }
+  .nav-bar .current, .nav-bar .active, .nav-bar a:hover {
+    position: relative;
+    border:none;
+  }
+  .nav-bar .current::after,
+  .nav-bar .active::after,
+  .nav-bar a:hover::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    height: 3px;
+    left: 0;
+    right: 0;
+    background-color: #c92027;
+  }
+
+
+  .search-download{
+    float:right;
+    margin-top:11px;
+  }
+  .search-download form{
+    float:left;
+    border: 1px solid #ddd;
+  }
+  .search-download input{
+    /* border:solid 1px #ddd;
+    border-right:none; */
+    border:none;
+    height: 26px;
+    line-height:22px;
+    padding:0 10px;
+    margin-right:-5px;
+    width: 229px;
+  }
+  .search-download .download-search-bth{
+    background: url(//csdnimg.cn/public/common/toolbar/images/f_icon.png) no-repeat 0 -189px;
+    display: inline-block;
+    border: none;
+    width: 22px;
+    height: 26px;
+    vertical-align: middle;
+    padding-right: 2px;
+    background-color: #fff;
+  }
+  .search-download .help{
+    float:left;
+    margin:3px 0 0 20px;
+    font-size: 15px;
+    color: #4f4f4f;
+    line-height: 35px;
+    border: 0 !important;
+  }
+  .search-download .help .fa{
+    margin-right:5px;
+  }
+
+</style>
+
+<div class="news-nav">
+  <div class="container">
+    <div class="nav-bar">
+      <a href="/home" class="">论坛首页</a>
+      <span class="dropdown">
+  <a href="#">精选版块</a>
+  <span class="caret" style="top: 22px;"></span>
+  <div class="dropdown-menu" style="background: #eaebec;top: 45px">
+    <dl>
+      <dt><a href="/forums/Mobile">移动开发</a></dt>
+      <dd>
+        <a href="/forums/ios">iOS</a>
+        <a href="/forums/Android">Android</a>
+        <a href="/forums/Qt">Qt</a>
+        <a href="/forums/WindowsMobile">WP</a>
+      </dd>
+    </dl>
+    <dl>
+      <dt><a href="/forums/CloudComputing">云计算</a></dt>
+      <dd>
+        <a href="/forums/AWS">IaaS</a>
+        <a href="/forums/CloudFoundry">Pass/SaaS</a>
+        <a href="/forums/hadoop">分布式计算/Hadoop</a>
+      </dd>
+    </dl>
+    <dl>
+      <dt><a href="/forums/Java">Java技术</a></dt>
+      <dd>
+        <a href="/forums/J2SE">Java SE</a>
+        <a href="/forums/Java_WebDevelop">Java Web 开发</a>
+        <a href="/forums/J2EE">Java EE</a>
+        <a href="/forums/JavaOther">Java其他相关</a>
+      </dd>
+    </dl>
+    <dl>
+      <dt><a href="/forums/DotNET">.NET技术</a></dt>
+      <dd>
+        <a href="/forums/DotNETFramework">.NET Framework</a>
+        <a href="/forums/CSharp">C#</a>
+        <a href="/forums/DotNETAnalysisAndDesign">.NET分析与设计</a>
+        <a href="/forums/ASPDotNET">ASP .NET</a>
+        <a href="/forums/VBDotNET">VB .NET</a>
+      </dd>
+    </dl>
+    <dl>
+      <dt><a href="/forums/WebDevelop">Web开发</a></dt>
+      <dd>
+        <a href="/forums/PHP">PHP</a>
+        <a href="/forums/JavaScript">JavaScript</a>
+        <a href="/forums/ASP">ASP</a>
+        <a href="/forums/HTMLCSS">HTML(CSS)</a>
+        <a href="/forums/HTML5">HTML5</a>
+        <a href="/forums/Apache">Apache</a>
+      </dd>
+    </dl>
+    <dl>
+      <dt><a href="#">开发语言/框架</a></dt>
+      <dd>
+        <a href="/forums/Delphi">Delphi</a>
+        <a href="/forums/VC">VC/MFC</a>
+        <a href="/forums/VB">VB</a>
+        <a href="/forums/Cpp">C/C++</a>
+        <a href="/forums/BCB">C++ Builder</a>
+        <a href="/forums/OtherLanguage">其他开发语言</a>
+      </dd>
+    </dl>
+    <dl>
+      <dt><a href="#">数据库开发</a></dt>
+      <dd>
+        <a href="/forums/MSSQL">MS-SQL Server</a>
+        <a href="/forums/Oracle">Oracle</a>
+        <a href="/forums/PowerBuilder">PowerBuilder</a>
+        <a href="/forums/Informatica">Informatica</a>
+        <a href="/forums/OtherDatabase">其他数据库开发</a>
+      </dd>
+    </dl>
+    <dl>
+      <dt><a href="/forums/Embedded">硬件/嵌入式开发</a></dt>
+      <dd>
+        <a href="/forums/WinCE">嵌入开发(WinCE)</a>
+        <a href="/forums/Embedded_driver">驱动开发/核心开发</a>
+        <a href="/forums/Embedded_hardware">硬件设计</a>
+        <a href="/forums/Embedded_SCM">单片机/工控</a>
+        <a href="/forums/ASM">汇编语言</a>
+        <a href="/forums/VxWorks">VxWorks开发</a>
+      </dd>
+    </dl>
+    <dl>
+      <dt><a href="/forums/Linux">Linux/Unix社区</a></dt>
+      <dd>
+        <a href="/forums/Linux_System">系统维护与使用区</a>
+        <a href="/forums/Linux_Development">应用程序开发区</a>
+        <a href="/forums/Linux_Kernel">内核源代码研究区</a>
+        <a href="/forums/Linux_Driver">驱动程序开发区</a>
+        <a href="/forums/Linux_Hardware">CPU和硬件区</a>
+      </dd>
+    </dl>
+  </div>
+</span>
+
+      <a href="/rank" class="">论坛牛人</a>
+      <a href="/map" class="">论坛地图</a>
+      <a href="http://ask.csdn.net/subjects" target="_blank">专家问答</a>
+      <a href="/topics/new" class="">我要发贴</a>
+    </div>
+    <div class="search-download">
+      <a href="/help" class="help" style="color: #4f4f4f;" target="_blank">
+          <i class="fa fa-question-circle"></i>论坛帮助
+</a>    </div>
+  </div>
+</div>
+    <div class="wraper">
+      
+      <!--[if IE]>
+<style type="text/css" media="screen">
+  .control_area .control .drop_menu{border:3px solid #ccc \9; _*border:3px solid #ccc;}
+</style>
+<![endif]-->
+
+<!--<iframe id="frm_tt1" marginwidth="0" marginheight="0" frameborder="0" scrolling="no" width="100%" src="/sda/TopicBodyTop.htm?v=1"></iframe>-->
+<script type="text/javascript">
+//  setTimeout(function () { document.getElementById("frm_tt1").src = "/sda/TopicBodyTop.htm?v="+new Date().getTime(); }, 5000);
+
+  $(function(){
+      //获取要定位元素距离浏览器顶部的距离
+      $ = jQuery;
+      var navH = $(".detail_title_fixed").offset().top;
+      $(".detail_title_fixed").hide();
+
+      var show_detail_title_fixed = true;
+      //滚动条事件
+      $(window).scroll(function(){
+
+          //获取滚动条的滑动距离
+          var scroH = $(this).scrollTop();
+
+          //滚动条的滑动距离大于等于定位元素距离浏览器顶部的距离，就固定，反之就不固定
+          if(show_detail_title_fixed){
+              if(scroH>=navH){
+                  $(".detail_title_fixed").css({"position":"fixed","top":"0","border":"1px #198cc5 solid","z-index":"99999"});
+                  $(".detail_title_fixed").show();
+              }else if(scroH<navH){
+                  $(".detail_title_fixed").css({"position":"static"});
+                  $(".detail_title_fixed").hide();
+              }
+          }
+      });
+
+      $("#close_detail_title_fixed").click(function(){
+          show_detail_title_fixed = false;
+          $(".detail_title_fixed").hide();
+      });
+
+      $("#com-back-home").click(function(){
+        window.location.href="/";
+      });
+
+      $("#com-back-channel").click(function(){
+          window.location.href="/forums/J2SE";
+      });
+  })
+</script>
+
+
+
+
+<div class="flash_messages">
+</div>
+
+<div class="control_area top">
+  <form name="form" id="form">
+    
+    <div class="bread_nav" style="  float: left;margin-right: 10px">
+      <a href="http://www.csdn.net" target="_blank">CSDN</a> <em>&gt;</em>
+      <a href="/" target="_blank">CSDN论坛</a> <em>&gt;</em>
+          <a href="/forums/Java" target="_blank">Java</a> <em>&gt;</em>
+      <a href="/forums/J2SE" target="_blank">Java SE</a>
+    </div>
+    <div class="control">
+      <ul>
+        <li class="drop_menu_wrap drop_menu_down">
+          <a href="#" class="drop_toggle btn_1 " rel='nofollow'>
+            <span>
+              <img src="/assets/ico_set.gif" alt="" />管理菜单<img src="/assets/arrow_down.gif" alt="" />
+            </span>
+          </a>
+          <ul class="drop_menu" style="display: none; top:26px;">
+              <li><a href="/topics/310260314/top" class="fancybox" rel="nofollow">置顶</a></li>
+
+  <li><a href="/topics/310260314/recommend" data-confirm="您确定要推荐该帖吗？帖子被推荐后将奖励发帖用 户88个可用分和3个C币!" data-method="put" rel="nofollow">推荐</a></li>
+
+  <li><a href="/topics/310260314/lock" class="fancybox" rel="nofollow">锁定</a></li>
+
+<li><a href="/topics/310260314/move" class="fancybox" rel="nofollow">移动</a></li>
+<li><a href="/topics/310260314/edit" class="fancybox" rel="nofollow">编辑</a></li>
+<li><a href="/topics/310260314/destroy_edit" class="fancybox" rel="nofollow">删除</a></li>
+<li><a href="/topics/310260314/add_point" class="fancybox" rel="nofollow">帖子加分</a></li>
+  <li><a href="/topics/310260314/highlight" class="fancybox" rel="nofollow">帖子高亮</a></li>
+
+          </ul>
+        </li>
+        <li>
+          <a href="/topics/310260314/close" class="btn_1 close_topic" rel='nofollow'>
+            <span><img src="/assets/ico_over.gif" alt="" />结帖</span>
+          </a>
+        </li>
+        <li>
+          <a href="/topics/new?forum_id=J2SE" class="btn_1 create_topic" rel='nofollow'>
+            <span><img src="/assets/ico_publish.gif" alt="" />发帖</span>
+          </a>
+        </li>
+        <li>
+          <a href="#new_post" class="btn_1 reply_topic" rel='nofollow'>
+            <span><img src="/assets/ico_return.gif" alt="" />回复</span>
+          </a>
+        </li>
+          <li>
+            <a href="/topics/310260314/attetion" class="btn_1 reply_topic" rel='nofollow'>
+              <span><img src="/assets/ico_attention_topic.png" title="关注" />关注</span>
+            </a>
+          </li>
+      </ul>
+    </div>
+  </form>
+</div>
+
+<div class="h-entry">
+  <a class="p-author" href="#">A_dang_A_la</a>
+</div>
+
+
+<div class="detail_tbox">
+    <div class="detail_title_fixed">
+      <h1>
+            <span class="title text_overflow">java实现音乐频谱或者波形图</span>
+        <span>
+          [问题点数：20分，结帖人A_dang_A_la]
+        </span>
+      </h1>
+
+      <div class="fixed-r">
+        <a href="#new_post" class="bbs-btn-blue26">快速回复</a>
+            <a href="/topics/310260314?list=lz" class="bbs-btn-blue26">只显示楼主</a>
+            <a href="/topics/310260314/attetion" class="bbs-btn-blue26">关注帖子</a>
+        <a href="javascript:void(0);" id="close_detail_title_fixed" class="bbs-btn-close"> </a>
+      </div>
+    </div>
+    <div class="detail_title">
+      <h1>
+          <span class="title text_overflow">java实现音乐频谱或者波形图</span>
+        <span>
+          [问题点数：20分，结帖人A_dang_A_la]
+        </span>
+      </h1>
+      <div class="fr">
+        <select name="filter_posts">
+          <option value="default">不显示删除回复</option>
+          <option value="all">显示所有回复</option>
+          <option value="star">显示星级回复</option>
+          <option value="pointed">显示得分回复</option>
+          <option value="lz">只显示楼主</option>
+        </select>
+        <a href="#" onclick="bbs_fav('http://bbs.csdn.net/topics/310260314','java实现音乐频谱或者波形图')" class="fav" id="bbs_fav">&nbsp;收藏&nbsp;</a>
+        <script>
+            function bbs_fav(url,title){
+                $.ajax({
+                    url: '//my.csdn.net/my/favorite/do_add/2',
+                    dataType: 'json',
+                    type: 'get',
+                    xhrFields: { withCredentials: true },
+                    crossDomain: true,
+                    data:{title:title,url:url,share:1,map_name:''},
+                    success: function(json) {
+                        console.log(json);
+                        if(json.succ==1){
+                            alert('收藏成功');
+                        }else{
+                            alert(json.msg);
+                        }
+                    },
+                    error: function() {
+                    }
+                });
+            }
+        </script>
+      </div>
+    </div>
+</div>
+<div>
+  <!-- 广告位：PC端-论坛帖子页顶部banner1-960*90 -->
+  <script>
+      (function() {
+          var s = "_" + Math.random().toString(36).slice(2);
+          document.write('<div id="' + s + '"></div>');
+          (window.slotbydup=window.slotbydup || []).push({
+              id: '4776821',
+              container: s,
+              size: '960,90',
+              display: 'inlay-fix'
+          });
+      })();
+  </script>
+</div>
+<div class="detailed">
+    <table border="0" cellspacing="0" cellpadding="0" id="post-310260314"
+  class="post topic "
+  data-post-id="310260314" data-is-topic-locked="false">
+  <colgroup><col width="110" /><col /></colgroup>
+  <tr>
+      <td rowspan="2" valign="top" class="wirter" style="width: 110px">
+                <dl class="user_info ">
+          <dt class="user_head" data-username="A_dang_A_la">
+            <a href="//my.csdn.net/A_dang_A_la" rel="nofollow" target="_blank"><img alt="A_dang_A_la" class="avatar" src="//avatar.csdn.net/E/E/3/1_a_dang_a_la.jpg" style="height: 80px;" /></a>
+          </dt>
+          <dd class="username" style="display: none">
+            <a href="//my.csdn.net/A_dang_A_la" rel="nofollow" target="_blank" title="Huanght">Huanght</a>
+            
+          </dd>
+          <dd class="nickname" style="word-break:break-all;">
+            <a href="//my.csdn.net/A_dang_A_la" rel="nofollow" target="_blank" title="Huanght">Huanght</a>
+            <br>
+            <img alt="Bbs1" class="topic_show_user_level" src="//csdnimg.cn/jifen/images/xunzhang/jianzhang/bbs1.png" style="margin: 4px 0;" />
+            <div class="topic_show_posts">
+              <div class="smallTittle">
+                本版专家分：84
+              </div>
+            </div>
+            
+          </dd>
+
+
+
+          <dd class="close_rate" title="用户结帖率：100%
+总发帖：9
+正常结帖：9
+未结帖：0">结帖率：100%</dd>
+
+          <dd class="showTittleDD">
+
+          </dd>
+
+        </dl>
+
+      </td>
+
+		<td style="vertical-align: bottom" valign="top" class="post_info topic pointed" data-username="A_dang_A_la" data-floor="">
+			
+        <div class="post_body">
+
+              <div class="tag">
+              </div>
+                  java实现音乐频谱或者波形图，附代码··
+
+
+                  <!-- 主帖下Banner (D4) -->
+                  <!-- 主帖下文字 (D5) -->
+                  <div marginwidth="0" marginheight="0" scrolling="no" width="100%">
+                    <style type="text/css">
+    /***Business text AD***/
+    /*body {margin:0; padding: 0;font:normal 12px simsun; }*/
+    .adtxt{text-align:center;}
+    .adtxt ul{margin:5px 0;border-top:1px solid #B9B9B9;border-bottom:1px solid #B9B9B9;background-color:#F2F6FB;padding:5px 0;}
+    .adtxt ul li{display: inline-block;font-size:12px;}
+    .adtxt ul li a{color:#333;}
+    /*a{color: #002D93;text-decoration:none;}*/
+    /*a:visited{color: #B00;text-decoration:none;}*/
+    /*a:hover{color: #B00; text-decoration: underline;}*/
+</style>
+
+<body>
+<div id="bd_ad_2" style="margin:0; padding-bottom:5px; display:block; text-align: center">
+  <!-- 广告位：PC端-论坛帖子页banner2-728*90 -->
+  <div id="placeholder" class="mediav_ad" ></div>
+  <script type="text/javascript">
+      NEWS_FEED({
+          w: 728,//必须大于300
+          showid : '0UvTI1',
+          placeholderId : 'placeholder',//容器ID
+          fId : '',//信息流容器ID
+          inject : 'cads'
+      })
+  </script>
+</div>
+
+</body>
+                  </div>
+
+
+        </div>
+
+		</td>
+	</tr>
+	<tr>
+		<td valign="bottom">
+							<div style="margin: 0 0 0 10px;font-size: 14px;border-top: 1px dashed #eee;padding:8px 0 0 0;">
+								<ul>
+											<li data-mod="popu_592" class="csdn-tracking-statistics" style="width: 820px;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+												<a href="https://blog.csdn.net/gizwits_csdn/article/details/79031719" target="_blank" title="Arduino音乐频谱">Arduino音乐频谱</a>
+											</li>
+								</ul>
+							</div>
+					
+<div class="control">
+
+  <span class="time">
+              发表于：
+    2009-08-28 09:40:06
+  </span>
+
+
+      <strong class="fr">
+        楼主
+      </strong>
+
+  <div class="fr" style="margin-left:50px;">
+        <a href="javascript:void(0)" onclick="post_digg(310260314,310260314)" class="red digg">对我有用[0]</a> |
+        <a href="javascript:void(0)" onclick="post_bury(310260314,310260314)" class="bury">丢个板砖[0]</a> |
+        <script>
+          function post_digg(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/digg',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.digg').text(json.digg);
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+
+          function post_bury(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/bury',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.bury').text('丢个板砖['+json.bury+']');
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+        </script>
+      <a href="#quote" class="quote" rel='nofollow'>引用</a> |
+      <a href="/posts/310260314/report?topic_id=310260314" class="fancybox red report_spam" rel="nofollow">举报 </a> |
+    <span class="manage-toggle">
+      <div class="manage" style="display: none;">
+          <a href="/topics/310260314/edit" class="fancybox" rel="nofollow">编辑</a>
+          <a href="/topics/310260314/destroy_edit" class="fancybox" rel="nofollow">删除</a>
+      </div>
+      管理
+    </span>
+  </div>
+    <span class="return_time">回复次数：11</span>
+
+
+</div>
+
+
+		</td>
+  </tr>
+</table>
+
+
+				<table>
+					<tbody>
+					<tr>
+						<td valign="top" class="wirter" style="width: 110px">
+							<dl class="user_info ">
+								<dt class="user_head" data-username="CSDN官网">
+									<a href="http://www.csdn.net" rel="nofollow" target="_blank"><img alt="CSDN官网" class="avatar" src="//avatar.csdn.net/6/2/6/1_nettman.jpg"></a>
+								<div class="user_material" style="display: none;height: 118px">
+									<div class="user_material_bg" style="height: 100px">
+										<dl>
+											<dt><a href="http://www.csdn.net" target="_blank"><img src="//avatar.csdn.net/6/2/6/1_nettman.jpg" class="avatar_80"></a></dt>
+											<dd style="text-align: left;">账号:<a href="http://www.csdn.net" target="_blank">CSDN官网</a></dd>
+											<dd style="text-align: left;" class="nickname">昵称:<span class="name2nick" style="overflow: initial;">CSDN官网</span></dd>
+										</dl>
+									</div>
+								</div>
+								</dt>
+								<dd class="username">
+									<a href="http://www.csdn.net" rel="nofollow" target="_blank" title="CSDN官网">CSDN推荐</a>
+								</dd>
+							</dl>
+						</td>
+						<td>
+							<div >
+								<div style="margin-top: 5px;width: 100%;padding: 0" class="post_body">
+									<ul style="margin-left: 16px">
+												<li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+													<a href="https://download.csdn.net/download/fandongdong2282/7261671" target="_blank" title="语音的读入以及绘出语音信号的波形频谱图">语音的读入以及绘出语音信号的波形频谱图</a>
+												</li>
+												<li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+													<a href="https://blog.csdn.net/yazi1297/article/details/39610693" target="_blank" title="canvas画波形图">canvas画波形图</a>
+												</li>
+												<li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+													<a href="https://blog.csdn.net/daiyelang/article/details/16980427" target="_blank" title="ios 绘制wav波形图">ios 绘制wav波形图</a>
+												</li>
+												<li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+													<a href="https://blog.csdn.net/hduxiejun/article/details/46287341" target="_blank" title="STM32F4  FFT  音乐频谱 不要太easy！">STM32F4  FFT  音乐频谱 不要太easy！</a>
+												</li>
+												<li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+													<a href="https://download.csdn.net/download/zr339361504/8379573" target="_blank" title="iOS以及osx绘制音频频谱demo">iOS以及osx绘制音频频谱demo</a>
+												</li>
+												<li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+													<a href="https://blog.csdn.net/u013584315/article/details/37967455" target="_blank" title="LED音乐频谱之点阵">LED音乐频谱之点阵</a>
+												</li>
+												<li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+													<a href="https://blog.csdn.net/weixin_39364136/article/details/78592134" target="_blank" title="通过html5的Audio API和canvas实现音频可视化">通过html5的Audio API和canvas实现音频可视化</a>
+												</li>
+												<li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+													<a href="https://download.csdn.net/download/h7572473/5298975" target="_blank" title="Matlab程序，是播放音乐文件的波形和频谱的实时显示">Matlab程序，是播放音乐文件的波形和频谱的实时显示</a>
+												</li>
+									</ul>
+
+								</div>
+							</div>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+
+
+
+
+  <table border="0" cellspacing="0" cellpadding="0" id="post-312476237"
+  class="post  "
+  data-post-id="312476237" data-is-topic-locked="false">
+  <colgroup><col width="110" /><col /></colgroup>
+  <tr>
+      <td rowspan="2" valign="top" class="wirter" style="width: 110px">
+                <dl class="user_info ">
+          <dt class="user_head" data-username="justinavril">
+            <a href="//my.csdn.net/justinavril" rel="nofollow" target="_blank"><img alt="justinavril" class="avatar" src="//avatar.csdn.net/B/F/7/1_justinavril.jpg" style="height: 80px;" /></a>
+          </dt>
+          <dd class="username" style="display: none">
+            <a href="//my.csdn.net/justinavril" rel="nofollow" target="_blank" title="justinavril">justinavril</a>
+            
+          </dd>
+          <dd class="nickname" style="word-break:break-all;">
+            <a href="//my.csdn.net/justinavril" rel="nofollow" target="_blank" title="justinavril">justinavril</a>
+            <br>
+            <img alt="Bbs7" class="topic_show_user_level" src="//csdnimg.cn/jifen/images/xunzhang/jianzhang/bbs7.png" style="margin: 4px 0;" />
+            <div class="topic_show_posts">
+              <div class="smallTittle">
+                本版专家分：12365
+              </div>
+            </div>
+            
+          </dd>
+
+
+
+          <dd class="close_rate" title="用户结帖率：100%
+总发帖：71
+正常结帖：71
+未结帖：0">结帖率：100%</dd>
+
+          <dd class="showTittleDD">
+                <span>
+                   <img  src="//csdnimg.cn/jifen/images/xunzhang/xunzhang/weiruanmvpsmall.png" alt="Blank"  class="xunZhang" >
+                   <div class="showTittle">
+                     <div style="left: 18%; top: -8px; position: absolute; width: 0; height: 0;border-left: 10px solid transparent;border-right: 10px solid transparent; border-bottom: 8px solid #ffffff;"></div>
+                     <dl>
+                       <dt><img src="//csdnimg.cn/jifen/images/xunzhang/xunzhang/weiruanmvpmiddle.png"></dt>
+                       <dd>
+                         <strong>微软MVP</strong>
+                         2014年1月 荣获微软MVP称号
+                       </dd>
+                     </dl>
+                   </div>
+                </span>
+
+          </dd>
+
+        </dl>
+
+      </td>
+
+		<td style="vertical-align: bottom" valign="top" class="post_info star" data-username="justinavril" data-floor="1">
+			
+        <div class="post_body">
+
+                  这个不仅要Java好，还要懂音律，期待人才...
+
+
+
+        </div>
+
+		</td>
+	</tr>
+	<tr>
+		<td valign="bottom">
+							<div style="margin: 0 0 0 10px;font-size: 14px;border-top: 1px dashed #eee;padding:8px 0 0 0;">
+								<ul>
+											<li data-mod="popu_592" class="csdn-tracking-statistics" style="width: 820px;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+												<a href="https://blog.csdn.net/u011500781/article/details/52073220" target="_blank" title="html5音乐频谱">html5音乐频谱</a>
+											</li>
+								</ul>
+							</div>
+					
+<div class="control">
+
+  <span class="time">
+              回复于：
+    2009-08-28 09:40:58
+  </span>
+
+
+            <span class="fr" style="margin-left:50px;">
+              <a href="#post-312476237">#1</a>
+              得分：0
+            </span>
+
+    <div id='post-forum-bulletin-1'  class='fl tracking-ad' data-mod='popu_9'>
+    </div>
+  <div class="fr" style="margin-left:50px;">
+        <a href="javascript:void(0)" onclick="post_digg(310260314,312476237)" class="red digg">对我有用[0]</a> |
+        <a href="javascript:void(0)" onclick="post_bury(310260314,312476237)" class="bury">丢个板砖[0]</a> |
+        <script>
+          function post_digg(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/digg',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.digg').text(json.digg);
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+
+          function post_bury(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/bury',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.bury').text('丢个板砖['+json.bury+']');
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+        </script>
+      <a href="#quote" class="quote" rel='nofollow'>引用</a> |
+      <a href="/posts/312476237/report?topic_id=310260314" class="fancybox red report_spam" rel="nofollow">举报 </a> |
+    <span class="manage-toggle">
+      <div class="manage" style="display: none;">
+          <a href="/posts/312476237/edit" class="fancybox" rel="nofollow">编辑</a>
+          <a href="/posts/312476237/destroy_edit" class="fancybox" rel="nofollow">删除</a>
+      </div>
+      管理
+    </span>
+  </div>
+
+
+</div>
+
+
+		</td>
+  </tr>
+</table>
+
+
+<table border="0" cellspacing="0" cellpadding="0" id="post-312477830"
+  class="post  "
+  data-post-id="312477830" data-is-topic-locked="false">
+  <colgroup><col width="110" /><col /></colgroup>
+  <tr>
+      <td rowspan="2" valign="top" class="wirter" style="width: 110px">
+                <dl class="user_info ">
+          <dt class="user_head" data-username="dz007">
+            <a href="//my.csdn.net/dz007" rel="nofollow" target="_blank"><img alt="dz007" class="avatar" src="//avatar.csdn.net/3/9/B/1_dz007.jpg" style="height: 80px;" /></a>
+          </dt>
+          <dd class="username" style="display: none">
+            <a href="//my.csdn.net/dz007" rel="nofollow" target="_blank" title="dz007">dz007</a>
+            
+          </dd>
+          <dd class="nickname" style="word-break:break-all;">
+            <a href="//my.csdn.net/dz007" rel="nofollow" target="_blank" title="dz007">dz007</a>
+            <br>
+            <img alt="Bbs3" class="topic_show_user_level" src="//csdnimg.cn/jifen/images/xunzhang/jianzhang/bbs3.png" style="margin: 4px 0;" />
+            <div class="topic_show_posts">
+              <div class="smallTittle">
+                本版专家分：967
+              </div>
+            </div>
+            
+          </dd>
+
+
+
+          <dd class="close_rate" title="用户结帖率：100%
+总发帖：30
+正常结帖：30
+未结帖：0">结帖率：100%</dd>
+
+          <dd class="showTittleDD">
+
+          </dd>
+
+        </dl>
+
+      </td>
+
+		<td style="vertical-align: bottom" valign="top" class="post_info " data-username="dz007" data-floor="2">
+			
+        <div class="post_body">
+
+                  这个难度，老高老高啦，还要分析文件……
+
+
+
+        </div>
+
+		</td>
+	</tr>
+	<tr>
+		<td valign="bottom">
+							<div style="margin: 0 0 0 10px;font-size: 14px;border-top: 1px dashed #eee;padding:8px 0 0 0;">
+								<ul>
+											<li data-mod="popu_592" class="csdn-tracking-statistics" style="width: 820px;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+												<a href="https://download.csdn.net/download/u011467537/9448351" target="_blank" title="android 音乐律动频谱实现">android 音乐律动频谱实现</a>
+											</li>
+								</ul>
+							</div>
+					
+<div class="control">
+
+  <span class="time">
+              回复于：
+    2009-08-28 10:19:26
+  </span>
+
+
+            <span class="fr" style="margin-left:50px;">
+              <a href="#post-312477830">#2</a>
+              得分：0
+            </span>
+
+    <div id='post-forum-bulletin-2'  class='fl tracking-ad' data-mod='popu_9'>
+    </div>
+  <div class="fr" style="margin-left:50px;">
+        <a href="javascript:void(0)" onclick="post_digg(310260314,312477830)" class="red digg">对我有用[0]</a> |
+        <a href="javascript:void(0)" onclick="post_bury(310260314,312477830)" class="bury">丢个板砖[0]</a> |
+        <script>
+          function post_digg(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/digg',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.digg').text(json.digg);
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+
+          function post_bury(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/bury',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.bury').text('丢个板砖['+json.bury+']');
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+        </script>
+      <a href="#quote" class="quote" rel='nofollow'>引用</a> |
+      <a href="/posts/312477830/report?topic_id=310260314" class="fancybox red report_spam" rel="nofollow">举报 </a> |
+    <span class="manage-toggle">
+      <div class="manage" style="display: none;">
+          <a href="/posts/312477830/edit" class="fancybox" rel="nofollow">编辑</a>
+          <a href="/posts/312477830/destroy_edit" class="fancybox" rel="nofollow">删除</a>
+      </div>
+      管理
+    </span>
+  </div>
+
+
+</div>
+
+
+		</td>
+  </tr>
+</table>
+
+
+<table border="0" cellspacing="0" cellpadding="0" id="post-312484495"
+  class="post  "
+  data-post-id="312484495" data-is-topic-locked="false">
+  <colgroup><col width="110" /><col /></colgroup>
+  <tr>
+      <td rowspan="2" valign="top" class="wirter" style="width: 110px">
+                <dl class="user_info ">
+          <dt class="user_head" data-username="A_dang_A_la">
+            <a href="//my.csdn.net/A_dang_A_la" rel="nofollow" target="_blank"><img alt="A_dang_A_la" class="avatar" src="//avatar.csdn.net/E/E/3/1_a_dang_a_la.jpg" style="height: 80px;" /></a>
+          </dt>
+          <dd class="username" style="display: none">
+            <a href="//my.csdn.net/A_dang_A_la" rel="nofollow" target="_blank" title="Huanght">Huanght</a>
+            
+          </dd>
+          <dd class="nickname" style="word-break:break-all;">
+            <a href="//my.csdn.net/A_dang_A_la" rel="nofollow" target="_blank" title="Huanght">Huanght</a>
+            <br>
+            <img alt="Bbs1" class="topic_show_user_level" src="//csdnimg.cn/jifen/images/xunzhang/jianzhang/bbs1.png" style="margin: 4px 0;" />
+            <div class="topic_show_posts">
+              <div class="smallTittle">
+                本版专家分：84
+              </div>
+            </div>
+            
+          </dd>
+
+
+
+          <dd class="close_rate" title="用户结帖率：100%
+总发帖：9
+正常结帖：9
+未结帖：0">结帖率：100%</dd>
+
+          <dd class="showTittleDD">
+
+          </dd>
+
+        </dl>
+
+      </td>
+
+		<td style="vertical-align: bottom" valign="top" class="post_info " data-username="A_dang_A_la" data-floor="3">
+			
+        <div class="post_body">
+
+                  ding
+
+
+
+        </div>
+
+		</td>
+	</tr>
+	<tr>
+		<td valign="bottom">
+							<div style="margin: 0 0 0 10px;font-size: 14px;border-top: 1px dashed #eee;padding:8px 0 0 0;">
+								<ul>
+											<li data-mod="popu_592" class="csdn-tracking-statistics" style="width: 820px;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+												<a href="https://download.csdn.net/download/hugion/5163885" target="_blank" title="PCM wav文件的波形图显示">PCM wav文件的波形图显示</a>
+											</li>
+								</ul>
+							</div>
+					
+<div class="control">
+
+  <span class="time">
+              回复于：
+    2009-08-28 13:28:26
+  </span>
+
+
+            <span class="fr" style="margin-left:50px;">
+              <a href="#post-312484495">#3</a>
+              得分：0
+            </span>
+
+    <div id='post-forum-bulletin-3'  class='fl tracking-ad' data-mod='popu_9'>
+    </div>
+  <div class="fr" style="margin-left:50px;">
+        <a href="javascript:void(0)" onclick="post_digg(310260314,312484495)" class="red digg">对我有用[0]</a> |
+        <a href="javascript:void(0)" onclick="post_bury(310260314,312484495)" class="bury">丢个板砖[0]</a> |
+        <script>
+          function post_digg(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/digg',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.digg').text(json.digg);
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+
+          function post_bury(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/bury',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.bury').text('丢个板砖['+json.bury+']');
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+        </script>
+      <a href="#quote" class="quote" rel='nofollow'>引用</a> |
+      <a href="/posts/312484495/report?topic_id=310260314" class="fancybox red report_spam" rel="nofollow">举报 </a> |
+    <span class="manage-toggle">
+      <div class="manage" style="display: none;">
+          <a href="/posts/312484495/edit" class="fancybox" rel="nofollow">编辑</a>
+          <a href="/posts/312484495/destroy_edit" class="fancybox" rel="nofollow">删除</a>
+      </div>
+      管理
+    </span>
+  </div>
+
+
+</div>
+
+
+		</td>
+  </tr>
+</table>
+
+
+<table border="0" cellspacing="0" cellpadding="0" id="post-312484641"
+  class="post  "
+  data-post-id="312484641" data-is-topic-locked="false">
+  <colgroup><col width="110" /><col /></colgroup>
+  <tr>
+      <td rowspan="2" valign="top" class="wirter" style="width: 110px">
+                <dl class="user_info ">
+          <dt class="user_head" data-username="hbgzg3006">
+            <a href="//my.csdn.net/hbgzg3006" rel="nofollow" target="_blank"><img alt="hbgzg3006" class="avatar" src="//avatar.csdn.net/E/3/9/1_hbgzg3006.jpg" style="height: 80px;" /></a>
+          </dt>
+          <dd class="username" style="display: none">
+            <a href="//my.csdn.net/hbgzg3006" rel="nofollow" target="_blank" title="hbgzg3006">hbgzg3006</a>
+            
+          </dd>
+          <dd class="nickname" style="word-break:break-all;">
+            <a href="//my.csdn.net/hbgzg3006" rel="nofollow" target="_blank" title="hbgzg3006">hbgzg3006</a>
+            <br>
+            <img alt="Bbs5" class="topic_show_user_level" src="//csdnimg.cn/jifen/images/xunzhang/jianzhang/bbs5.png" style="margin: 4px 0;" />
+            <div class="topic_show_posts">
+              <div class="smallTittle">
+                本版专家分：4579
+              </div>
+            </div>
+            
+          </dd>
+
+
+
+          <dd class="close_rate" title="用户结帖率：98.7%
+总发帖：77
+正常结帖：76
+未结帖：1">结帖率：98.7%</dd>
+
+          <dd class="showTittleDD">
+
+          </dd>
+
+        </dl>
+
+      </td>
+
+		<td style="vertical-align: bottom" valign="top" class="post_info " data-username="hbgzg3006" data-floor="4">
+			
+        <div class="post_body">
+
+                  话说有可能要看YOYOPlayer的源码
+
+
+
+        </div>
+
+		</td>
+	</tr>
+	<tr>
+		<td valign="bottom">
+							<div style="margin: 0 0 0 10px;font-size: 14px;border-top: 1px dashed #eee;padding:8px 0 0 0;">
+								<ul>
+											<li data-mod="popu_592" class="csdn-tracking-statistics" style="width: 820px;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+												<a href="https://download.csdn.net/download/chenxh/142622" target="_blank" title="音乐频谱显示程序源代码">音乐频谱显示程序源代码</a>
+											</li>
+								</ul>
+							</div>
+					
+<div class="control">
+
+  <span class="time">
+              回复于：
+    2009-08-28 13:33:11
+  </span>
+
+
+            <span class="fr" style="margin-left:50px;">
+              <a href="#post-312484641">#4</a>
+              得分：0
+            </span>
+
+    <div id='post-forum-bulletin-4'  class='fl tracking-ad' data-mod='popu_9'>
+    </div>
+  <div class="fr" style="margin-left:50px;">
+        <a href="javascript:void(0)" onclick="post_digg(310260314,312484641)" class="red digg">对我有用[0]</a> |
+        <a href="javascript:void(0)" onclick="post_bury(310260314,312484641)" class="bury">丢个板砖[0]</a> |
+        <script>
+          function post_digg(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/digg',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.digg').text(json.digg);
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+
+          function post_bury(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/bury',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.bury').text('丢个板砖['+json.bury+']');
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+        </script>
+      <a href="#quote" class="quote" rel='nofollow'>引用</a> |
+      <a href="/posts/312484641/report?topic_id=310260314" class="fancybox red report_spam" rel="nofollow">举报 </a> |
+    <span class="manage-toggle">
+      <div class="manage" style="display: none;">
+          <a href="/posts/312484641/edit" class="fancybox" rel="nofollow">编辑</a>
+          <a href="/posts/312484641/destroy_edit" class="fancybox" rel="nofollow">删除</a>
+      </div>
+      管理
+    </span>
+  </div>
+
+
+</div>
+
+
+		</td>
+  </tr>
+</table>
+
+
+<table border="0" cellspacing="0" cellpadding="0" id="post-312487005"
+  class="post  "
+  data-post-id="312487005" data-is-topic-locked="false">
+  <colgroup><col width="110" /><col /></colgroup>
+  <tr>
+      <td rowspan="2" valign="top" class="wirter" style="width: 110px">
+                <dl class="user_info ">
+          <dt class="user_head" data-username="zhangyong20081204">
+            <a href="//my.csdn.net/zhangyong20081204" rel="nofollow" target="_blank"><img alt="zhangyong20081204" class="avatar" src="//avatar.csdn.net/7/9/E/1_zhangyong20081204.jpg" style="height: 80px;" /></a>
+          </dt>
+          <dd class="username" style="display: none">
+            <a href="//my.csdn.net/zhangyong20081204" rel="nofollow" target="_blank" title="启明星">启明星</a>
+            
+          </dd>
+          <dd class="nickname" style="word-break:break-all;">
+            <a href="//my.csdn.net/zhangyong20081204" rel="nofollow" target="_blank" title="启明星">启明星</a>
+            <br>
+            <img alt="Bbs2" class="topic_show_user_level" src="//csdnimg.cn/jifen/images/xunzhang/jianzhang/bbs2.png" style="margin: 4px 0;" />
+            <div class="topic_show_posts">
+              <div class="smallTittle">
+                本版专家分：348
+              </div>
+            </div>
+            
+          </dd>
+
+
+
+          <dd class="close_rate" title="用户结帖率：100%
+总发帖：15
+正常结帖：15
+未结帖：0">结帖率：100%</dd>
+
+          <dd class="showTittleDD">
+
+          </dd>
+
+        </dl>
+
+      </td>
+
+		<td style="vertical-align: bottom" valign="top" class="post_info " data-username="zhangyong20081204" data-floor="5">
+			
+        <div class="post_body">
+
+                  我了解的，有的事我们的系统里都有基本的MIDI的音频的东西，网上有这方面的工具包，下载一个，然后用了。。
+
+                  <div marginwidth="0" marginheight="0" scrolling="no" width="100%">
+                    <div id="placeholder_floor5" class="mediav_ad" ></div>
+                    <script type="text/javascript">
+                        NEWS_FEED({
+                            w: 728,//必须大于300
+                            showid : '0UvTI1',
+                            placeholderId : 'placeholder_floor5',//容器ID
+                            fId : '',//信息流容器ID
+                            inject : 'cads'
+                        })
+                    </script>
+                  </div>
+
+
+        </div>
+
+		</td>
+	</tr>
+	<tr>
+		<td valign="bottom">
+							<div style="margin: 0 0 0 10px;font-size: 14px;border-top: 1px dashed #eee;padding:8px 0 0 0;">
+								<ul>
+											<li data-mod="popu_592" class="csdn-tracking-statistics" style="width: 820px;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+												<a href="https://blog.csdn.net/u013584315/article/details/38023431" target="_blank" title="LED音乐频谱之输入数据处理">LED音乐频谱之输入数据处理</a>
+											</li>
+								</ul>
+							</div>
+					
+<div class="control">
+
+  <span class="time">
+              回复于：
+    2009-08-28 14:45:20
+  </span>
+
+
+            <span class="fr" style="margin-left:50px;">
+              <a href="#post-312487005">#5</a>
+              得分：0
+            </span>
+
+    <div id='post-forum-bulletin-5'  class='fl tracking-ad' data-mod='popu_9'>
+    </div>
+  <div class="fr" style="margin-left:50px;">
+        <a href="javascript:void(0)" onclick="post_digg(310260314,312487005)" class="red digg">对我有用[0]</a> |
+        <a href="javascript:void(0)" onclick="post_bury(310260314,312487005)" class="bury">丢个板砖[0]</a> |
+        <script>
+          function post_digg(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/digg',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.digg').text(json.digg);
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+
+          function post_bury(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/bury',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.bury').text('丢个板砖['+json.bury+']');
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+        </script>
+      <a href="#quote" class="quote" rel='nofollow'>引用</a> |
+      <a href="/posts/312487005/report?topic_id=310260314" class="fancybox red report_spam" rel="nofollow">举报 </a> |
+    <span class="manage-toggle">
+      <div class="manage" style="display: none;">
+          <a href="/posts/312487005/edit" class="fancybox" rel="nofollow">编辑</a>
+          <a href="/posts/312487005/destroy_edit" class="fancybox" rel="nofollow">删除</a>
+      </div>
+      管理
+    </span>
+  </div>
+
+
+</div>
+
+
+		</td>
+  </tr>
+</table>
+
+
+<table border="0" cellspacing="0" cellpadding="0" id="post-312487408"
+  class="post  "
+  data-post-id="312487408" data-is-topic-locked="false">
+  <colgroup><col width="110" /><col /></colgroup>
+  <tr>
+      <td rowspan="2" valign="top" class="wirter" style="width: 110px">
+                <dl class="user_info ">
+          <dt class="user_head" data-username="yekai012">
+            <a href="//my.csdn.net/yekai012" rel="nofollow" target="_blank"><img alt="yekai012" class="avatar" src="//avatar.csdn.net/E/8/5/1_yekai012.jpg" style="height: 80px;" /></a>
+          </dt>
+          <dd class="username" style="display: none">
+            <a href="//my.csdn.net/yekai012" rel="nofollow" target="_blank" title="yekai012">yekai012</a>
+            
+          </dd>
+          <dd class="nickname" style="word-break:break-all;">
+            <a href="//my.csdn.net/yekai012" rel="nofollow" target="_blank" title="yekai012">yekai012</a>
+            <br>
+            <img alt="Bbs4" class="topic_show_user_level" src="//csdnimg.cn/jifen/images/xunzhang/jianzhang/bbs4.png" style="margin: 4px 0;" />
+            <div class="topic_show_posts">
+              <div class="smallTittle">
+                本版专家分：1358
+              </div>
+            </div>
+            
+          </dd>
+
+
+
+          <dd class="close_rate" title="用户结帖率：100%
+总发帖：4
+正常结帖：4
+未结帖：0">结帖率：100%</dd>
+
+          <dd class="showTittleDD">
+
+          </dd>
+
+        </dl>
+
+      </td>
+
+		<td style="vertical-align: bottom" valign="top" class="post_info " data-username="yekai012" data-floor="6">
+			
+        <div class="post_body">
+
+                  java好像有专门的inputStream来处理，具体的想不起来了。<br />
+波形好做，频谱需要FFT转换，比较复杂。
+
+
+
+        </div>
+
+		</td>
+	</tr>
+	<tr>
+		<td valign="bottom">
+							<div style="margin: 0 0 0 10px;font-size: 14px;border-top: 1px dashed #eee;padding:8px 0 0 0;">
+								<ul>
+											<li data-mod="popu_592" class="csdn-tracking-statistics" style="width: 820px;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+												<a href="https://blog.csdn.net/yuanyuan_186/article/details/51244328" target="_blank" title="java显示声音波形图示例">java显示声音波形图示例</a>
+											</li>
+								</ul>
+							</div>
+					
+<div class="control">
+
+  <span class="time">
+              回复于：
+    2009-08-28 14:57:05
+  </span>
+
+
+            <span class="fr" style="margin-left:50px;">
+              <a href="#post-312487408">#6</a>
+              得分：0
+            </span>
+
+    <div id='post-forum-bulletin-6'  class='fl tracking-ad' data-mod='popu_9'>
+    </div>
+  <div class="fr" style="margin-left:50px;">
+        <a href="javascript:void(0)" onclick="post_digg(310260314,312487408)" class="red digg">对我有用[0]</a> |
+        <a href="javascript:void(0)" onclick="post_bury(310260314,312487408)" class="bury">丢个板砖[0]</a> |
+        <script>
+          function post_digg(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/digg',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.digg').text(json.digg);
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+
+          function post_bury(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/bury',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.bury').text('丢个板砖['+json.bury+']');
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+        </script>
+      <a href="#quote" class="quote" rel='nofollow'>引用</a> |
+      <a href="/posts/312487408/report?topic_id=310260314" class="fancybox red report_spam" rel="nofollow">举报 </a> |
+    <span class="manage-toggle">
+      <div class="manage" style="display: none;">
+          <a href="/posts/312487408/edit" class="fancybox" rel="nofollow">编辑</a>
+          <a href="/posts/312487408/destroy_edit" class="fancybox" rel="nofollow">删除</a>
+      </div>
+      管理
+    </span>
+  </div>
+
+
+</div>
+
+
+		</td>
+  </tr>
+</table>
+
+
+<table border="0" cellspacing="0" cellpadding="0" id="post-312509009"
+  class="post  "
+  data-post-id="312509009" data-is-topic-locked="false">
+  <colgroup><col width="110" /><col /></colgroup>
+  <tr>
+      <td rowspan="2" valign="top" class="wirter" style="width: 110px">
+                <dl class="user_info ">
+          <dt class="user_head" data-username="A_dang_A_la">
+            <a href="//my.csdn.net/A_dang_A_la" rel="nofollow" target="_blank"><img alt="A_dang_A_la" class="avatar" src="//avatar.csdn.net/E/E/3/1_a_dang_a_la.jpg" style="height: 80px;" /></a>
+          </dt>
+          <dd class="username" style="display: none">
+            <a href="//my.csdn.net/A_dang_A_la" rel="nofollow" target="_blank" title="Huanght">Huanght</a>
+            
+          </dd>
+          <dd class="nickname" style="word-break:break-all;">
+            <a href="//my.csdn.net/A_dang_A_la" rel="nofollow" target="_blank" title="Huanght">Huanght</a>
+            <br>
+            <img alt="Bbs1" class="topic_show_user_level" src="//csdnimg.cn/jifen/images/xunzhang/jianzhang/bbs1.png" style="margin: 4px 0;" />
+            <div class="topic_show_posts">
+              <div class="smallTittle">
+                本版专家分：84
+              </div>
+            </div>
+            
+          </dd>
+
+
+
+          <dd class="close_rate" title="用户结帖率：100%
+总发帖：9
+正常结帖：9
+未结帖：0">结帖率：100%</dd>
+
+          <dd class="showTittleDD">
+
+          </dd>
+
+        </dl>
+
+      </td>
+
+		<td style="vertical-align: bottom" valign="top" class="post_info " data-username="A_dang_A_la" data-floor="7">
+			
+        <div class="post_body">
+
+                  波形怎么做啊
+
+
+
+        </div>
+
+		</td>
+	</tr>
+	<tr>
+		<td valign="bottom">
+							<div style="margin: 0 0 0 10px;font-size: 14px;border-top: 1px dashed #eee;padding:8px 0 0 0;">
+								<ul>
+											<li data-mod="popu_592" class="csdn-tracking-statistics" style="width: 820px;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+												<a href="https://blog.csdn.net/lt1983lt/article/details/5637690" target="_blank" title="JAVA画出wav音频波形图">JAVA画出wav音频波形图</a>
+											</li>
+								</ul>
+							</div>
+					
+<div class="control">
+
+  <span class="time">
+              回复于：
+    2009-08-29 18:07:50
+  </span>
+
+
+            <span class="fr" style="margin-left:50px;">
+              <a href="#post-312509009">#7</a>
+              得分：0
+            </span>
+
+    <div id='post-forum-bulletin-7'  class='fl tracking-ad' data-mod='popu_9'>
+    </div>
+  <div class="fr" style="margin-left:50px;">
+        <a href="javascript:void(0)" onclick="post_digg(310260314,312509009)" class="red digg">对我有用[0]</a> |
+        <a href="javascript:void(0)" onclick="post_bury(310260314,312509009)" class="bury">丢个板砖[0]</a> |
+        <script>
+          function post_digg(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/digg',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.digg').text(json.digg);
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+
+          function post_bury(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/bury',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.bury').text('丢个板砖['+json.bury+']');
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+        </script>
+      <a href="#quote" class="quote" rel='nofollow'>引用</a> |
+      <a href="/posts/312509009/report?topic_id=310260314" class="fancybox red report_spam" rel="nofollow">举报 </a> |
+    <span class="manage-toggle">
+      <div class="manage" style="display: none;">
+          <a href="/posts/312509009/edit" class="fancybox" rel="nofollow">编辑</a>
+          <a href="/posts/312509009/destroy_edit" class="fancybox" rel="nofollow">删除</a>
+      </div>
+      管理
+    </span>
+  </div>
+
+
+</div>
+
+
+		</td>
+  </tr>
+</table>
+
+
+<table border="0" cellspacing="0" cellpadding="0" id="post-312509245"
+  class="post  "
+  data-post-id="312509245" data-is-topic-locked="false">
+  <colgroup><col width="110" /><col /></colgroup>
+  <tr>
+      <td rowspan="2" valign="top" class="wirter" style="width: 110px">
+                <dl class="user_info ">
+          <dt class="user_head" data-username="lightenmore">
+            <a href="//my.csdn.net/lightenmore" rel="nofollow" target="_blank"><img alt="lightenmore" class="avatar" src="//avatar.csdn.net/C/D/1/1_lightenmore.jpg" style="height: 80px;" /></a>
+          </dt>
+          <dd class="username" style="display: none">
+            <a href="//my.csdn.net/lightenmore" rel="nofollow" target="_blank" title="lightenmore">lightenmore</a>
+            
+          </dd>
+          <dd class="nickname" style="word-break:break-all;">
+            <a href="//my.csdn.net/lightenmore" rel="nofollow" target="_blank" title="lightenmore">lightenmore</a>
+            <br>
+            <img alt="Bbs1" class="topic_show_user_level" src="//csdnimg.cn/jifen/images/xunzhang/jianzhang/bbs1.png" style="margin: 4px 0;" />
+            <div class="topic_show_posts">
+              <div class="smallTittle">
+                本版专家分：40
+              </div>
+            </div>
+            
+          </dd>
+
+
+
+          <dd class="close_rate" title="用户结帖率：0%
+总发帖：0
+正常结帖：0
+未结帖：0">结帖率：0%</dd>
+
+          <dd class="showTittleDD">
+
+          </dd>
+
+        </dl>
+
+      </td>
+
+		<td style="vertical-align: bottom" valign="top" class="post_info " data-username="lightenmore" data-floor="8">
+			
+        <div class="post_body">
+
+                  这个问题有难度，分数不够吸引人啊，呵呵
+
+
+
+        </div>
+
+		</td>
+	</tr>
+	<tr>
+		<td valign="bottom">
+							<div style="margin: 0 0 0 10px;font-size: 14px;border-top: 1px dashed #eee;padding:8px 0 0 0;">
+								<ul>
+											<li data-mod="popu_592" class="csdn-tracking-statistics" style="width: 820px;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+												<a href="https://blog.csdn.net/com6339663/article/details/42681103" target="_blank" title="android音乐频谱解析">android音乐频谱解析</a>
+											</li>
+								</ul>
+							</div>
+					
+<div class="control">
+
+  <span class="time">
+              回复于：
+    2009-08-29 18:28:38
+  </span>
+
+
+            <span class="fr" style="margin-left:50px;">
+              <a href="#post-312509245">#8</a>
+              得分：0
+            </span>
+
+    <div id='post-forum-bulletin-8'  class='fl tracking-ad' data-mod='popu_9'>
+    </div>
+  <div class="fr" style="margin-left:50px;">
+        <a href="javascript:void(0)" onclick="post_digg(310260314,312509245)" class="red digg">对我有用[0]</a> |
+        <a href="javascript:void(0)" onclick="post_bury(310260314,312509245)" class="bury">丢个板砖[0]</a> |
+        <script>
+          function post_digg(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/digg',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.digg').text(json.digg);
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+
+          function post_bury(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/bury',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.bury').text('丢个板砖['+json.bury+']');
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+        </script>
+      <a href="#quote" class="quote" rel='nofollow'>引用</a> |
+      <a href="/posts/312509245/report?topic_id=310260314" class="fancybox red report_spam" rel="nofollow">举报 </a> |
+    <span class="manage-toggle">
+      <div class="manage" style="display: none;">
+          <a href="/posts/312509245/edit" class="fancybox" rel="nofollow">编辑</a>
+          <a href="/posts/312509245/destroy_edit" class="fancybox" rel="nofollow">删除</a>
+      </div>
+      管理
+    </span>
+  </div>
+
+
+</div>
+
+
+		</td>
+  </tr>
+</table>
+
+
+<table border="0" cellspacing="0" cellpadding="0" id="post-312510279"
+  class="post  "
+  data-post-id="312510279" data-is-topic-locked="false">
+  <colgroup><col width="110" /><col /></colgroup>
+  <tr>
+      <td rowspan="2" valign="top" class="wirter" style="width: 110px">
+                <dl class="user_info ">
+          <dt class="user_head" data-username="yekai012">
+            <a href="//my.csdn.net/yekai012" rel="nofollow" target="_blank"><img alt="yekai012" class="avatar" src="//avatar.csdn.net/E/8/5/1_yekai012.jpg" style="height: 80px;" /></a>
+          </dt>
+          <dd class="username" style="display: none">
+            <a href="//my.csdn.net/yekai012" rel="nofollow" target="_blank" title="yekai012">yekai012</a>
+            
+          </dd>
+          <dd class="nickname" style="word-break:break-all;">
+            <a href="//my.csdn.net/yekai012" rel="nofollow" target="_blank" title="yekai012">yekai012</a>
+            <br>
+            <img alt="Bbs4" class="topic_show_user_level" src="//csdnimg.cn/jifen/images/xunzhang/jianzhang/bbs4.png" style="margin: 4px 0;" />
+            <div class="topic_show_posts">
+              <div class="smallTittle">
+                本版专家分：1358
+              </div>
+            </div>
+            
+          </dd>
+
+
+
+          <dd class="close_rate" title="用户结帖率：100%
+总发帖：4
+正常结帖：4
+未结帖：0">结帖率：100%</dd>
+
+          <dd class="showTittleDD">
+
+          </dd>
+
+        </dl>
+
+      </td>
+
+		<td style="vertical-align: bottom" valign="top" class="post_info pointed" data-username="yekai012" data-floor="9">
+			
+        <div class="post_body">
+
+                  我以前做的一部分吧，波形图其实是时间与PCM的数据振幅大小的对应关系，所以又叫时域图，频谱图是频率与能量（分贝）的对应关系，又叫频域图。两者可以通过FFT进行转换。<br />
+明白了这个后，就好做了，下面是我以前做的部分代码：供参考<br />
+<pre class="brush: Java"><br />
+if(fileName&nbsp;==&nbsp;null){<br />
+			throw&nbsp;new&nbsp;Exception("File&nbsp;name&nbsp;can't&nbsp;be&nbsp;null!");<br />
+		}<br />
+		<br />
+		File&nbsp;file&nbsp;=&nbsp;new&nbsp;File(fileName);<br />
+		if(!file.exists()){<br />
+			throw&nbsp;new&nbsp;Exception(fileName&nbsp;+&nbsp;"&nbsp;is&nbsp;not&nbsp;exist!");<br />
+		}<br />
+		AudioInputStream&nbsp;ais&nbsp;=&nbsp;null;<br />
+		AudioFormat&nbsp;baseFormat&nbsp;=&nbsp;null;<br />
+		DataLine.Info&nbsp;info&nbsp;=&nbsp;null;<br />
+		SourceDataLine&nbsp;line&nbsp;=&nbsp;null;<br />
+		try&nbsp;{<br />
+			ais&nbsp;=&nbsp;AudioSystem.getAudioInputStream(file);<br />
+			baseFormat&nbsp;=&nbsp;ais.getFormat();<br />
+			<br />
+			info&nbsp;=&nbsp;new&nbsp;DataLine.Info(SourceDataLine.class,<br />
+					baseFormat);<br />
+			//提取信息<br />
+			this.channels&nbsp;=&nbsp;baseFormat.getChannels();<br />
+			this.frameRate&nbsp;=&nbsp;baseFormat.getFrameRate();<br />
+			this.frameSize&nbsp;=&nbsp;baseFormat.getFrameSize();<br />
+			this.sampleRate&nbsp;=&nbsp;baseFormat.getSampleRate();<br />
+			this.sampleSizeInBits&nbsp;=&nbsp;baseFormat.getSampleSizeInBits();<br />
+			<br />
+			line&nbsp;=&nbsp;(SourceDataLine)&nbsp;AudioSystem.getLine(info);<br />
+			<br />
+			line.open(baseFormat);<br />
+			line.start();<br />
+			int&nbsp;intBytes&nbsp;=&nbsp;0;<br />
+			vector.clear();<br />
+			<br />
+			<br />
+			while&nbsp;(intBytes&nbsp;!=&nbsp;-1)&nbsp;{<br />
+				intBytes&nbsp;=&nbsp;ais.read(buf,&nbsp;0,&nbsp;BUFFER_SIZE);//&nbsp;从音频流读取指定的最大数量的数据字节，并将其放入给定的字节数组中。<br />
+				for(int&nbsp;c&nbsp;=&nbsp;0;&nbsp;c&nbsp;&lt;&nbsp;intBytes;&nbsp;c++){<br />
+					//System.out.println(buf[c]);<br />
+					int&nbsp;value&nbsp;=&nbsp;buf[c]&nbsp;&gt;&nbsp;0&nbsp;?&nbsp;buf[c]:(buf[c]&nbsp;+&nbsp;256);<br />
+					vector.add(value);<br />
+				}<br />
+				//播放代码<br />
+				//if&nbsp;(intBytes&nbsp;&gt;=&nbsp;0)&nbsp;{<br />
+				//	int&nbsp;outBytes&nbsp;=&nbsp;line.write(buf,&nbsp;0,&nbsp;intBytes);//&nbsp;通过此源数据行将音频数据写入混频器。<br />
+				//}<br />
+			}<br />
+			<br />
+		}&nbsp;catch&nbsp;(UnsupportedAudioFileException&nbsp;e)&nbsp;{<br />
+			//&nbsp;TODO&nbsp;Auto-generated&nbsp;catch&nbsp;block<br />
+			e.printStackTrace();<br />
+		}&nbsp;catch&nbsp;(IOException&nbsp;e)&nbsp;{<br />
+			//&nbsp;TODO&nbsp;Auto-generated&nbsp;catch&nbsp;block<br />
+			e.printStackTrace();<br />
+		}&nbsp;catch&nbsp;(LineUnavailableException&nbsp;e)&nbsp;{<br />
+			//&nbsp;TODO&nbsp;Auto-generated&nbsp;catch&nbsp;block<br />
+			e.printStackTrace();<br />
+		}<br />
+		float[]&nbsp;f&nbsp;=&nbsp;new&nbsp;float[vector.size()];<br />
+		File&nbsp;ff&nbsp;=&nbsp;new&nbsp;File("f:\\pcm.txt");<br />
+		FileWriter&nbsp;fw&nbsp;=&nbsp;new&nbsp;FileWriter(ff);<br />
+		for(int&nbsp;c&nbsp;=&nbsp;0;&nbsp;c&nbsp;&lt;&nbsp;vector.size();&nbsp;c++){<br />
+			f[c]&nbsp;=&nbsp;vector.get(c);<br />
+			fw.write(""&nbsp;+&nbsp;f[c]&nbsp;+&nbsp;"\r\n");<br />
+			<br />
+		}<br />
+		fw.flush();<br />
+		fw.close();<br />
+		<br />
+		Complex[]&nbsp;comples&nbsp;=&nbsp;new&nbsp;Complex[1024];<br />
+		for(int&nbsp;c&nbsp;=&nbsp;0;&nbsp;c&nbsp;&lt;&nbsp;f.length;&nbsp;c++){<br />
+			comples[c]&nbsp;=&nbsp;new&nbsp;Complex(f[c],&nbsp;0);<br />
+		}<br />
+		for(int&nbsp;c&nbsp;=&nbsp;971;&nbsp;c&nbsp;&lt;&nbsp;1024;&nbsp;c++){<br />
+			comples[c]&nbsp;=&nbsp;new&nbsp;Complex(0,&nbsp;0);<br />
+		}<br />
+		<br />
+		Complex[]&nbsp;values&nbsp;=&nbsp;FFT.fft(comples);<br />
+		double[]&nbsp;d&nbsp;=&nbsp;FFT.normalize(values);<br />
+		<br />
+		File&nbsp;fff&nbsp;=&nbsp;new&nbsp;File("f:\\pcm2.txt");<br />
+		FileWriter&nbsp;fw2&nbsp;=&nbsp;new&nbsp;FileWriter(fff);<br />
+		for(int&nbsp;c=&nbsp;0;&nbsp;c&nbsp;&lt;&nbsp;d.length;&nbsp;c++){<br />
+			<br />
+			fw2.write(""&nbsp;+&nbsp;d[c]&nbsp;+&nbsp;"\r\n");<br />
+				<br />
+		}<br />
+</pre>
+
+
+
+        </div>
+
+		</td>
+	</tr>
+	<tr>
+		<td valign="bottom">
+							<div style="margin: 0 0 0 10px;font-size: 14px;border-top: 1px dashed #eee;padding:8px 0 0 0;">
+								<ul>
+											<li data-mod="popu_592" class="csdn-tracking-statistics" style="width: 820px;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+												<a href="https://blog.csdn.net/u013171283/article/details/54971036" target="_blank" title="android示波器，音频频谱绘制">android示波器，音频频谱绘制</a>
+											</li>
+								</ul>
+							</div>
+					
+<div class="control">
+
+  <span class="time">
+              回复于：
+    2009-08-29 20:11:33
+  </span>
+
+
+            <span class="fr" style="margin-left:50px;">
+              <a href="#post-312510279">#9</a>
+              得分：20
+            </span>
+
+    <div id='post-forum-bulletin-9'  class='fl tracking-ad' data-mod='popu_9'>
+    </div>
+  <div class="fr" style="margin-left:50px;">
+        <a href="javascript:void(0)" onclick="post_digg(310260314,312510279)" class="red digg">对我有用[1]</a> |
+        <a href="javascript:void(0)" onclick="post_bury(310260314,312510279)" class="bury">丢个板砖[0]</a> |
+        <script>
+          function post_digg(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/digg',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.digg').text(json.digg);
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+
+          function post_bury(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/bury',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.bury').text('丢个板砖['+json.bury+']');
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+        </script>
+      <a href="#quote" class="quote" rel='nofollow'>引用</a> |
+      <a href="/posts/312510279/report?topic_id=310260314" class="fancybox red report_spam" rel="nofollow">举报 </a> |
+    <span class="manage-toggle">
+      <div class="manage" style="display: none;">
+          <a href="/posts/312510279/edit" class="fancybox" rel="nofollow">编辑</a>
+          <a href="/posts/312510279/destroy_edit" class="fancybox" rel="nofollow">删除</a>
+      </div>
+      管理
+    </span>
+  </div>
+
+
+</div>
+
+
+		</td>
+  </tr>
+</table>
+
+
+<table border="0" cellspacing="0" cellpadding="0" id="post-312512713"
+  class="post  "
+  data-post-id="312512713" data-is-topic-locked="false">
+  <colgroup><col width="110" /><col /></colgroup>
+  <tr>
+      <td rowspan="2" valign="top" class="wirter" style="width: 110px">
+                <dl class="user_info ">
+          <dt class="user_head" data-username="wym2005em">
+            <a href="//my.csdn.net/wym2005em" rel="nofollow" target="_blank"><img alt="wym2005em" class="avatar" src="//avatar.csdn.net/5/F/2/1_wym2005em.jpg" style="height: 80px;" /></a>
+          </dt>
+          <dd class="username" style="display: none">
+            <a href="//my.csdn.net/wym2005em" rel="nofollow" target="_blank" title="wym2005em">wym2005em</a>
+            
+          </dd>
+          <dd class="nickname" style="word-break:break-all;">
+            <a href="//my.csdn.net/wym2005em" rel="nofollow" target="_blank" title="wym2005em">wym2005em</a>
+            <br>
+            <img alt="Bbs1" class="topic_show_user_level" src="//csdnimg.cn/jifen/images/xunzhang/jianzhang/bbs1.png" style="margin: 4px 0;" />
+            <div class="topic_show_posts">
+              <div class="smallTittle">
+                本版专家分：74
+              </div>
+            </div>
+            
+          </dd>
+
+
+
+          <dd class="close_rate" title="用户结帖率：40.63%
+总发帖：32
+正常结帖：13
+未结帖：19">结帖率：40.63%</dd>
+
+          <dd class="showTittleDD">
+
+          </dd>
+
+        </dl>
+
+      </td>
+
+		<td style="vertical-align: bottom" valign="top" class="post_info " data-username="wym2005em" data-floor="10">
+			
+        <div class="post_body">
+
+                  学习呀，太难
+
+
+
+        </div>
+
+		</td>
+	</tr>
+	<tr>
+		<td valign="bottom">
+							<div style="margin: 0 0 0 10px;font-size: 14px;border-top: 1px dashed #eee;padding:8px 0 0 0;">
+								<ul>
+											<li data-mod="popu_592" class="csdn-tracking-statistics" style="width: 820px;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+												<a href="https://download.csdn.net/download/tangzhongneng/1526848" target="_blank" title="java绘制音频波形图">java绘制音频波形图</a>
+											</li>
+								</ul>
+							</div>
+					
+<div class="control">
+
+  <span class="time">
+              回复于：
+    2009-08-29 23:30:39
+  </span>
+
+
+            <span class="fr" style="margin-left:50px;">
+              <a href="#post-312512713">#10</a>
+              得分：0
+            </span>
+
+    <div id='post-forum-bulletin-10'  class='fl tracking-ad' data-mod='popu_9'>
+    </div>
+  <div class="fr" style="margin-left:50px;">
+        <a href="javascript:void(0)" onclick="post_digg(310260314,312512713)" class="red digg">对我有用[0]</a> |
+        <a href="javascript:void(0)" onclick="post_bury(310260314,312512713)" class="bury">丢个板砖[0]</a> |
+        <script>
+          function post_digg(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/digg',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.digg').text(json.digg);
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+
+          function post_bury(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/bury',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.bury').text('丢个板砖['+json.bury+']');
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+        </script>
+      <a href="#quote" class="quote" rel='nofollow'>引用</a> |
+      <a href="/posts/312512713/report?topic_id=310260314" class="fancybox red report_spam" rel="nofollow">举报 </a> |
+    <span class="manage-toggle">
+      <div class="manage" style="display: none;">
+          <a href="/posts/312512713/edit" class="fancybox" rel="nofollow">编辑</a>
+          <a href="/posts/312512713/destroy_edit" class="fancybox" rel="nofollow">删除</a>
+      </div>
+      管理
+    </span>
+  </div>
+
+
+</div>
+
+
+		</td>
+  </tr>
+</table>
+
+
+<table border="0" cellspacing="0" cellpadding="0" id="post-312513295"
+  class="post  "
+  data-post-id="312513295" data-is-topic-locked="false">
+  <colgroup><col width="110" /><col /></colgroup>
+  <tr>
+      <td rowspan="2" valign="top" class="wirter" style="width: 110px">
+                <dl class="user_info ">
+          <dt class="user_head" data-username="yuwenbao">
+            <a href="//my.csdn.net/yuwenbao" rel="nofollow" target="_blank"><img alt="yuwenbao" class="avatar" src="//avatar.csdn.net/5/A/D/1_yuwenbao.jpg" style="height: 80px;" /></a>
+          </dt>
+          <dd class="username" style="display: none">
+            <a href="//my.csdn.net/yuwenbao" rel="nofollow" target="_blank" title="yuwenbao">yuwenbao</a>
+            
+          </dd>
+          <dd class="nickname" style="word-break:break-all;">
+            <a href="//my.csdn.net/yuwenbao" rel="nofollow" target="_blank" title="yuwenbao">yuwenbao</a>
+            <br>
+            <img alt="Bbs5" class="topic_show_user_level" src="//csdnimg.cn/jifen/images/xunzhang/jianzhang/bbs5.png" style="margin: 4px 0;" />
+            <div class="topic_show_posts">
+              <div class="smallTittle">
+                本版专家分：2719
+              </div>
+            </div>
+            
+          </dd>
+
+
+
+          <dd class="close_rate" title="用户结帖率：93.33%
+总发帖：15
+正常结帖：14
+未结帖：1">结帖率：93.33%</dd>
+
+          <dd class="showTittleDD">
+
+          </dd>
+
+        </dl>
+
+      </td>
+
+		<td style="vertical-align: bottom" valign="top" class="post_info " data-username="yuwenbao" data-floor="11">
+			
+        <div class="post_body">
+
+                  yoyoplayer里有这个功能，而且封装的不错，你可以看下
+
+
+
+        </div>
+
+		</td>
+	</tr>
+	<tr>
+		<td valign="bottom">
+							<div style="margin: 0 0 0 10px;font-size: 14px;border-top: 1px dashed #eee;padding:8px 0 0 0;">
+								<ul>
+											<li data-mod="popu_592" class="csdn-tracking-statistics" style="width: 820px;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+												<a href="https://blog.csdn.net/MichaelCode/article/details/2846059" target="_blank" title="关于声音文件的波形图和频谱图">关于声音文件的波形图和频谱图</a>
+											</li>
+								</ul>
+							</div>
+					
+<div class="control">
+
+  <span class="time">
+              回复于：
+    2009-08-30 00:25:40
+  </span>
+
+
+            <span class="fr" style="margin-left:50px;">
+              <a href="#post-312513295">#11</a>
+              得分：0
+            </span>
+
+    <div id='post-forum-bulletin-11'  class='fl tracking-ad' data-mod='popu_9'>
+    </div>
+  <div class="fr" style="margin-left:50px;">
+        <a href="javascript:void(0)" onclick="post_digg(310260314,312513295)" class="red digg">对我有用[0]</a> |
+        <a href="javascript:void(0)" onclick="post_bury(310260314,312513295)" class="bury">丢个板砖[0]</a> |
+        <script>
+          function post_digg(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/digg',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.digg').text(json.digg);
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+
+          function post_bury(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/bury',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.bury').text('丢个板砖['+json.bury+']');
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+        </script>
+      <a href="#quote" class="quote" rel='nofollow'>引用</a> |
+      <a href="/posts/312513295/report?topic_id=310260314" class="fancybox red report_spam" rel="nofollow">举报 </a> |
+    <span class="manage-toggle">
+      <div class="manage" style="display: none;">
+          <a href="/posts/312513295/edit" class="fancybox" rel="nofollow">编辑</a>
+          <a href="/posts/312513295/destroy_edit" class="fancybox" rel="nofollow">删除</a>
+      </div>
+      管理
+    </span>
+  </div>
+
+
+</div>
+
+
+		</td>
+  </tr>
+</table>
+
+
+
+</div>
+
+<script type="text/javascript" charset="utf-8">
+    $(function(){
+        topics_page_js.show_page();
+    });
+</script>
+
+<input type="hidden" id="autosave_post_val" value="" />
+<input type="hidden" id="autosave_old_post_val"  />
+
+
+<div class="control_area bottom">
+  <form name="form" id="form">
+    
+    <div class="bread_nav" style="  float: left;margin-right: 10px">
+      <a href="http://www.csdn.net" target="_blank">CSDN</a> <em>&gt;</em>
+      <a href="/" target="_blank">CSDN论坛</a> <em>&gt;</em>
+          <a href="/forums/Java" target="_blank">Java</a> <em>&gt;</em>
+      <a href="/forums/J2SE" target="_blank">Java SE</a>
+    </div>
+    <div class="control">
+      <ul>
+        <li class="drop_menu_wrap drop_menu_up">
+          <a href="#" class="drop_toggle btn_1 drop_toggle_up" rel='nofollow'>
+            <span>
+              <img src="/assets/ico_set.gif" alt="" />管理菜单<img src="/assets/arrow_down.gif" alt="" />
+            </span>
+          </a>
+          <ul class="drop_menu" style="display: none; bottom:26px">
+              <li><a href="/topics/310260314/top" class="fancybox" rel="nofollow">置顶</a></li>
+
+  <li><a href="/topics/310260314/recommend" data-confirm="您确定要推荐该帖吗？帖子被推荐后将奖励发帖用 户88个可用分和3个C币!" data-method="put" rel="nofollow">推荐</a></li>
+
+  <li><a href="/topics/310260314/lock" class="fancybox" rel="nofollow">锁定</a></li>
+
+<li><a href="/topics/310260314/move" class="fancybox" rel="nofollow">移动</a></li>
+<li><a href="/topics/310260314/edit" class="fancybox" rel="nofollow">编辑</a></li>
+<li><a href="/topics/310260314/destroy_edit" class="fancybox" rel="nofollow">删除</a></li>
+<li><a href="/topics/310260314/add_point" class="fancybox" rel="nofollow">帖子加分</a></li>
+  <li><a href="/topics/310260314/highlight" class="fancybox" rel="nofollow">帖子高亮</a></li>
+
+          </ul>
+        </li>
+        <li>
+          <a href="/topics/310260314/close" class="btn_1 close_topic" rel='nofollow'>
+            <span><img src="/assets/ico_over.gif" alt="" />结帖</span>
+          </a>
+        </li>
+        <li>
+          <a href="/topics/new?forum_id=J2SE" class="btn_1 create_topic" rel='nofollow'>
+            <span><img src="/assets/ico_publish.gif" alt="" />发帖</span>
+          </a>
+        </li>
+        <li>
+          <a href="#new_post" class="btn_1 reply_topic" rel='nofollow'>
+            <span><img src="/assets/ico_return.gif" alt="" />回复</span>
+          </a>
+        </li>
+          <li>
+            <a href="/topics/310260314/attetion" class="btn_1 reply_topic" rel='nofollow'>
+              <span><img src="/assets/ico_attention_topic.png" title="关注" />关注</span>
+            </a>
+          </li>
+      </ul>
+    </div>
+  </form>
+</div>
+
+
+    <span class="login" id="new_post">匿名用户不能发表回复！<a  href="javascript:void(0); " onclick='loginbox();' >登录</a>|<a href="https://passport.csdn.net/account/register" target="_blank">注册</a></span>
+
+    <div class="detailed">
+      <table>
+        <tbody>
+        <tr>
+          <td valign="top" class="wirter" style="width: 110px">
+            <dl class="user_info ">
+              <dt class="user_head" data-username="CSDN官网">
+                <a href="http://www.csdn.net" rel="nofollow" target="_blank"><img alt="CSDN官网" class="avatar" src="//avatar.csdn.net/6/2/6/1_nettman.jpg"></a>
+              <div class="user_material" style="display: none;height: 118px">
+                <div class="user_material_bg" style="height: 100px">
+                    <dl>
+                      <dt><a href="http://www.csdn.net" target="_blank"><img src="//avatar.csdn.net/6/2/6/1_nettman.jpg" class="avatar_80"></a></dt>
+                      <dd style="text-align: left;">账号:<a href="http://www.csdn.net" target="_blank">CSDN官网</a></dd>
+                      <dd style="text-align: left;" class="nickname">昵称:<span class="name2nick" style="overflow: initial;">CSDN官网</span></dd>
+                    </dl>
+                  </div>
+                </div>
+              </dt>
+              <dd class="username">
+                <a href="http://www.csdn.net" rel="nofollow" target="_blank" title="CSDN官网">CSDN推荐</a>
+              </dd>
+            </dl>
+          </td>
+          <td>
+            <div >
+              <div style="margin-top: 5px;width: 100%;padding: 0" class="post_body">
+                <ul style="margin-left: 16px">
+                      <li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                        <a href="https://blog.csdn.net/baixiaozhe/article/details/51276970" target="_blank" title="oc开发笔记4 ios 声像图 波形和频谱">oc开发笔记4 ios 声像图 波形和频谱</a>
+                      </li>
+                      <li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                        <a href="https://blog.csdn.net/liu_if_else/article/details/51233799" target="_blank" title="用Unity3D内部频谱分析方法做音乐视觉特效的原理说明">用Unity3D内部频谱分析方法做音乐视觉特效的原理说明</a>
+                      </li>
+                      <li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                        <a href="https://blog.csdn.net/unixzii/article/details/45422899" target="_blank" title="使用HTML5 API(AudioContext)实现可视化频谱效果">使用HTML5 API(AudioContext)实现可视化频谱效果</a>
+                      </li>
+                      <li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                        <a href="https://blog.csdn.net/assfafa/article/details/73435427" target="_blank" title="js获取音频条 频谱的动画数据 每秒频谱数值">js获取音频条 频谱的动画数据 每秒频谱数值</a>
+                      </li>
+                      <li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                        <a href="https://blog.csdn.net/aiyh0202/article/details/52848305" target="_blank" title="音频频谱图（自定义View——进阶篇2）">音频频谱图（自定义View——进阶篇2）</a>
+                      </li>
+                      <li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                        <a href="https://blog.csdn.net/zgzzcyz/article/details/54342149" target="_blank" title="Unity中实现获取音频的频谱的可视化均衡器">Unity中实现获取音频的频谱的可视化均衡器</a>
+                      </li>
+                      <li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                        <a href="https://blog.csdn.net/muzhengjun/article/details/46880879" target="_blank" title="音频频谱分析柱状图">音频频谱分析柱状图</a>
+                      </li>
+                      <li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                        <a href="https://download.csdn.net/download/honey1452356756/8476117" target="_blank" title="Android应用源码音乐实时跳动频谱显示">Android应用源码音乐实时跳动频谱显示</a>
+                      </li>
+                      <li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                        <a href="https://download.csdn.net/download/zhxueq001/1980924" target="_blank" title="音频波形及频谱显示控件">音频波形及频谱显示控件</a>
+                      </li>
+                      <li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                        <a href="https://blog.csdn.net/qqMCY/article/details/14228559" target="_blank" title="iOS  画音频波形曲线 根据音频数据版">iOS  画音频波形曲线 根据音频数据版</a>
+                      </li>
+                </ul>
+
+              </div>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+<!-- 对联广告 -->
+<div id="ad_left" style="display:none">
+  <div>
+    <ins data-revive-zoneid="56" data-revive-id="8c38e720de1c90a6f6ff52f3f89c4d57"></ins>
+<script type="text/javascript">  
+  $(function(){
+      if ($(parent.window).width() >= 1280) {
+          parent.$('#ad_left').show();
+      }
+  });
+</script>
+  </div>
+</div>
+<div id="ad_right" style="display:none">
+  <div>
+    <ins data-revive-zoneid="57" data-revive-id="8c38e720de1c90a6f6ff52f3f89c4d57"></ins>
+<script type="text/javascript">    
+    $(function(){
+        if ($(parent.window).width() >= 1280) {
+            parent.$('#ad_right').show();
+        }
+    });
+</script>
+  </div>
+</div>
+
+<script>
+  $(function(){
+    window.onresize = function(){
+      if($(parent.window).width() <= 1280){
+        $('#ad_right').hide();
+        $('#ad_left').hide();
+      } else {
+          $('#ad_right').show();
+          $('#ad_left').show();
+      }
+    };
+      if ($(parent.window).width() >= 1280) {
+          $('#ad_right').show();
+          $('#ad_left').show();
+      }
+  });
+
+</script>
+
+
+<!-- 浮层弹窗广告 -->
+<!--AdForward Begin:-->
+<div id="ad_pop">
+  <div class="J_adv" data-view="true" data-mod="ad_popu_64" data-mtp="62" data-order="21" data-con="ad_content_2070">
+    <script id="popuLayer_js_q" src="//ads.csdn.net/js/popuLayer.js" defer="" type="text/javascript"></script>
+    <div id="layerd" style="position: fixed; bottom: 0px; right: 0px; line-height: 0px; z-index: 1000; width: 300px; height: 278px;">
+      <div class="J_close layer_close" style="display:block;background-color:#efefef;padding:0px;color:#333;font:12px/24px Helvetica,Tahoma,Arial,sans-serif;text-align:right;">
+        关闭
+      </div>
+      <!--广告占位容器 u2895106-->
+      <div id="ad_abc">
+        <!-- 广告位：pc端-论坛帖子页右侧弹窗-300*250-new -->
+        <script>
+            (function() {
+                var s = "_" + Math.random().toString(36).slice(2);
+                document.write('<div id="' + s + '"></div>');
+                (window.slotbydup=window.slotbydup || []).push({
+                    id: '4742630',
+                    container: s,
+                    size: '300,250',
+                    display: 'inlay-fix'
+                });
+            })();
+        </script>
+
+      </div>
+      <script>
+          $(function(){
+              $('.J_close').on('click',function(){$('#layerd').hide();$('.J_close').hide()})
+          })
+      </script>
+    </div>
+  </div>
+</div>
+<!--AdForward End-->
+
+
+<!-- go-backhome   go-backchannel-->
+<!-- <button id="com-back-home" class="btn btn-top bbs-btn-gray28 bbs-btn-backhome" title="回到首页" style="cursor: pointer; border: 0px none; bottom: 35px; width: 80px; height: 28px; margin: 0px; padding: 0px; position: fixed; right: 40px; display: block; padding-right:13px;">回到首页</button>-->
+<!-- <button id="com-back-channel" class="btn btn-top bbs-btn-gray28 bbs-btn-backchannel" title="回到频道" style="cursor: pointer; border: 0px none; bottom:68px; width: 80px; height: 28px; margin: 0px; padding: 0px; position: fixed; right: 40px; display: block; padding-right:13px;">回到频道</button> -->
+    </div>
+    <script type="text/javascript" language="javascript" charset="utf-8">
+window.bbsInfoflag = true;
+
+//<![CDATA[
+$(function(){
+  $('.post .post_body fieldset+br').remove();
+  $('.post .post_body blockquote').each(function(index, item) {
+    var first_child = $(item).find(':first');
+    if($(item).contents().get(0) !== undefined &&
+      $(item).contents().get(0).nodeName.toLowerCase() === 'br' &&
+      first_child.prop('tagName').toLowerCase() === 'br') {
+      first_child.remove();
+    }
+  });
+  
+});
+
+$(".showTittleDD span").hover(
+        function () {
+            $(this).find(".showTittle")[0].style.display="inline-block";
+        },
+        function () {
+                $(this).find(".showTittle")[0].style.display="none";
+        }
+);
+
+$(".topic_show_user_level").hover(
+    function () {
+    $(this).next().find(".smallTittle")[0].style.display="inline-block";
+
+
+    },
+    function () {
+        $(this).next().find(".smallTittle")[0].style.display="none";
+    }
+);
+//]]>
+var auto_save_time = null;
+$(document).ready(function(){
+    autosavecontent = $("#autosave_post_val").val();
+    if(autosavecontent != ''){$("#post_body").val(autosavecontent);}
+    auto_save_time = setInterval(autosave, 90*1000);
+});
+function autosave(){
+    var content =  $("#post_body").val();
+    var old_content = $("#autosave_old_post_val").val();
+    topic_id = 310260314
+    if(content != "" && content != old_content) {
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            url: '/posts/autosave_post',
+            data: {
+                content: content,
+                topic_id: topic_id
+            },
+            success: function (result) {
+                $("#autosave_old_post_val").val(content);
+            },
+            error: function (result) {
+              if(result.status == 403 && result.responseText == '需要登录'){
+                  clearInterval(auto_save_time);
+              }
+            }
+        })
+    }
+}
+
+
+</script>
+
+    
+<div id="pop_win" style="display:none ;position: absolute; z-index: 10000; border: 1px solid rgb(220, 220, 220); top: 222.5px; left: 630px; opacity: 1; background: none 0px 0px repeat scroll rgb(255, 255, 255);">
+    
+</div>
+<div id="popup_mask"></div>
+<style>
+    #popup_mask
+    {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 9999;
+        left: 0px;
+        top: 0px;
+        opacity: 0.3;
+        filter: alpha(opacity=30);
+        display: none;
+    }
+ 
+</style>
+
+
+    <script src="//csdnimg.cn/www/js/component.js"></script>
+    <script language="javascript" type="text/javascript" src="//csdnimg.cn/asdf/async-1.0.0.js"></script>
+<div id="a9784604d" style="width: 1px; height: 1px; display: none;">
+	<script id="adJs9784604"></script>
+	<script>document.getElementById("adJs9784604").src = "//ads.csdn.net/js/opt/9784604.js?t=" + Math.random();</script>
+</div>
+<script type="text/javascript">
+  document.write('<script type="text/javascript" src="//csdnimg.cn/pubfooter/js/publib_footer-1.0.2.js?' + Math.floor(new Date()/120000).toString(36) + '="></'+'script>');
+</script>
+
+<script type="text/javascript" src="//csdnimg.cn/pig/pubjs/cnick.js"></script>
+<script id="csdn-toolbar-id" btnId="header_notice_num" wrapId="note1" count="5" subCount="5" type="text/javascript" src="//csdnimg.cn/public/common/toolbar/js/content_toolbar.js"></script>
+<script src='//csdnimg.cn/public/common/gotop/js/goTop-v1.0.min.js?v1519799761'></script>
+  </body>
+</html>

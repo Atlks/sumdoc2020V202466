@@ -1,0 +1,11 @@
+Hibernate 是一个ORM TOOL...
+
+两种重要的文件..
+HIBERNATE.CFG.XML
+*.HBM.XML
+
+几个重要的接口
+Configuration(use to reda the hibernate.cfg.xml...)
+SessionFactory
+Session
+Transaction

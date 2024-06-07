@@ -1,0 +1,41 @@
+atitit.orm sql接口简化版本...
+
+insert/update 能简化版本了...
+
+	/**
+	 * only insert or update
+	 * @param m
+	 * @param table
+	 * @return
+	 */
+		public String convert2sql(Map m,String table ) {
+			System.out.println("");
+ 				Map flds_jo=m;
+					String vals = "";
+					String flds = "";
+					java.util.Set<String> set = m.keySet();
+					for (String fld : set) {
+						flds = flds + "," + fld;
+						if(flds_jo.get(fld)==null)
+							vals = vals + ",null" ;
+						else if (flds_jo.get(fld).getClass() == Integer.class
+								|| flds_jo.get(fld).getClass() == Double.class)
+							vals = vals + "," + flds_jo.get(fld);
+						else if (isFunExp(flds_jo.get(fld)))
+							vals = vals + "," + flds_jo.get(fld);
+						else
+							// str
+							vals = vals + ",'" + flds_jo.get(fld) + "'";
+				 	}
+
+					flds = strUtil.trimx(",", flds);
+					vals = strUtil.trimx(",", vals);
+					String sql = "insert into    " + table
+							+ " (" + flds + ") values (" + vals + ")";
+					return sql;
+				//}
+
+			}
+
+
+

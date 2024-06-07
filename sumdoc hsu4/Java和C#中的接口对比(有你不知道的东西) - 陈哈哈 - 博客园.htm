@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Java和C#中的接口对比(有你不知道的东西) - 陈哈哈 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=Jsknfrse2BShd-7DrxM42RyulObn44e4JjkI6-WX6zk1"/>
+<link type="text/css" rel="stylesheet" href="/blog/customcss/97462.css?v=b6HFw%2bn0vF2ccWGgMYDZ7FnBGSg%3d"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/kissazi2/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/kissazi2/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/kissazi2/wlwmanifest.xml"/>
+<script src="http://common.cnblogs.com/script/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'kissazi2', cb_enable_mathjax=false;</script>
+<script src="/bundles/blog-common.js?v=9L_w0MEfELQG9nFB8p64U8rNrp1QzDOdn2O29x5bbqA1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="http://www.cnblogs.com/kissazi2/"><img id="blogLogo" src="/Skins/custom/images/logo.gif" alt="返回主页" /></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/kissazi2/"></a></h1>
+<h2></h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li></li>
+<li></li>
+<li><a id="MyLinks1_NewPostLink" class="menu" rel="nofollow" href="http://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li><a id="MyLinks1_ContactLink" class="menu" rel="nofollow" href="http://msg.cnblogs.com/send/%E9%99%88%E5%93%88%E5%93%88">联系</a></li>
+<li><a id="MyLinks1_Syndication" class="menu" href="http://www.cnblogs.com/kissazi2/rss">订阅</a>
+<!--<a id="MyLinks1_XMLLink" class="aHeaderXML" href="http://www.cnblogs.com/kissazi2/rss"><img src="http://www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li><a id="MyLinks1_Admin" class="menu" rel="nofollow" href="http://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div class="blogStats">
+			
+			
+<!--done-->
+随笔- 262&nbsp;
+文章- 14&nbsp;
+评论- 240&nbsp;
+
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/kissazi2/p/3291730.html">Java和C#中的接口对比(有你不知道的东西)</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body"><h2>1.与Java不同，C#中的接口不能包含字段（Field）。</h2>
+<pre>在java中，接口中可以包含字段，但是这些字段隐式地是<span style="color: #0000ff;">static</span>和<span style="color: #0000ff;">final</span>的。而C#不允许接口中有字段，编译器在编译时就会提示错误（如下代码所示）。</pre>
+<div class="cnblogs_code" style="background-color: #f5f5f5; border: #cccccc 1px solid; padding: 5px;">
+<pre><span style="color: #0000ff;">interface</span><span style="color: #000000;"> IInterface            </span></pre>
+<pre><span style="color: #000000;">    {
+        </span><span style="color: #0000ff;">int</span> a ;<span style="color: #008000;">//</span><span style="color: #008000;">编译器错误提示：接口不能包含字段</span>
+    }</pre>
+</div>
+<h2>2、在C#和Java中，接口内的所有方法默认都是公用方法。</h2>
+<pre>在Java中，方法声明可以带有public修饰符（即使这并非必要），但在C#中，显式地为接口中的方法指定public修饰符是非法的。例如，下面的代码将产生一个编译错误。 </pre>
+<div class="cnblogs_code" style="background-color: #f5f5f5; border: #cccccc 1px solid; padding: 5px;">
+<pre><span style="color: #0000ff;">interface</span><span style="color: #000000;"> IInterface
+    {
+        </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">int</span> add();<span style="color: #008000;">//</span><span style="color: #008000;">错误提示：修饰符&ldquo;public&rdquo;对该项无效</span>
+    }</pre>
+</div>
+<h2>3、C#中特有的实现接口和显式实现接口.</h2>
+<pre>普通实现接口</pre>
+<div class="cnblogs_code" style="background-color: #f5f5f5; border: #cccccc 1px solid; padding: 5px;">
+<pre><span style="color: #0000ff;">interface</span><span style="color: #000000;"> IInterface
+    {
+        </span><span style="color: #0000ff;">int</span> add(<span style="color: #0000ff;">int</span> a,<span style="color: #0000ff;">int</span><span style="color: #000000;"> b) ;
+    }
+    </span><span style="color: #0000ff;">class</span><span style="color: #000000;"> Program:IInterface
+    {
+        </span><span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> Main(<span style="color: #0000ff;">string</span><span style="color: #000000;">[] args)
+        {
+            Program ii </span>= <span style="color: #0000ff;">new</span> Program();     <span style="color: #008000;">//</span><span style="color: #008000;">使用实体类来访问自己的接口函数</span>
+            Console.WriteLine(ii.add(<span style="color: #800080;">1</span>, <span style="color: #800080;">2</span>));<span style="color: #008000;">//</span><span style="color: #008000;">正确运行，没有提示错误</span>
+<span style="color: #000000;">        }
+
+        </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">int</span> add(<span style="color: #0000ff;">int</span> a, <span style="color: #0000ff;">int</span><span style="color: #000000;"> b)
+        {
+            </span><span style="color: #0000ff;">return</span> a +<span style="color: #000000;"> b;
+        }
+    }</span></pre>
+</div>
+<pre>&nbsp;</pre>
+<pre>显示地实现接口</pre>
+<div class="cnblogs_code" style="background-color: #f5f5f5; border: #cccccc 1px solid; padding: 5px;">
+<pre><span style="color: #0000ff;">interface</span><span style="color: #000000;"> IInterface
+    {
+        </span><span style="color: #0000ff;">int</span> add(<span style="color: #0000ff;">int</span> a,<span style="color: #0000ff;">int</span> b) ;<span style="color: #008000;">//</span><span style="color: #008000;">编译器错误提示：接口不能包含字段</span>
+<span style="color: #000000;">    }
+    </span><span style="color: #0000ff;">class</span><span style="color: #000000;"> Program:IInterface
+    {
+        </span><span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> Main(<span style="color: #0000ff;">string</span><span style="color: #000000;">[] args)
+        {
+            Program newProgram </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> Program();
+            newProgram.add(</span><span style="color: #800080;">1</span>, <span style="color: #800080;">2</span>);<span style="color: #008000;">//</span><span style="color: #008000;">编译器提示错误：&ldquo;ConsoleApplication3.Program&rdquo;不包含&ldquo;add&rdquo;的定义，
+                                 </span><span style="color: #008000;">//</span><span style="color: #008000;">并且找不到可接受类型为&ldquo;ConsoleApplication3.Program&rdquo;的第一个参数的扩展方法&ldquo;add&rdquo;(是否缺少 using 指令或程序集引用?)          </span>
+<span style="color: #000000;">        }
+
+        </span><span style="color: #0000ff;">int</span> IInterface.add(<span style="color: #0000ff;">int</span> a, <span style="color: #0000ff;">int</span> b)<span style="color: #008000;">//</span><span style="color: #008000;">显示实现接口，注意这个方法多了IIterface限定符</span>
+<span style="color: #000000;">        {
+            </span><span style="color: #0000ff;">return</span> a +<span style="color: #000000;"> b;
+        }
+    }</span></pre>
+</div>
+<p>另外，我们注意到显式实现接口后<span style="color: #0000ff;">int</span> IInterface.add(<span style="color: #0000ff;">int</span> a, <span style="color: #0000ff;">int</span> b)中少了<span style="color: #0000ff;">public</span>修饰符，但是我们一加上编译器又会提示错误：&ldquo;修饰符&ldquo;public&rdquo;对该项无效&rdquo;。另外因为是Program类访问自身的方法，所以访问性也不是构成add()方法无法访问的原因。</p>
+<p>如果我们将main()函数中的代码修改一下，将new Program()的变量赋给IIterface的引用，再看看结果如何</p>
+<div class="cnblogs_code" style="background-color: #f5f5f5; border: #cccccc 1px solid; padding: 5px;">
+<pre><span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> Main(<span style="color: #0000ff;">string</span><span style="color: #000000;">[] args)
+        {
+            IInterface ii </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> Program();
+            Console.WriteLine(ii.add(</span><span style="color: #800080;">1</span>, <span style="color: #800080;">2</span>));<span style="color: #008000;">//</span><span style="color: #008000;">正确运行，没有提示错误</span>
+        }</pre>
+</div>
+<p>从以上结果，我们可以看出如果是显示实现接口，那么对接口中方法的访问必须要通过接口类型的引用，用显示实现了接口的类是没有办法使用的。</p>
+<h3>显式接口成员实现的两个主要用途</h3>
+<p>&middot; 由于显式接口成员实现不能通过类或结构实例来访问，因此它们就不属于类或结构的自身的公共接口。当需在一个公用的类或结构中实现一些仅供内部使用（不允许外界访问）的接口时，这就特别有用。</p>
+<p>&middot; 显式接口成员实现可以消除因同时含有多个相同签名的接口成员所引起的多义性。如果没有显式接口成员实现，一个类或结构就不可能为具有相同签名和返回类型的接口成员分别提供相应的实现，也不可能为具有相同签名和不同返回类型的所有接口成员中的任何一个提供实现。</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2013-08-30 16:41</span> <a href='http://www.cnblogs.com/kissazi2/'>陈哈哈</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="http://i.cnblogs.com/EditPosts.aspx?postid=3291730" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(3291730);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,isLogined=false,cb_blogId=97462,cb_entryId=3291730,cb_blogApp=currentBlogApp,cb_blogUserGuid='51baaeaf-bdb1-e011-8673-842b2b196315',cb_entryCreatedDate='2013/8/30 16:41:00';loadViewCount(cb_entryId);</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='ad_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+$(function () {
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);    
+});
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2016 陈哈哈
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

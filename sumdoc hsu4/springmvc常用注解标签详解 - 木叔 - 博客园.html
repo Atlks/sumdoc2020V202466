@@ -1,0 +1,599 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="referrer" content="origin" />
+<title>springmvc常用注解标签详解 - 木叔 - 博客园</title>
+<meta property="og:description" content="1、@Controller 在SpringMVC&#160;中，控制器Controller&#160;负责处理由DispatcherServlet&#160;分发的请求，它把用户请求的数据经过业务处理" />
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=-duj5vpGTntb85GJoM3iRI972XwWcI-j8zmqDzyfu2w1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/summerGarden/bundle-summerGarden.css?v=R6EW1cwbYc7SqZ5y0CMKPNjYaFnIdEGDIwRo4NL-lHw1"/>
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/summerGarden/bundle-summerGarden-mobile.css?v=9eIhgMh0fONJ_oTulhhwN-Ot1dq2yL8Q7MlDslRvpnA1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/leskang/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/leskang/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/leskang/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript">var currentBlogApp = 'leskang', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=93E4BY8zFdnh3jDab2GTlgLeDcUJN7mm8kJmYz6dndo1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="https://www.cnblogs.com/leskang/"><img id="blogLogo" src="/Skins/custom/images/logo.gif" alt="返回主页" /></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="https://www.cnblogs.com/leskang/">leskang</a></h1>
+<h2></h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+	<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">博客园</a></li>
+	<li><a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/leskang/">首页</a></li>
+	<li><a href="http://news.cnblogs.com/">新闻</a></li>
+	<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+	<li><a id="blog_nav_contact" accesskey="9" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E6%9C%A8%E5%8F%94">联系</a></li>
+	<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+	<li><a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/leskang/rss">订阅</a>
+	<a id="blog_nav_rss_image" class="aHeaderXML" href="https://www.cnblogs.com/leskang/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a></li>
+</ul>
+
+
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<!--done-->
+随笔- 45&nbsp;
+文章- 0&nbsp;
+评论- 30&nbsp;
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/leskang/p/5445698.html">springmvc常用注解标签详解</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body"><h2><span style="font-family: 'Microsoft YaHei';">1、@Controller</span></h2>
+<p><span style="font-family: 'Microsoft YaHei';">在SpringMVC&nbsp;中，控制器Controller&nbsp;负责处理由DispatcherServlet&nbsp;分发的请求，它把用户请求的数据经过业务处理层处理之后封装成一个Model&nbsp;，然后再把该Model&nbsp;返回给对应的View&nbsp;进行展示。在SpringMVC&nbsp;中提供了一个非常简便的定义Controller&nbsp;的方法，你无需继承特定的类或实现特定的接口，只需使用@Controller&nbsp;标记一个类是Controller&nbsp;，然后使用@RequestMapping&nbsp;和@RequestParam&nbsp;等一些注解用以定义URL&nbsp;请求和Controller&nbsp;方法之间的映射，这样的Controller&nbsp;就能被外界访问到。此外Controller&nbsp;不会直接依赖于HttpServletRequest&nbsp;和HttpServletResponse&nbsp;等HttpServlet&nbsp;对象，它们可以通过Controller&nbsp;的方法参数灵活的获取到。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">@Controller&nbsp;用于标记在一个类上，使用它标记的类就是一个SpringMVC Controller&nbsp;对象。分发处理器将会扫描使用了该注解的类的方法，并检测该方法是否使用了@RequestMapping&nbsp;注解。@Controller&nbsp;只是定义了一个控制器类，而使用@RequestMapping&nbsp;注解的方法才是真正处理请求的处理器。单单使用@Controller&nbsp;标记在一个类上还不能真正意义上的说它就是SpringMVC&nbsp;的一个控制器类，因为这个时候Spring&nbsp;还不认识它。那么要如何做Spring&nbsp;才能认识它呢？这个时候就需要我们把这个控制器类交给Spring&nbsp;来管理。有两种方式：</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">　　（1）在SpringMVC&nbsp;的配置文件中定义MyController&nbsp;的bean&nbsp;对象。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">　　（2）在SpringMVC&nbsp;的配置文件中告诉Spring&nbsp;该到哪里去找标记为@Controller&nbsp;的Controller&nbsp;控制器。</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">&lt;!--</span><span style="color: #008000;">方式一</span><span style="color: #008000;">--&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">bean </span><span style="color: #ff0000;">class</span><span style="color: #0000ff;">="com.host.app.web.controller.MyController"</span><span style="color: #0000ff;">/&gt;</span>
+<span style="color: #008000;">&lt;!--</span><span style="color: #008000;">方式二</span><span style="color: #008000;">--&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;"> context:component-scan </span><span style="color: #ff0000;">base-package </span><span style="color: #0000ff;">= "com.host.app.web"</span> /<span style="color: #0000ff;">&gt;//路径写到controller的上一层(扫描包详解见下面浅析)</span></pre>
+</div>
+<h2><span style="font-family: 'Microsoft YaHei';">2、@RequestMapping</span></h2>
+<p><span style="font-family: 'Microsoft YaHei';">RequestMapping是一个用来处理请求地址映射的注解，可用于类或方法上。用于类上，表示类中的所有响应请求的方法都是以该地址作为父路径。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">RequestMapping注解有六个属性，下面我们把她分成三类进行说明（下面有相应示例）。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';"><strong>1、 value， method；</strong></span></p>
+<p><span style="font-family: 'Microsoft YaHei';">value：&nbsp;&nbsp;&nbsp;&nbsp; 指定请求的实际地址，指定的地址可以是URI Template 模式（后面将会说明）；</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">method：&nbsp; 指定请求的method类型， GET、POST、PUT、DELETE等；</span></p>
+<p><span style="font-family: 'Microsoft YaHei';"><strong>2、consumes，produces</strong></span></p>
+<p><span style="font-family: 'Microsoft YaHei';">consumes： 指定处理请求的提交内容类型（Content-Type），例如application/json, text/html;</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">produces:&nbsp;&nbsp;&nbsp; 指定返回的内容类型，仅当request请求头中的(Accept)类型中包含该指定类型才返回；</span></p>
+<p><span style="font-family: 'Microsoft YaHei';"><strong>3、params，headers</strong></span></p>
+<p><span style="font-family: 'Microsoft YaHei';">params： 指定request中必须包含某些参数值是，才让该方法处理。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">headers： 指定request中必须包含某些指定的header值，才能让该方法处理请求。</span></p>
+<h2><span style="font-family: 'Microsoft YaHei';">3、@Resource和@Autowired</span></h2>
+<p><span style="font-family: 'Microsoft YaHei';">@Resource和@Autowired都是做bean的注入时使用，其实@Resource并不是Spring的注解，它的包是javax.annotation.Resource，需要导入，但是Spring支持该注解的注入。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';"><strong>1、共同点</strong></span></p>
+<p><span style="font-family: 'Microsoft YaHei';">两者都可以写在字段和setter方法上。两者如果都写在字段上，那么就不需要再写setter方法。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';"><strong>2、不同点</strong></span></p>
+<p><span style="font-family: 'Microsoft YaHei';">（1）@Autowired</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">@Autowired为Spring提供的注解，需要导入包org.springframework.beans.factory.annotation.Autowired;只按照byType注入。</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> TestServiceImpl {
+    </span><span style="color: #008000;">//</span><span style="color: #008000;"> 下面两种@Autowired只要使用一种即可</span>
+<span style="color: #000000;">    @Autowired
+    </span><span style="color: #0000ff;">private</span> UserDao userDao; <span style="color: #008000;">//</span><span style="color: #008000;"> 用于字段上</span>
+<span style="color: #000000;">    
+    @Autowired
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span> setUserDao(UserDao userDao) { <span style="color: #008000;">//</span><span style="color: #008000;"> 用于属性的方法上</span>
+        <span style="color: #0000ff;">this</span>.userDao =<span style="color: #000000;"> userDao;
+    }
+}</span></pre>
+</div>
+<p><span style="font-family: 'Microsoft YaHei';">@Autowired注解是按照类型（byType）装配依赖对象，默认情况下它要求依赖对象必须存在，如果允许null值，可以设置它的required属性为false。如果我们想使用按照名称（byName）来装配，可以结合@Qualifier注解一起使用。如下：</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> TestServiceImpl {
+    @Autowired
+    @Qualifier(</span>"userDao"<span style="color: #000000;">)
+    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> UserDao userDao; 
+}</span></pre>
+</div>
+<p><span style="font-family: 'Microsoft YaHei';">（2）@Resource</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">@Resource默认按照ByName自动注入，由J2EE提供，需要导入包javax.annotation.Resource。@Resource有两个重要的属性：name和type，而Spring将@Resource注解的name属性解析为bean的名字，而type属性则解析为bean的类型。所以，如果使用name属性，则使用byName的自动注入策略，而使用type属性时则使用byType自动注入策略。如果既不制定name也不制定type属性，这时将通过反射机制使用byName自动注入策略。</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> TestServiceImpl {
+    </span><span style="color: #008000;">//</span><span style="color: #008000;"> 下面两种@Resource只要使用一种即可</span>
+    @Resource(name="userDao"<span style="color: #000000;">)
+    </span><span style="color: #0000ff;">private</span> UserDao userDao; <span style="color: #008000;">//</span><span style="color: #008000;"> 用于字段上</span>
+<span style="color: #000000;">    
+    @Resource(name</span>="userDao"<span style="color: #000000;">)
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span> setUserDao(UserDao userDao) { <span style="color: #008000;">//</span><span style="color: #008000;"> 用于属性的setter方法上</span>
+        <span style="color: #0000ff;">this</span>.userDao =<span style="color: #000000;"> userDao;
+    }
+}</span></pre>
+</div>
+<p><span style="font-family: 'Microsoft YaHei';">注：最好是将@Resource放在setter方法上，因为这样更符合面向对象的思想，通过set、get去操作属性，而不是直接去操作属性。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">@Resource装配顺序：</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">①如果同时指定了name和type，则从Spring上下文中找到唯一匹配的bean进行装配，找不到则抛出异常。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">②如果指定了name，则从上下文中查找名称（id）匹配的bean进行装配，找不到则抛出异常。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">③如果指定了type，则从上下文中找到类似匹配的唯一bean进行装配，找不到或是找到多个，都会抛出异常。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">④如果既没有指定name，又没有指定type，则自动按照byName方式进行装配；如果没有匹配，则回退为一个原始类型进行匹配，如果匹配则自动装配。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">@Resource的作用相当于@Autowired，只不过@Autowired按照byType自动注入。</span></p>
+<h2>4、@ModelAttribute和&nbsp;@SessionAttributes</h2>
+<p><span style="font-family: 'Microsoft YaHei';">代表的是：该Controller的所有方法在调用前，先执行此@ModelAttribute方法，可用于注解和方法参数中，可以把这个@ModelAttribute特性，应用在BaseController当中，所有的Controller继承BaseController，即可实现在调用Controller时，先执行@ModelAttribute方法。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">&nbsp;@SessionAttributes即将值放到session作用域中，写在class上面。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">具体示例参见下面：使用&nbsp;@ModelAttribute&nbsp;和&nbsp;@SessionAttributes&nbsp;传递和保存数据</span></p>
+<h2>5、@PathVariable</h2>
+<p><span style="font-family: 'Microsoft YaHei';">用于将请求URL中的模板变量映射到功能处理方法的参数上，即取出uri模板中的变量作为参数。如：</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">@Controller  
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> TestController {  
+     @RequestMapping(value</span>="/user/{userId}/roles/{roleId}",method =<span style="color: #000000;"> RequestMethod.GET)  
+     </span><span style="color: #0000ff;">public</span> String getLogin(@PathVariable("userId"<span style="color: #000000;">) String userId,  
+         @PathVariable(</span>"roleId"<span style="color: #000000;">) String roleId){  
+         System.out.println(</span>"User Id : " +<span style="color: #000000;"> userId);  
+         System.out.println(</span>"Role Id : " +<span style="color: #000000;"> roleId);  
+         </span><span style="color: #0000ff;">return</span> "hello"<span style="color: #000000;">;  
+     }  
+     @RequestMapping(value</span>="/product/{productId}",method =<span style="color: #000000;"> RequestMethod.GET)  
+     </span><span style="color: #0000ff;">public</span> String getProduct(@PathVariable("productId"<span style="color: #000000;">) String productId){  
+           System.out.println(</span>"Product Id : " +<span style="color: #000000;"> productId);  
+           </span><span style="color: #0000ff;">return</span> "hello"<span style="color: #000000;">;  
+     }  
+     @RequestMapping(value</span>="/javabeat/{regexp1:[a-z-]+}"<span style="color: #000000;">,  
+           method </span>=<span style="color: #000000;"> RequestMethod.GET)  
+     </span><span style="color: #0000ff;">public</span> String getRegExp(@PathVariable("regexp1"<span style="color: #000000;">) String regexp1){  
+           System.out.println(</span>"URI Part 1 : " +<span style="color: #000000;"> regexp1);  
+           </span><span style="color: #0000ff;">return</span> "hello"<span style="color: #000000;">;  
+     }  
+}</span></pre>
+</div>
+<h2>6、@requestParam</h2>
+<p><span style="font-family: 'Microsoft YaHei';">@requestParam主要用于在SpringMVC后台控制层获取参数，类似一种是request.getParameter("name")，它有三个常用参数：defaultValue = "0", required = false, value = "isApp"；defaultValue 表示设置默认值，required 铜过boolean设置是否是必须要传入的参数，value 值表示接受的传入的参数类型。</span></p>
+<h2>7、@ResponseBody</h2>
+<p><span style="font-family: 'Microsoft YaHei';">作用：&nbsp;该注解用于将Controller的方法返回的对象，通过适当的HttpMessageConverter转换为指定格式后，写入到Response对象的body数据区。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">使用时机：返回的数据不是html标签的页面，而是其他某种格式的数据时（如json、xml等）使用；</span></p>
+<h2>8、<strong>@Component</strong></h2>
+<p><span style="font-family: 'Microsoft YaHei';">相当于通用的注解，当不知道一些类归到哪个层时使用，但是不建议。</span></p>
+<h2><span style="font-family: 'Microsoft YaHei';">9、@Repository</span></h2>
+<p><span style="font-family: 'Microsoft YaHei';">用于注解dao层，在daoImpl类上面注解。</span></p>
+<p>&nbsp;</p>
+<h2><span style="font-family: 'Microsoft YaHei';">注：</span></h2>
+<h4><span style="font-family: 'Microsoft YaHei';">1、使用&nbsp;@RequestMapping&nbsp;来映射&nbsp;Request&nbsp;请求与处理器</span></h4>
+<p><span style="font-family: 'Microsoft YaHei';">方式一、通过常见的类路径和方法路径结合访问controller方法</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">方式二、使用uri模板</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">@Controller
+@RequestMapping ( </span>"/test/{variable1}"<span style="color: #000000;"> )
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> MyController {<br />
+    @RequestMapping ( </span>"/showView/{variable2}"<span style="color: #000000;"> )
+    </span><span style="color: #0000ff;">public</span> ModelAndView showView( @PathVariable String variable1, @PathVariable ( "variable2" ) <span style="color: #0000ff;">int</span><span style="color: #000000;"> variable2) {
+       ModelAndView modelAndView </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> ModelAndView();
+       modelAndView.setViewName( </span>"viewName"<span style="color: #000000;"> );
+       modelAndView.addObject( </span>" 需要放到 model 中的属性名称 " , " 对应的属性值，它是一个对象 "<span style="color: #000000;"> );
+       </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> modelAndView;
+    }
+} </span></pre>
+</div>
+<p><span style="font-family: 'Microsoft YaHei';">URI&nbsp;模板就是在URI&nbsp;中给定一个变量，然后在映射的时候动态的给该变量赋值。如URI&nbsp;模板http://localhost/app/{variable1}/index.html&nbsp;，这个模板里面包含一个变量variable1&nbsp;，那么当我们请求http://localhost/app/hello/index.html&nbsp;的时候，该URL&nbsp;就跟模板相匹配，只是把模板中的variable1&nbsp;用hello&nbsp;来取代。这个变量在SpringMVC&nbsp;中是使用@PathVariable&nbsp;来标记的。在SpringMVC&nbsp;中，我们可以使用@PathVariable&nbsp;来标记一个Controller&nbsp;的处理方法参数，表示该参数的值将使用URI&nbsp;模板中对应的变量的值来赋值。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">代码中我们定义了两个URI&nbsp;变量，一个是控制器类上的variable1&nbsp;，一个是showView&nbsp;方法上的variable2&nbsp;，然后在showView&nbsp;方法的参数里面使用<strong>@PathVariable</strong>&nbsp;标记使用了这两个变量。所以当我们使用/test/hello/showView/2.do&nbsp;来请求的时候就可以访问到MyController&nbsp;的showView&nbsp;方法，这个时候variable1&nbsp;就被赋予值hello&nbsp;，variable2&nbsp;就被赋予值2&nbsp;，然后我们在showView&nbsp;方法参数里面标注了参数variable1&nbsp;和variable2&nbsp;是来自访问路径的path&nbsp;变量，这样方法参数variable1&nbsp;和variable2&nbsp;就被分别赋予hello&nbsp;和2&nbsp;。方法参数variable1&nbsp;是定义为String&nbsp;类型，variable2&nbsp;是定义为int&nbsp;类型，像这种简单类型在进行赋值的时候Spring&nbsp;是会帮我们自动转换的。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">&nbsp;&nbsp;&nbsp;在上面的代码中我们可以看到在标记variable1&nbsp;为path&nbsp;变量的时候我们使用的是@PathVariable&nbsp;，而在标记variable2&nbsp;的时候使用的是@PathVariable(&ldquo;variable2&rdquo;)&nbsp;。这两者有什么区别呢？<span style="color: #3366ff;">第一种情况就默认去URI&nbsp;模板中找跟参数名相同的变量，但是这种情况只有在使用debug&nbsp;模式进行编译的时候才可以，而第二种情况是明确规定使用的就是URI&nbsp;模板中的variable2&nbsp;变量。当不是使用debug&nbsp;模式进行编译，或者是所需要使用的变量名跟参数名不相同的时候，就要使用第二种方式明确指出使用的是URI&nbsp;模板中的哪个变量。</span></span></p>
+<p><span style="font-family: 'Microsoft YaHei';">&nbsp;除了在请求路径中使用URI&nbsp;模板，定义变量之外，<strong>@RequestMapping&nbsp;中还支持通配符&ldquo;*&nbsp;&rdquo;</strong>。如下面的代码我就可以使用/myTest/whatever/wildcard.do&nbsp;访问到Controller&nbsp;的testWildcard&nbsp;方法。如：</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">@Controller
+@RequestMapping ( </span>"/myTest"<span style="color: #000000;"> )
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> MyController {
+    @RequestMapping ( </span>"*/wildcard"<span style="color: #000000;"> )
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String testWildcard() {
+       System. out .println( </span>"wildcard------------"<span style="color: #000000;"> );
+       </span><span style="color: #0000ff;">return</span> "wildcard"<span style="color: #000000;"> ;
+    }  
+}</span></pre>
+</div>
+<p><span style="font-family: 'Microsoft YaHei';">当@RequestParam中没有指定参数名称时，Spring&nbsp;在代码是debug&nbsp;编译的情况下会默认取更方法参数同名的参数，如果不是debug&nbsp;编译的就会报错。</span></p>
+<h4>2、使用&nbsp;@RequestMapping&nbsp;的一些高级用法</h4>
+<p><span style="font-family: 'Microsoft YaHei';">（1）</span>params属性</p>
+<div class="cnblogs_code">
+<pre>@RequestMapping (value= "testParams" , params={ "param1=value1" , "param2" , "!param3"<span style="color: #000000;"> })
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String testParams() {
+       System. out .println( </span>"test Params..........."<span style="color: #000000;"> );
+       </span><span style="color: #0000ff;">return</span> "testParams"<span style="color: #000000;"> ;
+    }</span></pre>
+</div>
+<p><span style="font-family: 'Microsoft YaHei';">用@RequestMapping&nbsp;的params&nbsp;属性指定了三个参数，这些参数都是针对请求参数而言的，它们分别表示参数param1&nbsp;的值必须等于value1&nbsp;，参数param2&nbsp;必须存在，值无所谓，参数param3&nbsp;必须不存在，只有当请求/testParams.do&nbsp;并且满足指定的三个参数条件的时候才能访问到该方法。所以当请求/testParams.do?param1=value1&amp;param2=value2&nbsp;的时候能够正确访问到该testParams&nbsp;方法，当请求/testParams.do?param1=value1&amp;param2=value2&amp;param3=value3&nbsp;的时候就不能够正常的访问到该方法，因为在@RequestMapping&nbsp;的params&nbsp;参数里面指定了参数param3&nbsp;是不能存在的。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">（2）method属性</span></p>
+<div class="cnblogs_code">
+<pre>@RequestMapping (value= "testMethod" , method=<span style="color: #000000;">{RequestMethod. GET , RequestMethod. DELETE })
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String testMethod() {
+       </span><span style="color: #0000ff;">return</span> "method"<span style="color: #000000;"> ;
+    }</span></pre>
+</div>
+<p><span style="font-family: 'Microsoft YaHei';">在上面的代码中就使用method&nbsp;参数限制了以GET&nbsp;或DELETE&nbsp;方法请求/testMethod 的时候才能访问到该Controller&nbsp;的testMethod&nbsp;方法。</span></p>
+<p>（3）headers属性</p>
+<div class="cnblogs_code">
+<pre>@RequestMapping (value= "testHeaders" , headers={ "host=localhost" , "Accept"<span style="color: #000000;"> })
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String testHeaders() {
+       </span><span style="color: #0000ff;">return</span> "headers"<span style="color: #000000;"> ;
+    }</span></pre>
+</div>
+<p>headers&nbsp;属性的用法和功能与params&nbsp;属性相似。在上面的代码中当请求/testHeaders.do&nbsp;的时候只有当请求头包含Accept&nbsp;信息，且请求的host&nbsp;为localhost&nbsp;的时候才能正确的访问到testHeaders&nbsp;方法。</p>
+<h3><span style="font-family: 'Microsoft YaHei';">3、 @RequestMapping&nbsp;标记的处理器方法支持的方法参数和返回类型</span></h3>
+<h4><span style="font-family: 'Microsoft YaHei';">1.&nbsp;支持的方法参数类型</span></h4>
+<p><span style="font-family: 'Microsoft YaHei';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>（1&nbsp;）HttpServlet&nbsp;对象，主要包括HttpServletRequest&nbsp;、HttpServletResponse&nbsp;和HttpSession&nbsp;对象。&nbsp;</strong>这些参数Spring&nbsp;在调用处理器方法的时候会自动给它们赋值，所以当在处理器方法中需要使用到这些对象的时候，可以直接在方法上给定一个方法参数的申明，然后在方法体里面直接用就可以了。但是有一点需要注意的是在使用HttpSession&nbsp;对象的时候，如果此时HttpSession&nbsp;对象还没有建立起来的话就会有问题。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">&nbsp;&nbsp;&nbsp;<strong>（2&nbsp;）Spring&nbsp;自己的WebRequest&nbsp;对象。&nbsp;</strong>使用该对象可以访问到存放在HttpServletRequest&nbsp;和HttpSession&nbsp;中的属性值。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">&nbsp;&nbsp;&nbsp;<strong>（3&nbsp;）InputStream&nbsp;、OutputStream&nbsp;、Reader&nbsp;和Writer&nbsp;。&nbsp;</strong>InputStream&nbsp;和Reader&nbsp;是针对HttpServletRequest&nbsp;而言的，可以从里面取数据；OutputStream&nbsp;和Writer&nbsp;是针对HttpServletResponse&nbsp;而言的，可以往里面写数据。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">&nbsp;&nbsp;&nbsp;<strong>（4&nbsp;）使用@PathVariable&nbsp;、@RequestParam&nbsp;、@CookieValue&nbsp;和@RequestHeader&nbsp;标记的参数。</strong></span></p>
+<p><span style="font-family: 'Microsoft YaHei';"><strong>&nbsp;&nbsp;&nbsp;</strong><strong>（5&nbsp;）使用@ModelAttribute&nbsp;标记的参数。</strong></span></p>
+<p><span style="font-family: 'Microsoft YaHei';"><strong>&nbsp;&nbsp;&nbsp;</strong><strong>（6&nbsp;）java.util.Map&nbsp;、Spring&nbsp;封装的Model&nbsp;和ModelMap&nbsp;。&nbsp;</strong>这些都可以用来封装模型数据，用来给视图做展示。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">&nbsp;&nbsp;&nbsp;<strong>（7&nbsp;）实体类。&nbsp;</strong>可以用来接收上传的参数。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">&nbsp;&nbsp;&nbsp;<strong>（8&nbsp;）Spring&nbsp;封装的MultipartFile&nbsp;。&nbsp;</strong>用来接收上传文件的。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">&nbsp;&nbsp;&nbsp;<strong>（9&nbsp;）Spring&nbsp;封装的Errors&nbsp;和BindingResult&nbsp;对象。&nbsp;</strong>这两个对象参数必须紧接在需要验证的实体对象参数之后，它里面包含了实体对象的验证结果。</span></p>
+<h4><span style="font-family: 'Microsoft YaHei';">2.&nbsp;支持的返回类型</span></h4>
+<p><span style="font-family: 'Microsoft YaHei';">&nbsp; &nbsp;（1&nbsp;）一个包含模型和视图的ModelAndView&nbsp;对象。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">&nbsp;&nbsp;&nbsp;（2&nbsp;）一个模型对象，这主要包括Spring&nbsp;封装好的Model&nbsp;和ModelMap&nbsp;，以及java.util.Map&nbsp;，当没有视图返回的时候视图名称将由RequestToViewNameTranslator&nbsp;来决定。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">&nbsp;&nbsp;&nbsp;（3&nbsp;）一个View&nbsp;对象。这个时候如果在渲染视图的过程中模型的话就可以给处理器方法定义一个模型参数，然后在方法体里面往模型中添加值。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">&nbsp;&nbsp;&nbsp;（4&nbsp;）一个String&nbsp;字符串。这往往代表的是一个视图名称。这个时候如果需要在渲染视图的过程中需要模型的话就可以给处理器方法一个模型参数，然后在方法体里面往模型中添加值就可以了。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">&nbsp;&nbsp;&nbsp;（5&nbsp;）返回值是void&nbsp;。这种情况一般是我们直接把返回结果写到HttpServletResponse&nbsp;中了，如果没有写的话，那么Spring&nbsp;将会利用RequestToViewNameTranslator&nbsp;来返回一个对应的视图名称。如果视图中需要模型的话，处理方法与返回字符串的情况相同。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">&nbsp;&nbsp;&nbsp;（6&nbsp;）如果处理器方法被注解@ResponseBody&nbsp;标记的话，那么处理器方法的任何返回类型都会通过HttpMessageConverters&nbsp;转换之后写到HttpServletResponse&nbsp;中，而不会像上面的那些情况一样当做视图或者模型来处理。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">&nbsp;&nbsp;&nbsp;（7&nbsp;）除以上几种情况之外的其他任何返回类型都会被当做模型中的一个属性来处理，而返回的视图还是由RequestToViewNameTranslator&nbsp;来决定，添加到模型中的属性名称可以在该方法上用@ModelAttribute(&ldquo;attributeName&rdquo;)&nbsp;来定义，否则将使用返回类型的类名称的首字母小写形式来表示。使用@ModelAttribute&nbsp;标记的方法会在@RequestMapping&nbsp;标记的方法执行之前执行。</span></p>
+<h3>4、使用&nbsp;@ModelAttribute&nbsp;和&nbsp;@SessionAttributes&nbsp;传递和保存数据</h3>
+<p><span style="font-family: 'Microsoft YaHei';">SpringMVC&nbsp;支持使用&nbsp;@<strong>ModelAttribute</strong>&nbsp;和&nbsp;@<strong>SessionAttributes</strong>&nbsp;在不同的模型（model）和控制器之间共享数据。&nbsp;<strong>@ModelAttribute&nbsp;</strong>主要有两种使用方式，一种是标注在方法上，一种是标注在&nbsp;Controller&nbsp;方法参数上。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">当&nbsp;@<strong>ModelAttribute</strong>&nbsp;标记在方法上的时候，该方法将在处理器方法执行之前执行，然后把返回的对象存放在&nbsp;session&nbsp;或模型属性中，属性名称可以使用&nbsp;@<strong>ModelAttribute</strong>(&ldquo;attributeName&rdquo;)&nbsp;在标记方法的时候指定，若未指定，则使用返回类型的类名称（首字母小写）作为属性名称。关于&nbsp;@ModelAttribute&nbsp;标记在方法上时对应的属性是存放在&nbsp;session&nbsp;中还是存放在模型中，我们来做一个实验，看下面一段代码。</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">@Controller
+@RequestMapping ( </span>"/myTest"<span style="color: #000000;"> )
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> MyController {
+
+    @ModelAttribute ( </span>"hello"<span style="color: #000000;"> )
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String getModel() {
+       System. out .println( </span>"-------------Hello---------"<span style="color: #000000;"> );
+       </span><span style="color: #0000ff;">return</span> "world"<span style="color: #000000;"> ;
+    }
+
+    @ModelAttribute ( </span>"intValue"<span style="color: #000000;"> )
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> getInteger() {
+       System. out .println( </span>"-------------intValue---------------"<span style="color: #000000;"> );
+       </span><span style="color: #0000ff;">return</span> 10<span style="color: #000000;">;
+    }
+
+    @RequestMapping ( </span>"sayHello"<span style="color: #000000;"> )
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span> sayHello( @ModelAttribute ( "hello" ) String hello, @ModelAttribute ( "intValue" ) <span style="color: #0000ff;">int</span> num, @ModelAttribute ( "user2" ) User user, Writer writer, HttpSession session) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IOException {
+       writer.write( </span>"Hello " + hello + " , Hello " + user.getUsername() +<span style="color: #000000;"> num);
+       writer.write( </span>"\r"<span style="color: #000000;"> );
+       Enumeration enume </span>=<span style="color: #000000;"> session.getAttributeNames();
+       </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> (enume.hasMoreElements())
+           writer.write(enume.nextElement() </span>+ "\r"<span style="color: #000000;"> );
+    }
+
+    @ModelAttribute ( </span>"user2"<span style="color: #000000;"> )
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> User getUser(){
+       System. out .println( </span>"---------getUser-------------"<span style="color: #000000;"> );
+       </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">new</span> User(3, "user2"<span style="color: #000000;"> );
+    }
+}</span></pre>
+</div>
+<p><span style="font-family: 'Microsoft YaHei';">当我们请求&nbsp;/myTest/sayHello.do&nbsp;的时候使用&nbsp;@ModelAttribute&nbsp;标记的方法会先执行，然后把它们返回的对象存放到模型中。最终访问到&nbsp;sayHello&nbsp;方法的时候，使用&nbsp;@ModelAttribute&nbsp;标记的方法参数都能被正确的注入值。执行结果如下所示：</span></p>
+<p><span style="font-family: 'Microsoft YaHei'; background-color: #ffffff;"><em>&nbsp;Hello world,Hello user210</em></span></p>
+<p><span style="font-family: 'Microsoft YaHei';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由执行结果我们可以看出来，此时&nbsp;session&nbsp;中没有包含任何属性，也就是说上面的那些对象都是存放在模型属性中，而不是存放在&nbsp;session&nbsp;属性中。那要如何才能存放在&nbsp;session&nbsp;属性中呢？这个时候我们先引入一个新的概念&nbsp;@SessionAttributes&nbsp;，它的用法会在讲完&nbsp;@ModelAttribute&nbsp;之后介绍，这里我们就先拿来用一下。我们在&nbsp;MyController&nbsp;类上加上&nbsp;@SessionAttributes&nbsp;属性标记哪些是需要存放到&nbsp;session&nbsp;中的。看下面的代码：</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">@Controller
+@RequestMapping ( </span>"/myTest"<span style="color: #000000;"> )
+@SessionAttributes (value</span>={ "intValue" , "stringValue" }, types={User. <span style="color: #0000ff;">class</span><span style="color: #000000;"> })
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> MyController {
+
+    @ModelAttribute ( </span>"hello"<span style="color: #000000;"> )
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String getModel() {
+       System. out .println( </span>"-------------Hello---------"<span style="color: #000000;"> );
+       </span><span style="color: #0000ff;">return</span> "world"<span style="color: #000000;"> ;
+    }
+
+    @ModelAttribute ( </span>"intValue"<span style="color: #000000;"> )
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">int</span><span style="color: #000000;"> getInteger() {
+       System. out .println( </span>"-------------intValue---------------"<span style="color: #000000;"> );
+       </span><span style="color: #0000ff;">return</span> 10<span style="color: #000000;">;
+    }
+   
+    @RequestMapping ( </span>"sayHello"<span style="color: #000000;"> )
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span> sayHello(Map&lt;String, Object&gt; map, @ModelAttribute ( "hello" ) String hello, @ModelAttribute ( "intValue" ) <span style="color: #0000ff;">int</span> num, @ModelAttribute ( "user2" ) User user, Writer writer, HttpServletRequest request) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IOException {
+       map.put( </span>"stringValue" , "String"<span style="color: #000000;"> );
+       writer.write( </span>"Hello " + hello + " , Hello " + user.getUsername() +<span style="color: #000000;"> num);
+       writer.write( </span>"\r"<span style="color: #000000;"> );
+       HttpSession session </span>=<span style="color: #000000;"> request.getSession();
+       Enumeration enume </span>=<span style="color: #000000;"> session.getAttributeNames();
+       </span><span style="color: #0000ff;">while</span><span style="color: #000000;"> (enume.hasMoreElements())
+           writer.write(enume.nextElement() </span>+ "\r"<span style="color: #000000;"> );
+       System. out .println(session);
+    }
+
+    @ModelAttribute ( </span>"user2"<span style="color: #000000;"> )
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> User getUser() {
+       System. out .println( </span>"---------getUser-------------"<span style="color: #000000;"> );
+       </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">new</span> User(3, "user2"<span style="color: #000000;"> );
+    }
+}</span></pre>
+</div>
+<p>在上面代码中我们指定了属性为&nbsp;intValue&nbsp;或&nbsp;stringValue&nbsp;或者类型为&nbsp;User&nbsp;的都会放到&nbsp;Session中，利用上面的代码当我们访问&nbsp;/myTest/sayHello.do&nbsp;的时候，结果如下：</p>
+<p><em>&nbsp;Hello world,Hello user210</em></p>
+<p>仍然没有打印出任何&nbsp;session&nbsp;属性，这是怎么回事呢？怎么定义了把模型中属性名为&nbsp;intValue&nbsp;的对象和类型为&nbsp;User&nbsp;的对象存到&nbsp;session&nbsp;中，而实际上没有加进去呢？难道我们错啦？我们当然没有错，只是在第一次访问&nbsp;/myTest/sayHello.do&nbsp;的时候&nbsp;@SessionAttributes&nbsp;定义了需要存放到&nbsp;session&nbsp;中的属性，而且这个模型中也有对应的属性，但是这个时候还没有加到&nbsp;session&nbsp;中，所以&nbsp;session&nbsp;中不会有任何属性，等处理器方法执行完成后&nbsp;Spring&nbsp;才会把模型中对应的属性添加到&nbsp;session&nbsp;中。所以当请求第二次的时候就会出现如下结果：</p>
+<p><span style="color: #808080;"><em>&nbsp;Hello world,Hello user210</em></span></p>
+<p><span style="color: #808080;"><em>user2</em></span></p>
+<p><span style="color: #808080;"><em>intValue</em></span></p>
+<p><span style="color: #808080;"><em>stringValue</em></span></p>
+<p>当&nbsp;@ModelAttribute&nbsp;标记在处理器方法参数上的时候，表示该参数的值将从模型或者&nbsp;Session&nbsp;中取对应名称的属性值，该名称可以通过&nbsp;@ModelAttribute(&ldquo;attributeName&rdquo;)&nbsp;来指定，若未指定，则使用参数类型的类名称（首字母小写）作为属性名称。</p>
+<h3>5、<span class="tcnt"><span style="font-family: 'Microsoft YaHei';">@PathVariable和@RequestParam的区别</span>&nbsp;</span></h3>
+<p><span style="font-family: 'Microsoft YaHei';">请求路径上有个id的变量值，可以通过@PathVariable来获取&nbsp; @RequestMapping(value = "/page/{id}", method = RequestMethod.GET)&nbsp;&nbsp;</span><br /><span style="font-family: 'Microsoft YaHei';">@RequestParam用来获得静态的URL请求入参&nbsp;&nbsp;&nbsp;&nbsp; spring注解时action里用到。</span></p>
+<h4><span style="font-family: 'Microsoft YaHei';">简介：</span></h4>
+<p><span style="font-family: 'Microsoft YaHei';">handler method 参数绑定常用的注解,我们根据他们处理的Request的不同内容部分分为四类：（主要讲解常用类型）</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">A、处理<strong>requet uri&nbsp;</strong>部分（这里指uri template中variable，不含queryString部分）的注解： &nbsp; @PathVariable;</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">B、处理<strong>request header</strong>部分的注解：&nbsp;&nbsp; @RequestHeader, @CookieValue;</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">C、处理<strong>request body</strong>部分的注解：@RequestParam,&nbsp; @RequestBody;</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">D、处理<strong>attribute</strong>类型是注解： @SessionAttributes, @ModelAttribute;</span></p>
+<h4><span style="font-family: 'Microsoft YaHei';">（1）、<span class="tcnt">@PathVariable</span></span></h4>
+<p><span style="font-family: 'Microsoft YaHei';">当使用@RequestMapping URI template 样式映射时， 即 someUrl/{paramId}, 这时的paramId可通过 @Pathvariable注解绑定它传过来的值到方法的参数上。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">示例代码：</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">@Controller  
+@RequestMapping(</span>"/owners/{ownerId}"<span style="color: #000000;">)  
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> RelativePathUriTemplateController {  
+  
+  @RequestMapping(</span>"/pets/{petId}"<span style="color: #000000;">)  
+  </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> findPet(@PathVariable String ownerId, @PathVariable String petId, Model model) {      
+    </span><span style="color: #008000;">//</span><span style="color: #008000;"> implementation omitted   </span>
+<span style="color: #000000;">  }  
+} </span></pre>
+</div>
+<p><span style="font-family: 'Microsoft YaHei';">上面代码把URI template 中变量 ownerId的值和petId的值，绑定到方法的参数上。若方法参数名称和需要绑定的uri template中变量名称不一致，需要在@PathVariable("name")指定uri template中的名称。</span></p>
+<h4><span style="font-family: 'Microsoft YaHei';">（2）、 @RequestHeader、@CookieValue</span></h4>
+<p><span style="font-family: 'Microsoft YaHei';">@RequestHeader 注解，可以把Request请求header部分的值绑定到方法的参数上。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">示例代码：</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">这是一个Request 的header部分：</span></p>
+<div><ol>
+<li><span style="font-family: 'Microsoft YaHei';">Host&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;localhost:8080&nbsp;&nbsp;</span></li>
+<li><span style="font-family: 'Microsoft YaHei';">Accept&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text/html,application/xhtml+xml,application/xml;q=0.9&nbsp;&nbsp;</span></li>
+<li><span style="font-family: 'Microsoft YaHei';">Accept-Language&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fr,en-gb;q=0.7,en;q=0.3&nbsp;&nbsp;</span></li>
+<li><span style="font-family: 'Microsoft YaHei';">Accept-Encoding&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gzip,deflate&nbsp;&nbsp;</span></li>
+<li><span style="font-family: 'Microsoft YaHei';">Accept-Charset&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ISO-8859-1,utf-8;q=0.7,*;q=0.7&nbsp;&nbsp;</span></li>
+<li><span style="font-family: 'Microsoft YaHei';">Keep-Alive&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;300&nbsp;&nbsp;</span></li>
+</ol></div>
+<ol>
+<li><span style="font-family: 'Microsoft YaHei';"><span style="color: #646464;">@RequestMapping</span>(<span style="color: #0000ff;">"/displayHeaderInfo.do"</span>)&nbsp;&nbsp;</span></li>
+</ol>
+<div><ol>
+<li><span style="font-family: 'Microsoft YaHei';"><strong><span style="color: #006699;">public</span></strong>&nbsp;<strong><span style="color: #006699;">void</span></strong>&nbsp;displayHeaderInfo(<span style="color: #646464;">@RequestHeader</span>(<span style="color: #0000ff;">"Accept-Encoding"</span>)&nbsp;String&nbsp;encoding,&nbsp;&nbsp;</span></li>
+<li><span style="font-family: 'Microsoft YaHei';">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #646464;">@RequestHeader</span>(<span style="color: #0000ff;">"Keep-Alive"</span>)&nbsp;<strong><span style="color: #006699;">long</span></strong>&nbsp;keepAlive)&nbsp;&nbsp;{&nbsp;&nbsp;</span></li>
+<li><span style="font-family: 'Microsoft YaHei';">}&nbsp;&nbsp;</span></li>
+</ol></div>
+<p><span style="font-family: 'Microsoft YaHei';">上面的代码，把request header部分的 Accept-Encoding的值，绑定到参数encoding上了， Keep-Alive header的值绑定到参数keepAlive上。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">@CookieValue 可以把Request header中关于cookie的值绑定到方法的参数上。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">例如有如下Cookie值：</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">　　JSESSIONID=415A4AC178C59DACE0B2C9CA727CDD84</span></p>
+<div class="cnblogs_code">
+<pre>@RequestMapping("/displayHeaderInfo.do"<span style="color: #000000;">)  
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span> displayHeaderInfo(@CookieValue("JSESSIONID"<span style="color: #000000;">) String cookie)  {  
+} </span></pre>
+</div>
+<p><span style="font-family: 'Microsoft YaHei';">即把JSESSIONID的值绑定到参数cookie上。</span></p>
+<h4><span style="font-family: 'Microsoft YaHei';">（3）、@RequestParam, @RequestBody</span></h4>
+<p><span style="font-family: 'Microsoft YaHei';">@RequestParam&nbsp;</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">A） 常用来处理简单类型的绑定，<strong>通过Request.getParameter() 获取的String可直接转换为简单类型的情况</strong>（ String--&gt; 简单类型的转换操作由ConversionService配置的转换器来完成）；因为使用request.getParameter()方式获取参数，所以可以处理<strong>get 方式中queryString的值</strong>，也可以处理<strong>post方式中 body data的值</strong>；</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">B）用来处理Content-Type: 为&nbsp;<code>application/x-www-form-urlencoded</code>编码的内容，提交方式GET、POST；</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">C) 该注解有两个属性： value、required； value用来指定要传入值的id名称，required用来指示参数是否必须绑定；</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">示例代码：</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">@Controller  
+@RequestMapping(</span>"/pets"<span style="color: #000000;">)  
+@SessionAttributes(</span>"pet"<span style="color: #000000;">)  
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> EditPetForm {  
+    @RequestMapping(method </span>=<span style="color: #000000;"> RequestMethod.GET)  
+ </span><span style="color: #0000ff;">public</span> String setupForm(@RequestParam("petId") <span style="color: #0000ff;">int</span><span style="color: #000000;"> petId, ModelMap model) {  
+       Pet pet </span>= <span style="color: #0000ff;">this</span><span style="color: #000000;">.clinic.loadPet(petId);  
+   model.addAttribute(</span>"pet"<span style="color: #000000;">, pet);  
+   </span><span style="color: #0000ff;">return</span> "petForm"<span style="color: #000000;">;  
+   }<br />} </span></pre>
+</div>
+<p><span style="font-family: 'Microsoft YaHei';">@RequestBody</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">该注解常用来处理Content-Type: 不是<code>application/x-www-form-urlencoded</code>编码的内容，例如application/json, application/xml等；</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">它是通过使用HandlerAdapter 配置的<code>HttpMessageConverters</code>来解析post data body，然后绑定到相应的bean上的。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">因为配置有FormHttpMessageConverter，所以也可以用来处理&nbsp;<code>application/x-www-form-urlencoded</code>的内容，处理完的结果放在一个MultiValueMap&lt;String, String&gt;里，这种情况在某些特殊需求下使用，详情查看FormHttpMessageConverter api;</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">示例代码：</span></p>
+<div class="cnblogs_code">
+<pre>@RequestMapping(value = "/something", method =<span style="color: #000000;"> RequestMethod.PUT)  
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span> handle(@RequestBody String body, Writer writer) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> IOException {  
+  writer.write(body);  
+} </span></pre>
+</div>
+<h4><span style="font-family: 'Microsoft YaHei';">（4）、@SessionAttributes, @ModelAttribute</span></h4>
+<p><span style="font-family: 'Microsoft YaHei';">@SessionAttributes:</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">该注解用来绑定HttpSession中的attribute对象的值，便于在方法中的参数里使用。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">该注解有value、types两个属性，可以通过名字和类型指定要使用的attribute 对象；</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">示例代码：</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">@Controller  
+@RequestMapping(</span>"/editPet.do"<span style="color: #000000;">)  
+@SessionAttributes(</span>"pet"<span style="color: #000000;">)  
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> EditPetForm {  
+    </span><span style="color: #008000;">//</span><span style="color: #008000;"> ...   </span>
+} </pre>
+</div>
+<p><span style="font-family: 'Microsoft YaHei';">@ModelAttribute</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">该注解有两个用法，一个是用于方法上，一个是用于参数上；</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">用于方法上时：&nbsp; 通常用来在处理@RequestMapping之前，为请求绑定需要从后台查询的model；</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">用于参数上时： 用来通过名称对应，把相应名称的值绑定到注解的参数bean上；要绑定的值来源于：</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">A） @SessionAttributes 启用的attribute 对象上；</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">B） @ModelAttribute 用于方法上时指定的model对象；</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">C） 上述两种情况都没有时，new一个需要绑定的bean对象，然后把request中按名称对应的方式把值绑定到bean中。</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">&nbsp;</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">用到方法上@ModelAttribute的示例代码：</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">@ModelAttribute  
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> Account addAccount(@RequestParam String number) {  
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> accountManager.findAccount(number);  
+} </span></pre>
+</div>
+<div>
+<p><span style="font-family: 'Microsoft YaHei';">这种方式实际的效果就是在调用@RequestMapping的方法之前，为request对象的model里put（&ldquo;account&rdquo;， Account）。</span></p>
+</div>
+<p><span style="font-family: 'Microsoft YaHei';">用在参数上的@ModelAttribute示例代码：</span></p>
+<div class="cnblogs_code">
+<pre>@RequestMapping(value="/owners/{ownerId}/pets/{petId}/edit", method =<span style="color: #000000;"> RequestMethod.POST)  
+</span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String processSubmit(@ModelAttribute Pet pet) {  
+     
+} </span></pre>
+</div>
+<p><span style="font-family: 'Microsoft YaHei';">首先查询 @SessionAttributes有无绑定的Pet对象，若没有则查询@ModelAttribute方法层面上是否绑定了Pet对象，若没有则将URI template中的值按对应的名称绑定到Pet对象的各属性上。</span></p>
+<p>&nbsp;</p>
+<pre><span style="font-size: 18px;"><strong>6、&lt; context:component-scan base-package = "" /&gt;浅析<br /></strong></span></pre>
+<p><span style="font-family: 'Microsoft YaHei';">component-scan&nbsp;默认扫描的注解类型是&nbsp;@Component，不过，在&nbsp;@Component&nbsp;语义基础上细化后的&nbsp;@Repository,&nbsp;@Service&nbsp;和&nbsp;@Controller&nbsp;也同样可以获得&nbsp;component-scan&nbsp;的青睐</span></p>
+<p><span style="font-family: 'Microsoft YaHei';">有了&lt;context:component-scan&gt;，另一个&lt;context:annotation-config/&gt;标签根本可以移除掉，因为已经被包含进去了</span></p>
+<p align="left"><span style="font-family: 'Microsoft YaHei';">另外&lt;context:annotation-config/&gt;还提供了两个子标签</span></p>
+<p align="left"><span style="font-family: 'Microsoft YaHei';">1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;context:include-filter&gt; //指定扫描的路径</span></p>
+<p align="left"><span style="font-family: 'Microsoft YaHei';">2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;context:exclude-filter&gt; //排除扫描的路径</span></p>
+<p align="left"><span style="font-family: 'Microsoft YaHei';">&lt;context:component-scan&gt;有一个use-default-filters属性，属性默认为true,表示会扫描指定包下的全部的标有@Component的类，并注册成bean.也就是@Component的子注解@Service,@Reposity等。</span></p>
+<p align="left"><span style="font-family: 'Microsoft YaHei';">这种扫描的粒度有点太大，如果你只想扫描指定包下面的Controller或其他内容则设置use-default-filters属性为false，表示不再按照scan指定的包扫描，而是按照&lt;context:include-filter&gt;指定的包扫描，示例：</span></p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">context:component-scan </span><span style="color: #ff0000;">base-package</span><span style="color: #0000ff;">="com.tan"</span><span style="color: #ff0000;"> use-default-filters</span><span style="color: #0000ff;">="false"</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">context:include-filter </span><span style="color: #ff0000;">type</span><span style="color: #0000ff;">="regex"</span><span style="color: #ff0000;"> expression</span><span style="color: #0000ff;">="com.tan.*"</span><span style="color: #0000ff;">/&gt;//注意后面要写.*</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">context:component-scan</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<pre><span style="font-family: 'Microsoft YaHei';">当没有设置use-default-filters属性或者属性为true时，表示基于base-packge包下指定扫描的具体路径</span></pre>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">context:component-scan </span><span style="color: #ff0000;">base-package</span><span style="color: #0000ff;">="com.tan"</span> <span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">context:include-filter </span><span style="color: #ff0000;">type</span><span style="color: #0000ff;">="regex"</span><span style="color: #ff0000;"> expression</span><span style="color: #0000ff;">=".controller.*"</span><span style="color: #0000ff;">/&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">context:include-filter </span><span style="color: #ff0000;">type</span><span style="color: #0000ff;">="regex"</span><span style="color: #ff0000;"> expression</span><span style="color: #0000ff;">=".service.*"</span><span style="color: #0000ff;">/&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">context:include-filter </span><span style="color: #ff0000;">type</span><span style="color: #0000ff;">="regex"</span><span style="color: #ff0000;"> expression</span><span style="color: #0000ff;">=".dao.*"</span><span style="color: #0000ff;">/&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">context:component-scan</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>&nbsp;</p>
+<pre><span style="font-family: 'Microsoft YaHei';">效果相当于：</span></pre>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">context:component-scan </span><span style="color: #ff0000;">base-package</span><span style="color: #0000ff;">="com.tan"</span> <span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">context:exclude-filter </span><span style="color: #ff0000;">type</span><span style="color: #0000ff;">="regex"</span><span style="color: #ff0000;"> expression</span><span style="color: #0000ff;">=".model.*"</span><span style="color: #0000ff;">/&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">context:component-scan</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>&nbsp;</p>
+<pre><span style="font-family: 'Microsoft YaHei';">注意：本人尝试时无论哪种情况&lt;context:include-filter&gt;和&lt;context:exclude-filter&gt;都不能同时存在</span><br /><br /><br /><br /><br /><br /><br /><br /><br /></pre></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2016-04-29 11:30</span> <a href='https://www.cnblogs.com/leskang/'>木叔</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=5445698" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(5445698);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=267421,cb_entryId=5445698,cb_blogApp=currentBlogApp,cb_blogUserGuid='3725cb5e-fa34-e511-b908-9dcfd8948a71',cb_entryCreatedDate='2016/4/29 11:30:00';loadViewCount(cb_entryId);var cb_postType=1;</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+<script>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/1090369/C2', [468, 60], 'div-gpt-ad-1539008685004-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script>
+<div id='cnblogs_c2' class='c_ad_block'>
+    <div id='div-gpt-ad-1539008685004-0' style='height:60px; width:468px;'>
+    <script>
+    if (new Date() >= new Date(2018, 9, 13)) {
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1539008685004-0'); });
+    }
+    </script>
+    </div>
+</div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<DIV id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</DIV>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2018 木叔
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

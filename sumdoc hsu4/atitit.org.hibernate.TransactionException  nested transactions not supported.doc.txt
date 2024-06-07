@@ -1,0 +1,65 @@
+atitit.org.hibernate.TransactionException: nested transactions not supported
+
+原因:::  Transaction打开了两次，所以会抛出异常。 
+多个sql使用不同的session,这个是可以但...
+
+原因： 
+Transaction tx = null; 
+tx = session.beginTransaction(); 
+tx.begin(); 
+Transaction打开了两次，所以会抛出异常。 
+解决方法： 
+Transaction tx = null; 
+tx = session.beginTransaction(); 
+将tx.begain();删除 
+或者 
+将上述原因中的三行代码替换成如下代码。 
+Transaction tx = null; 
+tx = session.getTransaction(); 
+tx.begin(); 
+
+解决之道:::
+opensession a new sess    
+ synchronized  public static Session getSession() throws HibernateException {
+        Session session = (Session) threadLocal.get();
+        
+        //o9a   open a sess per times
+        session=null;
+if begin trans ex  ,then catch close sess...
+
+
+ catch (Exception re)  >>>>>    	session.close();
+
+ public Object merge(Object detachedInstance) {
+    	 try {
+    	Session session = getSession();
+    	Transaction tx = session.beginTransaction();
+    	Object r=session.merge(detachedInstance);
+    	
+    	tx.commit();
+        log.debug("merging   instance");
+       
+          
+            return r;
+        }catch(DataException de)
+        {
+        	if(de.getMessage().contains("截断字符串或二进制数据"))
+        	{
+        		core.log(de);
+        	}
+        	return detachedInstance;
+        }
+    	 
+    	 catch (Exception re) {
+            log.error("merge failed", re);
+            try {
+            	session.close();
+			} catch (Exception e) {
+				core.log(e);
+			}
+            throw new RuntimeException(re);
+        }
+hb cfg   autocommit=true
+multi session or multi fac
+begin trans then close thrans   in a sync  block
+

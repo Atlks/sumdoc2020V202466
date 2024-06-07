@@ -1,0 +1,180 @@
+paip.提升用户体验---c++  悬浮窗体以及右键菜单以及socket接口
+
+作者Attilax ，  EMAIL:1466519819@qq.com 
+来源：attilax的专栏
+地址：http://blog.csdn.net/attilax
+
+
+主要socket控件协议:
+///////////////////////
+show,hide： 显示,隐藏窗口.
+stat:显示状态。。
+mov : 显示当前位置
+mov 100,200 移动位置。
+
+主要流程：
+////////////////
+a.*.pro    add  QT += network
+b.建立服务器监听器.
+    server = new QTcpServer();
+    server->listen(QHostAddress::Any, 6665);
+    connect(server, SIGNAL(newConnection()), this, SLOT(acceptConnection()));
+ c.打开新的连接
+ void FormWdg::acceptConnection(){
+    clientConnection = server->nextPendingConnection();
+    connect(clientConnection, SIGNAL(readyRead()), this, SLOT(readClient()));}连接
+  D.读写socket
+  void  FormWdg::readClient()
+   QString str = clientConnection->readAll();
+       clientConnection->write(retx);
+
+
+
+测试工具：
+//////////////////////
+ 360netman.exe 360网络连接查看器..查看连接情况.
+ Test Socket 1.4 绿色版_Socket协议测试软件 ..可以测试tcp,udp .服务端，客户端..
+
+
+源码:
+////////////
+
+//c929  socket
+#include <QtNetwork>
+#include <QTcpServer>
+QTcpServer* server;
+QTcpSocket *clientConnection;
+
+
+
+----------------ini----------------
+    //c929  socket
+    //#include <QtNetwork>
+
+
+    server = new QTcpServer();
+    server->listen(QHostAddress::Any, 6665);
+    connect(server, SIGNAL(newConnection()), this, SLOT(acceptConnection()));
+    
+    
+    -----other
+    
+void FormWdg::acceptConnection()
+{
+    clientConnection = server->nextPendingConnection();
+    connect(clientConnection, SIGNAL(readyRead()), this, SLOT(readClient()));
+}
+#define CALL_FIRST 1
+#define CALL_LAST 0
+LONG Sequence=1;
+LONG Actual[3];
+LONG WINAPI
+VectoredHandler2(
+    struct _EXCEPTION_POINTERS *ExceptionInfo
+    )
+{
+    UNREFERENCED_PARAMETER(ExceptionInfo);
+
+    Actual[1] = Sequence++;
+    return EXCEPTION_CONTINUE_SEARCH;
+}
+void  FormWdg::readClient()
+{
+    QString ret="";
+    QString str = clientConnection->readAll();
+    if(str=="hide")
+    {
+        this->hide();
+    }
+    if(str=="show")
+    {
+        this->show();
+    }
+    if(str=="stat")
+    {
+        // this->show();
+        if(    this->isHidden())
+            ret="hidden";
+        else
+            ret="showed";
+    }
+    if(str.trimmed()=="mov")
+    {
+        QString x= QString::number( this->x());
+        QString y= QString::number( this->y());
+        ret=x+","+y;
+    }
+    else  if(str.startsWith("mov "))
+    {
+ //PVOID h1,h2,h3;
+       //     h2 = //AddVectoredExceptionHandler(CALL_FIRST,VectoredHandler2);
+ // __try
+         //   _asm
+//          __asm__ __volatile__
+//         //   {
+//        ("
+//         //   push    0FFFFFFFFh
+//            push    0xFFFFFFFF
+//            mov  ebx, offset catch_
+//            push ebx
+//            mov  eax, dword ptr fs:[0]
+//            push eax
+//            mov  dword ptr fs:[0], esp
+//        " )
+          //  }
+     //
+        QT_TRY
+            {
+            str=str.replace("  "," ");
+            str=str.replace("  "," ");
+            str=str.replace("  "," ");
+            str=str.replace("  "," ");
+            str=str.replace(", ",",");str=str.replace(", ",",");str=str.replace(", ",",");
+         //   throw 2;
+            str=str.replace(" ,",",");   str=str.replace(" ,",",");   str=str.replace(" ,",",");
+            QStringList sl = str.split( " ");
+            QString parm=sl.at(1);
+            QStringList  rarmLi = parm.split( ",");
+            int x= rarmLi.at(0).toInt();
+            int y=rarmLi.at(1).toInt();
+            this->move(x,y);
+            }
+    //  __except(EXCEPTION_EXECUTE_HANDLER)
+ QT_CATCH(...)
+//            asm
+//            {
+//            label:
+//            retn
+//            }
+     {
+  qDebug()<<"---some except c93---"<<str;
+        }
+
+
+    }
+
+
+    //    string q2s(const QString &s)
+    //    {
+    QString qsx="---"+ret;
+    const char * retx=qsx.toLocal8Bit();
+
+    clientConnection->write(retx);
+    //  clientConnection->wr
+    qDebug()<<"---readstr:---"<<str;
+    //或者
+    // char buf[1024];
+    //   clientConnection->read(buf,1024);
+}
+
+
+
+
+
+
+参考:
+Qt Socket简单通信 - Wuyuan's Blog - Just for sharing.htm
+网络通信测试工具(socket编程辅助)下载 v1.0 绿色免费版下载_编程工具_下载银行.htm
+[转载]Qt异常处理_yi_yuan_1988_新浪博客.htm
+__try，__except，__finally，__leave_OGRE_百度空间.htm
+浅议Qt的事件处理机制?二（转）_邱国华_新浪博客.htm

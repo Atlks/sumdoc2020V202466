@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Java 判断是否为汉字 判断是否为乱码 判断字符串是否为双整型数字 整数 数字 - _再见理想 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=-hy83QNg62d4qYibixJzxMJkbf1P9fTBlqv7SK5zVL01"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/LessIsMore/bundle-LessIsMore.css?v=K-SPbyFTmacJSNw1O1LzZFcIaS56dT8uEKlXYOxLR9k1"/>
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/LessIsMore/bundle-LessIsMore-mobile.css?v=d9LctKHRIQp9rreugMcQ1-UJuq_j1fo0GZXTXj8Bqrk1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/exmyth/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/exmyth/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/exmyth/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript">var currentBlogApp = 'exmyth', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=d16NGD79qD3qnJt25hXDZ2sGoojamz2W5Rl4vT0CGVg1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+		
+<!--done-->
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/exmyth/">再见理想</a></div>
+<div class="subtitle">Life is not what you have gained but what you have done! </div>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li id="nav_myhome"><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/exmyth/">首页</a></li>
+<li id="nav_newpost"><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li id="nav_contact"><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/_%E5%86%8D%E8%A7%81%E7%90%86%E6%83%B3">联系</a></li>
+<li id="nav_rss"><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/exmyth/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/exmyth/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li id="nav_admin"><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<!--done-->
+随笔-1279&nbsp;
+文章-0&nbsp;
+评论-135&nbsp;
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/exmyth/p/3956967.html">Java 判断是否为汉字 判断是否为乱码 判断字符串是否为双整型数字 整数 数字</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body"><p>/**<br />&nbsp; * 判断是否为汉字<br />&nbsp; *&nbsp;<br />&nbsp; * @param str<br />&nbsp; * @return<br />&nbsp; */<br />&nbsp;public static boolean isGBK(String str) {<br />&nbsp;&nbsp;char[] chars = str.toCharArray();<br />&nbsp;&nbsp;boolean isGBK = false;<br />&nbsp;&nbsp;for (int i = 0; i &lt; chars.length; i++) {<br />&nbsp;&nbsp;&nbsp;byte[] bytes = ("" + chars[i]).getBytes();<br />&nbsp;&nbsp;&nbsp;if (bytes.length == 2) {<br />&nbsp;&nbsp;&nbsp;&nbsp;int[] ints = new int[2];<br />&nbsp;&nbsp;&nbsp;&nbsp;ints[0] = bytes[0] &amp; 0xff;<br />&nbsp;&nbsp;&nbsp;&nbsp;ints[1] = bytes[1] &amp; 0xff;<br />&nbsp;&nbsp;&nbsp;&nbsp;if (ints[0] &gt;= 0x81 &amp;&amp; ints[0] &lt;= 0xFE &amp;&amp; ints[1] &gt;= 0x40<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&amp;&amp; ints[1] &lt;= 0xFE) {<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;isGBK = true;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;return isGBK;<br />&nbsp;}</p>
+<p>/**<br />&nbsp; * 判断是否为乱码<br />&nbsp; *&nbsp;<br />&nbsp; * @param str<br />&nbsp; * @return<br />&nbsp; */<br />&nbsp;public static boolean isMessyCode(String str) {<br />&nbsp;&nbsp;for (int i = 0; i &lt; str.length(); i++) {<br />&nbsp;&nbsp;&nbsp;char c = str.charAt(i);<br />&nbsp;&nbsp;&nbsp;// 当从Unicode编码向某个字符集转换时，如果在该字符集中没有对应的编码，则得到0x3f（即问号字符?）<br />&nbsp;&nbsp;&nbsp;//从其他字符集向Unicode编码转换时，如果这个二进制数在该字符集中没有标识任何的字符，则得到的结果是0xfffd<br />&nbsp;&nbsp;&nbsp;//System.out.println("--- " + (int) c);<br />&nbsp;&nbsp;&nbsp;if ((int) c == 0xfffd) {<br />&nbsp;&nbsp;&nbsp;&nbsp;// 存在乱码<br />&nbsp;&nbsp;&nbsp;&nbsp;//System.out.println("存在乱码 " + (int) c);<br />&nbsp;&nbsp;&nbsp;&nbsp;return true;<br />&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;return false;&nbsp;<br />&nbsp;}</p>
+<p><br />&nbsp;/**<br />&nbsp; * 判断字符串是否为双整型数字<br />&nbsp; *&nbsp;<br />&nbsp; * @param str<br />&nbsp; * @return<br />&nbsp; */<br />&nbsp;public static boolean isDouble(String str) {<br />&nbsp;&nbsp;if (StringUtil.isNullOrEmpty(str)) {<br />&nbsp;&nbsp;&nbsp;return false;<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;Pattern p = Pattern.compile("-*\\d*.\\d*");<br />&nbsp;&nbsp;// Pattern p = Pattern.compile("-*"+"<a href="http://file//d*%22+%22.%22+%22//d">\\d*"+"."+"\\d</a>*");<br />&nbsp;&nbsp;return p.matcher(str).matches();<br />&nbsp;}</p>
+<p>&nbsp;/**<br />&nbsp; * 判断字符串是否为整字<br />&nbsp; *&nbsp;<br />&nbsp; * @param str<br />&nbsp; * @return<br />&nbsp; */<br />&nbsp;public static boolean isNumber(String str) {<br />&nbsp;&nbsp;if (StringUtil.isNullOrEmpty(str)) {<br />&nbsp;&nbsp;&nbsp;return false;<br />&nbsp;&nbsp;}<br />&nbsp;&nbsp;Pattern p = Pattern.compile("-*\\d*");<br />&nbsp;&nbsp;return p.matcher(str).matches();<br />&nbsp;}<br />&nbsp;<br />&nbsp;/**<br />&nbsp; * 判断是否为数字<br />&nbsp; *&nbsp;<br />&nbsp; * @param str<br />&nbsp; * @return<br />&nbsp; */<br />&nbsp;public static boolean isNumeric(String str)&nbsp;&nbsp;&nbsp;<br />&nbsp;{&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Pattern pattern = Pattern.compile("[0-9]*");&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Matcher isNum = pattern.matcher(str);&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if( !isNum.matches() ) {&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return false;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return true;&nbsp;&nbsp;&nbsp;<br />&nbsp;}</p>
+<p>&nbsp;</p>
+<p>需要导入 java.util.regex.Pattern 和 java.util.regex.Matcher</p>
+<p>&nbsp;</p>
+<p>from:<a href="http://hi.baidu.com/zdz8207/item/13abe809f904c718eafe38d5">http://hi.baidu.com/zdz8207/item/13abe809f904c718eafe38d5</a></p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2014-09-04 22:08</span> <a href='http://www.cnblogs.com/exmyth/'>_再见理想</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=3956967" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(3956967);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=133405,cb_entryId=3956967,cb_blogApp=currentBlogApp,cb_blogUserGuid='91332956-972c-e211-aa8f-842b2b196315',cb_entryCreatedDate='2014/9/4 22:08:00';loadViewCount(cb_entryId);var cb_postType=1;</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2018 _再见理想
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

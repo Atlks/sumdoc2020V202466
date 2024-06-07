@@ -1,0 +1,8 @@
+atitit.微信支付接口与其他模块的对应关系，获取openid的接口模块。。。
+
+xxxx.pay.jsp?orderid=123456&fee=88&name=超级强大的服务
+
+
+获取openid
+  <meta http-equiv="refresh" content="0;URL=https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx947702f1812d3249&redirect_uri=http://m.hualip.com:8090/wechat/getopenid.jsp&response_type=code&scope=snsapi_base&state=1#wechat_redirect" />
+

@@ -1,0 +1,739 @@
+atitit lib RANK JAVA JAR 
+
+
+JSON Libraries (74)
+Core Utilities (5)
+Mocking (41)
+HTTP Clients (82)
+Dependency Injection (51)
+I/O Utilities (17)
+XML Processing (34)
+ 
+Web Frameworks (39)
+Reflection Libraries (47)
+ 
+Bytecode Libraries (34)
+Embedded SQL Databases (6)
+	Apache Derby Database Engine and Embedded JDBC Driver	Apache	1,681HTTP Clients (82)
+Dependency Injection (51)
+I/O Utilities (17)
+XML Processing (34)
+ 
+Reflection Libraries (47)
+ 
+ 
+Embedded SQL Databases (6)
+	Collections (72)
+Aspect Oriented (13)
+Base64 Libraries (20)
+Date and Time Utilities (30)
+Object/Relational Mapping (52)
+Command Line Parsers (45)
+	Expression Languages (18)
+Object Serialization (18)
+Configuration Libraries (21)
+Transaction APIs/Managers (20)
+ 
+Code Coverage Tools (12)
+Template Engines (25)
+Web Servers (7)
+YAML Parsers (9)
+Cache Implementations (21)
+Message Queue Clients (31)
+Compression Libraries (32)
+JPA Implementations (6)
+Mail Clients (12)
+	HTML Parsers (20)
+JDBC Extensions (21)
+Math Libraries (27)
+NetBeans Modules (600)
+REST Framework (13)
+Network App Frameworks (5)
+CSV Libraries (65)
+Security Frameworks (8)
+Redis Clients (29)
+ 
+ 
+ 
+ 
+Web Testing (11)
+String Utilities (14)
+MongoDB Clients (16)
+ 
+ 
+MIME Types Libraries (7)
+Web Upload Managers (8)
+	Parser Generators (18)
+Functional Programming (11)
+Markdown Processors (41)
+Excel Libraries (13)
+ 
+Job Scheduling (28)
+SSH Libraries (23)
+Console Utilities (10)
+Native Access Tools (14)
+FTP Clients and Servers (23)
+Annotation Processing Tools (17)
+Git Tools (42)
+OAuth Libraries (26)
+Full-Text Indexing Libraries (2)
+ 
+ 
+XPath Libraries (10)
+DB Migration Tools (6)
+PDF Libraries (12)
+WebSocket Clients (17)
+Exception Handling (18)
+ 
+ 
+ 
+RDF Libraries (17)
+External Process Execution (11)
+Machine Learning (26)
+ 
+Java Compilers/Parsers (7)
+Regular Expression Libraries (19)
+ 
+ 
+ 
+ 
+Barcode Libraries (14)
+Classpath Tools (20)
+I18N Libraries (4)
+ 
+Rule Engines (2)
+	Natural Language Processing (36)
+BPM Engines (6)
+Search Engines (8)
+JavaScript Processors (6)
+Diff and Patch Libraries (30)
+	DNS Libraries (29)
+DynamoDB Clients (21)
+ 
+Application Servers (4)
+Web Browser Automation (17)
+
+
+
+-------------------------------------
+JSON Libraries (74)
+	Jackson Databind	Apache	15,450
+	Gson	Apache	12,825
+	Jackson Core	Apache	7,331
+more...		
+Core Utilities (5)
+	Guava: Google Core Libraries For Java	Apache	23,989
+	Apache Commons Lang	Apache	16,769
+	Commons Lang	Apache	10,706
+more...		
+Mocking (41)
+	Mockito Core	MIT	20,238
+	Mockito	MIT	12,651
+	EasyMock	Apache	4,382
+more...		
+
+
+HTTP Clients (82)
+	Apache HttpClient	Apache	9,868
+	OkHttp	Apache	4,744
+	Apache HttpCore	Apache	3,449
+more...		
+Dependency Injection (51)
+	Spring Context	Apache	9,420
+	Spring Beans	Apache	5,221
+	Javax Inject	Apache	4,821
+more...		
+I/O Utilities (17)
+	Apache Commons IO	Apache	18,887
+	Commons IO	Apache	1,168
+	Okio	Apache	1,035
+more...		
+XML Processing (34)
+	JAXB API	CDDL	3,739
+	Old JAXB Runtime	EDL	2,251
+	Xerces2 J	Apache	2,151
+more...		
+OSGI Utilities (178)
+	OSGi Core	Apache	6,289
+	OSGi Compendium	Apache	3,567
+	Annotations For SCR	Apache	1,268
+more...		
+Web Frameworks (39)
+	Spring Web	Apache	5,591
+	Spring Web MVC	Apache	3,855
+	GWT User		1,953
+more...		
+Reflection Libraries (47)
+	Apache Commons BeanUtils	Apache	3,893
+	Kotlin Reflection	Apache	3,021
+	Reflections	BSD	2,668
+more...		
+Build Models (4)
+	Maven Plugin API	Apache	6,001
+	Maven Project	Apache	2,696
+	Maven Artifact	Apache	1,946
+more...		
+Bytecode Libraries (34)
+	Javassist	ApacheLGPLMPL	2,551
+	CGLib Nodep	Apache	1,978
+	CGLib	Apache	1,677
+more...		
+Embedded SQL Databases (6)
+	H2 Database Engine	EPLMPL	5,828
+	HyperSQL Database		2,568
+	Apache Derby Database Engine and Embedded JDBC Driver	Apache	1,681HTTP Clients (82)
+	Apache HttpClient	Apache	9,868
+	OkHttp	Apache	4,744
+	Apache HttpCore	Apache	3,449
+more...		
+Dependency Injection (51)
+	Spring Context	Apache	9,420
+	Spring Beans	Apache	5,221
+	Javax Inject	Apache	4,821
+more...		
+I/O Utilities (17)
+	Apache Commons IO	Apache	18,887
+	Commons IO	Apache	1,168
+	Okio	Apache	1,035
+more...		
+XML Processing (34)
+	JAXB API	CDDL	3,739
+	Old JAXB Runtime	EDL	2,251
+	Xerces2 J	Apache	2,151
+more...		
+OSGI Utilities (178)
+	OSGi Core	Apache	6,289
+	OSGi Compendium	Apache	3,567
+	Annotations For SCR	Apache	1,268
+more...		
+Web Frameworks (39)
+	Spring Web	Apache	5,591
+	Spring Web MVC	Apache	3,855
+	GWT User		1,953
+more...		
+Reflection Libraries (47)
+	Apache Commons BeanUtils	Apache	3,893
+	Kotlin Reflection	Apache	3,021
+	Reflections	BSD	2,668
+more...		
+Build Models (4)
+	Maven Plugin API	Apache	6,001
+	Maven Project	Apache	2,696
+	Maven Artifact	Apache	1,946
+more...		
+Bytecode Libraries (34)
+	Javassist	ApacheLGPLMPL	2,551
+	CGLib Nodep	Apache	1,978
+	CGLib	Apache	1,677
+more...		
+Embedded SQL Databases (6)
+	H2 Database Engine	EPLMPL	5,828
+	HyperSQL Database		2,568
+	Apache Derby Database Engine and Embedded JDBC Driver	Apache	1,681
+	
+	
+	
+	Collections (72)
+	Apache Commons Collections	Apache	5,233
+	Apache Commons Collections	Apache	2,316
+	Fastutil	Apache	500
+more...		
+Aspect Oriented (13)
+	Spring AOP	Apache	2,508
+	AspectJ Runtime	EPL	2,310
+	AspectJ Weaver	EPL	2,204
+more...		
+Base64 Libraries (20)
+	Apache Commons Codec	Apache	8,837
+	Base64	Public	156
+	MiG Base64	BSD	66
+more...		
+Date and Time Utilities (30)
+	Joda Time	Apache	7,478
+	Clj Time	MIT	1,000
+	Nscala Time	Apache	197
+
+
+
+Object/Relational Mapping (52)
+	Hibernate Core Relocation	LGPL	3,210
+	Spring Object/Relational Mapping	Apache	2,121
+	MyBatis	Apache	853
+more...		
+Command Line Parsers (45)
+	Apache Commons CLI	Apache	3,464
+	JCommander	Apache	861
+	Args4j	MIT	548
+	
+	
+	Expression Languages (18)
+	Spring Expression Language (SpEL)	Apache	1,355
+	Expression Language 3.0 API	CDDLGPLGPL	1,265
+	Expression Language API (2.1 Maintenance Release)		780
+more...		
+Object Serialization (18)
+	Protocol Buffers [Core]	BSD	2,645
+	Apache Avro	Apache	1,279
+	Apache Thrift	Apache	879
+more...		
+Configuration Libraries (21)
+	Config	Apache	1,947
+	Apache Commons Configuration	Apache	1,745
+	Commons Digester	Apache	934
+more...		
+Transaction APIs/Managers (20)
+	Spring Transaction	Apache	2,597
+	Java Transaction API		1,120
+	JTA 1.1	Apache	622
+more...		
+Build Tools (8)
+	Maven Core	Apache	3,266
+	Apache Ant Core	Apache	1,923
+	Ant	Apache	735
+more...		
+Code Coverage Tools (12)
+	Scalac SCoverage Runtime	Apache	2,322
+	Scalac SCoverage Plugin	Apache	2,262
+	JaCoCo :: Agent	EPL	655
+more...		
+Template Engines (25)
+	Apache FreeMarker	Apache	1,859
+	Apache Velocity	Apache	1,465
+	Twirl API	Apache	779
+more...		
+Web Servers (7)
+	Jetty :: Server Core	ApacheEPL	2,791
+	Jetty :: Server Core	Apache	1,320
+	Tomcat Embed Core	Apache	571
+more...		
+
+
+YAML Parsers (9)
+	SnakeYAML	Apache	2,136
+	Jackson Dataformat YAML	Apache	1,936
+	YamlBeans	BSD	63
+more...		
+Cache Implementations (21)
+	Caffeine Cache	Apache	1,027
+	Ehcache	Apache	771
+	Ehcache Core	Apache	653
+more...		
+Message Queue Clients (31)
+	Spring JMS	Apache	889
+	Spring Messaging	Apache	697
+	RabbitMQ Java Client	ApacheGPLMPL	503
+more...		
+Compression Libraries (32)
+	Apache Commons Compress	Apache	1,876
+	Snappy Java	Apache	700
+	XZ For Java	Public	447
+more...		
+JPA Implementations (6)
+	Hibernate EntityManager Relocation	LGPL	2,458
+	Javax Persistence	EDLEPL	568
+	EclipseLink	EPL	328
+more...		
+Mail Clients (12)
+	JavaMail API (compat)	CDDLGPL	2,214
+	JavaMail API	CDDLGPL	861
+	Apache Commons Email	Apache	37
+	
+	
+	HTML Parsers (20)
+	JSoup Java HTML Parser	MIT	2,165
+	Neko HTML	Apache	343
+	TagSoup	Apache	142
+more...		
+JDBC Extensions (21)
+	Spring JDBC	Apache	3,077
+	P6Spy	Apache	79
+	JCabi JDBC	BSD	9
+more...		
+Math Libraries (27)
+	Apache Commons Math	Apache	1,644
+	JTS Topology Suite	LGPL	603
+	Commons Math	Apache	354
+more...		
+NetBeans Modules (600)
+	OpenBlueSky Utilities	Apache	88
+	TheseFoolishThings Logger	Apache	87
+	Wrappers JSR 305	Apache	65
+more...		
+REST Framework (13)
+	RESTEasy JAX RS Implementation	Apache	943
+	Jersey Core	CDDLGPL	848
+	Jersey Core Server	ApacheBSDEPL	728
+more...		
+Network App Frameworks (5)
+	Netty/All In One	Apache	1,556
+	Netty/All In One	Apache	951
+	Apache MINA Core 3.0.0 M2	Apache	489
+more...		
+
+
+CSV Libraries (65)
+	Apache Commons CSV	Apache	688
+	OpenCSV	Apache	597
+	OpenCSV	Apache	290
+more...		
+Security Frameworks (8)
+	Spring Security Core	Apache	1,669
+	Apache Shiro :: Core	Apache	556
+	PicketBox Full JAR Distribution	LGPL	128
+more...		
+Redis Clients (29)
+	Jedis	MIT	1,334
+	Spring Data Redis	Apache	408
+	Redisson	Apache	209
+more...		
+Eclipse Plugins (2651)
+	Eclipse Paho Client Mqttv3	EPL	313
+	Eclipse Sisu Plexus	EPL	188
+	Eclipse Sisu Inject	EPL	160
+more...		
+Cloud Computing (19)
+	AWS SDK For Java	Apache	792
+	AWS SDK For Java Core	Apache	700
+	AppEngine API 1 0 SDK	ApacheCDDLGPL	327
+more...		
+Object Pools (11)
+	Commons Pool	Apache	1,225
+	Apache Commons Pool	Apache	1,126
+	OW2 Util :: Pool :: IMPL	LGPL	14
+more...		
+Distributed Computing (6)
+	Spark Project Core	Apache	1,568
+	Hadoop Core	Apache	687
+	Scalding Core	Apache	55
+more...		
+Web Testing (11)
+	Selenium Java	Apache	1,222
+	HtmlUnit	Apache	436
+	Selenium Server	Apache	292
+more...		
+
+
+String Utilities (14)
+	Apache Commons Text	Apache	1,461
+	Joda Convert	Apache	805
+	Java String Similarity	MIT	37
+more...		
+MongoDB Clients (16)
+	MongoDB Java Driver	Apache	1,092
+	Spring Data MongoDB Core	Apache	720
+	The MongoDB Asynchronous Driver	Apache	116
+more...		
+Message Brokers (12)
+	Apache Kafka	Apache	1,045
+	ActiveMQ :: Core	Apache	542
+	ActiveMQ :: Broker	Apache	448
+more...		
+Actor Frameworks (20)
+	Akka Actor	Apache	1,809
+	Scala Actors Library	BSD	112
+	GPars	Apache	106
+more...		
+Enterprise Integration (6)
+	Camel :: Core	Apache	1,432
+	Mule Core	CPAL	300
+	Spring Integration Core	Apache	271
+more...		
+MIME Types Libraries (7)
+	Apache HttpClient Mime	Apache	1,938
+	Mime Detection Utility	Apache	93
+	Apache James :: Mime4j :: Assembly	Apache	73
+more...		
+Web Upload Managers (8)
+	Apache Commons FileUpload	Apache	2,023
+	Tapestry Upload	Apache	20
+	Nunaliit2 Upload
+	
+	
+	Parser Generators (18)
+	ANTLR		594
+	Scala Parser Combinators	Apache	573
+	ANTLR 4 Tool	BSD	298
+more...		
+Functional Programming (11)
+	Scalaz Core	BSD	806
+	Vavr	Apache	346
+	CatsJVM	MIT	340
+more...		
+Markdown Processors (41)
+	Pegdown	Apache	1,222
+	Flexmark Java Core	BSD	141
+	CommonMark Java Core	BSD	115
+more...		
+Excel Libraries (13)
+	Apache POI	Apache	1,502
+	JXL	LGPL	211
+	Jxls Core	LGPL	39
+more...		
+Hadoop Query Engines (6)
+	Spark Project SQL	Apache	1,116
+	Hive Query Language	Apache	318
+	Pig	Apache	149
+more...		
+Android Platform (5)
+	Google Android Library	Apache	1,308
+	Android Support Library (v4)	Apache	216
+	Google Android Annotations Library	Apache	88
+more...		
+Job Scheduling (28)
+	Quartz	Apache	1,512
+	Cron4j	LGPL	60
+	Sakai Job Scheduler API (scheduler Api)	ECL	21
+more...		
+SSH Libraries (23)
+	JSch	BSD	1,041
+	Apache Mina SSHD :: Core	Apache	308
+	Ganymed SSH2 For Java	BSD	83
+more...		
+Console Utilities (10)
+	JLine	BSD	842
+	Jansi	Apache	458
+	JLine	BSD	64
+more...		
+Native Access Tools (14)
+	Java Native Access	ApacheLGPL	1,012
+	JNR FFI	Apache	95
+	GlueGen Runtime	BSD	91
+more...		
+
+
+
+FTP Clients and Servers (23)
+	Apache Commons Net	Apache	1,056
+	Apache FtpServer Core	Apache	119
+	Camel :: FTP	Apache	59
+more...		
+Annotation Processing Tools (17)
+	Value	Apache	630
+	Auto Common Libraries	Apache	260
+	Java Annotation Indexer	Apache	209
+more...		
+Git Tools (42)
+	JGit Core	BSDEDL	976
+	Grgit	Apache	83
+	Maven SCM Git Provider Git Executable Impl.	Apache	77
+more...		
+OAuth Libraries (26)
+	OAuth2 For Spring Security	Apache	341
+	Google OAuth Client Library For Java	Apache	180
+	OAuth 2.0 SDK with OpenID Connect Extensions	Apache	178
+more...		
+Full-Text Indexing Libraries (2)
+	Lucene Core	Apache	1,258
+	MG4J (big)	LGPL	5
+more...		
+Microbenchmarks (14)
+	JMH Core	GPL	712
+	JUnitBenchmarks	Apache	147
+	Scalameter	BSD	133
+more...		
+JWT Libraries (29)
+	JSON Web Token Support For The JVM	Apache	450
+	Java JWT	MIT	310
+	JOSE4j	Apache	187
+more...		
+ElasticSearch Clients (14)
+	Server	Apache	1,008
+	Jest Apache HC Jar	Apache	90
+	Elastisch	EPL	21
+more...		
+XPath Libraries (10)
+	Jaxen	BSD	1,050
+	Saxon XPath	MPL	44
+	Xsoup	MIT	22
+more...		
+
+
+DB Migration Tools (6)
+	Liquibase	Apache	522
+	Flyway Core	Apache	498
+	Ragtime	EPL	31
+more...		
+PDF Libraries (12)
+	Apache PDFBox	Apache	429
+	IText, A Free Java PDF Library	AGPL	326
+	IText Core	AGPL	258
+more...		
+WebSocket Clients (17)
+	WebSocket Server API	CDDLGPL	437
+	Java WebSocket	MIT	239
+	Jetty :: Websocket :: Client	ApacheEPL	182
+more...		
+Exception Handling (18)
+	Spring Retry	Apache	680
+	Catch Exception	Apache	125
+	Catch Exception	Apache	113
+more...		
+Cassandra Clients (25)
+	DataStax Java Driver For Apache Cassandra(R) Core	Apache	644
+	Hector Core	MIT	67
+	Astyanax Cassandra	Apache	41
+more...		
+OSGI Frameworks (2)
+	Apache Felix Framework	Apache	784
+	Common Eclipse Runtime	EPL	176
+more...		
+Distributed File Systems (6)
+	Apache Hadoop HDFS	Apache	861
+	Tachyon Project Core	Apache	13
+	Kosmosfs	Apache	10
+more...		
+RDF Libraries (17)
+	Apache Jena Core	Apache	233
+	OpenRDF Sesame: Model		214
+	Clerezza RDF Core	Apache	146
+more...		
+External Process Execution (11)
+	Apache Commons Exec	Apache	634
+	ZT Process Executor	Apache	122
+	Command	Apache	35
+more...		
+
+
+Machine Learning (26)
+	Spark Project ML Library	Apache	457
+	Weka Dev	GPL	215
+	Weka Stable	GPL	59
+more...		
+Distributed Tracing (17)
+	OpenTracing API	Apache	339
+	Brave	Apache	122
+	Zipkin Core Library (Deprecated)	Apache	99
+more...		
+Java Compilers/Parsers (7)
+	JavaParser Core	ApacheLGPL	284
+	Eclipse ECJ	EPL	268
+	QDox	Apache	146
+more...		
+Regular Expression Libraries (19)
+	Oro	Apache	506
+	Jakarta RegExp		91
+	Generex	Apache	52
+more...		
+Cache Clients (12)
+	JSR107 API and SPI	Apache	372
+	Spymemcached	Apache	181
+	Xmemcached	Apache	79
+more...		
+JMX Libraries (27)
+	Jmxutils	Apache	172
+	MX4J	Apache	162
+	JBoss JMX		78
+more...		
+Maven Repositories API (5)
+	Aether API	EPL	431
+	Aether :: API	EPL	220
+	Coursier	Apache	44
+more...		
+Graph Databases (12)
+	Neo4j Graph Database Kernel	GPL	231
+	Neo4j Community	GPL	213
+	Spark Project GraphX	Apache	84
+more...		
+
+
+Barcode Libraries (14)
+	ZXing Core	Apache	596
+	Barbecue		25
+	Barcode4J	Apache	25
+more...		
+Classpath Tools (20)
+	ClassGraph	MIT	228
+	FastClasspathScanner	MIT	175
+	Governator	Apache	81
+more...		
+I18N Libraries (4)
+	ICU4J	ICU	615
+	Scalingua	Apache	1
+	Commons I18n		0
+more...		
+Hashing Libraries (19)
+	LZ4 and XxHash	Apache	296
+	JBCrypt	ISC	198
+	Utilities Hashing	Apache	37
+more...		
+Cluster Managment (5)
+	Apache Hadoop YARN API	Apache	247
+	Apache Hadoop YARN Common	Apache	243
+	Mesos	Apache	55
+more...		
+Virtual File Systems (15)
+	JBoss VFS	Apache	326
+	Apache Commons VFS	Apache	217
+	TrueZIP	Apache	14
+more...		
+CSS, LESS, SASS (49)
+	CSS Parser	Apache	97
+	Simple API For CSS	W3C	88
+	Batik CSS	Apache	64
+more...		
+HBase Clients (4)
+	Apache HBase Client	Apache	539
+	Asynchronous HBase Client	BSD	18
+	Async HBase Client	Apache	0
+more...		
+Rule Engines (2)
+	Drools :: Core	Apache	530
+	DTRules :: DTRules
+	
+	
+	Natural Language Processing (36)
+	Stanford CoreNLP	GPL	176
+	Apache OpenNLP Tools	Apache	144
+	MAchine Learning For LanguagE Toolkit (MALLET)	CPALCPL	39
+more...		
+BPM Engines (6)
+	Activiti :: Engine	Apache	199
+	Camunda BPM Engine	Apache	180
+	JBPM :: BPMN2	Apache	119
+more...		
+Search Engines (8)
+	Apache Solr Solrj	Apache	495
+	Zoie Core	Apache	6
+	Bobo Browse	Apache	5
+more...		
+JavaScript Processors (6)
+	Closure Compiler	Apache	233
+	YUI Compressor	BSD	218
+	Jawr Core	Apache	19
+more...		
+Diff and Patch Libraries (30)
+	Java Diff Utilities	Apache	246
+	Diff Match Patch	Apache	23
+	Java Diff	Apache	22
+	
+	
+	
+	DNS Libraries (29)
+	DNSJava	BSD	206
+	JmDNS	Apache	56
+	ApacheDS Protocol Dns	Apache	34
+more...		
+DynamoDB Clients (21)
+	AWS Java SDK For Amazon DynamoDB	Apache	306
+	AWS Java SDK :: Services :: Amazon DynamoDB	Apache	46
+	Faraday	EPL	26
+more...		
+Docker Clients (16)
+	Docker Java	Apache	182
+	Docker Client	Apache	128
+	Gradle Docker Plugin	Apache	38
+more...		
+Vector/Matrix Libraries (17)
+	Colt		179
+	Efficient Java Matrix Library	Apache	61
+	Matrix Toolkits For Java	LGPL	49
+more...		
+Application Servers (4)
+	OpenEJB :: Container :: Core	Apache	143
+	JBoss Application Server: Server	LGPL	130
+	WildFly: Server	LGPL	66
+more...		
+Web Browser Automation (17)
+	PhantomJSDriver	BSD	139
+	PhantomJSDriver	BSD	110
+	PhantomJSDriver	BSD	65

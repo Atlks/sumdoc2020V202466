@@ -1,0 +1,424 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MyBatis 一、二级缓存和自定义缓存 - MoonGeek - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=-hy83QNg62d4qYibixJzxMJkbf1P9fTBlqv7SK5zVL01"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/BlackLowKey/bundle-BlackLowKey.css?v=porUb1GRMsPCuLZTJKjoDyrJre6Y7-Oiq-zx-_VcGG81"/>
+<link type="text/css" rel="stylesheet" href="/blog/customcss/376520.css?v=1XosObxMi6mtxw1AVjSQ%2bflXk9k%3d"/>
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/BlackLowKey/bundle-BlackLowKey-mobile.css?v=d9LctKHRIQp9rreugMcQ1-UJuq_j1fo0GZXTXj8Bqrk1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/moongeek/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/moongeek/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/moongeek/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript">var currentBlogApp = 'moongeek', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=taItysi72HxMPeH9Xg5nAYabRul6hhgahi3tVIMIKV81" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="http://www.cnblogs.com/moongeek/"><img id="blogLogo" src="/Skins/custom/images/logo.gif" alt="返回主页" /></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/moongeek/">三月烟雨飘摇的南方</a></h1>
+<h2>夫学须静也，才须学也，非学无以广才，非志无以成学。</h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/moongeek/">首页</a></li>
+<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/MoonGeek">联系</a></li>
+<li><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/moongeek/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/moongeek/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<span id="stats_post_count">随笔 - 17&nbsp; </span>
+<span id="stats_article_count">文章 - 2&nbsp; </span>
+<span id="stats-comment_count">评论 - 5</span>
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/moongeek/p/7689683.html">MyBatis 一、二级缓存和自定义缓存</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body cnblogs-markdown"><h2 id="一级缓存">1、一级缓存</h2>
+<p>​ MyBatis <strong>默认开启了一级缓存</strong>，一级缓存是在SqlSession 层面进行缓存的。即，同一个SqlSession ，多次调用同一个Mapper和同一个方法的同一个参数，只会进行一次数据库查询，然后把数据缓存到缓冲中，以后直接先从缓存中取出数据，不会直接去查数据库。</p>
+<p>​ 但是不同的SqlSession对象，因为不用的SqlSession都是相互隔离的，所以相同的Mapper、参数和方法，他还是会再次发送到SQL到数据库去执行，返回结果。</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(String[] args) {
+        <span class="co">// 自定义的单例SqlSessionFactory模式</span>
+        SqlSessionFactory factory = SqlSessionFactoryUtil.<span class="fu">openSqlSession</span>();
+
+        <span class="co">// 获得SqlSession对象</span>
+        SqlSession sqlSession = factory.<span class="fu">openSession</span>();
+        <span class="co">// 获得dao实体</span>
+        UserMapper userMapper = sqlSession.<span class="fu">getMapper</span>(UserMapper.<span class="fu">class</span>);
+        <span class="co">// 进行两次相同的查询操作</span>
+        userMapper.<span class="fu">selectByPrimaryKey</span>(<span class="dv">1</span>);
+        userMapper.<span class="fu">selectByPrimaryKey</span>(<span class="dv">1</span>);
+        <span class="co">// 注意，当我们使用二级缓存时候，sqlSession需要使用commit时候才会生效</span>
+        sqlSession.<span class="fu">commit</span>();
+
+        System.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;</span><span class="ch">\n\n</span><span class="st">=============================================================&quot;</span>);
+        <span class="co">// 获得一个新的SqlSession 对象</span>
+        SqlSession sqlSession1 = factory.<span class="fu">openSession</span>();
+        <span class="co">// 进行相同的查询操作</span>
+        sqlSession1.<span class="fu">getMapper</span>(UserMapper.<span class="fu">class</span>).<span class="fu">selectByPrimaryKey</span>(<span class="dv">1</span>);
+        <span class="co">// 注意，当我们使用二级缓存时候，sqlSession需要使用commit时候才会生效</span>
+        sqlSession.<span class="fu">commit</span>();
+    }</code></pre></div>
+<p>日志输出</p>
+<pre><code>DEBUG [main] - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@77caeb3e]
+DEBUG [main] - ==&gt;  Preparing: select user_ID, login_name,user_name, user_code, user_type, user_active, organization_ID,user_position,password from user where user_ID = ? 
+DEBUG [main] - ==&gt; Parameters: 1(Integer)
+TRACE [main] - &lt;==    Columns: user_ID, login_name, user_name, user_code, user_type, user_active, organization_ID, user_position, password
+TRACE [main] - &lt;==        Row: 1, HBAF-001, 李晓龙, HBAF-001, EMPLOYEE, 1, 0, 董事长, 152fa91ab3688aadcee09a88e4251a54
+DEBUG [main] - &lt;==      Total: 1
+
+
+=============================================================
+DEBUG [main] - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@553f17c]
+DEBUG [main] - ==&gt;  Preparing: select user_ID, login_name,user_name, user_code, user_type, user_active, organization_ID,user_position,password from user where user_ID = ? 
+DEBUG [main] - ==&gt; Parameters: 1(Integer)
+TRACE [main] - &lt;==    Columns: user_ID, login_name, user_name, user_code, user_type, user_active, organization_ID, user_position, password
+TRACE [main] - &lt;==        Row: 1, HBAF-001, 李晓龙, HBAF-001, EMPLOYEE, 1, 0, 董事长, 152fa91ab3688aadcee09a88e4251a54
+DEBUG [main] - &lt;==      Total: 1</code></pre>
+<p>​ 可以发现，第一次的两个相同操作，只执行了一次数据库。后来的那个操作又进行了数据库查询。</p>
+<h2 id="二级缓存">2、二级缓存</h2>
+<p>​ 为了克服这个问题，需要开启二级缓存，是的缓存zaiSqlSessionFactory层面给各个SqlSession 对象共享。默认二级缓存是不开启的，需要手动进行配置。</p>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;cache/&gt;</span></code></pre></div>
+<p>​ 如果这样配置的话，很多其他的配置就会被默认进行，如：</p>
+<ul>
+<li>映射文件所有的select 语句会被缓存</li>
+<li>映射文件的所有的insert、update和delete语句会刷新缓存</li>
+<li>缓存会使用默认的Least Recently Used（LRU，最近最少使用原则）的算法来回收缓存空间</li>
+<li>根据时间表，比如No Flush Interval，（CNFI，没有刷新间隔），缓存不会以任何时间顺序来刷新</li>
+<li>缓存会存储列表集合或对象（无论查询方法返回什么）的1024个引用</li>
+<li>缓存会被视为是read/write（可读/可写）的缓存，意味着对象检索不是共享的，而且可以很安全的被调用者修改，不干扰其他调用者或县城所作的潜在修改</li>
+</ul>
+<p>添加后日志打印如下，可以发现所有过程只使用了一次数据库查询</p>
+<pre><code>EBUG [main] - ooo Using Connection [com.mysql.jdbc.JDBC4Connection@5622fdf]
+DEBUG [main] - ==&gt;  Preparing: select user_ID, login_name,user_name, user_code, user_type, user_active, organization_ID,user_position,password from user where user_ID = ? 
+DEBUG [main] - ==&gt; Parameters: 1(Integer)
+TRACE [main] - &lt;==    Columns: user_ID, login_name, user_name, user_code, user_type, user_active, organization_ID, user_position, password
+TRACE [main] - &lt;==        Row: 1, HBAF-001, 李晓龙, HBAF-001, EMPLOYEE, 1, 0, 董事长, 152fa91ab3688aadcee09a88e4251a54
+DEBUG [main] - &lt;==      Total: 1
+
+
+=============================================================</code></pre>
+<p>可以在开启二级缓存时候，手动配置一些属性</p>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;cache</span><span class="ot"> eviction=</span><span class="st">&quot;LRU&quot;</span><span class="ot"> flushInterval=</span><span class="st">&quot;100000&quot;</span><span class="ot"> size=</span><span class="st">&quot;1024&quot;</span><span class="ot"> readOnly=</span><span class="st">&quot;true&quot;</span><span class="kw">/&gt;</span></code></pre></div>
+<p>各个属性意义如下：</p>
+<ul>
+<li>eviction：缓存回收策略
+<ul>
+<li>LRU：最少使用原则，移除最长时间不使用的对象</li>
+<li>FIFO：先进先出原则，按照对象进入缓存顺序进行回收</li>
+<li>SOFT：软引用，移除基于垃圾回收器状态和软引用规则的对象</li>
+<li>WEAK：弱引用，更积极的移除移除基于垃圾回收器状态和弱引用规则的对象</li>
+</ul></li>
+<li>flushInterval：刷新时间间隔，单位为毫秒，这里配置的100毫秒。如果不配置，那么只有在进行数据库修改操作才会被动刷新缓存区</li>
+<li>size：引用额数目，代表缓存最多可以存储的对象个数</li>
+<li>readOnly：是否只读，如果为true，则所有相同的sql语句返回的是同一个对象（有助于提高性能，但并发操作同一条数据时，可能不安全），如果设置为false，则相同的sql，后面访问的是cache的clone副本。</li>
+</ul>
+<p>可以在Mapper的具体方法下设置对二级缓存的访问意愿：</p>
+<ul>
+<li>useCache配置</li>
+</ul>
+<p>​ 如果一条语句每次都需要最新的数据，就意味着每次都需要从数据库中查询数据，可以把这个属性设置为false，如：</p>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml">  <span class="kw">&lt;select</span><span class="ot"> id=</span><span class="st">&quot;selectAll&quot;</span><span class="ot"> resultMap=</span><span class="st">&quot;BaseResultMap&quot;</span><span class="ot"> useCache=</span><span class="st">&quot;false&quot;</span><span class="kw">&gt;</span></code></pre></div>
+<ul>
+<li>刷新缓存（就是清空缓存）</li>
+</ul>
+<p>​ 二级缓存默认会在insert、update、delete操作后刷新缓存，可以手动配置不更新缓存，如下：</p>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml">  <span class="kw">&lt;update</span><span class="ot"> id=</span><span class="st">&quot;updateById&quot;</span><span class="ot"> parameterType=</span><span class="st">&quot;User&quot;</span><span class="ot"> flushCache=</span><span class="st">&quot;false&quot;</span> <span class="kw">/&gt;</span></code></pre></div>
+<h2 id="自定义缓存">3、自定义缓存</h2>
+<p>​ 自定义缓存对象，该对象必须实现 org.apache.ibatis.cache.Cache 接口，如下：</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">import org.apache.ibatis.cache.Cache;</span>
+
+<span class="kw">import java.util.concurrent.ConcurrentHashMap;</span>
+<span class="kw">import java.util.concurrent.locks.ReadWriteLock;</span>
+<span class="kw">import java.util.concurrent.locks.ReentrantReadWriteLock;</span>
+
+<span class="co">/**</span>
+<span class="co"> * Created by Luky on 2017/10/14.</span>
+<span class="co"> */</span>
+<span class="kw">public</span> <span class="kw">class</span> BatisCache <span class="kw">implements</span> Cache {
+    <span class="kw">private</span> ReadWriteLock lock = <span class="kw">new</span> ReentrantReadWriteLock();
+    <span class="kw">private</span> ConcurrentHashMap&lt;Object,Object&gt; cache = <span class="kw">new</span> ConcurrentHashMap&lt;Object, Object&gt;();
+    <span class="kw">private</span> String id;
+
+    <span class="kw">public</span>  <span class="fu">BatisCache</span>(){
+        System.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;初始化-1！&quot;</span>);
+    }
+
+  <span class="co">//必须有该构造函数</span>
+    <span class="kw">public</span> <span class="fu">BatisCache</span>(String id){
+        System.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;初始化-2！&quot;</span>);
+        <span class="kw">this</span>.<span class="fu">id</span> = id;
+    }
+
+    <span class="co">// 获取缓存编号</span>
+    <span class="kw">public</span> String <span class="fu">getId</span>() {
+        System.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;得到ID：&quot;</span> + id);
+        <span class="kw">return</span> id;
+    }
+
+    <span class="co">//获取缓存对象的大小</span>
+    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">getSize</span>() {
+        System.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;获取缓存大小！&quot;</span>);
+        <span class="kw">return</span> <span class="dv">0</span>;
+    }
+    <span class="co">// 保存key值缓存对象</span>
+    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">putObject</span>(Object key, Object value) {
+        System.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;往缓存中添加元素：key=&quot;</span> + key+<span class="st">&quot;,value=&quot;</span> + value);
+        cache.<span class="fu">put</span>(key,value);
+    }
+
+    <span class="co">//通过KEY</span>
+    <span class="kw">public</span> Object <span class="fu">getObject</span>(Object key) {
+        System.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;通过kEY获取值：&quot;</span> + key);
+        System.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;OVER&quot;</span>);
+        System.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;=======================================================&quot;</span>);
+        System.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;值为：&quot;</span> + cache.<span class="fu">get</span>(key));
+        System.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;=====================OVER==============================&quot;</span>);
+        <span class="kw">return</span> cache.<span class="fu">get</span>(key);
+    }
+
+    <span class="co">// 通过key删除缓存对象</span>
+    <span class="kw">public</span> Object <span class="fu">removeObject</span>(Object key) {
+        System.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;移除缓存对象：&quot;</span> + key);
+        <span class="kw">return</span> <span class="kw">null</span>;
+    }
+
+    <span class="co">// 清空缓存</span>
+    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">clear</span>() {
+        System.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;清除缓存！&quot;</span>);
+        cache.<span class="fu">clear</span>();
+    }
+
+    <span class="co">// 获取缓存的读写锁</span>
+    <span class="kw">public</span> ReadWriteLock <span class="fu">getReadWriteLock</span>() {
+        System.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;获取锁对象！！！&quot;</span>);
+        <span class="kw">return</span> lock;
+    }
+}</code></pre></div>
+<p>​ 在Mapper文件里配置使用该自定义的缓存对象，如：</p>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;cache</span><span class="ot"> type=</span><span class="st">&quot;com.sanyue.utils.BatisCache&quot;</span><span class="kw">/&gt;</span></code></pre></div>
+<p>​ 测试如下：</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"> <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span>(String[] args) {
+
+        SqlSessionFactory factory = SqlSessionFactoryUtil.<span class="fu">openSqlSession</span>();
+
+        <span class="co">// 获得SqlSession对象</span>
+        SqlSession sqlSession = factory.<span class="fu">openSession</span>();
+        <span class="co">// 获得dao实体</span>
+        UserMapper userMapper = sqlSession.<span class="fu">getMapper</span>(UserMapper.<span class="fu">class</span>);
+        <span class="co">// 进行两次相同的查询操作</span>
+        userMapper.<span class="fu">selectByPrimaryKey</span>(<span class="dv">1</span>);
+        userMapper.<span class="fu">selectByPrimaryKey</span>(<span class="dv">1</span>);
+        <span class="co">// 注意，当我们使用二级缓存时候，sqlSession需要使用commit时候才会生效</span>
+        sqlSession.<span class="fu">commit</span>();
+
+        System.<span class="fu">out</span>.<span class="fu">println</span>(<span class="st">&quot;</span><span class="ch">\n\n</span><span class="st">=============================================================&quot;</span>);
+        <span class="co">// 获得一个新的SqlSession 对象</span>
+        SqlSession sqlSession1 = factory.<span class="fu">openSession</span>();
+        <span class="co">// 进行相同的查询操作</span>
+        sqlSession1.<span class="fu">getMapper</span>(UserMapper.<span class="fu">class</span>).<span class="fu">selectByPrimaryKey</span>(<span class="dv">1</span>);
+        sqlSession1.<span class="fu">commit</span>();
+    }</code></pre></div>
+<p>​ 日志输出如下：</p>
+<pre><code>初始化-2！
+得到ID：com.sanyue.dao.UserMapper
+获取锁对象！！！
+通过kEY获取值：151355725:1423317450:com.sanyue.dao.UserMapper.selectByPrimaryKey:0:2147483647:
+        select
+        
+        user_ID, login_name,user_name, user_code, user_type, user_active, organization_ID,user_position,password
+    
+        from user
+        where user_ID = ?
+    :1
+OVER
+=======================================================
+值为：null
+=====================OVER==============================
+获取锁对象！！！
+获取锁对象！！！
+通过kEY获取值：151355725:1423317450:com.sanyue.dao.UserMapper.selectByPrimaryKey:0:2147483647:
+        select
+        
+        user_ID, login_name,user_name, user_code, user_type, user_active, organization_ID,user_position,password
+    
+        from user
+        where user_ID = ?
+    :1
+OVER
+=======================================================
+值为：null
+=====================OVER==============================
+获取锁对象！！！
+获取锁对象！！！
+往缓存中添加元素：key=151355725:1423317450:com.sanyue.dao.UserMapper.selectByPrimaryKey:0:2147483647:
+        select
+        
+        user_ID, login_name,user_name, user_code, user_type, user_active, organization_ID,user_position,password
+    
+        from user
+        where user_ID = ?
+    :1,value=[User{userId=1, loginName=&#39;HBAF-001&#39;, password=&#39;152fa91ab3688aadcee09a88e4251a54&#39;, userName=&#39;李晓龙&#39;, userCode=&#39;HBAF-001&#39;, userType=&#39;EMPLOYEE&#39;, userActive=true, organizationId=0, userPosition=&#39;董事长&#39;}]
+获取锁对象！！！
+
+
+=============================================================
+获取锁对象！！！
+通过kEY获取值：151355725:1423317450:com.sanyue.dao.UserMapper.selectByPrimaryKey:0:2147483647:
+        select
+        
+        user_ID, login_name,user_name, user_code, user_type, user_active, organization_ID,user_position,password
+    
+        from user
+        where user_ID = ?
+    :1
+OVER
+=======================================================
+值为：[User{userId=1, loginName=&#39;HBAF-001&#39;, password=&#39;152fa91ab3688aadcee09a88e4251a54&#39;, userName=&#39;李晓龙&#39;, userCode=&#39;HBAF-001&#39;, userType=&#39;EMPLOYEE&#39;, userActive=true, organizationId=0, userPosition=&#39;董事长&#39;}]
+=====================OVER==============================
+获取锁对象！！！</code></pre>
+<p>​ 可以看出，每次查询数据库前，MyBatis都会先在缓存中查找是否有该缓存对象。只有当调用了commit() 方法，MyBatis才会往缓存中写入数据，数据记录的键为 <code>数字编号+Mapper名+方法名+SQL语句+参数</code> 格式，值为返回的对象值。</p>
+</div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2017-10-18 23:01</span> <a href='http://www.cnblogs.com/moongeek/'>MoonGeek</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=7689683" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(7689683);return false;">收藏</a></div>
+	</div>
+	<script src="//common.cnblogs.com/highlight/9.1.0/highlight.min.js?id=20160127"></script><script>markdown_highlight();</script><script type="text/javascript">var allowComments=true,cb_blogId=376520,cb_entryId=7689683,cb_blogApp=currentBlogApp,cb_blogUserGuid='27eda406-f286-e511-9fc1-ac853d9f53cc',cb_entryCreatedDate='2017/10/18 23:01:00';loadViewCount(cb_entryId);var cb_postType=1;</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2018 MoonGeek
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+<!--PageEndHtml Block Begin-->
+<script language="javascript" type="text/javascript">
+//生成目录索引列表
+function GenerateContentList()
+{
+    var jquery_h3_list = $('#cnblogs_post_body h2');//如果你的章节标题不是h3,只需要将这里的h3换掉即可
+    if(jquery_h3_list.length>0)
+    {
+        var content = '<a name="_labelTop"></a>';
+        content    += '<div id="navCategory">';
+        content    += '<p style="font-size:18px"><b>目录导航</b></p>';
+        content    += '<ul>';
+        for(var i =0;i<jquery_h3_list.length;i++)
+        {
+            var go_to_top = '<div style="text-align: right"><a name="_label' + i + '"></a></div>';
+            $(jquery_h3_list[i]).before(go_to_top);
+            var li_content = '<li><a href="#_label' + i + '">' + $(jquery_h3_list[i]).text() + '</a></li>';
+            content += li_content;
+        }
+        content    += '</ul>';
+        content    += '</div>';
+        if($('#cnblogs_post_body').length != 0 )
+        {
+            $($('#cnblogs_post_body')[0]).prepend(content);
+        }
+    }    
+}
+GenerateContentList();
+</script>
+<!--PageEndHtml Block End-->
+</body>
+</html>

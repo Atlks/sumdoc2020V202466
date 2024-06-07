@@ -1,0 +1,3001 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://blog.csdn.net/qq_36481052/article/details/79075214"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="referrer" content="always">
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+    <script src="https://csdnimg.cn/release/phoenix/vendor/tingyun/tingyun-rum-blog.js"></script>
+
+    <link href="https://csdnimg.cn/public/favicon.ico" rel="SHORTCUT ICON">
+    <title>简单快速的用SpringBoot访问静态资源（图片、html） - 刘信晨 - CSDN博客</title>
+
+            <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/detail-4672122113.min.css">
+    
+            <script type="application/ld+json">{"@context":"https:\/\/ziyuan.baidu.com\/contexts\/cambrian.jsonld","@id":"https:\/\/blog.csdn.net\/qq_36481052\/article\/details\/79075214","appid":"1563894916825412","title":"\u7b80\u5355\u5feb\u901f\u7684\u7528SpringBoot\u8bbf\u95ee\u9759\u6001\u8d44\u6e90\uff08\u56fe\u7247\u3001html\uff09 - \u5218\u4fe1\u6668","images":["https:\/\/img-blog.csdn.net\/20180116144536926?watermark\/2\/text\/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY0ODEwNTI=\/font\/5a6L5L2T\/fontsize\/400\/fill\/I0JBQkFCMA==\/dissolve\/70\/gravity\/SouthEast","https:\/\/img-blog.csdn.net\/20180116145312634?watermark\/2\/text\/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY0ODEwNTI=\/font\/5a6L5L2T\/fontsize\/400\/fill\/I0JBQkFCMA==\/dissolve\/70\/gravity\/SouthEast","https:\/\/img-blog.csdn.net\/20180116144536926?watermark\/2\/text\/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY0ODEwNTI=\/font\/5a6L5L2T\/fontsize\/400\/fill\/I0JBQkFCMA==\/dissolve\/70\/gravity\/SouthEast"],"pubDate":"2018-11-23T11:24:08"}</script>
+        
+    <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/themes/skin-yellow/skin-yellow-2eefd34acf.min.css">
+
+    <script type="text/javascript">
+        var username = "qq_36481052";
+        var blog_address = "https://blog.csdn.net/qq_36481052";
+        var static_host = "https://csdnimg.cn/release/phoenix/";
+        var currentUserName = "attilax";
+        var isShowAds = true;
+        var isOwner = false;
+        var loginUrl = "http://passport.csdn.net/account/login?from=https://blog.csdn.net/qq_36481052/article/details/79075214"
+        var blogUrl = "https://blog.csdn.net/";
+        //页面皮肤样式
+        var curSkin = "skin-yellow";
+        // 第四范式所需数据
+        var articleTitles = "简单快速的用SpringBoot访问静态资源（图片、html） - 刘信晨";
+        var articleID = "79075214";
+
+        var nickName = "刘信晨";
+    </script>
+    <script type="text/javascript">
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+    </script>
+    <script src="https://csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="https://csdnimg.cn/rabbit/exposure-click/main-1.0.6.js"></script>
+    <!-- 新版上报 -->
+    <script src="//g.csdnimg.cn/track/1.1.1/track.js" type="text/javascript"></script>
+    <!-- 新版上报end -->
+            <link rel="stylesheet" href="https://csdnimg.cn/public/sandalstrap/1.4/css/sandalstrap.min.css">
+    <style>
+        .MathJax, .MathJax_Message, .MathJax_Preview{
+            display: none
+        }
+    </style>
+</head>
+<!-- nodata 第三栏接口无数据时样式不变 -->
+<body class="nodata"> 
+    <link rel="stylesheet" href="https://csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+    <script id="toolbar-tpl-scriptId" src="https://csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="https://blog.csdn.net/"></script>
+<link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/blog_code-c3a0c33d5c.css">
+<link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/vendor/pagination/paging.css">
+<script type="text/javascript">
+	// 容错处理
+	var NEWS_FEED = function(){}
+</script>
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<script type="text/javascript" src="//g.csdnimg.cn/copyright/1.0.3/copyright.js"></script>
+<div style="display:none;">
+	<img src="" onerror='setTimeout(function(){if(!/(csdn.net|iteye.com|baiducontent.com|googleusercontent.com|360webcache.com|sogoucdn.com|bingj.com|baidu.com)$/.test(window.location.hostname)){window.location.href="\x68\x74\x74\x70\x73\x3a\x2f\x2f\x77\x77\x77\x2e\x63\x73\x64\x6e\x2e\x6e\x65\x74"}},3000);'>
+</div>
+<link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/chart-3456820cac.css" />
+
+
+
+<script src="https://dup.baidustatic.com/js/ds.js"></script>
+<div class="container clearfix" id="mainBox">
+		<div class="recommend-right">
+  <ul class="recommend-fixed-box">
+    
+  </ul>
+</div>
+    <main>
+        <div class="blog-content-box">
+	<div class="article-header-box">
+		<div class="article-header">
+			<div class="article-title-box">
+				<span class="article-type type-1 float-left">原</span>				<h1 class="title-article">简单快速的用SpringBoot访问静态资源（图片、html）</h1>
+			</div>
+			<div class="article-info-box">
+				<div class="article-bar-top">
+																				<span class="time">2018年01月16日 15:15:23</span>
+					<a class="follow-nickName" href="https://me.csdn.net/qq_36481052" target="_blank">刘信晨</a>
+						<span class="read-count">阅读数：39804</span>
+						
+														<span class="tags-box artic-tag-box">
+								<span class="label">标签：</span>
+																<a data-track-click='{"mod":"popu_626","con":"java"}' data-track-view='{"mod":"popu_626","con":"java"}' class="tag-link" href="http://so.csdn.net/so/search/s.do?q=java&t=blog" target="_blank">java																<a data-track-click='{"mod":"popu_626","con":"SpringBoot"}' data-track-view='{"mod":"popu_626","con":"SpringBoot"}' class="tag-link" href="http://so.csdn.net/so/search/s.do?q=SpringBoot&t=blog" target="_blank">SpringBoot																<a data-track-click='{"mod":"popu_626","con":"html"}' data-track-view='{"mod":"popu_626","con":"html"}' class="tag-link" href="http://so.csdn.net/so/search/s.do?q=html&t=blog" target="_blank">html																<a data-track-click='{"mod":"popu_626","con":"css"}' data-track-view='{"mod":"popu_626","con":"css"}' class="tag-link" href="http://so.csdn.net/so/search/s.do?q=css&t=blog" target="_blank">css																<a data-track-click='{"mod":"popu_626","con":"js"}' data-track-view='{"mod":"popu_626","con":"js"}' class="tag-link" href="http://so.csdn.net/so/search/s.do?q=js&t=blog" target="_blank">js																</a>
+							</span>
+																					<div class="tags-box space">
+								<span class="label">个人分类：</span>
+																<a class="tag-link" href="https://blog.csdn.net/qq_36481052/article/category/7400387"  target="_blank">SpringBoot																</a>
+							</div>
+																								</div>
+				<div class="operating">
+														</div>
+			</div>
+		</div>
+	</div>
+	<article class="baidu_pl">
+		<div id="article_content" class="article_content clearfix csdn-tracking-statistics" data-pid="blog"  data-mod=popu_307  data-dsm = "post" >
+								<div class="article-copyright">
+					版权声明：本文为博主原创文章，未经博主允许不得转载。					https://blog.csdn.net/qq_36481052/article/details/79075214				</div>
+								            <div id="content_views" class="markdown_views prism-atom-one-dark">
+							<!-- flowchart 箭头图标 勿删 -->
+							<svg xmlns="http://www.w3.org/2000/svg" style="display: none;"><path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path></svg>
+							<h2 id="使用springboot简单快速的访问静态资源">使用SpringBoot简单快速的访问静态资源</h2>
+
+<pre><code>首先需要记载Springboot访问静态资源的Jar文件
+</code></pre>
+
+
+
+<pre class="prettyprint"><code class=" hljs xml">        <span class="hljs-tag">&lt;<span class="hljs-title">dependency</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-title">groupId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">artifactId</span>&gt;</span>spring-boot-starter-thymeleaf<span class="hljs-tag">&lt;/<span class="hljs-title">artifactId</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">dependency</span>&gt;</span></code></pre>
+
+<pre><code>还需要在“resources”目录下(注意只能在“resources”目录下创建文件，因为SpringBoot只在它下面扫描)，再创建一个文件夹名为“static”的文件夹，这里面存放的就是你的图片(如果你想更清晰点，你就在static的下面在创建文件夹)
+下图是效果：
+</code></pre>
+
+<p><img src="https://img-blog.csdn.net/20180116144536926?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY0ODEwNTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="访问静态资源" title=""></p>
+
+<pre><code>启动主程序，就可以直接访问了 这是我的URL:localhost:8080/img/1234.png
+</code></pre>
+
+<p>事例: <br>
+<img src="https://img-blog.csdn.net/20180116145312634?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY0ODEwNTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="图片访问" title=""></p>
+
+<p>如果你还想访问html 就得在”resources”文件夹下再创建一个文件名为“templates”的文件夹,这个文件夹存放的就是页面 （注意不能使用其他名称） <br>
+    <img src="https://img-blog.csdn.net/20180116144536926?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY0ODEwNTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="访问静态资源" title=""></p>
+
+<p>然后写一个html页面放进templates文件夹下，在写个controller放问就行了</p>
+
+<p>controller：  <br>
+<img src="https://img-blog.csdn.net/20180116150634107?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY0ODEwNTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" title=""></p>
+
+<p>html: <br>
+<img src="https://img-blog.csdn.net/20180116150758522?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY0ODEwNTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" title=""></p>
+
+<pre><code>启动主程序，这是我的URL:localhost:8080/demo
+</code></pre>
+
+<p><img src="https://img-blog.csdn.net/20180116150917006?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzY0ODEwNTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" title=""></p>
+
+<pre><code>  还有static里面还可以存放css和js文件。
+  请路过的大神，指点教导，如果有问题请留言评论，谢谢各位大神
+</code></pre>            </div>
+						<link href="https://csdnimg.cn/release/phoenix/mdeditor/markdown_views-2787195726.css" rel="stylesheet">
+                </div>
+									<div class="hide-article-box text-center">
+						<a class="btn" id="btn-readmore" data-track-view='{"mod":"popu_376","con":",https://blog.csdn.net/qq_36481052/article/details/79075214,"}' data-track-click='{"mod":"popu_376","con":",https://blog.csdn.net/qq_36481052/article/details/79075214,"}'>阅读更多</a>
+					</div>
+					<script>
+						(function(){
+							function setArticleH(btnReadmore,posi){
+								var winH = $(window).height();
+								var articleBox = $("div.article_content");
+								var artH = articleBox.height();
+								if(artH > winH*posi){
+									articleBox.css({
+										'height':winH*posi+'px',
+										'overflow':'hidden'
+									})
+									btnReadmore.click(function(){
+										articleBox.removeAttr("style");
+										$(this).parent().remove();
+									})
+								}else{
+									btnReadmore.parent().remove();
+								}
+							}
+							var btnReadmore = $("#btn-readmore");
+							if(btnReadmore.length>0){
+								if(currentUserName){
+									setArticleH(btnReadmore,3);
+								}else{
+									setArticleH(btnReadmore,1.2);
+								}
+							}
+						})()
+					</script>
+					</article>
+	
+</div>
+<script>
+		$(".MathJax").remove();
+		if($('div.markdown_views pre.prettyprint code.hljs').length > 0 ){
+				$('div.markdown_views')[0].className = 'markdown_views';
+		}
+</script>
+        <div id="dmp_ad_58"><div id="kp_box_58" data-pid="58" data-track-view='{"mod":"kp_popu_58-402","con":",,"}' data-track-click='{"mod":"kp_popu_58-402","con":",,"}'><div style="width:100%;background:#fff;border:3px solid #fff;">
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<div id="three_ad1" class="mediav_ad" ></div>
+<script>
+                                               NEWS_FEED({
+                w: 900,
+                h : 100,
+                showid : 'ztvJV8',
+                placeholderId: "three_ad1",
+                inject : 'define',
+                define : {
+                    imagePosition : 'left',
+                    imageBorderRadius : 0,
+                    imageWidth: 90,
+                    imageHeight: 68,
+                    imageFill : 'clip',
+                    displayImage : true,
+                    displayTitle : true,
+                    titleFontSize: 18,
+                    titleFontColor: '#000',
+                    titleFontFamily : 'Lato,-apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif',
+                    titleFontWeight: 'bold',
+                    titlePaddingTop : 0,
+                    titlePaddingRight : 0,
+                    titlePaddingBottom : 5,
+                    titlePaddingLeft : 16,
+                    displayDesc : true,
+                    descFontSize: 14,
+                    descFontColor: '#8e959a',
+                    descFontFamily : 'Microsoft YaHei',
+                    paddingTop : 20,
+                    paddingRight : 0,
+                    paddingBottom : 0,
+                    paddingLeft : 20,
+                    backgroundColor: '#fff',
+                    hoverColor: '#000'
+                      }
+                  })
+                                        </script>
+</div></div></div>        <a id="commentBox"></a>
+<div class="comment-box">
+	
+	<div class="comment-edit-box d-flex">
+		<a id="commentsedit"></a>
+		<div class="user-img">
+			<a href="//me.csdn.net/attilax" target="_blank">
+				<img class="" src="https://avatar.csdn.net/3/9/1/3_attilax.jpg">
+			</a>
+		</div>
+		<form id="commentform">
+			<input type="hidden" id="comment_replyId">
+			<textarea class="comment-content" name="comment_content" id="comment_content" placeholder="想对作者说点什么"></textarea>
+			<div class="opt-box"> <!-- d-flex -->
+				<div id="ubbtools" class="add_code">
+					<a href="#insertcode" code="code" target="_self"><i class="icon iconfont icon-daima"></i></a>
+				</div>
+				<input type="hidden" id="comment_replyId" name="comment_replyId">
+				<input type="hidden" id="comment_userId" name="comment_userId" value="">
+				<input type="hidden" id="commentId" name="commentId" value="">
+				<div style="display: none;" class="csdn-tracking-statistics tracking-click" data-mod="popu_384"><a href="#" target="_blank" class="comment_area_btn">发表评论</a></div>
+				<div class="dropdown" id="myDrap">
+					<a class="dropdown-face d-flex align-items-center" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+					<div class="txt-selected text-truncate">添加代码片</div>
+					<svg class="icon d-block" aria-hidden="true">
+						<use xlink:href="#csdnc-triangledown"></use>
+					</svg>
+					</a>
+					<ul class="dropdown-menu" id="commentCode" aria-labelledby="drop4">
+						<li><a data-code="html">HTML/XML</a></li>
+						<li><a data-code="objc">objective-c</a></li>
+						<li><a data-code="ruby">Ruby</a></li>
+						<li><a data-code="php">PHP</a></li>
+						<li><a data-code="csharp">C</a></li>
+						<li><a data-code="cpp">C++</a></li>
+						<li><a data-code="javascript">JavaScript</a></li>
+						<li><a data-code="python">Python</a></li>
+						<li><a data-code="java">Java</a></li>
+						<li><a data-code="css">CSS</a></li>
+						<li><a data-code="sql">SQL</a></li>
+						<li><a data-code="plain">其它</a></li>
+					</ul>
+				</div>  
+				<div class="right-box">
+					<span id="tip_comment" class="tip">还能输入<em>1000</em>个字符</span>
+					<input type="submit" class="btn btn-sm btn-red btn-comment" value="发表评论">
+				</div>
+			</div>
+		</form>
+	</div>
+
+		<div class="comment-list-container">
+		<a id="comments"></a>
+		<div class="comment-list-box">
+		</div>
+		<div id="commentPage" class="pagination-box d-none"></div>
+		<div class="opt-box text-center">
+			<button class="btn btn-sm btn-link-blue" id="btnMoreComment"></button>
+		</div>
+	</div>
+</div>
+        <div class="recommend-box">
+            		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/yiifaa/article/details/78299052,BlogCommendClickRateRank_2"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/yiifaa/article/details/78299052,BlogCommendClickRateRank_2"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/yiifaa/article/details/78299052" target="_blank" title="Spring Boot(六)：如何配置静态资源的地址与访问路径 - 甘焕的博客">
+				<h4 class="text-truncate oneline">
+						Spring Boot(六)：如何配置<em>静态资源</em>的地址与<em>访问</em>路径 - 甘焕的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/F/4/E/3_yiifaa.jpg" alt="yiifaa" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">yiifaa</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">10-20</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							2.9万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/yiifaa/article/details/78299052" target="_blank" title="Spring Boot(六)：如何配置静态资源的地址与访问路径 - 甘焕的博客">
+							<span class="desc oneline">静态资源，例如HTML文件、JS文件，设计到的Spring Boot配置有两项，一是“spring.mvc.static-path-pattern”，一是“spring.resources.stati...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/yiifaa">来自：	<span class="blog_title"> 甘焕的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/catoop/article/details/50501706,BlogCommendClickRateRank_0"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/catoop/article/details/50501706,BlogCommendClickRateRank_0"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/catoop/article/details/50501706" target="_blank" title="Spring Boot 静态资源处理 - 小单的博客专栏">
+				<h4 class="text-truncate oneline">
+						Spring Boot <em>静态资源</em>处理 - 小单的博客专栏				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/3/0/1/3_catoop.jpg" alt="catoop" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">catoop</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">01-12</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							14.1万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/catoop/article/details/50501706" target="_blank" title="Spring Boot 静态资源处理 - 小单的博客专栏">
+							<span class="desc oneline">Spring Boot 默认为我们提供了静态资源处理，使用 WebMvcAutoConfiguration 中的配置各种属性。建议大家使用Spring Boot的默认配置方式，如果需要特殊处理的再通过...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/catoop">来自：	<span class="blog_title"> 小单的博客专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/feicongcong/article/details/76665072,BlogCommendClickRateRank_6"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/feicongcong/article/details/76665072,BlogCommendClickRateRank_6"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/feicongcong/article/details/76665072" target="_blank" title="springboot页面资源，静态资源读取 - feicongcong的博客">
+				<h4 class="text-truncate oneline">
+						<em>springboot</em>页面资源，<em>静态资源</em>读取 - feicongcong的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/B/7/A/3_feicongcong.jpg" alt="feicongcong" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">feicongcong</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">08-04</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							4572</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/feicongcong/article/details/76665072" target="_blank" title="springboot页面资源，静态资源读取 - feicongcong的博客">
+							<span class="desc oneline">springboot页面资源 默认是从templates目录下读取
+application.properties中
+## 响应页面默认后缀
+spring.mvc.view.suffix=.html...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/feicongcong">来自：	<span class="blog_title"> feicongcong的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <!-- 第四范式广告开关 -->
+				<div class="p4courset3_target _4paradigm_box recommend-item-box clearfix" ></div>
+				<script>window.p4sdk_enable_recommendBox=true</script>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/ljj_9/article/details/79650008,BlogCommendClickRateRank_9"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/ljj_9/article/details/79650008,BlogCommendClickRateRank_9"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/ljj_9/article/details/79650008" target="_blank" title="spring boot 直接通过url访问获取内部或者外部静态资源图片 - 赖进杰的专栏">
+				<h4 class="text-truncate oneline">
+						spring boot 直接通过url<em>访问</em>获取内部或者外部<em>静态资源</em><em>图片</em> - 赖进杰的专栏				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/3/B/2/3_ljj_9.jpg" alt="ljj_9" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">ljj_9</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">03-22</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							9697</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/ljj_9/article/details/79650008" target="_blank" title="spring boot 直接通过url访问获取内部或者外部静态资源图片 - 赖进杰的专栏">
+							<span class="desc oneline">第一种方式，在代码上配置@Configuration	public class WebMvcConfiguration extends WebMvcConfigurerAdapter {				@Ov...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/ljj_9">来自：	<span class="blog_title"> 赖进杰的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/u013512014/article/details/55667086,BlogCommendClickRateRank_10"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/u013512014/article/details/55667086,BlogCommendClickRateRank_10"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u013512014/article/details/55667086" target="_blank" title="springboot搭建web（静态资源访问）（三） - Arrome的博客">
+				<h4 class="text-truncate oneline">
+						<em>springboot</em>搭建web（<em>静态资源</em><em>访问</em>）（三） - Arrome的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/2/0/A/3_u013512014.jpg" alt="u013512014" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">u013512014</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">02-18</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1.8万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u013512014/article/details/55667086" target="_blank" title="springboot搭建web（静态资源访问）（三） - Arrome的博客">
+							<span class="desc oneline">springboot静态资源</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/u013512014">来自：	<span class="blog_title"> Arrome的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/hzmhy123456/article/details/69525280,BlogCommendClickRateRank_1"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/hzmhy123456/article/details/69525280,BlogCommendClickRateRank_1"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/hzmhy123456/article/details/69525280" target="_blank" title="springboot配置跳转html页面 - hzmhy123456的专栏">
+				<h4 class="text-truncate oneline">
+						<em>springboot</em>配置跳转<em>html</em>页面 - hzmhy123456的专栏				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/1/E/F/3_hzmhy123456.jpg" alt="hzmhy123456" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">hzmhy123456</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">04-07</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							6.3万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/hzmhy123456/article/details/69525280" target="_blank" title="springboot配置跳转html页面 - hzmhy123456的专栏">
+							<span class="desc oneline">1，首先在pom文件中引入模板引擎jar包
+
+dependency&gt;
+   groupId&gt;org.springframework.bootgroupId&gt;
+   artifactId&gt;sprin...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/hzmhy123456">来自：	<span class="blog_title"> hzmhy123456的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/qq_31971675/article/details/51853295,BlogCommendClickRateRank_3"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/qq_31971675/article/details/51853295,BlogCommendClickRateRank_3"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_31971675/article/details/51853295" target="_blank" title="SpringBoot+Thymeleaf图片回显 - 帅帅哒风">
+				<h4 class="text-truncate oneline">
+						<em>SpringBoot</em>+Thymeleaf<em>图片</em>回显 - 帅帅哒风				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/C/2/F/3_qq_31971675.jpg" alt="qq_31971675" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qq_31971675</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">07-07</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1.1万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_31971675/article/details/51853295" target="_blank" title="SpringBoot+Thymeleaf图片回显 - 帅帅哒风">
+							<span class="desc oneline">一直就想做一个新框架玩玩。周一的时候给自己定下目标。这周一定完成商城模块。。谁知道说的容易做的慢，今天周四了但是项目一直止步不前，原因还是技术太渣的问题，脑袋一片浆糊不能思维扩展，造成这些原因的还是自...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qq_31971675">来自：	<span class="blog_title"> 帅帅哒风</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/LeegooWang/article/details/78591086,BlogCommendClickRateRank_4"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/LeegooWang/article/details/78591086,BlogCommendClickRateRank_4"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/LeegooWang/article/details/78591086" target="_blank" title="为什么spring boot工程静态资源访问不到 - LeegooWang的博客">
+				<h4 class="text-truncate oneline">
+						为什么spring boot工程<em>静态资源</em><em>访问</em>不到 - LeegooWang的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/8/5/0/3_leegoowang.jpg" alt="LeegooWang" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">LeegooWang</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">11-21</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1.1万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/LeegooWang/article/details/78591086" target="_blank" title="为什么spring boot工程静态资源访问不到 - LeegooWang的博客">
+							<span class="desc oneline">为什么spring boot工程访问不到 静态资源，templates模式，访问不到，都是404，No mapping found for HTTP request with URI [/index....</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/LeegooWang">来自：	<span class="blog_title"> LeegooWang的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_60" data-pid="60" data-track-view='{"mod":"kp_popu_60-43","con":",,"}' data-track-click='{"mod":"kp_popu_60-43","con":",,"}'><div id="three_ad8" class="mediav_ad" ></div>
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<script>
+                                               NEWS_FEED({
+                w: 900,
+                h : 84,
+                showid : 'Afihld',
+                placeholderId: "three_ad8",
+                inject : 'define',
+                define : {
+                    imagePosition : 'left',
+                    imageBorderRadius : 3,
+                    imageWidth: 90,
+                    imageHeight: 60,
+                    imageFill : 'clip',
+                    displayImage : true,
+                    displayTitle : true,
+                    titleFontSize: 18,
+                    titleFontColor: '#000',
+                    titleFontFamily : 'Lato,-apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif',
+                    titleFontWeight: 'bold',
+                    titlePaddingTop : 0,
+                    titlePaddingRight : 0,
+                    titlePaddingBottom : 5,
+                    titlePaddingLeft : 16,
+                    displayDesc : true,
+                    descFontSize: 14,
+                    descFontColor: '#8e959a',
+                    descFontFamily : 'Microsoft Yahei',
+                    paddingTop : 10,
+                    paddingRight : 0,
+                    paddingBottom : 0,
+                    paddingLeft : 0,
+                    backgroundColor: '#fff',
+                    hoverColor: '#000'
+                      }
+                  })
+                                        </script></div></div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/sou_time/article/details/79641476,BlogCommendClickRateRank_5"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/sou_time/article/details/79641476,BlogCommendClickRateRank_5"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/sou_time/article/details/79641476" target="_blank" title="Springboot怎么访问html页面 - sou_time">
+				<h4 class="text-truncate oneline">
+						<em>Springboot</em>怎么<em>访问</em><em>html</em>页面 - sou_time				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/7/4/2/3_sou_time.jpg" alt="sou_time" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">sou_time</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">03-21</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1.6万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/sou_time/article/details/79641476" target="_blank" title="Springboot怎么访问html页面 - sou_time">
+							<span class="desc oneline">1. 在原有的项目resouces目录下创建static包,并在static下创建pages,然后在pages包下hello.html.这时你会发现hello.html并没有在static中,它跑哪去...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/sou_time">来自：	<span class="blog_title"> sou_time</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+			<div class="recommend-item-box type_hot_word">
+						<div class="content clearfix oneline">
+				<h5 class="float-left">文章热词</h5>
+				<div class="word float-left">
+													<span>
+						<a href="https://edu.csdn.net/courses/o5329_s5330_k " target="_blank">
+						机器学习					</a></span>
+																	<span>
+						<a href="https://edu.csdn.net/courses/o5329_s5330_k " target="_blank">
+						机器学习课程					</a></span>
+																	<span>
+						<a href="https://edu.csdn.net/courses/o5329_s5330_k " target="_blank">
+						机器学习教程					</a></span>
+																	<span>
+						<a href="https://edu.csdn.net/combos/o5329_s5331_l0_t " target="_blank">
+						深度学习视频教程					</a></span>
+																	<span>
+						<a href="https://edu.csdn.net/combos/o5329_s5331_l0_t " target="_blank">
+						深度学习学习					</a></span>
+												</div>
+			</div>
+									<div class="content clearfix oneline">
+				<h5 class="float-left">相关热词</h5>
+				<div class="float-left">
+									<span>
+						<a href="https://www.csdn.net/gather_25/MtTagg4sNzktYmxvZwO0O0OO0O0O.html" target="_blank">
+						c#访问本地html</a>
+					</span>
+									<span>
+						<a href="https://www.csdn.net/gather_27/MtTakg4sMTE5OS1ibG9n.html" target="_blank">
+						android 正则html图片</a>
+					</span>
+									<span>
+						<a href="https://www.csdn.net/gather_2a/MtjaAg5sMTctYmxvZwO0O0OO0O0O.html" target="_blank">
+						c# 快速 读取图片</a>
+					</span>
+									<span>
+						<a href="https://www.csdn.net/gather_24/MtTaQg3sNzMtYmxvZwO0O0OO0O0O.html" target="_blank">
+						c# 快速读取图片</a>
+					</span>
+									<span>
+						<a href="https://www.csdn.net/gather_27/MtTaYgysNjQyLWJsb2cO0O0O.html" target="_blank">
+						c# 访问url图片</a>
+					</span>
+									<span>
+						<a href="https://www.csdn.net/gather_4a/NtDaAgwsMS1lZHUO0O0O.html" target="_blank">
+						快速学python</a>
+					</span>
+									<span>
+						<a href="https://www.csdn.net/gather_4a/MtTaIgxsNi1lZHUO0O0O.html" target="_blank">
+						如何快速的学习python</a>
+					</span>
+								</div>
+			</div>
+					</div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/nisxiya/article/details/44937763,BlogCommendClickRateRank_7"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/nisxiya/article/details/44937763,BlogCommendClickRateRank_7"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/nisxiya/article/details/44937763" target="_blank" title="Spring Boot 设置静态资源访问 - 二十三小时">
+				<h4 class="text-truncate oneline">
+						Spring Boot 设置<em>静态资源</em><em>访问</em> - 二十三小时				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/F/C/2/3_nisxiya.jpg" alt="nisxiya" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">nisxiya</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">04-08</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							3.2万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/nisxiya/article/details/44937763" target="_blank" title="Spring Boot 设置静态资源访问 - 二十三小时">
+							<span class="desc oneline">问题描述当使用Spring Boot来架设服务系统时，有时候也需要用到前端页面，当然就不可或缺地需要访问其他一些静态资源，比如图片、css、js等文件。那么如何设置Spring Boot网站可以访问得...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/nisxiya">来自：	<span class="blog_title"> 二十三小时</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+            <div class="recommend-item-box blog-expert-recommend-box">
+			<div class="d-flex">
+				<div class="blog-expert-recommend">
+					<div class="blog-expert">
+						<div class="blog-expert-flexbox"></div>
+					</div>
+				</div>
+				<div class="blog-expert-load-new" data-index="3">
+					<svg version="1.1" viewBox="0 0 200 200" style="enable-background:new 0 0 200 200;" xml:space="preserve">
+					<path d="M142.5,57.5c-1.3-1.2-2.1-3.3-2.1-5.4c0-4.2,3.3-7.5,7.5-7.5h19.6c4.2,0,7.5,3.3,7.5,7.5s-3.3,7.5-7.5,7.5h-4.2
+						C170.8,71.2,175,85,175,100c0,41.7-33.8,75-75,75c-4.2,0-7.5-3.3-7.5-7.5c0-4.2,3.3-7.5,7.5-7.5c33.3,0,60-27.1,60-60
+						C160,83.7,153.8,68.7,142.5,57.5L142.5,57.5z M57.5,142.5c1.2,1.2,2.1,3.3,2.1,5.4c0,4.2-3.3,7.5-7.5,7.5H32.5
+						c-4.2,0-7.5-3.3-7.5-7.5c0-4.2,3.3-7.5,7.5-7.5h4.2C29.2,128.8,25,115,25,100c0-41.7,33.7-75,75-75c4.2,0,7.5,3.3,7.5,7.5
+						S104.2,40,100,40c-33.3,0-60,27.1-60,60C40,116.2,46.2,131.2,57.5,142.5z"/>
+					</svg>
+					<span>换一批</span>
+				</div>
+			</div>
+        </div>
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/UIYOOOO/article/details/79000019,BlogCommendClickRateRank_8"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/UIYOOOO/article/details/79000019,BlogCommendClickRateRank_8"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/UIYOOOO/article/details/79000019" target="_blank" title="springboot jsp 静态资源访问 - SpringBoot">
+				<h4 class="text-truncate oneline">
+						<em>springboot</em> jsp <em>静态资源</em><em>访问</em> - <em>SpringBoot</em>				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/1/0/4/3_uiyoooo.jpg" alt="UIYOOOO" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">UIYOOOO</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">01-08</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							2902</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/UIYOOOO/article/details/79000019" target="_blank" title="springboot jsp 静态资源访问 - SpringBoot">
+							<span class="desc oneline">在使用springboot框架之前，前台资源一直存放在WEB-INF文件夹里，如图：
+那使用springboot框架还想用之前的方式进行访问怎么做呢？这个问题困扰我一天，在其他好友的帮助下，终于解决了...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/UIYOOOO">来自：	<span class="blog_title"> SpringBoot</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/duangecho/article/details/80258300,BlogCommendClickRateRank_11"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/duangecho/article/details/80258300,BlogCommendClickRateRank_11"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/duangecho/article/details/80258300" target="_blank" title="springboot打成jar包后配置外部资源映射成静态资源 - duangecho的博客">
+				<h4 class="text-truncate oneline">
+						<em>springboot</em>打成jar包后配置外部资源映射成<em>静态资源</em> - duangecho的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/2/C/9/3_duangecho.jpg" alt="duangecho" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">duangecho</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">05-09</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							4720</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/duangecho/article/details/80258300" target="_blank" title="springboot打成jar包后配置外部资源映射成静态资源 - duangecho的博客">
+							<span class="desc oneline">很多的项目都要上传图片那些，然后通过打包jar包或者war包发布到服务器上，我们不可能把上传图片的文件夹放在jar包或者war包里面，那样会越来越大。所以有了下面的配置，其他框架都好说可以把文件放在t...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/duangecho">来自：	<span class="blog_title"> duangecho的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/u010004082/article/details/79351193,BlogCommendClickRateRank_12"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/u010004082/article/details/79351193,BlogCommendClickRateRank_12"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u010004082/article/details/79351193" target="_blank" title="SpringBoot设置静态资源访问目录 - 飞鸟的轨迹">
+				<h4 class="text-truncate oneline">
+						<em>SpringBoot</em>设置<em>静态资源</em><em>访问</em>目录 - 飞鸟的轨迹				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/B/1/8/3_u010004082.jpg" alt="u010004082" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">u010004082</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">02-23</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							6404</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u010004082/article/details/79351193" target="_blank" title="SpringBoot设置静态资源访问目录 - 飞鸟的轨迹">
+							<span class="desc oneline">公司项目使用SpringBoot作为后端，Vue开发前端页面。在前台上传完图片后，需要查看。路径被拦截，查看SpringBoot知道是没有设置访问路径。
+
+看到几篇文章有介绍，关于官网的介绍，Mark...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/u010004082">来自：	<span class="blog_title"> 飞鸟的轨迹</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_61" data-pid="61" data-track-view='{"mod":"kp_popu_61-557","con":",,"}' data-track-click='{"mod":"kp_popu_61-557","con":",,"}'><div id="three_ad13" class="mediav_ad" ></div>
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<script>
+                                               NEWS_FEED({
+                w: 852,
+                h : 60,
+                showid : 'GNKXx7',
+                placeholderId: "three_ad13",
+                inject : 'define',
+                define : {
+                    imagePosition : 'left',
+                    imageBorderRadius : 3,
+                    imageWidth: 90,
+                    imageHeight: 60,
+                    imageFill : 'clip',
+                    displayImage : true,
+                    displayTitle : true,
+                    titleFontSize: 18,
+                    titleFontColor: '#000',
+                    titleFontFamily : 'Lato,-apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif',
+                    titleFontWeight: 'bold',
+                    titlePaddingTop : 0,
+                    titlePaddingRight : 0,
+                    titlePaddingBottom : 5,
+                    titlePaddingLeft : 16,
+                    displayDesc : true,
+                    descFontSize: 14,
+                    descFontColor: '#8e959a',
+                    descFontFamily : 'Microsoft Yahei',
+                    paddingTop : 0,
+                    paddingRight : 0,
+                    paddingBottom : 0,
+                    paddingLeft : 0,
+                    backgroundColor: '#fff',
+                    hoverColor: '#000'
+                      }
+                  })
+                                        </script></div></div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/wangb_java/article/details/71775637,BlogCommendClickRateRank_13"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/wangb_java/article/details/71775637,BlogCommendClickRateRank_13"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/wangb_java/article/details/71775637" target="_blank" title="spring boot(4)-html和templates - JAVA博客">
+				<h4 class="text-truncate oneline">
+						spring boot(4)-<em>html</em>和templates - JAVA博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/B/E/0/3_wangb_java.jpg" alt="wangb_java" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">wangb_java</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">05-13</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							5.2万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/wangb_java/article/details/71775637" target="_blank" title="spring boot(4)-html和templates - JAVA博客">
+							<span class="desc oneline">静态页面
+spring boot项目只有src目录，没有webapp目录，会将静态访问(html/图片等)映射到其自动配置的静态目录，如下
+
+
+
+
+/static
+
+/public
+
+/resourc...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/wangb_java">来自：	<span class="blog_title"> JAVA博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/u012882134/article/details/77230900,BlogCommendClickRateRank_14"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/u012882134/article/details/77230900,BlogCommendClickRateRank_14"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u012882134/article/details/77230900" target="_blank" title="spring boot 笔记（四）：返回静态页面 - 芙兰泣露的博客">
+				<h4 class="text-truncate oneline">
+						spring boot 笔记（四）：返回静态页面 - 芙兰泣露的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/9/B/B/3_u012882134.jpg" alt="u012882134" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">u012882134</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">08-16</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							2.6万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u012882134/article/details/77230900" target="_blank" title="spring boot 笔记（四）：返回静态页面 - 芙兰泣露的博客">
+							<span class="desc oneline">Spring boot官方对于Thymeleaf模板提供了很好的支持，但默认不开通Thymeleaf模板，需要手动配置。...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/u012882134">来自：	<span class="blog_title"> 芙兰泣露的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/wangBing_/article/details/73331512,BlogCommendClickRateRank_15"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/wangBing_/article/details/73331512,BlogCommendClickRateRank_15"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/wangBing_/article/details/73331512" target="_blank" title="springboot项目打包部署时把静态资源打包到jar中、或修改静态资源根目录 - wangBing_的博客">
+				<h4 class="text-truncate oneline">
+						<em>springboot</em>项目打包部署时把<em>静态资源</em>打包到jar中、或修改<em>静态资源</em>根目录 - wangBing_的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/C/5/5/3_wangbing_.jpg" alt="wangBing_" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">wangBing_</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">06-16</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1.3万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/wangBing_/article/details/73331512" target="_blank" title="springboot项目打包部署时把静态资源打包到jar中、或修改静态资源根目录 - wangBing_的博客">
+							<span class="desc oneline">通常一个web项目静态资源都放在webapp下，打包成war包便可运行。
+
+但是当我们打包成jar包时会只有后台资源，而没有前台资源。
+
+
+
+
+如果想打包时静态资源也打包到jar中，springboo...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/wangBing_">来自：	<span class="blog_title"> wangBing_的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/Fmuma/article/details/79596571,BlogCommendClickRateRank_16"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/Fmuma/article/details/79596571,BlogCommendClickRateRank_16"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/Fmuma/article/details/79596571" target="_blank" title="SpringBoot直接访问HTML页面 - 二进制的博客">
+				<h4 class="text-truncate oneline">
+						<em>SpringBoot</em>直接<em>访问</em><em>HTML</em>页面 - 二进制的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/1/0/7/3_fmuma.jpg" alt="Fmuma" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">Fmuma</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">03-17</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							9080</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/Fmuma/article/details/79596571" target="_blank" title="SpringBoot直接访问HTML页面 - 二进制的博客">
+							<span class="desc oneline">之前用SSM框架撸代码时是可以直接跳转jsp页面。也就是说没有经过controller处理，这样相对来说不是那么安全，因此有些页面需要判断权限操作。
+
+这几天在使用springboot的时候，大多处理...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/Fmuma">来自：	<span class="blog_title"> 二进制的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/lizhen1114/article/details/79367506,BlogCommendClickRateRank_17"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/lizhen1114/article/details/79367506,BlogCommendClickRateRank_17"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/lizhen1114/article/details/79367506" target="_blank" title="2-Spring Boot ( 静态资源访问 ) - lizhen1114的博客">
+				<h4 class="text-truncate oneline">
+						2-Spring Boot ( <em>静态资源</em><em>访问</em> ) - lizhen1114的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/A/0/F/3_lizhen1114.jpg" alt="lizhen1114" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">lizhen1114</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">02-25</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							562</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/lizhen1114/article/details/79367506" target="_blank" title="2-Spring Boot ( 静态资源访问 ) - lizhen1114的博客">
+							<span class="desc oneline">静态资源访问在我们开发Web应用的时候，需要引用大量的js、css、图片等静态资源。默认配置Spring Boot默认提供静态资源目录位置需置于classpath下，目录名需符合如下规则：/stati...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/lizhen1114">来自：	<span class="blog_title"> lizhen1114的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_62" data-pid="62" data-track-view='{"mod":"kp_popu_62-556","con":",,"}' data-track-click='{"mod":"kp_popu_62-556","con":",,"}'><div id="three_ad18" class="mediav_ad" ></div>
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<script>
+                                               NEWS_FEED({
+                w: 852,
+                h : 60,
+                showid : 'Afihld',
+                placeholderId: "three_ad18",
+                inject : 'define',
+                define : {
+                    imagePosition : 'left',
+                    imageBorderRadius : 3,
+                    imageWidth: 90,
+                    imageHeight: 60,
+                    imageFill : 'clip',
+                    displayImage : true,
+                    displayTitle : true,
+                    titleFontSize: 18,
+                    titleFontColor: '#000',
+                    titleFontFamily : 'Lato,-apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif',
+                    titleFontWeight: 'bold',
+                    titlePaddingTop : 0,
+                    titlePaddingRight : 0,
+                    titlePaddingBottom : 5,
+                    titlePaddingLeft : 16,
+                    displayDesc : true,
+                    descFontSize: 14,
+                    descFontColor: '#8e959a',
+                    descFontFamily : 'Microsoft Yahei',
+                    paddingTop : 0,
+                    paddingRight : 0,
+                    paddingBottom : 0,
+                    paddingLeft : 0,
+                    backgroundColor: '#fff',
+                    hoverColor: '#000'
+                      }
+                  })
+                                        </script></div></div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/w_x_z_/article/details/55657512,BlogCommendClickRateRank_18"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/w_x_z_/article/details/55657512,BlogCommendClickRateRank_18"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/w_x_z_/article/details/55657512" target="_blank" title="在SpringBoot中访问静态资源 - 架构之路">
+				<h4 class="text-truncate oneline">
+						在<em>SpringBoot</em>中<em>访问</em><em>静态资源</em> - 架构之路				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/2/E/B/3_w_x_z_.jpg" alt="w_x_z_" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">w_x_z_</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">02-18</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							3.4万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/w_x_z_/article/details/55657512" target="_blank" title="在SpringBoot中访问静态资源 - 架构之路">
+							<span class="desc oneline">第一种方式 : 放在src/main/webapp目录下 放在webapp目录下的静态资源是可以直接访问的user.html2.png在user.html中引用2.png第二种方式：放在classpa...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/w_x_z_">来自：	<span class="blog_title"> 架构之路</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/plei_yue/article/details/79360645,BlogCommendClickRateRank_19"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/plei_yue/article/details/79360645,BlogCommendClickRateRank_19"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/plei_yue/article/details/79360645" target="_blank" title="SpringBoot（四）：静态资源的访问和配置 - 刘大磊的博客">
+				<h4 class="text-truncate oneline">
+						<em>SpringBoot</em>（四）：<em>静态资源</em>的<em>访问</em>和配置 - 刘大磊的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/4/9/A/3_plei_yue.jpg" alt="plei_yue" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">plei_yue</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">02-24</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1.2万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/plei_yue/article/details/79360645" target="_blank" title="SpringBoot（四）：静态资源的访问和配置 - 刘大磊的博客">
+							<span class="desc oneline">默认静态资源访问
+
+Spring Boot的默认静态资源的路径为： 
+spring.resources.static-locations=classpath:/META-INF/resources/,...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/plei_yue">来自：	<span class="blog_title"> 刘大磊的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/aslongasyoulike/article/details/77001824,BlogCommendClickRateRank_20"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/aslongasyoulike/article/details/77001824,BlogCommendClickRateRank_20"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/aslongasyoulike/article/details/77001824" target="_blank" title="spring boot实现上传图片并在页面上显示 - 浮闲">
+				<h4 class="text-truncate oneline">
+						spring boot实现上传<em>图片</em>并在页面上显示 - 浮闲				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/4/7/A/3_aslongasyoulike.jpg" alt="aslongasyoulike" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">aslongasyoulike</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">08-09</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1.7万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/aslongasyoulike/article/details/77001824" target="_blank" title="spring boot实现上传图片并在页面上显示 - 浮闲">
+							<span class="desc oneline">最近在使用spring boot搭建网站的过程之中遇到了这样一个问题：用户注册时需要上传一个属于自己的头像，注册成功之后跳转到个人中心，在个人中心中显示用户信息，其中在显示头像的时候遇到了问题：上传头...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/aslongasyoulike">来自：	<span class="blog_title"> 浮闲</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/sinat_33889619/article/details/78339042,BlogCommendClickRateRank_21"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/sinat_33889619/article/details/78339042,BlogCommendClickRateRank_21"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/sinat_33889619/article/details/78339042" target="_blank" title="通过SpringBoot访问HTML页面 - 吃瓜的猫~">
+				<h4 class="text-truncate oneline">
+						通过<em>SpringBoot</em><em>访问</em><em>HTML</em>页面 - 吃瓜的猫~				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/C/5/F/3_sinat_33889619.jpg" alt="sinat_33889619" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">sinat_33889619</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">10-25</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							5.2万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/sinat_33889619/article/details/78339042" target="_blank" title="通过SpringBoot访问HTML页面 - 吃瓜的猫~">
+							<span class="desc oneline">本文章内容主要讲下怎么通过SpringBoot进入HTML页面 
+1、首先在pom.xml添加对HTML的相关依赖/**
+ * pom.xml文件
+ */
+
+    
+        org.spri...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/sinat_33889619">来自：	<span class="blog_title"> 吃瓜的猫~</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/u011271894/article/details/75530331,BlogCommendClickRateRank_22"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/u011271894/article/details/75530331,BlogCommendClickRateRank_22"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u011271894/article/details/75530331" target="_blank" title="spring boot静态资源文件的访问以及自定义 - 一屁小肥羊的专栏">
+				<h4 class="text-truncate oneline">
+						spring boot<em>静态资源</em>文件的<em>访问</em>以及自定义 - 一屁小肥羊的专栏				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/A/4/2/3_u011271894.jpg" alt="u011271894" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">u011271894</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">07-20</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							6937</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u011271894/article/details/75530331" target="_blank" title="spring boot静态资源文件的访问以及自定义 - 一屁小肥羊的专栏">
+							<span class="desc oneline">spring boot静态资源文件的访问以及自定义</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/u011271894">来自：	<span class="blog_title"> 一屁小肥羊的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_63" data-pid="63" data-track-view='{"mod":"kp_popu_63-555","con":",,"}' data-track-click='{"mod":"kp_popu_63-555","con":",,"}'><div id="three_ad23" class="mediav_ad" ></div>
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<script>
+                                               NEWS_FEED({
+                w: 852,
+                h : 60,
+                showid : 'GNKXx7',
+                placeholderId: "three_ad23",
+                inject : 'define',
+                define : {
+                    imagePosition : 'left',
+                    imageBorderRadius : 3,
+                    imageWidth: 90,
+                    imageHeight: 60,
+                    imageFill : 'clip',
+                    displayImage : true,
+                    displayTitle : true,
+                    titleFontSize: 18,
+                    titleFontColor: '#000',
+                    titleFontFamily : 'Lato,-apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif',
+                    titleFontWeight: 'bold',
+                    titlePaddingTop : 0,
+                    titlePaddingRight : 0,
+                    titlePaddingBottom : 5,
+                    titlePaddingLeft : 16,
+                    displayDesc : true,
+                    descFontSize: 14,
+                    descFontColor: '#8e959a',
+                    descFontFamily : 'Microsoft Yahei',
+                    paddingTop : 0,
+                    paddingRight : 0,
+                    paddingBottom : 0,
+                    paddingLeft : 0,
+                    backgroundColor: '#fff',
+                    hoverColor: '#000'
+                      }
+                  })
+                                        </script></div></div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/a1102325298/article/details/80352605,BlogCommendClickRateRank_23"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/a1102325298/article/details/80352605,BlogCommendClickRateRank_23"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/a1102325298/article/details/80352605" target="_blank" title="springboot静态资源访问路径 - a1102325298的博客">
+				<h4 class="text-truncate oneline">
+						<em>springboot</em><em>静态资源</em><em>访问</em>路径 - a1102325298的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/7/8/8/3_a1102325298.jpg" alt="a1102325298" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">a1102325298</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">05-17</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							370</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/a1102325298/article/details/80352605" target="_blank" title="springboot静态资源访问路径 - a1102325298的博客">
+							<span class="desc oneline">在springboot中约定大于配置，当然对静态资源也有默认的约定。Spring Boot 默认将 /** 所有访问映射到以下目录：classpath:/static
+classpath:/publi...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/a1102325298">来自：	<span class="blog_title"> a1102325298的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/zknxx/article/details/53414955,BlogCommendClickRateRank_24"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/zknxx/article/details/53414955,BlogCommendClickRateRank_24"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/zknxx/article/details/53414955" target="_blank" title="SpringBoot加载静态资源 - 努力改变人生！">
+				<h4 class="text-truncate oneline">
+						<em>SpringBoot</em>加载<em>静态资源</em> - 努力改变人生！				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/4/5/7/3_zknxx.jpg" alt="zknxx" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">zknxx</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">11-30</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							2.4万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/zknxx/article/details/53414955" target="_blank" title="SpringBoot加载静态资源 - 努力改变人生！">
+							<span class="desc oneline">在SpringBoot中加载静态资源和在普通的web应用中不太一样。默认情况下，Spring Boot从classpath下一个叫/static（/public，/resources或/META-IN...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/zknxx">来自：	<span class="blog_title"> 努力改变人生！</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/qq_34797335/article/details/80194137,BlogCommendClickRateRank_25"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/qq_34797335/article/details/80194137,BlogCommendClickRateRank_25"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_34797335/article/details/80194137" target="_blank" title="SpringBoot之静态资源访问 - 吴锦涛的博客">
+				<h4 class="text-truncate oneline">
+						<em>SpringBoot</em>之<em>静态资源</em><em>访问</em> - 吴锦涛的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/3/A/C/3_qq_34797335.jpg" alt="qq_34797335" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qq_34797335</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">05-04</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							2757</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_34797335/article/details/80194137" target="_blank" title="SpringBoot之静态资源访问 - 吴锦涛的博客">
+							<span class="desc oneline">           SpringBoot之静态资源访问
+
+1.springboot访问静态资源的几种方式 
+   (1)在src/main/resources/目录下创建 
+       stati...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qq_34797335">来自：	<span class="blog_title"> 吴锦涛的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/weixin_38303684/article/details/78047252,BlogCommendClickRateRank_26"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/weixin_38303684/article/details/78047252,BlogCommendClickRateRank_26"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/weixin_38303684/article/details/78047252" target="_blank" title="启动Springboot项目在浏览器中加载不了静态资源文件 - weixin_38303684的博客">
+				<h4 class="text-truncate oneline">
+						启动<em>Springboot</em>项目在浏览器中加载不了<em>静态资源</em>文件 - weixin_38303684的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/1/8/E/3_weixin_38303684.jpg" alt="weixin_38303684" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">weixin_38303684</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">09-21</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							3426</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/weixin_38303684/article/details/78047252" target="_blank" title="启动Springboot项目在浏览器中加载不了静态资源文件 - weixin_38303684的博客">
+							<span class="desc oneline">以前都是想试试用IDEA做一个Springboot+mybatis的整合项目，然后写了一个静态网页，想着运行一下看看，发现在网页中的bootstrap等静态资源文件加载失败，这里给大家找到了原因，分享...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/weixin_38303684">来自：	<span class="blog_title"> weixin_38303684的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/u013185616/article/details/73647955,BlogCommendClickRateRank_27"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/u013185616/article/details/73647955,BlogCommendClickRateRank_27"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u013185616/article/details/73647955" target="_blank" title="spring-boot笔记-静态资源及页面开发（六） - Frankenstein的博客">
+				<h4 class="text-truncate oneline">
+						spring-boot笔记-<em>静态资源</em>及页面开发（六） - Frankenstein的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/A/1/E/3_u013185616.jpg" alt="u013185616" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">u013185616</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">06-23</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u013185616/article/details/73647955" target="_blank" title="spring-boot笔记-静态资源及页面开发（六） - Frankenstein的博客">
+							<span class="desc oneline">介绍springboot的静态资源路径及两种修改方式，简单介绍页面开发的一些demo</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/u013185616">来自：	<span class="blog_title"> Frankenstein的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_64" data-pid="64" data-track-view='{"mod":"kp_popu_64-81","con":",,"}' data-track-click='{"mod":"kp_popu_64-81","con":",,"}'><div id="three_ad28" class="mediav_ad" ></div>
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<script>
+                                               NEWS_FEED({
+                w: 852,
+                h : 60,
+                showid : 'Afihld',
+                placeholderId: "three_ad28",
+                inject : 'define',
+                define : {
+                    imagePosition : 'left',
+                    imageBorderRadius : 3,
+                    imageWidth: 90,
+                    imageHeight: 60,
+                    imageFill : 'clip',
+                    displayImage : true,
+                    displayTitle : true,
+                    titleFontSize: 18,
+                    titleFontColor: '#000',
+                    titleFontFamily : 'Lato,-apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif',
+                    titleFontWeight: 'bold',
+                    titlePaddingTop : 0,
+                    titlePaddingRight : 0,
+                    titlePaddingBottom : 5,
+                    titlePaddingLeft : 16,
+                    displayDesc : true,
+                    descFontSize: 14,
+                    descFontColor: '#8e959a',
+                    descFontFamily : 'Microsoft Yahei',
+                    paddingTop : 0,
+                    paddingRight : 0,
+                    paddingBottom : 0,
+                    paddingLeft : 0,
+                    backgroundColor: '#fff',
+                    hoverColor: '#000'
+                      }
+                  })
+                                        </script></div></div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/u013289746/article/details/77530807,BlogCommendClickRateRank_28"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/u013289746/article/details/77530807,BlogCommendClickRateRank_28"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u013289746/article/details/77530807" target="_blank" title="spring boot之集成页面 - u013289746的博客">
+				<h4 class="text-truncate oneline">
+						spring boot之集成页面 - u013289746的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/E/9/6/3_u013289746.jpg" alt="u013289746" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">u013289746</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">08-24</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							7199</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u013289746/article/details/77530807" target="_blank" title="spring boot之集成页面 - u013289746的博客">
+							<span class="desc oneline">spring boot之集成前台页面html</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/u013289746">来自：	<span class="blog_title"> u013289746的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/yingxiake/article/details/51295551,BlogCommendClickRateRank_29"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/yingxiake/article/details/51295551,BlogCommendClickRateRank_29"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/yingxiake/article/details/51295551" target="_blank" title="spring boot 静态资源处理 - 打不死的小强">
+				<h4 class="text-truncate oneline">
+						spring boot <em>静态资源</em>处理 - 打不死的小强				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/4/C/C/3_yingxiake.jpg" alt="yingxiake" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">yingxiake</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">05-02</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1.2万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/yingxiake/article/details/51295551" target="_blank" title="spring boot 静态资源处理 - 打不死的小强">
+							<span class="desc oneline">spring boot 秉承约定优于配置，spring boot在静态资源的处理上就已经默认做了处理。1.默认资源映射映射”/**”的路径到 /static （或/public、/resources、...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/yingxiake">来自：	<span class="blog_title"> 打不死的小强</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/weixin_39048143/article/details/79270630,BlogCommendClickRateRank_30"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/weixin_39048143/article/details/79270630,BlogCommendClickRateRank_30"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/weixin_39048143/article/details/79270630" target="_blank" title="关于springboot中的web项目不能访问templates中的静态资源 - weixin_39048143的博客">
+				<h4 class="text-truncate oneline">
+						关于<em>springboot</em>中的web项目不能<em>访问</em>templates中的<em>静态资源</em> - weixin_39048143的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/4/B/B/3_weixin_39048143.jpg" alt="weixin_39048143" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">weixin_39048143</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">02-06</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							5307</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/weixin_39048143/article/details/79270630" target="_blank" title="关于springboot中的web项目不能访问templates中的静态资源 - weixin_39048143的博客">
+							<span class="desc oneline">最近在创建一个springboot的简单的web工程的时候,把welcome.html放到templates中的文件夹中去.启动项目之后,就是访问不到该html页面,最终自己在该resources下重...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/weixin_39048143">来自：	<span class="blog_title"> weixin_39048143的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/zahngjialiang/article/details/78614739,BlogCommendClickRateRank_31"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/zahngjialiang/article/details/78614739,BlogCommendClickRateRank_31"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/zahngjialiang/article/details/78614739" target="_blank" title="Springboot加载静态图片 - jialiang的博客">
+				<h4 class="text-truncate oneline">
+						<em>Springboot</em>加载静态<em>图片</em> - jialiang的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/0/7/2/3_zahngjialiang.jpg" alt="zahngjialiang" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">zahngjialiang</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">11-23</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							4236</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/zahngjialiang/article/details/78614739" target="_blank" title="Springboot加载静态图片 - jialiang的博客">
+							<span class="desc oneline">项目中，上传图片到服务器，然后展示出来。之前关于文件的上传下载做得比较多。但是关于图片的显示，从没有做过，查了一些资料，折腾了一番。终于实现了最基本的效果。 
+以前上传后的文件，在数据库中记录时，记录...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/zahngjialiang">来自：	<span class="blog_title"> jialiang的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/CarryBest/article/details/80494433,BlogCommendClickRateRank_32"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/CarryBest/article/details/80494433,BlogCommendClickRateRank_32"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/CarryBest/article/details/80494433" target="_blank" title="spring boot项目读取本地（服务器）图片显示在页面 - CarryBest的博客">
+				<h4 class="text-truncate oneline">
+						spring boot项目读取本地（服务器）<em>图片</em>显示在页面 - CarryBest的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/2/6/2/3_carrybest.jpg" alt="CarryBest" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">CarryBest</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">05-29</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							5397</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/CarryBest/article/details/80494433" target="_blank" title="spring boot项目读取本地（服务器）图片显示在页面 - CarryBest的博客">
+							<span class="desc oneline">1:在配置文件中加上下面web.upload-path=E:/hd/img/                   spring.mvc.static-path-pattern=/**spring.re...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/CarryBest">来自：	<span class="blog_title"> CarryBest的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_65" data-pid="65" data-track-view='{"mod":"kp_popu_65-625","con":",,"}' data-track-click='{"mod":"kp_popu_65-625","con":",,"}'><script type="text/javascript" src="//rabc1.iteye.com/common/openjs/m022.js?hcuzbzy=bi"></script></div></div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/u010502101/article/details/78879338,BlogCommendClickRateRank_33"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/u010502101/article/details/78879338,BlogCommendClickRateRank_33"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u010502101/article/details/78879338" target="_blank" title="10.7、spring boot的web应用——访问静态资源 - u010502101的博客">
+				<h4 class="text-truncate oneline">
+						10.7、spring boot的web应用——<em>访问</em><em>静态资源</em> - u010502101的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/6/D/4/3_u010502101.jpg" alt="u010502101" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">u010502101</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">12-23</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1784</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u010502101/article/details/78879338" target="_blank" title="10.7、spring boot的web应用——访问静态资源 - u010502101的博客">
+							<span class="desc oneline">一、原理 
+    之前创建web工程的时候，直接把静态资源，比如html文件、图片等放在src/main/webapp目录下，在浏览器中是直接可以访问到这些静态资源的。但是在创建spring boo...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/u010502101">来自：	<span class="blog_title"> u010502101的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/songhaifengshuaige/article/details/54137330,BlogCommendClickRateRank_34"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/songhaifengshuaige/article/details/54137330,BlogCommendClickRateRank_34"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/songhaifengshuaige/article/details/54137330" target="_blank" title="springboot下静态资源的处理 - 海锋博客">
+				<h4 class="text-truncate oneline">
+						<em>springboot</em>下<em>静态资源</em>的处理 - 海锋博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/1/F/D/3_songhaifengshuaige.jpg" alt="songhaifengshuaige" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">songhaifengshuaige</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">01-06</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1.3万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/songhaifengshuaige/article/details/54137330" target="_blank" title="springboot下静态资源的处理 - 海锋博客">
+							<span class="desc oneline">在SpringBoot中有默认的静态资源文件相关配置，需要通过如下源码跟踪：
+WebMvcAutoConfiguration--&gt;configureResourceChain（method）--&gt;Re...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/songhaifengshuaige">来自：	<span class="blog_title"> 海锋博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/zhy905692718/article/details/78949730,BlogCommendClickRateRank_35"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/zhy905692718/article/details/78949730,BlogCommendClickRateRank_35"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/zhy905692718/article/details/78949730" target="_blank" title="springboot 访问静态页面 - zhy905692718的专栏">
+				<h4 class="text-truncate oneline">
+						<em>springboot</em> <em>访问</em>静态页面 - zhy905692718的专栏				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/B/3/D/3_zhy905692718.jpg" alt="zhy905692718" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">zhy905692718</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">01-02</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1373</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/zhy905692718/article/details/78949730" target="_blank" title="springboot 访问静态页面 - zhy905692718的专栏">
+							<span class="desc oneline">背景：由于项目的前后端由不同团队开发，因此决定使用前后端彻底分离的方式进行开发，前端的开发不使用模板，数据使用restful的接口获取。后端通过controller处理页面跳转时只需要返回指定的静态页...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/zhy905692718">来自：	<span class="blog_title"> zhy905692718的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/mrxiky/article/details/70244700,BlogCommendClickRateRank_36"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/mrxiky/article/details/70244700,BlogCommendClickRateRank_36"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/mrxiky/article/details/70244700" target="_blank" title="springboot加载静态资源 - mrxiky的专栏">
+				<h4 class="text-truncate oneline">
+						<em>springboot</em>加载<em>静态资源</em> - mrxiky的专栏				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/8/3/B/3_mrxiky.jpg" alt="mrxiky" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">mrxiky</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">04-19</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							7497</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/mrxiky/article/details/70244700" target="_blank" title="springboot加载静态资源 - mrxiky的专栏">
+							<span class="desc oneline">在SpringBoot中加载静态资源和在普通的web应用中不太一样。默认情况下，spring Boot从classpath下一个叫/static（/public，/resources或/META-IN...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/mrxiky">来自：	<span class="blog_title"> mrxiky的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/jawhiow/article/details/82625842,BlogCommendClickRateRank_37"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/jawhiow/article/details/82625842,BlogCommendClickRateRank_37"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/jawhiow/article/details/82625842" target="_blank" title="Springboot中如何访问静态资源 - 静坐听雨，无问西东">
+				<h4 class="text-truncate oneline">
+						<em>Springboot</em>中如何<em>访问</em><em>静态资源</em> - 静坐听雨，无问西东				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/1/6/B/3_jawhiow.jpg" alt="jawhiow" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">jawhiow</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">09-11</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							109</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/jawhiow/article/details/82625842" target="_blank" title="Springboot中如何访问静态资源 - 静坐听雨，无问西东">
+							<span class="desc oneline">1. application中需要先行的两个配置项
+
+
+
+1.1 spring.mvc.static-path-pattern
+
+这个配置项是告诉springboot，应该以什么样的方式去寻找资源。默...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/jawhiow">来自：	<span class="blog_title"> 静坐听雨，无问西东</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_66" data-pid="66" data-track-view='{"mod":"kp_popu_66-87","con":",,"}' data-track-click='{"mod":"kp_popu_66-87","con":",,"}'><div id="three_ad38" class="mediav_ad" ></div>
+<script>
+                                               NEWS_FEED({
+                w: 852,
+                h : 60,
+                showid : 'Afihld',
+                placeholderId: "three_ad38",
+                inject : 'define',
+                define : {
+                    imagePosition : 'left',
+                    imageBorderRadius : 3,
+                    imageWidth: 90,
+                    imageHeight: 60,
+                    imageFill : 'clip',
+                    displayImage : true,
+                    displayTitle : true,
+                    titleFontSize: 18,
+                    titleFontColor: '#000',
+                    titleFontFamily : 'Lato,-apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif',
+                    titleFontWeight: 'bold',
+                    titlePaddingTop : 0,
+                    titlePaddingRight : 0,
+                    titlePaddingBottom : 5,
+                    titlePaddingLeft : 16,
+                    displayDesc : true,
+                    descFontSize: 14,
+                    descFontColor: '#8e959a',
+                    descFontFamily : 'Microsoft Yahei',
+                    paddingTop : 0,
+                    paddingRight : 0,
+                    paddingBottom : 0,
+                    paddingLeft : 0,
+                    backgroundColor: '#fff',
+                    hoverColor: '#000'
+                      }
+                  })
+                                        </script></div></div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/qq_21104515/article/details/79155052,BlogCommendClickRateRank_38"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/qq_21104515/article/details/79155052,BlogCommendClickRateRank_38"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_21104515/article/details/79155052" target="_blank" title="Spring boot 直接访问templates中html文件 - 弓长张_木子李的博客">
+				<h4 class="text-truncate oneline">
+						Spring boot 直接<em>访问</em>templates中<em>html</em>文件 - 弓长张_木子李的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/8/D/5/3_qq_21104515.jpg" alt="qq_21104515" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qq_21104515</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">01-29</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							5704</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_21104515/article/details/79155052" target="_blank" title="Spring boot 直接访问templates中html文件 - 弓长张_木子李的博客">
+							<span class="desc oneline">application.properties
+
+在浏览器中输入http://localhost:8080/index.html 会报一个
+
+ 
+因为Spring boot 无法直接访问tem...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qq_21104515">来自：	<span class="blog_title"> 弓长张_木子李的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/lz710117239/article/details/80978925,BlogCommendClickRateRank_39"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/lz710117239/article/details/80978925,BlogCommendClickRateRank_39"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/lz710117239/article/details/80978925" target="_blank" title="Springboot访问静态资源源码解析 - lz710117239的博客">
+				<h4 class="text-truncate oneline">
+						<em>Springboot</em><em>访问</em><em>静态资源</em>源码解析 - lz710117239的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/9/A/A/3_lz710117239.jpg" alt="lz710117239" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">lz710117239</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">07-09</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							196</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/lz710117239/article/details/80978925" target="_blank" title="Springboot访问静态资源源码解析 - lz710117239的博客">
+							<span class="desc oneline">Springboot中访问静态资源也是通过DispatcherServlet。与访问方法请求一样也是走的这个方法：mv = ha.handle(processedRequest, response, ...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/lz710117239">来自：	<span class="blog_title"> lz710117239的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/qq_29411737/article/details/80255116,BlogCommendClickRateRank_40"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/qq_29411737/article/details/80255116,BlogCommendClickRateRank_40"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_29411737/article/details/80255116" target="_blank" title="SpringBoot Web静态资源访问 - 随波的博客">
+				<h4 class="text-truncate oneline">
+						<em>SpringBoot</em> Web<em>静态资源</em><em>访问</em> - 随波的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/5/0/8/3_qq_29411737.jpg" alt="qq_29411737" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qq_29411737</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">05-09</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							87</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_29411737/article/details/80255116" target="_blank" title="SpringBoot Web静态资源访问 - 随波的博客">
+							<span class="desc oneline">SpringBoot Web静态资源访问映射规则
+
+在WebMvcAutoConfiguration源码中有这样一个方法：
+
+ public void addResourceHandlers(Reso...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qq_29411737">来自：	<span class="blog_title"> 随波的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/qq_17639593/article/details/80517482,BlogCommendClickRateRank_41"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/qq_17639593/article/details/80517482,BlogCommendClickRateRank_41"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_17639593/article/details/80517482" target="_blank" title="SpringBoot入门（6）—— 自定义访问静态资源 - 痕迹">
+				<h4 class="text-truncate oneline">
+						<em>SpringBoot</em>入门（6）—— 自定义<em>访问</em><em>静态资源</em> - 痕迹				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/4/C/2/3_qq_17639593.jpg" alt="qq_17639593" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qq_17639593</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">05-30</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							43</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_17639593/article/details/80517482" target="_blank" title="SpringBoot入门（6）—— 自定义访问静态资源 - 痕迹">
+							<span class="desc oneline">
+
+
+
+
+
+1.SpringBoot 默认访问静态资源路径
+2.自定义访问资源路径
+
+
+
+
+
+
+
+
+
+
+
+
+
+1.SpringBoot 默认访问静态资源路径
+
+
+  默认配置的 /** 映射到 /st...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qq_17639593">来自：	<span class="blog_title"> 痕迹</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/atmknight/article/details/81536627,BlogCommendClickRateRank_42"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/atmknight/article/details/81536627,BlogCommendClickRateRank_42"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/atmknight/article/details/81536627" target="_blank" title="springboot  访问静态资源设置 - atmknight的博客">
+				<h4 class="text-truncate oneline">
+						<em>springboot</em>  <em>访问</em><em>静态资源</em>设置 - atmknight的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/E/D/9/3_atmknight.jpg" alt="atmknight" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">atmknight</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">08-09</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							225</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/atmknight/article/details/81536627" target="_blank" title="springboot  访问静态资源设置 - atmknight的博客">
+							<span class="desc oneline">今天一个人问我为什么项目下的图片不能访问，帮他解决问题后我决定记录下来，springboot 的程序的静态资源访问需要重写addResourceHandlers方法，直接上代码：
+
+
+import o...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/atmknight">来自：	<span class="blog_title"> atmknight的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_67" data-pid="67" data-track-view='{"mod":"kp_popu_67-658","con":",,"}' data-track-click='{"mod":"kp_popu_67-658","con":",,"}'><script type="text/javascript">
+    (function() {
+        var s = "_" + Math.random().toString(36).slice(2);
+        document.write('<div style="" id="' + s + '"></div>');
+        (window.slotbydup = window.slotbydup || []).push({
+            id: "u3573058",
+            container:  s
+        });
+    })();
+</script>
+<!-- 多条广告如下脚本只需引入一次 -->
+<script type="text/javascript" src="//cpro.baidustatic.com/cpro/ui/c.js" async="async" defer="defer" ></script></div></div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/yali_aini/article/details/83213695,BlogCommendClickRateRank_43"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/yali_aini/article/details/83213695,BlogCommendClickRateRank_43"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/yali_aini/article/details/83213695" target="_blank" title="SpringBoot之访问静态资源(webapp...) - 临窗，听雨声">
+				<h4 class="text-truncate oneline">
+						<em>SpringBoot</em>之<em>访问</em><em>静态资源</em>(webapp...) - 临窗，听雨声				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/7/B/6/3_yali_aini.jpg" alt="yali_aini" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">yali_aini</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">10-20</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							261</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/yali_aini/article/details/83213695" target="_blank" title="SpringBoot之访问静态资源(webapp...) - 临窗，听雨声">
+							<span class="desc oneline">springboot访问静态资源，默认有两个默认目录，
+
+一个是  classpath/static 目录 (src/mian/resource)
+
+一个是 ServletContext 根目录下( ...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/yali_aini">来自：	<span class="blog_title"> 临窗，听雨声</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/omayyouhappy/article/details/81451923,BlogCommendClickRateRank_44"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/omayyouhappy/article/details/81451923,BlogCommendClickRateRank_44"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/omayyouhappy/article/details/81451923" target="_blank" title="springboot 外置tomcat 中html页面访问静态img资源的问题 - 你好邱林和的专栏">
+				<h4 class="text-truncate oneline">
+						<em>springboot</em> 外置tomcat 中<em>html</em>页面<em>访问</em>静态img资源的问题 - 你好邱林和的专栏				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/D/3/9/3_omayyouhappy.jpg" alt="omayyouhappy" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">omayyouhappy</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">08-06</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							240</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/omayyouhappy/article/details/81451923" target="_blank" title="springboot 外置tomcat 中html页面访问静态img资源的问题 - 你好邱林和的专栏">
+							<span class="desc oneline">    
+
+         springboot项目中html文件中,原本img的路径是/img/profile.jpg,在idea本地运行是能获取到图片,并能正确显示的,
+不过打包成war包,放在...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/omayyouhappy">来自：	<span class="blog_title"> 你好邱林和的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/XU906722/article/details/82532377,BlogCommendClickRateRank_45"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/XU906722/article/details/82532377,BlogCommendClickRateRank_45"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/XU906722/article/details/82532377" target="_blank" title="Springboot 页面访问不到静态资源 - NullPointerException的博客">
+				<h4 class="text-truncate oneline">
+						<em>Springboot</em> 页面<em>访问</em>不到<em>静态资源</em> - NullPointerException的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/3/8/3/3_xu906722.jpg" alt="XU906722" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">XU906722</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">09-08</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							457</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/XU906722/article/details/82532377" target="_blank" title="Springboot 页面访问不到静态资源 - NullPointerException的博客">
+							<span class="desc oneline">问题：
+
+
+在HTML文件中引入图片，但是浏览器访问不到图片。
+
+
+index.html：
+
+
+&amp;amp;lt;!DOCTYPE html&amp;amp;gt;
+&amp;amp;lt;html xmlns:th=...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/XU906722">来自：	<span class="blog_title"> NullPointerException的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/zty1317313805/article/details/80095687,BlogCommendClickRateRank_46"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/zty1317313805/article/details/80095687,BlogCommendClickRateRank_46"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/zty1317313805/article/details/80095687" target="_blank" title="SpringBoot通过后台访问HTML页面 - 海子@幸福人">
+				<h4 class="text-truncate oneline">
+						<em>SpringBoot</em>通过后台<em>访问</em><em>HTML</em>页面 - 海子@幸福人				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/E/B/3/3_zty1317313805.jpg" alt="zty1317313805" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">zty1317313805</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">04-26</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							3376</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/zty1317313805/article/details/80095687" target="_blank" title="SpringBoot通过后台访问HTML页面 - 海子@幸福人">
+							<span class="desc oneline">本文章内容主要讲下怎么通过SpringBoot进入HTML页面1、首先在pom.xml添加对HTML的相关依赖/**
+ * pom.xml文件
+ */
+&amp;amp;lt;dependencies&amp;amp...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/zty1317313805">来自：	<span class="blog_title"> 海子@幸福人</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/zxfly6/article/details/82084245,BlogCommendClickRateRank_47"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/zxfly6/article/details/82084245,BlogCommendClickRateRank_47"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/zxfly6/article/details/82084245" target="_blank" title="IntelliJ IDEA+SpringBoot中静态资源访问路径 - zxfly6的博客">
+				<h4 class="text-truncate oneline">
+						IntelliJ IDEA+<em>SpringBoot</em>中<em>静态资源</em><em>访问</em>路径 - zxfly6的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/1/3/D/3_zxfly6.jpg" alt="zxfly6" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">zxfly6</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">08-26</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							220</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/zxfly6/article/details/82084245" target="_blank" title="IntelliJ IDEA+SpringBoot中静态资源访问路径 - zxfly6的博客">
+							<span class="desc oneline">https://blog.csdn.net/zhoucheng05_13/article/details/78197766?locationNum=9&amp;amp;amp;fps=1</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/zxfly6">来自：	<span class="blog_title"> zxfly6的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_68" data-pid="68" data-track-view='{"mod":"kp_popu_68-625","con":",,"}' data-track-click='{"mod":"kp_popu_68-625","con":",,"}'><script type="text/javascript" src="//rabc1.iteye.com/common/openjs/m022.js?hcuzbzy=bi"></script></div></div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/c0411034/article/details/81436119,BlogCommendClickRateRank_48"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/c0411034/article/details/81436119,BlogCommendClickRateRank_48"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/c0411034/article/details/81436119" target="_blank" title="spring boot通过url访问服务器外部静态资源 - c0411034的博客">
+				<h4 class="text-truncate oneline">
+						spring boot通过url<em>访问</em>服务器外部<em>静态资源</em> - c0411034的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/6/3/0/3_c0411034.jpg" alt="c0411034" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">c0411034</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">08-05</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							826</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/c0411034/article/details/81436119" target="_blank" title="spring boot通过url访问服务器外部静态资源 - c0411034的博客">
+							<span class="desc oneline">1.建立一个配置类
+
+@Configuration  
+public class WebMvcConfiguration extends WebMvcConfigurerAdapter {  
+@Ov...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/c0411034">来自：	<span class="blog_title"> c0411034的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/hsg_happyLearning/article/details/81666103,BlogCommendClickRateRank_49"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/hsg_happyLearning/article/details/81666103,BlogCommendClickRateRank_49"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/hsg_happyLearning/article/details/81666103" target="_blank" title="springboot中访问项目外的静态资源 - hsg_happyLearning的博客">
+				<h4 class="text-truncate oneline">
+						<em>springboot</em>中<em>访问</em>项目外的<em>静态资源</em> - hsg_happyLearning的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/E/8/5/3_hsg_happylearning.jpg" alt="hsg_happyLearning" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">hsg_happyLearning</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">08-14</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							449</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/hsg_happyLearning/article/details/81666103" target="_blank" title="springboot中访问项目外的静态资源 - hsg_happyLearning的博客">
+							<span class="desc oneline">如果我们想自定义静态资源映射目录的话，只需重写addResourceHandlers方法即可。
+
+
+@Configuration
+public class MyWebMvcConfigurerAdap...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/hsg_happyLearning">来自：	<span class="blog_title"> hsg_happyLearning的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    
+
+            <div class="recommend-loading-box">
+                <img src='https://csdnimg.cn/release/phoenix/images/feedLoading.gif'>
+            </div>
+            <div class="recommend-end-box">
+                <p class="text-center">没有更多推荐了，<a href="https://blog.csdn.net/" class="c-blue c-blue-hover c-blue-focus">返回首页</a></p>
+            </div>
+        </div>
+    </main>
+
+    <aside>
+		    <div id="asideProfile" class="aside-box">
+    <!-- <h3 class="aside-title">个人资料</h3> -->
+    <div class="profile-intro d-flex">
+        <div class="avatar-box d-flex justify-content-center flex-column">
+            <a href="https://blog.csdn.net/qq_36481052">
+                <img src="https://avatar.csdn.net/D/8/6/3_qq_36481052.jpg" class="avatar_pic">
+            </a>
+        </div>
+        <div class="user-info d-flex justify-content-center flex-column">
+            <p class="name csdn-tracking-statistics tracking-click" data-mod="popu_379">
+                <a href="https://blog.csdn.net/qq_36481052" target="_blank" class="" id="uid">刘信晨</a>
+            </p>
+                    </div>
+                <div class="opt-box d-flex justify-content-center flex-column">
+            <span  class="csdn-tracking-statistics tracking-click" data-mod="popu_379">
+                <a class="btn btn-sm btn-red-hollow attention" id="btnAttent">关注</a>
+            </span>
+                    </div>
+            </div>
+    <div class="data-info d-flex item-tiling">
+                <dl class="text-center" title="18">
+                        <dt><a href="https://blog.csdn.net/qq_36481052?t=1">原创</a></dt>
+            <dd><a href="https://blog.csdn.net/qq_36481052?t=1"><span class="count">18</span></a></dd>
+                    </dl>
+        <dl class="text-center" id="fanBox" title="5">
+            <dt>粉丝</dt>
+            <dd><span class="count" id="fan">5</span></dd>
+        </dl>
+        <dl class="text-center" title="9">
+            <dt>喜欢</dt>
+            <dd><span class="count">9</span></dd>
+        </dl>
+        <dl class="text-center" title="16">
+            <dt>评论</dt>
+            <dd><span class="count">16</span></dd>
+        </dl>
+    </div>
+    <div class="grade-box clearfix">
+        <dl>
+            <dt>等级：</dt>
+            <dd>
+                <a href="https://blog.csdn.net/home/help.html#level" title="2级,点击查看等级说明" target="_blank">
+                    <svg class="icon icon-level" aria-hidden="true">
+                        <use xlink:href="#csdnc-bloglevel-2"></use>
+                    </svg>
+                </a>
+            </dd>
+        </dl>
+        <dl>
+            <dt>访问：</dt>
+            <dd title="53183">
+                5万+            </dd>
+        </dl>
+        <dl>
+            <dt>积分：</dt>
+            <dd title="440">
+                440            </dd>
+        </dl>
+        <dl title="132908">
+            <dt>排名：</dt>
+            <dd>13万+</dd>
+        </dl>
+    </div>
+        <div class="badge-box d-flex">
+        <span>勋章：</span>
+                        <div class="icon-badge" title="持之以恒">
+            <div class="mouse-box">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#csdnc-m-lasting"></use>
+                </svg>
+                <div class="icon-arrow"></div>
+            </div>
+            <div class="grade-detail-box">
+                <div class="pos-box">
+                    <div class="left-box d-flex justify-content-center align-items-center flex-column">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#csdnc-m-lasting"></use>
+                        </svg>
+                        <p>持之以恒</p>
+                    </div>
+                    <div class="right-box d-flex justify-content-center align-items-center">
+                        授予每个自然月内发布4篇或4篇以上原创或翻译IT博文的用户。不积跬步无以至千里，不积小流无以成江海，程序人生的精彩需要坚持不懈地积累！
+                    </div>
+                </div>
+            </div>
+        </div>
+                                                <script>
+            (function ($) {
+                setTimeout(function(){
+                    $('div.icon-badge.show-moment').removeClass('show-moment');
+                }, 5000);
+            })(window.jQuery)
+        </script>
+    </div>
+    </div>
+		    <div class="csdn-tracking-statistics mb8 box-shadow" data-pid="blog" data-mod="popu_4" style="height:250px;">
+    <div class="aside-content text-center" id="cpro_u2734133">
+      <script type="text/javascript" src="//rabc1.iteye.com/common/leh4.js?idmc=jefav"></script>    </div>
+</div>
+		    <div id="asideNewArticle" class="aside-box">
+    <h3 class="aside-title">最新文章</h3>
+    <div class="aside-content">
+        <ul class="inf_list clearfix csdn-tracking-statistics tracking-click" data-mod="popu_382">
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/qq_36481052/article/details/83062160" target="_blank">SpringBoot集成TkMapper</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/qq_36481052/article/details/81562580" target="_blank">SpringMVC发送Email 邮件</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/qq_36481052/article/details/79982234" target="_blank">简单快速的运行Zheng （upms+cms）平台（运行篇）</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/qq_36481052/article/details/79848595" target="_blank">简单快速的运行 Zheng 平台（配置篇）</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/qq_36481052/article/details/79370111" target="_blank">简单快速的用SpringBoot集成多数据源（mybatis）</a>
+            </li>
+                    </ul>
+    </div>
+</div>
+		    		    <div id="asideCategory" class="aside-box">
+    <h3 class="aside-title">个人分类</h3>
+    <div class="aside-content">
+        <ul>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/qq_36481052/article/category/7324759">
+                    <span class="title oneline">基础</span>
+                    <span class="count float-right">8篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/qq_36481052/article/category/7400387">
+                    <span class="title oneline">SpringBoot</span>
+                    <span class="count float-right">7篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/qq_36481052/article/category/7571310">
+                    <span class="title oneline">Zheng</span>
+                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                    </ul>
+    </div>
+    </div>
+		    <div id="asideArchive" class="aside-box flexible-box">
+    <h3 class="aside-title">归档</h3>
+    <div class="aside-content">
+        <ul class="archive-list">
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/qq_36481052/article/month/2018/10">
+                    2018年10月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/qq_36481052/article/month/2018/08">
+                    2018年8月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/qq_36481052/article/month/2018/04">
+                    2018年4月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/qq_36481052/article/month/2018/02">
+                    2018年2月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/qq_36481052/article/month/2018/01">
+                    2018年1月                    <span class="count float-right">5篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/qq_36481052/article/month/2017/12">
+                    2017年12月                    <span class="count float-right">6篇</span>
+                </a>
+            </li>
+                    </ul>
+    </div>
+        <p class="text-center">
+        <a class="btn btn-link-blue flexible-btn" data-fbox="aside-archive">展开</a>
+    </p>
+    </div>
+		    <div id="asideHotArticle" class="aside-box">
+	<h3 class="aside-title">热门文章</h3>
+	<div class="aside-content">
+		<ul class="hotArticle-list csdn-tracking-statistics tracking-click" data-mod="popu_521">
+							<li>
+					<a href="https://blog.csdn.net/qq_36481052/article/details/79075214">简单快速的用SpringBoot访问静态资源（图片、html）</a>
+					<p class="read">阅读量：<span>39690</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/qq_36481052/article/details/79140695">简单快速用SpringBoot集成JDBC</a>
+					<p class="read">阅读量：<span>4949</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/qq_36481052/article/details/78998581">简单快速的用Java动态生成jsp/html前端页面。</a>
+					<p class="read">阅读量：<span>3014</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/qq_36481052/article/details/78813213">IDEA 中tomcat图片储存和访问虚拟路径</a>
+					<p class="read">阅读量：<span>1704</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/qq_36481052/article/details/78922725">java   简单快速的生成二维码（带图片）</a>
+					<p class="read">阅读量：<span>875</span></p>
+				</li>
+					</ul>
+	</div>
+</div>
+		    <div id="asideNewComments" class="aside-box">
+    <h3 class="aside-title">最新评论</h3>
+    <div class="aside-content">
+        <ul class="newcomment-list">
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/qq_36481052/article/details/79075214#comments">简单快速的用SpringBoot访...</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/beijishiqidu" class="user-name" target="_blank">beijishiqidu</a>：[reply]ysk_xh_521[/reply]
+不要觉得人家写的就是垃圾，或许对一个新手来讲，...                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/qq_36481052/article/details/79075214#comments">简单快速的用SpringBoot访...</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/ysk_xh_521" class="user-name" target="_blank">ysk_xh_521</a>：呵呵，没用，太垃圾了                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/qq_36481052/article/details/79075214#comments">简单快速的用SpringBoot访...</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/qq_37681291" class="user-name" target="_blank">qq_37681291</a>：[reply]tyk766564616[/reply]
+在springBoot中spring-bo...                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/qq_36481052/article/details/78813213#comments">IDEA 中tomcat图片储存和...</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/qq_42713438" class="user-name" target="_blank">qq_42713438</a>：[reply]weixin_43312383[/reply]
+Tomcat配置和idea配置本来就...                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/qq_36481052/article/details/78813213#comments">IDEA 中tomcat图片储存和...</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/weixin_43312383" class="user-name" target="_blank">weixin_43312383</a>：配置了server.xml之后访问不到文件。按照博主的方式在idea上配置了之后问题完美解决，我又...                </p>
+            </li>
+                    </ul>
+    </div>
+</div>
+		<div id="asideFooter">
+			
+		<div class="aside-box">
+			<div id="kp_box_57" data-pid="57" data-track-view='{"mod":"kp_popu_57-77","con":",,"}' data-track-click='{"mod":"kp_popu_57-77","con":",,"}'><script type="text/javascript" src="//rabc1.iteye.com/common/web/site/9i6gu.js?av=neunkwb"></script></div>		</div>
+				<div class="aside-box">
+			<div class="persion_article">
+			</div>
+		</div>
+	</div>
+</aside>
+<script src="https://csdnimg.cn/pubfooter/js/publib_footer-1.0.3.js" data-isfootertrack="false" type="text/javascript"></script>
+<script>
+	$("a.flexible-btn").click(function(){
+		$(this).parents('div.aside-box').removeClass('flexible-box');
+		$(this).remove();
+	})
+</script>
+</div>
+<div class="mask-dark"></div>
+<div class="tool-box">
+	<ul class="meau-list">
+		<li class="btn-like-box long-width">
+			<button class=" long-height hover-box btn-like " title="点赞">
+				<svg class="icon active hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-thumbsup-ok"></use>
+				</svg>
+				<svg class="icon no-active hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-thumbsup"></use>
+				</svg>
+				<span class="hover-show text-box text">
+					<span class="no-active">点赞</span>
+					<span class="active">取消点赞</span>
+				</span>
+				<p>3</p>
+			</button>
+		</li>
+		<li class="">
+						<a class="btn-comments long-height hover-box" title="写评论" href="#commentBox">
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-comments"></use>
+				</svg>
+				<span class="hover-show text">评论</span>
+				<p class="">
+						9				</p>
+			</a>
+		</li>
+		<li class="toc-container-box" id="liTocBox">
+			<button class="btn-toc low-height hover-box" title="目录">
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-contents"></use>
+				</svg>
+				<span class="hover-show text">目录</span>
+			</button>
+			<div class="toc-container">
+				<div class="pos-box">
+					<div class="icon-arrow"></div>
+					<div class="scroll-box">
+						<div class="toc-box"></div>
+					</div>
+				</div>
+				<div class="opt-box">
+					<button class="btn-opt prev nomore" title="向上">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#csdnc-chevronup"></use>
+						</svg>
+					</button>
+					<button class="btn-opt next">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#csdnc-chevrondown"></use>
+						</svg>
+					</button>
+				</div>
+			</div>
+		</li>
+		<li>
+			<button class="btn-bookmark low-height hover-box" title="收藏">
+				<svg class="icon active hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-bookmark-ok"></use>
+				</svg>
+				<svg class="icon no-active hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-bookmark"></use>
+				</svg>
+					<span class="hover-show text">收藏</span>
+				<!-- <span class="hover-show text-box text">
+					<span class="no-active">收藏</span>
+					<span class="active">取消收藏</span>
+				</span> -->
+			</button>
+		</li>
+				<li class="bdsharebuttonbox">
+			<button class="btn-comments low-height hover-box" >
+				<a href="#" class="bds_weixin clear-share-style" data-cmd="weixin" title="手机看"></a>
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-usephone"></use>
+				</svg>
+				<span class="hover-show text text3">
+					手机看
+				</span>
+			</button>
+		</li>
+							<li class="widescreen-hide">
+				<a class="btn-comments low-height hover-box" href="https://blog.csdn.net/qq_36481052/article/details/79055693" title="简单易懂的SpringBoot初级使用">
+					<svg class="icon hover-hide" aria-hidden="true">
+						<use xlink:href="#csdnc-chevronleft"></use>
+					</svg>
+					<span class="hover-show text text3">上一篇</span>
+				</a>
+			</li>
+								<li class="widescreen-hide">
+			<a class="btn-comments hover-box low-height" href="https://blog.csdn.net/qq_36481052/article/details/79140695" title="简单快速用SpringBoot集成JDBC">
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-chevronright"></use>
+				</svg>
+				<span class="hover-show text text3">下一篇</span>
+			</a>
+		</li>
+						<!-- 宽屏更多按钮 -->
+		<li class="widescreen-more">
+			<a class="btn-comments chat-ask-button low-height hover-box" title="快问" href="#chatqa">
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-more"></use>
+				</svg>
+				<span class="hover-show text">更多</span>
+				
+			</a>
+			<ul class="widescreen-more-box">
+													<li class="widescreen-more">
+						<a class="btn-comments low-height hover-box" href="https://blog.csdn.net/qq_36481052/article/details/79055693" title="简单易懂的SpringBoot初级使用">
+							<svg class="icon hover-hide" aria-hidden="true">
+								<use xlink:href="#csdnc-chevronleft"></use>
+							</svg>
+							<span class="hover-show text text3">上一篇</span>
+						</a>
+					</li>
+																<li class="widescreen-more">
+					<a class="btn-comments hover-box low-height" href="https://blog.csdn.net/qq_36481052/article/details/79140695" title="简单快速用SpringBoot集成JDBC">
+						<svg class="icon hover-hide" aria-hidden="true">
+							<use xlink:href="#csdnc-chevronright"></use>
+						</svg>
+						<span class="hover-show text text3">下一篇</span>
+					</a>
+				</li>
+							</ul>
+		</li>
+	</ul>
+</div>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'https://csdnimg.cn/static/api/js/share.js?v=89860594'];</script>
+<script>
+    var recommendCount = 50;
+    recommendCount = recommendCount > 1 ? (recommendCount + (recommendCount>6 ? 2 : 1)) : recommendCount;
+    var articleTit = articleTitles;
+    var ChannelId = 31;
+    var articleId = "79075214";
+    var commentscount = 9;
+    var islock = false;
+    var curentUrl = "https://blog.csdn.net/qq_36481052/article/details/79075214";
+    var myUrl = "https://my.csdn.net/";
+    //1禁止评论，2正常
+    var commentAuth = 2;
+    //百度搜索
+    var baiduKey = "spring+boot+%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90";
+    var needInsertBaidu = false;
+    // 代码段样式
+    var codeStyle = '';
+		var highlight = ["\u7b80\u5355","\u5feb\u901f","springboot","\u8bbf\u95ee","\u9759\u6001\u8d44\u6e90","\u56fe\u7247","html"];//高亮数组
+		// 相关推荐博主数据
+    var RecommendBlogExpertList = [{"user_name":"qq_17639593","nick_name":"\u9b54\u672f\u5154","avatar":"https:\/\/avatar.csdn.net\/4\/C\/2\/3_qq_17639593.jpg","is_expert":false,"article_count":23},{"user_name":"atmknight","nick_name":"atmknight","avatar":"https:\/\/avatar.csdn.net\/E\/D\/9\/3_atmknight.jpg","is_expert":false,"article_count":21},{"user_name":"yali_aini","nick_name":"\u4e34\u7a97\uff0c\u542c\u96e8\u58f0","avatar":"https:\/\/avatar.csdn.net\/7\/B\/6\/3_yali_aini.jpg","is_expert":false,"article_count":64},{"user_name":"omayyouhappy","nick_name":"\u6e05\u6f88@Cherry","avatar":"https:\/\/avatar.csdn.net\/D\/3\/9\/3_omayyouhappy.jpg","is_expert":false,"article_count":442},{"user_name":"XU906722","nick_name":"\u5927\u53d4xyz","avatar":"https:\/\/avatar.csdn.net\/3\/8\/3\/3_xu906722.jpg","is_expert":false,"article_count":110},{"user_name":"zxfly6","nick_name":"zxfly6","avatar":"https:\/\/avatar.csdn.net\/1\/3\/D\/3_zxfly6.jpg","is_expert":false,"article_count":148},{"user_name":"c0411034","nick_name":"\u9ed1\u9e26log","avatar":"https:\/\/avatar.csdn.net\/6\/3\/0\/3_c0411034.jpg","is_expert":false,"article_count":79},{"user_name":"hsg_happyLearning","nick_name":"\u5496\u5561\u4e0d\u751c\u4e0d\u597d\u559d","avatar":"https:\/\/avatar.csdn.net\/E\/8\/5\/3_hsg_happylearning.jpg","is_expert":false,"article_count":13},{"user_name":"icarusliu","nick_name":"icarusliu81","avatar":"https:\/\/avatar.csdn.net\/C\/0\/A\/3_icarusliu.jpg","is_expert":false,"article_count":108},{"user_name":"boke7265","nick_name":"boke7265","avatar":"https:\/\/avatar.csdn.net\/F\/7\/9\/3_boke7265.jpg","is_expert":false,"article_count":31}];
+
+		var articleType = 1;
+		var CopyrightContent = '本文为博主原创文章，未经博主允许不得转载。';
+</script>
+<script src="https://csdnimg.cn/public/sandalstrap/1.4/js/sandalstrap.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/vendor/pagination/paging.js"></script>
+<script src='https://csdnimg.cn/public/common/gotop/js/goTop-v1.0.min.js?v201811201455'></script>
+<script>
+    GoTop({
+        right: 8,
+        hasReport: true,
+        reportFun: function() {
+            showReport(false,articleTit);
+        }
+    })
+</script>
+
+<script src="https://csdnimg.cn/search/baidu_search-1.1.2.js?v=201802071056&autorun=true&install=true&keyword=spring+boot+%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90"  type="text/javascript"></script>
+</body>
+
+<!-- 右侧第四栏 -->
+<div class="fourth_column">
+	<div class="title-box">
+		<b class="title">猿学习</b>
+		<span class="fourth_column_close">    
+			<svg class="icon" aria-hidden="true">
+				<use xlink:href="#csdnc-times"></use>
+			</svg>
+		</span>
+		
+	</div>
+	<ul class="">
+		<li><div id="kp_box_456" data-pid="456" data-track-view='{"mod":"kp_popu_456-638","con":",,"}' data-track-click='{"mod":"kp_popu_456-638","con":",,"}'><a href="https://edu.csdn.net/topic/ai30?utm_source=blogright" target="_blank">  <div class="blogkp1"><img src="https://img-ads.csdn.net/2018/201811070940425306.png"width="100" height="100"><h6>人工智能工程师免费试听</h6></div></a></div></li>		<li><div id="kp_box_457" data-pid="457" data-track-view='{"mod":"kp_popu_457-639","con":",,"}' data-track-click='{"mod":"kp_popu_457-639","con":",,"}'><a href="https://edu.csdn.net/topic/python115?utm_source=blogright" target="_blank"><div class="blogkp2"><img src="https://img-ads.csdn.net/2018/201811070945058586.png"width="100" height="100"><h6>Python全栈工程师免费试听</h6>
+    </div></a></div></li>		<li><div id="kp_box_458" data-pid="458" data-track-view='{"mod":"kp_popu_458-640","con":",,"}' data-track-click='{"mod":"kp_popu_458-640","con":",,"}'><a href="https://gitchat.csdn.net/column/5a7d1a13a7f22b3dffca7e49?utm_source=csdn100" target="_blank"><div class="blogkp3"><img src="http://img-ads.csdn.net/2018/201811091452349556.png"width="100" height="100"><h6>Python 爬虫和数据分析实战</h6><span style="position:absolute;right:0;bottom:0;background:url(https://img-ads.csdn.net/2016/201608021757063065.png) no-repeat;width:33px;height:18px;display:block;z-index: 9999;"></span></div></a></div></li>		<li><div id="kp_box_459" data-pid="459" data-track-view='{"mod":"kp_popu_459-655","con":",,"}' data-track-click='{"mod":"kp_popu_459-655","con":",,"}'><a href="https://edu.csdn.net/topic/ai30?utm_source=blogright" target="_blank"><div class="blogkp3"><img src="https://img-ads.csdn.net/2018/201811091258589141.png"width="100" height="100"><h6>人工智能工程师 </h6><span style="position:absolute;right:0;bottom:0;background:url(https://img-ads.csdn.net/2016/201608021757063065.png) no-repeat;width:33px;height:18px;display:block;z-index: 9999;"></span></div></a></div></li>	</ul>
+</div>
+<script type="text/javascript">
+	$('.fourth_column_close').click(function(){
+		$('.fourth_column').remove();
+	})
+</script>
+<!-- 右侧第四栏end -->
+<!-- 高亮未与 markdown兼容  -->
+	<link rel="stylesheet" href="https://csdnimg.cn/release/blog_editor_html/release1.3.3/ckeditor/plugins/codesnippet/lib/highlight/styles/atom-one-dark.css">
+	<script type="text/javascript" src="https://csdnimg.cn/release/phoenix/production/pc_wap_common-9e177e0136.js" /></script>
+	
+	<!-- <script type="text/javascript" src="https://csdnimg.cn/release/phoenix/production/markdownCopy-3e5d9ef4b0.js" /></script> -->
+
+
+<script src="https://g.csdnimg.cn/login-box/1.0.2/login-box.js?t=1542363472"></script>
+<script src="https://csdnimg.cn/release/phoenix/template/js/common-89876177c4.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/template/js/detail-c519da9ea8.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/themes/skin-yellow/skin-yellow-9376486353.min.js"></script>
+<script src="//g.csdnimg.cn/fixed-sidebar/1.1.1/fixed-sidebar.js" type="text/javascript"></script>
+<script type="text/javascript" src="//g.csdnimg.cn/check-adblock/1.0.9/check-adblock.js"></script>
+
+<script type="text/javascript" src="https://static-blog.csdn.net/mdeditor/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            "HTML-CSS": {
+                    linebreaks: { automatic: true, width: "94%container" },
+                    imageFont: null
+            },
+            tex2jax: {
+                preview: "none"
+            },
+            mml2jax: {
+                preview: 'none'
+            }
+    });
+</script>
+<script type="text/javascript">
+window.baidu_hh_hotword = {
+    di:'24004469_1_oem_dg',
+		id:['content_views'],
+    isMobile:false,
+    page_url:'https://blog.csdn.net/qq_36481052/article/details/79075214',
+    title:'简单快速的用SpringBoot访问静态资源（图片、html）',
+    sid:""
+}
+</script>
+<script src="https://gh.bdstatic.com/static/gh/js/ll/m_word.js"></script>
+</html>

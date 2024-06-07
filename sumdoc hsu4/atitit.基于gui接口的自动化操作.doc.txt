@@ -1,0 +1,131 @@
+
+
+11
+11
+11
+11
+11
+22
+22
+22
+22
+22
+22
+33
+33
+33
+44
+55
+5
+项目架构说明
+主要的使用selenium 调用ff 的dom模型操作web gui..
+Jsoup做Html的解析
+gui接口的归类
+Win Native  gui
+
+Java swing /.net   vm gui
+
+Web gui
+
+Web gui的实现模式
+Swt (com ie)
+Browser base (selenium) 
+Sikuli (不基于dom 模型)
+
+selenium支持的browser (ie ,ff ,chrome)
+支持代理
+	profile.setPreference("network.proxy.type", 1);
+					// http协议代理配置
+					String proxStr = li.get(i).trim();
+					System.out.println("--use prox:" + proxStr);
+					String[] prx = proxStr.split(":");
+					profile.setPreference("network.proxy.http", prx[0].trim());
+					profile.setPreference("network.proxy.http_port",
+							Integer.parseInt(prx[1].trim()));
+					// 对于localhost的不用代理，这里必须要配置，否则无法和webdriver通讯
+					profile.setPreference("network.proxy.no_proxies_on",
+							"localhost");
+				}
+
+	driver = new FirefoxDriver(profile);
+Web 界面控件操作
+	driver.findElement(By.id("txtTitle")).sendKeys(p1tit);
+点击btn
+	driver.findElement(By.id("chkHome")).click();
+
+
+Editor类型的控件操作
+使用js  dom..不能直接地操作
+
+try{
+	window.frames[1].document.body.innerHTML='@txt';
+}catch(e){
+	
+}
+	window.frames[2].document.body.innerHTML='@txt';
+
+
+
+	JavascriptExecutor jse = (JavascriptExecutor) driver;
+			p2_txt = EncodeX.jsEncodeSingleQuoue(p2_txt);
+			// p2_txt="test in html";
+			String baseDir=pathx.classPathParent_jensyegeor()
+					 + "/";
+			String js =filex.read(baseDir + "/db/" + PubberMainform..get()
+					 
+					+ "/editor__form.js");
+			String script = js.replace("@txt", p2_txt);
+
+			// window.document.getElementById('editor').value='..xxx'
+			driver.executeScript(script,
+					driver.findElement(By.id("editor")));
+
+
+信息提取使用selenium  配合jsoup
+Ajax内容的html提取 通过selenium  
+
+
+	FirefoxDriver driver = driverPb3;
+		try {
+			Ipub2 puber2 = (Ipub2) puber;
+			return (puber2.isInLoginForm(driver.getTitle(),
+					driver.getPageSource()));
+
+Html的解析通过jsoup
+		Document doc = null;		  
+		doc = Jsoup.parse(html);
+
+	private List<Element> getTables(Document doc, String keyword,
+			String paichuWord) {
+		List<Element> li = new ArrayList<Element>();
+		Element tb_mid = null;
+		Elements el = doc.getElementsByTag("table");
+		int n = 0;
+		for (Element e : el) {
+			n++;
+			System.out.println(" now table inedex:" + n);
+			String tabletxt = e.ownText();
+
+			tabletxt = e.text();
+			if (isPaichuTable(tabletxt.trim(), paichuWord))
+				continue;
+			if (tabletxt.trim().contains(paichuWord)) {
+				// System.out.println(tabletxt);
+				continue;
+			}
+
+			if (tabletxt.trim().contains(keyword)) {
+				System.out.println("-----------");
+				System.out.println(tabletxt);
+				tb_mid = e;
+				li.add(e);
+				// break;
+			}
+
+		}
+		// tb_mid=tb_mid.getElementsByTag("div").get(0).getElementsByTag("table").get(0);
+		return li;
+	}
+
+-----end
+

@@ -1,0 +1,323 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="UTF-8">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Language" content="UTF-8" />
+<meta http-equiv="x-ua-compatible" content="ie=7"/>
+<meta name="robots" content="all" />
+<meta name="author" content="your@email.com,YourName" />
+<meta name="Copyright" content="一号门 CopyRight 2008" />
+<meta name="keywords" content="mybatis" />
+<meta name="description" content="mybatis补充教程之三：缓存(cache)的使用" />
+<title>mybatis补充教程之三：缓存(cache)的使用 - 一号门-程序员的工作,程序员的生活(java,python,delphi实战)</title>
+<base href="http://www.yihaomen.com/"></base>
+<style type="text/css">
+	.ownerClassLog{display:none}
+	.ownerClassComment{display:none}
+</style>
+<link rel="stylesheet" rev="stylesheet" href="skins/geekg/global.css" type="text/css" media="all" />
+<link rel="stylesheet" rev="stylesheet" href="skins/geekg/layout.css" type="text/css" media="all" />
+<link rel="stylesheet" rev="stylesheet" href="skins/geekg/typography.css" type="text/css" media="all" />
+<link rel="stylesheet" rev="stylesheet" href="skins/geekg/link.css" type="text/css" media="all" />
+<link rel="stylesheet" rev="stylesheet" href="skins/geekg/UBB/editor.css" type="text/css" media="all" />
+<link rel="stylesheet" rev="stylesheet" href="FCKeditor/editor/css/Dphighlighter.css" type="text/css" media="all" />
+
+
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<script type="text/javascript" src="common/common.js"></script>
+<script type="text/javascript" src="common/ajax.js"></script>
+<script type="text/javascript" src="common/AjaxRequest.js"></script>
+<script type="text/javascript" src="common/Action.js"></script>
+<script type="text/javascript">
+	var g_styleID = "geekg";
+	var g_logID = "428";
+	var g_comDesc = "Desc";
+	
+	document.write ('<script type="text/javascript" src="static_js.asp"><\/script>')
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?12efe370363929ab0449bcbacc55790b";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<!--<script type="text/javascript" src="common/nicetitle.js"></script>-->
+</head>
+<body onload="initJS()" onkeydown="PressKey()">
+<a href="default.asp" accesskey="i"></a> <a href="javascript:history.go(-1)" accesskey="z"></a>
+<div id="container">
+  <!--顶部-->
+  <div id="header">
+    <div id="blogname">一号门-程序员的工作,程序员的生活(java,python,delphi实战)
+      <!-- <div id="blogTitle"></div> -->
+      <div id="blogTitle">这是我的个人博客，但我期待你的参与...<br />MSN:asuncool#hotmail.com(将#改成@)</div>
+    </div>
+		<!-- 导航位置 -->
+      <div id="menu"><div id="Left"></div><div id="Right"></div><ul><li class="menuL"></li><li><a class="menuA" href="default.asp" title="日志首页">Index</a></li><li class="menuDiv"></li><li><a class="menuA" href="default.asp?cateID=3" title="Delphi情节">Delphi</a></li><li class="menuDiv"></li><li><a class="menuA" href="default.asp?cateID=48" title="蟒蛇">Python/Django</a></li><li class="menuDiv"></li><li><a class="menuA menuB" href="default.asp?cateID=22" title="Java学习">Java</a></li><li class="menuDiv"></li><li><a class="menuA" href="default.asp?cateID=49" title="linux/unix">linux/unix</a></li><li class="menuDiv"></li><li><a class="menuA" href="default.asp?cateID=17" title="Javascript资料">Javascript</a></li><li class="menuDiv"></li><li><a class="menuA" href="default.asp?cateID=47" title="我的产品(开放)">My Soft</a></li><li class="menuDiv"></li><li><a class="menuA" href="default.asp?cateID=6" title="MS-SQLSERVER">Database</a></li><li class="menuDiv"></li><li><a class="menuA" href="default.asp?cateID=50" title="Architect">Architect</a></li><li class="menuDiv"></li><li><a class="menuA" href="default.asp?cateID=37" title="FileNet学习">IBM</a></li><li class="menuDiv"></li><li><a class="menuA" href="default.asp?cateID=51" title="杂七杂八">Others</a></li><li class="menuDiv"></li><li><a class="menuA" href="default.asp?cateID=8" title="心情日记">My Didary</a></li><li class="menuDiv"></li><li><a class="menuA" href="LoadMod.asp?plugins=GuestBookForPJBlog" title="给我留言">给我留言</a></li><li class="menuR"></li></ul></div>
+  </div>
+  <!--内容-->
+  <div id="Tbody">
+    <div id="mainContent">
+      <div id="innermainContent">
+        <div id="mainContent-topimg"></div>
+		<!-- 内容开始 -->
+			<div id="Content_ContentList" class="content-width"><a name="body" accesskey="B" href="#body"></a>
+				<div class="pageContent">
+					<div style="float:right;width:auto"><a href="article/python/427.htm" title="上一篇日志: django 防止 XSS 注入的方法" accesskey=","><img border="0" src="images/Cprevious.gif" alt=""/>上一篇</a> | <a href="article/java/429.htm" title="下一篇日志: Spring MVC 类型转换(type convert)例子及下载" accesskey="."><img border="0" src="images/Cnext.gif" alt=""/>下一篇</a></div> 
+					<img src="images/icons/15.gif" style="margin:0px 2px -4px 0px" alt=""/> <strong><a href="default.asp?cateID=22" title="查看所有Java的日志">Java</a></strong> <a href="feed.asp?cateID=22" target="_blank" title="订阅所有Java的日志" accesskey="O"><img border="0" src="images/rss.png" alt="订阅所有Java的日志" style="margin-bottom:-1px"/></a>
+				</div>
+				
+				<div class="Content">
+					<div class="Content-top"><div class="ContentLeft"></div><div class="ContentRight"></div>
+					<h1 class="ContentTitle"><strong>mybatis补充教程之三：缓存(cache)的使用</strong></h1>
+					<h2 class="ContentAuthor">作者:轻舞肥羊 日期:2013-11-24</h2>
+				</div>
+			    <div class="Content-Info">
+					<div class="InfoOther">字体大小: <a href="javascript:SetFont('12px')" accesskey="1">小</a> <a href="javascript:SetFont('14px')" accesskey="2">中</a> <a href="javascript:SetFont('16px')" accesskey="3">大</a></div>
+					
+					<div class="InfoAuthor"><img src="images/weather/hn2_sunny.gif" style="margin:0px 2px -6px 0px" alt=""/><img src="images/weather/hn2_t_sunny.gif" alt=""/> <img src="images/level3.gif" style="margin:0px 2px -1px 0px" alt=""/>
+						<span class="ownerClassLog">
+						<a href="blogedit.asp?id=428" title="编辑该日志" accesskey="E"><img src="images/icon_edit.gif" alt="" border="0" style="margin-bottom:-2px"/></a> <a href="blogedit.asp?action=del&amp;id=428" onclick="if (!window.confirm('是否要删除该日志')) return false" accesskey="K"><img src="images/icon_del.gif" alt="" border="0" style="margin-bottom:-2px"/></a>
+						</span>
+					</div>
+				</div>
+				
+				
+				
+				
+				<div id="logPanel" class="Content-body">
+					
+					许多应用程序，为了提高性能而增加缓存, 特别是从数据库中获取的数据. 在默认情况下，mybatis 的一级缓存是默认开启的。类似于hibernate, 所谓一级缓存，也就是基于同一个sqlsession 的查询语句，即 session 级别的缓存，非全局缓存，或者非二级缓存.<br/><br/>如果要实现 mybatis 的二级缓存，一般来说有如下两种方式:<br/>1. 采用 mybatis 内置的 cache 机制。<br/>2. 采用三方 cache 框架， 比如ehcache, oscache 等等.<br/><br/><strong> 采用 mybatis 内置的 cache 机制。</strong><br/>在 sql 语句映射文件中加入 &lt;cache /&gt; 语句 , 并且相应的 model 类要实现 java Serializable 接口，因为缓存说白了就是序列化与反序列化的过程，所以需要实现这个接口. 单纯的 &lt;cache /&gt; 表示如下意思:<br/><br/>1.所有在映射文件里的 select 语句都将被缓存。<br/>2.所有在映射文件里 insert,update 和 delete 语句会清空缓存。<br/>3.缓存使用“最近很少使用”算法来回收<br/>4.缓存不会被设定的时间所清空。<br/>5.每个缓存可以存储 1024 个列表或对象的引用（不管查询出来的结果是什么） 。<br/>6.缓存将作为“读/写”缓存，意味着获取的对象不是共享的且对调用者是安全的。不会有其它的调用者或线程潜在修改。<br/>缓存元素的所有特性都可以通过属性来修改。比如：<br/><div class="UBBPanel codePanel"><div class="UBBTitle"><img src="images/code.gif" style="margin:0px 2px -3px 0px" alt="程序代码"/> 程序代码</div><div class="UBBContent"><br/>&lt;cache eviction="FIFO" flushInterval="60000" size="512" readOnly="true" /&gt;<br/></div></div><br/><br/><strong> 采用 ehcache 来实现 mybatis&nbsp;&nbsp;的二级缓存 </strong><br/><br/>首先需要在 mybatis 的官网上下载相关jar 包：<a href="https://code.google.com/p/mybatis/" target="_blank" rel="external">https://code.google.com/p/mybatis/</a> 写文档的时候下载的是：mybatis-ehcache-1.0.2.zip ，里面包括了<br/><div class="UBBPanel codePanel"><div class="UBBTitle"><img src="images/code.gif" style="margin:0px 2px -3px 0px" alt="程序代码"/> 程序代码</div><div class="UBBContent"><br/>mybatis-ehcache-1.0.2.jar<br/>ehcache-core-2.6.5.jar<br/>slf4j-api-1.6.1.jar<br/></div></div><br/><br/>当然，采用ehcache 就必须在 classpath 下 加入ehcache 的配置文件 ehcache.xml:<br/><div class="UBBPanel codePanel"><div class="UBBTitle"><img src="images/code.gif" style="margin:0px 2px -3px 0px" alt="程序代码"/> 程序代码</div><div class="UBBContent"><br/>&lt;cache name="default"<br/>&nbsp;&nbsp;&nbsp;&nbsp;maxElementsInMemory="10000"<br/>&nbsp;&nbsp;&nbsp;&nbsp;eternal="false"<br/>&nbsp;&nbsp;&nbsp;&nbsp;timeToIdleSeconds="3600"<br/>&nbsp;&nbsp;&nbsp;&nbsp;timeToLiveSeconds="10"<br/>&nbsp;&nbsp;&nbsp;&nbsp;overflowToDisk="true"<br/>&nbsp;&nbsp;&nbsp;&nbsp;diskPersistent="true"<br/>&nbsp;&nbsp;&nbsp;&nbsp;diskExpiryThreadIntervalSeconds="120"<br/>&nbsp;&nbsp;&nbsp;&nbsp;maxElementsOnDisk="10000"<br/>/&gt;<br/></div></div><br/><br/>那么在 sql 映射文件中要如何配置呢，参考如下：<br/><div class="UBBPanel codePanel"><div class="UBBTitle"><img src="images/code.gif" style="margin:0px 2px -3px 0px" alt="程序代码"/> 程序代码</div><div class="UBBContent"><br/>&lt;cache type="org.mybatis.caches.ehcache.LoggingEhcache" &gt; <br/>&#160;&#160;&#160;&#160;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property name="timeToIdleSeconds" value="3600"/&gt;&lt;!--1 hour--&gt;<br/>&#160;&#160;&#160;&#160;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property name="timeToLiveSeconds" value="3600"/&gt;&lt;!--1 hour--&gt;<br/>&#160;&#160;&#160;&#160;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property name="maxEntriesLocalHeap" value="1000"/&gt;<br/>&#160;&#160;&#160;&#160;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property name="maxEntriesLocalDisk" value="10000000"/&gt;<br/>&#160;&#160;&#160;&#160;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property name="memoryStoreEvictionPolicy" value="LRU"/&gt;<br/>&#160;&#160;&#160;&#160;&lt;/cache&gt;<br/></div></div><br/><br/>总结：无论是采用mybatis 自身的cache&nbsp;&nbsp;还是三方的cache , 这样的配置，就是对 所有的select 语句都全局缓存，但事实上，并不总是这样，比如，我在这系列教程中第七章中 <a href="http://www.yihaomen.com/article/java/326.htm" target="_blank" rel="external">http://www.yihaomen.com/article/java/326.htm</a>，自己写的分页算法，就不能用这种情况。需要禁止掉cache ,所以需要如下方法:<br/><div class="UBBPanel codePanel"><div class="UBBTitle"><img src="images/code.gif" style="margin:0px 2px -3px 0px" alt="程序代码"/> 程序代码</div><div class="UBBContent"><br/> &lt;select id="selectArticleListPage" resultMap="resultUserArticleList" useCache="false"&gt;<br/>.......<br/></div></div><br/><br/>注意到 useCache="false" 了吗？ 这可以避免使用缓存。<br/><br/>
+					<br/>
+					<div id="google_ad_468x60_text" style="width:575px;">
+						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+						<!-- 468*60 横 -->
+						<ins class="adsbygoogle"
+						     style="display:inline-block;width:468px;height:60px"
+						     data-ad-client="ca-pub-8938429428345245"
+						     data-ad-slot="9644930757"></ins>
+						<script>
+						(adsbygoogle = window.adsbygoogle || []).push({});
+						</script>
+				  </div>
+					<br/>
+					<div id="copyrightannounce">除非申明,文章均为<b><a href="http://www.yihaomen.com">一号门</a></b>原创,转载请注明本文地址,谢谢!</div>
+				</div>
+        
+				<div id="myad">
+					
+			  </div>
+				<div class="Content-body">
+					
+					<img src="images/From.gif" style="margin:0px 2px -4px 0px" alt=""/><strong>文章来自:</strong> <a href="http://www.yihaomen.com/" target="_blank">本站原创</a><br/>
+					<img src="images/icon_trackback.gif" style="margin:4px 2px -4px 0px" alt=""/><strong>引用通告:</strong> <a href="trackback.asp?tbID=428&amp;action=view" target="_blank">查看所有引用</a> | <a href="javascript:;" title="获得引用文章的链接" onclick="getTrackbackURL(428)">我要引用此文章</a><br/>
+					<img src="images/tag.gif" style="margin:4px 2px -4px 0px" alt=""/><strong>Tags:</strong> <a href="default.asp?tag=mybatis">mybatis</a><a href="http://technorati.com/tag/mybatis" rel="tag" style="display:none">mybatis</a> <br/>
+                    <img src="images/tag.gif" style="margin:4px 2px -4px 0px" alt=""/><strong>相关日志:</strong>
+                    <div class="Content-body" id="wbc_tag"></div>
+                    <script language="javascript" type="text/javascript">check('Getarticle.asp?id=428&blog_postFile=2','wbc_tag','wbc_tag')</script>
+				</div>
+				<div class="Content-bottom"><div class="ContentBLeft"></div><div class="ContentBRight"></div>评论: 3 | <a href="trackback.asp?tbID=428&amp;action=view" target="_blank">引用: 0</a> | 查看次数: <span id="countNum">-</span> </div>
+			</div>
+		</div>
+		<!-- 内容结束 -->   
+        <!--评论区域-->
+        <div id="commentBox"><a name="comm_top" href="#comm_top" accesskey="C"></a><div class="pageContent"></div><div class="comment"><div class="commenttop"><span class="ownerClassComment" style="float:right;cursor:pointer" onclick="replyMsg(428,368,0,1,1)"><img src="images/reply.gif" alt="回复" style="margin-bottom:-2px;"/>回复</span><a name="comm_368" href="javascript:addQuote('11','commcontent_368')"><img border="0" src="images/icon_quote.gif" alt="" style="margin:0px 4px -3px 0px"/></a><a href="member.asp?action=view&memName=11"><strong>11</strong></a><span class="commentinfo">[2015-11-29 06:09 PM<span class="ownerClassComment"> | <a href="blogcomm.asp?action=del&amp;commID=368" onclick="return delCommentConfirm()"><img src="images/del1.gif" alt="del" border="0"/></a></span>]</span></div><div class="commentcontent" id="commcontent_368">11</div></div><div class="comment"><div class="commenttop"><span class="ownerClassComment" style="float:right;cursor:pointer" onclick="replyMsg(428,313,0,1,1)"><img src="images/reply.gif" alt="回复" style="margin-bottom:-2px;"/>回复</span><a name="comm_313" href="javascript:addQuote('16','commcontent_313')"><img border="0" src="images/icon_quote.gif" alt="" style="margin:0px 4px -3px 0px"/></a><a href="member.asp?action=view&memName=16"><strong>16</strong></a><span class="commentinfo">[2015-04-06 04:37 PM<span class="ownerClassComment"> | <a href="blogcomm.asp?action=del&amp;commID=313" onclick="return delCommentConfirm()"><img src="images/del1.gif" alt="del" border="0"/></a></span>]</span></div><div class="commentcontent" id="commcontent_313">limit 方式分页要加上 useCache = &#34;false&#34;&nbsp;&nbsp;??</div></div><div class="comment"><div class="commenttop"><span class="ownerClassComment" style="float:right;cursor:pointer" onclick="replyMsg(428,158,0,1,1)"><img src="images/reply.gif" alt="回复" style="margin-bottom:-2px;"/>回复</span><a name="comm_158" href="javascript:addQuote('minggxu9','commcontent_158')"><img border="0" src="images/icon_quote.gif" alt="" style="margin:0px 4px -3px 0px"/></a><a href="member.asp?action=view&memName=minggxu9"><strong>minggxu9</strong></a><span class="commentinfo">[2013-12-21 08:19 PM<span class="ownerClassComment"> | <a href="blogcomm.asp?action=del&amp;commID=158" onclick="return delCommentConfirm()"><img src="images/del1.gif" alt="del" border="0"/></a></span>]</span></div><div class="commentcontent" id="commcontent_158">你好，在什么时候不使用二级缓存呢，除了分页的情况以外。<br/><div class="UBBPanel replayPanel"><div class="UBBTitle"><img src="images/icon_reply.gif" style="margin:0px 2px -3px 0px" alt="回复来自 轻舞肥羊 的评论"/> 轻舞肥羊 于 <span class="commentinfo replayinfo">2013-12-21 10:53 PM</span> 回复</div><div class="UBBContent">基本上一般的应用都不会用到二级缓存，一级缓存足够了。<br/>二级缓存一般基于以下原则：<br/>1. 不经常变动的数据，但经常会使用<br/>2. 数据量比较大，系统多处会用到。或者跨系统用。<br/>3. 对性能有特别要求的地方。<br/><br/>滥用二级缓存，有可能反而会降低性能，特别是查询缓存，是根据查询条件来的。</div></div></div></div><div class="pageContent"></div></div>
+		<script type="text/javascript">tryLoadComment();</script>
+        <!-- 评论输入框 -->
+		 <div id="MsgContent" style="width:94%;">
+		  <div id="MsgHead">发表评论</div>
+		  <div id="MsgBody">
+		    <script type="text/javascript">
+				      		function checkCommentPost(){
+				      			if (!CheckPost) return false
+								// 备用方法
+				      			return true
+				      		}
+				      </script>
+		    <form name="frm" action="blogcomm.asp" method="post" onsubmit="return checkCommentPost()" style="margin:0px;">
+		      <table width="100%" cellpadding="0" cellspacing="0">
+		        <tr>
+		          <td align="right" width="70"><strong>昵　称:</strong></td>
+		          <td align="left" style="padding:3px;"><input name="username" type="text" size="18" class="userpass" maxlength="24" /></td>
+		        </tr>
+		        <tr id="passArea">
+		      	  <td align="right" width="70"><strong>密　码:</strong></td>
+		      	  <td align="left" style="padding:3px;"><input name="password" type="password" size="18" class="userpass" maxlength="24"/> 游客发言不需要密码.</td>
+		        </tr>
+		        <tr>
+		          <td align="right" width="70" valign="top"><strong>内　容:</strong><br/></td>
+		          <td style="padding:2px;">
+		          	<script language="javascript" type="text/javascript" src="common/UBBCode.js"></script>
+		            <script language="javascript" type="text/javascript" src="common/UBBCode_help.js"></script>
+		            <div id="UBBSmiliesPanel" class="UBBSmiliesPanel"></div>
+		            <textarea id="editMask" class="editTextarea" style="width:99%;height:100px" onfocus="loadUBB('Message')"></textarea>
+		            <div id="editorbody" style="display:none">
+		              <div id="editorHead">正在加载编辑器...</div>
+		              <div class="editorContent">
+		                <textarea name="Message" class="editTextarea" style="height:150px;;" cols="1" rows="1" accesskey="R"></textarea>
+		              </div>
+		            </div></td>
+		        </tr>
+		        <tr>
+		          <td align="right" width="70"><strong>验证码:</strong></td>
+		          <td align="left" style="padding:3px;"><input name="validate" type="text" size="4" class="userpass" maxlength="4" onfocus="this.select()"/>
+		            <img id="vcodeImg" src="about:blank" onerror="this.onerror=null;this.src='common/getcode.asp?s='+Math.random();" alt="验证码" title="看不清楚？点击刷新验证码！" style="margin-right:40px;cursor:pointer;width:40px;height:18px;margin-bottom:-4px;margin-top:3px;" onclick="src='common/getcode.asp?s='+Math.random()"/></td>
+		        </tr>
+		        <tr>
+		          <td align="right" width="70" valign="top"><strong>选　项:</strong></td>
+		          <td align="left" style="padding:3px;"><label for="label5">
+		              <input name="log_DisSM" type="checkbox" id="label5" value="1" />
+		              禁止表情转换</label>
+		            <label for="label6">
+		              <input name="log_DisURL" type="checkbox" id="label6" value="1" />
+		              禁止自动转换链接</label>
+		            <label for="label7">
+		              <input name="log_DisKey" type="checkbox" id="label7" value="1" />
+		              禁止自动转换关键字</label></td>
+		        </tr>
+		        <tr>
+		          <td colspan="2" align="center" style="padding:3px;">
+		          	<input name="logID" type="hidden" value="428"/>
+		            <input name="action" type="hidden" value="post"/>
+		            <input name="submit2" type="submit" class="userbutton" value="发表评论" accesskey="S"/>
+		            <input name="button" type="reset" class="userbutton" value="重写"/></td>
+		        </tr>
+		        <tr>
+		          <td colspan="2" align="right" > 虽然发表评论不用注册，但是为了保护您的发言权，建议您<a href="register.asp">注册帐号</a>. 
+		           </td>
+		        </tr>
+		      </table>
+		    </form>
+		  </div>
+		</div>
+ 
+        <div id="mainContent-bottomimg"></div>
+      </div>
+    </div>
+    <div id="sidebar">
+      <div id="innersidebar">
+        <div id="sidebar-topimg">
+          <!--工具条顶部图象-->
+        </div>      
+        
+               
+        <div id="google_ad_300x250_pic" class="sidepanel" style="margin-bottom:10px;border:1px dotted #ccc;">
+        	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<!-- 300x250_pic -->
+					<ins class="adsbygoogle"
+					     style="display:inline-block;width:300px;height:250px"
+					     data-ad-client="ca-pub-8938429428345245"
+					     data-ad-slot="7705539497"></ins>
+					<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+        </div>
+		
+        <div id="Side_RandomLogForPJBlog" class="sidepanel" style="margin-top:10px;">
+			<div class="Pcontent" style="padding-top: 10px;">
+				<a class="sideA" href="https://item.taobao.com/item.htm?spm=a230r.1.14.1.knuj5c&id=520878123391&ns=1&abbucket=11#detail">Django 开发的CMS 系统</a>	
+				<a class="sideA" href="http://www.yihaomen.com/article/myproduct/178.htm">免费的商场，超市POS系统</a>								
+			</div>
+		</div>
+		
+		        
+        <div  class="sidepanel" style="border:1px dotted #ccc;">
+		<script type="text/javascript">
+				/*300*250 图文混排单一模式，创建于2014-4-8*/
+				var cpro_id = "u1515841";
+				</script>
+				<script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+        	
+        </div>
+        
+        <!--漂浮广告--> 
+        <div id="right_float" style="border:1px dotted #ccc;width:300px;"> 
+	        <div id="google_right_float" class="sidepanel"> 											
+						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+							<!-- 300*250 text and pic -->
+							<ins class="adsbygoogle"
+							     style="display:inline-block;width:300px;height:250px"
+							     data-ad-client="ca-pub-8938429428345245"
+							     data-ad-slot="4014566290"></ins>
+							<script>
+							(adsbygoogle = window.adsbygoogle || []).push({});
+					  </script>
+				  </div>					
+			 
+			  <div id="baidu_right_float" class="sidepanel" style="line-height:25px;padding-left:3px;"> 
+			      <script language="javascript" src="topblog.asp?TopLen=10&titleLength=26"></script>
+			  </div>
+	 </div>		  
+      <!--漂浮广告结束 -->        
+        
+               
+        
+        <div id="sidebarDynamic"></div>
+        <div id="sidebar-bottomimg"></div>
+        <!--我自己增加的-->
+        <div id="Side_topnav" class="sidepanel"><h4 class="Ptitle">topnav</h4>
+        	<div class="Pcontent">
+        	<ul>
+          <li><a href="default.asp"><img src="skins/geekg/menu1.gif" alt=""/> &nbsp;&nbsp; index </a></li>
+					<li><a href="tag.asp?searchType=Comments"><img src="skins/geekg/menu3.gif" alt=""/> &nbsp;  tags </a></li>
+					<li><a href="mailto:sunny3super@163.com"><img src="skins/geekg/menu5.gif" alt=""/>   &nbsp;&nbsp;Email </a></li>
+					<li><a href="http://www.yihaomen.com/default.asp?cateID=43"><img src="skins/geekg/joke.png" alt=""/>   &nbsp;&nbsp;joke </a></li>
+					<li><a href="http://www.yihaomen.com/default.asp?cateID=46"><img src="skins/geekg/pic.png" alt=""/>   &nbsp;&nbsp;photo </a></li>
+					<li><a href="feed.asp"  target="_blank"><img src="skins/geekg/menu6.gif" alt=""/>   &nbsp;&nbsp;RSS </a></li>
+					</ul>
+				  </div>
+				</div>
+        <!--增加的结束-->
+      </div>
+    </div>
+    <div style="clear: both;height:1px;overflow:hidden;margin-top:-1px;"></div>
+  </div>
+  <!--底部-->
+  <div id="foot">
+    <p>Powered By <a href="http://www.yihaomen.com" target="_blank"><strong>一号门博客 v3.0.6.170</strong></a> CopyRight 2005 - 2011, <strong>一号门-程序员的工作,程序员的生活(java,python,delphi实战)</strong> <a href="http://validator.w3.org/check/referer" target="_blank">xhtml</a> | <a href="http://jigsaw.w3.org/css-validator/validator-uri.html">css</a></p>
+    <p><a href="http://www.miibeian.gov.cn" style="font-size:12px"><b>公安备案号:42280202422812</b></a></p>        
+  </div>
+</div>
+
+<script type="text/javascript">
+	//初始化日志页面
+	//initAccessKey();
+	//initSidebar();
+	initLogin('PJBlog3');
+	ping();
+</script>
+<!--用来漂浮广告 -->
+<script>
+	window.onload=function(){
+	var oDiv=document.getElementById("right_float");	
+	var H=0,iE6;
+	var Y=oDiv;
+	while(Y){H+=Y.offsetTop;Y=Y.offsetParent};
+	iE6=window.ActiveXObject&&!window.XMLHttpRequest;
+	if(!iE6){
+		if (oDiv){
+		window.onscroll=function()
+		{			
+			var s=document.body.scrollTop||document.documentElement.scrollTop;
+			if(s>H){oDiv.className="div1 div2";if(iE6){oDiv.style.top=(s-H)+"px";}}
+			else{oDiv.className="div1";}	
+		};
+	   }
+	} 
+}   
+</script>
+<!--end-->
+
+<script type="text/javascript">
+    /*图+推广*/
+var cpro_id = "u2012348";
+</script>
+<script src="http://cpro.baidustatic.com/cpro/ui/i.js" type="text/javascript"></script>
+
+</body>
+</html>

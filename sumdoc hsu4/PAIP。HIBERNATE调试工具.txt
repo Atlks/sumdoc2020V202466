@@ -1,0 +1,27 @@
+HIBERNATE调试工
+
+
+----作者Attilax ， 1466519819@qq.com--- 
+
+
+HIBERNATE TOOL.又叫HIBERNATE CONSOLE。。
+
+
+目前已经包括在JBOSS TOOLS里边。。。
+
+最新版本号
+JBoss Tools (Juno) 4.0.0.Final，适合ECLIPSE 4.2(Juno)使用。。。
+
+
+先打开ECLIPSE，然后把地址拖向ECLIPSE，就可以在线安装了，大概ECLIPSE体积增长了150M左右。。
+
+首先配置一个CFG文件，选择存在的CFG，然后，新建HQL，然后就可以执行了。
+
+在 dynamic sql preview 中，可看到生成的实际SQL。。
+
+
+如果看到SQL中修改后不生效，需要在编译BIN目录中看下HBM等配置文件，如果不生效，可重新编译下，就可以了。。
+
+
+如果不能编译，可看下BUILD PATH， 是否找到相关CLASS ，增加相关的JAR。。
+

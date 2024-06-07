@@ -1,0 +1,5 @@
+Atitit 类似mybatis的orm解决方案，循序渐进的orm以及提升开发速度与架构简单性
+
+Orm的三个阶段。
+纯sql阶段》》可配置的sql阶段（mybatis）》基于meta的orm 》》》重型orm（hibernate）
+

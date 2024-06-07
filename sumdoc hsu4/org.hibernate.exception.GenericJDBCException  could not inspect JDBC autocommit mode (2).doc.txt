@@ -1,0 +1,19 @@
+org.hibernate.exception.GenericJDBCException: could not inspect JDBC autocommit mode
+
+4579298 WARN  [2014-09-22 19:37:52]   ---org.hibernate.exception.GenericJDBCException: could not inspect JDBC autocommit mode
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:54)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:125)
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:110)
+	at org.hibernate.engine.jdbc.internal.LogicalConnectionImpl.isAutoCommit(LogicalConnectionImpl.java:395)
+	at org.hibernate.engine.transaction.internal.TransactionCoordinatorImpl.afterNonTransactionalQuery(TransactionCoordinatorImpl.java:195)
+	at org.hibernate.internal.SessionImpl.afterOperation(SessionImpl.java:598)
+	at org.hibernate.internal.SessionImpl.list(SessionImpl.java:1253)
+
+原因::: session的autocommit 配置修改了....
+
+解除::
+最好的方法是new open 一个session,中间不然哇...不要使用currentSession...
+
+修改session 配置..不过也许其他地方也使用这个session,,也许有影响影响,
+
+

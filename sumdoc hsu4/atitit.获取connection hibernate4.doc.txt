@@ -1,0 +1,46 @@
+atitit.获取connection hibernate4
+
+11
+11
+11
+11
+1
+嘎自实现法(推荐)
+读取hb配置文件,通过jdbc api生成con
+c=	new Hb4JdbcX().getConnection();
+
+wechat4propty 项目..
+SessionFactoryUtils法（不好用)
+这个方法生成的多个conn实际都是一个,所以,不好用
+Hibernate3.3.2版本中getSession().connection()已被弃用，替代方法SessionFactoryUtils.getDataSource(getSessionFactory()).getConnection()
+
+ConnectionProvider 法（不好用)
+雅十,这个方法生成的多个conn实际都是一个,所以,不好用
+
+	ConnectionProvider cp = ((SessionFactoryImplementor)ssn.getSessionFactory()).getConnectionProvider();
+									//	  c = cp.getConnection();
+或者使用work (但是work黑头的conn是个闭包,,不好用)
+
+
+	bd.bind(Connection.class).toInstance(
+							(Connection) new Closure2() {
+
+								@Override
+								public Object execute(Object arg0) {
+									BaseImpl basedao = new BaseImpl();
+	SessionFactory sessionFactory = HibernateSessionFactory.getSessionFactory();
+								
+									 	Connection c;
+									try {
+										c = SessionFactoryUtils.getDataSource(sessionFactory ).getConnection();
+									} catch (SQLException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+										throw new RuntimeException(e);
+									}
+									return c;
+								}
+							}.execute(null));
+
+Hibernate Session 获取connection - liuxianbing119的专栏 - 博客频道 - CSDN.NET.htm
+

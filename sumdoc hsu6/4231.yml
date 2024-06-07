@@ -1,0 +1,39 @@
+playr: 
+    layer:1
+    y:17
+    type:守门员
+    x:50       
+        
+    
+
+playr:
+    x:20 
+    layer:2
+    y:34
+    type:后卫 
+    
+playr:
+    x:40 
+    layer:2
+    y:34
+    type:后卫 
+
+    
+    playr：        
+        x:40    
+    playr：       
+        x:60 
+    playr：       
+        x:80
+       
+        
+layer: 
+    layer:3
+    y:50
+    type:中峰
+    playr：
+        x:33   
+    playr：     
+        x:66   
+ 
+       

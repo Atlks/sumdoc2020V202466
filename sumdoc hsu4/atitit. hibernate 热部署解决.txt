@@ -1,0 +1,18 @@
+	
+	
+atitit. hibernate spring 热部署解决
+	
+rebuild factory..
+/**
+	 * 读取Hibernate配置文件,并生成SessionFactory
+	 */
+	public void createSessionFactory() {
+		logger.info("系统正在读取Hibernate配置文件，并生成SessionFactory");
+		Configuration cfg = new Configuration().configure();
+		ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(cfg.getProperties()).buildServiceRegistry();
+		Constant.sessionFactory = cfg.buildSessionFactory(serviceRegistry);
+	}
+	
+	
+	作者 老哇的爪子 Attilax 艾龙，  EMAIL:1466519819@qq.com
+转载请注明来源： http://blog.csdn.net/attilax

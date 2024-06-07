@@ -1,0 +1,439 @@
+
+
+22
+22
+33
+33
+33
+33
+44
+44
+44
+55
+55
+55
+66
+88
+88
+88
+88
+88
+99
+99
+99
+1010
+1010
+1010
+1010
+1313
+1313
+1313
+1414
+1414
+1515
+1515
+15
+
+
+
+change histroty
+721.  v1  接口定义与全局返回码
+723	.  v2  服务端的接口发布
+724	  v3   增加上传播放记录信息记录，以及文档合并
+728    v5  添加了防篡改签名,加密,压缩的内容...添加了通过推送接口的数据格式..
+729	  v6  添加了 推送素材下载任务数据格式,实时反馈下载完成信息数据格式,推送节目单数据格式
+86   V8    添加了 实时反馈节目单接收完成信息。。。。
+添加了   素材下载，节目单推送的具体json文件示例
+88  v9   调整了标题结构..and 添加了一些双向接口
+77
+77
+77
+77
+88
+88
+88
+99
+99
+99
+815 v10   增加了版本升级接口
+91	v11   增加了素材下载任务，反馈下载任务消息接收完成信息
+9L  v12  add monitor api n device valida api
+
+接口方式说明 基于http  json  
+基于http  json  
+接口实现没有采用restful方式，使用了rpc单url方式，简化开发
+
+
+发布对外http接口：注册api接口子方法处理器（服务端）
+
+在com.focustar.listener.MyListener.injectApiHandler()里面添加新的子方法处理器...
+
+主要的添加一行...HandlerChain reg(String subMeth,Handler handler);
+
+
+
+使用实现类的方法注册..
+HandlerChain.reg("postPlayRec", new HandlerImp1());
+
+使用闭包的方式注册:::
+ 		 
+			HandlerChain.reg("postPlayRec", new Handler() {
+
+				@Override public Object handleReq(Object arg) throws Exception {
+					// attilax 老哇的爪子 is6 o7l
+					return " o788 test ...";
+
+				}
+			});
+		 
+ 闭包DSL:::
+导入template。xml模板。。java>editor>template>>import。。。
+输入api   生成一下大陀代码
+
+HandlerChain.reg("postPlayRec", new Handler() {
+
+				@Override public Object handleReq(Object arg) throws Exception {
+					// attilax 老哇的爪子 is6 o7l
+					return " o788 test ...";
+
+				}
+			});
+
+Handler 的接口实现
+一个方法是不实现Handler 接口,使用闭包的方式注册
+在就是实现Handler 接口,使用class的方法注册...
+
+
+
+客户端调用接口overview 
+http请求方式: GET/Post
+http://host/api.jsp？appid=APPID&secret=APPSECRET&submethod=login&param={param1:val1,param2:val2}
+请求附加参数说明
+参数	是否必须	说明
+submethod	是	调用的接口方法（ 验证，返回设备状态，反馈下载信息，播放流水上传等，各自模块定义）
+Param	是	实际的参数
+
+	
+	
+
+appid	是	机身串码
+secret	否	预留，可暂时不用。。 用户唯一凭证密钥，即appsecret
+sign	
+	是	防篡改签名
+zip	否	Param参数是否压缩..  t为true,其他为否...
+encry	否
+	加密数据..使用json格式 {param1:val1,param2:val2}.
+
+	
+	
+
+
+
+通过推送接口的数据格式..
+使用json格式 {submethod:val1,Param:val2,....}...参数意义如下::
+
+请求附加参数说明
+参数	是否必须	说明
+submethod	是	调用的接口方法（ 验证，返回设备状态，反馈下载信息，播放流水上传等，各自模块定义）
+Param	是	实际的参数,json格式..
+appid	是	机身串码
+secret	否	预留，可暂时不用。。 用户唯一凭证密钥，即appsecret
+sign	
+	是	防篡改签名
+zip	否	是否压缩..  t为true,其他为否...
+encry	否
+	加密数据..
+
+返回说明（正常情况下）
+正常情况下，服务器会返回下述JSON数据包：
+{param1:val1,param2:val2}
+ 参数含义各模块定义。。。
+错误时返回
+ 会返回错误码等信息，JSON数据包示例如下（该示例为AppID无效错误）:
+{"errcode":40013,"errmsg":"invalid appid" }
+
+全局返回码说明如下：
+ 每次调用接口时，可能获得正确或错误的返回码， 可以根据返回码信息调试接口，排查错误。
+
+返回码	说明
+-1	系统繁忙
+0	请求成功
+40002	不合法的凭证类型
+40008	不合法的消息类型
+40013	不合法的APPID
+40021	不合法的版本号
+40033	不合法的请求字符，不能包含\uxxxx格式的字符
+40035	不合法的参数
+40038	不合法的请求格式
+40039	不合法的URL长度
+40050	不合法的分组id
+40051	分组名字不合法
+41001	缺少参数
+42001	超时
+43001	需要GET请求
+43002	需要POST请求
+43003	需要HTTPS请求
+44002	POST的数据包为空
+45009	接口调用超过限制
+45015	回复时间超过限制
+46001	不存在媒体数据
+46004	不存在的用户
+47001	解析JSON/XML内容错误
+48001	api功能未授权
+50001	用户未授权该api
+00701	缺失meth参数
+其他返回码	。。。。
+
+
+
+详细模块调用数据格式
+调用操作服务端数据(sql格式)
+
+http://localhost/vod/api.jsp?submethod=sql&appid=1234507y767676&sign=xxxxxx&param=select * from   xxxTAble wherer fld1=11 order by fld2
+
+调用操作服务端数据(hql格式)
+
+http://localhost/vod/api.jsp?submethod=hql&appid=1234507y767676&sign=xxxxxx&param=  from   xxxTAble wherer fld1=11 order by fld2
+
+调用操作服务端数据(对象化map格式)
+查询操作
+http://localhost/vod/api.jsp?submethod=map&appid=1234507y767676&sign=xxxxxx&param= 
+{
+	"ClassName": "class123",
+	"conditon": [{
+		"propName": "prop123",
+		"op": "<=",
+		"val": "val123"
+	},
+	{
+		"propName": "prop456",
+		"op": "like",
+		"val": "abc"
+	}]
+}
+
+
+--------update op
+param=
+{
+	"op": "update",
+	"ClassName": "class123",
+	"id": 3456,
+	"set": [{
+		"propName": "prop66",
+		"val": "val123"
+	}],
+	"where": [{
+		"propName": "prop123",
+		"op": "<=",
+		"val": "val123"
+	}]
+}
+
+
+--------delete op
+param=
+{
+	"op": "del",
+	"ClassName": "class123",
+	"id": 3456,
+	"where": [{
+		"propName": "prop123",
+		"op": "<=",
+		"val": "val123"
+	}]
+}
+
+
+调用操作客户端数据(sql式,异步方式)
+通过推送接口推送数据
+
+{
+    "submethod": "sql",
+    "param":"select * from   xxxTAble wherer fld1=11 order by fld2
+",
+    "sign": "xxxxxx"
+}
+
+返回json array    [{...}]
+
+调用操作客户端数据(同步方式)
+通过推送接口推送数据
+
+{
+	"submethod": "sql_syn",
+	"param": {
+		"sql": "select * from   xxxTAble wherer fld1=11 order by fld2",
+		"callback": "call123"
+	},
+	"sign": "xxxxxx"
+}
+
+返回json array    [{...}]
+
+调用操作客户端数据(同步方式)反馈
+http://localhost/vod/api.jsp?submethod=call123&appid=1234507y767676&sign=xxxxxx&param=[{ }]
+
+
+调用操作客户端数据(对象化map格式)
+参考操作服务端数据(对象化map格式)
+
+推送节目单数据格式
+{
+	"submethod": "pushProgram",
+	"param": {
+		"endTime": null,
+		"equipmentId": 14,
+		"equipmentName": "",
+		"interruptedStartTime": null,
+		"mome": "",
+		"prgrm": {
+			"createMan": 4,
+			"createManName": "",
+			"createTime": {
+				"date": 21,
+				"day": 1,
+				"hours": 15,
+				"minutes": 7,
+				"month": 6,
+				"nanos": 620000000,
+				"seconds": 53,
+				"time": 1405980473620,
+				"timezoneOffset": 420,
+				"year": 114
+			},
+			"describe": "test2",
+			"list": [{
+				"materialId": 97,
+				"pdId": 1,
+				"playOrder": 0,
+				"programmeId": 10
+			},
+			{
+				"materialId": 98,
+				"pdId": 2,
+				"playOrder": 1,
+				"programmeId": 10
+			},
+			{
+				"materialId": 95,
+				"pdId": 3,
+				"playOrder": 2,
+				"programmeId": 10
+			}],
+			"materialNumber": 3,
+			"progarmmeId": 10,
+			"screen": 1,
+			"totalDuration": 2
+		},
+		"progarmmeId": 10,
+		"progarmmeName": "",
+		"publishId": 1090,
+		"publishManId": 4,
+		"publishManName": "",
+		"publishTime": {
+			"date": 29,
+			"day": 2,
+			"hours": 11,
+			"minutes": 50,
+			"month": 6,
+			"nanos": 803000000,
+			"seconds": 20,
+			"time": 1406659820803,
+			"timezoneOffset": 420,
+			"year": 114
+		},
+		"publishType": 0,
+		"reviewManId": 0,
+		"reviewTime": null,
+		"startTime": null,
+		"status": 0
+	},
+	"sign": ".."
+}
+
+
+ 实时反馈节目单接收完成信息
+http://localhost/vod/api.jsp?submethod=pushProgramBackfeed&appid=1234507y767676&sign=xxxxxx&param={
+   "dsId": 1,     //发布单的id
+  "equipmentId": 15,
+ } 
+
+
+
+推送素材下载任务数据格式
+
+{
+    "submethod": "pushDownTask",
+    "param": {
+        "downloadCreateTime": null,
+        "downloadEndTime": null,
+        "downloadStatus": 0,
+        "dsId": 1,
+        "equipmentId": 15,
+        "file": "http://xxxx/aaa.mpg",
+        "materialId": 2,
+        "noticeFlag": 0
+    },
+    "sign": "xxxxxx"
+}
+
+ 实时反馈下载任务消息接收完成信息
+http://localhost/vod/api.jsp?submethod=postDownTaskBackfeed4notice&appid=1234507y767676&sign=xxxxxx&param={
+   "dsId": 1,    //任务id
+  "equipmentId": 15,
+ } 
+
+
+ 实时反馈下载完成信息
+http://localhost/vod/api.jsp?submethod=postDownTaskBackfeed&appid=1234507y767676&sign=xxxxxx&param={
+   "dsId": 1,    //任务id
+  "equipmentId": 15,
+ } 
+上传播放记录
+ http://localhost/vod/api.jsp?submethod=postPlayRec&appid=1234507y767676&param=%7B%0D%0A++%22equipmentId%22%3A+10%2C%0D%0A++%22materialId%22%3A+3%2C%0D%0A++%22playTime%22%3A+null%2C%0D%0A++%22prId%22%3A+0%2C%0D%0A++%22publishType%22%3A+0%2C%0D%0A++%22screen%22%3A+4%0D%0A%7D%0D%0A  
+
+注：get方式发送参数是需要url编码。
+
+参数含义表
+参数	值	含义
+submethod	postPlayRec	指明为上上传播放记录
+appid	xxxxx	机身串码
+sign	
+	afdadafkdjfaksdfsign	签名
+param	[{
+  "equipmentId": 10,
+  "materialId": 3,
+  "playTime": null,
+  "prId": 0,
+  "publishType": 0,
+  "screen": 4
+}]	上传的播放记录数据
+具体字段含义参照数据表
+
+返回
+{"errcode":0,"errmsg":"ok" }
+
+版本升级接口
+
+
+http://192.168.1.206:888/vod/upgrd/ver.txt
+http://192.168.1.206:888/vod/upgrd/update.apk
+
+
+监控数据提交 
+ http://localhost:8080/vodx/ajaxMonitors!putCacher?monitorJson=[json] 监控数据提交 
+
+设备验证
+
+http://localhost:8080/vodx/ajaxEquipment!ajaxValidateSerialCode?ip=192.168.0.1&SerialCode=123 
+
+
+QA：：
+get方式发送参数是需要url编码。
+
+
+
+
+
+

@@ -1,0 +1,1080 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+<meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="referrer" content="always">
+<link href="https://csdnimg.cn//public/favicon.ico" rel="shortcut icon" />
+<link href="https://blog.csdn.net/november22/article/details/60582866"  rel="canonical" />
+<link href="https://blog.csdn.net/november22/rss/list" id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" />
+<script src="https://csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="https://dup.baidustatic.com/js/ds.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var CFG={
+        BASE_URL : "https://csdnimg.cn/release/phoenix/",    //当前页面对应的虚拟路径,静态资源对应目录同<base href="">
+        API_URL  : "https://blog.csdn.net/",                 //当前项目默认的后端API地址
+        ROOT_URL  : "https://blog.csdn.net/",          //当前项目根路径, JS跳转
+        STATIC_URL : "https://csdnimg.cn/release/phoenix/",          //本项目静态资源根目录
+        STATIC_GLOBAL_URL : "https://csdnimg.cn/",    //公共静态资源根目录
+        CUR_URL : "https://blog.csdn.net/november22/article/details/60582866",
+        SO_URL : "http://so.csdn.net/so/search/s.do"  // 站内搜索路径
+    }
+</script>
+    <title>spring的cache的注解方式的简单实用（具体步骤） - CSDN博客</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="1、启用注解模式
+如果使用的是注解类，需要在注解类上添加@EnableCaching，如果是使用的配置文件
+
+xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+xmlns:cache=&quot;http://www.springframework.org/schema/cache&quot;
+xsi:schemaLocation=&quot;
+http:/" />
+    <meta name="referrer" content="always">
+    <link href="https://csdnimg.cn/blog/csdn_public_blog_detail.min.css" type="text/css" rel="stylesheet"/>
+    <link href="https://csdnimg.cn/release/phoenix/dotnet/css/blog_detail-2cf3d309c5.css" type="text/css" rel="stylesheet" />
+    <link href="https://csdnimg.cn/release/phoenix/bloglist/iconfont/iconfont.css" type="text/css" rel="stylesheet"/>
+    <link href="https://csdnimg.cn/release/phoenix/dotnet/skin/skin-yellow/css/style.css?v=201803221741"  type="text/css" rel="stylesheet" />
+    <script>
+        var username = "november22";
+        var _blogger = username;
+        var blog_address = "https://blog.csdn.net/november22";
+        var static_host = "https://csdnimg.cn/release/phoenix/";
+        var currentUserName = "attilax";
+        var islock = false;
+        var fileName = "60582866";
+        var commentscount = 0;
+        var curUserFace = "https://avatar.csdn.net/3/9/1/3_attilax.jpg";
+
+        document.domain = "csdn.net";
+        var title="spring的cache的注解方式的简单实用（具体步骤）";
+        window.quickReplyflag = true;
+        var isBole = false;
+        var fasrc="https://my.csdn.net//my/favoriteminiadd?dt=spring的cache的注解方式的简单实用（具体步骤）&u=https://blog.csdn.net/november22/article/details/60582866";
+        var baiduKey = "cache%E6%B3%A8%E8%A7%A3";
+        var needInsertBaidu = false;
+        var ChannelId = 0;
+    </script>
+      <script src="https://csdnimg.cn/search/baidu_search-1.1.2.js?v=201802071056&autorun=true&install=true&keyword=java"  type="text/javascript"></script>
+      <script src="https://csdnimg.cn/release/phoenix/dotnet/js/blog_detail-352dcd7058.js" type="text/javascript"></script>
+    <style type="text/css">
+        .embody{
+            padding:10px 10px 10px;
+            margin:0 -20px;
+            border-bottom:solid 1px #ededed;
+        }
+        .embody_b{
+            margin:0 ;
+            padding:10px 0;
+        }
+        .embody .embody_t,.embody .embody_c{
+            display: inline-block;
+            margin-right:10px;
+        }
+        .embody_t{
+            font-size: 12px;
+            color:#999;
+        }
+        .embody_c{
+            font-size: 12px;
+        }
+        .embody_c img,.embody_c em{
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .embody_c img{
+            width:30px;
+            height:30px;
+        }
+        .embody_c em{
+            margin: 0 20px 0 10px;
+            color:#333;
+            font-style: normal;
+        }
+    </style>
+    <style>
+        .MathJax, .MathJax_Message, .MathJax_Preview{
+            display: none
+        }
+    </style>
+</head>
+<body>
+<link rel="stylesheet" href="https://csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+<script id="toolbar-tpl-scriptId" src="https://csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="https://blog.csdn.net/"></script>
+<div id="container">
+    <!--header+navigator-->
+    <div id="header">
+    <div class="header">
+        <div id="blog_title">
+            <h2>
+                <a href="https://blog.csdn.net/november22">November22的博客</a>
+            </h2>
+            <h3>
+                             </h3>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+</div>
+<div id="navigator">
+    <div class="navigator_bg">
+    </div>
+    <div class="navigator">
+        <ul>
+            <li id="btnContents"><a href="https://blog.csdn.net/november22?viewmode=contents"><span
+                    onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_mulu'])">
+                    <img src="https://csdnimg.cn/release/phoenix/images/ico_list.gif">目录视图</span></a></li>
+            <li id="btnView"><a href="https://blog.csdn.net/november22?viewmode=list"><span
+                    onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_zhaiyao'])">
+                    <img src="https://csdnimg.cn/release/phoenix/images/ico_summary.gif">摘要视图</span></a></li>
+            <li id="btnRss"><a href="https://blog.csdn.net/november22/rss/list"><span
+                    onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_RSS'])">
+                    <img src="https://csdnimg.cn/release/phoenix/images/ico_rss.gif">订阅</span></a></li>
+                    </ul>
+    </div>
+</div>
+    <div id="body">
+        <div id="main">
+            <div class="main">
+               <div class="main">
+    <div class="ad_class">
+    </div>
+    <!--文章详情-->
+    <div id="article_details" class="details">
+        <div class="article_title">
+            <span class="ico ico_type_Original"></span>
+            <h1>
+                <span class="link_title">
+                    <a href="https://blog.csdn.net/November22/article/details/60582866">
+                        
+                                                spring的cache的注解方式的简单实用（具体步骤）                    </a>
+                </span>
+            </h1>
+        </div>
+        <div class="article_manage clearfix">
+        <div class="article_r">
+        <span class="link_postdate">2017年03月06日 17:10:29</span>
+        <span class="link_view" title="阅读次数">2069人阅读</span>
+        <span class="link_comments" title="评论次数"> <a href="javascript:void(0);" class="btn-pinglun">评论</a>(0)</span>
+        <span class="link_collect csdn-tracking-statistics" data-pid="blog"  data-mod="popu_171">
+            <a href="javascript:void(0);" onclick="javascript:collectArticle('spring的cache的注解方式的简单实用（具体步骤）','60582866');return false;" title="收藏">收藏</a>
+        </span>
+                <span class="link_report">
+            <a href="javascript:void(0);" onclick="javascript:report(60582866, 2);return false;" title="举报">举报</a>
+        </span>
+                    </div>
+</div>
+<script  type="text/javascript">
+    $(function () {
+        try
+        {
+            var lib = eval("("+$("#lib").attr("value")+")");
+            var html = "";
+            if (lib.err == 0) {
+                $.each(lib.data, function (i) {
+                    var obj = lib.data[i];
+                    //html += '<img src="' + obj.logo + '"/>' + obj.name + "&nbsp;&nbsp;";
+                    html += ' <a href="' + obj.url + '" target="_blank">';
+                    html += ' <img src="' + obj.logo + '">';
+                    html += ' <em><b>' + obj.name + '</b></em>';
+                    html += ' </a>';
+                });
+                if (html != "") {
+                    setTimeout(function () {
+                        $("#lib").html(html);
+                        $("#embody").show();
+                    }, 100);
+                }
+            }
+        } catch (err)
+        { }
+
+    });
+</script>
+                <div class="bog_copyright">
+                    </div>
+        <div id="article_content" class="article_content csdn-tracking-statistics" data-pid="blog"  data-mod=popu_307  data-dsm = "post" >
+                    <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/production/htmledit_views-0a60691e80.css" />
+            <div class="htmledit_views">
+                
+<p><strong>     1<span style="font-family:'宋体';">、启用注解模式</span></strong></p>
+<p><span style="font-family:'宋体';">如果使用的是注解类，需要在注解类上添加</span><strong>@EnableCaching</strong><span style="font-family:'宋体';">，如果是使用的配置文件</span></p>
+<p>&lt;beans xmlns="http://www.springframework.org/schema/beans"</p>
+<p>xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"</p>
+<p>xmlns:cache="http://www.springframework.org/schema/cache"</p>
+<p>xsi:schemaLocation="</p>
+<p>http://www.springframework.org/schema/beans </p>
+<p>http://www.springframework.org/schema/beans/spring-beans.xsd<a href="http://www.springframework.org/schema/cache"></a></p>
+<p><a href="http://www.springframework.org/schema/cache"><u><span>http://www.springframework.org/schema/cache</span></u></a><u></u></p>
+<p>http://www.springframework.org/schema/cache/spring-cache.xsd</p>
+<p>"&gt;</p>
+<p>    &lt;cache:annotation-driven /&gt; &lt;!-- 启用缓存 --&gt;</p>
+<p>   &lt;bean id="<strong>cacheManager</strong>" </p>
+<p>                 class="<strong>org.springframework.cache.concurrent.ConcurrentMapCacheManager</strong>" /&gt;</p>
+<p>&lt;/beans&gt;<br /><br />
+2、<strong><span style="font-family:'宋体';">配置</span>CacheManager</strong><br />
+Spring 3.1 内置了五个缓存管理器实现，如下：</p>
+<p>        *SimpleCacheManager</p>
+<p>        *NoOpCacheManger</p>
+<p><strong>        *ConcurrentMapCacheManager</strong></p>
+<p>         *CompositeCacheManger</p>
+<p><strong>        *EhCacheCacheManger</strong></p>
+<p>       Spring Data提供了两个缓存管理器：</p>
+<p>             *RedisCacheManager（来自于Spring Data Redis项目）</p>
+<p>             *GmfireCacheManager（来自于Spring Data GemFire项目）</p>
+<p><span style="font-family:'宋体';">在这里使用</span><strong>EhCacheCacheManger</strong><span style="font-family:'宋体';">来实现缓存服务</span><br /><span style="font-family:'宋体';">配置缓存管理器实例，可以自行转换为</span>xml中的配置</p>
+<p>@Configuration</p>
+<p><strong>@EnableCaching//开启声明式缓存支持</strong></p>
+<p>public class RootConfig {</p>
+<p>/**</p>
+<p>* 注册实现CacheManager的bean</p>
+<p>* EhCache的CacheManager要被注入到Spring的EhCacheCacheManager之中</p>
+<p>* @param cacheManager 由下面的EhCacheManagerFactoryBean提供</p>
+<p>* @return</p>
+<p>*/</p>
+<p>     @Bean</p>
+<p>     public EhCacheCacheManager <strong>cacheCacheManager</strong>(CacheManager cacheManager){</p>
+<p>            return new <strong>EhCacheCacheManager(cacheManager);</strong></p>
+<p>     }</p>
+<p> </p>
+<p>       @Bean</p>
+<p>        public <strong>EhCacheManagerFactoryBean ehcache</strong>(){</p>
+<p>                 EhCacheManagerFactoryBean ehCacheManagerFactoryBean =</p>
+<p>                        new EhCacheManagerFactoryBean();</p>
+<p>                  ehCacheManagerFactoryBean.setConfigLocation(<strong>   new ClassPathResource("ehcahe.xml的配置文件所在地址")</strong>  );</p>
+<p>                  return ehCacheManagerFactoryBean;<br /></p>
+<p>      }</p>
+<p>}</p>
+<p><span style="font-family:'宋体';">   说明：</span>Spring提供了<strong>EhCacheManagerFactoryBean</strong><span style="font-family:'宋体';">来生成</span>EhCache的CacheManager的方法。方法<strong>ehcache</strong><span style="font-family:'宋体';">会创建并返回一个</span><strong>EhCacheManagerFactoryBean</strong><span style="font-family:'宋体';">的实例。因为他是一个</span><strong><span style="font-family:'宋体';">工厂</span>bean（也就是说他实现了Spring的FactoryBean接口）</strong><span style="font-family:'宋体';">，所以在</span>spring应用上下文中并不是<strong>EhCacheManagerFactoryBean
+ 的示例</strong><span style="font-family:'宋体';">，而是</span>CacheManager的一个实例，因此适合注入到<strong>cacheCacheManager</strong><span style="font-family:'宋体';">之中。</span><br /><br /><strong>3、ehcache.xml文件的基本配置（具体配置可百度）</strong></p>
+<p>&lt;ehcache&gt;</p>
+<p>      &lt;cache name="spittleCache"</p>
+<p>           maxBytesLocalHeap="50m" ---最大的堆存储为50m</p>
+<p>            timeToLiveSeconds="100" ---存活时间100秒</p>
+<p>   &lt;/ehcache&gt;</p>
+<p><br /><strong>4、spring 对Cache的注解支持</strong></p>
+<p>  Spring 提供了四个注解来声明缓存规则</p>
+<p><strong>         *@Cacheable </strong><span style="font-family:'宋体';">：</span> <span style="font-family:'宋体';">
+表明</span>Spring在调用方法之前，首先应该在缓存中查找方法的返回值。如果这个值能够找到，就会返回缓存的的值，否则的话，这个方法就会被调用，返回值会放到缓存之中。</p>
+<p><strong>        *@CachePut </strong><span style="font-family:'宋体';">：表明</span>Spring应该将方法的返回值放到缓存中。在方法的调用前不会检查缓存，方法始终都会被调用。</p>
+<p><strong>        *@CacheEvict </strong>: 表明Spring应该在缓存中移除一个或多个条目。</p>
+<p><strong>        *@Caching </strong>: 这是一个分组的注解，能够同时应用多个其他的缓存注解。</p>
+<p><br /><strong>5、简单示例</strong></p>
+<p>        @Cacheable(value="缓存空间的名称，xml中配置的" , key = "#spittle.id")--spittle是参数里面的spittle，如果不设置，就以参数作为key</p>
+<p>        Spittle save(Spittle spittle);</p>
+<p><br /></p>
+<p><strong><span style="font-family:'宋体';">  条件化缓存：</span></strong></p>
+<p>       @Cacheable(value="spittleCache" , <strong>unless="#result.message.contains('NoCache')")</strong>//当条件为true时，不保存对象</p>
+<p>       Spittle findOne(Long id);</p>
+<p> </p>
+<p><strong><span style="font-family:'宋体';"> 移除缓存条目：</span></strong></p>
+<p>     @CacheEvict("spittleCache")</p>
+<p>      void remove(Long spittled);</p>
+<p><strong><span style="color:#ff6666;">PS：总结比较粗糙，勿怪，主要备忘，有问题，留言，大家交流</span></strong></p>
+<p> </p>
+<p> </p>
+<p> </p>
+            </div>
+                </div>
+        <div class="readall_box csdn-tracking-statistics tracking-click"  data-pid="blog"  data-mod="popu_596">
+        <div class="read_more_mask"></div>
+            <a class="btn btn-large btn-gray-fred read_more_btn" target="_self">阅读全文</a>
+        </div>
+        <ul class="article_next_prev">
+                                    <li class="prev_article">
+                <span  onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian']);location.href='https://blog.csdn.net/november22/article/details/58592173';">上一篇</span>
+                <a href="https://blog.csdn.net/november22/article/details/58592173" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian'])">spring security报错--java.lang.NoClassDefFoundError: org/springframework/core/SpringProperties</a>
+            </li>
+            
+                                    <li class="next_article">
+                <span  onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian']);location.href='https://blog.csdn.net/november22/article/details/61623696';">下一篇</span>
+                <a href="https://blog.csdn.net/november22/article/details/61623696" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian'])">spring security 配置类方式实现（1）</a>
+            </li>
+                    </ul>
+        <div style="clear:both; height:10px;"></div>
+    </div>
+    <div class="edu_promotion" style="margin: 16px 0;display:none;"></div>
+    <script>
+    $(".MathJax").remove();
+    </script>
+        <!--文章底部广告位-->
+    <div id="article_ad">
+        <!-- 广告位：PC端-博客详情页底部banner-760*90 -->
+        <script type="text/javascript" src="//cee1.iteye.com/pkccmgslc.js"></script>
+    </div>
+    
+    <!--评论区-->
+    <div class="comment_class">
+        <div class="commentform" id="comments"></div>
+        <div id="comment_form">
+
+        </div>
+        <div id="comment_title" class="panel_head">
+            <span class="see_comment">查看评论</span><a name="comments" ></a></div>
+        <div id="comment_list">
+
+        </div>
+        <div id="comment_bar">
+        </div>
+    </div>
+
+    <!--推荐列表-->
+    <div class="recommend_list">
+                                            <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/sinat_21184471/article/details/76924260"  target="_blank" strategy="BlogCommendFromBaidu_0">
+                    <dd>
+                        <h2>Spring Cache抽象详解，一篇很好的spring Cache的解释文章，结合源码更加让人容易懂</h2>
+                        <div class="summary">
+                            Spring Cache抽象详解
+大部分的redis缓存就只是交给spring实例化，没有实现spring的缓存接口，看了这个文章更加让人理解
+
+博客分类： 
+
+spring杂谈
+spri...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/7/7/6/3_sinat_21184471.jpg" alt="sinat_21184471" title="sinat_21184471"></li>
+                            <li class="user_name">sinat_21184471</li>
+                            <li class="time">2017年08月08日 18:07</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1396</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/xiaoyu411502/article/details/51927476"  target="_blank" strategy="BlogCommendFromBaidu_1">
+                    <dd>
+                        <h2>Spring Cache使用详解</h2>
+                        <div class="summary">
+                            Spring Cache
+
+
+Spring Cache使用方法与Spring对事务管理的配置相似。Spring Cache的核心就是对某个方法进行缓存，其实质就是缓存该方法的返回结果，并把方法参...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/8/3/C/3_xiaoyu411502.jpg" alt="xiaoyu411502" title="xiaoyu411502"></li>
+                            <li class="user_name">xiaoyu411502</li>
+                            <li class="time">2016年07月17日 00:08</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>7919</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                          <dl class="">
+            <script>
+            (function() {
+              var s = "_" + Math.random().toString(36).slice(2);
+              document.write('<div id="' + s + '"></div>');
+              (window.slotbydup=window.slotbydup || []).push({
+                id: '4765209',
+                container: s,
+                size: '808,120',
+                display: 'inlay-fix'
+              });
+            })();
+            </script>
+          </dl>
+                                        <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/lanmo555/article/details/52355589"  target="_blank" strategy="BlogCommendFromBaidu_2">
+                    <dd>
+                        <h2>spring-cache 雪崩</h2>
+                        <div class="summary">
+                            spring-cache 基本原理是利用拦截器，先尝试读取缓存，未命中缓存，先读库在写入缓存，经过查看源码如果在并发量大的时候容易造成“雪崩”。原因是在更新缓存逻辑中没有做并发更新的处理。...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/8/4/1/3_lanmo555.jpg" alt="lanmo555" title="lanmo555"></li>
+                            <li class="user_name">lanmo555</li>
+                            <li class="time">2016年08月29日 18:38</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1458</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/u011659172/article/details/50844501"  target="_blank" strategy="BlogCommendFromBaidu_3">
+                    <dd>
+                        <h2>从头认识Spring Cache</h2>
+                        <div class="summary">
+                            概述:
+Spring 3.1 引入了激动人心的基于注释（annotation）的缓存（cache）技术，它本质上不是一个具体的缓存实现方案（例如EHCache 或者 OSCache），而是一个对缓存...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/9/8/1/3_u011659172.jpg" alt="u011659172" title="u011659172"></li>
+                            <li class="user_name">u011659172</li>
+                            <li class="time">2016年03月10日 11:50</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1499</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/whatlookingfor/article/details/51833378"  target="_blank" strategy="BlogCommendFromBaidu_4">
+                    <dd>
+                        <h2>Spring缓存注解@Cacheable,@CachePut , @CacheEvict使用</h2>
+                        <div class="summary">
+                            Spring缓存注解的介绍以及常用总结                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/4/3/3/3_whatlookingfor.jpg" alt="whatlookingfor" title="whatlookingfor"></li>
+                            <li class="user_name">whatlookingfor</li>
+                            <li class="time">2016年07月05日 18:41</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>16799</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/tianwei7518/article/details/49072311"  target="_blank" strategy="BlogCommendFromBaidu_5">
+                    <dd>
+                        <h2>Spring Cache缓存介绍</h2>
+                        <div class="summary">
+                            Spring 3.1 引入了激动人心的基于注释（annotation）的缓存（cache）技术，它本质上不是一个具体的缓存实现方案（例如 EHCache 或者 OSCache），而是一个对缓存使用的抽...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/D/B/E/3_tianwei7518.jpg" alt="tianwei7518" title="tianwei7518"></li>
+                            <li class="user_name">tianwei7518</li>
+                            <li class="time">2015年10月18日 15:13</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>9850</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/u013065023/article/details/54633390"  target="_blank" strategy="BlogCommendFromBaidu_6">
+                    <dd>
+                        <h2>Spring cache+ redis与redis 的比较</h2>
+                        <div class="summary">
+                            1. 缓存级别不同
+
+    Spring cache是代码级的缓存，他一般是使用一个ConcurrentMap。也就是说实际上还是是使用JVM的内存来缓存对象的，
+
+    那么肯定会造成大量的内存...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/5/4/1/3_u013065023.jpg" alt="u013065023" title="u013065023"></li>
+                            <li class="user_name">u013065023</li>
+                            <li class="time">2017年01月20日 20:00</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>2610</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/lsgqjh/article/details/54381202"  target="_blank" strategy="BlogCommendFromBaidu_7">
+                    <dd>
+                        <h2>Spring Cache 注解用法</h2>
+                        <div class="summary">
+                            缓存策略
+Eviction policy
+移除策略，即如果缓存满了，从缓存中移除数据的策略；常见的有LFU、LRU、FIFO：
+FIFO（First In First Out）：先进先出算法，即...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/E/F/9/3_lsgqjh.jpg" alt="lsgqjh" title="lsgqjh"></li>
+                            <li class="user_name">lsgqjh</li>
+                            <li class="time">2017年01月12日 19:56</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>2311</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/Rickesy/article/details/47779935"  target="_blank" strategy="BlogCommendFromBaidu_8">
+                    <dd>
+                        <h2>Spring Cache 使用</h2>
+                        <div class="summary">
+                            Spring Cache 使用                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/8/9/9/3_rickesy.jpg" alt="Rickesy" title="Rickesy"></li>
+                            <li class="user_name">Rickesy</li>
+                            <li class="time">2015年08月19日 14:14</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1816</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/AlbertFly/article/details/51967659"  target="_blank" strategy="BlogCommendFromBaidu_9">
+                    <dd>
+                        <h2>使用Spring Cache</h2>
+                        <div class="summary">
+                            本人用的是Spring3.2，所以如果你用的是其他版本，则本文不能保证完全正确。
+
+Spring的cache是在Spring-context中实现的，你额外的引入的spring-context包即可。...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/0/8/4/3_albertfly.jpg" alt="AlbertFly" title="AlbertFly"></li>
+                            <li class="user_name">AlbertFly</li>
+                            <li class="time">2016年07月20日 14:02</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1124</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                            </div>
+   <div id="ad_bot"></div>
+    <div id="report_dialog"></div>
+    <div id="pop_win" style="display:none ;position: absolute; z-index: 10000; border: 1px solid rgb(220, 220, 220); top: 222.5px; left: 630px; opacity: 1; background: none 0px 0px repeat scroll rgb(255, 255, 255);">
+    </div>
+    <div id="popup_mask"></div>
+    <style>
+        #popup_mask
+        {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 9999;
+            left: 0px;
+            top: 0px;
+            opacity: 0.3;
+            filter: alpha(opacity=30);
+            display: none;
+        }
+
+    </style>
+    <div class="clear">
+    </div>
+</div>
+            </div>
+        </div>
+        <div id="side" class="side">
+    <div>
+                    <div id="panel_Profile" class="panel">
+    <ul class="panel_head"><span>个人资料</span></ul>
+    <ul class="panel_body profile">
+        <div class=" user_info">
+    <dl class="inf_bar clearfix">
+        <dt class="csdn-tracking-statistics tracking-click" data-mod="popu_381">
+                <a href="https://blog.csdn.net/november22" target="_blank">
+                    <img src="https://avatar.csdn.net/2/E/8/3_november22.jpg" class="avatar_pic">
+        </a>
+      </dt><dd>
+            <h3 class="csdn-tracking-statistics tracking-click"  data-mod="popu_380"><a href="https://blog.csdn.net/november22" target="_blank" id="uid">november22</a></h3>
+            <div class="medals" title="">
+                      </div>
+                        <span  class="csdn-tracking-statistics tracking-click" data-mod="popu_379"><a class="btn btn-redborder-small "  id="span_add_follow" target="_self">关注</a></span>
+                    </dd>
+    </dl>
+    <div class="inf_number_box clearfix">
+        <dl title="22">
+            <dt>原创</dt>
+            <dd>22</dd>
+        </dl>
+        <dl title="6">
+            <dt>粉丝</dt>
+            <dd id='fan'>6</dd>
+        </dl>
+        <dl title="6">
+            <dt>喜欢</dt>
+            <dd>6</dd>
+        </dl>
+        <dl title="12">
+          <dt>评论</dt>
+          <dd>12</dd>
+        </dl>
+    </div>
+
+</div>
+<div class="interflow clearfix">
+      <div class="badge gradeAndbadge">
+        <div>
+                                    <img src='https://csdnimg.cn/jifen/images/xunzhang/xunzhang/chizhiyiheng.png' alt='持之以恒'>
+                                            </div>
+    </div>
+      <div class="grade gradeAndbadge gradewidths">
+      <span>等级：</span>
+      <div>
+        <a href="https://blog.csdn.net/home/help.html#level" title="3级,点击查看等级说明" target="_blank">
+          <img class="grade-img" src="https://csdnimg.cn/jifen/images/xunzhang/jianzhang/blog3.png" alt="3级,点击查看等级说明">
+        </a>
+      </div>
+    </div>
+    <div class="gradeAndbadge gradewidths" title="66754">
+        <span>访问量：</span>
+        <span class="num odd-overhidden">6万+</span>
+    </div>
+
+    <div class="gradeAndbadge gradewidths" title="554">
+      <span>积分：</span>
+      <span  class="num odd-overhidden">554</span>
+    </div>
+    <div class="gradeAndbadge gradewidths" title="93251">
+        <span>排名：</span>
+        <span class="num odd-overhidden">9万+</span>
+    </div>
+
+</div>
+<script type="text/javascript">
+  // 判断并设置用户名位置，没有博客专家与关注按钮时，用户名居中
+  $medals_children = $('.medals').children().length;
+  $span_add_follow = $('#span_add_follow').length;
+  if($medals_children === 0 && $span_add_follow === 0){
+    $('.inf_bar dd').css('vertical-align','10px')
+  }
+</script>    </ul>
+</div>
+
+                            <div id="homepageArticles" class="panel csdn-tracking-statistics" data-pid="blog" data-mod="popu_4" style="height:250px;">
+    <div id="cpro_u2734133" style="text-align:center;">
+        <!-- 投放代码 -->
+        <script type="text/javascript" src="//cee1.iteye.com/lgyyovfyh.js"></script>
+    </div>
+</div>
+                                <div class="panel" id="panel_Search">
+    <ul class="panel_head"><span>文章搜索</span></ul>
+    <ul class="panel_body" class="form_search">
+        <form id="frmSearch" class="form_search csdn-tracking-statistics" data-pid="blog" target="_blank" data-mod="popu_306">
+            <span><input id="inputSearch" type="text" class="blogsearch" title="请输入关键字"/></span>
+            <input id="btnSubmit" type="button" value="搜索" title="search in blog"/>
+        </form>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").unbind("click");
+        $("#btnSubmit").click(function () {
+            search();
+        });
+
+        $("#frmSearch").submit(function () {
+            search();
+            return false;
+        });
+        function search() {
+            if ($("#inputSearch").val() == "") {
+                alert("请录入搜索关键词！");
+                return false;
+            }
+            var url = CFG.SO_URL + "?q=" + encodeURIComponent($("#inputSearch").val())+'&t=blog&u='+username;
+            // window.location.href = url;
+            window.open(url)
+        }
+    });
+</script>
+
+                                
+                                <div id="panel_Category" class="panel">
+    <ul class="panel_head"><span>文章分类</span></ul>
+    <ul class="panel_body">
+                        <li>
+            <a href="https://blog.csdn.net/november22/article/category/6670601" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                支付宝接口            </a>
+            <span>(1)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/november22/article/category/6681291" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                备忘            </a>
+            <span>(1)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/november22/article/category/6684762" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                错误收集            </a>
+            <span>(7)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/november22/article/category/6700986" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                《Spring 实战》--学习笔记            </a>
+            <span>(10)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/november22/article/category/6701027" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                随记            </a>
+            <span>(2)</span>
+        </li>
+                    </ul>
+</div>
+
+                                <div id="panel_Archive" class="panel">
+    <ul class="panel_head"><span>文章存档</span></ul>
+    <ul class="panel_body">
+        <div id="archive_list">
+                        <!--归档统计-->
+            <li>
+               <a href="https://blog.csdn.net/november22/article/month/2017/11">2017年11月</a>
+               <span>(1)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="https://blog.csdn.net/november22/article/month/2017/03">2017年3月</a>
+               <span>(4)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="https://blog.csdn.net/november22/article/month/2017/02">2017年2月</a>
+               <span>(12)</span>
+            </li>
+                        <!--归档统计-->
+            <li>
+               <a href="https://blog.csdn.net/november22/article/month/2017/01">2017年1月</a>
+               <span>(5)</span>
+            </li>
+                    </div>
+    </ul>
+</div>
+
+                                <div id="hotarticls" class="panel csdn-tracking-statistics" data-pid="blog" data-mod="popu_340">
+    <ul class="panel_head"><span>阅读排行</span></ul>
+    <ul class="panel_body itemlist">
+                        <li>
+            <a href="https://blog.csdn.net/november22/article/details/54600567" title="spring cloud 的启动Eureka client报错--Cannot execute request on any known server">
+                spring cloud 的启动Eureka client报错--Cannot execute request on any known server            </a>
+            <span>(24613)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/november22/article/details/54233269" title="支付宝接口开发-手机网站支付-沙箱测试">
+                支付宝接口开发-手机网站支付-沙箱测试            </a>
+            <span>(24325)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/november22/article/details/54612454" title="ribbon的注解使用报错--No instances available for [IP]">
+                ribbon的注解使用报错--No instances available for [IP]            </a>
+            <span>(5496)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/november22/article/details/60582866" title="spring的cache的注解方式的简单实用（具体步骤）">
+                spring的cache的注解方式的简单实用（具体步骤）            </a>
+            <span>(2066)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/november22/article/details/55506145" title="在web.xml中配置，使用配置类替代springmvc.xml和applicationContext.xml">
+                在web.xml中配置，使用配置类替代springmvc.xml和applicationContext.xml            </a>
+            <span>(1463)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/november22/article/details/55518009" title="重定向时传输数据">
+                重定向时传输数据            </a>
+            <span>(1436)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/november22/article/details/56014447" title="shiro使用报错---One or more realms must be present to execute an authentication attempt.">
+                shiro使用报错---One or more realms must be present to execute an authentication attempt.            </a>
+            <span>(1083)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/november22/article/details/54582410" title="错误--spring boot的application.yml配置文件报错">
+                错误--spring boot的application.yml配置文件报错            </a>
+            <span>(878)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/november22/article/details/54916933" title="微信的jssdk的config接口注入权限验证配置--signature的生成">
+                微信的jssdk的config接口注入权限验证配置--signature的生成            </a>
+            <span>(804)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/november22/article/details/58592173" title="spring security报错--java.lang.NoClassDefFoundError: org/springframework/core/SpringProperties">
+                spring security报错--java.lang.NoClassDefFoundError: org/springframework/core/SpringProperties            </a>
+            <span>(645)</span>
+        </li>
+                    </ul>
+</div>
+
+                                <div id="newcomments" class="panel">
+    <ul class="panel_head"><span>最新评论</span></ul>
+    <ul class="panel_body itemlist">
+                <li>
+            <a href="https://blog.csdn.net/november22/article/details/54612454#comments">ribbon的注解使用报错--No...</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/qq_26545305" class="user_name">qq_26545305</a>:
+                赞一个~~~，666            </p>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/november22/article/details/54233269#comments">支付宝接口开发-手机网站支付-沙箱...</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/y778260328" class="user_name">y778260328</a>:
+                PhonePayServlet 中setReturnUrl和setNotifyUrl的参数是什么？            </p>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/november22/article/details/54233269#comments">支付宝接口开发-手机网站支付-沙箱...</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/u012440725" class="user_name">u012440725</a>:
+                请问你调用支付宝手机网站支付用沙箱帐号付款显示成功后，遇到验证失败的提示是啥愿意呢！            </p>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/november22/article/details/54612454#comments">ribbon的注解使用报错--No...</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/kaifa1321" class="user_name">kaifa1321</a>:
+                赞一个            </p>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/november22/article/details/54233269#comments">支付宝接口开发-手机网站支付-沙箱...</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/s_xly" class="user_name">s_xly</a>:
+                [reply]qq_30646539[/reply]我也出现了这个问题 ，请问你解决了吗            </p>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/november22/article/details/54233269#comments">支付宝接口开发-手机网站支付-沙箱...</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/qq_39857765" class="user_name">qq_39857765</a>:
+                [reply]Loveveryu[/reply]
+老哥，你pc端搞定了吗？            </p>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/november22/article/details/54233269#comments">支付宝接口开发-手机网站支付-沙箱...</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/zz962" class="user_name">zz962</a>:
+                请问你调pageExecute得到的页面是收银台？
+我在用沙箱测试PC网站集成支付宝，调这个接口只...            </p>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/november22/article/details/54233269#comments">支付宝接口开发-手机网站支付-沙箱...</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/qq_31261105" class="user_name">qq_31261105</a>:
+                [reply]qq_30646539[/reply]
+解决了吗？            </p>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/november22/article/details/54233269#comments">支付宝接口开发-手机网站支付-沙箱...</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/November22" class="user_name">November22</a>:
+                [reply]u013270829[/reply]
+看下蚂蚁平台的开放平台吧，他好像每周有固定的时...            </p>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/november22/article/details/54233269#comments">支付宝接口开发-手机网站支付-沙箱...</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/Loveveryu" class="user_name">Loveveryu</a>:
+                博主，做过pc端 支付宝支付吗？            </p>
+        </li>
+            </ul>
+</div>
+
+                            <div id="nav_show_top_stop" class="clearfix" style="z-index:1000;width:300px;">
+                          <div id="cpro_u3031286" class="csdn-tracking-statistics" data-pid="blog" data-view="true" data-mod="ad_popu_189" data-mtp="63"
+                    data-order="40" data-con="ad_content_1259" style="text-align:center;background-color:#fff;">
+                   <!-- 投放代码 -->
+                   <script type="text/javascript" src="//cee1.iteye.com/mhzzpwgzj.js"></script>
+               </div>
+                        <div class="persion_article"></div>
+        </div>
+        <script type="text/javascript">
+            var naviga_offsetTop;
+            $(function(){
+                resetleftTop();
+                $(window).scroll(function(){
+                    var scrollTop = $(document).scrollTop();
+
+                    if (scrollTop > naviga_offsetTop) {
+                        jQuery("#nav_show_top_stop").css({"position": "fixed"});
+                        jQuery("#nav_show_top_stop").css({"top": "2px"});
+                    } else {
+                        jQuery("#nav_show_top_stop").css({"position": "static"});
+                    }
+                });
+            });
+
+            function resetleftTop(){
+                naviga_offsetTop = $("#nav_show_top_stop").position().top;
+            }
+
+        </script>
+    </div>
+    <div class="clear"></div>
+</div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="left_fixed">
+  <div class="left_show_button">
+    <span>
+      <i class="icon iconfont icon-youjiantou"></i>
+    </span>
+</div>
+
+    <ul class="left_menu" id="share_box">
+        <li>
+            <button class="left-fixed-btn btn-like csdn-tracking-statistics tracking-click" data-mod="popu_373" target="_self" title="点赞">
+                <a href="javascript:void(0);" class="iconbox border_red" ><i class="icon iconfont icon-dianzan"></i></a>
+                <a class="txt" href="javascript:void(0);">0</a>
+            </button>
+        </li>
+        <li>
+            <button class="left-fixed-btn csdn-tracking-statistics tracking-click btn-collect" data-mod="popu_374"  target="_self" title="收藏">
+                <a href="javascript:void(0);" class="iconbox border_purple" ><i class="icon iconfont icon-shoucang"></i></a>
+            </button>
+        </li>
+        <li>
+            <button class="left-fixed-btn btn-pinglun csdn-tracking-statistics tracking-click" data-mod="popu_544" title="评论">
+            <a href="javascript:void(0);" class="iconbox border_purple" ><i class="icon iconfont icon-pinglun"></i></a>
+            </button>
+        </li>
+        <li class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+            <a class="bds_tsina outside left-fixed-btn" data-cmd="tsina" title="分享到新浪微博"></a>
+            <span class="iconbox border_red2"><i class="icon iconfont icon-xinlang"></i></span>
+        </li>
+        <li class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+            <a class="bds_weixin outside left-fixed-btn" data-cmd="weixin" title="分享到微信"></a>
+            <span class="iconbox border_green"><i class="icon iconfont icon-weixin"></i></span>
+        </li>
+        <li class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+            <a class="bds_qzone outside left-fixed-btn" data-cmd="qzone" title="分享到QQ空间"></a>
+            <span class="iconbox border_blue"><i class="icon iconfont icon-QQ"></i></span>
+        </li>
+    </ul>
+</div>
+<div id="a52b5334d" style="width: 1px; height: 1px; display: none;">
+    <script id="adJs52b5334"></script>
+    <script>document.getElementById("adJs52b5334").src = "https://ads.csdn.net/js/opt/52b5334.js?t=" + Math.random();</script>
+</div>
+<script src="https://csdnimg.cn/public/common/append_mark/appendMark.min.js?v=5.00.43" type="text/javascript"></script>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'https://csdnimg.cn/static/api/js/share.js?v=89860594'];</script>
+<script type="text/javascript">
+    $(function(){
+        setTimeout(function(){
+            $(".comment_body:contains('回复')").each(function(index,item){
+                var u=$(this).text().split('：')[0].toString().replace("回复","")
+                var thisComment=$(this);
+                if(u)
+                {
+                    $.getJSON("https://passport.csdn.net/get/nick?callback=?", {users: u}, function(a) {
+                        if(a!=null&&a.data!=null&&a.data.length>0)
+                        {
+                            nick=a.data[0].n;
+                            if(u!=nick)
+                            {
+                                thisComment.text(thisComment.text().replace(u,nick));
+                            }
+                        }
+                    });
+                }
+            });
+
+        },200);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },5000);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },10000);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },15000);
+
+    });
+
+    appendMark($('.recommend_list').children('a').find('dt'),$('.extension_other'));
+
+    $(function () {
+        $('pre.prettyprint code').each(function () {
+            var lines = $(this).text().split('\n').length;
+            var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+            $(this).addClass('has-numbering').parent().append($numbering);
+            for (i = 1; i <= lines; i++) {
+                $numbering.append($('<li/>').text(i));
+            };
+            $numbering.fadeIn(1700);
+        });
+    });
+</script>
+     <!--右下角弹窗广告-->
+<div class="csdn-tracking-statistics" data-pid="blog" data-view="true" data-mod="ad_popu_72" data-mtp="62"
+     data-order="40" data-con="ad_content_2072">
+    <!--右下角弹窗广告-->
+    <script id="popuLayer_js_q" src="//ads.csdn.net/js/popuLayer.js" defer="defer" type="text/javascript"></script>
+    <div id="layerd" style="position: fixed;bottom:0px;right:0px;line-height:0px;display:none;z-index:1000;" >
+        <div class="J_close layer_close"
+             style="background-color:#efefef;padding:0px;color:#333;font:12px/24px Helvetica,Tahoma,Arial,sans-serif;text-align:right;">
+            关闭
+        </div>
+        <!-- 广告占位容器 -->
+        <div id="cpro_u3026784">
+            <!-- 列表页广告 -->
+                    <!-- 详情页iteye广告-->
+            <script>
+              (function() {
+              var s = "_" + Math.random().toString(36).slice(2);
+              document.write('<div id="' + s + '"></div>');
+              (window.slotbydup=window.slotbydup || []).push({
+              id: '5570104',
+              container: s,
+              size: '250,250',
+              display: 'inlay-fix'
+              });
+              })();
+              </script>
+              <script src="https://dup.baidustatic.com/js/os.js"></script>
+                 </div>
+    </div>
+    <script type='text/javascript'>
+        document.getElementById("popuLayer_js_q").onload = function () {
+            var styObjd = styObj = {width: "250px", "height": parseInt(250) + 28};
+            window.CSDN.Layer.PopuLayer("#layerd", {
+                storageName: "layerd",
+                styleObj: styObjd,
+                total: 50,
+                expoire: 1000 * 60
+            });
+        }
+        $(function(){
+          function resize_show(){
+            var win_width = $(window).width();
+            if(win_width>1680){
+              $('#layerd').fadeIn()
+            }else{
+              $('#layerd').hide()
+            }
+          }
+          resize_show();
+          $(window).resize(resize_show);
+        })
+    </script>
+</div>
+     <div style="display:none;">
+    <img src="" onerror='setTimeout(function(){if(!/(csdn.net|iteye.com|baiducontent.com|googleusercontent.com|360webcache.com|sogoucdn.com|bingj.com|baidu.com)$/.test(window.location.hostname)){window.location. href="\x68\x74\x74\x70\x73\x3a\x2f\x2f\x77\x77\x77\x2e\x63\x73\x64\x6e\x2e\x6e\x65\x74"}},3000);'>
+</div>
+<script src="https://csdnimg.cn/pubfooter/js/publib_footer-1.0.3.js?v201804111810"  type="text/javascript"></script>
+<script src="https://csdnimg.cn//release/phoenix/bloglist/iconfont/iconfont.js?v=2017.065"  type="text/javascript" ></script>
+<script src='https://csdnimg.cn/public/common/gotop/js/goTop-v1.0.min.js?v1521531018'></script>
+<script>
+    GoTop({
+        hasReport: true,
+        reportFun: function() {
+            $.createMask();
+            var r = blog_address + "/common/report?id=" + fileName + "&t=" + 2;
+            if (3 == 2) {
+                var s = n.parentNode.parentNode.parentNode.getAttribute("floor");
+                r += "&floor=" + s
+            }
+            var i = (document.documentElement.clientHeight - 400) / 2 + (document.documentElement.scrollTop || document.body.scrollTop),
+                a = (document.documentElement.clientWidth - 400) / 2;
+
+            $("#report_dialog").load(r).css({
+                //top: i + "px",
+                top: '20%',
+                left: a
+            }).show()
+        }
+    })
+</script>
+</body>
+<script src='https://csdnimg.cn/public/common/gotop/js/goTop-v1.0.min.js?v201803151422'></script>
+<script>
+    GoTop({
+        hasReport: true,
+        reportFun: function() {
+            $.createMask();
+            var r = blog_address + "/common/report?id=" + fileName + "&t=" + 2;
+            if (3 == 2) {
+                var s = n.parentNode.parentNode.parentNode.getAttribute("floor");
+                r += "&floor=" + s
+            }
+            var i = (document.documentElement.clientHeight - 400) / 2 + (document.documentElement.scrollTop || document.body.scrollTop),
+                a = (document.documentElement.clientWidth - 400) / 2;
+
+            $("#report_dialog").load(r).css({
+                //top: i + "px",
+                top: '20%',
+                left: a
+            }).show()
+        }
+    })
+</script>
+<script type="text/x-mathjax-config"> 
+    MathJax.Hub.Config({ 
+        "HTML-CSS": { 
+            linebreaks: { automatic: true, width: "94%container" },
+            imageFont: null
+        }
+    });
+</script>
+<script type="text/javascript" src="https://static-blog.csdn.net/mdeditor/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="https://dup.baidustatic.com/js/os.js"></script>
+</html>

@@ -1,0 +1,181 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom' xmlns:apps='http://schemas.google.com/apps/2006'>
+	<title>Mail Filters</title>
+	<id>tag:mail.google.com,2008:filters:1582907987053,z0000001584934132825*5595639648762461691,z0000001584934343914*7462223062037201297,z0000001584940221979*2945119104401702485,z0000001584940265338*5837123673266430214,z0000001584940504458*4607350473564401859,z0000001584940676179*1015692841944498868,z0000001584940796190*2652855129317378564,z0000001584940981565*8405800292470798090,z0000001584941088568*5818346440438214432,z0000001584941200780*4372900248828338867,z0000001584944361294*5062265324480118485</id>
+	<updated>2020-03-23T06:19:31Z</updated>
+	<author>
+		<name>attilax ati</name>
+		<email>attilax1314@gmail.com</email>
+	</author>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:1582907987053</id>
+		<updated>2020-03-23T06:19:31Z</updated>
+		<content></content>
+		<apps:property name='hasTheWord' value='from:@cloudhq.net OR from:cloudhq.us OR from:cloudhq.io OR from:cloudhq-mkt11.us OR from:cloudhq-mkt12.us'/>
+		<apps:property name='shouldNeverSpam' value='true'/>
+		<apps:property name='smartLabelToApply' value='^smartlabel_personal'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:z0000001584934132825*5595639648762461691</id>
+		<updated>2020-03-23T06:19:31Z</updated>
+		<content></content>
+		<apps:property name='subject' value='Google快讯'/>
+		<apps:property name='label' value='news'/>
+		<apps:property name='shouldArchive' value='true'/>
+		<apps:property name='shouldNeverSpam' value='true'/>
+		<apps:property name='smartLabelToApply' value='^smartlabel_notification'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:z0000001584934343914*7462223062037201297</id>
+		<updated>2020-03-23T06:19:31Z</updated>
+		<content></content>
+		<apps:property name='from' value='action@ifttt.com'/>
+		<apps:property name='label' value='ifttt'/>
+		<apps:property name='shouldArchive' value='true'/>
+		<apps:property name='shouldNeverSpam' value='true'/>
+		<apps:property name='smartLabelToApply' value='^smartlabel_notification'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:z0000001584940221979*2945119104401702485</id>
+		<updated>2020-03-23T06:19:31Z</updated>
+		<content></content>
+		<apps:property name='subject' value='账单'/>
+		<apps:property name='label' value='bill'/>
+		<apps:property name='shouldNeverSpam' value='true'/>
+		<apps:property name='shouldAlwaysMarkAsImportant' value='true'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:z0000001584940265338*5837123673266430214</id>
+		<updated>2020-03-23T06:19:31Z</updated>
+		<content></content>
+		<apps:property name='subject' value='尾号'/>
+		<apps:property name='label' value='paylog'/>
+		<apps:property name='shouldStar' value='true'/>
+		<apps:property name='shouldNeverSpam' value='true'/>
+		<apps:property name='shouldAlwaysMarkAsImportant' value='true'/>
+		<apps:property name='smartLabelToApply' value='^smartlabel_personal'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:z0000001584940504458*4607350473564401859</id>
+		<updated>2020-03-23T06:19:31Z</updated>
+		<content></content>
+		<apps:property name='subject' value='结算'/>
+		<apps:property name='label' value='paylog'/>
+		<apps:property name='shouldStar' value='true'/>
+		<apps:property name='shouldNeverSpam' value='true'/>
+		<apps:property name='shouldAlwaysMarkAsImportant' value='true'/>
+		<apps:property name='smartLabelToApply' value='^smartlabel_personal'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:z0000001584940676179*1015692841944498868</id>
+		<updated>2020-03-23T06:19:31Z</updated>
+		<content></content>
+		<apps:property name='subject' value='Your Grab E-Receip'/>
+		<apps:property name='label' value='paylog'/>
+		<apps:property name='shouldStar' value='true'/>
+		<apps:property name='shouldNeverSpam' value='true'/>
+		<apps:property name='shouldAlwaysMarkAsImportant' value='true'/>
+		<apps:property name='smartLabelToApply' value='^smartlabel_personal'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:z0000001584940796190*2652855129317378564</id>
+		<updated>2020-03-23T06:19:31Z</updated>
+		<content></content>
+		<apps:property name='hasTheWord' value='Grab E-Receipt'/>
+		<apps:property name='label' value='paylog'/>
+		<apps:property name='shouldStar' value='true'/>
+		<apps:property name='shouldNeverSpam' value='true'/>
+		<apps:property name='shouldAlwaysMarkAsImportant' value='true'/>
+		<apps:property name='smartLabelToApply' value='^smartlabel_personal'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:z0000001584940981565*8405800292470798090</id>
+		<updated>2020-03-23T06:19:31Z</updated>
+		<content></content>
+		<apps:property name='subject' value='安全'/>
+		<apps:property name='label' value='securyLog'/>
+		<apps:property name='shouldStar' value='true'/>
+		<apps:property name='shouldNeverSpam' value='true'/>
+		<apps:property name='shouldAlwaysMarkAsImportant' value='true'/>
+		<apps:property name='smartLabelToApply' value='^smartlabel_personal'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:z0000001584941088568*5818346440438214432</id>
+		<updated>2020-03-23T06:19:31Z</updated>
+		<content></content>
+		<apps:property name='from' value='Editors.Chinese@dowjones.com'/>
+		<apps:property name='label' value='news'/>
+		<apps:property name='shouldMarkAsRead' value='true'/>
+		<apps:property name='shouldArchive' value='true'/>
+		<apps:property name='shouldNeverSpam' value='true'/>
+		<apps:property name='shouldNeverMarkAsImportant' value='true'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:z0000001584941200780*4372900248828338867</id>
+		<updated>2020-03-23T06:19:31Z</updated>
+		<content></content>
+		<apps:property name='from' value='cn.help@nytimes.com'/>
+		<apps:property name='label' value='news'/>
+		<apps:property name='shouldMarkAsRead' value='true'/>
+		<apps:property name='shouldArchive' value='true'/>
+		<apps:property name='shouldNeverSpam' value='true'/>
+		<apps:property name='shouldNeverMarkAsImportant' value='true'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+	<entry>
+		<category term='filter'></category>
+		<title>Mail Filter</title>
+		<id>tag:mail.google.com,2008:filter:z0000001584944361294*5062265324480118485</id>
+		<updated>2020-03-23T06:19:31Z</updated>
+		<content></content>
+		<apps:property name='hasTheWord' value='交易提醒'/>
+		<apps:property name='label' value='paylog'/>
+		<apps:property name='shouldStar' value='true'/>
+		<apps:property name='shouldNeverSpam' value='true'/>
+		<apps:property name='shouldAlwaysMarkAsImportant' value='true'/>
+		<apps:property name='smartLabelToApply' value='^smartlabel_personal'/>
+		<apps:property name='sizeOperator' value='s_sl'/>
+		<apps:property name='sizeUnit' value='s_smb'/>
+	</entry>
+</feed>

@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>mybatis 3.x 缓存Cache的使用 - 菩提树下的杨过 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=-hy83QNg62d4qYibixJzxMJkbf1P9fTBlqv7SK5zVL01"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue.css?v=0qK9u742QhZ2ygXQ2XvDKUpwAJ6TPVAq3vGGNZD4Qx81"/>
+<link type="text/css" rel="stylesheet" href="/blog/customcss/31164.css?v=xApjKdOG9x53Iwn30Qujijvv74w%3d"/>
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/SimpleBlue/bundle-SimpleBlue-mobile.css?v=NNDA5QyCVOryYTTnKs-Bji3iJtsOwZNbIf8Qs7hMnyE1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/yjmyzz/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/yjmyzz/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/yjmyzz/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript">var currentBlogApp = 'yjmyzz', cb_enable_mathjax=true;var isLogined=false;</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']], processClass: 'blogpost-body', processEscapes: true },
+        TeX: { 
+            equationNumbers: { autoNumber: ['AMS'], useLabelIds: true }, extensions: ['extpfeil.js'] },
+            'HTML-CSS': { linebreaks: { automatic: true } },
+            SVG: { linebreaks: { automatic: true } }
+        });
+    </script><script src="//mathjax.cnblogs.com/2_7_2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="/bundles/blog-common.js?v=taItysi72HxMPeH9Xg5nAYabRul6hhgahi3tVIMIKV81" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+<!--PageBeginHtml Block Begin-->
+<script type="text/javascript" src="https://files.cnblogs.com/yjmyzz/cnblog.js"></script>
+<div class="ajaxBg" id="ajaxBg" style="display:none">
+    </div>
+    <div class="ajaxPopUp" id="ajaxPopUp" style="display:none">
+        <div class="title" id="ajaxTitle">            
+        </div>
+        <div class="body" id="ajaxBody">           
+        </div>
+        <div class="footer">
+            <a href="javascript:void(0)" onclick="_jimmyClosePopUp()">Close(关闭)</a></div>
+    </div>
+<!--PageBeginHtml Block End-->
+
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+		
+<!--done-->
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/yjmyzz/">菩提树下的杨过</a></div>
+<div class="subtitle"></div>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li id="nav_myhome"><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/yjmyzz/">首页</a></li>
+<li id="nav_newpost"><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li id="nav_contact"></li>
+<li id="nav_rss"><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/yjmyzz/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/yjmyzz/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li id="nav_admin"><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<!--done-->
+随笔-1147&nbsp;
+文章-1&nbsp;
+评论-2693&nbsp;
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/yjmyzz/p/use-cache-in-mybatis.html">mybatis 3.x 缓存Cache的使用</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body"><p>mybatis 3.x 已经支持cache功能了，使用很简单，在mappper的xml文件里添加以下节点：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008080;"> 1</span> <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">mapper </span><span style="color: #ff0000;">namespace</span><span style="color: #0000ff;">="com.cnblogs.yjmyzz.mybatis.mapper.OrderMapper"</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #008080;"> 2</span> 
+<span style="color: #008080;"> 3</span>     <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">cache 
+</span><span style="color: #008080;"> 4</span>         <span style="color: #ff0000;">eviction</span><span style="color: #0000ff;">="LRU"</span>
+<span style="color: #008080;"> 5</span> <span style="color: #ff0000;">        flushInterval</span><span style="color: #0000ff;">="60000"</span>
+<span style="color: #008080;"> 6</span> <span style="color: #ff0000;">        size</span><span style="color: #0000ff;">="1024"</span>
+<span style="color: #008080;"> 7</span> <span style="color: #ff0000;">        readOnly</span><span style="color: #0000ff;">="true"</span>
+<span style="color: #008080;"> 8</span>     <span style="color: #0000ff;">/&gt;</span>    
+<span style="color: #008080;"> 9</span> <span style="color: #000000;">...
+</span><span style="color: #008080;">10</span> <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">mapper</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>这里有几个要注意的地方：</p>
+<p><span style="color: #ff0000;">eviction</span>是缓存的淘汰算法，可选值有"LRU"、"FIFO"、"SOFT"、"WEAK"，缺省值是LRU</p>
+<p><span style="color: #ff0000;">flashInterval</span>指缓存过期时间，单位为毫秒，60000即为60秒，<span style="color: #ff0000;">缺省值为空，即只要容量足够，永不过期</span></p>
+<p><span style="color: #ff0000;">size</span>指缓存多少个对象，默认值为1024</p>
+<p><span style="color: #ff0000;">readOnly</span>是否只读，如果为true，则所有相同的sql语句返回的是同一个对象（有助于提高性能，但并发操作同一条数据时，可能不安全），如果设置为false，则相同的sql，后面访问的是cache的clone副本。</p>
+<p>&nbsp;</p>
+<p>上面这个是全局设置，在每条单独的sql语句上，还可以有局部设置，比如：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">select </span><span style="color: #ff0000;">id</span><span style="color: #0000ff;">="getOrder"</span><span style="color: #ff0000;"> parameterType</span><span style="color: #0000ff;">="int"</span><span style="color: #ff0000;"> resultType</span><span style="color: #0000ff;">="TOrder"</span><span style="color: #ff0000;">  useCache</span><span style="color: #0000ff;">="false"</span><span style="color: #0000ff;">&gt;</span><span style="color: #000000;">
+        ...
+    </span><span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">select</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p><span style="color: #ff0000;">useCache="false"</span>表示该select语句不使用缓存（即使xml最开头的全局cache启用）</p>
+<p>默认情况下，如果全局开启了缓存，insert/update/delete成功后，会自动刷新相关的缓存项，但<span style="color: #ff0000;">有一点要特别注意</span>：在mybatis与hibernate混用时，由于mybatis与hibernate的缓存是无关的，如果用mybatis做select查询，用hibernate做insert/update/delete，hibernate对数据的修改，并不会刷新mybatis的缓存。</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2014-11-13 12:53</span> <a href='http://www.cnblogs.com/yjmyzz/'>菩提树下的杨过</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=4094485" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(4094485);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=31164,cb_entryId=4094485,cb_blogApp=currentBlogApp,cb_blogUserGuid='c1853d0b-63cf-dd11-9e4d-001cf0cd104b',cb_entryCreatedDate='2014/11/13 12:53:00';loadViewCount(cb_entryId);var cb_postType=1;</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2018 菩提树下的杨过
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

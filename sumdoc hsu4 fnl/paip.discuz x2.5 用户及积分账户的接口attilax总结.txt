@@ -1,0 +1,80 @@
+paip.discuz x2.5 用户及积分账户的接口attilax总结
+
+今天新建立了一个/unaapi.php，准备利用它作接口API，供我的彩票系统调用。。查了不少网络，DISCUZ的文档做的真烂，有些方法实在不好找，也不想去一点点跟踪调试。。就自己重写了。。
+
+1. 系统方法引用
+
+
+define ( 'APPTYPEID', 5 ); // 必须的，你懂的
+define ( 'CURSCRIPT', 'userapp' ); // 必须的，你懂的
+require_once './source/class/class_core.php'; // 必须的，你懂的
+$discuz = & discuz_core::instance (); // 必须的，你懂的
+$discuz->cachelist = $cachelist; // 必须的，你懂的
+$discuz->init (); // 必须的，你懂的
+
+
+引用这几行代码是为了获取当前登录用户   username:".$_G['username']
+
+2. getUidByUname ,找遍DISCUZ，没发现通过用户名找UID这个方法，只好自己写了...因为是通过远程API调用取UID，所以无法用$_G['uid']这个捷径。。
+
+function getUidByUname($uname) {
+	inidb();
+	     $sql="Select * FROM pre_common_member where username='".$uname."'" ;
+	         $result=mysql_query($sql);
+	        mysql_num_rows($result);
+	           $rowx=mysql_fetch_array($result); 
+	           $uid=   $rowx['uid'];
+	           return $uid;
+}
+
+
+
+3. 连接数据库..
+require './config/config_global.php';
+ 
+ 
+ function inidb()
+ {
+ 	global  $_config;
+ 	mysql_connect($_config['db']['1']['dbhost'],$_config['db']['1']['dbuser'],$_config['db']['1']['dbpw'] = '');
+ 	mysql_select_db(	$_config['db']['1']['dbname']);
+ 	mysql_query("set names 'GBK'") ;
+ 	
+ 	 
+ 	
+ }
+
+
+
+4. 取金钱余额(积分系统中的金钱）。。。
+
+	           
+		        //$sql="Select * FROM pre_common_member_count where uid= ".$uid ; 
+		        	$row2 = C::t('common_member_count')->fetch($uid);   
+		         $money = $row2['extcredits2']; 
+
+
+
+
+
+
+
+5.减少金钱
+
+ if($_REQUEST["method"]=="AccMinus")
+ {			$uname=$_REQUEST["uname"];
+		 $minus=$_REQUEST["money"];
+		 $uid=getUidByUname ( $uname );
+		 
+		 $row2 = C::t('common_member_count')->fetch($uid);
+		 $moneyOri = $row2['extcredits2'];
+		 $newMoney=$moneyOri-$minus;
+		 C::t('common_member_count')->update($uid, array('extcredits2' =>$newMoney ));
+		 
+		 global $money;
+		 $money=$newMoney;
+ }
+      
+
+
+6.增加金钱.

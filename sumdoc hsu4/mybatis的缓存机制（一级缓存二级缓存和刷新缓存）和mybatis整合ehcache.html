@@ -1,0 +1,460 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script type="text/javascript">
+        if (window.location.toString().indexOf("shtml?") > 0) {
+            self.location = window.location.toString().replace(window.location.search.toString(), "");
+        }
+        function doccheckart(json) {
+            if (json[0].result == "1") {
+                self.location = "http://www.360doc.com/noarticle.aspx";
+            }
+        }
+    </script>
+<script src="/js/jquery1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+        if (navigator.userAgent.indexOf("iPhone") > 0 || navigator.userAgent.indexOf("Android") > 0 || navigator.userAgent.indexOf("iPod") > 0) {  //手机端跳转
+            var patt1 = new RegExp("[0-9]*_[0-9]*");
+            var url = patt1.exec(location.href);
+            if (url != "") {
+                self.location = "http://www.360doc.cn/article/" + url + ".html";
+            }
+        }
+        if ( 518018352 !=  518018352) {
+            $.ajax({
+                url: "http://www.360doc.com/ajax/getuserid.ashx",
+                cache: false,
+                dataType: "json",
+                success: function (result) {
+                    if (29475794 != result.userid) { 
+                        self.location = "http://www.360doc.com/content/15/1205/07/29475794_518018352.shtml";
+                    }
+                }
+            });
+        }
+    </script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="360doc" name="classification" /><link rel="alternate" media="only screen and (max-width: 640px)" href="http://www.360doc.cn/article/29475794_518018352.html"/><meta content="缓存,二级,数据" name=keywords><meta content="mybatis的缓存机制（一级缓存二级缓存和刷新缓存）和mybatis整合ehcache" name=description><meta name="mobile-agent" content="format=html5;url=http://www.360doc.cn/article/29475794_518018352.html"/><meta content="// 二级缓存测试。mybatis二级缓存对细粒度的数据级别的缓存实现不好，对同时缓存较多条数据的缓存，比如如下需求：对商品信息进行缓存，由于商品信息查询访问量大，但是要求用户每次都能查询最新的商品信息，此时如果使用mybatis的二级缓存就无法实现当一个商品变化时只刷新该商品的缓存信息而不刷新其它商品的信息，因为mybaits的二级缓存区域以mapper为单位划分，当一个商品信息变化会将所有商品信息的缓存数据全部清空。" name=360docabstract><meta content="www.360doc.com" name="author" /><title>
+mybatis的缓存机制（一级缓存二级缓存和刷新缓存）和mybatis整合ehcache
+</title>
+<script src="/js/showarticlefollow20160329.js?t=2017062101" type="text/javascript" charset="utf-8"></script>
+<script src="http://www.360doc.com/js/jQuery.md5.min.js?t=2016041501" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?d86954201130d615136257dde062a503";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+<link rel="stylesheet" type="text/css" href="http://css.360doc.com/wzhead-cleaned.css?t=2016011601" /><link rel="stylesheet" type="text/css" href="http://css.360doc.com/newArticle20160509.css?t=2017101701" /><style>#artContent img{max-width:656px;} #artContent h1{font-size:16px;font-weight: 400;}</style>
+<script type="text/javascript" language="javascript">
+        window.onerror = ignoreError;
+        function ignoreError() {
+            return true;
+        }
+    </script>
+<link href="http://css.360doc.com/index7/newheader.css?t=2016123003" rel="stylesheet" type="text/css" /></head>
+<body onmouseup="setDragEnd()" onclick="delAllDiv(event)">
+<span id="LayerLogin"></span>
+<div style="position: fixed; width: 100%; z-index: 1000;">
+<div class="header" style="background-color: #ffffff;">
+<div class="header_1">
+<a href="http://www.360doc.com/index.html">
+<img src="http://pubimage.360doc.com/index7/nlogo.jpg" class="f_left" /></a>
+<div class="mylibrary">
+<a id="userInfoUrl" href="http://www.360doc.com/my360doc.aspx" class="a1">
+<div class="h_user">
+<img id="divuserinfonew" src="http://pubimage.360doc.com/index7/dingtu.gif" /><span></span>
+</div>
+我的图书馆
+</a>
+<ul class="hm_list hm_account" style="display: none;">
+<li><a href="http://www.360doc.com/myindex.aspx">首页</a></li>
+<li><a href="http://www.360doc.com/myfiles.aspx?app=1&type=3">馆藏</a></li>
+<li><a href="http://www.360doc.com/myreadroom.aspx">阅览室</a></li>
+<li><a href="http://www.360doc.com/mystudy.aspx">学习圈</a></li>
+<li><a href="http://www.360doc.com/mycontacts.aspx">通讯录</a></li>
+<li><a href="javascript:void(0);" onclick="displaylogin();">退出帐号</a></li>
+</ul>
+</div>
+<div class="headmail f_left" style="display: none;">
+<p class="h_icon1" id="newMsg"></p>
+<span class="h_border"></span>
+<ul class="hm_list" id="msgtips">
+<li id="msgicon"><a href="/mymsg.aspx?app=2">查看信箱</a></li>
+<li id="sysmsgicon"><a href="/mymsg.aspx?app=9">系统消息</a></li>
+<li id="sysicon"><a href="/mymsg.aspx?app=4">官方通知</a></li>
+<li class="hm_color2" style="background-color: #f4f4f4"><a href="/mymsg.aspx?app=6">设置</a></li>
+</ul>
+</div>
+<div class="headtalker f_left" style="display: none;">
+<p class="h_icon1" id="newDialog"></p>
+<span class="h_border"></span>
+<ul class="hm_list">
+<li id="li1chat"><a href="javascript:void(0)" onclick="initchatnew()">开始对话</a></li>
+<li id="li2chat" style="display: none;"><a href="javascript:void(0)" style="color: #141414;">有<span>11</span>人和你对话，<span onclick="initchatnew()" style="color: #4578b4">查看</span>&nbsp;<span onclick="clearinfochat()" style="color: #4578b4">忽略</span></a></li>
+<li><a href="http://www.360doc.com/mycontacts.aspx?app=8">历史对话记录</a></li>
+<li class="hm_color2" style="background-color: #f4f4f4"><a href="http://www.360doc.com/mycontacts.aspx?app=7">通知设置</a></li>
+</ul>
+</div>
+<a href="http://www.360doc.com/advice.html" target="_blank" class="head_talk f_right">留言交流</a>
+<div class="headsearch f_right">
+<div class="zcomdiv">
+<input type="text" class="headsearch_inp f_left" value="搜文章 找馆友" />
+<span class="headsearch_btn f_right" id="searchlinkid"></span>
+</div>
+<div class="headsearch_select">
+<p class="hs_title">请选择搜索范围</p>
+<a href="javascript:goSearch();" class="cur">含&nbsp;<span></span>&nbsp;的文章</a>
+<a href="javascript:goSearch();">昵称为&nbsp;<span></span>&nbsp;的馆友</a>
+<a href="javascript:goSearch();">兴趣为&nbsp;<span></span>&nbsp;的馆友</a>
+</div>
+</div>
+</div>
+</div>
+<div class="arti_type_shadow"></div>
+</div>
+<div style="height: 68px; _height: 0px; width: 100%;"></div>
+<div class="clear360doc"></div>
+<div class="doc360article_content">
+<div style="height: 90px; padding-top: 13px;">
+<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'></script><ins class='adsbygoogle' style='display: inline-block; width: 970px; height: 90px' data-ad-client='ca-pub-6625678643128649' data-ad-slot='2709112222'></ins><script> (adsbygoogle = window.adsbygoogle || []).push({ }); </script>
+</div>
+<p class="clearboth"></p>
+<div class="a_left">
+<div id="bgchange">
+<div class="fontsize_bgcolor_controler">
+<div class="a_bgcolor">
+<img src="http://pubimage.360doc.com/NewArticle/bgcolor.jpg" />
+<div class="a_colorlist">
+<span class="a_color1" onclick="artStatistics('20-11-1');">
+<img src="http://pubimage.360doc.com/NewArticle/yes.gif" /></span>
+<span class="a_color2" onclick="artStatistics('20-11-2');">
+<img src="http://pubimage.360doc.com/NewArticle/yes.gif" /></span>
+<span class="a_color3" onclick="artStatistics('20-11-3');">
+<img src="http://pubimage.360doc.com/NewArticle/yes.gif" /></span>
+<span class="a_color4" onclick="artStatistics('20-11-4');">
+<img src="http://pubimage.360doc.com/NewArticle/yes.gif" /></span>
+<span class="a_color5" onclick="artStatistics('20-11-5');">
+<img src="http://pubimage.360doc.com/NewArticle/yes.gif" /></span>
+<span class="a_color6 cur" onclick="artStatistics('20-11-6');">
+<img src="http://pubimage.360doc.com/NewArticle/yes.gif" /></span>
+</div>
+</div>
+<div class="a_fontsize">
+<img src="http://pubimage.360doc.com/NewArticle/fontSize.jpg" />
+<div class="fschange">
+<label>
+<input type="radio" name="font_Size" id="" value="18" onclick="artStatistics('20-10-1');" />大
+</label>
+&nbsp;
+<label>
+<input type="radio" name="font_Size" id="" value="16" onclick="artStatistics('20-10-2');" />中
+</label>
+&nbsp;
+<label>
+<input type="radio" name="font_Size" id="" value="14" onclick="artStatistics('20-10-3');" />小
+</label>
+</div>
+</div>
+</div>
+<h2 id="titiletext">mybatis的缓存机制（一级缓存二级缓存和刷新缓存）和mybatis整合ehcache</h2>
+<div class="article_data">
+<div class="article_data_left">
+2015-12-05
+<span class="a_username">&nbsp;<a href="http://www.360doc.com/userhome/29475794" id="savernickname" target="_blank" onclick="artStatistics(&#39;20-7-1&#39;);">anowls</a>
+</span>
+<span id="articleinfo">
+<span id="docsource" class="a_from"></span><span id="360doc_Readnum"></span><span id="360docResaveCount"><span onclick="ShowSaverUser();artStatistics('20-13');" id="360doc_saverNum" style="cursor: pointer;"></span>
+<span id="360doc_saverUser">
+<div style="position: absolute; height: 305px; width: 144px; left: 0px; z-index: 2;" id="sameArtOuter">
+<div onclick="event.cancelBubble=true;" style="overflow-y: auto; height: 300px; overflow-x: hidden; z-index: 100; right: 0px; margin-top: -10px;" id="sameArt">
+</div>
+</div>
+</span>
+</span>
+</span>
+</div>
+<div id="resavelayer1" class="bdsharebuttonbox article_data_right">
+</div>
+</div>
+<div id="articlecontent" class="article_container" onmousedown="newhighlight = true;" onmouseup="NewHighlight(event);">
+<table>
+<tbody>
+<tr>
+<td id="artContent" width="656">
+<div style="width: 656px; margin: 0; padding: 0; height: 0;"></div>
+<h1>1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;查询缓存</h1><p>&nbsp;</p><h2>1.1&nbsp;&nbsp;什么是查询缓存</h2><p>mybatis提供查询缓存，用于减轻数据压力，提高数据库性能。</p><p>mybaits提供一级缓存，和二级缓存。</p><p>&nbsp;<img src='http://image91.360doc.com/DownloadImg/2015/12/0507/62469396_1' alt='' style='max-width: 650px;'></p><p>一级缓存是SqlSession级别的缓存。在操作数据库时需要构造 sqlSession对象，在对象中有一个(内存区域)数据结构（HashMap）用于存储缓存数据。不同的sqlSession之间的缓存数据区域<span>（</span><span>HashMap</span><span>）</span>是互相不影响的。</p><p>一级缓存的作用域是同一个SqlSession，在同一个sqlSession中两次执行相同的sql语句，<a target='_blank' name='OLE_LINK95'></a><a target='_blank' name='OLE_LINK94'></a><a target='_blank' name='OLE_LINK93'>第一次执行完毕会将数据库中查询的数据写到缓存（内存），第二次会从缓存中获取数据将不再从数据库查询，从而提高查询效率。</a>当一个sqlSession结束后该sqlSession中的一级缓存也就不存在了。<span>Mybatis</span><span>默认开启一级缓存</span>。</p><p>二级缓存是mapper级别的缓存，多个SqlSession去操作同一个Mapper的sql语句，多个SqlSession去操作数据库得到数据会存在二级缓存区域，多个SqlSession可以共用二级缓存，二级缓存是跨SqlSession的。</p><p>&nbsp;&nbsp;&nbsp; 二级缓存是多个SqlSession共享的，其作用域是mapper的同一个namespace<span>，不同的sqlSession两次执行相同namespace下的sql语句且向sql中传递参数也相同即最终执行相同的sql语句，第一次执行完毕会将数据库中查询的数据写到缓存（内存），第二次会从缓存中获取数据将不再从数据库查询，从而提高查询效率。</span><span>Mybatis</span><span>默认没有开启二级缓</span><span>存需要在setting全局参数中配置开启二级缓存。</span></p><p>如果缓存中有数据就不用从数据库中获取，大大提高系统性能。</p><h2>1.2&nbsp;&nbsp;一级缓存</h2><h3>1.2.1&nbsp;&nbsp;&nbsp;&nbsp;一级缓存工作原理</h3><p>下图是根据id查询用户的一级缓存图解</p><p><p>&nbsp;<img src='http://image91.360doc.com/DownloadImg/2015/12/0507/62469396_2' alt=''></p><p>第一次发起查询用户id为1的用户信息，先去找缓存中是否有id为1的用户信息，如果没有，从数据库查询用户信息。</p><p>得到用户信息，将用户信息存储到一级缓存中。</p><p>&nbsp;</p><p>如果<strong><span>sqlSession</span><span>去执行</span><span>commit</span><span>操作（执行插入、更新、删除），清空</span><span>SqlSession</span><span>中的一级缓</span></strong>存，这样做的目的为了让缓存中存储的是最新的信息，避免脏读。</p><p>&nbsp;</p><p>第二次发起查询用户id为1的用户信息，先去找缓存中是否有id为1的用户信息，缓存中有，直接从缓存中获取用户信息。</p><h3>1.2.2&nbsp;&nbsp;&nbsp;&nbsp;一级缓存测试</h3><p>mybatis默认支持一级缓存，不需要在配置文件去配置。</p><p>&nbsp;</p><p>按照上边一级缓存原理步骤去测试。</p><p>&nbsp;</p><p align='left'><span>@Test</span></p><p align='left'>&nbsp;&nbsp; <strong><span>public</span> <span>void</span></strong> testCache1() <strong><span>throws</span></strong> Exception{</p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SqlSessionsqlSession = <span>sqlSessionFactory</span>.openSession();<span>//</span><span>创建代理对象</span></p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; UserMapperuserMapper = sqlSession.getMapper(UserMapper.<strong><span>class</span></strong>);</p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>//</span><span>下边查询使用一个</span><span>SqlSession</span></p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>//</span><span>第一次发起请求，查询</span><span>id</span><span>为</span><span>1</span><span>的用户</span></p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Useruser1 = userMapper.<span>findUserById</span>(1);</p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.<em><span>out</span></em>.println(user1);</p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p><p align='left'><span>//&nbsp;&nbsp;&nbsp; </span><span>如果</span><span>sqlSession</span><span>去执行</span><span>commit</span><span>操作（执行插入、更新、删除），清空</span><span>SqlSession</span><span>中的一级缓存，这样做的目的为了让缓存中存储的是最新的信息，避免脏读。</span></p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>//</span><span>更新</span><span>user1</span><span>的信息</span></p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; user1.setUsername(<span>'</span><span>测试用户</span><span>22'</span>);</p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; userMapper.updateUser(user1);</p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>//</span><span>执行</span><span>commit</span><span>操作去清空缓存</span></p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sqlSession.commit();</p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>//</span><span>第二次发起请求，查询</span><span>id</span><span>为</span><span>1</span><span>的用户</span></p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Useruser2 = userMapper.<span>findUserById</span>(1);</p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.<em><span>out</span></em>.println(user2);</p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sqlSession.close();</p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p><p>&nbsp;&nbsp; }</p><h3>1.2.3&nbsp;&nbsp;&nbsp;&nbsp;一级缓存应用</h3><p>正式开发，是将mybatis和spring进行整合开发，事务控制在service中。</p><p>一个service方法中包括很多mapper方法调用。</p><p>service{</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //开始执行时，开启事务，创建SqlSession对象</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //第一次调用mapper的方法findUserById(1)</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; //第二次调用mapper的方法findUserById(1)，从一级缓存中取数据</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p><p>//aop控制 只要方法结束，sqlSession关闭 sqlsession关闭后就销毁数据结构，清空缓存</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Service结束sqlsession关闭</p><p>}</p><p>如果是<span>执行两次</span><span>service</span><span>调用查询相同</span><span>的用户信息，不走一级缓存，因为</span><span>Service</span><span>方法结束，</span><span>sqlSession</span><span>就关闭，一级缓存就清空。</span></p><h2>1.3&nbsp;&nbsp;二级缓存</h2><h3>1.3.1&nbsp;&nbsp;&nbsp;&nbsp;原理</h3><p><p>&nbsp;<img src='http://image91.360doc.com/DownloadImg/2015/12/0507/62469396_3' alt=''></p><p>首先开启mybatis的二级缓存。</p><p>&nbsp;</p><p>sqlSession1去查询用户id为1的用户信息，查询到用户信息会将查询数据存储到二级缓存中。</p><p>&nbsp;</p><p>如果<strong><span>SqlSession3</span><span>去执行相同</span><span> mapper</span><span>下</span><span>sql</span><span>，执行</span><span>commit</span><span>提交，清空该</span><span> mapper</span><span>下的二级缓存区域的数据。</span></strong></p><p>&nbsp;</p><p>sqlSession2去查询用户id为1的用户信息，去缓存中找是否存在数据，如果存在直接从缓存中取出数据。</p><p>&nbsp;</p><p>二级缓存与一级缓存区别，二级缓存的范围更大，<span>多个</span><span>sqlSession</span><span>可以共享一个</span><span>UserMapper</span><span>的二级缓存区域</span>。数据类型仍然为<span>HashMap</span></p><p>UserMapper有一个二级缓存区域（<span>按</span><span>namespace</span><span>分，如果</span><span>namespace</span><span>相同则使用同一个相同的二级缓存区</span>），其它mapper也有自己的二级缓存区域（按namespace分）。</p><p>每一个namespace的mapper都有一个二缓存区域，两个mapper的namespace如果相同，这两个mapper执行sql查询到数据将存在相同的二级缓存区域中。</p><h3>1.3.2&nbsp;&nbsp;&nbsp;&nbsp;开启二级缓存</h3><p>mybaits的二级缓存是<span>mapper</span><span>范围级别，除了在</span><span>SqlMapConfig.xml</span><span>设置二级缓存的总开关</span>，<span>还要在具体的</span><span>mapper.xml</span><span>中开启二级缓存。</span></p><p>&nbsp;</p><p>在核心配置文件<span>SqlMapConfig.xml</span>中加入</p><p><span>&lt;setting</span><span>name</span><span>=</span><span><em><span>'cacheEnabled'</span></em></span><span>value</span><span>=</span><span><em><span>'true'</span></em></span><span>/&gt;</span></p><p align='left'><span>&lt;!-- </span><span>全局配置参数，需要时再设置</span><span> --&gt;</span></p><p align='left'>&nbsp;&nbsp;&nbsp; <span>&lt;</span><span>settings</span><span>&gt;</span></p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>&lt;!-- </span><span>开启二级缓存</span><span>&nbsp;</span><span>默认值为</span><span>true --&gt;</span></p><p align='left'>&nbsp;&nbsp;&nbsp; <span>&lt;</span><span>setting</span><span>name</span>=<em><span>'cacheEnabled'</span></em><span>value</span>=<em><span>'true'</span></em><span>/&gt;</span></p><p>&nbsp;&nbsp;&nbsp; <span>&lt;/</span><span>settings</span><span>&gt;</span></p><p><span>&nbsp;</span></p><table border='1' cellspacing='0' cellpadding='0'><tbody><tr><td><p align='left'>描述</p></td><td><p align='left'>允许值</p></td><td><p align='left'>默认值</p></td></tr><tr><td><p align='left'>cacheEnabled</p></td><td><p align='left'>对在此配置文件下的所有cache 进行全局性开/关设置。</p></td><td><p align='left'>true false</p></td><td><p align='left'>true</p></td></tr></tbody></table><p>&nbsp;</p><p>在UserMapper.xml中开启二缓存，UserMapper.xml下的sql执行完成会存储到它的缓存区域（HashMap）。</p><p align='left'><span>&lt;</span><span>mapper</span><span>namespace</span>=<em><span>'cn.hpu.mybatis.mapper.UserMapper'</span></em><span>&gt;</span></p><p align='left'><span>&lt;!-- </span><span>开启本</span><u><span>mapper</span></u><span><u>namespace</u></span><span>下的二级缓存</span><span> --&gt;</span></p><p><span>&lt;</span><span>cache</span><span>&gt;&lt;/</span><span>cache</span><span>&gt;</span></p><h3><span>1.3.3&nbsp;&nbsp;&nbsp;&nbsp;</span>调用pojo<span>类实现序列化接口</span></h3><p align='left'><strong><span>public</span> <span>class</span></strong> <u><span>User</span></u><strong><span>implements</span></strong> Serializable {</p><p>&nbsp;&nbsp;&nbsp; <span>//<u>Serializable</u></span><span>实现序列化，为了将来反序列化</span></p><p>&nbsp;</p><p>二级缓存需要查询结果映射的pojo对象实现java.io.Serializable接口实现序列化和反序列化操作，注意如果存在父类、成员pojo都需要实现序列化接口。</p><p>pojo<span>类实现序列化接口是</span>为了将缓存数据取出执行反序列化操作，因为二级缓存数据存储介质多种多样，不一定在内存有可能是硬盘或者远程服务器。</p><h3>1.3.4&nbsp;&nbsp;&nbsp;&nbsp;测试方法</h3><p>&nbsp;</p><p align='left'><span>// </span><span>二级缓存测试</span></p><p align='left'>&nbsp;&nbsp; <span>@Test</span></p><p align='left'>&nbsp;&nbsp; <strong><span>public</span> <span>void</span></strong> testCache2() <strong><span>throws</span></strong> Exception {</p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SqlSessionsqlSession1 = <span>sqlSessionFactory</span>.openSession();</p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SqlSessionsqlSession2 = <span>sqlSessionFactory</span>.openSession();</p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SqlSessionsqlSession3 = <span>sqlSessionFactory</span>.openSession();</p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>// </span><span>创建代理对象</span></p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; UserMapperuserMapper1 = sqlSession1.getMapper(UserMapper.<strong><span>class</span></strong>);</p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>// </span><span>第一次发起请求，查询</span><span>id</span><span>为</span><span>1</span><span>的用户</span></p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Useruser1 = userMapper1.findUserById(1);</p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.<em><span>out</span></em>.println(user1);</p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>//</span><span>这里执行关闭操作，将</span><u><span>sqlsession</span></u><span>中的数据写到二级缓存区域</span></p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sqlSession1.close();</p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>//</span><span>使用</span><span>sqlSession3</span><span>执行</span><span>commit()</span><span>操作</span></p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; UserMapperuserMapper3 = sqlSession3.getMapper(UserMapper.<strong><span>class</span></strong>);</p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Useruser&nbsp; = userMapper3.findUserById(1);</p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; user.setUsername(<span>'</span><span>张明明</span><span>'</span>);</p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; userMapper3.updateUser(user);</p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>//</span><span>执行提交，清空</span><span>UserMapper</span><span>下边的二级缓存</span></p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sqlSession3.commit();</p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sqlSession3.close();</p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; UserMapperuserMapper2 = sqlSession2.getMapper(UserMapper.<strong><span>class</span></strong>);</p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>// </span><span>第二次发起请求，查询</span><span>id</span><span>为</span><span>1</span><span>的用户</span></p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Useruser2 = userMapper2.findUserById(1);</p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; System.<em><span>out</span></em>.println(user2);</p><p align='left'>&nbsp;</p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; sqlSession2.close();</p><p>&nbsp;&nbsp; }</p><h3>1.3.5&nbsp; useCache配置禁用二级缓存</h3><p>在statement<span>中设置</span><span>useCache=false</span><span>可以禁用当前</span><span>select</span><span>语句的二级缓存</span><span>，</span><span>即每次查询都会发出</span><span>sql</span><span>去查询</span><span>，默认情况是</span><span>true</span><span>，即该sql使用二级缓存。</span></p><p>&lt;selectid='findOrderListResultMap' resultMap='ordersUserMap' <span>useCache='false'</span>&gt;</p><p>总结：针对每次查询都<span>需要最新的数据</span><span>sql</span><span>，</span>要设置成useCache=false，禁用二级缓存。<span>&nbsp;</span></p><h3>1.3.6&nbsp;&nbsp;&nbsp;&nbsp;mybatis刷新缓存（就是清空缓存）</h3><p>在mapper的同一个namespace中，如果有其它insert、update、delete操作数据后需要刷新缓存，如果不执行刷新缓存会出现脏读。</p><p>&nbsp;设置statement配置中的flushCache='true'&nbsp;属性，<span>默认情况下为</span><span>true</span>即刷新缓存，如果改成false则不会刷新。使用缓存时如果手动修改数据库表中的查询数据会出现脏读。</p><p>如下：</p><p>&lt;insertid='insertUser' parameterType='cn.itcast.mybatis.po.User' <strong><span>flushCache='true'</span></strong>&gt;</p><p>&nbsp;</p><p>总结：一般下执行完commit操作都需要刷新缓存，<span>flushCache=true</span><span>表示刷新缓存默认情况下为</span><span>true,</span><span>我们不用去设置它</span>，这样可以避免数据库脏读。</p><h3>1.3.7&nbsp; Mybatis Cache参数</h3><p align='left'><span>flushInterval</span><span>（刷新间隔）</span>可以被设置为任意的正整数，而且它们代表一个合理的毫秒形式的时间段。默认情况是不设置，也就是没有刷新间隔，缓存仅仅调用语句时刷新。</p><p align='left'>size（引用数目）可以被设置为任意正整数，要记住你缓存的对象数目和你运行环境的可用内存资源数目。默认值是1024。</p><p align='left'>readOnly（只读）属性可以被设置为true或false。只读的缓存会给所有调用者返回缓存对象的相同实例。因此这些对象不能被修改。这提供了很重要的性能优势。可读写的缓存会返回缓存对象的拷贝（通过序列化）。这会慢一些，但是安全，因此默认是false。</p><p align='left'>如下例子：</p><p align='left'><span>&lt;</span>cache &nbsp;eviction='FIFO'&nbsp;flushInterval='60000'&nbsp; size='512'&nbsp;readOnly='true'/&gt;</p><p align='left'>这个更高级的配置创建了一个&nbsp;FIFO&nbsp;缓存,并每隔&nbsp;60&nbsp;秒刷新,存数结果对象或列表的&nbsp;512&nbsp;个引用,而且返回的对象被认为是只读的,因此在不同线程中的调用者之间修改它们会导致冲突。可用的收回策略有,&nbsp;默认的是&nbsp;LRU:</p><p align='left'>1.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LRU&nbsp;–&nbsp;最近最少使用的:移除最长时间不被使用的对象。</p><p align='left'>2.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FIFO&nbsp;–&nbsp;先进先出:按对象进入缓存的顺序来移除它们。</p><p align='left'>3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SOFT&nbsp;–&nbsp;软引用:移除基于垃圾回收器状态和软引用规则的对象。</p><p align='left'>4.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WEAK&nbsp;–&nbsp;弱引用:更积极地移除基于垃圾收集器状态和弱引用规则的对象。</p><h2>1.4&nbsp;&nbsp;mybatis整合ehcache</h2><p><span>ehcache</span><span>是一个分布式缓存框架。</span></p><p>EhCache 是一个纯Java的进程内缓存框架，是一种广泛使用的开源Java分布式缓存，具有快速、精干等特点，是Hibernate中默认的CacheProvider。</p><h3>1.4.1&nbsp;&nbsp;&nbsp;&nbsp;分布缓存</h3><p>我们系统为了<span>提高系统并发，性能、一般对系统进行分布式部署</span>（集群部署方式）</p><p><img src='http://image91.360doc.com/DownloadImg/2015/12/0507/62469396_4' alt='' style='max-width: 650px;'><br></p><p><p>不使用分布缓存，缓存的数据在各各服务单独存储，不方便系统开发。所以要使用分布式缓存<span>对缓存数据进行集中管理。</span></p><p><span>mybatis</span><span>无法实现分布式缓存，需要和其它分布式缓存框架进行整合。</span></p><h3>1.4.2&nbsp;&nbsp;&nbsp;&nbsp;整合方法(掌握无论整合谁，首先想到改type接口)</h3><p>mybatis提供了一个cache接口，如果要实现自己的缓存逻辑，实现cache接口开发即可。</p><p>mybatis和ehcache整合，mybatis和ehcache整合包中提供了一个cache接口的实现类。</p><h3>1.4.3&nbsp;&nbsp;&nbsp;&nbsp;第一步加入ehcache包</h3><p>&nbsp;<img src='http://image91.360doc.com/DownloadImg/2015/12/0507/62469396_5' alt=''></p><p><h3>1.4.4&nbsp;&nbsp;&nbsp;&nbsp;整合ehcache</h3><p>配置mapper中cache中的type为ehcache对cache接口的实现类型。</p><p>&nbsp;</p><p align='left'><span>&lt;</span><span>mapper</span><span>namespace</span>=<em><span>'cn.hpu.mybatis.mapper.UserMapper'</span></em><span>&gt;</span></p><p align='left'><span>&lt;!-- </span><span>开启本</span><u><span>mapper</span></u><span><u>namespace</u></span><span>下的二级缓存</span></p><p align='left'><span>&nbsp;&nbsp; type</span><span>：指定</span><span>cache</span><span>接口实现类，</span><u><span>mybatis</span></u><span>默认使用</span><span>PerpetualCache</span></p><p align='left'><span>&nbsp;&nbsp; </span><span>要和</span><u><span>eache</span></u><span>整合，需要配置</span><span>type</span><span>为</span><u><span>ehcahe</span></u><span>实现</span><span>cache</span><span>接口的类型</span></p><p align='left'><span>&nbsp;--&gt;</span></p><p align='left'><span>&lt;</span><span>cache</span><span>type</span>=<em><span>'org.mybatis.caches.ehcache.EhcacheCache'</span></em><span>&gt;</span></p><p><span>&lt;/</span><span>cache</span><span>&gt;</span></p><p><span>&nbsp;</span></p><p>可以根据需求调整缓存参数：</p><p align='left'><span>&lt;</span><span>cache</span><span>type</span>=<em><span>'org.mybatis.caches.ehcache.EhcacheCache'</span></em><span>&gt;</span></p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>&lt;</span><span>property</span><span>name</span>=<em><span>'timeToIdleSeconds'</span></em><span>value</span>=<em><span>'3600'</span></em><span>/&gt;</span></p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>&lt;</span><span>property</span><span>name</span>=<em><span>'timeToLiveSeconds'</span></em><span>value</span>=<em><span>'3600'</span></em><span>/&gt;</span></p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>&lt;!-- </span><span>同</span><u><span>ehcache</span></u><span>参数</span><span>maxElementsInMemory--&gt;</span></p><p align='left'><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span>&lt;</span><span>property</span><span>name</span>=<em><span>'maxEntriesLocalHeap'</span></em><span>value</span>=<em><span>'1000'</span></em><span>/&gt;</span></p><p align='left'><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;!-- </span><span>同</span><u><span>ehcache</span></u><span>参数</span><span>maxElementsOnDisk --&gt;</span></p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>&lt;</span><span>property</span><span>name</span>=<em><span>'maxEntriesLocalDisk'</span></em><span>value</span>=<em><span>'10000000'</span></em><span>/&gt;</span></p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>&lt;</span><span>property</span><span>name</span>=<em><span>'memoryStoreEvictionPolicy'</span></em><span>value</span>=<em><span>'LRU'</span></em><span>/&gt;</span></p><p>&nbsp;&nbsp;&nbsp; <span>&lt;/</span><span>cache</span><span>&gt;</span></p><h3>1.4.5&nbsp;&nbsp;&nbsp;&nbsp;加入ehcache的配置文件</h3><p>在<span>classpath</span>下配置<span>ehcache</span>.xml</p><p align='left'><span>&lt;</span><span>ehcache</span><span>xmlns:xsi</span>=<em><span>'http://www.w3.org/2001/XMLSchema-instance'</span></em></p><p align='left'>&nbsp;&nbsp;&nbsp; <span>xsi:noNamespaceSchemaLocation</span>=<em><span>'../config/ehcache.xsd'</span></em><span>&gt;</span></p><p align='left'>&nbsp;&nbsp;&nbsp; <span>&lt;</span><span>diskStore</span><span>path</span>=<em><span>'F:\develop\ehcache'</span></em><span>/&gt;</span></p><p align='left'>&nbsp;&nbsp;&nbsp; <span>&lt;</span><span>defaultCache</span></p><p align='left'><span><span>maxElementsInMemory</span>=<em><span>'1000'</span></em></span></p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>maxElementsOnDisk</span>=<em><span>'10000000'</span></em></p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>eternal</span>=<em><span>'false'</span></em></p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>overflowToDisk</span>=<em><span>'false'</span></em></p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>timeToIdleSeconds</span>=<em><span>'120'</span></em></p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>timeToLiveSeconds</span>=<em><span>'120'</span></em></p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>diskExpiryThreadIntervalSeconds</span>=<em><span>'120'</span></em></p><p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span>memoryStoreEvictionPolicy</span>=<em><span>'LRU'</span></em><span>&gt;</span></p><p align='left'>&nbsp;&nbsp;&nbsp; <span>&lt;/</span><span>defaultCache</span><span>&gt;</span></p><p><span>&lt;/</span><span>ehcache</span><span>&gt;</span></p><p><span>属性说明：</span></p><p><span> diskStore</span><span>：指定数据在磁盘中的存储位置。</span></p><p><span> defaultCache</span><span>：当借助</span><span>CacheManager.add('demoCache')</span><span>创建</span><span>Cache</span><span>时，</span><span>EhCache</span><span>便会采用</span><span>&lt;defalutCache/&gt;</span><span>指定的的管理策略</span></p><p><span>以下属性是必须的：</span></p><p><span>maxElementsInMemory - </span><span>在内存中缓存的</span><span>element</span><span>的最大数目</span></p><p><span>maxElementsOnDisk - </span><span>在磁盘上缓存的</span><span>element</span><span>的最大数目，若是</span><span>0</span><span>表示无穷大</span></p><p><span> eternal - </span><span>设定缓存的</span><span>elements</span><span>是否永远不过期。如果为</span><span>true</span><span>，则缓存的数据始终有效，如果为</span><span>false</span><span>那么还要根据</span><span>timeToIdleSeconds</span><span>，</span><span>timeToLiveSeconds</span><span>判断</span></p><p><span> overflowToDisk- </span><span>设定当内存缓存溢出的时候是否将过期的</span><span>element</span><span>缓存到磁盘上</span></p><p><span>以下属性是可选的：</span></p><p><span>timeToIdleSeconds - </span><span>当缓存在</span><span>EhCache</span><span>中的数据前后两次访问的时间超过</span><span>timeToIdleSeconds</span><span>的属性取值时，这些数据便会删除，默认值是</span><span>0,</span><span>也就是<a target='_blank' name='OLE_LINK168'></a><a target='_blank' name='OLE_LINK164'>可闲置时间</a>无穷大</span></p><p><span>timeToLiveSeconds - </span><span>缓存</span><span>element</span><span>的有效生命期，默认是</span><span>0.,</span><span>也就是</span><span>element</span><span>存活时间无穷大</span></p><p><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; diskSpoolBufferSizeMB </span><span>这个参数设置</span><span>DiskStore(</span><span>磁盘缓存</span><span>)</span><span>的缓存区大小</span><span>.</span><span>默认是</span><span>30MB.</span><span>每个</span><span>Cache</span><span>都应该有自己的一个缓冲区</span><span>.</span></p><p><span>disk<span lang='EN-US'>Persistent</span></span><span>在</span><span>VM</span><span>重启的时候是否启用磁盘保存</span><span>EhCache</span><span>中的数据，默认是</span><span>false</span><span>。</span></p><p><span>diskExpiryThreadIntervalSeconds - </span><span>磁盘缓存的清理线程运行间隔，默认是</span><span>120</span><span>秒。每个</span><span>120s</span><span>，相应的线程会进行一次</span><span>EhCache</span><span>中数据的清理工作</span></p><p><span>memoryStoreEvictionPolicy - </span><span>当内存缓存达到最大，有新的</span><span>element</span><span>加入的时候，</span><span>移除缓存中</span><span>element</span><span>的策略。默认是</span><span>LRU</span><span>（最近最少使用），可选的有</span><span>LFU</span><span>（最不常使用）和</span><span>FIFO</span><span>（先进先出）</span></p><h2>1.5&nbsp;&nbsp;二级应用场景</h2><p>对于<span>访问多的查询请求且用户对查询结果实时性要求不高</span>，此时可采用mybatis二级缓存技术降低数据库访问量，提高访问速度，业务场景比如：<span>耗时较高的统计分析</span><span>sql</span>、电话账单查询sql等。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 实现方法如下：通过设置刷新间隔时间，由mybatis每隔一段时间自动清空缓存，根据数据变化频率设置缓存刷新间隔<strong><span>flushInterval</span></strong>，比如设置为30分钟、60分钟、24小时等，根据需求而定。</p><h2>1.6&nbsp;&nbsp;二级缓存局限性</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mybatis二级缓存对<span>细粒度的数据级别的缓存实现不好</span>，<span>对同时缓存较多条数据的缓存</span>，比如如下需求：对商品信息进行缓存，由于商品信息查询访问量大，但是要求用户每次都能查询最新的商品信息，此时如果使用mybatis的二级缓存就无法实现当一个商品变化时只刷新该商品的缓存信息而不刷新其它商品的信息，因为mybaits的二级缓存区域以mapper为单位划分，当一个商品信息变化会将所有商品信息的缓存数据全部清空。<span>解决此类问题需要在业务层根据需求对数据有针对性缓存。需要使用三级缓存</span></p><p><span><br></span></p><p>摘自传智博客燕青老师的视频</p>
+</td>
+<script>
+                                    var html = document.getElementById("artContent").innerHTML;
+                                    document.getElementById("artContent").innerHTML = html;
+
+                                </script>
+</tr>
+</tbody>
+</table>
+<div id="viewerPlaceHolder" style="width: 717px; height: 700px; display: none; margin: 0 auto;">
+</div>
+</div>
+<table>
+<tbody>
+<tr>
+<td>
+<ul></ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div></div>
+<span></span>
+<a></a>
+<p style="margin: 0; padding: 0;"></p>
+<p class="clearboth"></p>
+<div id="divreward" style="display: none;"></div>
+<div class="bdsharebuttonbox bottombtn" style="margin-top: 33px;">
+<div class="zcommond" style="overflow: visible;">
+<a href="javascript:void(0);" class="btn_collect" onclick="SaveArt();artStatistics('20-3-2');">转藏到我的图书馆</a>
+<a id="flowimg3" href="javascript:void(0);" class="btn_good" onclick="Showflowerlayer('sendedLayer1');">献花（<span id="articleflowernum">0</span>）
+<span id="flowernumadd" style="display: none;">+1</span>
+</a>
+<span class="span1 f_left" onclick="setTimeout(function(){$('.bottombtn .sharelist_new').slideToggle(0);},10);artStatistics('20-8-3');" onmouseover="this.style.color='#0f659c'" onmouseout="this.style.color=''">分享：</span>
+<a class="sharewx f_left" href="javascript:void(0);" onclick="shareWeixin();artStatistics('20-8-6');">微信</a>
+<div class="s2 f_left" onclick="setTimeout(function(){$('.bottombtn .sharelist_new').slideToggle(0);},10);artStatistics('20-8-4');"><span></span></div>
+</div>
+<div class="sharelist_new" id="fenxiangLayer2">
+<a class="slbg1" href="javascript:void(0);" data-cmd="qzone" onclick="artStatistics('20-8-8');">QQ空间</a>
+<a class="slbg2" href="javascript:void(0);" data-cmd="sqq" onclick="artStatistics('20-8-10');">QQ好友</a>
+<a class="slbg3" href="javascript:void(0);" data-cmd="tsina" onclick="artStatistics('20-8-12');">新浪微博</a>
+<a class="slbg5" href="javascript:void(0);" onclick="showdivemail1();artStatistics('20-8-16');">推荐给朋友</a>
+</div>
+</div>
+<div class="bottom_controler">
+<p class="bottom_cleft">
+来自：
+<span class="a_username" style="width: auto;">
+<a href="http://www.360doc.com/userhome/29475794" id="savernickname2" target="_blank" onclick="artStatistics(&#39;20-7-2&#39;);">anowls</a>
+</span>
+&gt;
+<span id="cname" class="a_from"><a href='http://www.360doc.com/userhome.aspx?userid=29475794&cid=-1000' target='_blank' onclick='artStatistics("20-6");'>《待分类》</a></span>
+</p>
+<div class="bottom_cright">
+<a href=" https://www.baidu.com/s?wd=%e7%bc%93%e5%ad%98+%e4%ba%8c%e7%ba%a7+%e6%95%b0%e6%8d%ae&tn=SE_hldp01010_6r0gix1f" target="_blank" class="a1" onclick="artStatistics('20-19');">以文找文</a>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="javascript:void(0);" class="a2" onclick="showAlertLayer1();artStatistics('20-18');">举报</a>
+</div>
+</div>
+<div class="prev_next">
+<p id="lastart" class="p1">
+</p>
+<p id="nextart" class="p2">
+</p>
+</div>
+</div>
+<p class="clearboth"></p>
+<div style="width: 676px; float: left;">
+<div class="str_border" style="border: none; position: relative; z-index: 2;">
+<strong>猜你喜欢</strong>
+</div>
+<ul class="youlike" style="margin-top: -18px; position: relative; z-index: 1;">
+<div style="width: 676px; height: 280px; border: 0;" id="divyoulikead">
+</div>
+</ul>
+<div class="zcommond" style="padding: 10px 0 5px;">
+<div class="bottom_article f_left">
+<div class="str_border">
+<strong>类似文章</strong>
+</div>
+<ul class="barticle_list">
+<li><span><a href=http://www.360doc.com/content/17/1227/13/903511_716703678.shtml target=_blank onclick='artStatistics("20-9-7");'>邹市明双眼多处骨折：拿命换钱是每一个人...</a></span></li>
+<li><span><a href=http://www.360doc.com/content/17/1102/08/535749_700198777.shtml target=_blank onclick='artStatistics("20-9-7");'>深井冰：大姐，你放过我吧，我身边的男人...</a></span></li>
+<li><span><a href=http://www.360doc.com/content/17/1008/11/10548584_693158193.shtml target=_blank onclick='artStatistics("20-9-7");'>涂搽特效药，治愈老烂腿</a></span></li>
+<li><span><a href=http://www.360doc.com/content/17/1202/18/30583536_709286544.shtml target=_blank onclick='artStatistics("20-9-7");'>如何跨工作表高级筛选</a></span></li>
+<li><span><a href=http://www.360doc.com/content/17/1030/16/2355900_699468624.shtml target=_blank onclick='artStatistics("20-9-7");'>泪奔！“你未长大，我不敢老”</a></span></li>
+<li><span><a href=http://www.360doc.com/content/18/0401/21/45758433_742101292.shtml target=_blank onclick='artStatistics("20-9-7");'>干大事的男人，都有这三个特征</a></span></li>
+<li><span><a href=http://www.360doc.com/content/17/0908/10/992788_685454997.shtml target=_blank onclick='artStatistics("20-9-7");'>职场中，只埋头做事的人最可悲</a></span></li>
+<li><span><a href=http://www.360doc.com/content/17/1117/11/18841360_704601062.shtml target=_blank onclick='artStatistics("20-9-7");'>秦朝统一中国的过程中，六个诸侯国的君主...</a></span></li>
+</ul>
+</div>
+<div class="bottom_article f_right">
+<div class="str_border">
+<strong>精选文章</strong>
+</div>
+<ul class="barticle_list">
+<li><span><a onclick="artStatistics('20-9-9');" href=http://www.360doc.com/content/13/0214/14/7161582_265534414.shtml target="_blank">直击女人的48个阴暗面</a></span></li>
+<li><span><a onclick="artStatistics('20-9-9');" href=http://www.360doc.com/content/13/0919/10/9269981_315509224.shtml target="_blank">中秋月圆情更圆（中秋特辑）</a></span></li>
+<li><span><a onclick="artStatistics('20-9-9');" href=http://www.360doc.com/content/13/1023/23/9186740_323534327.shtml target="_blank">爱到八分最相宜</a></span></li>
+<li><span><a onclick="artStatistics('20-9-9');" href=http://www.360doc.com/content/13/1030/23/535749_325319536.shtml target="_blank">老外眼里,中国生意这么做</a></span></li>
+<li><span><a onclick="artStatistics('20-9-9');" href=http://www.360doc.com/content/13/1126/02/14685269_332102755.shtml target="_blank">生和活:看了几遍,还想看</a></span></li>
+<li><span><a onclick="artStatistics('20-9-9');" href=http://www.360doc.com/content/14/0226/23/202378_355860131.shtml target="_blank">挣钱与挣身价</a></span></li>
+<li><span><a onclick="artStatistics('20-9-9');" href=http://www.360doc.com/content/14/0222/15/6085160_354664819.shtml target="_blank">治疗肝郁气滞、慢性疲劳的名医名方</a></span></li>
+<li><span><a onclick="artStatistics('20-9-9');" href=http://www.360doc.com/content/14/0308/17/7392892_358708678.shtml target="_blank">你名字蕴涵的秘密</a></span></li>
+</ul>
+</div>
+</div>
+<div id="divunderad">
+</div>
+<div id="ReflectionPart">
+<div style="height: 156px; margin: 0px 0px;">
+<div class="plbox">
+<div style="padding-left: 6px;">
+<div class="titwx" style="height: 23px; font-size: 16px; font-weight: bold; margin-top: 10px;">
+发表评论<a target="_blank" href="http://www.360doc.com/agreement.html" style="float: right; font-size: 12px; color: #666; font-weight: normal; line-height: 20px; padding-right: 4px;">评论公约</a>
+</div>
+<textarea name="SendRefTB" id="SendRefTB" style="width: 100%; margin-top: 6px; height: 75px; border: 1px solid #e7e7e7; background-color: #fff; overflow: auto; font-size: 12px;" onfocus="testContent(1);" onblur="testContent(2)"></textarea>
+<div style="text-align: right; padding-right: 3px; padding-top: 6px;">
+<div class="huifubt">
+<a id="ImgSendPL" href="javascript:void(0);" onclick="SubmitReflection();"></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div style="padding-top: 15px; padding-left: 15px;" id="Reflction">
+</div>
+</div>
+</div>
+<div class="a_right">
+<div class="user_info">
+<div class="user_photo f_left">
+<p class="user_photopic">
+<a href="http://www.360doc.com/userhome/29475794" id="userphotourl" target="_blank" onclick="artStatistics(&#39;20-7-4&#39;);">
+<img src="http://pubimage.360doc.com/head/cartoon/007.gif" id="userphoto" width="58" height="58" />
+</a>
+</p>
+<a href="javascript:void(0);" onclick="docTalk();artStatistics('20-15');" class="user_talk" title="与TA对话"></a>
+</div>
+<div class="user_data f_right">
+<div class="user_data_name">
+<a href="http://www.360doc.com/userhome/29475794" id="nickname" target="_blank" onclick="artStatistics(&#39;20-7-3&#39;);">anowls</a>
+<img src="http://pubimage.360doc.com/NewArticle/user_name_tag.gif" alt="图书馆" />
+</div>
+<p id="userdegree"><img src='http://pubimage.360doc.com/NewArticle/userstar2.gif' /><img src='http://pubimage.360doc.com/NewArticle/userstar3.gif' /><img src='http://pubimage.360doc.com/NewArticle/userstar3.gif' /><img src='http://pubimage.360doc.com/NewArticle/userstar3.gif' /><img src='http://pubimage.360doc.com/NewArticle/userstar3.gif' /></p>
+<div class="user_data_num">
+<a id="spanfollowstatus" class="gz_no"></a>
+<script type="text/javascript">isfollow(29475794);</script>
+<span id="follownum">2</span>&nbsp;&nbsp;&nbsp;&nbsp;
+<span>馆藏</span>&nbsp;<span id="artnum">8</span>
+</div>
+</div>
+</div>
+<div class="his_her"><ul class='his_her_type'><li class='f_left curone'>TA的最新馆藏</li></ul><div class='his_her_div' style="height:190px;"><ul class='his_her_list'><li><div><span></span><a href=http://www.360doc.com/content/16/0109/09/29475794_526565528.shtml target=_blank onclick="artStatistics('20-9-3');">Jvm工作原理学习笔记</a></div><div><span></span><a href=http://www.360doc.com/content/15/1207/00/29475794_518425357.shtml target=_blank onclick="artStatistics('20-9-3');">hadoop 2.0 详细配置教程</a></div><div><span></span><a href=http://www.360doc.com/content/15/1205/08/29475794_518021844.shtml target=_blank onclick="artStatistics('20-9-3');">Spring Mybatis Tomcat下多数据源与 atomikos 分布式事务配置</a></div><div><span></span><a href=http://www.360doc.com/content/15/1205/07/29475794_518019526.shtml target=_blank onclick="artStatistics('20-9-3');">四火的BLOG</a></div><div><span></span><a href=http://www.360doc.com/content/15/1205/07/29475794_518018352.shtml target=_blank onclick="artStatistics('20-9-3');">mybatis的缓存机制（一级缓存二级缓存和刷新缓存）和mybatis整合ehcache</a></div><div><span style="color:#b0b0b0;">[转]&nbsp;</span><a href=http://www.360doc.com/content/15/1128/11/29401529_516465906.shtml target=_blank onclick="artStatistics('20-9-3');">编发看这里，几款发型让你散发女神光芒</a></div></li></ul></div></div>
+<div class="clear360doc" style="padding-top: 10px; height: 260px;">
+<div id="divifartad1">
+<script>
+            var strow = document.body.offsetWidth;
+            var strsw = document.body.scrollWidth;
+            var strsc = window.screen.width;
+
+            function aliad1() {
+                document.write('<a style="display:none!important" id="tanx-a-mm_11220363_1101997_10218757"></a>');
+                tanx_s = document.createElement("script");
+                tanx_s.type = "text/javascript";
+                tanx_s.charset = "gbk";
+                tanx_s.id = "tanx-s-mm_11220363_1101997_10218757";
+                tanx_s.async = true;
+                tanx_s.src = "http://p.tanx.com/ex?i=mm_11220363_1101997_10218757";
+                tanx_h = document.getElementsByTagName("head")[0];
+                if (tanx_h) tanx_h.insertBefore(tanx_s, tanx_h.firstChild);
+            }
+
+            function aliad2() {
+                document.write('<a style="display:none!important" id="tanx-a-mm_11220363_1101997_26568831"></a>');
+                tanx_s = document.createElement("script");
+                tanx_s.type = "text/javascript";
+                tanx_s.charset = "gbk";
+                tanx_s.id = "tanx-s-mm_11220363_1101997_26568831";
+                tanx_s.async = true;
+                tanx_s.src = "http://p.tanx.com/ex?i=mm_11220363_1101997_26568831";
+                tanx_h = document.getElementsByTagName("head")[0];
+                if (tanx_h) tanx_h.insertBefore(tanx_s, tanx_h.firstChild);
+            }
+
+
+            if (strsc <= 1024) {
+                aliad1();
+            }
+            else {
+                //300宽
+                aliad2();
+            }
+        </script>
+</div>
+<div style="height: 10px;">
+</div>
+</div>
+<div class="his_her" id="recommendArt" style="margin-top: 5px;">
+<div class="str_border" style="margin: 0;">
+<span style="font-size: 14px; float: left;">喜欢该文的人也喜欢</span>
+<a style="float: right;" class="a_more" onclick="artStatistics('20-9-4');" href="http://www.360doc.com/readroom.html" target="_blank">更多</a>
+</div>
+<div class='his_her_div' style="height: 264px;">
+<ul class='his_her_list'>
+<li id="recommendArtLists"></li>
+</ul>
+</div>
+</div>
+<div class="clear360doc" style="padding-top: 10px;" id="divifartad2">
+</div>
+<br />
+<div id="divifartrightsogou">
+</div>
+<div class="clear360doc" id="divad5" style="padding-top: 11px; zoom: 1; width: 300px;">
+<div id="divad4" style="display: none;">
+<div id="divifartad">
+</div>
+<div class="ggwz">
+<a href="javascript:void(0);" onclick="closead(2);">关闭</a>
+</div>
+<div style="height: 13px;">
+</div>
+</div>
+<div style="clear: both; display: none;" id="divad6">
+<div id="adfloatbaidu">
+</div>
+<div class="ggwz" style="left: 25px;">
+<a href="javascript:void(0);" onclick="closead(3);">关闭</a>
+</div>
+<div style="height: 13px;">
+</div>
+</div>
+<div style="height: 75px;">
+</div>
+</div>
+</div>
+</div>
+<p class="clearboth"></p>
+<input type="hidden" id="artid" value="518018352" />
+<input type="hidden" id="docarttitle" value="mybatis%e7%9a%84%e7%bc%93%e5%ad%98%e6%9c%ba%e5%88%b6%ef%bc%88%e4%b8%80%e7%ba%a7%e7%bc%93%e5%ad%98%e4%ba%8c%e7%ba%a7%e7%bc%93%e5%ad%98%e5%92%8c%e5%88%b7%e6%96%b0%e7%bc%93%e5%ad%98%ef%bc%89%e5%92%8cmybatis%e6%95%b4%e5%90%88ehcache" />
+<input type="hidden" id="firstartid" value="518018352" />
+<input type="hidden" id="firstuid" value="29475794" />
+<input type="hidden" id="firstarturl" value="http://www.360doc.com/content/15/1205/07/29475794_518018352.shtml" />
+<input type="hidden" id="subclassid" value="-1" />
+<input type="hidden" id="recommendart1" value="-1" />
+<input type="hidden" id="recommendart2" value="536666913" />
+<input type="hidden" id="isowner" value="False" />
+<input type="hidden" id="original" value="0" />
+<input type="hidden" id="showrewardlist" value="0" />
+<input type="hidden" id="saveruserid" value="29475794" />
+<input type="hidden" id="sourceurl" value="http://blog.csdn.net/u012373815/article/details/47069223" />
+<input type="hidden" id="artreadroomid" value="0" />
+<script src="http://www.360doc.com/js/Statistics/sha1.js?t=2017092101" type="text/javascript"></script>
+<script src="http://www.360doc.com/js/Statistics/addStatistics.js?t=2017101601" type="text/javascript"></script>
+<script src="http://www.360doc.com/js/showarticle.js?t=2018041701" type="text/javascript" charset="utf-8"></script>
+<script>GerLookingUserInfo(1,29475794,1,0,'-1',-1,10,0);OutputSource('http://blog.csdn.net/u012373815/article/details/47069223','');OutputLastNextArt('%e5%9b%9b%e7%81%ab%e7%9a%84BLOG','http://www.360doc.com/content/15/1205/07/29475794_518019526.shtml',1);</script>
+<script type="text/javascript" src="http://www.360doc.com/js/index7/newheader.js?t=2018040902"></script>
+<script src="http://blockart.360doc.com/ajax/getstatusv2.ashx?aid=518018352" type="text/javascript" charset="utf-8" async="async"></script>
+<script type="text/javascript">
+        var baiduImagePlus = {
+            noLogo: true,
+            unionId: 'u2617463',
+            maxMiniAdCount: 0,
+            formList: [{ formId: 10 }]
+        };
+    </script>
+<script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/i.js"></script>
+</body>
+</html>

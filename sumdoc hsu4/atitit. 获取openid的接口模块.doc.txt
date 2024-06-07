@@ -1,0 +1,15 @@
+atitit. 获取第三方openid的接口模块
+
+客户端发起请求
+  String url="http://host+port/wechat/getopenid.jsp?callbackurl=http://host+port/myapp/api.jsp?method=setOpenid&param1=t&openid=" ;//URLEncoder.encode(s, enc);
+
+
+服务端获取openid并回调
+$openid=getopenid();
+goto("http://host+port/myapp/api.jsp?method=setOpenid&param1=t&openid="+$openid;
+
+
+
+参考
+atitit微信支付的文档总结.doc
+

@@ -1,0 +1,35 @@
+PAIP.HIBERNATE ORA-02289 sequence does not exist的解决
+
+作者Attilax ， 1466519819@qq.com
+HBM配置文件是 
+<id name="id" column="CID">
+   <generator class="native" />
+</id>
+
+
+第一种方案:
+----------------
+建立 HIBERNATE_SEQUENCE 序列..因为HB会每次先查这个序列的.默认..可通过打印的SQL查看。。会SELECT HIBERNATE_SEQUENCE。NEXT
+这个比较通用...
+
+
+
+第2种方案:
+----------------
+应该改成：
+
+<id name="id" column="CID">
+<generator   class="sequence">   
+             <param name="sequence">SEQ_hibernate</param>   
+       </generator>
+
+<id>
+
+通过配置文件指出你所使用的Sequence，SEQ_hibernate是在oracle中已经创建好的 
+
+第三种方案:
+-------------
+
+或者<generator 用UUID也是比较通用的.
+
+

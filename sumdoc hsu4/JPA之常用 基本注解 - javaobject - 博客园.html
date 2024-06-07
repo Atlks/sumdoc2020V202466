@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="referrer" content="origin" />
+<title>JPA之常用 基本注解 - javaobject - 博客园</title>
+<meta property="og:description" content="1、常用基本注解 @Entity @Table @Basic @Column @GeneratedValue @Id 2、特殊注解 @Transient @Temporal 用 table 来生成主键" />
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=-duj5vpGTntb85GJoM3iRI972XwWcI-j8zmqDzyfu2w1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/CodingLife/bundle-CodingLife.css?v=g4Oce5UBaUn_FUwadcT09ICEg5NkULQGtUpNhTtrI8U1"/>
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/CodingLife/bundle-CodingLife-mobile.css?v=Xay8b9tTSw814nBzbOgvS6rrbcxrobMhvHJHdZAO9vI1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/a8457013/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/a8457013/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/a8457013/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript">var currentBlogApp = 'a8457013', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=rHIw2cNUzv2rwxyOxfsH907im68SWXSQXtJgebg37Kk1" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="https://www.cnblogs.com/a8457013/"><img id="blogLogo" src="/Skins/custom/images/logo.gif" alt="返回主页" /></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="https://www.cnblogs.com/a8457013/">javaobject</a></h1>
+<h2>这是我的博客链接欢迎大家访问：http://www.cnblogs.com/a8457013/</h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">博客园</a></li>
+<li><a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/a8457013/">首页</a></li>
+<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/javaobject">联系</a></li>
+<li><a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/a8457013/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="https://www.cnblogs.com/a8457013/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<span id="stats_post_count">随笔 - 322&nbsp; </span>
+<span id="stats_article_count">文章 - 1&nbsp; </span>
+<span id="stats-comment_count">评论 - 17</span>
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/a8457013/p/7753575.html">JPA之常用 基本注解</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body"><p><span style="font-size: 18pt">1、常用基本注解</span></p>
+<p>@Entity &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+<p>@Table</p>
+<p>@Basic</p>
+<p>@Column</p>
+<p>@GeneratedValue</p>
+<p>@Id</p>
+<p><span style="font-size: 18pt"><strong>2、特殊注解</strong></span></p>
+<p>@Transient</p>
+<p>@Temporal</p>
+<p>用 table 来生成主键</p>
+<p><span style="font-size: 18pt"><strong>3、常用注解的使用</strong></span></p>
+<p>1、<span style="font-size: 16px"><strong>@Entity</strong></span> 标注用于实体类声明语句之前，指出该Java 类为实体类，将映射到指定的数据库表。如声明一个实体类 Customer，它将映射到数据库中的 customer 表上。</p>
+<p>2、<span style="font-size: 16px"><strong>@Table</strong></span></p>
+<p>当实体类与其映射的数据库表名不同名时需要使用 @Table 标注说明，该标注与 @Entity 标注并列使用，置于实体类声明语句之前，可写于单独语句行，也可与声明语句同行。</p>
+<p>@Table 标注的常用选项是 name，用于指明数据库的表名 @Table标注还有一个两个选项 catalog 和 schema 用于设置表所属的数据库目录或模式，通常为数据库名。</p>
+<p>uniqueConstraints 选项用于设置约束条件，通常不须设置。如下代码：</p>
+<ul>
+<li>
+<div class="cnblogs_code">
+<pre>@Table(name=<span style="color: #800000">"</span><span style="color: #800000">JPA_CUSTOMERS</span><span style="color: #800000">"</span>)<span style="color: #008000">//</span><span style="color: #008000">主要是映射表名对应的数据库表名JPA_CUSTOMER默认情况下可以不写表名与持久化类名相同</span>
+@Entity <span style="color: #008000">//</span><span style="color: #008000">表明这是一个持久化类<br></span>
+<span style="color: #0000ff">public</span> <span style="color: #0000ff">class</span> Customer {<br><br></pre>
+</div>
+</li>
+</ul>
+<p>&nbsp;3、<span style="font-size: 16px"><strong>@Id</strong></span></p>
+<p>@Id 标注用于声明一个实体类的属性映射为数据库的<strong><span style="background-color: #ff0000">主键列</span></strong>。该属性通常置于属性声明语句之前，可与声明语句同行，也可写在单独行上。 @Id标注也可置于属性的<span style="background-color: #ff0000"><strong>getter方法之前</strong></span>。</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008000">//</span><span style="color: #008000">定义主键，生成主键的策略AUTO自动的根据数据的类型生成主键</span>
+    @GeneratedValue(strategy=<span style="color: #000000">GenerationType.AUTO)
+    @Id </span><span style="color: #008000">//</span><span style="color: #008000">定义数据列
+</span><span style="color: #008000">//</span><span style="color: #008000">    @Column(name="ID")</span><span style="color: #008000">//</span><span style="color: #008000">定义数据库的列名如果与字段名一样可以省略</span>
+    <span style="color: #0000ff">public</span><span style="color: #000000"> Integer getId() {
+        </span><span style="color: #0000ff">return</span><span style="color: #000000"> id;
+    }</span></pre>
+</div>
+<p>4、<span style="font-size: 16px"><strong>@GeneratedValue</strong></span></p>
+<p><strong><span style="background-color: #ff0000">@GeneratedValue 用于标注主键的生成策略，通过 strategy 属性指定。默认情况下，JPA 自动选择一个最适合底层数据库的主键生成策略：SqlServer 对应 identity，MySQL 对应 auto increment。 在 javax.persistence.GenerationType 中定义了以下几种可供选择的策略：</span></strong></p>
+<p>IDENTITY：采用数据库 ID自增长的方式来自增主键字段，Oracle 不支持这种方式；</p>
+<p>AUTO： JPA自动选择合适的策略，是默认选项；</p>
+<p>SEQUENCE：通过序列产生主键，通过<span style="background-color: #3366ff"><strong> @SequenceGenerator</strong> </span>注解指定序列名，MySql 不支持这种方式</p>
+<p>TABLE：通过表产生主键，框架借由表模拟序列产生主键，使用该策略可以使应用更易于数据库移植。</p>
+<p>5、<span style="font-size: 16px"><strong>@Basic</strong></span></p>
+<p>@Basic 表示一个简单的属性到数据库表的字段的映射,对于没有任何标注的 getXxxx() 方法,默认即为</p>
+<p>@Basic fetch: 表示该属性的读取策略,有 EAGER 和 LAZY 两种,分别表示主支抓取和延迟加载,默认为 EAGER.</p>
+<p>optional:表示该属性是否允许为null, 默认为true</p>
+<p>6、@Column</p>
+<p><strong><span style="background-color: #3366ff"><span style="font-size: 18px">当实体的属性与其映射的数据库表的列不同名时需要使用@Column 标注说明</span>，</span></strong>该属性通常置于实体的属性声明语句之前，还可与 @Id 标注一起使用。</p>
+<p>@Column 标注的常用属性是 name，用于设置映射数据库表的列名。此外，该标注还包含其它多个属性，如<span style="font-size: 18px"><strong><span style="background-color: #3366ff">：unique 、nullable、length</span> </strong></span>等。</p>
+<p>@Column 标注的 columnDefinition 属性: <strong><span style="font-size: 18px">表示该字段在数据库中的实际类型.通常 ORM 框架可以根据属性类型自动判断数据库中字段的类型</span></strong>,但是对于Date类型仍无法确定数据库中字段类型究竟是DATE,TIME还是TIMESTAMP.此外,String的默认映射类型为VARCHAR, 如果要将 String 类型映射到特定数据库的 BLOB 或TEXT 字段类型.</p>
+<p>@Column标注也可置于属性的getter方法之前</p>
+<p>&nbsp;</p>
+<p><span style="font-size: 18pt; background-color: #ffffff"><strong>4、特殊注解的使用</strong></span></p>
+<p>1、<span style="font-size: 16px"><strong>@Transient</strong></span></p>
+<p>.表示该属性并非一个到数据库表的字段的映射,ORM框架将忽略该属性.</p>
+<p>.如果一个属性并非数据库表的字段映射,就务必将其标示为@Transient,否则,ORM框架默认其注解为@Basic</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008000">//</span><span style="color: #008000">工具方法，不需要映射为数据表的一列</span>
+<span style="color: #000000">    @Transient
+    </span><span style="color: #0000ff">public</span><span style="color: #000000"> String getInfo(){
+        </span><span style="color: #0000ff">return</span> <span style="color: #800000">"</span><span style="color: #800000">lastName:</span><span style="color: #800000">"</span>+lastName+<span style="color: #800000">"</span><span style="color: #800000">,email:</span><span style="color: #800000">"</span>+<span style="color: #000000">email;
+    }</span></pre>
+</div>
+<p>&nbsp;</p>
+<p>2、@Temporal</p>
+<p>在核心的 Java API 中并没有定义 Date 类型的精度(temporal precision). 而在数据库中,表示 Date 类型的数据有 DATE, TIME, 和 TIMESTAMP 三种精度(即单纯的日期,时间,或者两者 兼备).</p>
+<p><span style="font-size: 16px"><strong> 在进行属性映射时可使用@Temporal注解来调整精度.</strong></span></p>
+<p>&nbsp;</p>
+<div class="cnblogs_code">
+<pre><span style="color: #000000">@Temporal(TemporalType.TIMESTAMP)// 时间戳
+    </span><span style="color: #0000ff">public</span><span style="color: #000000"> Date getCreatedTime() {
+        </span><span style="color: #0000ff">return</span><span style="color: #000000"> createdTime;
+        }
+
+@Temporal(TemporalType.DATE) //时间精确到天
+    </span><span style="color: #0000ff">public</span><span style="color: #000000"> Date getBirth() {
+        </span><span style="color: #0000ff">return</span><span style="color: #000000"> birth;
+    }</span></pre>
+</div>
+<p><span style="font-size: 16px"><strong>3、table生成主键的使用（用的比较少）</strong></span></p>
+<p>将当前主键的值单独保存到一个数据库的表中，主键的值每次都是从指定的表中查询来获得 这种方法生成主键的策略可以适用于任何数据库，不必担心不同数据库不兼容造成的问题。</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008000">     //</span><span style="color: #008000">使用table生成主键</span>
+    @TableGenerator(name=<span style="color: #800000">"</span><span style="color: #800000">ID_GENERATOR</span><span style="color: #800000">"</span><span style="color: #000000">,
+            table</span>=<span style="color: #800000">"</span><span style="color: #800000">JPA_ID_GENERATORS</span><span style="color: #800000">"</span><span style="color: #000000">, 
+            pkColumnName</span>=<span style="color: #800000">"</span><span style="color: #800000">PK_NAME</span><span style="color: #800000">"</span><span style="color: #000000">,
+            pkColumnValue</span>=<span style="color: #800000">"</span><span style="color: #800000">CUSTOMER_ID</span><span style="color: #800000">"</span><span style="color: #000000">,
+            valueColumnName</span>=<span style="color: #800000">"</span><span style="color: #800000">PK_VALUE</span><span style="color: #800000">"</span><span style="color: #000000">,
+            allocationSize</span>=<span style="color: #800080">100</span><span style="color: #000000">
+            )
+    
+    @GeneratedValue(strategy</span>=GenerationType.TABLE,generator=<span style="color: #800000">"</span><span style="color: #800000">ID_GENERATOR</span><span style="color: #800000">"</span><span style="color: #000000">)
+    @Id
+    </span><span style="color: #0000ff">public</span><span style="color: #000000"> Integer getId() {
+        </span><span style="color: #0000ff">return</span><span style="color: #000000"> id;
+    }</span></pre>
+</div>
+<p>其中：</p>
+<p>1、name 属性表示该主键生成策略的名称，它被引用在@GeneratedValue中设置的generator 值中</p>
+<p>2、table 属性表示表生成策略所持久化的表名</p>
+<p>3、pkColumnName 属性的值表示在持久化表中，该主键生成策略所对应键值的名称</p>
+<p>4、valueColumnName 属性的值表示在持久化表中，该主键当前所生成的值，它的值将会随着每次创建累加</p>
+<p>5、pkColumnValue 属性的值表示在持久化表中，该生成策略所对应的主键</p>
+<p>6、allocationSize 表示每次主键值增加的大小, 默认值为 50</p>
+<p>关系图：</p>
+<p><img src="https://images2017.cnblogs.com/blog/842651/201710/842651-20171030155041902-864455493.png" alt=""></p>
+<p>&nbsp;</p>
+<p>源码地址：https://github.com/wuhongpu/JPA.git</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2017-10-30 10:55</span> <a href='https://www.cnblogs.com/a8457013/'>javaobject</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=7753575" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(7753575);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=274942,cb_entryId=7753575,cb_blogApp=currentBlogApp,cb_blogUserGuid='06c59385-0a91-e511-9fc1-ac853d9f53cc',cb_entryCreatedDate='2017/10/30 10:55:00';loadViewCount(cb_entryId);var cb_postType=1;</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+<script>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/1090369/C2', [468, 60], 'div-gpt-ad-1539008685004-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script>
+<div id='cnblogs_c2' class='c_ad_block'>
+    <div id='div-gpt-ad-1539008685004-0' style='height:60px; width:468px;'>
+    <script>
+    if (new Date() >= new Date(2018, 9, 13)) {
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1539008685004-0'); });
+    }
+    </script>
+    </div>
+</div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2018 javaobject
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

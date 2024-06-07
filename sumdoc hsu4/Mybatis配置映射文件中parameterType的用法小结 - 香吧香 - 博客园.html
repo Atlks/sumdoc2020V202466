@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mybatis配置映射文件中parameterType的用法小结 - 香吧香 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=-hy83QNg62d4qYibixJzxMJkbf1P9fTBlqv7SK5zVL01"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/Custom/bundle-Custom.css?v=Z683z9azGWin6jOfOyAHK6FgPVxm_nmCnl3EFztc2eE1"/>
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/Custom/bundle-Custom-mobile.css?v=D4ZG96to-4HBTPc_nukUGx4UJPJRCpcXUrj8NiiyXiU1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/zjdxr-up/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/zjdxr-up/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/zjdxr-up/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript">var currentBlogApp = 'zjdxr-up', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=taItysi72HxMPeH9Xg5nAYabRul6hhgahi3tVIMIKV81" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="http://www.cnblogs.com/zjdxr-up/"><img id="blogLogo" src="/Skins/custom/images/logo.gif" alt="返回主页" /></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/zjdxr-up/">香吧香</a></h1>
+<h2></h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/zjdxr-up/">首页</a></li>
+<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E9%A6%99%E5%90%A7%E9%A6%99">联系</a></li>
+<li><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/zjdxr-up/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/zjdxr-up/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<span id="stats_post_count">随笔 - 154&nbsp; </span>
+<span id="stats_article_count">文章 - 5&nbsp; </span>
+<span id="stats-comment_count">评论 - 8</span>
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/zjdxr-up/p/6603419.html">Mybatis配置映射文件中parameterType的用法小结</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body"><p>原创：</p>
+<p>在mybatis映射接口的配置中,有select,insert,update,delete等元素都提到了<br>parameterType的用法，parameterType为输入参数，在配置的时候，配置相应的<br>输入参数类型即可。parameterType有基本数据类型和复杂的数据类型配置。<br>1.基本数据类型，如输入参数只有一个，其数据类型可以是基本的数据类型，也可以是<br>自己定的类类型。包括int,String,Integer,Date,如下：</p>
+<p>&nbsp;（1）根据id进行相应的删除：&lt;delete id="deleteById" parameterType="Integer"&gt;</p>
+<p>（2）添加员工：&lt;insert id="addEmp" parameterType="com.pojo.Employee"&gt;</p>
+<p>2.复杂数据类型：包含java实体类，map。</p>
+<p>配置如：</p>
+<p>&nbsp; <span class="tag">&lt;<span class="tag-name">select&nbsp;<span class="attribute">id=<span class="attribute-value">"selectTeacher"&nbsp;<span class="attribute">parameterType=<span class="attribute-value">"Map"&nbsp;<span class="attribute">resultType=<span class="attribute-value">"com.myapp.domain.Teacher"<span class="tag">&gt;&nbsp;&nbsp;</span></span></span></span></span></span></span></span></span></p>
+<p>&nbsp;&nbsp; &nbsp; &nbsp; select&nbsp;*&nbsp;from&nbsp;Teacher&nbsp;where&nbsp;<span class="attribute">c_id=#{id}&nbsp;and&nbsp;<span class="attribute">sex=#{sex}&nbsp; </span></span></p>
+<p><span class="tag">&nbsp; &lt;/<span class="tag-name">select<span class="tag">&gt;&nbsp; <br></span></span></span></p>
+<p class="alt">java代码如下：</p>
+<p class="alt">&nbsp;&nbsp;&nbsp; Map&lt;String,String&gt;&nbsp;map=<span class="keyword">new&nbsp;HasMap&lt;String,String&gt;();&nbsp;&nbsp;</span></p>
+<p>&nbsp;&nbsp;&nbsp; map.put(<span class="string">"id",<span class="string">"2");&nbsp;&nbsp;</span></span></p>
+<p class="alt">&nbsp;&nbsp;&nbsp; map.put(<span class="string">"sex",<span class="string">"男");&nbsp;&nbsp;</span></span></p>
+<p>&nbsp;&nbsp;&nbsp; List&lt;Teacher&gt;&nbsp;tList&nbsp;=&nbsp;teacherMapper.selectTeacher(map);&nbsp;&nbsp;&nbsp; </p>
+<p>&nbsp;&nbsp;&nbsp; <span class="keyword">for&nbsp;(Teacher&nbsp;entityTemp&nbsp;:&nbsp;tList)&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;</span></p>
+<p>&nbsp;&nbsp;&nbsp; System.out.println(entityTemp.toString());&nbsp;}&nbsp;</p>
+<h4><span style="font-family: 宋体; background-color: #ccffcc"><strong><span style="color: #ffff33"><span style="color: #ff0000">另外MyBatis还提供了一个使用注解来参入多个参数的方式。这种方式需要在接口的参数上添加@Param注解</span></span></strong></span></h4>
+<p><span style="font-family: 宋体; background-color: #ffffff"><strong><span style="color: #ffff33"><span style="color: #ff0000">&nbsp;&nbsp;<span style="color: #ff9900">&nbsp; /**</span><br><span style="color: #ff9900">&nbsp;&nbsp; &nbsp; * 此处要注意的是，由于该方法需要传入多个参数，在进行Mybatis配置时，</span><br><span style="color: #ff9900">&nbsp;&nbsp; &nbsp; * 没有办法同时配置多个参数，另外MyBatis还提供了一个使用注解来参入</span><br><span style="color: #ff9900">&nbsp;&nbsp; &nbsp; * 多个参数的方式。这种方式需要在接口的参数上添加@Param注解。。</span><br><span style="color: #ff9900">&nbsp;&nbsp; &nbsp; * 注意，以下两种写法是完全相同的。但使用的时候要使用第一种类型</span><br><span style="color: #ff9900">&nbsp;&nbsp; &nbsp; */</span><br><span style="color: #ff9900">&nbsp;&nbsp; &nbsp;</span><br><span style="color: #ff9900">&nbsp;&nbsp; &nbsp;User login(@Param(value="name")String name,@Param(value="password")String password );</span><br><span style="color: #ff9900">//&nbsp;&nbsp; &nbsp;User login(String name,String password);</span></span></span></strong></span></p>
+<p><span style="font-family: 宋体; background-color: #ffffff"><strong><span style="color: #ffff33"><span style="color: #ff0000"><span style="color: #ff9900">配置如下：</span></span></span></strong></span></p>
+<p><span style="font-family: 宋体; background-color: #ffffff"><strong><span style="color: #ffff33"><span style="color: #ff0000"><span style="color: #ff9900">&nbsp;&lt;select id="login"&nbsp; resultType="com.pojo.User"&gt;<br>&nbsp;&nbsp;&nbsp; select * from us where name=#{name} and password=#{password}<br>&nbsp;&nbsp; &lt;/select&gt;</span></span></span></strong></span></p>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2017-03-23 09:19</span> <a href='http://www.cnblogs.com/zjdxr-up/'>香吧香</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=6603419" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(6603419);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=336751,cb_entryId=6603419,cb_blogApp=currentBlogApp,cb_blogUserGuid='8a77ce92-98f8-e611-845c-ac853d9f53ac',cb_entryCreatedDate='2017/3/23 9:19:00';loadViewCount(cb_entryId);var cb_postType=1;</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2018 香吧香
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

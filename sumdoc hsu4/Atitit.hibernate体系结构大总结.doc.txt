@@ -1,0 +1,7 @@
+Atitit.hibernate体系结构大总结
+
+hbm2ddl
+C3p0 dbpool
+
+
+

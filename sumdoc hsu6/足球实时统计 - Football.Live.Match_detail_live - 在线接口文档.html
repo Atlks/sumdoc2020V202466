@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title> 足球实时统计 - Football.Live.Match_detail_live - 在线接口文档</title>
+
+    <link rel="stylesheet" href="https://cdn.bootcss.com/semantic-ui/2.2.2/semantic.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/semantic-ui/2.2.2/components/table.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/semantic-ui/2.2.2/components/container.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/semantic-ui/2.2.2/components/message.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/semantic-ui/2.2.2/components/label.min.css">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+    <script src="https://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://apps.bdimg.com/libs/jquery.cookie/1.4.1/jquery.cookie.min.js"></script>
+</head>
+
+<body>
+
+<div class="row" style="margin-top: 60px;" ></div>
+
+    <div class="ui text container" style="max-width: none !important;">
+        <div class="ui floating message">
+<h2 class='ui header'>接口：Football.Live.Match_detail_live</h2><br/> <span class='ui teal tag label'> 足球实时统计</span>            <div class="ui raised segment">
+                <span class="ui red ribbon label">接口说明</span>
+                <div class="ui message">
+                    <p> 返回最近240分钟内的比赛事件和技术统计数据</p>
+                </div>
+            </div>
+            <h3><i class="sign in alternate icon"></i>接口参数</h3>
+            <table class="ui red celled striped table" >
+                <thead>
+                    <tr><th>参数名字</th><th>类型</th><th>是否必须</th><th>默认值</th><th>其他</th><th>说明</th></tr>
+                </thead>
+                <tbody><tr><td>username</td><td>字符串</td><td><font color="red">必须</font></td><td></td><td></td><td>用户名</td></tr>
+<tr><td>secret</td><td>字符串</td><td><font color="red">必须</font></td><td></td><td></td><td>用户密钥</td></tr>
+                </tbody>
+            </table>
+            <h3><i class="sign out alternate icon"></i>返回结果</h3>
+            <table class="ui green celled striped table" >
+                <thead>
+                    <tr><th>返回字段</th><th>类型</th><th>说明</th></tr>
+                </thead>
+                <tbody><tr><td>id</td><td>整型</td><td>纳米比赛id</td></tr><tr><td>score</td><td>json</td><td>即时比分</td></tr><tr><td>stats</td><td>json</td><td>技术统计</td></tr><tr><td>incidents</td><td>json</td><td>比赛事件</td></tr><tr><td>tlive</td><td>json</td><td>文字直播</td></tr>            </tbody>
+        </table>            <h3><i class="bell icon"></i>异常情况</h3>
+            <table class="ui red celled striped table" >
+                <thead>
+                    <tr><th>错误码</th><th>错误描述信息</th>
+                </thead>
+                <tbody><tr><td>400</td><td>ret=400，表示客户端参数错误</td></tr><tr><td>404</td><td>ret=404，表示接口服务不存在</td></tr><tr><td>500</td><td>ret=500，表示服务端内部错误</td></tr>            </tbody>
+        </table><h3>
+    <i class="bug icon"></i>在线测试 &nbsp;&nbsp;
+</h3><table class="ui green celled striped table" >
+    <thead>
+        <tr><th width="25%">参数</th><th width="10%">是否必填</th><th width="65%">值</th></tr>
+    </thead>
+    <tbody id="params">
+        <tr>
+            <td>service</td>
+            <td><font color="red">必须</font></td>
+            <td><div class="ui fluid input disabled"><input name="service" data-source="get" value="Football.Live.Match_detail_live" style="width:100%;" class="C_input" /></div></td>
+        </tr>        <tr>
+            <td>username</td>
+            <td><font color="red">必须</font></td>
+            <td><div class="ui fluid input"><input name="username" value="" data-source="" placeholder="用户名" style="width:100%;" class="C_input" type="text" /></div></td>
+        </tr>        <tr>
+            <td>secret</td>
+            <td><font color="red">必须</font></td>
+            <td><div class="ui fluid input"><input name="secret" value="" data-source="" placeholder="用户密钥" style="width:100%;" class="C_input" type="text" /></div></td>
+        </tr>    </tbody>
+</table>
+<div style="display: flex;align-items:center;">
+    <!--<select name="request_type" style="font-size: 14px; padding: 2px;">
+        <option value="POST">POST</option>
+        <option value="GET">GET</option>
+    </select>--><!--
+接口链接：&nbsp;<input name="request_url" value="http://www.skrsport.live/" style="width:500px; height:24px; line-height:18px; font-size:13px;position:relative; padding-left:5px;margin-left: 10px"/>
+    <input type="submit" name="submit" value="发送" id="submit" style="font-size:14px;line-height: 20px;margin-left: 10px " class="ui green button" />
+-->
+
+</div>
+
+<div class="ui fluid action input">
+      <input placeholder="请求的接口链接" type="text" name="request_url" value="http://www.skrsport.live/" >
+      <button class="ui button green" id="submit" >请求当前接口</button>
+</div><div class="ui blue message" id="json_output">
+</div><h3><i class="code icon"></i>接口返回示例</h3><!-- 代码高亮 -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<div class="ui text">
+    <pre><code>建议请求频次：2秒/次
+
+score 即时比分字段说明，详见即时数据-＞足球即时比分接口
+
+incidents 比赛事件字段说明
+包含：黄牌、两黄变红、红牌、进球、助攻、换人、点球、乌龙球、中场、伤停补时、结束
+{
+  &quot;type&quot;: 1,//类型，详见状态码-&gt;足球技术统计
+  &quot;position&quot;: 2,//事件发生方,0-中立 1,主队 2,客队
+  &quot;time&quot;: 47,    //时间(分钟)
+  &quot;player_id&quot;: 31727,//事件相关球员id,可能为空
+  &quot;player_name&quot;: &quot;内马尔&quot;,//事件相关球员名称,可能为空
+  &quot;assist1_id&quot;: 12395,//进球时,助攻球员1 id,可能为空
+  &quot;assist1_name&quot;: &quot;梅西&quot;,//进球时,助攻球员1名称,可能为空
+  &quot;in_player_id &quot;: 12395,//换人时,换上球员id,可能为空
+  &quot;in_player_name &quot;: &quot;梅西&quot;,//换人时,换上球员名称,可能为空
+  &quot;out_player_id &quot;: 10156,//换人时,换下球员id ,可能为空
+  &quot;out_player_name &quot;: &quot;C罗&quot;,//换人时,换下球员名称,可能为空
+  &quot;home_score&quot;: 1,//进球时,主队比分,可能没有
+  &quot;away_score&quot;: 2,//进球时,客队比分,可能没有
+}
+stats 比赛统计字段说明
+{
+  &quot;type&quot;: 2,//类型，详见状态码-&gt;足球技术统计
+  &quot;home&quot;: 9,//主队值
+  &quot;away&quot;: 0//客队值
+}
+tlive 文字直播字段说明
+包含：黄牌、红牌、进球、换人、角球、比赛开始、中场、结束
+{
+  &quot;main&quot;: 1,//是否重要事件,1-是,0-否
+  &quot;data&quot;: &quot;77' - 第10个角球，本场比赛的第十个角球已经产生！&quot;,
+  &quot;position&quot;: 1,//事件发生方,0-中立 1,主队 2,客队
+  &quot;type&quot;: 2,//类型，详见状态码
+  &quot;time&quot;: &quot;77'&quot; //事件时间
+}
+状态码
+0 比赛异常，说明：暂未判断具体原因的异常比赛，可能但不限于：腰斩、取消等等，可隐藏处理
+1 未开赛
+2 上半场
+3 中场
+4 下半场
+5 加时赛
+6 加时赛(弃用)
+7 点球决战
+8 完场
+9 推迟
+10  中断
+11  腰斩
+12  取消
+13  待定<code></pre>
+</div>        </div>
+
+    </div>
+
+    <script type="text/javascript">
+        function getData() {
+            var data = new FormData();
+            var param = [];
+            $("td input").each(function(index,e) {
+                if ($.trim(e.value)){
+                    if (e.type != 'file'){
+                        if ($(e).data('source') == 'get') {
+                            param.push(e.name + '=' + e.value);
+                        } else {
+                            data.append(e.name, e.value);
+                        }
+
+                        if (e.name != "service") $.cookie(e.name, e.value, {expires: 30});
+                    } else{
+                        var files = e.files;
+                        if (files.length == 1){
+                            data.append(e.name, files[0]);
+                        } else{
+                            for (var i = 0; i < files.length; i++) {
+                                data.append(e.name + '[]', files[i]);
+                            }
+                        }
+                    }
+                }
+            });
+            param = param.join('&');
+            return {param:param, data:data};
+        }
+        
+        $(function(){
+            $("#json_output").hide();
+            $("#submit").on("click",function(){
+                var data = getData();
+                var url_arr = $("input[name=request_url]").val().split('?');
+                var url = url_arr.shift();
+                var param = url_arr.join('?');
+                param = param.length > 0 ? param + '&' + data.param : data.param;
+                url = url + '?' + param;
+                $.ajax({
+                    url: url,
+                    type:'post',
+                    data:data.data,
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    success:function(res,status,xhr){
+                        console.log(xhr);
+                        var statu = xhr.status + ' ' + xhr.statusText;
+                        var header = xhr.getAllResponseHeaders();
+                        var json_text = JSON.stringify(res, null, 4);    // 缩进4个空格
+                        $("#json_output").html('<pre>' + statu + '<br/>' + header + '<br/>' + json_text + '</pre>');
+                        $("#json_output").show();
+                    },
+                    error:function(error){
+                        console.log(error)
+                    }
+                })
+            })
+
+            fillHistoryData();
+
+            checkLastestVersion();
+        })
+
+        // 填充历史数据
+        function fillHistoryData() {
+            $("td input").each(function(index,e) {
+                var cookie_value = $.cookie(e.name);
+                if (e.name != "service" && cookie_value != "" && cookie_value !== undefined) {
+                    e.value = cookie_value;
+                }
+            });
+        }
+
+        // 检测最新版本
+        function checkLastestVersion() {
+                $.ajax({
+                    url:'https://www.phalapi.net/check_lastest_version.php',
+                    type:'get',
+                    data:{version : '2.10.1'},
+                    success:function(res,status,xhr){
+                        if (!res.ret || res.ret != 200) {
+                            return;
+                        }
+                        if (res.data.need_upgrade >= 0) {
+                            return;
+                        }          
+
+                        $('#version_update').html('&nbsp; | &nbsp; <a target="_blank" href=" ' + res.data.url + ' "><strong>免费升级到 PhalApi ' + res.data.version + '</strong></a>');              
+                    },
+                    error:function(error){
+                        console.log(error)
+                    }
+                })
+
+        }
+    </script>
+</body>
+</html>

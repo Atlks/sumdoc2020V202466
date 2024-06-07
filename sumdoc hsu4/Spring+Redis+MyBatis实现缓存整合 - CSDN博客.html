@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="canonical" href="https://blog.csdn.net/cx118118/article/details/78022440"/> 
+    <script type="text/javascript">
+        var username = "cx118118";
+        var _blogger = username;
+        var blog_address = "https://blog.csdn.net/cx118118";
+        var static_host = "https://csdnimg.cn/release/phoenix/";
+        var currentUserName = "attilax"; 
+        var fileName = '78022440';
+        var commentscount = 0;
+        var islock = false;
+        window.quickReplyflag = true;
+        var totalFloor = 0;
+        var isBole = false;
+        var isDigg = false;
+        var isExpert = false;
+        var isAdm = false;
+        var baiduKey = "redis%2Bmybatis";
+        var needInsertBaidu = false;
+        var isShowAds = true;
+        var ChannelId = 6;
+    </script>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="referrer" content="always">
+    <script src="https://csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://csdnimg.cn/public/static/css/avatar.css">
+                <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/production/main-f869aa95a4.css">
+          <link rel="stylesheet" href="https://csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+
+    <script src="https://csdnimg.cn/rabbit/exposure-click/main-1.0.5.js"></script>
+    <script type="text/javascript" src="https://csdnimg.cn/pubfooter/js/tracking-1.0.2.js" charset="utf-8"></script>
+    <script type="text/javascript" src="https://csdnimg.cn/release/phoenix/production/main-e96db8abdf.js"></script>
+
+    <script src="https://dup.baidustatic.com/js/ds.js"></script>
+    <script type="text/javascript">
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+    </script>
+    <meta name="description" content="&lt;!--配置redis连接的配置文件，placeholder的实例只能存在一个--&gt;
+    &lt;!--&lt;context:property-placeholder location=&quot;classpath:redis.properties&quot;/&gt;--&gt;
+    &lt;!--启用缓存注解--&gt;
+    &lt;cache:annotation-driven cache-manager=&quot;cacheManager&quot;/&gt;" />
+    <meta name="keywords" content="spring,redis" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+    <title>Spring+Redis+MyBatis实现缓存整合 - CSDN博客</title>
+    <link href="https://csdnimg.cn/public/favicon.ico" rel="SHORTCUT ICON">
+              <script src="https://csdnimg.cn/search/baidu_search-1.1.2.js?v=201802071056&autorun=true&install=true&keyword=redis%2Bmybatis"  type="text/javascript"></script>
+                  <style>
+            .MathJax, .MathJax_Message, .MathJax_Preview{
+                display: none
+            }
+      </style>
+</head>
+<body>
+<script id="toolbar-tpl-scriptId" prod="download" skin="black" src="https://csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="https://blog.csdn.net/"></script>
+<div class="container clearfix">
+  <main>
+    <div style="display:none;">
+      <img src="" onerror='setTimeout(function(){if(!/(csdn.net|iteye.com|baiducontent.com|googleusercontent.com|360webcache.com|sogoucdn.com|bingj.com|baidu.com)$/.test(window.location.hostname)){window.location.href="\x68\x74\x74\x70\x73\x3a\x2f\x2f\x77\x77\x77\x2e\x63\x73\x64\x6e\x2e\x6e\x65\x74"}},3000);'>
+    </div>
+    <article>
+        <h1 class="csdn_top">Spring+Redis+MyBatis实现缓存整合</h1>
+        <div class="article_bar clearfix">
+            <div class="artical_tag">
+                <span class="original">
+                原创                </span>
+                <span class="time">2017年09月18日 18:52:29</span>
+            </div>
+
+            <ul class="article_tags clearfix csdn-tracking-statistics tracking-click" data-mod="popu_377" >
+                <li class="tit">标签：</li>
+
+<!--          [startarticletags]-->
+                                                            <li><a href="http://so.csdn.net/so/search/s.do?q=spring&t=blog" target="_blank">spring</a> <span>/</span></li>
+                                            <li><a href="http://so.csdn.net/so/search/s.do?q=redis&t=blog" target="_blank">redis</a> <span>/</span></li>
+                                            <li><a href="http://so.csdn.net/so/search/s.do?q=mybatis&t=blog" target="_blank">mybatis</a> <span>/</span></li>
+                                    <!--          [endarticletags]-->
+            </ul>
+            <ul class="right_bar">
+                <li><button class="btn-noborder"><i class="icon iconfont icon-read"></i><span class="txt">1427</span></button></li>
+                <li class="edit">
+                    <a class="btn-noborder" href="" >
+                        <i class="icon iconfont icon-bianji"></i><span class="txt">编辑</span>
+                    </a>
+                </li>
+                <li class="del">
+                    <a class="btn-noborder" onclick="javascript:deleteArticle(fileName);return false;">
+                        <i class="icon iconfont icon-shanchu"></i><span class="txt">删除</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div id="article_content" class="article_content csdn-tracking-statistics tracking-click" data-mod="popu_519" data-dsm="post">
+                            <div class="markdown_views">
+                        <pre class="prettyprint"><code class="language-xml hljs ">        <span class="hljs-comment">&lt;!--redis缓存--&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">dependency</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">groupId</span>&gt;</span>org.springframework.data<span class="hljs-tag">&lt;/<span class="hljs-title">groupId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">artifactId</span>&gt;</span>spring-data-redis<span class="hljs-tag">&lt;/<span class="hljs-title">artifactId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">version</span>&gt;</span>1.8.5.RELEASE<span class="hljs-tag">&lt;/<span class="hljs-title">version</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">dependency</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">dependency</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">groupId</span>&gt;</span>org.apache.commons<span class="hljs-tag">&lt;/<span class="hljs-title">groupId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">artifactId</span>&gt;</span>commons-pool2<span class="hljs-tag">&lt;/<span class="hljs-title">artifactId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">version</span>&gt;</span>2.3<span class="hljs-tag">&lt;/<span class="hljs-title">version</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">dependency</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">dependency</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">groupId</span>&gt;</span>redis.clients<span class="hljs-tag">&lt;/<span class="hljs-title">groupId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">artifactId</span>&gt;</span>jedis<span class="hljs-tag">&lt;/<span class="hljs-title">artifactId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">version</span>&gt;</span>2.9.0<span class="hljs-tag">&lt;/<span class="hljs-title">version</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">dependency</span>&gt;</span></code></pre>
+
+<pre class="prettyprint"><code class="language-xml hljs ">    <span class="hljs-comment">&lt;!--配置redis连接的配置文件，placeholder的实例只能存在一个--&gt;</span>
+    <span class="hljs-comment">&lt;!--&lt;context:property-placeholder location="classpath:redis.properties"/&gt;--&gt;</span>
+    <span class="hljs-comment">&lt;!--启用缓存注解--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">cache:annotation-driven</span> <span class="hljs-attribute">cache-manager</span>=<span class="hljs-value">"cacheManager"</span>/&gt;</span>
+    <span class="hljs-comment">&lt;!--缓存管理器--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">bean</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"cacheManager"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"org.springframework.cache.support.SimpleCacheManager"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">property</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"caches"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">set</span>&gt;</span>
+                <span class="hljs-comment">&lt;!--自定义的redis缓存操作实现--&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">bean</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"com.common.cache.redis.RedisCache"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-title">property</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"name"</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"myCache"</span>/&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-title">property</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"redisTemplate"</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"redisTemplate"</span>/&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-title">bean</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-title">set</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">property</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">bean</span>&gt;</span>
+    <span class="hljs-comment">&lt;!--redis连接池配置--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">bean</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"poolConfig"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"redis.clients.jedis.JedisPoolConfig"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">property</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"maxIdle"</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"${redis.maxIdle}"</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">property</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"maxTotal"</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"${redis.maxTotal}"</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">property</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"testOnBorrow"</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"${redis.testOnBorrow}"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">bean</span>&gt;</span>
+    <span class="hljs-comment">&lt;!--redis连接工厂配置--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">bean</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"connectionFactory"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"org.springframework.data.redis.connection.jedis.JedisConnectionFactory"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">property</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"hostName"</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"${redis.host}"</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">property</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"port"</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"${redis.port}"</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">property</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"password"</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"${redis.pass}"</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">property</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"poolConfig"</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"poolConfig"</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">property</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"usePool"</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"true"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">bean</span>&gt;</span>
+    <span class="hljs-comment">&lt;!--redis操作模板--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">bean</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"redisTemplate"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"org.springframework.data.redis.core.RedisTemplate"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">property</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"connectionFactory"</span> <span class="hljs-attribute">ref</span>=<span class="hljs-value">"connectionFactory"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">bean</span>&gt;</span>
+</code></pre>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs ">
+<span class="hljs-javadoc">/**
+ * Cache adapter for Redis.
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RedisCache</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Cache</span> {</span>
+    <span class="hljs-keyword">private</span> RedisTemplate&lt;String, Object&gt; redisTemplate;
+    <span class="hljs-keyword">private</span> String name;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setRedisTemplate</span>(RedisTemplate&lt;String, Object&gt; redisTemplate) {
+        <span class="hljs-keyword">this</span>.redisTemplate = redisTemplate;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setName</span>(String name) {
+        <span class="hljs-keyword">this</span>.name = name;
+    }
+
+    <span class="hljs-annotation">@Override</span>
+    <span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span>() {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.name;
+    }
+
+    <span class="hljs-annotation">@Override</span>
+    <span class="hljs-keyword">public</span> Object <span class="hljs-title">getNativeCache</span>() {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.redisTemplate;
+    }
+
+    <span class="hljs-javadoc">/**
+     * 从缓存中获取key
+     */</span>
+    <span class="hljs-annotation">@Override</span>
+    <span class="hljs-keyword">public</span> ValueWrapper <span class="hljs-title">get</span>(Object key) {
+        <span class="hljs-keyword">final</span> String keyf = key.toString();
+        Object object;
+        object = redisTemplate.execute((RedisCallback&lt;Object&gt;) connection -&gt; {
+            <span class="hljs-keyword">byte</span>[] key1 = keyf.getBytes();
+            <span class="hljs-keyword">byte</span>[] value = connection.get(key1);
+            <span class="hljs-keyword">if</span> (value == <span class="hljs-keyword">null</span>) {
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+            }
+            <span class="hljs-keyword">return</span> SerializationUtils.deserialize(value);
+        });
+        <span class="hljs-keyword">return</span> (object != <span class="hljs-keyword">null</span> ? <span class="hljs-keyword">new</span> SimpleValueWrapper(object) : <span class="hljs-keyword">null</span>);
+    }
+
+    <span class="hljs-javadoc">/**
+     * 将一个新的key保存到缓存中
+     * 先拿到需要缓存key名称和对象，然后将其转成ByteArray
+     */</span>
+    <span class="hljs-annotation">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">put</span>(Object key, Object value) {
+        <span class="hljs-keyword">final</span> String keyf = key.toString();
+        <span class="hljs-keyword">final</span> Object valuef = value;
+        <span class="hljs-keyword">final</span> <span class="hljs-keyword">long</span> liveTime = <span class="hljs-number">86400</span>;
+        redisTemplate.execute((RedisCallback&lt;Long&gt;) connection -&gt; {
+            <span class="hljs-keyword">byte</span>[] keyb = keyf.getBytes();
+            <span class="hljs-keyword">byte</span>[] valueb = SerializationUtils.serialize(valuef);
+            connection.set(keyb, valueb);
+            <span class="hljs-keyword">if</span> (liveTime &gt; <span class="hljs-number">0</span>) {
+                connection.expire(keyb, liveTime);
+            }
+            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>L;
+        });
+    }
+
+
+    <span class="hljs-javadoc">/**
+     * 删除key
+     */</span>
+    <span class="hljs-annotation">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">evict</span>(Object key) {
+        <span class="hljs-keyword">final</span> String keyf = key.toString();
+        redisTemplate.execute((RedisCallback&lt;Long&gt;) connection -&gt; connection.del(keyf.getBytes()));
+    }
+
+    <span class="hljs-javadoc">/**
+     * 清空key
+     */</span>
+    <span class="hljs-annotation">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">clear</span>() {
+        redisTemplate.execute((RedisCallback&lt;String&gt;) connection -&gt; {
+            connection.flushDb();
+            <span class="hljs-keyword">return</span> <span class="hljs-string">"ok"</span>;
+        });
+    }
+
+    <span class="hljs-annotation">@Override</span>
+    <span class="hljs-keyword">public</span> &lt;T&gt; T <span class="hljs-title">get</span>(Object key, Class&lt;T&gt; type) {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+    }
+
+    <span class="hljs-annotation">@Override</span>
+    <span class="hljs-keyword">public</span> &lt;T&gt; T <span class="hljs-title">get</span>(Object o, Callable&lt;T&gt; callable) {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+    }
+
+    <span class="hljs-annotation">@Override</span>
+    <span class="hljs-keyword">public</span> ValueWrapper <span class="hljs-title">putIfAbsent</span>(Object key, Object value) {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
+    }
+}
+</code></pre>
+
+<pre class="prettyprint"><code class="language-java hljs ">    <span class="hljs-comment">//在Service层写注解</span>
+    <span class="hljs-annotation">@Cacheable</span>(value = <span class="hljs-string">"myCache"</span>, key = <span class="hljs-string">"getMethodName()"</span>)</code></pre>                </div>
+                                                <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/production/markdown_views-ea0013b516.css" />
+                                    </div>
+        <script>
+        $(".MathJax").remove();
+        </script>
+    </article>
+      <div class="readall_box csdn-tracking-statistics tracking-click" data-mod="popu_376">
+          <div class="read_more_mask"></div>
+          <a class="btn btn-large btn-gray-fred read_more_btn" target="_self">阅读全文</a>
+      </div>
+      <div class="article_copyright">
+
+                    版权声明：本文为博主原创文章，未经博主允许不得转载。            https://blog.csdn.net/cx118118/article/details/78022440              </div>
+      <ul class="article_collect clearfix csdn-tracking-statistics tracking-click"  data-mod="popu_378">
+          <li class="tit">本文已收录于以下专栏：</li>
+<!--          [startarticlecolumns]-->
+                                <!--          [endarticlecolumns]-->
+      </ul>
+      <div class="edu_promotion" style="margin: 16px 0;display:none;"></div>
+      <div class="comment_box clearfix" id="comments">
+          <div id="comment_form">
+              <div id="commentsbmitarear">
+                                  <div class="comment_area clearfix">
+                      <div class="userimg">
+                        <a href="https://my.csdn.net/attilax">
+                          <img src="https://avatar.csdn.net/3/9/1/3_attilax.jpg">
+                        </a>
+                      </div>
+
+                      <form action="https://blog.csdn.net/cx118118/phoenix/comment/submit?id=78022440" method="post" onsubmit="return subform(this);" id="commentform">
+                          <textarea class="comment_content" name="comment_content" id="comment_content" placeholder="写下你的评论…"></textarea>
+                          <div class="bot_bar clearfix">
+                              <div id="ubbtools" class="add_code">
+                                  <a href="#insertcode" code="code" target="_self"><i class="icon iconfont icon-daima"></i></a>
+                              </div>
+
+                              <input type="hidden" id="comment_replyId" name="comment_replyId">
+                              <input type="hidden" id="comment_userId" name="comment_userId" value="">
+                              <input type="hidden" id="commentId" name="commentId" value="">
+                              <input type="submit" class="btn btn-redborder" value="发表评论">
+                              <span id="tip_comment" class="tip">
+                              <div style="display: none;" class="csdn-tracking-statistics tracking-click" data-mod="popu_384"><a href="#" target="_blank" class="comment_area_btn">发表评论</a></div>
+
+                              <div id="lang_list" code="code">
+                                  <a href="#html" style="width:95px;" class="long_name" target="_self">HTML/XML</a>
+                                  <a href="#objc" style="width:95px;" class="long_name" target="_self">objective-c</a>
+                                  <a href="#delphi" style="width:58px;" class="zhong_name" target="_self">Delphi</a>
+                                  <a href="#ruby" class="zhong_name" target="_self">Ruby</a>
+                                  <a href="#php" target="_self">PHP</a>
+                                  <a href="#csharp" class="duan_name" target="_self">C#</a>
+                                  <a style=" border-right: none;" href="#cpp" class="duan_name" target="_self">C++</a>
+                                  <a style=" border-bottom:none;width:95px;" href="#javascript" class="long_name" target="_self">JavaScript</a>
+                                  <a style=" border-bottom:none;width:95px;" href="#vb" class="long_name" target="_self">Visual Basic</a>
+                                  <a style=" border-bottom:none;" href="#python" class="zhong_name" target="_self">Python</a>
+                                  <a style=" border-bottom:none;" href="#java" class="zhong_name" target="_self">Java</a>
+                                  <a style="border-bottom:none;" href="#css" class="duan_name" target="_self">CSS</a>
+                                  <a style="border-bottom:none;" href="#sql" class="duan_name" target="_self">SQL</a>
+                                  <a style="border:none; " href="#plain" class="duan_name" target="_self">其它</a>
+                                  <span class="arrb"></span>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+                              </div>
+          </div>
+      </div>
+      <div class="comment_li_outbox">
+          <div id="comment_list"></div>
+      </div>
+
+      <div class="more_comment">
+          <div id="comment_bar" class="trackgin-ad" data-mod="popu_385"></div>
+      </div>
+
+      <!-- <h3 class="recommend_tit" id="related">相关文章推荐</h3> -->
+      <div class="recommend_list clearfix" id="rasss">
+                                          <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/xwnxwn/article/details/53895076"  target="_blank" strategy="BlogCommendFromBaidu_0">
+                    <dd>
+                        <h2>Redis之实战篇（与Mybatis整合）</h2>
+                        <div class="summary">
+                            1，准备好ssm工程，如果有不会的，可以参考
+
+springmvc+mybatis整合
+
+
+2，准备好Redis服务器
+
+3，构建 pom.xml 文件，这个pom文件和之前ssm的基本一样，只是添加...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/3/B/5/3_xwnxwn.jpg" alt="xwnxwn" title="xwnxwn"></li>
+                            <li class="user_name">xwnxwn</li>
+                            <li class="time">2016年12月27日 14:09</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>4457</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/donggang1992/article/details/51064962"  target="_blank" strategy="BlogCommendFromBaidu_1">
+                    <dd>
+                        <h2>redis整合spring mybatis --缓存方案</h2>
+                        <div class="summary">
+                            上一篇总结了redis sentinel（哨兵方案）的配置流程，本篇就redis整合ssm框架进行说明。目前，大多数公司用redis主要做缓存用，对于那些不常变动的数据来说，我们将其缓存在redis中...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/D/2/D/3_donggang1992.jpg" alt="donggang1992" title="donggang1992"></li>
+                            <li class="user_name">donggang1992</li>
+                            <li class="time">2016年04月05日 15:12</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>19698</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                          <dl class="">
+            <script>
+            (function() {
+              var s = "_" + Math.random().toString(36).slice(2);
+              document.write('<div id="' + s + '"></div>');
+              (window.slotbydup=window.slotbydup || []).push({
+                id: '4765209',
+                container: s,
+                size: '808,120',
+                display: 'inlay-fix'
+              });
+            })();
+            </script>
+          </dl>
+                                        <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/yjl33/article/details/50401211"  target="_blank" strategy="BlogCommendFromBaidu_2">
+                    <dd>
+                        <h2>mybatis通过配置文件方式整合redis缓存，替换mybatis二级缓存</h2>
+                        <div class="summary">
+                            mybatis通过redis取代二级缓存，二级缓存的缺点不再赘述。
+
+mybatis默认缓存是PerpetualCache，可以查看一下它的源码，发现其是Cache接口的实现；那么我们的缓存只要实现该...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/3/6/4/3_yjl33.jpg" alt="yjl33" title="yjl33"></li>
+                            <li class="user_name">yjl33</li>
+                            <li class="time">2015年12月25日 11:01</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>4012</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics downloadElement" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a class="clearfix" href="https://download.csdn.net/download/wangys198/9524857" target="_blank" strategy="BlogCommendFromBaidu_3">
+                    <dd class="floatL">
+                        <div class="summary">
+                            <h2>springmvc+mybatis+redis完美整合</h2>
+                            <div class="summary">
+                                <ul>
+                                    <li class="time">2016年05月19日 11:09</li>
+                                    <li class="visited_num fileSize">52.55MB</li>
+                                    <li class="download_btn">下载</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </dd>
+                    <dt class="floatR"><img class="maxwidth" src="http://csdnimg.cn/release/download/old_static/images/minetype/zip.svg" alt="" title=""/></dt>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/xiadi934/article/details/50786293"  target="_blank" strategy="BlogCommendFromBaidu_4">
+                    <dd>
+                        <h2>SpringMVC + MyBatis + Mysql + Redis(作为二级缓存) 配置</h2>
+                        <div class="summary">
+                            项目环境： 在SpringMVC + MyBatis + Mysql。Redis部署在Linux虚拟机。1、整体思路
+参考Ehcache实现MyBatis二级缓存代码（Maven引用对应jar查阅）
+...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/F/3/7/3_xiadi934.jpg" alt="xiadi934" title="xiadi934"></li>
+                            <li class="user_name">xiadi934</li>
+                            <li class="time">2016年03月03日 10:37</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>38235</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/KilluaZoldyck/article/details/72719774"  target="_blank" strategy="BlogCommendFromBaidu_5">
+                    <dd>
+                        <h2>SSM超详细搭建教程(Spring+SpringMVC+Mybatis)以及集成Redis和Druid</h2>
+                        <div class="summary">
+                            这个教程主要包括以下部分： 
+1，基础SSM(Spring+SpringMVC+Mybatis)搭建教程 
+2，集成Redis 
+3，Redis Sentinel高可用方案（基于docker） 
+4，...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/A/9/D/3_killuazoldyck.jpg" alt="KilluaZoldyck" title="KilluaZoldyck"></li>
+                            <li class="user_name">KilluaZoldyck</li>
+                            <li class="time">2017年05月25日 00:19</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1629</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/joshua1830/article/details/54175084"  target="_blank" strategy="searchFromBaidu_6">
+                    <dd>
+                        <h2>spring boot +mybatis+redis集成</h2>
+                        <div class="summary">
+                            整体思路之前已经有人做过mybatis+redis在spring环境的集成（http://blog.csdn.net/xiadi934/article/details/50786293）。 这里我们试...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/E/A/3/3_joshua1830.jpg" alt="joshua1830" title="joshua1830"></li>
+                            <li class="user_name">joshua1830</li>
+                            <li class="time">2017年01月07日 15:59</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>6092</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/wyn1433954905/article/details/78132086"  target="_blank" strategy="BlogCommendFromBaidu_7">
+                    <dd>
+                        <h2>springmvc+mybatis集成redis</h2>
+                        <div class="summary">
+                            springmvc+mybatis整合redis实现缓存                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/0/0/7/3_wyn1433954905.jpg" alt="wyn1433954905" title="wyn1433954905"></li>
+                            <li class="user_name">wyn1433954905</li>
+                            <li class="time">2017年09月29日 11:18</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>635</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics downloadElement" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a class="clearfix" href="https://download.csdn.net/download/u012312155/9980671" target="_blank" strategy="BlogCommendFromBaidu_8">
+                    <dd class="floatL">
+                        <div class="summary">
+                            <h2>spring boot + mybatis +redis 整合亲测可用</h2>
+                            <div class="summary">
+                                <ul>
+                                    <li class="time">2017年09月15日 15:31</li>
+                                    <li class="visited_num fileSize">27KB</li>
+                                    <li class="download_btn">下载</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </dd>
+                    <dt class="floatR"><img class="maxwidth" src="http://csdnimg.cn/release/download/old_static/images/minetype/zip.svg" alt="" title=""/></dt>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/air_stalh/article/details/75040435"  target="_blank" strategy="BlogCommendFromBaidu_9">
+                    <dd>
+                        <h2>Redis整合Mybatis</h2>
+                        <div class="summary">
+                            将Mybatis的缓存修改成redis缓存
+
+
+将缓存和数据库分开                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/4/A/3/3_air_stalh.jpg" alt="air_stalh" title="air_stalh"></li>
+                            <li class="user_name">air_stalh</li>
+                            <li class="time">2017年07月12日 19:56</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>182</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                              </div>
+  </main>
+<aside>
+    <div class="right_box user_info">
+    <dl class="inf_bar clearfix">
+        <dt class="csdn-tracking-statistics tracking-click" data-mod="popu_381">
+                <a href="https://blog.csdn.net/cx118118" target="_blank">
+                    <img src="https://avatar.csdn.net/D/B/5/3_cx118118.jpg" class="avatar_pic">
+        </a>
+      </dt><dd>
+            <h3 class="csdn-tracking-statistics tracking-click"  data-mod="popu_380"><a href="https://blog.csdn.net/cx118118" target="_blank" id="uid">cx118118</a></h3>
+            <div class="medals" title="">
+                      </div>
+                        <span  class="csdn-tracking-statistics tracking-click" data-mod="popu_379"><a class="btn btn-redborder-small "  id="span_add_follow" target="_self">关注</a></span>
+                    </dd>
+    </dl>
+    <div class="inf_number_box clearfix">
+        <dl title="101">
+            <dt>原创</dt>
+            <dd>101</dd>
+        </dl>
+        <dl title="15">
+            <dt>粉丝</dt>
+            <dd id='fan'>15</dd>
+        </dl>
+        <dl title="8">
+            <dt>喜欢</dt>
+            <dd>8</dd>
+        </dl>
+        <dl title="3">
+          <dt>评论</dt>
+          <dd>3</dd>
+        </dl>
+    </div>
+
+</div>
+<div class="interflow clearfix">
+      <div class="badge gradeAndbadge">
+        <div>
+                                    <img src='https://csdnimg.cn/jifen/images/xunzhang/xunzhang/chizhiyiheng.png' alt='持之以恒'>
+                                            </div>
+    </div>
+      <div class="grade gradeAndbadge gradewidths">
+      <span>等级：</span>
+      <div>
+        <a href="https://blog.csdn.net/home/help.html#level" title="4级,点击查看等级说明" target="_blank">
+          <img class="grade-img" src="https://csdnimg.cn/jifen/images/xunzhang/jianzhang/blog4.png" alt="4级,点击查看等级说明">
+        </a>
+      </div>
+    </div>
+    <div class="gradeAndbadge gradewidths" title="59890">
+        <span>访问量：</span>
+        <span class="num odd-overhidden">5万+</span>
+    </div>
+
+    <div class="gradeAndbadge gradewidths" title="1564">
+      <span>积分：</span>
+      <span  class="num odd-overhidden">1564</span>
+    </div>
+    <div class="gradeAndbadge gradewidths" title="32077">
+        <span>排名：</span>
+        <span class="num odd-overhidden">3万+</span>
+    </div>
+
+</div>
+<script type="text/javascript">
+  // 判断并设置用户名位置，没有博客专家与关注按钮时，用户名居中
+  $medals_children = $('.medals').children().length;
+  $span_add_follow = $('#span_add_follow').length;
+  if($medals_children === 0 && $span_add_follow === 0){
+    $('.inf_bar dd').css('vertical-align','10px')
+  }
+</script>          <div class="extension_other csdn-tracking-statistics tracking-click" data-mod="popu_389">
+          <!--u3032528-->
+        <div class="flashrecommend">
+                        <script type="text/javascript" src="//cee1.iteye.com/bwocoltly.js"></script>
+                    </div>
+      </div>
+            <div class="writings">
+      <div class="public_signal clearfix">
+        <h3>博主最新文章</h3>
+        <a href="https://blog.csdn.net/cx118118" target="_blank" class="more"><span>更多文章</span></a>
+      </div>
+        <ul class="inf_list clearfix csdn-tracking-statistics tracking-click" data-mod="popu_382">
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/cx118118/article/details/79122023" target="_blank">2018年1月21日</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/cx118118/article/details/78814019" target="_blank">Java非反射方式获取方法签名</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/cx118118/article/details/78720023" target="_blank">ActiveMQ的两种消息模式</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/cx118118/article/details/78275532" target="_blank">Java字符流读取中文文档</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/cx118118/article/details/78093881" target="_blank">Oracle EX 11g创建用户表和表空间授权</a>
+            </li>
+                    </ul>
+    </div>
+                <div class="user-hotArticle sort ClassSort">
+            <h3>文章分类</h3>
+            <ul class="hotArticle-list sort-list ClassSort-list">
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/cx118118/article/category/6446655" class="odd-overhidden floatL">Android开发笔记</a>
+                        <div class="read list-left floatR"><span>5篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/cx118118/article/category/6060374" class="odd-overhidden floatL">PHP开发笔记</a>
+                        <div class="read list-left floatR"><span>4篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/cx118118/article/category/6439356" class="odd-overhidden floatL">Java笔记</a>
+                        <div class="read list-left floatR"><span>25篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/cx118118/article/category/6060373" class="odd-overhidden floatL">蓝桥杯练习题</a>
+                        <div class="read list-left floatR"><span>21篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/cx118118/article/category/6060375" class="odd-overhidden floatL">随笔</a>
+                        <div class="read list-left floatR"><span>17篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/cx118118/article/category/6284371" class="odd-overhidden floatL">C语言练习</a>
+                        <div class="read list-left floatR"><span>2篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/cx118118/article/category/6476620" class="odd-overhidden floatL">JavaEE实战</a>
+                        <div class="read list-left floatR"><span>25篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/cx118118/article/category/6751652" class="odd-overhidden floatL">Python练习</a>
+                        <div class="read list-left floatR"><span>1篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/cx118118/article/category/6895484" class="odd-overhidden floatL">linux运维</a>
+                        <div class="read list-left floatR"><span>4篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/cx118118/article/category/6926220" class="odd-overhidden floatL">JQuery笔记</a>
+                        <div class="read list-left floatR"><span>2篇</span></div>
+                    </li>
+                            </ul>
+            <div class="unfold-btn">
+              <span>展开</span><i class="icon iconfont icon-xiajiantou"></i>
+            </div>
+        </div>
+    <!--    [StartShowSelfColumn]-->
+    <!--    [EndShowSelfColumn]-->
+            <div class="user-hotArticle sort timeSort">
+          <h3>文章存档</h3>
+          <ul class="hotArticle-list timeSort-list">
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/cx118118/article/month/2018/01" class="odd-overhidden floatL">2018年1月</a>
+                  <div class="read list-left floatR"><span>1篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/cx118118/article/month/2017/12" class="odd-overhidden floatL">2017年12月</a>
+                  <div class="read list-left floatR"><span>2篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/cx118118/article/month/2017/10" class="odd-overhidden floatL">2017年10月</a>
+                  <div class="read list-left floatR"><span>1篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/cx118118/article/month/2017/09" class="odd-overhidden floatL">2017年9月</a>
+                  <div class="read list-left floatR"><span>12篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/cx118118/article/month/2017/08" class="odd-overhidden floatL">2017年8月</a>
+                  <div class="read list-left floatR"><span>14篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/cx118118/article/month/2017/07" class="odd-overhidden floatL">2017年7月</a>
+                  <div class="read list-left floatR"><span>5篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/cx118118/article/month/2017/06" class="odd-overhidden floatL">2017年6月</a>
+                  <div class="read list-left floatR"><span>3篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/cx118118/article/month/2017/05" class="odd-overhidden floatL">2017年5月</a>
+                  <div class="read list-left floatR"><span>5篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/cx118118/article/month/2017/04" class="odd-overhidden floatL">2017年4月</a>
+                  <div class="read list-left floatR"><span>6篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/cx118118/article/month/2017/03" class="odd-overhidden floatL">2017年3月</a>
+                  <div class="read list-left floatR"><span>5篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/cx118118/article/month/2017/02" class="odd-overhidden floatL">2017年2月</a>
+                  <div class="read list-left floatR"><span>12篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/cx118118/article/month/2016/12" class="odd-overhidden floatL">2016年12月</a>
+                  <div class="read list-left floatR"><span>3篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/cx118118/article/month/2016/11" class="odd-overhidden floatL">2016年11月</a>
+                  <div class="read list-left floatR"><span>6篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/cx118118/article/month/2016/10" class="odd-overhidden floatL">2016年10月</a>
+                  <div class="read list-left floatR"><span>6篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/cx118118/article/month/2016/09" class="odd-overhidden floatL">2016年9月</a>
+                  <div class="read list-left floatR"><span>3篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/cx118118/article/month/2016/08" class="odd-overhidden floatL">2016年8月</a>
+                  <div class="read list-left floatR"><span>3篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/cx118118/article/month/2016/06" class="odd-overhidden floatL">2016年6月</a>
+                  <div class="read list-left floatR"><span>3篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/cx118118/article/month/2016/01" class="odd-overhidden floatL">2016年1月</a>
+                  <div class="read list-left floatR"><span>12篇</span></div>
+                </li>
+                      </ul>
+          <div class="unfold-btn">
+            <span>展开</span><i class="icon iconfont icon-xiajiantou"></i>
+          </div>
+        </div>
+            <div class="user-hotArticle">
+        <h3>博主热门文章</h3>
+        <ul class="hotArticle-list csdn-tracking-statistics tracking-click" data-mod="popu_521">
+<!--        [StartHotArticles]-->
+                            <li>
+                    <a href="https://blog.csdn.net/cx118118/article/details/52614423">JQuery修改CSS伪类</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>4707</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/cx118118/article/details/53427796">实现SVN提交后自动更新目录</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>4704</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/cx118118/article/details/54955620">Linux下找到真正的JDK路径</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>3784</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/cx118118/article/details/53587210">JAVA实现银行系统</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>3552</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/cx118118/article/details/51755311">C语言实现基于SYN洪泛的DoS攻击</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2237</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/cx118118/article/details/54898409">JAVA从MySQL取出datetime类型的字段输出后多了个&quot;.0&quot;</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>1810</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/cx118118/article/details/53464367">GNS3配置ASA解决console无法使用的问题</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>1732</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/cx118118/article/details/70174469">Java生成控制台字符图像</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>1481</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/cx118118/article/details/53067516">SQLite数据库中文乱码处理</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>1466</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/cx118118/article/details/78022440">Spring+Redis+MyBatis实现缓存整合</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>1424</span></div>
+                </li>
+            <!--        [EndHotArticles]-->
+        </ul>
+    </div>
+    
+<!--    [startcustom]-->
+    <!--    [endcustom]-->
+  <div class="fixRight_box" style="height:256px">
+    <div class="fixRight">
+                    <!--u3163270-->
+                        <script type="text/javascript" src="//cee1.iteye.com/avneunkwb.js"></script>
+                          <div class="persion_article"></div>
+    </div>
+  </div>
+</aside>
+</div>
+
+<div class="left_fixed">
+    <div class="left_show_button">
+        <span>
+          <i class="icon iconfont icon-youjiantou"></i>
+        </span>
+    </div>
+    <ul class="left_menu" id="share_box">
+        <li>
+            <button class="left-fixed-btn btn-like csdn-tracking-statistics tracking-click" data-mod="popu_373" target="_self" title="点赞">
+                <a href="javascript:void(0);" class="iconbox border_red" ><i class="icon iconfont icon-dianzan"></i></a>
+                <a class="txt" href="javascript:void(0);">0</a>
+            </button>
+        </li>
+        <li id="blog_artical_directory">
+            <button class="left-fixed-btn left_menu_btn csdn-tracking-statistics tracking-click" data-mod="popu_372" target="_self" title="目录">
+                <a href="javascript:void(0);" class="iconbox border_black" ><i class="icon iconfont icon-mulu"></i></a>
+            </button>
+        </li>
+        <li class="menu_con">
+            <div class="list_father">
+                <div class="arr_box">
+                    <button class="btn-noborder arr-btn scroll-down  left_scroll_down"><i class="icon iconfont icon-xiajiantou"></i></button>
+                    <button class="btn-noborder arr-btn scroll-up left_scroll_top"><i class="icon iconfont icon-shangjiantou"></i></button>
+                </div>
+                <div class="arr"></div>
+                <div id="csdnBlogDir"></div>
+            </div>
+        </li>
+        <!--        <li>-->
+        <!--            <button class="left-fixed-btn btn-like tracking-ad" data-mod="popu_373" target="_self">-->
+        <!--                <span class="iconbox border_red"><i class="icon iconfont icon-xihuan-"></i></span>-->
+        <!--                <span class="txt">喜欢</span>-->
+        <!--                <span class="untxt">取消喜欢</span>-->
+        <!--            </button>-->
+        <!--        </li>-->
+        <li>
+            <button class="left-fixed-btn csdn-tracking-statistics tracking-click" data-mod="popu_374"  id="com-quick-collect" target="_self" title="收藏">
+                <a href="javascript:void(0);" class="iconbox border_purple" ><i class="icon iconfont icon-shoucang"></i></a>
+            </button>
+        </li>
+        <li>
+            <button class="left-fixed-btn btn-pinglun csdn-tracking-statistics tracking-click" data-mod="popu_544" title="评论">
+                <a href="javascript:void(0);" class="iconbox border_purple" ><i class="icon iconfont icon-pinglun"></i></a>
+            </button>
+        </li>
+        <li class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+            <a class="bds_tsina outside left-fixed-btn" data-cmd="tsina" title="分享到新浪微博"></a>
+            <span class="iconbox border_red2"><i class="icon iconfont icon-xinlang"></i></span>
+        </li>
+        <li class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+            <a class="bds_weixin outside left-fixed-btn" data-cmd="weixin" title="分享到微信"></a>
+            <span class="iconbox border_green"><i class="icon iconfont icon-weixin"></i></span>
+        </li>
+        <li class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+            <a class="bds_qzone outside left-fixed-btn" data-cmd="qzone" title="分享到QQ空间"></a>
+            <span class="iconbox border_blue"><i class="icon iconfont icon-QQ"></i></span>
+        </li>
+        <li id="share_box">
+
+            <div class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+
+
+
+            </div>
+        </li>
+    </ul>
+</div>
+<div id="pop_win"></div>
+<div id="popup_mask"></div>
+<div class="pop_CA_cover" ></div>
+<div class="pop pop_CA" >
+    <div class="CA_header">
+        收藏助手
+        <span class="cancel_icon"  id="fapancle" ></span>
+    </div>
+    <iframe src="" id="collectIframe" frameborder="0" width="100%" height="360"  scrolling="no" ></iframe>
+</div>
+<!--举报-->
+<div id="report_dialog" style="top: 250px; left: 343.5px;"><div id="panel_report">
+    <div class="panel_head">不良信息举报</div>
+    <form method="post" id="frmReport" class="panel_body">
+        <table border="0" cellpadding="0" cellspacing="4" class="pop_table">
+            <tbody><tr><td colspan="2">您举报文章：<a href="https://blog.csdn.net/cx118118/article/details/78022440" target="_blank">Spring+Redis+MyBatis实现缓存整合</a></td></tr>
+            <tr>
+                <th style="width:60px;">举报原因：</th>
+                <td id="panel_reporttype">
+                    <label><input type="radio" class="report_type" id="report_sex" name="report_type" value="1">色情</label>
+                    <label><input type="radio" class="report_type" id="report_Politics" name="report_type" value="2">政治</label>
+                    <label><input type="radio" class="report_type" id="report_copy" name="report_type" value="3">抄袭</label>
+                    <label><input type="radio" class="report_type" id="report_ad" name="report_type" value="4">广告</label>
+                    <label><input type="radio" class="report_type" id="report_want" name="report_type" value="5">招聘</label>
+                    <label><input type="radio" class="report_type" id="report_call" name="report_type" value="6">骂人</label>
+                    <br>
+                    <label><input type="radio" class="report_type" id="report_other" name="report_type" value="7">其他</label>
+                    <input type="text" name="report_other_content" id="report_other_content" maxlength="30" style="display: none;">
+                </td>
+            </tr>
+            <tr id="panel_originalurl" style="display: none;">
+                <th>原文地址：</th>
+                <td>
+                    <input id="originalurl" value="http://" name="originalurl" type="text" style="width: 90%;">
+                </td>
+            </tr>
+            <tr>
+                <th id="sp_reason">原因补充：</th>
+                <td>
+                    <textarea id="report_description" style="width: 300px;" rows="3" name="report_description"></textarea>
+                    <p id="sp_n" style="color:#999;margin:0px;padding:0px;">(最多只允许输入30个字)</p>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input id="btnSubmitReport" name="submit" type="image" align="middle" class="btn_1" src="https://csdnimg.cn/release/phoenix/images/btn_submit.jpg">
+                    <span style="padding-left:20px;"></span>
+                    <img id="btnCloseReportDialog" src="https://csdnimg.cn/release/phoenix/images/btn_cancel.jpg" align="middle">
+                    <div id="error" style="color: Red">
+                    </div>
+                </td>
+            </tr>
+            </tbody></table>
+    </form>
+</div>
+    <script language="javascript" type="text/javascript">
+        var isComment=0;
+        //显示隐藏地址
+        $(function () {
+          console.log("version:phoenix");
+            if(isComment){
+                $("#report_description").attr("disabled",true);
+                $("#sp_n").hide();
+                $("#sp_reason").html("评论内容：");
+            }
+            $(".report_type").click(function () {
+                $("#panel_originalurl,#report_other_content").hide();
+                switch ($(this).val()) {
+                    case '3':
+                        $("#panel_originalurl").show();
+                        $("#originalurl").focus();
+                        break;
+                    case '7':
+                        if(isComment){
+                            $("#report_other_content").show().focus();
+                        }
+                        break;
+                }
+
+            });
+
+            $("#frmReport").submit(function () {
+                if (!currentUserName) {
+
+                    if (confirm("您的操作必须登录，是否登录？")) {
+                        location.href = "https://passport.csdn.net/account/login?from=" + encodeURIComponent(location.href);
+                        return false;
+                    }
+                    return false;
+                }
+
+                var reportType = $("input[name=report_type]:checked").val();
+                if(!reportType){
+                    alert("请选择举报原因！");
+                    return false;
+                }
+                var otherInfo = "";
+                switch (reportType) {
+                    case '3':
+                        otherInfo = $("#originalurl").val();
+                        if (otherInfo == ""||otherInfo=="http://") {
+                            alert("举报抄袭必须提供原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        } else if(!checkeURL(otherInfo)) {
+                            alert("请输入正确的原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        }
+                        break;
+                    case '7':
+                        otherInfo = $("#report_other_content").val();
+                        if (isComment && !otherInfo) {
+                            alert("请填写举报的具体原因！");
+                            $("#report_other_content").focus();
+                            return false;
+                        }
+                        if(!isComment){
+                            if(!$("#report_description").val()){
+                                alert("请填写举报的具体原因！");
+                                $("#report_description").focus();
+                                return false;
+                            }
+                        }
+                        break;
+                }
+                if(!isComment){
+                    if($("#report_description").val().length>30){
+                        alert("举报原因最多只允许输入30个字！");
+                        return false;
+                    }
+                }
+	            nowTime = {
+		            year: new Date().getFullYear(),
+		            month: parseInt(new Date().getMonth())+1,
+		            day: new Date().getDate(),
+		            hours: parseInt(new Date().getHours())+1,
+		            minutes: parseInt(new Date().getMinutes())+1,
+		            seconds: parseInt(new Date().getSeconds())+1
+	            };
+	            var data = {
+		            articleId: fileName,
+		            commentId: 0,
+		            reportType: reportType,
+		            originalurl: $("#originalurl").val(),
+		            report_other_content: $("#report_other_content").val(),
+		            report_description: $("#report_description").val(),
+		            currentUserName: currentUserName,
+		            updatetime: nowTime.year+'/'+nowTime.month+'/'+nowTime.day+' '+ nowTime.hours+':'+nowTime.minutes+':'+seconds,
+		            blogUser: username
+	            };
+	            if(!isComment){//如果是举报文章
+		            data.report_other_content = data.report_description;
+		            // data.report_description = "1. 神经网络这是一个常见的神经网络的图：这是一个常见的三层神经网络的基本构成，Layer L1是输入层，Layer L2是隐含层";
+	            }
+
+	            $.post(blog_address + "/common/report?id="+fileName+"&t=2", data, function (data) {
+		            if (data.result == 1){
+			            SetError("感谢您的举报，我们会尽快审核！");
+		            }else{
+			            if (data.content) alert(data.content);
+		            }
+
+	            });
+                return false;
+            });
+
+            $("#btnCloseReportDialog").click(function () {
+                CloseDiv();
+            });
+
+        });
+
+        //提示后关闭方法
+        function SetError(error) {
+            $("#btnCloseReportDialog").trigger("click");
+            alert(error);
+            CloseDiv();
+        }
+
+        //关闭方法
+        function CloseDiv() {
+
+            $.removeMask();
+            $("#report_dialog").hide();
+            return false;
+        }
+
+        //验证url
+        function checkeURL(url){
+            return /^http(s)?:\/\/([\w-]+\.)+[\w-]+/i.test(url);
+        }
+    </script>
+</div>
+<!--  fixme 后期清理掉  -->
+<div id="a52b5334d" style="width: 1px; height: 1px; display: none;">
+    <script id="adJs52b5334"></script>
+    <script>document.getElementById("adJs52b5334").src = "https://ads.csdn.net/js/opt/52b5334.js?t=" + Math.random();</script>
+</div>
+<script type="text/javascript" src="https://static-blog.csdn.net/mdeditor/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            linebreaks: { automatic: true, width: "94%container" },
+            imageFont: null
+        }
+    });
+</script>
+<!-- <script type="text/javascript" src="https://passport.csdn.net/content/loginbox/login.js"></script> -->
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'https://csdnimg.cn/static/api/js/share.js?v=89860594'];</script>
+<script type="text/javascript" >
+    if($(".article_collect li").length==1){$(".article_collect").hide();}
+    if($(".article_tags li").length==1){$(".article_tags").hide();}
+    $(".edit a").attr("href","https://mp.csdn.net/postedit/"+fileName);
+    $.each($(".edu_li a"),function(){$(this).attr("href",$(this).attr("href").replace("blog7","blog9"))});
+    new CNick('#uid').showNickname();
+
+    if($("#fan").html()=="")
+    {
+	    $("#fan").html(0);
+    }
+</script>
+<script src="https://csdnimg.cn/public/common/append_mark/appendMark.min.js?v=5.00.43" type="text/javascript"></script>
+<script type="text/javascript">
+    appendMark($('.recommend_list').children('a').find('dt'),$('.extension_other'),$('.yd_a_d_feed_cla'))
+</script>
+<script src='https://csdnimg.cn/pubfooter/js/publib_footer-1.0.3.js?v201804111810' data-isfootertrack="false"></script>
+<script src='https://csdnimg.cn/public/common/gotop/js/goTop-v1.0.min.js?v201803151422'></script>
+<script>
+    GoTop({
+        right: 8,
+        hasReport: true,
+        reportFun: function() {
+            $.createMask();
+            var r = blog_address + "/common/report?id=" + fileName + "&t=" + 2;
+            if (3 == 2) {
+                var s = n.parentNode.parentNode.parentNode.getAttribute("floor");
+                r += "&floor=" + s
+            }
+            var i = (document.documentElement.clientHeight - 400) / 2 + (document.documentElement.scrollTop || document.body.scrollTop),
+                a = (document.documentElement.clientWidth - 400) / 2;
+
+            $("#report_dialog").load(r).css({
+                //top: i + "px",
+                top: '20%',
+                left: a
+            }).show()
+        }
+    })
+</script>
+<script src="https://dup.baidustatic.com/js/os.js"></script>
+
+<div id="loginWrap"></div>
+<div id="dlMask"></div>
+</body>

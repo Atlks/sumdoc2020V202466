@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>试卷</title>
+	<meta charset="utf-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta HTTP-EQUIV="pragma" CONTENT="no-cache">
+	<meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+	<meta HTTP-EQUIV="expires" CONTENT="0">
+	<style type="text/css">
+	h3{white-space:pre-wrap}
+	</style>
+</head>
+<body>
+<center>
+<h1>P0059-云计算Hibernate+Spring+SSH理论1</h1>
+<h3>
+学院:_______________ 班级:_______________ 姓名:_______________ 得分:_______________   总分:100分  
+</h3>
+</center>
+<div id="exampaper-body" style="padding: 0px">
+	<!-- 开始加载试卷 -->
+			单选题  每道题（3分）
+				<h3><pre>1、struts2中,不属于Action接口中定义的字符串常量是()</pre></h3>
+					<p>A:success</p>
+					<p>B:failure</p>
+					<p>C:error</p>
+					<p>D:Input</p>
+			
+				<h3><pre>2、 聚合函数能获取总记录数的函数是( )</pre></h3>
+					<p>A:max()</p>
+					<p>B:min()</p>
+					<p>C:sum()</p>
+					<p>D:count()</p>
+			
+				<h3><pre>3、 查询用户的平均年龄,正面正确的sql是()</pre></h3>
+					<p>A:select  sum(age) from user;</p>
+					<p>B:select count(age) from user;</p>
+					<p>C:select avg(age) from user;</p>
+					<p>D:select max(age) from user;</p>
+			
+				<h3><pre>4、关于struts2配置文件说法争取的是:()</pre></h3>
+					<p>A:必须在WEB-Inf/classes目录下</p>
+					<p>B:名字必须为struts.xml</p>
+					<p>C:配置Action时,必须配置包信息</p>
+					<p>D:使用&lt;forward&gt;原色配置转发</p>
+			
+				<h3><pre>5、以下属于struts2的控制器组件是</pre></h3>
+					<p>A:Action</p>
+					<p>B:ActionForm</p>
+					<p>C:ActionServlet</p>
+					<p>D:dispatchAction</p>
+			
+				<h3><pre>6、yjs5-Java字节码文件是以（ ）结尾的文件</pre></h3>
+					<p>A:html</p>
+					<p>B:class</p>
+					<p>C:java</p>
+					<p>D:clazz</p>
+			
+				<h3><pre>7、yjs5-main()方法的返回类型是什么</pre></h3>
+					<p>A:int</p>
+					<p>B:void</p>
+					<p>C:boolean</p>
+					<p>D:static</p>
+			
+				<h3><pre>8、yjs5-JAVA中一个数组中的数据类型可以有（   ）种</pre></h3>
+					<p>A:1</p>
+					<p>B:2</p>
+					<p>C:3</p>
+					<p>D:多</p>
+			
+				<h3><pre>9、yjs5-对于数组 int[][] t = {{1,2,3},{4,5,6}}来说， t.length 等于2 ， t[0].length 等于 （   ）</pre></h3>
+					<p>A:1</p>
+					<p>B:2</p>
+					<p>C:3</p>
+					<p>D:4</p>
+			
+				<h3><pre>10、yjs5-下列描述中不正确的是</pre></h3>
+					<p>A:JSP小脚本 在JSP页面中的表现形式&lt;%! Java代码; %&gt;</p>
+					<p>B:include 指令用于在编译时将其它 HTML文件或 JSP文件嵌入到当前 JSP页面中</p>
+					<p>C:声明的概念：在JSP页面中所放置的一个方法或变量的完整定义</p>
+					<p>D:表达式是对数据的表示，系统将其计算后返回并显示</p>
+			
+				<h3><pre>11、yjs5-下列选项命名变量正确的是</pre></h3>
+					<p>A:name@</p>
+					<p>B:12name</p>
+					<p>C:_name</p>
+					<p>D:this</p>
+			
+				<h3><pre>12、yjs5-update关键字在mysql中是用来做（）</pre></h3>
+					<p>A:删除</p>
+					<p>B:添加</p>
+					<p>C:修改</p>
+					<p>D:查询</p>
+			
+				<h3><pre>13、yjs5-下面不属于java基本数据类型的是</pre></h3>
+					<p>A:float</p>
+					<p>B:String</p>
+					<p>C:double</p>
+					<p>D:int</p>
+			
+				<h3><pre>14、yjs5-Java源码文件的扩展名是</pre></h3>
+					<p>A:.class</p>
+					<p>B:.java</p>
+					<p>C:.doc</p>
+					<p>D:.jvm</p>
+			
+				<h3><pre>15、yjs5-Java跨平台的原理是通过（  ）来实现的</pre></h3>
+					<p>A:JVM</p>
+					<p>B:.java</p>
+					<p>C:windows</p>
+					<p>D:linux</p>
+			
+				<h3><pre>16、yjs5-Java属于赋值运算符的是(   )</pre></h3>
+					<p>A:+</p>
+					<p>B:*</p>
+					<p>C:=</p>
+					<p>D:!</p>
+			
+				<h3><pre>17、yjs5-jsp九大内置对象中表示错误对象的是</pre></h3>
+					<p>A:cookie</p>
+					<p>B:response</p>
+					<p>C:request</p>
+					<p>D:exception</p>
+			
+				<h3><pre>18、yjs5-jsp指令不包括下列哪项</pre></h3>
+					<p>A:forword</p>
+					<p>B:include</p>
+					<p>C:taglib</p>
+					<p>D:page</p>
+			
+				<h3><pre>19、yjs5-以下有关类的继承的说明中，正确的是</pre></h3>
+					<p>A:子类能直接继承父类所有的非私有属性，也可通过接口继承父类的私有属性</p>
+					<p>B:子类只能继承父类的方法，不能继承父类的属性</p>
+					<p>C:子类只能继承父类的非私有属性，不能继承父类的方法</p>
+					<p>D:子类不能继承父类的私有属性</p>
+			
+				<h3><pre>20、给出下面代码，关于该程序以下哪个说法是正确的
+public class Person{ 
+static int arr[] = new int[5];
+public static void main(String a[]) 
+{ 
+　　System.out.println(arr[0]);　}
+} </pre></h3>
+					<p>A:编译时将产生错误</p>
+					<p>B:编译时正确，运行时将产生错误</p>
+					<p>C:输出零</p>
+					<p>D:输出空</p>
+			多选题  每道题（2分）
+				<h3><pre>21、 下面关于form表提交说法正确的是()</pre></h3>
+					<p>A:method=&quot;form&quot;属于form表单提交方式</p>
+					<p>B:method=&quot;post&quot;属于form表单提交方式</p>
+					<p>C:method=&quot;java&quot;属于form表单提交方式</p>
+					<p>D:method=&quot;get&quot;属于form表单提交方式</p>
+			
+				<h3><pre>22、 struts2的struts.xml中的标签有</pre></h3>
+					<p>A:&lt;action&gt;</p>
+					<p>B:&lt;result&gt;</p>
+					<p>C:&lt;package&gt;</p>
+					<p>D:&lt;struts&gt;</p>
+			
+				<h3><pre>23、以下属于struts2配置文件中的配置元素是</pre></h3>
+					<p>A:&lt;package&gt;</p>
+					<p>B:&lt;action&gt;</p>
+					<p>C:&lt;form-beans&gt;</p>
+					<p>D:&lt;action-mappings&gt;</p>
+			
+				<h3><pre>24、YJSZG001-下面关于反射（reflection）描述不正确的是（）</pre></h3>
+					<p>A:反射是不能检测和修改它本身的状态</p>
+					<p>B:反射（reflection）的概念是由Smith于1982年首次提出的，主要是指程序可以访问、检测和修改它本身状态或行为的一种能力</p>
+					<p>C:java没有反射</p>
+					<p>D:反射是指一类应用，它们能够自描述和自控制，也就是说，这类应用通过采用某种机制来实现对自己行为的描述（self-representation）和监测（examination），能根据自身行为的状态和结果，调整或修改应用所描述行为的状态和和相关的语义</p>
+			
+				<h3><pre>25、YJSZG001-struts2中，编写action类可以继承或者实现的类和接口有（）</pre></h3>
+					<p>A:ActionServlet</p>
+					<p>B:Action</p>
+					<p>C:HttpServlet</p>
+					<p>D:ActionSupport</p>
+			
+				<h3><pre>26、yjs5-(   )是List接口实现类</pre></h3>
+					<p>A:ArrayList</p>
+					<p>B:LinkedList</p>
+					<p>C:Set</p>
+					<p>D:HashSet</p>
+			
+				<h3><pre>27、yjs5-下面属于DDL的是</pre></h3>
+					<p>A:create</p>
+					<p>B:drop</p>
+					<p>C:delete</p>
+					<p>D:alter</p>
+			
+				<h3><pre>28、yjs5-Java语言的特点有(  )</pre></h3>
+					<p>A:面向对象</p>
+					<p>B:跨平台</p>
+					<p>C:安全</p>
+					<p>D:不安全</p>
+			
+				<h3><pre>29、yjs5-java语言技术体系包括</pre></h3>
+					<p>A:J2SE</p>
+					<p>B:J2EE</p>
+					<p>C:J2ME</p>
+					<p>D:J2LE</p>
+			判断题  每道题（2分）
+				<h3><pre>30、 mysql中获取系统当前时间可以使用SYSDATE()</pre></h3>
+				<p>A:正确</p>
+				<p>B:错误</p>
+			
+				<h3><pre>31、yjs5-java中byte数据类型的取值范围是（-128~~127）。</pre></h3>
+				<p>A:正确</p>
+				<p>B:错误</p>
+			
+				<h3><pre>32、yjs5-int是浮点型</pre></h3>
+				<p>A:正确</p>
+				<p>B:错误</p>
+			
+				<h3><pre>33、yjs5-Java是大小写敏感的，所有标识符严格区分大小写。</pre></h3>
+				<p>A:正确</p>
+				<p>B:错误</p>
+			
+				<h3><pre>34、yjs5-double是整数类型。</pre></h3>
+				<p>A:正确</p>
+				<p>B:错误</p>
+			
+				<h3><pre>35、yjs5-continue语句只中断所在层循环中的当次循环 </pre></h3>
+				<p>A:正确</p>
+				<p>B:错误</p>
+			
+				<h3><pre>36、yjs5-byte是字符类型</pre></h3>
+				<p>A:正确</p>
+				<p>B:错误</p>
+			
+				<h3><pre>37、yjs5-java创始人是詹姆斯？高斯林</pre></h3>
+				<p>A:正确</p>
+				<p>B:错误</p>
+			
+				<h3><pre>38、yjs5-配置PATH，目的：java执行应用程序的路径</pre></h3>
+				<p>A:正确</p>
+				<p>B:错误</p>
+			
+				<h3><pre>39、yjs5-mysql中空值可以用is null来判断</pre></h3>
+				<p>A:正确</p>
+				<p>B:错误</p>
+			
+				<h3><pre>40、yjs5-开发Java程序除了需要安装JDK以外还需要配置path 和 classpath环境变量</pre></h3>
+				<p>A:正确</p>
+				<p>B:错误</p>
+</div>
+</body>
+</html>

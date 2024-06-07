@@ -1,0 +1,104 @@
+paip.提升用户体验---c++  右键菜单以及socket接口
+
+作者Attilax ，  EMAIL:1466519819@qq.com 
+来源：attilax的专栏
+地址：http://blog.csdn.net/attilax
+
+
+
+主要流程:
+a.实现contextMenuEvent方法.当在window上右击时,自动调用这个方法...用来显示菜单..
+b.on_actionClear_triggered 用来触发事件操作.
+c.eventFilter用来区分左右的鼠标键..当右键点击菜单条款时候不反应,只能左的键有效.....
+d.注意事项..
+按道理 if (qApp->mouseButtons() == Qt::LeftButton)这个可以区分了.实际上不行..
+按道理   // act->installEventFilter( this ); 不个过滤器加的个QAction上走行。。实际上要加的个menu上了.
+e.只是实现孪api接口..还有个.http接口,js接口..腰实现了..
+
+源码下列的:
+////////////////////////////////////////////
+void FormWdg::contextMenuEvent(QContextMenuEvent * event)
+
+{
+//show menu
+    QCursor cur=this->cursor();
+
+    QMenu *menu=new QMenu(this);
+  menu->installEventFilter( this );
+ QIcon myIcon("d:\\icon.jpg");
+ //Act_Maxsize->setIcon(QIcon("Resources/logo.png"));
+
+     QAction *act =   menu->addAction(myIcon,tr("删除"));
+      // act->installEventFilter( this );
+
+  connect(act,SIGNAL(triggered()),this,SLOT(on_actionClear_triggered( )));
+  menu->addSeparator();
+    menu->addAction(tr("新建"));
+
+    menu->exec(cur.pos());
+    //menu->exec(event->globalPos());
+
+
+}
+
+
+
+ void   FormWdg::on_actionClear_triggered(  ){
+     qDebug()<<"---on_actionClear_triggered---";
+     qDebug()<<(qApp->mouseButtons() == Qt::LeftButton);
+     //qDebug()<<qApp->mouseButtons().enum_type;
+    // qDebug()<<Qt::MouseButtons
+
+     if (qApp->mouseButtons() == Qt::LeftButton)
+     {
+   //  qApp->mouseButtons() ==
+         QMessageBox::about(NULL, "About", "LeftButton click");
+         return; }
+     if (qApp->mouseButtons() == Qt::RightButton)
+     {
+         QMessageBox::about(NULL, "About", "RightButton click");
+         return;
+     }
+     QMessageBox::about(NULL, "About", "no check");
+     return;
+//QMessageBox::about(NULL, "About", "About this <font color='red'>application</font>");
+
+ }
+ 
+ 
+ 
+ bool FormWdg::eventFilter(QObject *obj, QEvent *event)
+{
+  //  qDebug()<<"---eventFilter  >> eventFilter---";
+    QMouseEvent *msEvt=static_cast<QMouseEvent *>(event);
+    if(msEvt->type()==QEvent::MouseButtonPress)
+    {
+             qDebug()<<"---eventFilter  >> MouseButtonPress---";
+                 if(msEvt->button() == Qt::LeftButton)
+                 {
+                        qDebug()<<"---eventFilter  >> LeftButton check---";
+                     //   return TRUE; // 吃掉了这个事件
+                 }
+                 if(msEvt->button() == Qt::RightButton                 )
+                 {
+                        qDebug()<<"---eventFilter  >> RightButton check---";
+                     //   return TRUE; // 吃掉了这个事件
+                 }
+    }
+
+ 
+}
+
+
+参考:
+初识Qt Object 类(3) - 51CTO.COM.htm
+Qt?安装事件过滤器installEventFilter_kunyuan_新浪博客.htm
+Qt eventFilter无法过滤mouse事件 - 学无止境 - 博客频道 - CSDN.NET.htm
+Qt 鼠标专题 - 豆丁网.htm
+Qt QWidget添加右键菜单 - 坐看云起的日志 - 网易博客.htm
+QT 创建鼠标右键菜单 - 开源中国社区.htm
+【转】QT右键菜单、右键下拉菜单、各控件响应右键菜单方法简介(持续添加更新中...)_龙腾9吴天的空间_百度空间.htm
+qt trigger - neverland的日志 - 网易博客.htm
+qt的右键扩展，继承contextMenuEvent - 新闻中心 - 赛迪网.htm
+Qt学习之路(13)  菜单和工具条(续) - 豆子空间 - 51CTO技术博客.htm
+Qt学习之路(20)  事件接收与忽略 - 豆子空间 - 51CTO技术博客.htm

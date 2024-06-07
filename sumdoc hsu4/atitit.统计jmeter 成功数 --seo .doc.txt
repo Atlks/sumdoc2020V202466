@@ -1,0 +1,18 @@
+atitit.统计jmeter 成功数 --seo 
+
+配置保存文件...
+
+<httpSample t="777" lt="165" ts="1408580015595" s="true" lb="HTTP请求http://blog.csdn.net/attilax/article/details/38714593" rc="200" rm="OK" tn="线程组 1-1" dt="text" by="69912" sc="1" ec="0">
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">GET</method>
+  <queryString class="java.lang.String"></queryString>
+  <java.net.URL>http://blog.csdn.net/attilax/article/details/38714593?rdm=72539573180</java.net.URL>
+</httpSample>
+
+搜索
+details/38714593.*rm="OK"	
+
+Hits 4534
+
+

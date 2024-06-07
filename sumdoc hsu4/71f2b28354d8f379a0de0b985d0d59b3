@@ -1,0 +1,136 @@
+<?php 
+	$filterExtraResources=[
+		'example'
+	]; 
+?>
+
+
+
+
+<?php $__env->startSection('html_content'); ?>
+	<div class="container">
+		<div class="clearfix p1em p3em-sm bg-white">
+			<div class="row">
+				<div class="col-sm-4">
+					<div class="clearfix bd1px bd-gray bd-right">
+						<?php echo $__env->make('auth.block.menu',['menus'=>\App\Library\Menus::$diamond], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+					</div>
+				</div>
+				
+				<div class="col-sm-8">
+					<div class="clearfix">
+						<section class="clearfix mb1em">
+							<h2 class="center"><?php echo e($TITLE); ?>？</h2>
+							<hr>
+						</section>
+
+						<section class="clearfix mb1em">
+							<div class="clearfix text-indent2em-box pb2em">
+								<p>勤云石是《一表非凡》网站的虚拟货币，可以用来购买VIP会员资格、提升诚信系统等级等。</p>
+								<p>随着一表非凡不断的升级和完善，勤云石在后期也可以累积兑换“勤云网络科技”提供的部分商品和其它服务，累积信用积分进入勤云诚信系统获取我们的后期金融资助等服务。</p>
+							</div>
+						</section>
+						
+						<section class="clearfix mb1em">
+							<div class="clearfix mb1em">
+								<?php
+									$rows=[
+										['初级','<p>表单数量：1</p>','60颗','149颗','299颗','499颗','899颗'],
+										['中级','<p>表单数量：3</p> <p>表单数据分析</p>','90颗','239颗','439颗','799颗','1199颗'],
+										['高级','<p>表单数量：10</p> <p>表单数据分析</p> <p>更多待定</p>','199颗','560颗','999颗','1888颗','2890颗'],
+										['专业','<p>表单数量：50</p> <p>表单数据分析</p> <p>更多待定</p>','299颗','699颗','1390颗','2990颗','4990颗'],
+										['定制','<p>表单数量：100</p> <p>表单数据分析</p> <p>更多待定</p>','399颗','890颗','1980颗','3980颗','6980颗'],
+									];
+								?>
+								<table class="table table-hover table-condensed">
+									<thead>
+										<tr>
+											<th>VIP等级</th>
+											<th>权限</th>
+											<th>1个月</th>
+											<th>3个月</th>
+											<th>6个月</th>
+											<th>1年</th>
+											<th>2年</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<?php foreach($rows as $arr): ?>
+											<tr>
+												<td><?php echo e($arr[0]); ?></td>
+												<td><?php echo $arr[1]; ?></td>
+												<td><?php echo e($arr[2]); ?></td>
+												<td><?php echo e($arr[3]); ?></td>
+												<td><?php echo e($arr[4]); ?></td>
+												<td><?php echo e($arr[5]); ?></td>
+												<td><?php echo e($arr[6]); ?></td>
+											</tr>
+										<?php endforeach; ?>
+									</tbody>
+								</table>
+							</div>
+
+							<div class="clearfix mb1em">
+								<table class="table table-hover table-condensed">
+									<thead>
+										<tr>
+											<th colspan="2">授权代理</th>
+											<th colspan="2">诚信系统</th>
+										</tr>
+									</thead>
+									
+									<?php
+										$rows=[
+											[
+												'一级'=>'40000颗',
+												'一星'=>'1000颗',
+											],
+											[
+												'二级'=>'60000颗',
+												'二星'=>'5000颗',
+											],
+											[
+												'三级'=>'150000颗',
+												'三星'=>'15000颗',
+											],
+										]; 
+									?>
+									<tbody>
+										<?php foreach($rows as $row): ?>
+											<tr>
+												<?php foreach($row as $key => $value): ?>
+													<td><?php echo e($key); ?></td>
+													<td><?php echo e($value); ?></td>
+												<?php endforeach; ?>
+											</tr>
+										<?php endforeach; ?>
+									</tbody>
+								</table>
+							</div>
+						</section>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php $__env->stopSection(); ?>
+
+
+
+<?php $__env->startSection('css_extra'); ?>
+	<style type="text/css" media="screen">
+	</style>
+<?php $__env->stopSection(); ?>
+
+
+
+<?php $__env->startSection('js_extra'); ?>
+	<script type="text/javascript">
+	$(function(){
+		
+	});
+	</script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.htmlpage', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

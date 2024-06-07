@@ -1,0 +1,49 @@
+Atitti mybatis的单元测试attilax总结
+
+版本mybatis 3.2.4
+
+
+/palmWin/src/main/java/com/attilax/dao/mybatisTest.java
+
+/palmWin/src/main/java/com/taYu/mapping/UsersMapper.xml
+
+ <!--根据条件查询管理员信息(userMane:登录名；password:密码) -->
+        <select id="QueryByUsersByMap" parameterType="map" resultMap="UsersMap">
+           select * from s_user where 1=1
+             and username = #{username}
+             and password = #{password}
+        </select>
+
+
+
+SqlSession模式
+	private static void t2(Map<String, String> map) throws Exception {
+		org.mybatis.spring.SqlSessionFactoryBean  factoryBean=SpringUtil.build4wash().getBeanV2(SqlSessionFactoryBean.class);
+	 	SqlSessionFactory sessionFactory = factoryBean.getObject();
+	 	  SqlSession sqlSession = sessionFactory.openSession();
+	      List li=   sqlSession.selectList("QueryByUsersByMap", map);
+ 
+			System.out.println( AtiJson.toJson(li));
+	}
+
+
+这里和3.0版本稍有不同。。以前可以直接获取到SqlSessionFactory 
+接口对应map文件命名空间模式
+ private static void li(Map<String, String> map) {
+		UsersMapper userdao=  	 (UsersMapper) SpringUtil.build4wash().getBeanV2(UsersMapper.class);
+		
+		List list=userdao.QueryByUsersByMap(map);
+		System.out.println(AtiJson.toJson(list));
+	}
+
+测试service
+ 
+	private static void li3() {
+		UsersService us=  (UsersService) SpringUtil.build4wash().getBeanV2("usersService");
+	 	Users  result = us.QueryByUsersByNameAndPassword("admin", "admin");
+	 	System.out.println(AtiJson.toJson(result));
+	}
+
+ 
+
+

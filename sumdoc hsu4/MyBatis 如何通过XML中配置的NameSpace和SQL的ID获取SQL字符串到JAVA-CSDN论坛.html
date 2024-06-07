@@ -1,0 +1,2189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html class='csdn-bbs'>
+  <head>
+    <meta http-equiv="Cache-Control" content="no-transform" />
+<link rel="alternate" media="handheld" href="#" />
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>MyBatis 如何通过XML中配置的NameSpace和SQL的ID获取SQL字符串到JAVA-CSDN论坛</title>
+
+    <link href="//csdnimg.cn/release/bbs/assets/main-cd9eaadbb591e8704713b4899269ddb2.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="//csdnimg.cn/public/themes/default/css/btn.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="//csdnimg.cn/release/bbs/assets/application-514f15ea10f1331852f2449625cedbe2.js" type="text/javascript"></script>
+    <script src="//csdnimg.cn/atsuggest/atsuggest.js" type="text/javascript"></script>
+    <meta content="authenticity_token" name="csrf-param" />
+<meta content="iBq7e/8kqWUifBvSwRYHRwzXfu/7Ki4SQ16jpa0BjTU=" name="csrf-token" />
+    <link href="//csdnimg.cn/public/favicon.ico" rel="SHORTCUT ICON">
+<link rel="stylesheet" href="//csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+<script language="javascript" type="text/javascript" src="//csdnimg.cn/asdf/tracking-1.0.0.js"></script>
+<meta name="referrer" content="always">
+        <!-- 请置于所有广告位代码之前 -->
+    <script src="//dup.baidustatic.com/js/ds.js"></script>
+    <link href="//csdnimg.cn/release/bbs/assets/sh-353e52ea73888f7bf72641c9ae8e6a45.css" media="all" rel="stylesheet" type="text/css" />
+  <script src="//csdnimg.cn/release/bbs/assets/sh-83dfe6b3d61bfd8fe4da30e0d7046ae0.js" type="text/javascript"></script>
+    <style>
+        #topic-detail-ad-ul{width:960px;float:left;font-size:1px;margin:0;padding:0}
+        #topic-detail-ad-l{float:left;}
+        #topic-detail-ad-r{float:right;}
+        #topic-detail-ad-ul li{list-style: none;}
+    </style>
+  <script>
+	var _hmt = _hmt || [];
+	(function() {
+	 var hm = document.createElement("script");
+	 hm.src = "//hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+	 var s = document.getElementsByTagName("script")[0];
+	 s.parentNode.insertBefore(hm, s);
+	})();
+	</script>
+
+
+    <script type="text/javascript">
+        window.bbsInfoflag = true;
+        // 快速回复
+        $(document).ready(function () {
+            $("#com-quick-reply-bbs").bind("click", function(){
+                //_gaq.push(['_trackEvent','function', 'onclick', 'BBS_articles_youhuifu']);
+                $("#post_body").focus();
+                window.scrollTo(0, $(document).height());
+            });
+        });
+    </script>
+        <link ref="canonical" href="//bbs.csdn.net/topics/390040545">
+
+
+  </head>
+  <body id='topics-show'>
+  <!-- 自动推送工具代码-->
+  <script>
+      (function(){
+          var bp = document.createElement('script');
+          var curProtocol = window.location.protocol.split(':')[0];
+          if (curProtocol === 'https') {
+              bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+          }
+          else {
+              bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+          }
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(bp, s);
+      })();
+
+  </script>
+    <!-- <script type="text/javascript" src="http://c.csdnimg.cn/pubnav/js/pub_topnav_2011.js"></script> -->
+
+<!--全屏-->
+<ins data-revive-zoneid="149" data-revive-id="8c38e720de1c90a6f6ff52f3f89c4d57"></ins>
+<!--全屏-->
+
+
+
+    <style>
+
+  .news-nav .container {
+    MARGIN: 0px auto;width:1170px; FONT-FAMILY: "Microsoft YaHei";
+    padding:0;
+  }
+  .nav-bar{
+    font-size :16px;
+    color:#fff;
+    float:left;
+  }
+  .nav-bar a{
+    padding: 0;
+    display: inline-block;
+    line-height: 44px;
+    margin-right: 32px;
+    color: #4f4f4f;
+    text-decoration: none;
+    font-family: "Microsoft YaHei";
+  }
+  .nav-bar .current, .nav-bar .active, .nav-bar a:hover {
+    position: relative;
+    border:none;
+  }
+  .nav-bar .current::after,
+  .nav-bar .active::after,
+  .nav-bar a:hover::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    height: 3px;
+    left: 0;
+    right: 0;
+    background-color: #c92027;
+  }
+
+
+  .search-download{
+    float:right;
+    margin-top:11px;
+  }
+  .search-download form{
+    float:left;
+    border: 1px solid #ddd;
+  }
+  .search-download input{
+    /* border:solid 1px #ddd;
+    border-right:none; */
+    border:none;
+    height: 26px;
+    line-height:22px;
+    padding:0 10px;
+    margin-right:-5px;
+    width: 229px;
+  }
+  .search-download .download-search-bth{
+    background: url(//csdnimg.cn/public/common/toolbar/images/f_icon.png) no-repeat 0 -189px;
+    display: inline-block;
+    border: none;
+    width: 22px;
+    height: 26px;
+    vertical-align: middle;
+    padding-right: 2px;
+    background-color: #fff;
+  }
+  .search-download .help{
+    float:left;
+    margin:3px 0 0 20px;
+    font-size: 15px;
+    color: #4f4f4f;
+    line-height: 35px;
+    border: 0 !important;
+  }
+  .search-download .help .fa{
+    margin-right:5px;
+  }
+
+</style>
+
+<div class="news-nav">
+  <div class="container">
+    <div class="nav-bar">
+      <a href="/home" class="">论坛首页</a>
+      <span class="dropdown">
+  <a href="#">精选版块</a>
+  <span class="caret" style="top: 22px;"></span>
+  <div class="dropdown-menu" style="background: #eaebec;top: 45px">
+    <dl>
+      <dt><a href="/forums/Mobile">移动开发</a></dt>
+      <dd>
+        <a href="/forums/ios">iOS</a>
+        <a href="/forums/Android">Android</a>
+        <a href="/forums/Qt">Qt</a>
+        <a href="/forums/WindowsMobile">WP</a>
+      </dd>
+    </dl>
+    <dl>
+      <dt><a href="/forums/CloudComputing">云计算</a></dt>
+      <dd>
+        <a href="/forums/AWS">IaaS</a>
+        <a href="/forums/CloudFoundry">Pass/SaaS</a>
+        <a href="/forums/hadoop">分布式计算/Hadoop</a>
+      </dd>
+    </dl>
+    <dl>
+      <dt><a href="/forums/Java">Java技术</a></dt>
+      <dd>
+        <a href="/forums/J2SE">Java SE</a>
+        <a href="/forums/Java_WebDevelop">Java Web 开发</a>
+        <a href="/forums/J2EE">Java EE</a>
+        <a href="/forums/JavaOther">Java其他相关</a>
+      </dd>
+    </dl>
+    <dl>
+      <dt><a href="/forums/DotNET">.NET技术</a></dt>
+      <dd>
+        <a href="/forums/DotNETFramework">.NET Framework</a>
+        <a href="/forums/CSharp">C#</a>
+        <a href="/forums/DotNETAnalysisAndDesign">.NET分析与设计</a>
+        <a href="/forums/ASPDotNET">ASP .NET</a>
+        <a href="/forums/VBDotNET">VB .NET</a>
+      </dd>
+    </dl>
+    <dl>
+      <dt><a href="/forums/WebDevelop">Web开发</a></dt>
+      <dd>
+        <a href="/forums/PHP">PHP</a>
+        <a href="/forums/JavaScript">JavaScript</a>
+        <a href="/forums/ASP">ASP</a>
+        <a href="/forums/HTMLCSS">HTML(CSS)</a>
+        <a href="/forums/HTML5">HTML5</a>
+        <a href="/forums/Apache">Apache</a>
+      </dd>
+    </dl>
+    <dl>
+      <dt><a href="#">开发语言/框架</a></dt>
+      <dd>
+        <a href="/forums/Delphi">Delphi</a>
+        <a href="/forums/VC">VC/MFC</a>
+        <a href="/forums/VB">VB</a>
+        <a href="/forums/Cpp">C/C++</a>
+        <a href="/forums/BCB">C++ Builder</a>
+        <a href="/forums/OtherLanguage">其他开发语言</a>
+      </dd>
+    </dl>
+    <dl>
+      <dt><a href="#">数据库开发</a></dt>
+      <dd>
+        <a href="/forums/MSSQL">MS-SQL Server</a>
+        <a href="/forums/Oracle">Oracle</a>
+        <a href="/forums/PowerBuilder">PowerBuilder</a>
+        <a href="/forums/Informatica">Informatica</a>
+        <a href="/forums/OtherDatabase">其他数据库开发</a>
+      </dd>
+    </dl>
+    <dl>
+      <dt><a href="/forums/Embedded">硬件/嵌入式开发</a></dt>
+      <dd>
+        <a href="/forums/WinCE">嵌入开发(WinCE)</a>
+        <a href="/forums/Embedded_driver">驱动开发/核心开发</a>
+        <a href="/forums/Embedded_hardware">硬件设计</a>
+        <a href="/forums/Embedded_SCM">单片机/工控</a>
+        <a href="/forums/ASM">汇编语言</a>
+        <a href="/forums/VxWorks">VxWorks开发</a>
+      </dd>
+    </dl>
+    <dl>
+      <dt><a href="/forums/Linux">Linux/Unix社区</a></dt>
+      <dd>
+        <a href="/forums/Linux_System">系统维护与使用区</a>
+        <a href="/forums/Linux_Development">应用程序开发区</a>
+        <a href="/forums/Linux_Kernel">内核源代码研究区</a>
+        <a href="/forums/Linux_Driver">驱动程序开发区</a>
+        <a href="/forums/Linux_Hardware">CPU和硬件区</a>
+      </dd>
+    </dl>
+  </div>
+</span>
+
+      <a href="/rank" class="">论坛牛人</a>
+      <a href="/map" class="">论坛地图</a>
+      <a href="http://ask.csdn.net/subjects" target="_blank">专家问答</a>
+      <a href="/topics/new" class="">我要发贴</a>
+    </div>
+    <div class="search-download">
+      <a href="/help" class="help" style="color: #4f4f4f;" target="_blank">
+          <i class="fa fa-question-circle"></i>论坛帮助
+</a>    </div>
+  </div>
+</div>
+    <div class="wraper">
+      
+      <!--[if IE]>
+<style type="text/css" media="screen">
+  .control_area .control .drop_menu{border:3px solid #ccc \9; _*border:3px solid #ccc;}
+</style>
+<![endif]-->
+
+<!--<iframe id="frm_tt1" marginwidth="0" marginheight="0" frameborder="0" scrolling="no" width="100%" src="/sda/TopicBodyTop.htm?v=1"></iframe>-->
+<script type="text/javascript">
+//  setTimeout(function () { document.getElementById("frm_tt1").src = "/sda/TopicBodyTop.htm?v="+new Date().getTime(); }, 5000);
+
+  $(function(){
+      //获取要定位元素距离浏览器顶部的距离
+      $ = jQuery;
+      var navH = $(".detail_title_fixed").offset().top;
+      $(".detail_title_fixed").hide();
+
+      var show_detail_title_fixed = true;
+      //滚动条事件
+      $(window).scroll(function(){
+
+          //获取滚动条的滑动距离
+          var scroH = $(this).scrollTop();
+
+          //滚动条的滑动距离大于等于定位元素距离浏览器顶部的距离，就固定，反之就不固定
+          if(show_detail_title_fixed){
+              if(scroH>=navH){
+                  $(".detail_title_fixed").css({"position":"fixed","top":"0","border":"1px #198cc5 solid","z-index":"99999"});
+                  $(".detail_title_fixed").show();
+              }else if(scroH<navH){
+                  $(".detail_title_fixed").css({"position":"static"});
+                  $(".detail_title_fixed").hide();
+              }
+          }
+      });
+
+      $("#close_detail_title_fixed").click(function(){
+          show_detail_title_fixed = false;
+          $(".detail_title_fixed").hide();
+      });
+
+      $("#com-back-home").click(function(){
+        window.location.href="/";
+      });
+
+      $("#com-back-channel").click(function(){
+          window.location.href="/forums/Java_WebDevelop";
+      });
+  })
+</script>
+
+
+
+
+<div class="flash_messages">
+</div>
+
+<div class="control_area top">
+  <form name="form" id="form">
+    
+    <div class="bread_nav" style="  float: left;margin-right: 10px">
+      <a href="http://www.csdn.net" target="_blank">CSDN</a> <em>&gt;</em>
+      <a href="/" target="_blank">CSDN论坛</a> <em>&gt;</em>
+          <a href="/forums/Java" target="_blank">Java</a> <em>&gt;</em>
+      <a href="/forums/Java_WebDevelop" target="_blank">Web 开发</a>
+    </div>
+    <div class="control">
+      <ul>
+        <li class="drop_menu_wrap drop_menu_down">
+          <a href="#" class="drop_toggle btn_1 " rel='nofollow'>
+            <span>
+              <img src="/assets/ico_set.gif" alt="" />管理菜单<img src="/assets/arrow_down.gif" alt="" />
+            </span>
+          </a>
+          <ul class="drop_menu" style="display: none; top:26px;">
+              <li><a href="/topics/390040545/top" class="fancybox" rel="nofollow">置顶</a></li>
+
+  <li><a href="/topics/390040545/recommend" data-confirm="您确定要推荐该帖吗？帖子被推荐后将奖励发帖用 户88个可用分和3个C币!" data-method="put" rel="nofollow">推荐</a></li>
+
+  <li><a href="/topics/390040545/lock" class="fancybox" rel="nofollow">锁定</a></li>
+
+<li><a href="/topics/390040545/move" class="fancybox" rel="nofollow">移动</a></li>
+<li><a href="/topics/390040545/edit" class="fancybox" rel="nofollow">编辑</a></li>
+<li><a href="/topics/390040545/destroy_edit" class="fancybox" rel="nofollow">删除</a></li>
+<li><a href="/topics/390040545/add_point" class="fancybox" rel="nofollow">帖子加分</a></li>
+  <li><a href="/topics/390040545/highlight" class="fancybox" rel="nofollow">帖子高亮</a></li>
+
+          </ul>
+        </li>
+        <li>
+          <a href="/topics/390040545/close" class="btn_1 close_topic" rel='nofollow'>
+            <span><img src="/assets/ico_over.gif" alt="" />结帖</span>
+          </a>
+        </li>
+        <li>
+          <a href="/topics/new?forum_id=Java_WebDevelop" class="btn_1 create_topic" rel='nofollow'>
+            <span><img src="/assets/ico_publish.gif" alt="" />发帖</span>
+          </a>
+        </li>
+        <li>
+          <a href="#new_post" class="btn_1 reply_topic" rel='nofollow'>
+            <span><img src="/assets/ico_return.gif" alt="" />回复</span>
+          </a>
+        </li>
+          <li>
+            <a href="/topics/390040545/attetion" class="btn_1 reply_topic" rel='nofollow'>
+              <span><img src="/assets/ico_attention_topic.png" title="关注" />关注</span>
+            </a>
+          </li>
+      </ul>
+    </div>
+  </form>
+</div>
+
+<div class="h-entry">
+  <a class="p-author" href="#">tonghuizx</a>
+</div>
+
+
+<div class="detail_tbox">
+    <div class="detail_title_fixed">
+      <h1>
+            <span class="title text_overflow">MyBatis 如何通过XML中配置的NameSpace和SQL的ID获取SQL字符串到JAVA</span>
+        <span>
+          [问题点数：20分，结帖人tonghuizx]
+        </span>
+      </h1>
+
+      <div class="fixed-r">
+        <a href="#new_post" class="bbs-btn-blue26">快速回复</a>
+            <a href="/topics/390040545?list=lz" class="bbs-btn-blue26">只显示楼主</a>
+            <a href="/topics/390040545/attetion" class="bbs-btn-blue26">关注帖子</a>
+        <a href="javascript:void(0);" id="close_detail_title_fixed" class="bbs-btn-close"> </a>
+      </div>
+    </div>
+    <div class="detail_title">
+      <h1>
+          <span class="title text_overflow">MyBatis 如何通过XML中配置的NameSpace和SQL的ID获取SQL字符串到JAVA</span>
+        <span>
+          [问题点数：20分，结帖人tonghuizx]
+        </span>
+      </h1>
+      <div class="fr">
+        <select name="filter_posts">
+          <option value="default">不显示删除回复</option>
+          <option value="all">显示所有回复</option>
+          <option value="star">显示星级回复</option>
+          <option value="pointed">显示得分回复</option>
+          <option value="lz">只显示楼主</option>
+        </select>
+        <a href="#" onclick="bbs_fav('http://bbs.csdn.net/topics/390040545','MyBatis 如何通过XML中配置的NameSpace和SQL的ID获取SQL字符串到JAVA')" class="fav" id="bbs_fav">&nbsp;收藏&nbsp;</a>
+        <script>
+            function bbs_fav(url,title){
+                $.ajax({
+                    url: '//my.csdn.net/my/favorite/do_add/2',
+                    dataType: 'json',
+                    type: 'get',
+                    xhrFields: { withCredentials: true },
+                    crossDomain: true,
+                    data:{title:title,url:url,share:1,map_name:''},
+                    success: function(json) {
+                        console.log(json);
+                        if(json.succ==1){
+                            alert('收藏成功');
+                        }else{
+                            alert(json.msg);
+                        }
+                    },
+                    error: function() {
+                    }
+                });
+            }
+        </script>
+      </div>
+    </div>
+</div>
+<div>
+  <!-- 广告位：PC端-论坛帖子页顶部banner1-960*90 -->
+  <script>
+      (function() {
+          var s = "_" + Math.random().toString(36).slice(2);
+          document.write('<div id="' + s + '"></div>');
+          (window.slotbydup=window.slotbydup || []).push({
+              id: '4776821',
+              container: s,
+              size: '960,90',
+              display: 'inlay-fix'
+          });
+      })();
+  </script>
+</div>
+<div class="detailed">
+    
+
+<table border="0" cellspacing="0" cellpadding="0" id="post-390040545"
+  class="post topic "
+  data-post-id="390040545" data-is-topic-locked="false">
+  <colgroup><col width="110" /><col /></colgroup>
+  <tr>
+      <td rowspan="2" valign="top" class="wirter" style="width: 110px">
+                <dl class="user_info ">
+          <dt class="user_head" data-username="tonghuizx">
+            <a href="//my.csdn.net/tonghuizx" rel="nofollow" target="_blank"><img alt="tonghuizx" class="avatar" src="//avatar.csdn.net/E/3/A/1_tonghuizx.jpg" style="height: 80px;" /></a>
+          </dt>
+          <dd class="username" style="display: none">
+            <a href="//my.csdn.net/tonghuizx" rel="nofollow" target="_blank" title="tonghuizx">tonghuizx</a>
+            
+          </dd>
+          <dd class="nickname" style="word-break:break-all;">
+            <a href="//my.csdn.net/tonghuizx" rel="nofollow" target="_blank" title="tonghuizx">tonghuizx</a>
+            <br>
+            <img alt="Bbs1" class="topic_show_user_level" src="//csdnimg.cn/jifen/images/xunzhang/jianzhang/bbs1.png" style="margin: 4px 0;" />
+            <div class="topic_show_posts">
+              <div class="smallTittle">
+                本版专家分：0
+              </div>
+            </div>
+            
+          </dd>
+
+
+
+          <dd class="close_rate" title="用户结帖率：92.86%
+总发帖：14
+正常结帖：13
+未结帖：1">结帖率：92.86%</dd>
+
+          <dd class="showTittleDD">
+
+          </dd>
+
+        </dl>
+
+      </td>
+		<td style="vertical-align: bottom" valign="top" class="post_info topic pointed" data-username="tonghuizx" data-floor="">
+			
+        <div class="post_body">
+
+              <div class="tag">
+              </div>
+                  XML中为如下配置<br />
+<br />
+&lt;mapper&nbsp;namespace="com.wmxny.systemwork.persistence.StartIndexMapper"&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;定义返回结果的映射类型&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;resultMap&nbsp;id="StartIndex"&nbsp;type="com.wmxny.systemwork.entity.StartIndexEntity"&gt;--&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;省略写法，当属性为基本类型或者基本类型的封装类型时，可以省略javaType和jdbcType<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;result&nbsp;column="ID"&nbsp;property="id"/&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;result&nbsp;column="User_No"&nbsp;property="userNo"/&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;result&nbsp;column="USER_NAME"&nbsp;property="userName"/&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/resultMap&gt;&nbsp;--&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;根据用户名查找对应的用户&nbsp;&nbsp;--&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;select&nbsp;id="selectAllUser"&nbsp;resultType="com.wmxny.systemwork.entity.StartIndexEntity"&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;![CDATA[<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;select&nbsp;ID,User_No&nbsp;as&nbsp;userNo,User_Name&nbsp;as&nbsp;userName&nbsp;from&nbsp;bas_users<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]]&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;where&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;if&nbsp;test="userName!=null"&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AND&nbsp;USER_NAME&nbsp;=&nbsp;#{userName}&nbsp;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/if&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/where&gt;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;/select&gt;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+&nbsp;&lt;/mapper&gt;<br />
+<br />
+-------------------------------------------------------------------------------------<br />
+<br />
+我想请教一下高人，如果实现这样一个函数：<br />
+public&nbsp;String&nbsp;getXmlSqlSyntax(String&nbsp;statement,HashMap&nbsp;params)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;...<br />
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;sqlSyntax;<br />
+}<br />
+<br />
+String&nbsp;statement&nbsp;传入字符串&nbsp;com.wmxny.systemwork.persistence.StartIndexMapper.selectAllUser<br />
+就是名字空间+Select&nbsp;ID.<br />
+HashMap&nbsp;params&nbsp;传&nbsp;userName="老张"<br />
+<br />
+返回的字符串为&nbsp;select&nbsp;ID,User_No&nbsp;as&nbsp;userNo,User_Name&nbsp;as&nbsp;userName&nbsp;from&nbsp;bas_users&nbsp;where&nbsp;USER_NAME&nbsp;=&nbsp;"老张"<br />
+<br />
+请高手解答，谢谢，在线等回复，分太少，希望大家帮帮忙。
+
+
+              <!-- 主帖下Banner (D4) -->
+              <!-- 主帖下文字 (D5) -->
+                  <div marginwidth="0" marginheight="0" scrolling="no" width="100%">
+                    <style type="text/css">
+    /***Business text AD***/
+    /*body {margin:0; padding: 0;font:normal 12px simsun; }*/
+    .adtxt{text-align:center;}
+    .adtxt ul{margin:5px 0;border-top:1px solid #B9B9B9;border-bottom:1px solid #B9B9B9;background-color:#F2F6FB;padding:5px 0;}
+    .adtxt ul li{display: inline-block;font-size:12px;}
+    .adtxt ul li a{color:#333;}
+    /*a{color: #002D93;text-decoration:none;}*/
+    /*a:visited{color: #B00;text-decoration:none;}*/
+    /*a:hover{color: #B00; text-decoration: underline;}*/
+</style>
+
+<body>
+<div id="bd_ad_2" style="margin:0; padding-bottom:5px; display:block; text-align: center">
+  <!-- 广告位：PC端-论坛帖子页banner2-728*90 -->
+  <script>
+      (function() {
+          var s = "_" + Math.random().toString(36).slice(2);
+          document.write('<div id="' + s + '"></div>');
+          (window.slotbydup=window.slotbydup || []).push({
+              id: '4776825',
+              container: s,
+              size: '728,90',
+              display: 'inlay-fix'
+          });
+      })();
+  </script>
+</div>
+
+</body>
+                  </div>
+
+
+        </div>
+
+
+		</td>
+	</tr>
+	<tr>
+		<td valign="bottom">
+							<div style="margin: 0 0 0 10px;font-size: 14px;border-top: 1px dashed #eee;padding:8px 0 0 0;">
+								<ul>
+											<li data-mod="popu_592" class="csdn-tracking-statistics" style="width: 820px;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+												<a href="https://blog.csdn.net/yerenyuan_pku/article/details/71893689" target="_blank" title="MyBatis框架的学习(四)——Mapper.xml文件中的输入和输出映射以及动态sql">MyBatis框架的学习(四)——Mapper.xml文件中的输入和输出映射以及动态sql</a>
+											</li>
+								</ul>
+							</div>
+					
+<div class="control">
+
+  <span class="time">
+              发表于：
+    2012-05-08 13:30:25
+  </span>
+
+
+      <strong class="fr">
+        楼主
+      </strong>
+
+  <div class="fr" style="margin-left:50px;">
+        <a href="javascript:void(0)" onclick="post_digg(390040545,390040545)" class="red digg">对我有用[0]</a> |
+        <a href="javascript:void(0)" onclick="post_bury(390040545,390040545)" class="bury">丢个板砖[0]</a> |
+        <script>
+          function post_digg(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/digg',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.digg').text(json.digg);
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+
+          function post_bury(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/bury',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.bury').text('丢个板砖['+json.bury+']');
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+        </script>
+      <a href="#quote" class="quote" rel='nofollow'>引用</a> |
+      <a href="/posts/390040545/report?topic_id=390040545" class="fancybox red report_spam" rel="nofollow">举报 </a> |
+    <span class="manage-toggle">
+      <div class="manage" style="display: none;">
+          <a href="/topics/390040545/edit" class="fancybox" rel="nofollow">编辑</a>
+          <a href="/topics/390040545/destroy_edit" class="fancybox" rel="nofollow">删除</a>
+      </div>
+      管理
+    </span>
+  </div>
+    <span class="return_time">回复次数：8</span>
+
+
+</div>
+
+
+		</td>
+  </tr>
+</table>
+
+
+				<table>
+					<tbody>
+					<tr>
+						<td valign="top" class="wirter" style="width: 110px">
+							<dl class="user_info ">
+								<dt class="user_head" data-username="CSDN官网">
+									<a href="http://www.csdn.net" rel="nofollow" target="_blank"><img alt="CSDN官网" class="avatar" src="//avatar.csdn.net/6/2/6/1_nettman.jpg"></a>
+								<div class="user_material" style="display: none;height: 118px">
+									<div class="user_material_bg" style="height: 100px">
+										<dl>
+											<dt><a href="http://www.csdn.net" target="_blank"><img src="//avatar.csdn.net/6/2/6/1_nettman.jpg" class="avatar_80"></a></dt>
+											<dd style="text-align: left;">账号:<a href="http://www.csdn.net" target="_blank">CSDN官网</a></dd>
+											<dd style="text-align: left;" class="nickname">昵称:<span class="name2nick" style="overflow: initial;">CSDN官网</span></dd>
+										</dl>
+									</div>
+								</div>
+								</dt>
+								<dd class="username">
+									<a href="http://www.csdn.net" rel="nofollow" target="_blank" title="CSDN官网">CSDN推荐</a>
+								</dd>
+							</dl>
+						</td>
+						<td>
+							<div >
+								<div style="margin-top: 5px;width: 100%;padding: 0" class="post_body">
+									<ul style="margin-left: 16px">
+												<li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+													<a href="https://blog.csdn.net/u013310119/article/details/51194879" target="_blank" title="MyBatis中SQL映射的XML文件">MyBatis中SQL映射的XML文件</a>
+												</li>
+												<li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+													<a href="https://blog.csdn.net/LuuvyJune/article/details/51155470" target="_blank" title="mybatis configuration 一些标签配置问题">mybatis configuration 一些标签配置问题</a>
+												</li>
+												<li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+													<a href="https://blog.csdn.net/yhl_jxy/article/details/52003079" target="_blank" title="MyBatis使用大全(4)------XML映射文件配置">MyBatis使用大全(4)------XML映射文件配置</a>
+												</li>
+												<li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+													<a href="https://blog.csdn.net/lvjinhan/article/details/51908525" target="_blank" title="MyBatis中的Sql片段使用">MyBatis中的Sql片段使用</a>
+												</li>
+												<li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+													<a href="https://blog.csdn.net/dalinsi/article/details/51919160" target="_blank" title="应用程序获取Mybatis中配置的执行SQL">应用程序获取Mybatis中配置的执行SQL</a>
+												</li>
+												<li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+													<a href="https://blog.csdn.net/zenghb/article/details/51705743" target="_blank" title="mybatis  找不到sql语句">mybatis  找不到sql语句</a>
+												</li>
+												<li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+													<a href="https://blog.csdn.net/yellowd1/article/details/46418873" target="_blank" title="mybatis sql语句配置">mybatis sql语句配置</a>
+												</li>
+												<li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+													<a href="https://blog.csdn.net/lkforce/article/details/58157808" target="_blank" title="mybatis的xml配置中使用${}可能发生SQL注入，应使用#{}">mybatis的xml配置中使用${}可能发生SQL注入，应使用#{}</a>
+												</li>
+									</ul>
+
+								</div>
+							</div>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+
+
+
+  
+
+<table border="0" cellspacing="0" cellpadding="0" id="post-391239101"
+  class="post  "
+  data-post-id="391239101" data-is-topic-locked="false">
+  <colgroup><col width="110" /><col /></colgroup>
+  <tr>
+      <td rowspan="2" valign="top" class="wirter" style="width: 110px">
+                <dl class="user_info ">
+          <dt class="user_head" data-username="tonghuizx">
+            <a href="//my.csdn.net/tonghuizx" rel="nofollow" target="_blank"><img alt="tonghuizx" class="avatar" src="//avatar.csdn.net/E/3/A/1_tonghuizx.jpg" style="height: 80px;" /></a>
+          </dt>
+          <dd class="username" style="display: none">
+            <a href="//my.csdn.net/tonghuizx" rel="nofollow" target="_blank" title="tonghuizx">tonghuizx</a>
+            
+          </dd>
+          <dd class="nickname" style="word-break:break-all;">
+            <a href="//my.csdn.net/tonghuizx" rel="nofollow" target="_blank" title="tonghuizx">tonghuizx</a>
+            <br>
+            <img alt="Bbs1" class="topic_show_user_level" src="//csdnimg.cn/jifen/images/xunzhang/jianzhang/bbs1.png" style="margin: 4px 0;" />
+            <div class="topic_show_posts">
+              <div class="smallTittle">
+                本版专家分：0
+              </div>
+            </div>
+            
+          </dd>
+
+
+
+          <dd class="close_rate" title="用户结帖率：92.86%
+总发帖：14
+正常结帖：13
+未结帖：1">结帖率：92.86%</dd>
+
+          <dd class="showTittleDD">
+
+          </dd>
+
+        </dl>
+
+      </td>
+		<td style="vertical-align: bottom" valign="top" class="post_info " data-username="tonghuizx" data-floor="1">
+			
+        <div class="post_body">
+
+                  自已顶吧
+
+
+
+        </div>
+
+
+		</td>
+	</tr>
+	<tr>
+		<td valign="bottom">
+							<div style="margin: 0 0 0 10px;font-size: 14px;border-top: 1px dashed #eee;padding:8px 0 0 0;">
+								<ul>
+											<li data-mod="popu_592" class="csdn-tracking-statistics" style="width: 820px;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+												<a href="https://blog.csdn.net/zer0_o/article/details/51967243" target="_blank" title="JAVA类获取mybatis的mapper进行数据库操作">JAVA类获取mybatis的mapper进行数据库操作</a>
+											</li>
+								</ul>
+							</div>
+					
+<div class="control">
+
+  <span class="time">
+              回复于：
+    2012-05-08 13:48:25
+  </span>
+
+
+            <span class="fr" style="margin-left:50px;">
+              <a href="#post-391239101">#1</a>
+              得分：0
+            </span>
+
+    <div id='post-forum-bulletin-1'  class='fl tracking-ad' data-mod='popu_9'>
+    </div>
+  <div class="fr" style="margin-left:50px;">
+        <a href="javascript:void(0)" onclick="post_digg(390040545,391239101)" class="red digg">对我有用[0]</a> |
+        <a href="javascript:void(0)" onclick="post_bury(390040545,391239101)" class="bury">丢个板砖[0]</a> |
+        <script>
+          function post_digg(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/digg',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.digg').text(json.digg);
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+
+          function post_bury(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/bury',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.bury').text('丢个板砖['+json.bury+']');
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+        </script>
+      <a href="#quote" class="quote" rel='nofollow'>引用</a> |
+      <a href="/posts/391239101/report?topic_id=390040545" class="fancybox red report_spam" rel="nofollow">举报 </a> |
+    <span class="manage-toggle">
+      <div class="manage" style="display: none;">
+          <a href="/posts/391239101/edit" class="fancybox" rel="nofollow">编辑</a>
+          <a href="/posts/391239101/destroy_edit" class="fancybox" rel="nofollow">删除</a>
+      </div>
+      管理
+    </span>
+  </div>
+
+
+</div>
+
+
+		</td>
+  </tr>
+</table>
+
+
+
+
+<table border="0" cellspacing="0" cellpadding="0" id="post-391239783"
+  class="post  "
+  data-post-id="391239783" data-is-topic-locked="false">
+  <colgroup><col width="110" /><col /></colgroup>
+  <tr>
+      <td rowspan="2" valign="top" class="wirter" style="width: 110px">
+                <dl class="user_info ">
+          <dt class="user_head" data-username="tonghuizx">
+            <a href="//my.csdn.net/tonghuizx" rel="nofollow" target="_blank"><img alt="tonghuizx" class="avatar" src="//avatar.csdn.net/E/3/A/1_tonghuizx.jpg" style="height: 80px;" /></a>
+          </dt>
+          <dd class="username" style="display: none">
+            <a href="//my.csdn.net/tonghuizx" rel="nofollow" target="_blank" title="tonghuizx">tonghuizx</a>
+            
+          </dd>
+          <dd class="nickname" style="word-break:break-all;">
+            <a href="//my.csdn.net/tonghuizx" rel="nofollow" target="_blank" title="tonghuizx">tonghuizx</a>
+            <br>
+            <img alt="Bbs1" class="topic_show_user_level" src="//csdnimg.cn/jifen/images/xunzhang/jianzhang/bbs1.png" style="margin: 4px 0;" />
+            <div class="topic_show_posts">
+              <div class="smallTittle">
+                本版专家分：0
+              </div>
+            </div>
+            
+          </dd>
+
+
+
+          <dd class="close_rate" title="用户结帖率：92.86%
+总发帖：14
+正常结帖：13
+未结帖：1">结帖率：92.86%</dd>
+
+          <dd class="showTittleDD">
+
+          </dd>
+
+        </dl>
+
+      </td>
+		<td style="vertical-align: bottom" valign="top" class="post_info " data-username="tonghuizx" data-floor="2">
+			
+        <div class="post_body">
+
+                  我在线等呢，没人捧场啊，真是冷清
+
+
+
+        </div>
+
+
+		</td>
+	</tr>
+	<tr>
+		<td valign="bottom">
+							<div style="margin: 0 0 0 10px;font-size: 14px;border-top: 1px dashed #eee;padding:8px 0 0 0;">
+								<ul>
+											<li data-mod="popu_592" class="csdn-tracking-statistics" style="width: 820px;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+												<a href="https://blog.csdn.net/daguairen/article/details/53762215" target="_blank" title="MyBatis学习(三)：解析MyBatis的SQL映射XML文件写法和使用原理">MyBatis学习(三)：解析MyBatis的SQL映射XML文件写法和使用原理</a>
+											</li>
+								</ul>
+							</div>
+					
+<div class="control">
+
+  <span class="time">
+              回复于：
+    2012-05-08 14:35:41
+  </span>
+
+
+            <span class="fr" style="margin-left:50px;">
+              <a href="#post-391239783">#2</a>
+              得分：0
+            </span>
+
+    <div id='post-forum-bulletin-2'  class='fl tracking-ad' data-mod='popu_9'>
+    </div>
+  <div class="fr" style="margin-left:50px;">
+        <a href="javascript:void(0)" onclick="post_digg(390040545,391239783)" class="red digg">对我有用[0]</a> |
+        <a href="javascript:void(0)" onclick="post_bury(390040545,391239783)" class="bury">丢个板砖[0]</a> |
+        <script>
+          function post_digg(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/digg',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.digg').text(json.digg);
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+
+          function post_bury(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/bury',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.bury').text('丢个板砖['+json.bury+']');
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+        </script>
+      <a href="#quote" class="quote" rel='nofollow'>引用</a> |
+      <a href="/posts/391239783/report?topic_id=390040545" class="fancybox red report_spam" rel="nofollow">举报 </a> |
+    <span class="manage-toggle">
+      <div class="manage" style="display: none;">
+          <a href="/posts/391239783/edit" class="fancybox" rel="nofollow">编辑</a>
+          <a href="/posts/391239783/destroy_edit" class="fancybox" rel="nofollow">删除</a>
+      </div>
+      管理
+    </span>
+  </div>
+
+
+</div>
+
+
+		</td>
+  </tr>
+</table>
+
+
+
+
+<table border="0" cellspacing="0" cellpadding="0" id="post-391240205"
+  class="post  "
+  data-post-id="391240205" data-is-topic-locked="false">
+  <colgroup><col width="110" /><col /></colgroup>
+  <tr>
+      <td rowspan="2" valign="top" class="wirter" style="width: 110px">
+                <dl class="user_info ">
+          <dt class="user_head" data-username="huage1998">
+            <a href="//my.csdn.net/huage1998" rel="nofollow" target="_blank"><img alt="huage1998" class="avatar" src="//avatar.csdn.net/7/9/4/1_huage1998.jpg" style="height: 80px;" /></a>
+          </dt>
+          <dd class="username" style="display: none">
+            <a href="//my.csdn.net/huage1998" rel="nofollow" target="_blank" title="huage">huage</a>
+            
+          </dd>
+          <dd class="nickname" style="word-break:break-all;">
+            <a href="//my.csdn.net/huage1998" rel="nofollow" target="_blank" title="huage">huage</a>
+            <br>
+            <img alt="Bbs5" class="topic_show_user_level" src="//csdnimg.cn/jifen/images/xunzhang/jianzhang/bbs5.png" style="margin: 4px 0;" />
+            <div class="topic_show_posts">
+              <div class="smallTittle">
+                本版专家分：3867
+              </div>
+            </div>
+            
+          </dd>
+
+
+
+          <dd class="close_rate" title="用户结帖率：94.74%
+总发帖：19
+正常结帖：18
+未结帖：1">结帖率：94.74%</dd>
+
+          <dd class="showTittleDD">
+
+          </dd>
+
+        </dl>
+
+      </td>
+		<td style="vertical-align: bottom" valign="top" class="post_info pointed" data-username="huage1998" data-floor="3">
+			
+        <div class="post_body">
+
+                  不知道你这样写有什么目的&nbsp;&nbsp;&nbsp;，&nbsp;不过你可以解析xml&nbsp;得到你要的吧&nbsp;&nbsp;，个人觉得sax不错
+
+
+
+        </div>
+
+
+		</td>
+	</tr>
+	<tr>
+		<td valign="bottom">
+							<div style="margin: 0 0 0 10px;font-size: 14px;border-top: 1px dashed #eee;padding:8px 0 0 0;">
+								<ul>
+											<li data-mod="popu_592" class="csdn-tracking-statistics" style="width: 820px;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+												<a href="https://blog.csdn.net/qq_39654446/article/details/78133810" target="_blank" title="MyBatis 中mapper.xml文件中&lt;sql&gt;标签，&lt;select&gt;标签是使用">MyBatis 中mapper.xml文件中&lt;sql&gt;标签，&lt;select&gt;标签是使用</a>
+											</li>
+								</ul>
+							</div>
+					
+<div class="control">
+
+  <span class="time">
+              回复于：
+    2012-05-08 15:04:53
+  </span>
+
+
+            <span class="fr" style="margin-left:50px;">
+              <a href="#post-391240205">#3</a>
+              得分：10
+            </span>
+
+    <div id='post-forum-bulletin-3'  class='fl tracking-ad' data-mod='popu_9'>
+    </div>
+  <div class="fr" style="margin-left:50px;">
+        <a href="javascript:void(0)" onclick="post_digg(390040545,391240205)" class="red digg">对我有用[0]</a> |
+        <a href="javascript:void(0)" onclick="post_bury(390040545,391240205)" class="bury">丢个板砖[0]</a> |
+        <script>
+          function post_digg(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/digg',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.digg').text(json.digg);
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+
+          function post_bury(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/bury',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.bury').text('丢个板砖['+json.bury+']');
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+        </script>
+      <a href="#quote" class="quote" rel='nofollow'>引用</a> |
+      <a href="/posts/391240205/report?topic_id=390040545" class="fancybox red report_spam" rel="nofollow">举报 </a> |
+    <span class="manage-toggle">
+      <div class="manage" style="display: none;">
+          <a href="/posts/391240205/edit" class="fancybox" rel="nofollow">编辑</a>
+          <a href="/posts/391240205/destroy_edit" class="fancybox" rel="nofollow">删除</a>
+      </div>
+      管理
+    </span>
+  </div>
+
+
+</div>
+
+
+		</td>
+  </tr>
+</table>
+
+
+
+
+<table border="0" cellspacing="0" cellpadding="0" id="post-391241477"
+  class="post  "
+  data-post-id="391241477" data-is-topic-locked="false">
+  <colgroup><col width="110" /><col /></colgroup>
+  <tr>
+      <td rowspan="2" valign="top" class="wirter" style="width: 110px">
+                <dl class="user_info ">
+          <dt class="user_head" data-username="tonghuizx">
+            <a href="//my.csdn.net/tonghuizx" rel="nofollow" target="_blank"><img alt="tonghuizx" class="avatar" src="//avatar.csdn.net/E/3/A/1_tonghuizx.jpg" style="height: 80px;" /></a>
+          </dt>
+          <dd class="username" style="display: none">
+            <a href="//my.csdn.net/tonghuizx" rel="nofollow" target="_blank" title="tonghuizx">tonghuizx</a>
+            
+          </dd>
+          <dd class="nickname" style="word-break:break-all;">
+            <a href="//my.csdn.net/tonghuizx" rel="nofollow" target="_blank" title="tonghuizx">tonghuizx</a>
+            <br>
+            <img alt="Bbs1" class="topic_show_user_level" src="//csdnimg.cn/jifen/images/xunzhang/jianzhang/bbs1.png" style="margin: 4px 0;" />
+            <div class="topic_show_posts">
+              <div class="smallTittle">
+                本版专家分：0
+              </div>
+            </div>
+            
+          </dd>
+
+
+
+          <dd class="close_rate" title="用户结帖率：92.86%
+总发帖：14
+正常结帖：13
+未结帖：1">结帖率：92.86%</dd>
+
+          <dd class="showTittleDD">
+
+          </dd>
+
+        </dl>
+
+      </td>
+		<td style="vertical-align: bottom" valign="top" class="post_info " data-username="tonghuizx" data-floor="4">
+			
+        <div class="post_body">
+
+                  <fieldset><legend class="font_bold">引用&nbsp;3&nbsp;楼&nbsp;&nbsp;的回复:</legend><blockquote>不知道你这样写有什么目的&nbsp;，&nbsp;不过你可以解析xml&nbsp;得到你要的吧&nbsp;，个人觉得sax不错</blockquote></fieldset><br />
+<br />
+解析的话太累了，我就是希望可以通过MyBatis的接口拿到字符串，有没有什么方法呢？
+
+
+
+        </div>
+
+
+		</td>
+	</tr>
+	<tr>
+		<td valign="bottom">
+							<div style="margin: 0 0 0 10px;font-size: 14px;border-top: 1px dashed #eee;padding:8px 0 0 0;">
+								<ul>
+											<li data-mod="popu_592" class="csdn-tracking-statistics" style="width: 820px;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+												<a href="https://blog.csdn.net/wabiaozia/article/details/78086637" target="_blank" title="mybatis和spring整合的几种方式及使用注解简化sql(不使用xml方式写sql)">mybatis和spring整合的几种方式及使用注解简化sql(不使用xml方式写sql)</a>
+											</li>
+								</ul>
+							</div>
+					
+<div class="control">
+
+  <span class="time">
+              回复于：
+    2012-05-08 16:18:02
+  </span>
+
+
+            <span class="fr" style="margin-left:50px;">
+              <a href="#post-391241477">#4</a>
+              得分：0
+            </span>
+
+    <div id='post-forum-bulletin-4'  class='fl tracking-ad' data-mod='popu_9'>
+    </div>
+  <div class="fr" style="margin-left:50px;">
+        <a href="javascript:void(0)" onclick="post_digg(390040545,391241477)" class="red digg">对我有用[0]</a> |
+        <a href="javascript:void(0)" onclick="post_bury(390040545,391241477)" class="bury">丢个板砖[0]</a> |
+        <script>
+          function post_digg(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/digg',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.digg').text(json.digg);
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+
+          function post_bury(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/bury',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.bury').text('丢个板砖['+json.bury+']');
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+        </script>
+      <a href="#quote" class="quote" rel='nofollow'>引用</a> |
+      <a href="/posts/391241477/report?topic_id=390040545" class="fancybox red report_spam" rel="nofollow">举报 </a> |
+    <span class="manage-toggle">
+      <div class="manage" style="display: none;">
+          <a href="/posts/391241477/edit" class="fancybox" rel="nofollow">编辑</a>
+          <a href="/posts/391241477/destroy_edit" class="fancybox" rel="nofollow">删除</a>
+      </div>
+      管理
+    </span>
+  </div>
+
+
+</div>
+
+
+		</td>
+  </tr>
+</table>
+
+
+
+
+<table border="0" cellspacing="0" cellpadding="0" id="post-391242569"
+  class="post  deleted"
+  data-post-id="391242569" data-is-topic-locked="false">
+  <colgroup><col width="110" /><col /></colgroup>
+  <tr>
+      <td rowspan="2" valign="top" class="wirter" style="width: 110px">
+                <dl class="user_info ">
+          <dt class="user_head" data-username="cxw3152">
+            <a href="//my.csdn.net/cxw3152" rel="nofollow" target="_blank"><img alt="cxw3152" class="avatar" src="//avatar.csdn.net/D/5/6/1_cxw3152.jpg" style="height: 80px;" /></a>
+          </dt>
+          <dd class="username" style="display: none">
+            <a href="//my.csdn.net/cxw3152" rel="nofollow" target="_blank" title="cxw3152">cxw3152</a>
+            
+          </dd>
+          <dd class="nickname" style="word-break:break-all;">
+            <a href="//my.csdn.net/cxw3152" rel="nofollow" target="_blank" title="cxw3152">cxw3152</a>
+            <br>
+            <img alt="Bbs5" class="topic_show_user_level" src="//csdnimg.cn/jifen/images/xunzhang/jianzhang/bbs5.png" style="margin: 4px 0;" />
+            <div class="topic_show_posts">
+              <div class="smallTittle">
+                本版专家分：2935
+              </div>
+            </div>
+            
+          </dd>
+
+
+
+          <dd class="close_rate" title="用户结帖率：100%
+总发帖：1
+正常结帖：1
+未结帖：0">结帖率：100%</dd>
+
+          <dd class="showTittleDD">
+
+          </dd>
+
+        </dl>
+
+      </td>
+		<td style="vertical-align: bottom" valign="top" class="post_info deleted" data-username="cxw3152" data-floor="5">
+			
+        <div class="post_body">
+            <div class="deleted_message">
+                该回复于2012-05-09 08:19:10被版主删除
+            </div>
+        </div>
+
+
+		</td>
+	</tr>
+	<tr>
+		<td valign="bottom">
+							<div style="margin: 0 0 0 10px;font-size: 14px;border-top: 1px dashed #eee;padding:8px 0 0 0;">
+								<ul>
+											<li data-mod="popu_592" class="csdn-tracking-statistics" style="width: 820px;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+												<a href="https://blog.csdn.net/a337895179/article/details/53506816" target="_blank" title="C#版本的MyBatis（ C#解析XML文件并且获取SQL语句）">C#版本的MyBatis（ C#解析XML文件并且获取SQL语句）</a>
+											</li>
+								</ul>
+							</div>
+					
+<div class="control">
+
+  <span class="time">
+              回复于：
+    2012-05-08 17:47:38
+  </span>
+
+
+            <span class="fr" style="margin-left:50px;">
+              <a href="#post-391242569">#5</a>
+              得分：0
+            </span>
+
+    <div id='post-forum-bulletin-5'  class='fl tracking-ad' data-mod='popu_9'>
+    </div>
+  <div class="fr" style="margin-left:50px;">
+    <span class="manage-toggle">
+      <div class="manage" style="display: none;">
+          <a href="/posts/391242569/edit" class="fancybox" rel="nofollow">编辑</a>
+          <a href="/posts/391242569/destroy_edit" class="fancybox" rel="nofollow">删除</a>
+      </div>
+      管理
+    </span>
+  </div>
+
+
+</div>
+
+
+		</td>
+  </tr>
+</table>
+
+
+
+
+<table border="0" cellspacing="0" cellpadding="0" id="post-391243125"
+  class="post  "
+  data-post-id="391243125" data-is-topic-locked="false">
+  <colgroup><col width="110" /><col /></colgroup>
+  <tr>
+      <td rowspan="2" valign="top" class="wirter" style="width: 110px">
+                <dl class="user_info ">
+          <dt class="user_head" data-username="Sun_mingtao">
+            <a href="//my.csdn.net/Sun_mingtao" rel="nofollow" target="_blank"><img alt="Sun_mingtao" class="avatar" src="//avatar.csdn.net/9/9/B/1_sun_mingtao.jpg" style="height: 80px;" /></a>
+          </dt>
+          <dd class="username" style="display: none">
+            <a href="//my.csdn.net/Sun_mingtao" rel="nofollow" target="_blank" title="德薄才浅">德薄才浅</a>
+            
+          </dd>
+          <dd class="nickname" style="word-break:break-all;">
+            <a href="//my.csdn.net/Sun_mingtao" rel="nofollow" target="_blank" title="德薄才浅">德薄才浅</a>
+            <br>
+            <img alt="Bbs2" class="topic_show_user_level" src="//csdnimg.cn/jifen/images/xunzhang/jianzhang/bbs2.png" style="margin: 4px 0;" />
+            <div class="topic_show_posts">
+              <div class="smallTittle">
+                本版专家分：493
+              </div>
+            </div>
+            
+          </dd>
+
+
+
+          <dd class="close_rate" title="用户结帖率：87.5%
+总发帖：8
+正常结帖：7
+未结帖：1">结帖率：87.5%</dd>
+
+          <dd class="showTittleDD">
+
+          </dd>
+
+        </dl>
+
+      </td>
+		<td style="vertical-align: bottom" valign="top" class="post_info pointed" data-username="Sun_mingtao" data-floor="6">
+			
+        <div class="post_body">
+
+                  <pre class="brush: XML">&nbsp;&nbsp;&lt;!--&nbsp;根据用户名查找对应的用户&nbsp;--&gt;<br />
+&nbsp;&nbsp;&lt;select&nbsp;id="selectAllUser"&nbsp;parameterClass="com.wmxny.systemwork.entity.StartIndexEntity"&nbsp;resultClass="com.wmxny.systemwork.entity.StartIndexEntity"&gt;<br />
+&nbsp;&nbsp;&lt;isNotNull&nbsp;property="userName"&gt;<br />
+&nbsp;&nbsp;&lt;![CDATA[<br />
+&nbsp;&nbsp;select&nbsp;'select&nbsp;ID,User_No&nbsp;as&nbsp;userNo,User_Name&nbsp;as&nbsp;userName&nbsp;from&nbsp;bas_users&nbsp;AND&nbsp;USER_NAME&nbsp;='&nbsp;+&nbsp;#{userName}#&nbsp;as&nbsp;sqlSyntax<br />
+&nbsp;&nbsp;]]&gt;<br />
+&nbsp;&nbsp;&lt;/isNotNull&gt;<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp;&lt;/select&gt;&nbsp;&nbsp;&nbsp;</pre><br />
+其中sqlSyntax必须为StartIndexEntity的一个成员变量有setter&nbsp;getter&nbsp;给方法调用后会返回一个StartIndexEntity对象，通过该对象取sqlSyntax。
+
+
+
+        </div>
+
+
+		</td>
+	</tr>
+	<tr>
+		<td valign="bottom">
+							<div style="margin: 0 0 0 10px;font-size: 14px;border-top: 1px dashed #eee;padding:8px 0 0 0;">
+								<ul>
+											<li data-mod="popu_592" class="csdn-tracking-statistics" style="width: 820px;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+												<a href="https://blog.csdn.net/qing_gee/article/details/50067251" target="_blank" title="mybatis简单sql使用java注解而不是xml配置">mybatis简单sql使用java注解而不是xml配置</a>
+											</li>
+								</ul>
+							</div>
+					
+<div class="control">
+
+  <span class="time">
+              回复于：
+    2012-05-08 19:01:35
+  </span>
+
+
+            <span class="fr" style="margin-left:50px;">
+              <a href="#post-391243125">#6</a>
+              得分：10
+            </span>
+
+    <div id='post-forum-bulletin-6'  class='fl tracking-ad' data-mod='popu_9'>
+    </div>
+  <div class="fr" style="margin-left:50px;">
+        <a href="javascript:void(0)" onclick="post_digg(390040545,391243125)" class="red digg">对我有用[0]</a> |
+        <a href="javascript:void(0)" onclick="post_bury(390040545,391243125)" class="bury">丢个板砖[0]</a> |
+        <script>
+          function post_digg(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/digg',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.digg').text(json.digg);
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+
+          function post_bury(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/bury',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.bury').text('丢个板砖['+json.bury+']');
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+        </script>
+      <a href="#quote" class="quote" rel='nofollow'>引用</a> |
+      <a href="/posts/391243125/report?topic_id=390040545" class="fancybox red report_spam" rel="nofollow">举报 </a> |
+    <span class="manage-toggle">
+      <div class="manage" style="display: none;">
+          <a href="/posts/391243125/edit" class="fancybox" rel="nofollow">编辑</a>
+          <a href="/posts/391243125/destroy_edit" class="fancybox" rel="nofollow">删除</a>
+      </div>
+      管理
+    </span>
+  </div>
+
+
+</div>
+
+
+		</td>
+  </tr>
+</table>
+
+
+
+
+<table border="0" cellspacing="0" cellpadding="0" id="post-391248265"
+  class="post  "
+  data-post-id="391248265" data-is-topic-locked="false">
+  <colgroup><col width="110" /><col /></colgroup>
+  <tr>
+      <td rowspan="2" valign="top" class="wirter" style="width: 110px">
+                <dl class="user_info ">
+          <dt class="user_head" data-username="tonghuizx">
+            <a href="//my.csdn.net/tonghuizx" rel="nofollow" target="_blank"><img alt="tonghuizx" class="avatar" src="//avatar.csdn.net/E/3/A/1_tonghuizx.jpg" style="height: 80px;" /></a>
+          </dt>
+          <dd class="username" style="display: none">
+            <a href="//my.csdn.net/tonghuizx" rel="nofollow" target="_blank" title="tonghuizx">tonghuizx</a>
+            
+          </dd>
+          <dd class="nickname" style="word-break:break-all;">
+            <a href="//my.csdn.net/tonghuizx" rel="nofollow" target="_blank" title="tonghuizx">tonghuizx</a>
+            <br>
+            <img alt="Bbs1" class="topic_show_user_level" src="//csdnimg.cn/jifen/images/xunzhang/jianzhang/bbs1.png" style="margin: 4px 0;" />
+            <div class="topic_show_posts">
+              <div class="smallTittle">
+                本版专家分：0
+              </div>
+            </div>
+            
+          </dd>
+
+
+
+          <dd class="close_rate" title="用户结帖率：92.86%
+总发帖：14
+正常结帖：13
+未结帖：1">结帖率：92.86%</dd>
+
+          <dd class="showTittleDD">
+
+          </dd>
+
+        </dl>
+
+      </td>
+		<td style="vertical-align: bottom" valign="top" class="post_info " data-username="tonghuizx" data-floor="7">
+			
+        <div class="post_body">
+
+                  <fieldset><legend class="font_bold">引用&nbsp;6&nbsp;楼&nbsp;&nbsp;的回复:</legend><blockquote>XML&nbsp;code<br />
+<br />
+&nbsp;&nbsp;&lt;!--&nbsp;根据用户名查找对应的用户&nbsp;--&gt;<br />
+&nbsp;&nbsp;&lt;select&nbsp;id="selectAllUser"&nbsp;parameterClass="com.wmxny.systemwork.entity.StartIndexEntity"&nbsp;resultClass="com.wmxny.systemwork.entity.StartIndexEntity"&gt;<br />
+&nbsp;&nbsp;&lt;isNotNul……</blockquote></fieldset>谢谢，不过我想要的是与Entity无关的那种<br />
+<br />
+我看到过代码<br />
+<br />
+<pre class="brush: Java">public&nbsp;&lt;E&gt;&nbsp;List&lt;E&gt;&nbsp;selectList(String&nbsp;statement,&nbsp;Object&nbsp;parameter,&nbsp;RowBounds&nbsp;rowBounds)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;try&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MappedStatement&nbsp;ms&nbsp;=&nbsp;configuration.getMappedStatement(statement);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;E&gt;&nbsp;result&nbsp;=&nbsp;executor.&lt;E&gt;query(ms,&nbsp;wrapCollection(parameter),&nbsp;rowBounds,&nbsp;Executor.NO_RESULT_HANDLER);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;result;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;catch&nbsp;(Exception&nbsp;e)&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw&nbsp;ExceptionFactory.wrapException("Error&nbsp;querying&nbsp;database.&nbsp;&nbsp;Cause:&nbsp;"&nbsp;+&nbsp;e,&nbsp;e);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;finally&nbsp;{<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ErrorContext.instance().reset();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+&nbsp;&nbsp;}</pre><br />
+<br />
+不知道&nbsp;executor.&lt;E&gt;query&nbsp;里面是怎么实现的，请教了
+
+
+
+        </div>
+
+
+		</td>
+	</tr>
+	<tr>
+		<td valign="bottom">
+							<div style="margin: 0 0 0 10px;font-size: 14px;border-top: 1px dashed #eee;padding:8px 0 0 0;">
+								<ul>
+											<li data-mod="popu_592" class="csdn-tracking-statistics" style="width: 820px;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+												<a href="https://blog.csdn.net/mwj_88/article/details/50261595" target="_blank" title="MyBatis学习二：mapper.xml属性">MyBatis学习二：mapper.xml属性</a>
+											</li>
+								</ul>
+							</div>
+					
+<div class="control">
+
+  <span class="time">
+              回复于：
+    2012-05-09 10:33:05
+  </span>
+
+
+            <span class="fr" style="margin-left:50px;">
+              <a href="#post-391248265">#7</a>
+              得分：0
+            </span>
+
+    <div id='post-forum-bulletin-7'  class='fl tracking-ad' data-mod='popu_9'>
+    </div>
+  <div class="fr" style="margin-left:50px;">
+        <a href="javascript:void(0)" onclick="post_digg(390040545,391248265)" class="red digg">对我有用[1]</a> |
+        <a href="javascript:void(0)" onclick="post_bury(390040545,391248265)" class="bury">丢个板砖[0]</a> |
+        <script>
+          function post_digg(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/digg',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.digg').text(json.digg);
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+
+          function post_bury(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/bury',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.bury').text('丢个板砖['+json.bury+']');
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+        </script>
+      <a href="#quote" class="quote" rel='nofollow'>引用</a> |
+      <a href="/posts/391248265/report?topic_id=390040545" class="fancybox red report_spam" rel="nofollow">举报 </a> |
+    <span class="manage-toggle">
+      <div class="manage" style="display: none;">
+          <a href="/posts/391248265/edit" class="fancybox" rel="nofollow">编辑</a>
+          <a href="/posts/391248265/destroy_edit" class="fancybox" rel="nofollow">删除</a>
+      </div>
+      管理
+    </span>
+  </div>
+
+
+</div>
+
+
+		</td>
+  </tr>
+</table>
+
+
+
+
+<table border="0" cellspacing="0" cellpadding="0" id="post-391250571"
+  class="post  "
+  data-post-id="391250571" data-is-topic-locked="false">
+  <colgroup><col width="110" /><col /></colgroup>
+  <tr>
+      <td rowspan="2" valign="top" class="wirter" style="width: 110px">
+                <dl class="user_info ">
+          <dt class="user_head" data-username="tonghuizx">
+            <a href="//my.csdn.net/tonghuizx" rel="nofollow" target="_blank"><img alt="tonghuizx" class="avatar" src="//avatar.csdn.net/E/3/A/1_tonghuizx.jpg" style="height: 80px;" /></a>
+          </dt>
+          <dd class="username" style="display: none">
+            <a href="//my.csdn.net/tonghuizx" rel="nofollow" target="_blank" title="tonghuizx">tonghuizx</a>
+            
+          </dd>
+          <dd class="nickname" style="word-break:break-all;">
+            <a href="//my.csdn.net/tonghuizx" rel="nofollow" target="_blank" title="tonghuizx">tonghuizx</a>
+            <br>
+            <img alt="Bbs1" class="topic_show_user_level" src="//csdnimg.cn/jifen/images/xunzhang/jianzhang/bbs1.png" style="margin: 4px 0;" />
+            <div class="topic_show_posts">
+              <div class="smallTittle">
+                本版专家分：0
+              </div>
+            </div>
+            
+          </dd>
+
+
+
+          <dd class="close_rate" title="用户结帖率：92.86%
+总发帖：14
+正常结帖：13
+未结帖：1">结帖率：92.86%</dd>
+
+          <dd class="showTittleDD">
+
+          </dd>
+
+        </dl>
+
+      </td>
+		<td style="vertical-align: bottom" valign="top" class="post_info " data-username="tonghuizx" data-floor="8">
+			
+        <div class="post_body">
+
+                  自已顶自已
+
+
+
+        </div>
+
+
+		</td>
+	</tr>
+	<tr>
+		<td valign="bottom">
+							<div style="margin: 0 0 0 10px;font-size: 14px;border-top: 1px dashed #eee;padding:8px 0 0 0;">
+								<ul>
+											<li data-mod="popu_592" class="csdn-tracking-statistics" style="width: 820px;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+												<a href="https://blog.csdn.net/duoen197231/article/details/52857443" target="_blank" title="mybatis.xml中sql编写规范">mybatis.xml中sql编写规范</a>
+											</li>
+								</ul>
+							</div>
+					
+<div class="control">
+
+  <span class="time">
+              回复于：
+    2012-05-09 13:05:07
+  </span>
+
+
+            <span class="fr" style="margin-left:50px;">
+              <a href="#post-391250571">#8</a>
+              得分：0
+            </span>
+
+    <div id='post-forum-bulletin-8'  class='fl tracking-ad' data-mod='popu_9'>
+    </div>
+  <div class="fr" style="margin-left:50px;">
+        <a href="javascript:void(0)" onclick="post_digg(390040545,391250571)" class="red digg">对我有用[0]</a> |
+        <a href="javascript:void(0)" onclick="post_bury(390040545,391250571)" class="bury">丢个板砖[0]</a> |
+        <script>
+          function post_digg(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/digg',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.digg').text(json.digg);
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+
+          function post_bury(topic_id,post_id){
+              $.ajax({
+                  type:'PUT',
+                  dataType: "json",
+                  url:'/posts/'+post_id.toString()+'/bury',
+                  data: {
+                      topic_id: topic_id.toString()
+                  },
+                  success: function(json){
+                      if(json.success){
+                          $('table.post[data-post-id="'+post_id+'"] a.bury').text('丢个板砖['+json.bury+']');
+                      }else{
+                          alert("您已经投过票了");
+                      }
+                  }
+              })
+          }
+        </script>
+      <a href="#quote" class="quote" rel='nofollow'>引用</a> |
+      <a href="/posts/391250571/report?topic_id=390040545" class="fancybox red report_spam" rel="nofollow">举报 </a> |
+    <span class="manage-toggle">
+      <div class="manage" style="display: none;">
+          <a href="/posts/391250571/edit" class="fancybox" rel="nofollow">编辑</a>
+          <a href="/posts/391250571/destroy_edit" class="fancybox" rel="nofollow">删除</a>
+      </div>
+      管理
+    </span>
+  </div>
+
+
+</div>
+
+
+		</td>
+  </tr>
+</table>
+
+
+
+</div>
+
+<script type="text/javascript" charset="utf-8">
+    $(function(){
+        topics_page_js.show_page();
+    });
+</script>
+
+<input type="hidden" id="autosave_post_val" value="" />
+<input type="hidden" id="autosave_old_post_val"  />
+
+
+<div class="control_area bottom">
+  <form name="form" id="form">
+    
+    <div class="bread_nav" style="  float: left;margin-right: 10px">
+      <a href="http://www.csdn.net" target="_blank">CSDN</a> <em>&gt;</em>
+      <a href="/" target="_blank">CSDN论坛</a> <em>&gt;</em>
+          <a href="/forums/Java" target="_blank">Java</a> <em>&gt;</em>
+      <a href="/forums/Java_WebDevelop" target="_blank">Web 开发</a>
+    </div>
+    <div class="control">
+      <ul>
+        <li class="drop_menu_wrap drop_menu_up">
+          <a href="#" class="drop_toggle btn_1 drop_toggle_up" rel='nofollow'>
+            <span>
+              <img src="/assets/ico_set.gif" alt="" />管理菜单<img src="/assets/arrow_down.gif" alt="" />
+            </span>
+          </a>
+          <ul class="drop_menu" style="display: none; bottom:26px">
+              <li><a href="/topics/390040545/top" class="fancybox" rel="nofollow">置顶</a></li>
+
+  <li><a href="/topics/390040545/recommend" data-confirm="您确定要推荐该帖吗？帖子被推荐后将奖励发帖用 户88个可用分和3个C币!" data-method="put" rel="nofollow">推荐</a></li>
+
+  <li><a href="/topics/390040545/lock" class="fancybox" rel="nofollow">锁定</a></li>
+
+<li><a href="/topics/390040545/move" class="fancybox" rel="nofollow">移动</a></li>
+<li><a href="/topics/390040545/edit" class="fancybox" rel="nofollow">编辑</a></li>
+<li><a href="/topics/390040545/destroy_edit" class="fancybox" rel="nofollow">删除</a></li>
+<li><a href="/topics/390040545/add_point" class="fancybox" rel="nofollow">帖子加分</a></li>
+  <li><a href="/topics/390040545/highlight" class="fancybox" rel="nofollow">帖子高亮</a></li>
+
+          </ul>
+        </li>
+        <li>
+          <a href="/topics/390040545/close" class="btn_1 close_topic" rel='nofollow'>
+            <span><img src="/assets/ico_over.gif" alt="" />结帖</span>
+          </a>
+        </li>
+        <li>
+          <a href="/topics/new?forum_id=Java_WebDevelop" class="btn_1 create_topic" rel='nofollow'>
+            <span><img src="/assets/ico_publish.gif" alt="" />发帖</span>
+          </a>
+        </li>
+        <li>
+          <a href="#new_post" class="btn_1 reply_topic" rel='nofollow'>
+            <span><img src="/assets/ico_return.gif" alt="" />回复</span>
+          </a>
+        </li>
+          <li>
+            <a href="/topics/390040545/attetion" class="btn_1 reply_topic" rel='nofollow'>
+              <span><img src="/assets/ico_attention_topic.png" title="关注" />关注</span>
+            </a>
+          </li>
+      </ul>
+    </div>
+  </form>
+</div>
+    <span class="login" id="new_post">匿名用户不能发表回复！<a  href="javascript:void(0); " onclick='loginbox();' >登录</a>|<a href="https://passport.csdn.net/account/register" target="_blank">注册</a></span>
+
+    <div class="detailed">
+      <table>
+        <tbody>
+        <tr>
+          <td valign="top" class="wirter" style="width: 110px">
+            <dl class="user_info ">
+              <dt class="user_head" data-username="CSDN官网">
+                <a href="http://www.csdn.net" rel="nofollow" target="_blank"><img alt="CSDN官网" class="avatar" src="//avatar.csdn.net/6/2/6/1_nettman.jpg"></a>
+              <div class="user_material" style="display: none;height: 118px">
+                <div class="user_material_bg" style="height: 100px">
+                    <dl>
+                      <dt><a href="http://www.csdn.net" target="_blank"><img src="//avatar.csdn.net/6/2/6/1_nettman.jpg" class="avatar_80"></a></dt>
+                      <dd style="text-align: left;">账号:<a href="http://www.csdn.net" target="_blank">CSDN官网</a></dd>
+                      <dd style="text-align: left;" class="nickname">昵称:<span class="name2nick" style="overflow: initial;">CSDN官网</span></dd>
+                    </dl>
+                  </div>
+                </div>
+              </dt>
+              <dd class="username">
+                <a href="http://www.csdn.net" rel="nofollow" target="_blank" title="CSDN官网">CSDN推荐</a>
+              </dd>
+            </dl>
+          </td>
+          <td>
+            <div >
+              <div style="margin-top: 5px;width: 100%;padding: 0" class="post_body">
+                <ul style="margin-left: 16px">
+                      <li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                        <a href="https://blog.csdn.net/a714115852/article/details/52448393" target="_blank" title="mybatis 获取指定mapper id sql">mybatis 获取指定mapper id sql</a>
+                      </li>
+                      <li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                        <a href="https://blog.csdn.net/Android_hongshao/article/details/46974935" target="_blank" title="mybatis的xml中sql语句中in的写法">mybatis的xml中sql语句中in的写法</a>
+                      </li>
+                      <li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                        <a href="https://blog.csdn.net/owen_william/article/details/51813239" target="_blank" title="MyBatis之使用XML配置SQL映射（一）">MyBatis之使用XML配置SQL映射（一）</a>
+                      </li>
+                      <li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                        <a href="https://blog.csdn.net/suyu_yuan/article/details/51545876" target="_blank" title="关于Mybatis的XML配置文件的namespace元素的作用。">关于Mybatis的XML配置文件的namespace元素的作用。</a>
+                      </li>
+                      <li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                        <a href="https://blog.csdn.net/x763795151/article/details/54602789" target="_blank" title="mybatis使用Mapper接口方式与sqlSession传sqlID方式基本配置">mybatis使用Mapper接口方式与sqlSession传sqlID方式基本配置</a>
+                      </li>
+                      <li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                        <a href="https://blog.csdn.net/luckytjx/article/details/48805481" target="_blank" title="Mybatis常用sql语句xml配置">Mybatis常用sql语句xml配置</a>
+                      </li>
+                      <li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                        <a href="https://blog.csdn.net/wp562846864/article/details/19304775" target="_blank" title="log4j.xml 简单配置 打印 mybatis 执行的 sql 语句">log4j.xml 简单配置 打印 mybatis 执行的 sql 语句</a>
+                      </li>
+                      <li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                        <a href="https://blog.csdn.net/vcshcn/article/details/50063153" target="_blank" title="如何解析Mybatis xml文件中配置的sql">如何解析Mybatis xml文件中配置的sql</a>
+                      </li>
+                      <li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                        <a href="https://blog.csdn.net/ccf547461296/article/details/54022605" target="_blank" title="mybatis源码学习之执行过程分析（4）——映射文件中sql的获取和sql语句的执行">mybatis源码学习之执行过程分析（4）——映射文件中sql的获取和sql语句的执行</a>
+                      </li>
+                      <li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                        <a href="https://blog.csdn.net/alan_liuyue/article/details/71794632" target="_blank" title="mybatis的xml映射文件SQL语句的增删改查、参数、缓存">mybatis的xml映射文件SQL语句的增删改查、参数、缓存</a>
+                      </li>
+                      <li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                        <a href="https://blog.csdn.net/dancheng1/article/details/53982251" target="_blank" title="Mybatis中动态sql___if判断语句">Mybatis中动态sql___if判断语句</a>
+                      </li>
+                      <li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                        <a href="https://download.csdn.net/download/qly2046/9333907" target="_blank" title="SQL SERVER获取插入数据的ID">SQL SERVER获取插入数据的ID</a>
+                      </li>
+                      <li data-mod="popu_592" data-dsm="post" data-poputype="feed" data-feed-show="false" class="csdn-tracking-statistics" style="margin: 0 10px 0 0;float: left;width: 400px;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                        <a href="https://blog.csdn.net/u011410254/article/details/51023627" target="_blank" title="sql语句放到外部xml文件里，读取操作">sql语句放到外部xml文件里，读取操作</a>
+                      </li>
+                </ul>
+
+              </div>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+<!-- 对联广告 -->
+<div id="ad_left" style="display:none">
+  <div>
+    <ins data-revive-zoneid="56" data-revive-id="8c38e720de1c90a6f6ff52f3f89c4d57"></ins>
+<script type="text/javascript">  
+  $(function(){
+      if ($(parent.window).width() >= 1280) {
+          parent.$('#ad_left').show();
+      }
+  });
+</script>
+  </div>
+</div>
+<div id="ad_right" style="display:none">
+  <div>
+    <ins data-revive-zoneid="57" data-revive-id="8c38e720de1c90a6f6ff52f3f89c4d57"></ins>
+<script type="text/javascript">    
+    $(function(){
+        if ($(parent.window).width() >= 1280) {
+            parent.$('#ad_right').show();
+        }
+    });
+</script>
+  </div>
+</div>
+
+<script>
+  $(function(){
+    window.onresize = function(){
+      if($(parent.window).width() <= 1280){
+        $('#ad_right').hide();
+        $('#ad_left').hide();
+      } else {
+          $('#ad_right').show();
+          $('#ad_left').show();
+      }
+    };
+      if ($(parent.window).width() >= 1280) {
+          $('#ad_right').show();
+          $('#ad_left').show();
+      }
+  });
+
+</script>
+
+
+<!-- 浮层弹窗广告 -->
+<!--AdForward Begin:-->
+<div id="ad_pop">
+  <div class="J_adv" data-view="true" data-mod="ad_popu_64" data-mtp="62" data-order="21" data-con="ad_content_2070">
+    <script id="popuLayer_js_q" src="//ads.csdn.net/js/popuLayer.js" defer="" type="text/javascript"></script>
+    <div id="layerd" style="position: fixed; bottom: 0px; right: 0px; line-height: 0px; z-index: 1000; width: 300px; height: 278px;">
+      <div class="J_close layer_close" style="display:block;background-color:#efefef;padding:0px;color:#333;font:12px/24px Helvetica,Tahoma,Arial,sans-serif;text-align:right;">
+        关闭
+      </div>
+      <!--广告占位容器 u2895106-->
+      <div id="ad_abc">
+        <!-- 广告位：pc端-论坛帖子页右侧弹窗-300*250-new -->
+        <script>
+            (function() {
+                var s = "_" + Math.random().toString(36).slice(2);
+                document.write('<div id="' + s + '"></div>');
+                (window.slotbydup=window.slotbydup || []).push({
+                    id: '4742630',
+                    container: s,
+                    size: '300,250',
+                    display: 'inlay-fix'
+                });
+            })();
+        </script>
+
+      </div>
+      <script>
+          $(function(){
+              $('.J_close').on('click',function(){$('#layerd').hide();$('.J_close').hide()})
+          })
+      </script>
+    </div>
+  </div>
+</div>
+<!--AdForward End-->
+
+
+<!-- go-backhome   go-backchannel-->
+<!-- <button id="com-back-home" class="btn btn-top bbs-btn-gray28 bbs-btn-backhome" title="回到首页" style="cursor: pointer; border: 0px none; bottom: 35px; width: 80px; height: 28px; margin: 0px; padding: 0px; position: fixed; right: 40px; display: block; padding-right:13px;">回到首页</button>-->
+<!-- <button id="com-back-channel" class="btn btn-top bbs-btn-gray28 bbs-btn-backchannel" title="回到频道" style="cursor: pointer; border: 0px none; bottom:68px; width: 80px; height: 28px; margin: 0px; padding: 0px; position: fixed; right: 40px; display: block; padding-right:13px;">回到频道</button> -->
+    </div>
+    <script type="text/javascript" language="javascript" charset="utf-8">
+window.bbsInfoflag = true;
+
+//<![CDATA[
+$(function(){
+  $('.post .post_body fieldset+br').remove();
+  $('.post .post_body blockquote').each(function(index, item) {
+    var first_child = $(item).find(':first');
+    if($(item).contents().get(0) !== undefined &&
+      $(item).contents().get(0).nodeName.toLowerCase() === 'br' &&
+      first_child.prop('tagName').toLowerCase() === 'br') {
+      first_child.remove();
+    }
+  });
+  
+});
+
+$(".showTittleDD span").hover(
+        function () {
+            $(this).find(".showTittle")[0].style.display="inline-block";
+        },
+        function () {
+                $(this).find(".showTittle")[0].style.display="none";
+        }
+);
+
+$(".topic_show_user_level").hover(
+    function () {
+    $(this).next().find(".smallTittle")[0].style.display="inline-block";
+
+
+    },
+    function () {
+        $(this).next().find(".smallTittle")[0].style.display="none";
+    }
+);
+//]]>
+var auto_save_time = null;
+$(document).ready(function(){
+    autosavecontent = $("#autosave_post_val").val();
+    if(autosavecontent != ''){$("#post_body").val(autosavecontent);}
+    auto_save_time = setInterval(autosave, 90*1000);
+});
+function autosave(){
+    var content =  $("#post_body").val();
+    var old_content = $("#autosave_old_post_val").val();
+    topic_id = 390040545
+    if(content != "" && content != old_content) {
+        $.ajax({
+            type: 'post',
+            dataType: 'json',
+            url: '/posts/autosave_post',
+            data: {
+                content: content,
+                topic_id: topic_id
+            },
+            success: function (result) {
+                $("#autosave_old_post_val").val(content);
+            },
+            error: function (result) {
+              if(result.status == 403 && result.responseText == '需要登录'){
+                  clearInterval(auto_save_time);
+              }
+            }
+        })
+    }
+}
+
+
+</script>
+
+    
+<div id="pop_win" style="display:none ;position: absolute; z-index: 10000; border: 1px solid rgb(220, 220, 220); top: 222.5px; left: 630px; opacity: 1; background: none 0px 0px repeat scroll rgb(255, 255, 255);">
+    
+</div>
+<div id="popup_mask"></div>
+<style>
+    #popup_mask
+    {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 9999;
+        left: 0px;
+        top: 0px;
+        opacity: 0.3;
+        filter: alpha(opacity=30);
+        display: none;
+    }
+ 
+</style>
+
+
+    <script src="//csdnimg.cn/www/js/component.js"></script>
+    <script language="javascript" type="text/javascript" src="//csdnimg.cn/asdf/async-1.0.0.js"></script>
+<div id="a9784604d" style="width: 1px; height: 1px; display: none;">
+	<script id="adJs9784604"></script>
+	<script>document.getElementById("adJs9784604").src = "//ads.csdn.net/js/opt/9784604.js?t=" + Math.random();</script>
+</div>
+<script type="text/javascript">
+  document.write('<script type="text/javascript" src="//csdnimg.cn/pubfooter/js/publib_footer-1.0.2.js?' + Math.floor(new Date()/120000).toString(36) + '="></'+'script>');
+</script>
+
+<script type="text/javascript" src="//csdnimg.cn/pig/pubjs/cnick.js"></script>
+<script id="csdn-toolbar-id" btnId="header_notice_num" wrapId="note1" count="5" subCount="5" type="text/javascript" src="//csdnimg.cn/public/common/toolbar/js/content_toolbar.js"></script>
+<script src='//csdnimg.cn/public/common/gotop/js/goTop-v1.0.min.js?v1519799761'></script>
+  </body>
+</html>

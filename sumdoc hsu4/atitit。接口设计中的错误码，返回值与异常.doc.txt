@@ -1,0 +1,25 @@
+atitit。接口设计中的错误码，返回值与异常
+
+errcode      从except，md5，转换为数字，取钱6位
+errcode_str    camel，一般从exception最后一个类获取
+errcode_localLang   :根据camel规则，自动拆分单词 ，自动翻译
+
+
+	private static String convert2retcode(String s) {
+		s=s.toLowerCase();
+		char[] a=s.toCharArray();
+		StringBuilder stringBuilder = new StringBuilder();
+	//	stringBuilder.append(str)
+		for (char c : a) {
+			if(c>=97)
+			{
+			String s2= String.valueOf(c-86);
+			stringBuilder.append(s2);
+			}else
+				stringBuilder.append(c);
+			
+		}
+		return stringBuilder.toString().substring(0, 6);
+	}
+
+

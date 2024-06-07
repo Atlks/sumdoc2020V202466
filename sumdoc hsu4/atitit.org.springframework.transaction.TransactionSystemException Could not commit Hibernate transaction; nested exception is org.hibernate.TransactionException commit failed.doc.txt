@@ -1,0 +1,20 @@
+atitit. org.springframework.transaction.TransactionSystemException Could not commit Hibernate transaction; nested exception is org.hibernate.TransactionException commit failed
+
+
+ by: org.hibernate.TransactionException: commit failed
+Caused by: org.hibernate.TransactionException: unable to commit against JDBC connection
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: Connection reset by peer: socket write error
+
+或者：：：
+。。。。。。。
+Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: 该连接已关闭。
+
+
+cause：：：maybe hibernate.hbm2ddl.auto", "update
+不个这个删除,三噪好兰...
+
+分析::::
+
+hbm2ddl 大概雅十使用的getCurrentSession,不个哪关闭兰..闪的service不能正常的使用...
+
+

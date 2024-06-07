@@ -1,0 +1,5 @@
+
+
+maybe class or cfg  cant be copy to class dir
+file lock...so cant clr..
+port cant bind..

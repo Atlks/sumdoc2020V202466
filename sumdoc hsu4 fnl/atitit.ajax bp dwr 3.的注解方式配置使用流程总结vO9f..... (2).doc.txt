@@ -1,0 +1,149 @@
+atitit.ajax bp dwr 3.的注解方式配置使用流程总结.....
+
+11
+11
+11
+22
+22
+33
+33
+33
+44
+44
+44
+44
+55
+55
+55
+5
+安装配置
+下载  dwr.jar 1M
+Development Release: Version 3 release candidate 2 (3.0 RC2)
+配置注解方式..web.xml
+<!-- o71 -->
+	
+	<servlet>
+  <display-name>DWR Servlet</display-name>
+  <servlet-name>dwr-invoker</servlet-name>  
+  <servlet-class>org.directwebremoting.servlet.DwrServlet</servlet-class>
+  <init-param>
+     <param-name>debug</param-name>
+     <param-value>true</param-value>
+  </init-param>
+  
+    <init-param>
+     <param-name>allowImpossibleTests</param-name>
+     <param-value>true</param-value>
+  </init-param>
+  
+  
+    <!-- 将设定注解的域对象和业务实现类放在下面列表中，中间使用逗号间隔 -->
+        <init-param>
+            <param-name>classes</param-name>
+            <param-value>
+               com.focustar.service.AwdSvs_shake_Perdaymode
+            </param-value>
+        </init-param> 
+</servlet>
+
+<servlet-mapping>
+  <servlet-name>dwr-invoker</servlet-name>
+  <url-pattern>/dwr/*</url-pattern>
+</servlet-mapping>
+作者:: 老哇的爪子 Attilax 艾龙，  EMAIL:1466519819@qq.com
+转载请注明来源： http://blog.csdn.net/attilax
+查询页面
+Class 配置SVS
+@RemoteProxy(name="AwdSvs_shake_PerdaymodeProx") 
+public class AwdSvs_shake_Perdaymode 
+	//   下午5:31:28 2014-7-2  老哇的爪子  Attilax
+	@RemoteMethod public String leftNum_noReq(String uid, String actid) {
+
+实体class配置@DataTransferObject  ,只使用这个走ok兰..
+
+public class Equipment implements java.io.Serializable {
+
+@RemoteProperty：：：这个通常不使用...要是使用李这个,所有的的属性都要加这个了,贝儿不行...
+
+
+测试查看公布的方法
+http://192.168.1.63/weixin/dwr/index.html
+Modules known to DWR:
+_AwdSvs_shake_PerdaymodeProx_(NewCreator for com.focustar.service.AwdSvs_shake_Perdaymode)
+
+点击类k能看到方法一瓦...能单个的方法测试了...stub已经ok兰...
+查看详细调用参数,能不个js下载哈来..不个http://192.168.1.63/weixin/dwr/interface/AwdSvs_shake_PerdaymodeProx.js下载哈来..
+
+
+导入到page页面
+Source code 查看...
+复制..
+ <script type='text/javascript' src='/weixin/dwr/engine.js'></script>
+  <script type='text/javascript' src='/weixin/dwr/interface/AwdSvs_shake_PerdaymodeProx.js'></script>
+
+ 
+
+  <script type='text/javascript' src='/weixin/dwr/util.js'></script>
+
+
+使用在js黑头
+ AwdSvs_shake_PerdaymodeProx.startDraw_noreq( openid,actid,   function(data)
+   	      {
+	//	alert(data);
+		//var data_json=eval(data);
+				var data_json = eval("(" + data + ")");
+   	      //     alert(data_json.code);
+   	         drawAftEvent(data_json);
+   	      }
+	);
+异常处理,使用java异常..
+
+ <init-param>
+   <param-name>classes</param-name>
+   <param-value> 
+   com.attilax.lang.CantDelDataEX,   
+   </param-value>
+
+throw new CantDelDataEX("有节目单关联数据，不能删除");
+
+
+@DataTransferObject
+public class CantDelDataEX extends RuntimeException {
+ 	public CantDelDataEX(String string) {
+		//  attilax 老哇的爪子 j_z_54   o93   
+		super(string);
+	}
+	//  attilax 老哇的爪子 j_z_41   o93   
+}
+Qa问题
+#=====param sh requesst
+
+不个http://192.168.1.63/weixin/dwr/interface/AwdSvs_shake_PerdaymodeProx.js下载哈来..
+    /**
+     * @param {function|Object} callback callback function or options object
+     */
+    p.leftNums = function(callback) {
+      return dwr.engine._execute(p._path, 'AwdSvs_shake_PerdaymodeProx', 'leftNums', arguments);
+};
+
+
+直接传callback走ok兰...
+子能不个哪rewrite兰,不个参数直接传类k...
+
+Xxx is undefine
+Thourng yeu trace l ,走十不晓得为什么trace 不的上去....大概太深的兰吧...
+
+原来的是js能直接显示拉李undefine...
+
+只好ff黑头step 调试..还凑火,能调试了.林吧...
+
+
+Warning: overloaded methods are not recommended
+Javascript does not support overloaded methods, so the javascript file generated from this class will contain two methods the second of which will replace the first. This is probably not what you wanted.
+It is best to avoid overloaded methods when using DWR.
+
+
+参考：：
+atitit.编辑表单的实现最佳实践dwr jq easyui O726
+
+

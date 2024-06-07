@@ -1,0 +1,53 @@
+paip.接入支付接口功能流程总结
+
+比如资金账户模块,有个充值功能模块，需要调用支付接口模块
+
+
+流程总结如下:
+
+-------------------充值功能模块---------
+xx.send.aspx(backurl,oid,oidConvertType )
+
+
+------------支付接口模块
+xx.send.aspx(backurl,oid,oidConvertType )
+
+if(notlogin())
+   tips( login first,pls) ;exit;
+
+//将ORDER ID 转为支付接口适应的OID
+oid=convert(oid,oidConvertType) 
+
+post param ,sign ,and submit()
+
+save(backurl,oid,oid4payInterface)
+
+..........转入支付接口的网站，进行支付
+
+back to    (xx.back.aspx)
+
+if(notSigncheck())
+     tips(para err) ;exit;
+
+if( payStateIsFaile)
+   tips(pay faile) ;exit;
+
+oid=getoid(oid4payInterface)
+
+backurl(oid,sign)
+
+-------------------充值功能模块(返回)---------
+back4acc.aspx(oid,sign)
+
+
+if(notSigncheck())
+     tips(para err) ;exit;
+
+if(alreadyPay(oid))
+    tips(alreadyPay) ;exit;
+
+updatePayState2alreadyPay()
+ tips(pay ok)
+
+
+

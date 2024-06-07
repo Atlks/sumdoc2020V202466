@@ -1,0 +1,31 @@
+paip.java 注解的详细使用代码
+
+作者Attilax 艾龙，  EMAIL:1466519819@qq.com
+来源：attilax的专栏
+地址：http://blog.csdn.net/attila
+
+
+//////////作用1: 防止乱码
+@utf编码
+public class tCache {
+
+
+////////////作用2: 生成单行文档
+单行文档
+可惜，注解参数生成unicode转码，好像要用API改写才行。。
+直接的注解名称到是可以。不错。
+
+////////////作用3: 设置参数SQL等...读取方法的注解
+	@sql(  "select * form tt")
+	public static void main(String[] args) 
+	
+	{
+			Method m=	tAnno.class.getMethod(Thread.currentThread().getStackTrace()[1].getMethodName(), String[].class);
+		sql a2	=m.getAnnotation(sql.class);
+		System.out.println(a2.value());
+		
+		
+////////////////读取类的注解
+//		anno1 a=	Thread.currentThread().getStackTrace()[1].getClass().getAnnotation(anno1.class);
+//		System.out.println(a.para());
+//				

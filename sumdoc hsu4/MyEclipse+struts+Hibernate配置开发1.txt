@@ -1,0 +1,362 @@
+Yesky首页| 产品报价| 行情| 手机 | 数码 | 笔记本 | 台式机 | DIY硬件 | 外设 | 网络 | 数字家庭 | 评测 | 软件 | e时代 | 游戏 | 图片 | 壁纸 | 群乐 | 社区 | 博客 | 下载
+
+
+窗体顶端
+
+窗体底端
+北京 上海 广东 西安重庆 成都 沈阳 江苏 
+用户登录
+?  ·ACER中国区总经理赖泰岳访谈 
+?  ·校园招聘：中国人民大学 
+?  ·联想扬天科技奥运咸阳行 
+?  ·直击2007世界通信展会 
+软件频道>程序开发>JavaVBVCDelphiC/C++Web开发微软专栏移动数据库程序人生软件工程|产品中心下载PHP创建XForms
+您现在的位置： 天极网 > 开发频道 > MyEclipse+struts+Hibernate配置开发
+戴尔返还￥200!(赛扬机型外)800-858-2238 
+全文
+评论
+MyEclipse+struts+Hibernate配置开发
+2005-12-18 10:31 作者： CoderGuo 出处： sina博客 责任编辑：方舟 
+　　说明：　　这个手册只是为初学者制作的环境配置和快速开发的一些基本方法，为的是广大爱好者能快速上手，少走我走过的弯路，里面没有任何关于java模式和其他相关的说明。本人水平有限，也没有能力去讨论关于模式设计和开发细节的一些内容。 
+　　建议：　　如果你还不清楚struts和hibernate的一些基本原理，希望能先去了解一下这方面的相关内容。
+　　推荐：　　Hibernate中文手册》作者认为要学Hibernate看这个就足够了，里面几乎包括了所有的细节，不过可能不太适合快速入门。　　地址：http://www.hibernate.org/hib_docs/v3/reference/zh- cn/html_single/　　关于struts的资料就很多了，这里推荐一个可以下载一些入门教程的网站。　　地址：http://www.wnetw.com/jclub/index.jsp　　强烈建议入门的朋友先了解一下基本的原理！否则本文可能对你没有任何帮助。
+　　相关工具下载：（注意版本）　　mysql5.0 http://www.mysql.org　　eclipse 3.1.1 http://www.eclipse.org 　　myeclipse4.0.3 http://www.myeclipseide.com　　tomcat5.5
+　　安装：　　关于tomcat和mysql的安装就不多说了，需要注意的是最好保证你的 jdk是1.5的版本，并配置好你的环境变量，不然可能会遇到一些问题。　　把eclipse解开，再去安装刚下载的myeclipse，在安装的时候需要把路径指定到刚才解开的eclipse上，由于myeclipse是个收费软件，所以需要注册。不过一般按照Chinese的习惯，去google一个注册码就可以了:}
+　　开发环境部署：　　好了，现在保证你的mysql和tomcat服务能够正常启动，myeclipse能够正常打开（如果不能，可以去找一下相关的说明或者给作者留言）。下面我们就要开始真正的开始部署一个传说中的tomcat+struts+hibernate+mysql结构的工程了！（faint!前言就写的我好累）　　首先，在myeclipse里新建一个工程。在左边的Package Exporler面版里点右键选择new->project… 　　在跳出菜单里选择MyEclipse->J2EE Projects->Web Project。　　点击next后进入如下画面：
+
+
+
+　　工程名为：test　　结束后点击Finish。　　好了，如果成功的话你就会在 Package Exporler里看到一个新的test工程！现在我们先配置一下数据库方面的东西。首先在你的mysql 里建立一个数据库webases，再在里面新建一个表admin，里面三个字段分别为id,name,password其中id为自动取值的主键（mysql具体的操作可以自己找资料，不是本文涉及范围）。　　再回到myeclipse ，选中window->Open Perspective->Other…　　可以看到现在跳出一个名为Select Perspective的菜单，在里面选中MyEclipse Databases Exporler，可以看到现在到了下面的页面。
+
+
+
+　　按以上图示输入相关字段后点击Finish便建立了一个数据库连接，在新出现的JDBC for Mysql上点右键，选择Open connection…，确认用户名和密码正确后点OK，如果一切顺利的话你会看到下面的画面： 
+
+
+
+　　这说明你已经和数据库建立了正确的连接。现在我们再回到window->Open Perspective- >Other…里的MyEclipse，也就是我们刚进来的时候看到的画面。　　右键点击你刚建立的工程 test并选择MyEclipse->Add struts Capabilities…在跳出的菜单里按照如下输入并确定：
+
+
+
+　　好了，现在你已经为你的工程增加了struts，接下来和上面一样在右键工程后选择MyEclipse- >Add Hibernate Capabilities…一路确定下来为你的工程添加Hibernate。（为方便起见我们在选择路径时把HibernateSessionFactory.java放在了src/com下面，其实最好建立个单独的目录如 src/com/hibernate）　　为了更好的演示我们不建立通常的登陆页面而是建立个注册页面。选择 src目录下的hibernate.cfg.xml文件。照如下填写并保存。这样hibernate就为你建立了数据库的连接池。
+
+
+
+　　下面我们再选择WebRoot/WEB-INF/struts-config.xml文件，在画面中点击右键选择new- >Form, Action and JSP。如下填写
+
+
+
+　　再选择JSP选项，如下
+
+
+
+　　最后选择Finish。　　再新建一个一个success.jsp的页面，　　在刚才struts- config.xml文件里右键选择addAdmin选择Properties，在菜单里选择Forwords，再点add，如下图填写 
+
+
+
+　　最后你的struts-config.xml就是下面这个样子：
+
+
+　　下面我们转到hibernate。换到刚才我们建立数据库的页面，选择你的admin的表点右键选择Create Hibernate Mapping。选择好打包路径后选择Finish。如图：
+
+
+　　在你刚才选择的路径下（我为方便是src/com/yourcompanyname/）下新建立的文件 AdminDAOFactory.java文件并输入以下内容：
+package com.yourcompanyname;
+import java.util.Iterator;
+import org.hibernate.HibernateException;import org.hibernate.Query;import org.hibernate.Session;import org.hibernate.Transaction;
+import com.hibernate.SessionFactory;
+public class AdminDAOFactory {?Session session;?Transaction tx;?public void add(Admin admin) throws HibernateException {??/**?? * Creation Date: 11-17-2005?? * TODO Add a new admin user.?? * @param An object of Admin?? * @return void?? * @author Coder Guo?? */??try {???session = SessionFactory.currentSession();???tx = session.beginTransaction();???//Add a new admin???session.save(admin);???tx.commit ();??}catch(HibernateException e){???throw e;??}finally{???if (tx!=null) {????tx.rollback();???} ???SessionFactory.closeSession();??}?}}
+?再打开com.yourcompany.struts.action下的AddAdminAction.java添加（其中如果有错误选中好按ctrl+shift+o自动添加包）
+public class AddAdminAction extends Action {
+?// --------------------------------------------------------- Instance Variables
+?// --------------------------------------------------------- Methods
+?/** ? * Method execute? * @param mapping? * @param form? * @param request? * @param response? * @return ActionForward? * @author Coder Guo? */?public ActionForward execute(??ActionMapping mapping,??ActionForm form,??HttpServletRequest request,??HttpServletResponse response) {??AddAdminForm addAdminForm = (AddAdminForm) form;????// TODO Add a new admin??Admin admin = new Admin();??admin.setName(addAdminForm.getName ());??admin.setPassword(addAdminForm.getPassword ());??AdminDAOFactory adminDAO = new AdminDAOFactory ();??adminDAO.add(admin);????return mapping.findForward("success");?}
+}
+?再打开com.yourcompanyname.struts.form下的AddAdminForm.java，修改（如果有错误按照上面说的方法导入包）?public ActionErrors validate(??ActionMapping mapping,??HttpServletRequest request) {
+??// TODO Auto-generated method stub??ActionErrors errors = new ActionErrors();????Session session = SessionFactory.currentSession();??Transaction tx = session.beginTransaction ();??Query query = session.createQuery("select admin from Admin as admin where admin.name = '" + this.name + "'");??Iterator it = query.iterate ();??if (it.hasNext()){???errors.add ("addAdmin.err.name",new ActionMessage("form.addAdmin.err.name"));??} ??tx.commit();??SessionFactory.closeSession ();??return errors;?}
+?public void reset(ActionMapping mapping, HttpServletRequest request) {
+??// TODO Auto-generated method stub??this.name=null;??this.password=null;?}
+　　再打开com\yourcompanyname\struts下的ApplicationResource.properties在这里面添加错误信息： Form.addAdmin.err.name=err
+　　最后，（汗，好累啊-_-!）打开addAdmin.jsp修改成如下：<%@ page contentType="text/html; charset=utf-8"%> <%@ page language="java"%><%@ taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%> <%@ taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
+<script language = "javascript"><!--function check(){?if (loginForm.userName.value == "" || loginForm.password.value == ""){??alert("请输入完整的信息！");??loginForm.userName.focus();??return false;?}}//--></script>??<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html:html>? <head>??? <html:base />??? ??? <title>login.jsp</title>??? <link href="css/webcss.css" rel="stylesheet" type="text/css">??? ??? <meta http-equiv="pragma" content="no- cache">??? <meta http-equiv="cache-control" content="no- cache">??? <meta http-equiv="expires" content="0">??? ??? <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">??? <meta http- equiv="description" content="This is my page">? </head>? 
+? <body>? <center>? ?<p>&nbsp;</p>? ?<p>&nbsp;</p>? ?<table width="300" border="0" cellpadding="0" cellspacing="0">? ?<html:form action="/addAdmin" focus="name" method="GET">??? ?<tr align="center" valign="middle">????? ?<td colspan="2" class="typt_normal">新增管理员</td>??? ?</tr>??? ?<tr>????? ?<td width="100" align="center" valign="middle" class="typt_normal">名称： </td>????? ?<td width="200" align="left"><html:text property="name" styleClass="text_s"/><html:errors property="addAdmin.err.name"/></td>??? ?</tr>??? ?<tr>????? ?<td width="100" align="center" valign="middle" class="typt_normal">密码： </td>????? ?<td width="200" align="left"><html:password property="password" styleClass="text_s"/></td>??? ?</tr>??? ?<tr>?????? ?<td colspan="2" align="center" valign="middle"><html:submit value="提交" onclick="return check ();"/><html:reset value="重置"></html:reset></td>????? ?</tr>?</html:form>? ?</table>?</center>?</body>
+</html:html>　　其中可以看到如何在struts的标签中使用javascript的方法。　　配置好myeclipse于tomcat的连接。在window->Preferences做如下设定：
+
+
+　　在项目文件点右键－>“myeclipse”－>“Add and remove project deployment”，如下图：
+
+
+　　好了，我们的配置工作基本结束了,在myeclipse上开启tomcat服务
+
+
+　　现在打开浏览器，输入　　http://127.0.0.1:8080/test/addAdmin.jsp就可以看到你的jsp页面了！
+现购买扬天电脑，享受免费升级19寸超大显示器 详情咨询800-999-3333 转6891
+baidu
+baidu
+
+
+窗体顶端
+
+窗体底端
+我顶一下　我要挑错　收藏到天极收藏夹 复制链接发给好友　加入收藏　打印　 
+
+发表评论：
+网友评论31条 查看全部
+[31楼]
+错误太多
+不知道表单loginForm怎么来的还有loginForm的userName属性是怎么弄出来的？楼主这程序运行过么？
+09-16 
+[30楼]
+天极网友
+需要修改很多东西。 import com.hibernate.SessionFactory; 需要改成自己生成的HibernateSessionFactory ...
+09-07 
+[29楼]
+天极网友
+已经弄好了~~高兴！
+09-07 
+[28楼]
+天极网友
+点击表，然后右键。没有Create Hibernate Mapping
+09-05 
+[26楼]
+天极网友
+Admin这个类是自己写的? 
+08-31 
+[25楼]
+天极网友
+没弄出来. 在创建sessionfactory 时就有报错.我用的是eclipse3.2 有谁弄出来了? 请给我一份. xueyanb...
+08-27 
+[24楼]
+天极网友
+没有弄出来 
+08-27 
+[23楼]
+天极网友
+好的很
+08-20 
+[22楼]
+天极网友
+讲得挺好的 
+08-14 
+[21楼]
+天极网友
+我点击表，然后右键。没有Create Hibernate Mapping
+07-11 
+[20楼]
+天极网友
+28626826
+06-21 
+[19楼]
+天极网友
+哪位朋友调出来了，请给我一份啊！上面写的我把代码粘进去照做也不行啊！QQ：562727925 邮箱:hai83666245...
+06-18 
+[18楼]
+天极网友
+我调了半天，不知道怎么改
+06-18 
+[17楼]
+d
+sadfasdfsa
+04-26 
+[15楼]
+天极网友
+^_^
+04-24 
+窗体顶端
+
+
+??用户昵称： 
+窗体底端
+热点评论
+[57楼] Windows Vista操作系统精华内容推荐
+[5楼] 编写Flash AS代码实现按钮触发全屏动画
+[5楼] 西班牙设计师Mario笔下的幻想世界
+[4楼] Echospacec插件帮AE创建三维运动特效
+[4楼] Photoshop人像照片处理特效：金属雕像
+[4楼] 金山毒霸2008杀毒防护软件试用手记
+相关文章
+·Java项目中使用Hibernate处理数据 
+·Eclipse插件开发之FindBugs插件 
+·Eclipse中插件开发之SQLExplorer 
+·Eclipse快速上手Hibernate之入门实例 
+·关于Eclipse中UI程序的线程的讨论 
+·Eclipse上的Tomcat插件安装和调试 
+最新更新
+·不使用VS进行ASP.NET Membership管理
+·ASP.NET调用oracle存储过程实现快速分页
+·Visual Studio 2008中的SQL数据库发布
+·几条相对于SQL Server密码的潜威胁判断
+·ASP.NET中的Response对象的方法
+·SQL Server 2008 几项新特性概述 
+天极无线
+关注此文读者还看过
+·VS2005入门之验证控件[视频]
+·传奇的诞生 PHP三位创始人简介
+·Visual C++视频教程:第一课 H
+·用JBuilder2007开发扩展JSF标签的插件
+·小荷才露尖尖角 中国的PHP社群介绍
+·PHP大潮将至 PHP近年发展分析
+·Visual C++视频教程:第一课 G
+·ASP.NET 2.0移动开发之列表控件
+·用C++控制DVD/CD驱动器的开关
+热门群乐
+群乐大全
+索爱手机主题
+手机视频下载
+诺基亚手机主题
+摩托罗拉手机主题
+摄影爱好者
+华南摄影外拍群乐
+影视俱乐部
+时尚服装
+笑话大全 
+电脑整机
+?  台式机 
+?  笔记本 
+?  服务器	数码产品
+?  数码摄像机 
+?  数码相机 
+?  MP4 
+?  MP3 
+?  掌上电脑
+DIY配件
+?  散热器 
+?  电源 
+?  主板 
+?  显卡 
+?  硬盘 
+?  内存 
+?  CPU 
+?  液晶显示器 
+?  键盘 
+?  机箱 
+?  鼠标 
+?  音箱 
+?  光驱 
+?  数码摄像头	手机
+?  诺基亚 
+?  摩托罗拉 
+?  索尼爱立信 
+?  三星 
+?  多普达 
+?  LG 
+?  NEC 
+?  联想 
+?  夏新 
+?  其它
+网络设备
+?  路由器 
+?  交换机	数字家庭
+?  液晶电视 
+?  等离子电视 
+?  小家电 
+?  背投电视 
+?  音响 
+?  家庭影院
+设计软件
+?  平面设计 
+?  flash 
+?  三维 
+?  视频处理 
+?  设计作品展示	操作系统
+?  Windows 
+?  Linux 
+?  其它系统
+网站建设
+?  主机评测 
+?  域名交易 
+?  网站制作 
+?  网站推广 
+?  网络赚钱	工具软件
+?  网络软件 
+?  系统软件 
+?  多媒体软件 
+?  图文处理软件 
+?  通讯工具 
+?  办公软件
+网络安全
+?  杀毒防毒 
+?  黑客技术 
+?  杀毒软件	程序开发
+?  Java 
+?  .net 
+?  win32 
+?  web开发 
+?  程序人生 
+?  移动开发 
+?  数据库 
+?  软件工程
+兴趣爱好
+?  FANS俱乐部 
+?  娱乐 
+?  情感 
+?  交友 
+?  动漫 
+?  音乐 
+?  影视 
+?  体育、休闲 
+?  商务、经济 
+?  汽车 
+?  人文、艺术 
+?  旅游 
+?  时尚、品牌 
+?  星座 
+?  饮食 
+?  活动 
+?  宠物、动物 
+?  同城、邻居	游戏
+?  网络游戏 
+?  电脑游戏 
+?  电视游戏 
+?  电子竞技 
+?  迷你游戏 
+?  手机游戏
+文章阅读排行
+周排行
+月排行
+.Net开发 细说Visual Basic.Net
+徽剑:三评汉语编程回应的泄露了骗局真相
+用Rational设计和实现简单的电话簿程序
+教你增强我们的 Visual Studio
+微软计划在开发平台集成F#语言 基于功能编程
+Visual Studio2005发布问题解决办法
+开发技术展望 Asp.net3.0 蓝图 
+每个开发人员现在应该下载的十种必备工具
+用C#开发智能手机软件：推箱子 系列教程
+DB2数据库性能理解的二十大误区
+无废话C#设计模式之二：Singleton
+C#学习 无废话C#设计模式之一：开篇
+VS2008已经编译完毕 内部人员已可使用
+给.Net初学者的一些建议(共勉之)
+微软效仿Eclipse推VS 2008 Shell平台
+VS 2008和.NET 3.5 Beta2新特性介绍
+C#编程中的 New 关键词的几种用法 
+33条C#、.Net经典面试题目及答案
+Java与.NET 谁才能主宰未来？
+每个开发人员现在应该下载的十种必备工具
+用C#开发智能手机软件：推箱子 系列教程
+听微软老员工讲述他们是如何走进微软的
+如何构造一个C#语言的爬虫程序
+ASP.NET 2.0 中的窗体身份验证
+教你用C#开发智能手机软件：推箱子(一)
+话说国外的女程序员 也是稀有动物
+DB2数据库性能理解的二十大误区 
+热点推荐
+珊瑚虫作者陈寿福被捕事件专题报道
+IBM Lotus Symphony免费办公软件轰动面世
+Vista系统群乐 分享大家的使用心得
+Visual Studio 2005入门视频教程
+欢迎订阅天极网RSS聚合资讯：http://www.yesky.com/index.xml　　　　
+
+更多精彩资讯尽在天极IT搜索
+窗体顶端
+　 
+窗体底端
+比特网: 新闻 评论 通信 互联网 CB博客 企业博客 信息化 企业软件 解决方案 商用系统 服务器 数据调查 
+天极网: 产品库 经销商 商情 手机 数码 笔记本 台式机 硬件 外设 网络 数字家庭 评测 E时代 软件 游戏 下载 
+IT专家网: 数据库 移动计算 网络 安全 存储 Web服务 CIO 中小企业IT IT专家库 白皮书 IT专家网论坛 IT专家网博客 
+Impress中文站: IT技术库 个人电脑 数码影像 音频视频 手机·通讯 游戏先锋 新潮家电 西川和久专栏 小寺信良周刊 
+欢迎投稿 | 天极服务 | 关于我们 | 网站律师 | 电子杂志 | RSS订阅 | 友情合作 | 加入我们 | 网站地图 | MSN/QQ上看天极 
+设定天极网为首页 
+
+Copyright (C) 1999-2007 Chinabyte.com, All Rights Reserved 版权所有 天极网络 渝ICP证B2-20030003号商务联系、网站内容、合作建议：010-82657868 详细联系方式 在线提交意见反馈 Powered by 天极内容管理平台CMS4i 

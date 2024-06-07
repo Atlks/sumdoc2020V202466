@@ -1,0 +1,662 @@
+
+atitit.api接口说明-overview  
+
+
+
+
+
+
+作者：attilax  (1466519819@qq.com)
+日期：2015.1
+版本： 
+
+
+
+
+44
+55
+55
+55
+66
+66
+66
+66
+66
+77
+77
+77
+77
+88
+88
+88
+99
+99
+1010
+1010
+1010
+1010
+1010
+1010
+1111
+1111
+1212
+1212
+1313
+1313
+1313
+1313
+1313
+1414
+1414
+1414
+1414
+1515
+1515
+1515
+1616
+1616
+1616
+1616
+1616
+1717
+1717
+1717
+1717
+1717
+1717
+2020
+2020
+2121
+2222
+2222
+2222
+2222
+2323
+2424
+2424
+2424
+2424
+2525
+2525
+2525
+2525
+2525
+2525
+2525
+2626
+26
+
+
+
+change histroty
+1m  v3  接口定义 
+1r   v4  新特性
+异常的识别与转化（客户端处理流程）
+接口的原理说明
+新增DSL风格接口。
+增加接口调用范例
+增加接口调用过程的伪码说明
+1u   v5   
+分离overview与详细数据格式说明。
+增加异常的处理策略说明
+部分目录结构调整
+
+1t  v6
+增加异常的类别识别 以及 引发异常的参数名称
+增加异常的处理架构图以及层次说明
+增加api测试工具的说明
+增加sql语法检测工具以及本地环境验证的说明
+增加异常处理的范例
+
+22  v7
+sql的智能提示，语法着色，与格式化，与语法销验工具集合说明
+多dsl语句支持（规划）
+嵌入动态脚本的支持（规划）
+二进制文件的上传处理与测试工具
+
+23 v8
+Json格式的语法着色，格式化，与语法校验工具集合说明
+在线sql 操作数据库工具 phpmyadmin 说明
+
+
+29 v9
+上传数据全面增加了json接口与说明
+Sdk的实施（规划 ）
+
+
+
+ 
+
+
+
+
+
+
+ 
+ 
+发布对外http接口：注册api接口子方法处理器（服务端）
+
+在.injectApiHandler()里面添加新的子方法处理器...
+
+主要的添加一行...HandlerChain reg(String subMeth,Handler handler);
+
+
+
+使用实现类的方法注册..
+HandlerChain.reg("xxx", new HandlerImp1());
+
+使用闭包的方式注册:::
+ 		 
+			HandlerChain.reg("xxx", new Handler() {
+
+				@Override public Object handleReq(Object arg) throws Exception {
+					// attilax 老哇的爪子 is6 o7l
+					return " o788 test ...";
+
+				}
+			});
+		 
+ 闭包DSL:::
+导入template。xml模板。。java>editor>template>>import。。。
+输入api   生成一下大陀代码
+
+HandlerChain.reg("xxx", new Handler() {
+
+				@Override public Object handleReq(Object arg) throws Exception {
+					// attilax 老哇的爪子 is6 o7l
+					return " o788 test ...";
+
+				}
+			});
+
+Handler 的接口实现
+一个方法是不实现Handler 接口,使用闭包的方式注册
+在就是实现Handler 接口,使用class的方法注册...
+
+
+
+客户端调用接口overview 
+
+接口实现的原理
+接口的原理就是远程方法/函数api调用。。。最重要的是需要指明调用的方法名，以及参数。。。其他的加密，防篡改，安全方面的参数主要是针对http这个通道来说的。。
+
+指明调用方法名的实现方式总结
+显式指明：：   这个也是我们此接口使用的方式。。显式指明方法，可以大大减少物理接口数量，只需要一个单接口就可以实现。开发速度快。
+
+Rpc方式隐式指明：： 这个是许多web service等接口使用的方式
+Restful方式url方式指明：：  这种方式，把方法名指明或绑定在url上了。
+
+指明调用的参数的实现方式总结
+单参数：：这个也是我们这个接口使用的方式
+优点是开发速度快，方便扩展，调整参数无需改动接口。类似于map/dic/字典对象参数方式
+为了方便网络传输，复合对象一般要序列化为json等格式传输，简单字符串一类的无需序列化，直接传输
+
+多参数：：也是个常用的实现方式，但调整参数需要改动接口。。编程语言常用多参数方式，方便ide的智能感知。。
+http请求方式: GET/Post
+DSL风格（推荐）
+
+_http://host/apifile?data=_method(param)__
+  http的Data参数内容说明  :: 直接指明要调用的方法名称与参数。。。参数为单参数模式，复合对象序列化为Json格式 
+
+DSL风格调用范例
+获取列表通过sql （简单参数） ：：：
+ getUserInfo (  SELECT * FROM `mall_user_info` where user_id=8 ) 
+
+-----------------------------------------------------------
+添加数据对象（复合对象参数） ：：： 
+addGoods (  {
+   "shop_id": 8,    
+  "goods_name": "prod999",  
+  "goods_intro": "商品介绍：商品介绍：商品介绍：",   
+  "goods_price": 100,   
+   "goods_thumb": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+ }
+) 
+
+
+DSL风格伪码说明
+	String	t= " getUserInfo (  SELECT * FROM `mall_user_info` where user_id=8 ) ";	 
+		String url="http://localhost:8090/shopitfs/api2.jsp?data="+URLEncoder.encode(t,"utf8");
+普通风格
+此种风格，把method与param都组合成个json对象了。
+_http://host/urlï¼data={method:methodName,param:paramVal}_
+http的Data参数内容说明   
+参数	是否必须	说明
+method	是	调用的远程接口方法（ 各自模块定义）
+param	是	单参数模式，复合对象序列化为Json格式 
+paramDataType	否	参数的数据类型，默认为json,可选xml,str,urlparam等
+普通风格调用范例
+获取列表通过sql （简单param参数） ：：：
+{
+"method":"getUserInfo ",
+"param": " select * from  tablexxx "
+}
+----------------------------------------------
+添加数据对象（复合对象param参数） ：：： 
+
+{
+"method":"addGoods",
+"param":{
+   "shop_id": 8,    
+  "goods_name": "prod999",  
+  "goods_intro": "商品介绍：商品介绍：商品介绍：",   
+  "goods_price": 100,   
+   "goods_thumb": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+ }
+
+}
+
+普通风格调用伪码说明
+myObject obj=new myObject ();
+obj.method="showGoodsList";
+obj.param="select * form table111  where xxx";
+String json=Obj2json(obj);
+String url="http://hostxxxxx/api.jsp?data="+urlEncode(json)
+http参数说明
+
+Datatype：：，可选参数，数据类型：默认json，可选xml,urlparam等
+Data：：必选，  实际的数据内容
+Ziptype：可选参数， 预留，压缩方法：：默认zip，可选其他
+Encrytype：可选参数， 预留，加密方法，默认aes，可选3des,ras,des等
+zipEncOrder：  可选参数,指明加密与压缩顺序。默认先加密在压缩
+Sessionid： 可选，session会话持久模式使用
+sessionMode： 可选，  会话模式：默认cookie模式
+Accesstoken：  可选，  Accesstoken模式时需要次参数
+Ver	   否	版本号
+appid	否	appid预留，可暂时不用
+Appsecret 	否	预留，可暂时不用。。 用户唯一凭证密钥，即appsecret
+Sign  	是	签名，为方便开发测试，可暂时不用。但正式版本为了安全，应该使用
+SignType ： 默认md5 方式，可选sha模式
+
+
+通过接口的数据格式..
+ datatype：：数据类型：默认json，可选xml,urlparam，yaml等
+
+返回说明（正常情况下）
+正常情况下，服务器会返回下述JSON数据包，或者无返回（空）
+一般查询操作会有返回，更改删除操作常常是无返回数据的。
+{param1:val1,param2:val2}
+ 参数含义各模块定义。。。
+
+二进制数据的上传(图片等），使用base64转码为字符串处理，统一处理
+大批量图片、或大体积二进制文件的上传，可用独立接口(ftp等）处理
+接口的数据压缩
+如参数过大，可使用zip压缩
+
+接口的数据加密
+数据内容可加密
+
+
+接口方式说明 基于rpc单url方式
+基于http  json  
+接口实现没有采用restful方式，使用了rpc单url方式，简化开发
+
+restful方式性能更高，但开发相比rpc方式较为繁琐
+
+会话持久模式 cookie模式
+常用的会话持久模式 cookie ，session, AccessToken  等
+
+此处选择cookie模式
+
+
+接口Exception异常处理机制
+ 会返回异常堆栈对象(仍然转换为json字符串格式)
+ 客户端收到后，转换为本地异常，进行处理（日志，重试，静默处理，或抛出到业务层，VIEW层处理）
+----------------------------------------------------------------
+异常机制代替返回码的优点：：
+开发速度快：：  无需人工定义返回码
+调试方便，出错信息详细：：  返回码方式，只能指定有限的返回码，其他的错误一般都都指定一个笼统的错误码，没有信息的错误信息，不方便调试。。而且返回错误堆栈，详细。。
+方便ide支持：： 异常常常都是预定义好的，方便ide智能感知。。
+
+
+-----------------------------------------------------------------
+异常的识别与转化：：
+主要查看返回的json对象是否包括cause与stackTrace 字段，，如果包括，基本可判断是异常对象，然后new一个本地异常，从接口层throw出去。。。   一般异常处理在业务层，少数在view层
+{
+  "cause": null,
+  "localizedMessage": "my exc msg",
+  "message": "my exc msg",
+  "stackTrace": [  {
+    "className": "com.attilax.api.aaa",
+    "fileName": "aaa.java",
+    "lineNumber": 17,
+    "methodName": "main",
+    "nativeMethod": false
+  }]
+}
+
+原版本某些接口如为返回码模式，依然有效。
+异常类别的识别  typex 属性
+目前新的异常对象已经有typex属性了，表明异常的类型
+比如 com.kunpeng.www.server.UserNotExistEx 爆一个用户不存在的异常。。
+
+异常对象的操作数据 causeExParam 属性
+当服务器程序读取某个参数出错时候，尽可能的报出参数名称，使用这个属性返回。。
+
+异常层次架构与处理图
+
+
+通用翻页参数
+Page   第几页
+Pagesize   每页多少条数据
+
+  如果是采用sql 方式，使用 limit 0,10   此种翻页法。。
+
+
+ 远程接口方法（通用方法）
+调用操作服务端数据(sql格式)
+
+方法名:sql
+参数:  sql语句
+调用操作服务端数据(hql格式)
+
+方法名:hql
+参数:  hql语句
+
+调用操作服务端数据(对象化map格式)
+查询操作 方法名:queryByMap
+参数:
+{
+	"ClassName": "class123",
+	"conditon": [{
+		"propName": "prop123",
+		"op": "<=",
+		"val": "val123"
+	},
+	{
+		"propName": "prop456",
+		"op": "like",
+		"val": "abc"
+	}]
+}
+
+
+--------update op 方法名:updateByMap
+参数:
+
+{
+ 	"ClassName": "class123",
+	"id": 3456,
+	"set": [{
+		"propName": "prop66",
+		"val": "val123"
+	}],
+	"where": [{
+		"propName": "prop123",
+		"op": "<=",
+		"val": "val123"
+	}]
+}
+
+
+--------delete op  方法名:delByMap
+参数:
+
+ {
+ 	"ClassName": "class123",
+	"id": 3456,
+	"where": [{
+		"propName": "prop123",
+		"op": "<=",
+		"val": "val123"
+	}]
+}
+
+
+调用操作客户端数据(sql式,异步方式)
+通过推送接口推送数据
+
+{
+    "submethod": "sql",
+    "param":"select * from   xxxTAble wherer fld1=11 order by fld2
+",
+    "sign": "xxxxxx"
+}
+
+返回json array    [{...}]
+
+调用操作客户端数据(同步方式)
+通过推送接口推送数据
+
+{
+	"submethod": "sql_syn",
+	"param": {
+		"sql": "select * from   xxxTAble wherer fld1=11 order by fld2",
+		"callback": "call123"
+	},
+	"sign": "xxxxxx"
+}
+
+返回json array    [{...}]
+
+调用操作客户端数据(同步方式)反馈
+ 
+
+调用操作客户端数据(对象化map格式)
+参考操作服务端数据(对象化map格式)
+
+版本升级接口
+
+
+ 
+
+
+ 
+远程接口方法（详见接口方法信息说明文档）
+ 
+常见的捕获异常后的处理策略
+
+转换为业务异常，抛出至上层处理（常用）
+从通信层异常转为业务异常，方便理解
+主要是业务层处理与view层处理
+一般是 catch 到 Lower Level Exception，但是向外抛出的却是 Higher Level Exception，对异常进行转换。
+
+根据异常种类处理异常（常用）
+事务rollback 
+能 rollback 的尽量 rollback
+日志记录，重新抛出
+主要用来统计分析稳定性情况，预警等
+
+忽略异常（较少这样处理）
+为了提升稳定性，需要冗余处理的时候，可以这样做。。。
+
+异常处理范例（以用户登录为例）
+用户登录：：会产生的异常如下：
+用户不存在异常
+用户密码错误异常
+用户密码不匹配异常（这个异常来源于用户不存在或者密码错误，更高级的一个异常）
+用户过期异常
+用户帐号锁定异常等。。
+
+
+private static void login() {
+		String url = "http://xxxxxxxx?data=method(param)";
+		try {
+			//....正常状态处理流程
+			JSONObject obj = login_api(url);
+			
+			//bindUi(obj);  //绑定用户相关信息到ui控件上
+			
+		} catch (UserNotExistEx e) {
+			// 用户不存的异常处理
+			e.printStackTrace();
+		} catch (PwdErrEx e) {
+			//密码错误的异常处理
+			e.printStackTrace();
+		} catch (ExprireEx e) {
+			// 用户过期的异常处理
+			e.printStackTrace();
+		} catch (LockEx e) {
+			//锁定的异常处理规则
+			e.printStackTrace();
+		} catch (UsernameAndPwdNotMatch e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	/**
+	 * 获取web内容通过url，带业务异常处理
+	 * @param url
+	 * @return
+	 * @throws UserNotExistEx 
+	 * @throws PwdErrEx 
+	 * @throws ExprireEx    用户过期异常
+	 * @throws LockEx     锁定异常
+	 * @throws UsernameAndPwdNotMatch 
+	 */
+	private static JSONObject login_api(String url) throws UserNotExistEx, PwdErrEx, ExprireEx, LockEx, UsernameAndPwdNotMatch {
+		String txt = websitex.WebpageContent(url); // 获取内容
+		if(txt==null || txt.trim().length()==0) //无返回或者返回为空
+			  throw new UsernameAndPwdNotMatch("用户名密码不匹配");
+		JSONObject jo = null;
+
+		try {
+			//尝试反序列化异常对象，因为异常对象是序列化为jsonobject
+			jo = JSONObject.fromObject(txt);
+
+		} catch (Exception e) {
+			// 解析json出错，说明不是异常对象,是正常对象。。返回
+			jo=JSONArray.fromObject(txt).getJSONObject(0);
+			return jo;
+		}
+		if (!jo.containsKey("cause") || !jo.containsKey("stackTrace"))
+			return jo; // 不包含异常对象属性。说明不是异常对象。返回
+		
+		if(jo.containsKey("typex"))
+		{
+			String typex=jo.getString("typex");
+			//此处注册多个本地异常与接口异常的转换。很适合使用命令模式/查表模式来注册多个异常转换器
+			if(typex!=null && typex.equals("com.kunpeng.www.server.UserNotExistEx"))
+			{
+				throw new UserNotExistEx(jo.getString("message"));
+			}
+			 if(typex!=null && typex.equals("com.kunpeng.PwdErrEx") )
+			{
+				throw new PwdErrEx(jo.getString("message"));
+			}
+			 if(typex!=null && typex.equals("com.kunpeng.ExprireEx") )
+				{
+					throw new ExprireEx(jo.getString("message"));
+				}
+			 if(typex!=null && typex.equals("com.kunpeng.LockEx") )
+				{
+					throw new LockEx(jo.getString("message"));
+				}
+		}
+
+		return jo;
+	}
+
+
+api测试工具
+有rest easy,restclient,httprequester等工具， 经过我的测试，有rest easy尚可一用。。。其他的不适用。。。
+
+单行的参数可以容易测试。。但是多sql，以及复合对象参数，要占用多行，就不方便测试了。只好自定义测试工具。。方便的支持多行参数测试。。。。
+
+
+自定义API测试工具。。
+
+
+
+sql语法检测与本地环境调试
+sql用的mysql5 的语法。。。使用根据navicate来语法检测，与格式美化。格式化
+
+本地数据库已经上传到共享。可以下载下来方便本地检测
+
+
+ QA：：
+get方式发送参数是需要url编码。
+
+
+sql的智能提示，语法着色，与格式化，与语法校验工具集合
+智能提示 navicate
+语法着色 navicate
+
+语法着色  notepad++ 》》语言》》sql
+或者打开扩展名为sql的文件会自动语法着色
+
+
+格式化根据 navicate
+
+
+
+
+也有许多在线sql格式、美化的网站来格式化sql语句，以便易于阅读。
+
+语法校验 navicate 
+
+
+
+多dsl语句支持（规划）
+目前，只能  _http://url_? data=method(param)     单语句支持...规划多语句支持,语句间使用分号分割。。
+范例：    _http://url_? data=method(param); method2(param2);method3(param3) 
+表达式的支持（规划）   
+流程控制的支持（规划）
+常见的case，if else 流程支持。。以及循环控制支持
+
+嵌入动态脚本的支持（规划）
+前期规划嵌入js ,然后php
+
+
+二进制文件的上传处理
+二进制post上传
+一般使用的  http://xxx/up.jsp
+base64 post上传
+一般使用的  _http://xxx/upb64.jsp?data=xxxxxxxxxxxxxxxxx_
+上传返回
+返回图片相对路径  upload/xxxx.jpg
+
+图片的上传测试工具
+up.html与 upb64.html       分别对应二进制与base64上传法。。
+
+Json格式的语法着色，格式化，与语法校验工具集合说明
+
+_http://www.cozof.com/demo/tool/jsonFormatter/_
+
+
+
+
+Json上传数据接口的说明
+
+ 
+方法名xxxxxx
+
+参数	说明	取值范例	参数值说明
+op	操作动作	add   新增，注册操作
+query为查询update更新编辑操作
+delete删除	
+
+datatype	数据类型	hx_car	
+
+field	要新增或者更新的字段。只限于update、add操作使用	filed1=1,filed2='字符串'	多个字段，使用逗号做分隔符...字段值如果是字符串类型，用单引号作为分界符
+condition	条件	Name like like '%迪%'
+name='aaa'	模糊查询为 
+ like '%%' 格式
+支持>,<,=等操作符。
+order	排序字段	Id 	数据的排序
+支持asc,desc排序。
+支持多字段排序，多字段用逗号分隔
+
+范例。。查询数据
+http://xxxx.jsp?data=searchCar  ( {
+"op":"query",
+"datatype":"hx_car",
+"codition":"name like '%2%'",
+"order":""
+}
+)
+
+注册，新增数据
+_http://xxxx.jsp?data=regNormalUser_ ( 
+{
+"op":"add",
+"datatype":"mall_users",
+"field":"user_name='attilax8',user_passwd=md5('111111')",
+"codition":"",
+"order":""
+} )
+
+
+

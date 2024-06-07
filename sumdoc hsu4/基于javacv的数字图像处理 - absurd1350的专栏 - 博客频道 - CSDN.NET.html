@@ -1,0 +1,1252 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+     
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    
+<head>  
+
+    <script type="text/javascript" src="http://c.csdnimg.cn/pubfooter/js/tracking.js" charset="utf-8"></script>  
+
+    <script type="text/javascript">
+        var protocol = window.location.protocol;
+        document.write('<script type="text/javascript" src="' + protocol + '//csdnimg.cn/pubfooter/js/repoAddr2.js?v=' + Math.random() + '"></' + 'script>');
+    </script>
+
+  
+ <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+
+    <title>基于javacv的数字图像处理 - absurd1350的专栏
+        - 博客频道 - CSDN.NET</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="服务端代码：package com.test.socket;import java.io.BufferedReader;import java.io.IOException;import java.io.InputStreamReader;import java.io.PrintWriter;import java.net.InetSocketAddress;i" />
+    <script src="http://static.blog.csdn.net/scripts/jquery.js" type="text/javascript"></script>
+      <script type="text/javascript" src="http://static.blog.csdn.net/scripts/jquery-version.js"></script>
+    <script type="text/javascript" src="http://static.blog.csdn.net/scripts/ad.js?v=1.1"></script>
+        <!--new top-->
+               <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/toolbar/css/index.css">        <!--new top-->
+    
+      <!-- ad begin -->
+         <script language="javascript" type="text/javascript" src="http://ads.csdn.net/js/tracking.js"></script>
+    <!-- ad end-->
+
+    <link rel="Stylesheet" type="text/css" href="http://static.blog.csdn.net/skin/default/css/style.css?v=1.1" />
+    <link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" href="/absurd1350/rss/list" />
+    <link rel="shortcut icon" href="http://c.csdnimg.cn/public/favicon.ico" />
+    <link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+ 
+
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+</head>
+<body>
+
+
+    <!-- 广告位开始 -->
+        <ins data-revive-zoneid="149" data-revive-id="8c38e720de1c90a6f6ff52f3f89c4d57"></ins>
+    <!-- 广告位结束 -->
+
+    
+   
+      <!--new top-->
+    <script id="toolbar-tpl-scriptId" fixed="true" prod="blog" skin="black" src="http://c.csdnimg.cn/public/common/toolbar/js/html.js" type="text/javascript"></script>
+     <!--new top-->
+    <div id="container">
+        <div id="header">
+    <div class="header">
+        <div id="blog_title">
+            <h2>
+                <a href="http://blog.csdn.net/absurd1350">absurd1350的专栏</a></h2>
+            <h3></h3>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+        
+     
+    </div>
+</div>
+<div id="navigator">
+    <div class="navigator_bg">
+    </div>
+    <div class="navigator">
+        <ul>           
+                <li id="btnContents"><a href="http://blog.csdn.net/absurd1350?viewmode=contents"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_mulu'])">
+                    <img src="http://static.blog.csdn.net/images/ico_list.gif">目录视图</span></a></li>
+                <li id="btnView"><a href="http://blog.csdn.net/absurd1350?viewmode=list"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_zhaiyao'])">
+                    <img src="http://static.blog.csdn.net/images/ico_summary.gif">摘要视图</span></a></li>
+                <li id="btnRss"><a href="http://blog.csdn.net/absurd1350/rss/list"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_RSS'])">
+                    <img src="http://static.blog.csdn.net/images/ico_rss.gif">订阅</span></a></li>                
+            
+
+            </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    var username = "absurd1350";
+    var _blogger = username;
+    var blog_address = "http://blog.csdn.net/absurd1350";
+    var static_host = "http://static.blog.csdn.net";
+    var currentUserName = "attilax";  
+</script>
+
+        <div id="body">
+            <div id="main">
+                <div class="main">
+                        <div class="ad_class">
+<div class="notice tracking-ad" data-mod='popu_3' > 
+
+
+<a href="http://geek.csdn.net/news/detail/134790
+">
+<font color=blue>CSDN学院招募微信小程序讲师啦
+
+
+</font></a>
+
+&nbsp;&nbsp;&nbsp;&nbsp
+
+<a href="http://edu.csdn.net/huiyiCourse/detail/274
+">
+<font color=red>程序员简历优化指南！ 
+</font></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<a href="http://blog.csdn.net/PK.html">
+<font color=blue>【观点】移动原生App开发 PK HTML 5开发
+</font></a>
+
+&nbsp;&nbsp;&nbsp;
+
+<a href="http://bss.csdn.net/m/product/aliyun_essay/index
+">
+<font color=red>云端应用征文大赛，秀绝招，赢无人机！
+</font></a>
+
+
+</div>                        </div>
+                        
+
+
+
+  
+<link href="http://static.blog.csdn.net/css/comment1.css" type="text/css" rel="stylesheet" />
+<link href="http://static.blog.csdn.net/css/style1.css" type="text/css" rel="stylesheet" />
+<script language='JavaScript' type='text/javascript' src='http://download.csdn.net/js/jquery.cookie.js'></script>
+<script type="text/javascript" src="http://c.csdnimg.cn/rabbit/search-service/main.js"></script>
+<link rel="stylesheet" href="http://static.blog.csdn.net/public/res-min/markdown_views.css?v=1.0" />
+<link rel="stylesheet" href="http://static.blog.csdn.net/css/category.css?v=1.0" />
+<script type="text/javascript" src="http://static.blog.csdn.net/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/web-storage-cache.min.js"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/replace.min.js"></script>
+
+
+
+
+  <script type="text/ecmascript">
+      window.quickReplyflag = true;
+           
+            var isBole = false;
+            
+      
+      var fasrc="http://my.csdn.net/my/favorite/miniadd?t=%e5%9f%ba%e4%ba%8ejavacv%e7%9a%84%e6%95%b0%e5%ad%97%e5%9b%be%e5%83%8f%e5%a4%84%e7%90%86&u=http://blog.csdn.net/absurd1350/article/details/46233871"
+
+    </script>
+<div id="article_details" class="details">
+    <div class="article_title">   
+         <span class="ico ico_type_Original"></span>
+
+
+    <h1>
+        <span class="link_title"><a href="/absurd1350/article/details/46233871">
+        基于javacv的数字图像处理            
+        </a></span>
+    </h1>
+</div>
+
+   
+
+        <div class="article_manage clearfix">
+        <div class="article_l">
+            <span class="link_categories">
+            标签：
+              <a href='http://www.csdn.net/tag/%e6%95%b0%e5%ad%97%e5%9b%be%e5%83%8f' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">数字图像</a><a href='http://www.csdn.net/tag/maven%e6%9e%84%e5%bb%ba' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">maven构建</a>
+            </span>
+        </div>
+        <div class="article_r">
+            <span class="link_postdate">2015-05-29 13:36</span>
+            <span class="link_view" title="阅读次数">775人阅读</span>
+            <span class="link_comments" title="评论次数"> <a href="#comments" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_pinglun'])">评论</a>(0)</span>
+            <span class="link_collect tracking-ad" data-mod="popu_171"> <a href="javascript:void(0);" onclick="javascript:collectArticle('%e5%9f%ba%e4%ba%8ejavacv%e7%9a%84%e6%95%b0%e5%ad%97%e5%9b%be%e5%83%8f%e5%a4%84%e7%90%86','46233871');return false;" title="收藏">收藏</a></span>
+             <span class="link_report"> <a href="#report" onclick="javascript:report(46233871,2);return false;" title="举报">举报</a></span>
+
+        </div>
+    </div>
+    <div class="embody"  style="display:none" id="embody">
+        <span class="embody_t">本文章已收录于：</span>
+        <div class="embody_c" id="lib" value="{&quot;err&quot;:0,&quot;msg&quot;:&quot;ok&quot;,&quot;data&quot;:[]}"></div>
+    </div>
+    <style type="text/css">        
+            .embody{
+                padding:10px 10px 10px;
+                margin:0 -20px;
+                border-bottom:solid 1px #ededed;                
+            }
+            .embody_b{
+                margin:0 ;
+                padding:10px 0;
+            }
+            .embody .embody_t,.embody .embody_c{
+                display: inline-block;
+                margin-right:10px;
+            }
+            .embody_t{
+                font-size: 12px;
+                color:#999;
+            }
+            .embody_c{
+                font-size: 12px;
+            }
+            .embody_c img,.embody_c em{
+                display: inline-block;
+                vertical-align: middle;               
+            }
+             .embody_c img{               
+                width:30px;
+                height:30px;
+            }
+            .embody_c em{
+                margin: 0 20px 0 10px;
+                color:#333;
+                font-style: normal;
+            }
+    </style>
+    <script  type="text/javascript">
+        $(function () {
+            try
+            {
+                var lib = eval("("+$("#lib").attr("value")+")");
+                var html = "";
+                if (lib.err == 0) {
+                    $.each(lib.data, function (i) {
+                        var obj = lib.data[i];
+                        //html += '<img src="' + obj.logo + '"/>' + obj.name + "&nbsp;&nbsp;";
+                        html += ' <a href="' + obj.url + '" target="_blank">';
+                        html += ' <img src="' + obj.logo + '">';
+                        html += ' <em><b>' + obj.name + '</b></em>';
+                        html += ' </a>';
+                    });
+                    if (html != "") {
+                        setTimeout(function () {
+                            $("#lib").html(html);                      
+                            $("#embody").show();
+                        }, 100);
+                    }
+                }      
+            } catch (err)
+            { }
+            
+        });
+    </script>
+      <div class="category clearfix">
+        <div class="category_l">
+           <img src="http://static.blog.csdn.net/images/category_icon.jpg">
+            <span>分类：</span>
+        </div>
+        <div class="category_r">
+                    <label  onclick="GetCategoryArticles('2661963','absurd1350','top','46233871');">
+                        <span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_fenlei']);">java<em>（8）</em></span>
+                      <img class="arrow-down" src="http://static.blog.csdn.net/images/arrow_triangle _down.jpg" style="display:inline;">
+                      <img class="arrow-up" src="http://static.blog.csdn.net/images/arrow_triangle_up.jpg" style="display:none;">
+                        <div class="subItem">
+                            <div class="subItem_t"><a  href="http://blog.csdn.net/absurd1350/article/category/2661963"  target="_blank">作者同类文章</a><i class="J_close">X</i></div>
+                            <ul class="subItem_l" id="top_2661963">                            
+                            </ul>
+                        </div>
+                    </label>                    
+        </div>
+    </div>
+    <script   type="text/javascript" src="http://static.blog.csdn.net/scripts/category.js"></script>  
+        <div   class="bog_copyright">         
+            <p  class="copyright_p" >版权声明：本文为博主原创文章，未经博主允许不得转载。</p>
+        </div>
+
+  
+
+  
+  
+     
+
+<div id="article_content" class="article_content">
+        <div class="markdown_views"><p>项目需要javacv的包，用maven构建如下 <br>
+<code>&lt;dependency&gt; <br>
+    &lt;groupId&gt;org.bytedeco&lt;/groupId&gt; <br>
+    &lt;artifactId&gt;javacv&lt;/artifactId&gt; <br>
+    &lt;version&gt;0.11&lt;/version&gt; <br>
+&lt;/dependency&gt; <br>
+&lt;dependency&gt; <br>
+    &lt;groupId&gt;org.bytedeco&lt;/groupId&gt; <br>
+    &lt;artifactId&gt;javacpp&lt;/artifactId&gt; <br>
+    &lt;version&gt;0.11&lt;/version&gt; <br>
+&lt;/dependency&gt;</code></p>
+
+<p>javacv里面有对象Mat，CvMat，IplImage对应opencv相应对象 <br>
+如果要使用例如cvSetImageROI之类的方法需要static引入 <br>
+下面是图片反白的示例：</p>
+
+<pre class="prettyprint"><code class=" hljs avrasm">package <span class="hljs-keyword">com</span><span class="hljs-preprocessor">.dealmap</span><span class="hljs-comment">;</span>
+
+import static org<span class="hljs-preprocessor">.bytedeco</span><span class="hljs-preprocessor">.javacpp</span><span class="hljs-preprocessor">.opencv</span>_core<span class="hljs-preprocessor">.CV</span>_8U<span class="hljs-comment">;</span>
+import static org<span class="hljs-preprocessor">.bytedeco</span><span class="hljs-preprocessor">.javacpp</span><span class="hljs-preprocessor">.opencv</span>_core<span class="hljs-preprocessor">.subtract</span><span class="hljs-comment">;</span>
+import static org<span class="hljs-preprocessor">.bytedeco</span><span class="hljs-preprocessor">.javacpp</span><span class="hljs-preprocessor">.opencv</span>_highgui<span class="hljs-preprocessor">.CV</span>_LOAD_IMAGE_COLOR<span class="hljs-comment">;</span>
+import static org<span class="hljs-preprocessor">.bytedeco</span><span class="hljs-preprocessor">.javacpp</span><span class="hljs-preprocessor">.opencv</span>_highgui<span class="hljs-preprocessor">.imread</span><span class="hljs-comment">;</span>
+import static org<span class="hljs-preprocessor">.bytedeco</span><span class="hljs-preprocessor">.javacpp</span><span class="hljs-preprocessor">.opencv</span>_highgui<span class="hljs-preprocessor">.imwrite</span><span class="hljs-comment">;</span>
+import static org<span class="hljs-preprocessor">.bytedeco</span><span class="hljs-preprocessor">.javacpp</span><span class="hljs-preprocessor">.opencv</span>_imgproc<span class="hljs-preprocessor">.COLOR</span>_BGR2GRAY<span class="hljs-comment">;</span>
+import static org<span class="hljs-preprocessor">.bytedeco</span><span class="hljs-preprocessor">.javacpp</span><span class="hljs-preprocessor">.opencv</span>_imgproc<span class="hljs-preprocessor">.cvtColor</span><span class="hljs-comment">;</span>
+
+import org<span class="hljs-preprocessor">.bytedeco</span><span class="hljs-preprocessor">.javacpp</span><span class="hljs-preprocessor">.opencv</span>_core<span class="hljs-preprocessor">.Mat</span><span class="hljs-comment">;</span>
+import org<span class="hljs-preprocessor">.bytedeco</span><span class="hljs-preprocessor">.javacpp</span><span class="hljs-preprocessor">.opencv</span>_core<span class="hljs-preprocessor">.Size</span><span class="hljs-comment">;</span>
+
+public class ReverseWrite {
+    public static void main(String[] args)  {  
+         Mat mat = imread(<span class="hljs-string">"E:\\Sunset.jpg"</span>,CV_LOAD_IMAGE_COLOR)<span class="hljs-comment">;</span>
+         Mat abc = new Mat()<span class="hljs-comment">;</span>
+        //gray
+          cvtColor(mat, abc, COLOR_BGR2GRAY)<span class="hljs-comment">;</span>
+        //<span class="hljs-number">1</span>
+          Mat dst= Mat<span class="hljs-preprocessor">.ones</span>(new Size(abc<span class="hljs-preprocessor">.rows</span>(),abc<span class="hljs-preprocessor">.cols</span>()), CV_8U)<span class="hljs-preprocessor">.asMat</span>()<span class="hljs-comment">;</span>
+        //<span class="hljs-number">255</span>
+        dst=  dst<span class="hljs-preprocessor">.mul</span>(dst, <span class="hljs-number">255</span>)<span class="hljs-preprocessor">.asMat</span>()<span class="hljs-comment">;</span>
+        //<span class="hljs-keyword">sub</span>
+          subtract(dst,abc,dst)<span class="hljs-comment">;</span>
+
+          imwrite(<span class="hljs-string">"E:\\aaa.jpg"</span>,dst)<span class="hljs-comment">;</span>
+
+        }  
+}
+</code></pre>
+
+<p>下面是DCT图像压缩的示例：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs java"><span class="hljs-keyword">package</span> com.dealmap;
+
+<span class="hljs-keyword">import</span> <span class="hljs-keyword">static</span> org.bytedeco.javacpp.opencv_core.*;
+<span class="hljs-keyword">import</span> <span class="hljs-keyword">static</span> org.bytedeco.javacpp.opencv_highgui.*;
+<span class="hljs-keyword">import</span> org.bytedeco.javacpp.opencv_core.CvMat;
+<span class="hljs-keyword">import</span> org.bytedeco.javacpp.opencv_core.IplImage;
+<span class="hljs-keyword">import</span> org.bytedeco.javacpp.opencv_core.Mat;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CompressImg</span> {</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> CvMat T;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> CvMat Tp;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> CvMat maskMat;
+<span class="hljs-keyword">static</span>{
+
+    <span class="hljs-keyword">double</span>[][] tt = {
+            { <span class="hljs-number">0.353553390593274</span>, <span class="hljs-number">0.353553390593274</span>, <span class="hljs-number">0.353553390593274</span>,
+                    <span class="hljs-number">0.353553390593274</span>, <span class="hljs-number">0.353553390593274</span>,
+                    <span class="hljs-number">0.353553390593274</span>, <span class="hljs-number">0.353553390593274</span>, <span class="hljs-number">0.353553390593274</span> },
+            { <span class="hljs-number">0.490392640201615</span>, <span class="hljs-number">0.415734806151273</span>, <span class="hljs-number">0.277785116509801</span>,
+                    <span class="hljs-number">0.0975451610080642</span>, -<span class="hljs-number">0.0975451610080641</span>,
+                    -<span class="hljs-number">0.277785116509801</span>, -<span class="hljs-number">0.415734806151273</span>,
+                    -<span class="hljs-number">0.490392640201615</span> },
+            { <span class="hljs-number">0.461939766255643</span>, <span class="hljs-number">0.191341716182545</span>, -<span class="hljs-number">0.191341716182545</span>,
+                    -<span class="hljs-number">0.461939766255643</span>, -<span class="hljs-number">0.461939766255643</span>,
+                    -<span class="hljs-number">0.191341716182545</span>, <span class="hljs-number">0.191341716182545</span>,
+                    <span class="hljs-number">0.461939766255643</span> },
+            { <span class="hljs-number">0.415734806151273</span>, -<span class="hljs-number">0.0975451610080641</span>, -<span class="hljs-number">0.490392640201615</span>,
+                    -<span class="hljs-number">0.277785116509801</span>, <span class="hljs-number">0.277785116509801</span>,
+                    <span class="hljs-number">0.490392640201615</span>, <span class="hljs-number">0.0975451610080640</span>,
+                    -<span class="hljs-number">0.415734806151272</span> },
+            { <span class="hljs-number">0.353553390593274</span>, -<span class="hljs-number">0.353553390593274</span>, -<span class="hljs-number">0.353553390593274</span>,
+                    <span class="hljs-number">0.353553390593274</span>, <span class="hljs-number">0.353553390593274</span>,
+                    -<span class="hljs-number">0.353553390593273</span>, -<span class="hljs-number">0.353553390593274</span>,
+                    <span class="hljs-number">0.353553390593273</span> },
+            { <span class="hljs-number">0.277785116509801</span>, -<span class="hljs-number">0.490392640201615</span>, <span class="hljs-number">0.0975451610080642</span>,
+                    <span class="hljs-number">0.415734806151273</span>, -<span class="hljs-number">0.415734806151273</span>,
+                    -<span class="hljs-number">0.0975451610080649</span>, <span class="hljs-number">0.490392640201615</span>,
+                    -<span class="hljs-number">0.277785116509801</span> },
+            { <span class="hljs-number">0.191341716182545</span>, -<span class="hljs-number">0.461939766255643</span>, <span class="hljs-number">0.461939766255643</span>,
+                    -<span class="hljs-number">0.191341716182545</span>, -<span class="hljs-number">0.191341716182545</span>,
+                    <span class="hljs-number">0.461939766255644</span>, -<span class="hljs-number">0.461939766255644</span>,
+                    <span class="hljs-number">0.191341716182543</span> },
+            { <span class="hljs-number">0.0975451610080642</span>, -<span class="hljs-number">0.277785116509801</span>, <span class="hljs-number">0.415734806151273</span>,
+                    -<span class="hljs-number">0.490392640201615</span>, <span class="hljs-number">0.490392640201615</span>,
+                    -<span class="hljs-number">0.415734806151272</span>, <span class="hljs-number">0.277785116509802</span>,
+                    -<span class="hljs-number">0.0975451610080625</span> } };
+    T = cvCreateMat(<span class="hljs-number">8</span>, <span class="hljs-number">8</span>,CV_32F);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">8</span>;i++)
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>;j&lt;<span class="hljs-number">8</span>;j++)
+    T.put(i, j, tt[i][j]);
+
+    <span class="hljs-comment">// T =cvCreateMat(8,8,CV_32F);</span>
+    <span class="hljs-comment">// CvMat dct = cvCreateMat(rImg.height(), rImg.width(),src.type());</span>
+    <span class="hljs-comment">// cvScale(rImg,dst,1,0);</span>
+    <span class="hljs-comment">// cvDCT(dst, dct, CV_DXT_FORWARD);</span>
+
+     Tp = cvCreateMat(T.cols(), T.rows(), CV_32F );
+    cvTranspose(T, Tp);
+    <span class="hljs-keyword">double</span>[] mask = { <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>,
+            <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>,
+            <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>,
+            <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span> };
+     maskMat = cvCreateMat(<span class="hljs-number">8</span>, <span class="hljs-number">8</span>,CV_32F);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">8</span>;i++)
+        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>;j&lt;<span class="hljs-number">8</span>;j++)
+            maskMat.put(i, j, mask[i*<span class="hljs-number">8</span>+j]);
+
+}
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span>(String[] args) {
+        IplImage orignTImg = cvLoadImage(<span class="hljs-string">"E:\\Sunset.jpg"</span>);
+        IplImage orignImg = cvCreateImage(cvSize(orignTImg.width(), orignTImg.height()), IPL_DEPTH_32F, <span class="hljs-number">3</span>);
+<span class="hljs-comment">//      orignImg = cvCloneImage(orignTImg);</span>
+        cvConvertScale(orignTImg, orignImg, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>);
+
+        CvMat src = orignImg.asCvMat();
+        IplImage destImg = cvCreateImage(cvSize(orignImg.width(), orignImg.height()), IPL_DEPTH_32F, <span class="hljs-number">3</span>);
+<span class="hljs-comment">//      IplImage destImg2 = cvCreateImage(cvSize(orignImg.width(), orignImg.height()), IPL_DEPTH_32F, 3);</span>
+
+        <span class="hljs-keyword">int</span> ceil_height = src.rows()/<span class="hljs-number">8</span>;  
+        <span class="hljs-keyword">int</span> ceil_width  = src.cols()/<span class="hljs-number">8</span>; 
+
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> rowi = <span class="hljs-number">0</span>; rowi &lt; ceil_height; rowi++)
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> colj = <span class="hljs-number">0</span>; colj &lt; ceil_width; colj++) {
+                <span class="hljs-comment">//lock area</span>
+                cvSetImageROI(orignImg,cvRect(colj*<span class="hljs-number">8</span>,rowi*<span class="hljs-number">8</span>,<span class="hljs-number">8</span>,<span class="hljs-number">8</span>));
+                IplImage tempImg = cvCreateImage(cvSize(<span class="hljs-number">8</span>, <span class="hljs-number">8</span>), IPL_DEPTH_32F, <span class="hljs-number">3</span>);
+                 cvCopy(orignImg, tempImg);
+                System.out.println(orignImg.depth());
+                 <span class="hljs-comment">//spilt</span>
+                IplImage rImg = cvCreateImage(tempImg.cvSize(),IPL_DEPTH_32F, <span class="hljs-number">1</span>);
+                IplImage gImg = cvCreateImage(tempImg.cvSize(), IPL_DEPTH_32F, <span class="hljs-number">1</span>);
+                IplImage bImg = cvCreateImage(tempImg.cvSize(), IPL_DEPTH_32F, <span class="hljs-number">1</span>);
+
+<span class="hljs-comment">//              IplImage bImg3 = cvCreateImage(tempImg.cvSize(),IPL_DEPTH_32F, 3);</span>
+<span class="hljs-comment">//              IplImage gImg3 = cvCreateImage(tempImg.cvSize(), orignImg.depth(), 3);</span>
+<span class="hljs-comment">//              IplImage rImg3 = cvCreateImage(tempImg.cvSize(), orignImg.depth(), 3);</span>
+                cvSplit(tempImg, bImg, gImg, rImg, <span class="hljs-keyword">null</span>);
+<span class="hljs-comment">//              cvMerge(bImg, null, null, null, bImg3);</span>
+<span class="hljs-comment">//              cvMerge(null, gImg, null, null, gImg3);</span>
+<span class="hljs-comment">//              cvMerge(null, gImg, null, null, rImg3);</span>
+                Mat rMat = <span class="hljs-keyword">new</span> Mat(rImg);
+                rMat.convertTo(rMat, CV_32F);
+                CvMat I2 = reSolve(rMat);
+                rImg = I2.asIplImage();
+<span class="hljs-comment">//              cvMerge(null, null, sigImg, null, rImg3);</span>
+
+
+<span class="hljs-comment">//rMat.convertTo(rMat, CV_32FC2);</span>
+<span class="hljs-comment">//              rMat =cvCloneMat( rImg.asCvMat());</span>
+<span class="hljs-comment">//              cvConvert(rImg3, rMat);</span>
+                Mat gMat = <span class="hljs-keyword">new</span> Mat(gImg);
+                gMat.convertTo(gMat, CV_32F);
+                I2 = reSolve(gMat);
+                gImg = I2.asIplImage();
+<span class="hljs-comment">//              cvMerge(null, sigImg, null, null, gImg3);</span>
+                Mat bMat = <span class="hljs-keyword">new</span> Mat(bImg);
+                bMat.convertTo(bMat, CV_32F);
+                I2 = reSolve(bMat);
+                bImg = I2.asIplImage();
+<span class="hljs-comment">//              cvMerge( sigImg,null, null, null, bImg3);</span>
+                cvMerge( bImg,gImg, rImg, <span class="hljs-keyword">null</span>, tempImg);
+
+                cvSetImageROI(destImg,cvRect(colj*<span class="hljs-number">8</span>,rowi*<span class="hljs-number">8</span>,<span class="hljs-number">8</span>,<span class="hljs-number">8</span>));
+<span class="hljs-comment">//              cvSetImageROI(destImg2,cvRect(colj*8,rowi*8,8,8));</span>
+                 cvCopy(tempImg, destImg);
+<span class="hljs-comment">//               cvCopy(bImg3, destImg2);</span>
+                 cvResetImageROI(destImg);  
+<span class="hljs-comment">//               cvResetImageROI(destImg2); </span>
+                 cvResetImageROI(orignImg);
+            }
+
+
+        imwrite(<span class="hljs-string">"E:\\aaa1.jpg"</span>, <span class="hljs-keyword">new</span> Mat(destImg.asCvMat()));
+<span class="hljs-comment">//      imwrite("E:\\aaa2.jpg", new Mat(destImg2.asCvMat()));</span>
+<span class="hljs-comment">//      imwrite("E:\\aaa3.jpg", new Mat(orignImg.asCvMat()));</span>
+
+    }
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> CvMat <span class="hljs-title">reSolve</span>(Mat rMat) {
+
+        <span class="hljs-comment">// imwrite("E:\\aaa1.jpg",new Mat(dct));</span>
+
+<span class="hljs-comment">//System.out.println(T.arraySize());</span>
+
+        <span class="hljs-comment">// Mat srcT = new Mat(T);</span>
+        <span class="hljs-comment">//</span>
+        CvMat temp = cvCreateMat(<span class="hljs-number">8</span>, <span class="hljs-number">8</span>,CV_32F );
+        CvMat B = cvCreateMat(<span class="hljs-number">8</span>, <span class="hljs-number">8</span>,CV_32F);
+        System.out.println(T.depth()+<span class="hljs-string">"!"</span>+rMat.depth());
+        <span class="hljs-comment">//T *x</span>
+        cvMatMul(T, rMat.asCvMat(), temp);
+        <span class="hljs-comment">//B=T *x *T'</span>
+        cvMatMul(temp, Tp, B);
+
+        CvMat B2 = cvCreateMat(<span class="hljs-number">8</span>, <span class="hljs-number">8</span>,CV_32F);
+
+        <span class="hljs-comment">//B2=mask.*B</span>
+        cvMul(maskMat, B, B2);
+
+        CvMat I2 = cvCreateMat(<span class="hljs-number">8</span>, <span class="hljs-number">8</span>,CV_32F);
+        cvMatMul(Tp, B2, temp);
+        <span class="hljs-comment">//I2=T' *B2 *T</span>
+        cvMatMul(temp, T, I2);
+        <span class="hljs-keyword">return</span> I2;
+    }
+
+}
+</code></pre>
+
+<p>转载请注明出处</p></div>
+        <script  type="text/javascript">
+            $(function () {
+                $('pre.prettyprint code').each(function () {
+                    var lines = $(this).text().split('\n').length;
+                    var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+                    $(this).addClass('has-numbering').parent().append($numbering);
+                    for (i = 1; i <= lines; i++) {
+                        $numbering.append($('<li/>').text(i));
+                    };
+                    $numbering.fadeIn(1700);
+                });
+            });
+        </script>
+   
+</div>
+
+
+
+
+<!-- Baidu Button BEGIN -->
+
+
+
+
+<div class="bdsharebuttonbox tracking-ad" style="float: right;" data-mod="popu_172">
+<a href="#" class="bds_more" data-cmd="more" style="background-position:0 0 !important; background-image: url(http://bdimg.share.baidu.com/static/api/img/share/icons_0_16.png?v=d754dcc0.png) !important"></a>
+<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"  style="background-position:0 -52px !important"></a>
+<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"style="background-position:0 -104px !important"></a>
+<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"style="background-position:0 -260px !important"></a>
+<a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"style="background-position:0 -208px !important"></a>
+<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"style="background-position:0 -1612px !important" ></a>
+</div>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+<!-- Baidu Button END -->
+
+   <link rel="stylesheet" href="http://static.blog.csdn.net/css/blog_detail.css" />
+
+    
+<!--172.16.140.13-->
+
+<!-- Baidu Button BEGIN -->
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=1536434" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+    document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->
+
+ 
+
+
+        <div id="digg" ArticleId="46233871" >
+            <dl id="btnDigg" class="digg digg_enable"  onclick="btndigga();">
+               
+                 <dt>顶</dt>
+                <dd>0</dd>
+            </dl>
+           
+              
+            <dl id="btnBury" class="digg digg_enable"  onclick="btnburya();">
+              
+                  <dt>踩</dt>
+                <dd>0</dd>               
+            </dl>
+            
+        </div>
+     <div class="tracking-ad" data-mod="popu_222"><a href="javascript:void(0);" >&nbsp;</a>   </div>
+    <div class="tracking-ad" data-mod="popu_223"> <a href="javascript:void(0);" >&nbsp;</a></div>
+    <script type="text/javascript">
+                function btndigga() {
+                    $(".tracking-ad[data-mod='popu_222'] a").click();
+                }
+                function btnburya() {
+                    $(".tracking-ad[data-mod='popu_223'] a").click();
+                }
+            </script>
+
+   <ul class="article_next_prev">
+                <li class="prev_article"><span  onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian']);location.href='/absurd1350/article/details/45973603';">上一篇</span><a href="/absurd1350/article/details/45973603" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian'])">欢迎使用CSDN-markdown编辑器</a></li>
+                <li class="next_article"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian']);location.href='/absurd1350/article/details/46501549';">下一篇</span><a href="/absurd1350/article/details/46501549" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian'])">hibernate 4+spring 处理mysql blob类型</a></li>
+    </ul>
+
+    <div style="clear:both; height:10px;"></div>
+
+
+        <div class="similar_article"  style="display:none">
+                <h4>我的同类文章</h4>
+                <div class="similar_c"style="margin:20px 0px 0px 0px">
+                    <div class="similar_c_t">
+                                <label class="similar_cur">
+                                    <span  style="cursor:pointer"  onclick="GetCategoryArticles('2661963','absurd1350','foot','46233871');">java<em>（8）</em></span>
+                                </label>
+                    </div>
+                   
+                    <div class="similar_wrap tracking-ad" data-mod="popu_141"  style="max-height:195px;">
+                        <a href="http://blog.csdn.net" style="display:none">http://blog.csdn.net</a>
+                        <ul class="similar_list fl">                          
+                        </ul>
+
+                        <ul class="similar_list fr">                           
+                        </ul>
+                    </div>
+                </div>
+            </div>    
+    <script  type="text/javascript">
+        $(function () {
+            GetCategoryArticles('2661963', 'absurd1350','foot','46233871');
+        });
+    </script>
+      
+</div>
+
+    <div>
+            <ins data-revive-zoneid="205" data-revive-id="8c38e720de1c90a6f6ff52f3f89c4d57"></ins> 
+     </div>
+
+<div id="suggest"></div>
+         <script  language="javascript" type='text/javascript'>     
+             $(function(){
+                 $.get("/absurd1350/svc/GetSuggestContent/46233871",function(data){
+                     $("#suggest").html(data);
+                 });     
+             });             
+         </script>  
+
+
+<style>
+.blog-ass-articl dd {
+color: #369;
+width: 99%; /*修改行*/
+float: left;
+overflow: hidden;
+font: normal normal 12px/23px "SimSun";
+height: 23px;
+margin: 0;
+padding: 0 0 0 10px;
+margin-right: 30px;
+background: url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px;
+}
+</style>
+
+ <link rel="stylesheet" href="http://static.blog.csdn.net/css/replace.css"/>
+<div id="relate" data-mod="popu_218"  class="tracking-ad">
+        <div class="relate_t">
+            <h3><span>参考知识库</span></h3>
+        </div>
+        <div class="relate_c">
+        </div>
+</div>
+ 
+
+<dl class="blog-ass-articl" id="res-relatived" > 
+    <div class="embody embody_b" id="libkeyparent"  style="display:none">
+            <span class="embody_t">更多资料请参考：</span>
+            <div class="embody_c" id="libkey"></div>
+    </div>
+
+
+     <dt><span>猜你在找</span></dt>    
+
+
+   
+
+
+    <div id="adCollege" style="width: 42%;float: left;"> 
+        <script src="http://csdnimg.cn/jobreco/job_reco.js" type="text/javascript"></script> 
+        <script type="text/javascript">
+            csdn.position.showEdu({
+                sourceType: "blog",
+                searchType: "detail",
+                searchKey: "46233871",
+                username: "attilax",
+                recordcount: "5",
+                containerId: "adCollege" //容器DIV的id。 
+            });
+        </script> 
+    </div>  
+
+    
+     <div id="res"  data-mod="popu_36"  class="tracking-ad" style="width: 42%;float: left;margin-right: 30px;"></div>
+   
+</dl>
+
+
+<script type="text/javascript">
+    $(function () {
+        setTimeout(function () {
+            var searchtitletags = '基于javacv的数字图像处理' + ',' + $("#tags").html();
+            searchService({
+                index: 'blog',
+                query: searchtitletags,
+                from: 5,
+                size: 5,
+                appendTo: '#res',
+                url: 'recommend',
+                his: 2,
+                client: "blog_cf_enhance",
+                tmpl: '<dd style="background:url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px;"><a href="#{ url }" title="#{ title }" strategy="#{ strategy }">#{ title }</a></dd>'
+            });
+        }, 500);
+    });    
+
+ </script>  
+
+
+    <div id="ad_cen">        
+<ins data-revive-zoneid="71" data-revive-id="8c38e720de1c90a6f6ff52f3f89c4d57"></ins>    </div>  
+
+    <!-- 广告位开始 -->
+    <ins data-revive-zoneid="72" data-revive-id="8c38e720de1c90a6f6ff52f3f89c4d57"></ins>
+    <!-- 广告位结束 -->
+
+<div class="comment_class">
+    <div id="comment_title" class="panel_head">
+        <span class="see_comment">查看评论</span><a name="comments"></a></div>
+    <div id="comment_list">
+    </div>
+    <div id="comment_bar">
+    </div>
+    <div id="comment_form">
+    </div>
+    <div class="announce">
+        * 以上用户言论只代表其个人观点，不代表CSDN网站的观点或立场<a name="reply"></a><a name="quote"></a></div>
+</div>
+
+<script type="text/javascript">
+    var fileName = '46233871';
+    var commentscount = 0;
+    var islock = false
+</script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/comment.js"></script>
+    <div id="ad_bot">
+    </div>
+<div id="report_dialog">
+</div>
+
+<div id="d-top"  style="bottom:60px;">
+
+        <a id="quick-reply" class="btn btn-top q-reply" title="快速回复" style="display:none;">
+            <img src="http://static.blog.csdn.net/images/blog-icon-reply.png" alt="快速回复">
+        </a>    
+    <a id="d-top-a" class="btn btn-top backtop"  style="display: none;" title="返回顶部" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_huidaodingbu'])" style="">         
+         <img src="http://static.blog.csdn.net/images/top.png" alt="TOP">
+    </a>
+</div>
+<script type="text/javascript">
+    $(function ()
+    {
+        $("#ad_frm_0").height("90px");
+        
+        setTimeout(function(){
+            $("#ad_frm_2").height("200px");
+        },1000);    
+    });
+  
+</script>
+<style type="text/css">
+    .tag_list
+    {
+        background: none repeat scroll 0 0 #FFFFFF;
+        border: 1px solid #D7CBC1;
+        color: #000000;
+        font-size: 12px;
+        line-height: 20px;
+        list-style: none outside none;
+        margin: 10px 2% 0 1%;
+        padding: 1px;
+    }
+    .tag_list h5
+    {
+        background: none repeat scroll 0 0 #E0DBD3;
+        color: #47381C;
+        font-size: 12px;
+        height: 24px;
+        line-height: 24px;
+        padding: 0 5px;
+        margin: 0;
+    }
+    .tag_list h5 a
+    {
+        color: #47381C;
+    }
+    .classify
+    {
+        margin: 10px 0;
+        padding: 4px 12px 8px;
+    }
+    .classify a
+    {
+        margin-right: 20px;
+        white-space: nowrap;
+    }
+</style>
+
+
+<div class="tag_list" style="display:none"></div>
+  <script  language="javascript" type='text/javascript'>     
+      $(function(){
+              setTimeout(function(){
+                  $.get("/absurd1350/svc/GetTagContent",function(data){
+                      $(".tag_list").html(data).show();
+                  });     
+              });
+          },500);                       
+ </script> 
+
+
+<div id="pop_win" style="display:none ;position: absolute; z-index: 10000; border: 1px solid rgb(220, 220, 220); top: 222.5px; left: 630px; opacity: 1; background: none 0px 0px repeat scroll rgb(255, 255, 255);">
+    
+</div>
+<div id="popup_mask"></div>
+<style>
+    #popup_mask
+    {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 9999;
+        left: 0px;
+        top: 0px;
+        opacity: 0.3;
+        filter: alpha(opacity=30);
+        display: none;
+    }
+
+</style>
+
+
+
+
+<script type="text/javascript">
+    $(function(){
+        setTimeout(function(){
+            $(".comment_body:contains('回复')").each(function(index,item){
+                var u=$(this).text().split('：')[0].toString().replace("回复","")
+                var thisComment=$(this);
+                if(u)
+                {
+                    $.getJSON("https://passport.csdn.net/get/nick?callback=?", {users: u}, function(a) {
+                        if(a!=null&&a.data!=null&&a.data.length>0)
+                        {
+                            nick=a.data[0].n; 
+                            if(u!=nick)
+                            {
+                                thisComment.text(thisComment.text().replace(u,nick));  
+                            }
+                        }       
+                    });  
+                }
+            });         
+
+        },200);  
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },5000);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },10000);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },15000);
+        
+        setTimeout(function(){
+            $("a img[src='http://js.tongji.linezing.com/stats.gif']").parent().css({"position":"absolute","left":"50%"});
+        },300);
+    });
+
+    function loginbox(){
+        var $logpop=$("#pop_win");
+        $logpop.html('<iframe src="https://passport.csdn.net/account/loginbox?service=http://static.blog.csdn.net/callback.htm" frameborder="0" height="600" width="400" scrolling="no"></iframe>');
+
+        $('#popup_mask').css({
+            opacity: 0.5,
+            width: $( document ).width() + 'px',
+            height:  $( document ).height() + 'px'
+        });
+        $('#popup_mask').css("display","block");
+ 
+        $logpop.css( {
+            top: ($( window ).height() - $logpop.height())/ 2  + $( window 
+       ).scrollTop() + 'px',
+            left:($( window ).width() - $logpop.width())/ 2
+        } );
+ 
+        setTimeout( function () {
+            $logpop.show();
+            $logpop.css( {
+                opacity: 1
+            } );
+        }, 200 );
+ 
+        $('#popup_mask').unbind("click");
+        $('#popup_mask').bind("click", function(){
+            $('#popup_mask').hide();
+            var $clopop = $("#pop_win");
+            $("#common_ask_div_sc").css("display","none");
+            $clopop.css( {
+                opacity: 0
+            } );
+            setTimeout( function () {
+                $clopop.hide();
+            }, 350 );
+            return false;
+        });
+    }   
+
+</script>
+ <script language="javascript" type="text/javascript" src="http://ads.csdn.net/js/async_new.js"></script>      
+
+
+
+
+                        <div class="clear">
+                        </div>
+                    </div>                   
+                
+            </div>
+                   
+           <div id="side">
+               
+    <div class="side">
+<div id="panel_Profile" class="panel">
+<ul class="panel_head"><span>个人资料</span></ul>
+<ul class="panel_body profile">
+<div id="blog_userface">
+    <a href="http://my.csdn.net/absurd1350" target="_blank">
+    <img src="http://avatar.csdn.net/F/8/6/1_absurd1350.jpg" title="访问我的空间" style="max-width:90%"/>
+    </a>
+    <br />
+    <span><a href="http://my.csdn.net/absurd1350" class="user_name" target="_blank">absurd1350</a></span>
+</div>
+<div class="interact">
+
+    <a href="javascript:void(0);" class="attent" id="span_add_follow" title="[加关注]"></a>
+
+ <a href="javascript:void(0);" class="letter"  title="[发私信]" onclick="window.open('http://msg.csdn.net/letters/model?receiver=absurd1350','_blank','height=350,width=700');_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_sixin'])"></a>  
+</div>
+<div id="blog_medal">
+                <div id="bms_box">
+                                            <a  target="_blank">
+                                                    <img src="http://c.csdnimg.cn/jifen/images/xunzhang/xunzhang/chizhiyiheng.png" onmouseover="m_over_m(this,4)" onmouseout="m_out_m()" alt="1" >
+                                            </a>
+               </div>
+</div>
+<ul id="blog_rank">
+    <li>访问：<span>17481次</span></li>
+    <li>积分：<span>943</span> </li>    
+    <li >等级： <span style="position:relative;display:inline-block;z-index:1" >
+            <img src="http://c.csdnimg.cn/jifen/images/xunzhang/jianzhang/blog3.png" alt="" style="vertical-align: middle;" id="leveImg">
+            <div id="smallTittle" style=" position: absolute;  left: -24px;  top: 25px;  text-align: center;  width: 101px;  height: 32px;  background-color: #fff;  line-height: 32px;  border: 2px #DDDDDD solid;  box-shadow: 0px 2px 2px rgba (0,0,0,0.1);  display: none;   z-index: 999;">
+            <div style="left: 42%;  top: -8px;  position: absolute;  width: 0;  height: 0;  border-left: 10px solid transparent;  border-right: 10px solid transparent;  border-bottom: 8px solid #EAEAEA;"></div>
+            积分：943 </div>
+        </span>  </li>
+    <li>排名：<span>千里之外</span></li>
+</ul>
+<ul id="blog_statistics">
+    <li>原创：<span>77篇</span></li>
+    <li>转载：<span>14篇</span></li>
+    <li>译文：<span>1篇</span></li>
+    <li>评论：<span>3条</span></li>
+</ul>
+</ul>
+</div>
+
+
+<div class="panel" id="panel_Search">
+    <ul class="panel_head"><span>文章搜索</span></ul>
+    <ul class="panel_body">
+        <form id="frmSearch" action="http://so.csdn.net/search" class="form_search" target="_blank">
+        <span><input id="inputSearch" type="text" class="blogsearch" title="请输入关键字" /></span>
+        <input id="btnSubmit" type="button" value="搜索" title="search in blog" />
+        <input type="hidden" name="q" id="inputQ" />
+        <input type="hidden" name="t" value="blog" />
+        <a id="btnSearchBlog" target="_blank"></a>
+        </form>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {           
+            search();
+        });
+
+        $("#frmSearch").submit(function () {
+            search();
+            return false;
+        });
+
+        function search()
+        {
+            var url = "http://so.csdn.net/so/search/s.do?q=" + encodeURIComponent($("#inputSearch").val()) + "&u=" + username + "&t=blog";
+            window.location.href = url;
+        }   
+    });
+</script><div id="panel_Category" class="panel">
+<ul class="panel_head"><span>文章分类</span></ul>
+<ul class="panel_body">    
+                 <li>
+                    <a href="/absurd1350/article/category/2391881" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">acm</a><span>(50)</span>
+                </li>
+                 <li>
+                    <a href="/absurd1350/article/category/2486919" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">ubuntu</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/absurd1350/article/category/2507065" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">matlab</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/absurd1350/article/category/2538929" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">windows</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/absurd1350/article/category/2538931" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">GDI</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/absurd1350/article/category/2661963" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">java</a><span>(9)</span>
+                </li>
+                 <li>
+                    <a href="/absurd1350/article/category/2662033" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">java</a><span>(0)</span>
+                </li>
+</ul>
+</div><div id="panel_Archive" class="panel">
+<ul class="panel_head"><span>文章存档</span></ul>
+<ul class="panel_body">
+<div id="archive_list">
+<!--归档统计-->
+<li><a href="/absurd1350/article/month/2016/03">2016年03月</a><span>(1)</span></li><li><a href="/absurd1350/article/month/2016/02">2016年02月</a><span>(4)</span></li><li><a href="/absurd1350/article/month/2015/12">2015年12月</a><span>(2)</span></li><li><a href="/absurd1350/article/month/2015/09">2015年09月</a><span>(1)</span></li><li><a href="/absurd1350/article/month/2015/08">2015年08月</a><span>(7)</span></li><li><a href="/absurd1350/article/month/2015/07">2015年07月</a><span>(1)</span></li><li><a href="/absurd1350/article/month/2015/06">2015年06月</a><span>(1)</span></li><li><a href="/absurd1350/article/month/2015/05">2015年05月</a><span>(2)</span></li><li><a href="/absurd1350/article/month/2014/11">2014年11月</a><span>(9)</span></li><li><a href="/absurd1350/article/month/2014/10">2014年10月</a><span>(11)</span></li><li><a href="/absurd1350/article/month/2014/09">2014年09月</a><span>(13)</span></li><li><a href="/absurd1350/article/month/2014/08">2014年08月</a><span>(10)</span></li><li><a href="/absurd1350/article/month/2014/07">2014年07月</a><span>(23)</span></li><li><a href="/absurd1350/article/month/2014/05">2014年05月</a><span>(4)</span></li>
+</div>
+</ul>
+</div>
+<div id="hotarticls" class="panel">
+<ul class="panel_head">
+    <span>       
+阅读排行    </span>
+</ul>
+
+<ul class="panel_body itemlist">
+<li>
+<a href="/absurd1350/article/details/38781691" title="matlab实现复杂网络中节点重要度评估的节点收缩方法">matlab实现复杂网络中节点重要度评估的节点收缩方法</a><span>(1165)</span>
+</li>
+<li>
+<a href="/absurd1350/article/details/46233871" title="基于javacv的数字图像处理">基于javacv的数字图像处理</a><span>(775)</span>
+</li>
+<li>
+<a href="/absurd1350/article/details/47149813" title="实习笔记">实习笔记</a><span>(706)</span>
+</li>
+<li>
+<a href="/absurd1350/article/details/50686102" title="DefaultAnnotationHandlerMapping  和RequestMappingHandlerMapping">DefaultAnnotationHandlerMapping  和RequestMappingHandlerMapping</a><span>(512)</span>
+</li>
+<li>
+<a href="/absurd1350/article/details/38716519" title="matlab实现prim算法">matlab实现prim算法</a><span>(498)</span>
+</li>
+<li>
+<a href="/absurd1350/article/details/26017811" title="关于jquery+ajax+json+ssh框架整合，数值异步的问题（暂时解决方案--延迟加载（lazy）改为急加载）">关于jquery+ajax+json+ssh框架整合，数值异步的问题（暂时解决方案--延迟加载（lazy）改为急加载）</a><span>(430)</span>
+</li>
+<li>
+<a href="/absurd1350/article/details/39297823" title="Chrome 控制台不完全指南">Chrome 控制台不完全指南</a><span>(275)</span>
+</li>
+<li>
+<a href="/absurd1350/article/details/26018317" title="jsp关于数据库乱码问题">jsp关于数据库乱码问题</a><span>(258)</span>
+</li>
+<li>
+<a href="/absurd1350/article/details/40855287" title="acm-Catalan（卡塔兰数）">acm-Catalan（卡塔兰数）</a><span>(249)</span>
+</li>
+<li>
+<a href="/absurd1350/article/details/50396167" title="centos6.7下ngnix1.8+tomcat8+memcached1.4.25 集群实现session共享">centos6.7下ngnix1.8+tomcat8+memcached1.4.25 集群实现session共享</a><span>(245)</span>
+</li>
+</ul>
+</div>
+<div id="hotarticls2" class="panel">
+<ul class="panel_head"><span>评论排行</span></ul>
+<ul class="panel_body itemlist">
+<li>
+<a href="/absurd1350/article/details/38781691" title="matlab实现复杂网络中节点重要度评估的节点收缩方法">matlab实现复杂网络中节点重要度评估的节点收缩方法</a><span>(3)</span>
+</li>
+<li>
+<a href="/absurd1350/article/details/37901833" title="acm-大菲波数">acm-大菲波数</a><span>(0)</span>
+</li>
+<li>
+<a href="/absurd1350/article/details/37901813" title="acm-大数阶乘">acm-大数阶乘</a><span>(0)</span>
+</li>
+<li>
+<a href="/absurd1350/article/details/37900549" title="算法竞赛入门经典课后习题3">算法竞赛入门经典课后习题3</a><span>(0)</span>
+</li>
+<li>
+<a href="/absurd1350/article/details/37900363" title="算法竞赛入门经典课后习题2">算法竞赛入门经典课后习题2</a><span>(0)</span>
+</li>
+<li>
+<a href="/absurd1350/article/details/37900159" title="算法竞赛入门经典课后习题1">算法竞赛入门经典课后习题1</a><span>(0)</span>
+</li>
+<li>
+<a href="/absurd1350/article/details/37725525" title="acm-Not That Kind of Graph-uva10800">acm-Not That Kind of Graph-uva10800</a><span>(0)</span>
+</li>
+<li>
+<a href="/absurd1350/article/details/26018317" title="jsp关于数据库乱码问题">jsp关于数据库乱码问题</a><span>(0)</span>
+</li>
+<li>
+<a href="/absurd1350/article/details/26018231" title="如何用visio2003画E-R图及建模">如何用visio2003画E-R图及建模</a><span>(0)</span>
+</li>
+<li>
+<a href="/absurd1350/article/details/50829566" title="hbase 学习笔记">hbase 学习笔记</a><span>(0)</span>
+</li>
+</ul>
+</div>
+<div id="homepageArticles" class="panel tracking-ad" data-mod="popu_4">
+<ul class="panel_head"><span>推荐文章</span></ul>
+<ul class="panel_body" id="ad_commend">
+<ul>
+<li><a href="http://blog.csdn.net/laoyang360/article/details/53843771" target="_blank">* 而立之年——三线城市程序员的年终告白</a></li>
+<li><a href="http://blog.csdn.net/sdkfjksf/article/details/54380659" 
+target="_blank">* Java集合框架中隐藏的设计套路</a></li>
+<li><a href="http://blog.csdn.net/jiangwei0910410003/article/details/54092364" 
+target="_blank">* Python脚本下载今日头条视频(附加Android版本辅助下载器)</a></li>
+<li><a href="http://blog.csdn.net/caowenbin/article/details/54406716" target="_blank">* 人工智能的冷思考</a></li>
+<li><a href="http://blog.csdn.net/it_talk/article/details/54346566" 
+target="_blank">* React Native 实战系列教程之热更新原理分析与实现</a></li>
+
+
+</ul></ul>
+</div>
+
+
+<div id="newcomments" class="panel">
+<ul class="panel_head"><span>最新评论</span></ul>
+<ul class="panel_body itemlist">
+    <li>
+   
+         <a href="/absurd1350/article/details/38781691#comments">matlab实现复杂网络中节点重要度评估的节点收缩方法</a>
+    <p style="margin:0px;"><a href="/YYai13" class="user_name">YYai13</a>:
+好文章，对我很有帮助，多谢楼主的无私分享~！
+    </p>
+    </li>
+    <li>
+   
+         <a href="/absurd1350/article/details/38781691#comments">matlab实现复杂网络中节点重要度评估的节点收缩方法</a>
+    <p style="margin:0px;"><a href="/absurd1350" class="user_name">absurd1350</a>:
+@qq_18523945:dy指顶点集合。比如dy=;就是5个顶点。
+    </p>
+    </li>
+    <li>
+   
+         <a href="/absurd1350/article/details/38781691#comments">matlab实现复杂网络中节点重要度评估的节点收缩方法</a>
+    <p style="margin:0px;"><a href="/qq_18523945" class="user_name">qq_18523945</a>:
+请问下 dy是什么
+    </p>
+    </li>
+</ul>
+</div>
+    </div>
+    <div class="clear">
+    </div>
+
+
+                   <!-- 广告位开始 --> 
+                    <ins data-revive-zoneid="190" data-revive-id="8c38e720de1c90a6f6ff52f3f89c4d57"></ins> 
+                    <!-- 广告位结束 -->
+
+           </div>   
+
+            <div class="clear">
+            </div>
+        </div>
+
+        
+
+<script type="text/javascript" src="http://c.csdnimg.cn/rabbit/cnick/cnick.js"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/newblog.min.js"></script>
+
+
+<script type="text/javascript" src="http://medal.blog.csdn.net/showblogmedal.ashx?blogid=1831785"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/JavaScript1.js"></script>
+
+<script type="text/javascript">document.write("<img src=http://counter.csdn.net/pv.aspx?id=24 border=0 width=0 height=0>");</script>
+<script type="text/javascript" src="http://www.csdn.net/ui/scripts/Csdn/counter.js"></script>
+<script type="text/javascript" src="http://ad.csdn.net/scripts/ad-blog.js"></script>
+<script type="text/javascript">
+    $(function () {
+        function __get_code_toolbar(snippet_id) {
+            return $("<span class='tracking-ad' data-mod='popu_167'><a href='https://code.csdn.net/snippets/"
+                    + snippet_id
+                    + "' target='_blank' title='在CODE上查看代码片'  style='text-indent:0;'><img src='https://code.csdn.net/assets/CODE_ico.png' width=12 height=12 alt='在CODE上查看代码片' style='position:relative;top:1px;left:2px;'/></a></span>"
+                    + "<span class='tracking-ad' data-mod='popu_170'><a href='https://code.csdn.net/snippets/"
+                    + snippet_id
+                    + "/fork' target='_blank' title='派生到我的代码片' style='text-indent:0;'><img src='https://code.csdn.net/assets/ico_fork.svg' width=12 height=12 alt='派生到我的代码片' style='position:relative;top:2px;left:2px;'/></a></span>");
+        }
+        
+        $("[code_snippet_id]").each(function () {
+            __s_id = $(this).attr("code_snippet_id");
+            if (__s_id != null && __s_id != "" && __s_id != 0 && parseInt(__s_id) > 70020) {
+                __code_tool = __get_code_toolbar(__s_id);
+                $(this).prev().find(".tools").append(__code_tool);
+            }
+        });
+
+        $(".bar").show();
+    });
+</script>
+
+
+
+
+
+    </div>
+      <!--new top-->
+    
+    <script id="csdn-toolbar-id" btnId="header_notice_num" wrapId="note1" count="5" subCount="5" type="text/javascript" src="http://c.csdnimg.cn/public/common/toolbar/js/toolbar.js"></script>     <!--new top-->
+   
+    <link href="http://c.csdnimg.cn/comm_ask/css/ask_float_block.css" type="text/css" rel="stylesheet" />
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/libs/wmd.js'></script>
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/libs/showdown.js'></script>
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/libs/prettify.js'></script>
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/apps/ask_float_block.js'></script>
+   
+
+   
+
+  <div id="a52b5334d" style="width: 1px; height: 1px; display: none;">
+                    <script id="adJs52b5334"></script>
+                    <script>document.getElementById("adJs52b5334").src = "http://ads.csdn.net/js/opt/52b5334.js?t=" + Math.random();</script>
+   </div>
+
+    <link rel="stylesheet" href="http://static.blog.csdn.net/css/blog_code.css" />
+    <script type="text/javascript" src="http://static.blog.csdn.net/scripts/saveToCode.js"></script>
+      <script type="text/javascript" src="//csdnimg.cn/rabbit/tracking-ad/main.js?75eacd8"></script>
+
+     <link rel="stylesheet" href="http://static.blog.csdn.net/css/fa.css" />
+
+    <div class="pop_CA_cover"  style="display:none"></div>
+    <div class="pop pop_CA"  style="display:none">
+          <div class="CA_header">
+            收藏助手
+            <span class="cancel_icon"  id="fapancle"  onclick="$('.pop_CA').hide();$('.pop_CA_cover').hide();"></span>
+          </div>
+          <iframe src="" id="fa" frameborder="0" width="100%" height="360"  scrolling="no" />
+    </div>
+</body>
+</html>   
+ 

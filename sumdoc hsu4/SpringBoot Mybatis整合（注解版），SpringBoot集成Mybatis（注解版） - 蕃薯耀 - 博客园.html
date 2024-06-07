@@ -1,0 +1,347 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="referrer" content="never" />
+<title>SpringBoot Mybatis整合（注解版），SpringBoot集成Mybatis（注解版） - 蕃薯耀 - 博客园</title>
+<meta property="og:description" content="SpringBoot Mybatis整合（注解版），SpringBoot集成Mybatis（注解版） &#169;Copyright&#160;蕃薯耀 2018年4月8日 http://www.cnb" />
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=-duj5vpGTntb85GJoM3iRI972XwWcI-j8zmqDzyfu2w1"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/CodingLife/bundle-CodingLife.css?v=g4Oce5UBaUn_FUwadcT09ICEg5NkULQGtUpNhTtrI8U1"/>
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/CodingLife/bundle-CodingLife-mobile.css?v=Xay8b9tTSw814nBzbOgvS6rrbcxrobMhvHJHdZAO9vI1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/fanshuyao/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/fanshuyao/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/fanshuyao/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript">var currentBlogApp = 'fanshuyao', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=oVrWjmbP-rXxVp7O71kev8vWEZCetdwYaIziKHJCYc41" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="https://www.cnblogs.com/fanshuyao/"><img id="blogLogo" src="/Skins/custom/images/logo.gif" alt="返回主页" /></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="https://www.cnblogs.com/fanshuyao/">蕃薯耀</a></h1>
+<h2></h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">博客园</a></li>
+<li><a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/fanshuyao/">首页</a></li>
+<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E8%95%83%E8%96%AF%E8%80%80">联系</a></li>
+<li><a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/fanshuyao/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="https://www.cnblogs.com/fanshuyao/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<span id="stats_post_count">随笔 - 196&nbsp; </span>
+<span id="stats_article_count">文章 - 0&nbsp; </span>
+<span id="stats-comment_count">评论 - 109</span>
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/fanshuyao/p/8745196.html">SpringBoot Mybatis整合（注解版），SpringBoot集成Mybatis（注解版）</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body"><p style="text-align: center"><span style="font-size: 16px"><strong>SpringBoot Mybatis整合（注解版），SpringBoot集成Mybatis（注解版）</strong></span></p>
+<p>&nbsp;</p>
+<p>================================</p>
+<p>©Copyright&nbsp;蕃薯耀 2018年4月8日</p>
+<p>http://www.cnblogs.com/fanshuyao/</p>
+<p>&nbsp;</p>
+<p><strong><span style="color: #ff0000">源代码下载见：</span></strong>http://fanshuyao.iteye.com/blog/2415933</p>
+<p>&nbsp;</p>
+<p><strong>一、引入Mybatis依赖包：</strong></p>
+<div id="" class="dp-highlighter">
+<div class="bar">
+<div class="tools">Xml代码&nbsp;&nbsp;<a title="收藏这段代码"><img class="star" src="http://fanshuyao.iteye.com/images/icon_star.png" alt="收藏代码"></a></div>
+</div>
+<ol class="dp-xml" start="1">
+<li><span class="tag">&lt;<span class="tag-name">dependency<span class="tag">&gt;&nbsp;&nbsp;</span></span></span></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;<span class="tag-name">groupId<span class="tag">&gt;org.mybatis.spring.boot<span class="tag">&lt;/<span class="tag-name">groupId<span class="tag">&gt;&nbsp;&nbsp;</span></span></span></span></span></span></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;<span class="tag-name">artifactId<span class="tag">&gt;mybatis-spring-boot-starter<span class="tag">&lt;/<span class="tag-name">artifactId<span class="tag">&gt;&nbsp;&nbsp;</span></span></span></span></span></span></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag">&lt;<span class="tag-name">version<span class="tag">&gt;1.3.2<span class="tag">&lt;/<span class="tag-name">version<span class="tag">&gt;&nbsp;&nbsp;</span></span></span></span></span></span></li>
+<li><span class="tag">&lt;/<span class="tag-name">dependency<span class="tag">&gt;&nbsp;&nbsp;</span></span></span></li>
+</ol></div>
+<p>&nbsp;数据库连接依赖包：</p>
+<div id="" class="dp-highlighter">
+<div class="bar">
+<div class="tools">Xml代码&nbsp;&nbsp;<a title="收藏这段代码"><img class="star" src="http://fanshuyao.iteye.com/images/icon_star.png" alt="收藏代码"></a></div>
+</div>
+<ol class="dp-xml" start="1">
+<li><span class="tag">&lt;<span class="tag-name">dependency<span class="tag">&gt;&nbsp;&nbsp;</span></span></span></li>
+<li>&nbsp;&nbsp;<span class="tag">&lt;<span class="tag-name">groupId<span class="tag">&gt;mysql<span class="tag">&lt;/<span class="tag-name">groupId<span class="tag">&gt;&nbsp;&nbsp;</span></span></span></span></span></span></li>
+<li>&nbsp;&nbsp;<span class="tag">&lt;<span class="tag-name">artifactId<span class="tag">&gt;mysql-connector-java<span class="tag">&lt;/<span class="tag-name">artifactId<span class="tag">&gt;&nbsp;&nbsp;</span></span></span></span></span></span></li>
+<li>&nbsp;&nbsp;<span class="tag">&lt;<span class="tag-name">scope<span class="tag">&gt;runtime<span class="tag">&lt;/<span class="tag-name">scope<span class="tag">&gt;&nbsp;&nbsp;</span></span></span></span></span></span></li>
+<li><span class="tag">&lt;/<span class="tag-name">dependency<span class="tag">&gt;&nbsp;&nbsp;</span></span></span></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+<li><span class="tag">&lt;<span class="tag-name">dependency<span class="tag">&gt;&nbsp;&nbsp;</span></span></span></li>
+<li>&nbsp;&nbsp;<span class="tag">&lt;<span class="tag-name">groupId<span class="tag">&gt;com.alibaba<span class="tag">&lt;/<span class="tag-name">groupId<span class="tag">&gt;&nbsp;&nbsp;</span></span></span></span></span></span></li>
+<li>&nbsp;&nbsp;<span class="tag">&lt;<span class="tag-name">artifactId<span class="tag">&gt;druid<span class="tag">&lt;/<span class="tag-name">artifactId<span class="tag">&gt;&nbsp;&nbsp;</span></span></span></span></span></span></li>
+<li>&nbsp;&nbsp;<span class="tag">&lt;<span class="tag-name">version<span class="tag">&gt;1.1.9<span class="tag">&lt;/<span class="tag-name">version<span class="tag">&gt;&nbsp;&nbsp;</span></span></span></span></span></span></li>
+<li><span class="tag">&lt;/<span class="tag-name">dependency<span class="tag">&gt;&nbsp;&nbsp;</span></span></span></li>
+</ol></div>
+<p>&nbsp;</p>
+<p><strong>二、建立对应的表和Java实体（过程略）</strong></p>
+<p><strong>三、建立实体对应的Mapper（如UserMapper&nbsp;）</strong></p>
+<div id="" class="dp-highlighter">
+<div class="bar">
+<div class="tools">Java代码&nbsp;&nbsp;<a title="收藏这段代码"><img class="star" src="http://fanshuyao.iteye.com/images/icon_star.png" alt="收藏代码"></a></div>
+</div>
+<ol class="dp-j" start="1">
+<li><span class="keyword">import&nbsp;org.apache.ibatis.annotations.Insert;&nbsp;&nbsp;</span></li>
+<li><span class="keyword">import&nbsp;org.apache.ibatis.annotations.Mapper;&nbsp;&nbsp;</span></li>
+<li><span class="keyword">import&nbsp;org.apache.ibatis.annotations.Options;&nbsp;&nbsp;</span></li>
+<li><span class="keyword">import&nbsp;org.apache.ibatis.annotations.Select;&nbsp;&nbsp;</span></li>
+<li>&nbsp;&nbsp;</li>
+<li><span class="keyword">import&nbsp;com.lqy.springboot.bean.User;&nbsp;&nbsp;</span></li>
+<li>&nbsp;&nbsp;</li>
+<li><span class="annotation">@Mapper&nbsp;&nbsp;</span></li>
+<li><span class="keyword">public&nbsp;<span class="keyword">interface&nbsp;UserMapper&nbsp;{&nbsp;&nbsp;</span></span></li>
+<li>&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<span class="annotation">@Select(<span class="string">"select&nbsp;*&nbsp;from&nbsp;user&nbsp;where&nbsp;user_id&nbsp;=&nbsp;#{userId}")&nbsp;&nbsp;</span></span></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public&nbsp;User&nbsp;getById(Integer&nbsp;userId);&nbsp;&nbsp;</span></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<span class="annotation">@Options(useGeneratedKeys=<span class="keyword">true,keyProperty=<span class="string">"userId")&nbsp;&nbsp;</span></span></span></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<span class="annotation">@Insert(<span class="string">"insert&nbsp;into&nbsp;user(user_name,age)&nbsp;values(#{userName},#{age})")&nbsp;&nbsp;</span></span></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public&nbsp;Integer&nbsp;save(User&nbsp;user);&nbsp;&nbsp;&nbsp;</span></li>
+<li>}&nbsp;&nbsp;</li>
+</ol></div>
+<p>&nbsp;</p>
+<p><strong>注意：</strong>使用注解版需要在类上加上@Mapper注解，让SpringBoot自动扫描能识别</p>
+<div id="" class="dp-highlighter">
+<div class="bar">
+<div class="tools">Java代码&nbsp;&nbsp;<a title="收藏这段代码"><img class="star" src="http://fanshuyao.iteye.com/images/icon_star.png" alt="收藏代码"></a></div>
+</div>
+<ol class="dp-j" start="1">
+<li><span class="annotation">@Mapper&nbsp;&nbsp;</span></li>
+</ol></div>
+<p><strong>&nbsp;问题：如果有很多Mapper接口，能不能一次性扫描呢？</strong></p>
+<p>有。</p>
+<p>在程序启动入口加入注解：</p>
+<div id="" class="dp-highlighter">
+<div class="bar">
+<div class="tools">Java代码&nbsp;&nbsp;<a title="收藏这段代码"><img class="star" src="http://fanshuyao.iteye.com/images/icon_star.png" alt="收藏代码"></a></div>
+</div>
+<ol class="dp-j" start="1">
+<li><span class="annotation">@MapperScan(basePackages=&nbsp;{<span class="string">"com.lqy.springboot.mapper"})&nbsp;&nbsp;</span></span></li>
+</ol></div>
+<p>具体如下：</p>
+<div id="" class="dp-highlighter">
+<div class="bar">
+<div class="tools">Java代码&nbsp;&nbsp;<a title="收藏这段代码"><img class="star" src="http://fanshuyao.iteye.com/images/icon_star.png" alt="收藏代码"></a></div>
+</div>
+<ol class="dp-j" start="1">
+<li><span class="keyword">import&nbsp;org.mybatis.spring.annotation.MapperScan;&nbsp;&nbsp;</span></li>
+<li><span class="keyword">import&nbsp;org.springframework.boot.SpringApplication;&nbsp;&nbsp;</span></li>
+<li><span class="keyword">import&nbsp;org.springframework.boot.autoconfigure.SpringBootApplication;&nbsp;&nbsp;</span></li>
+<li>&nbsp;&nbsp;</li>
+<li><span class="comment">//Mybatis自动扫描包&nbsp;&nbsp;</span></li>
+<li><span class="comment">//@MapperScan(basePackages=&nbsp;{"com.lqy.springboot.mapper"})&nbsp;&nbsp;</span></li>
+<li><span class="annotation">@SpringBootApplication&nbsp;&nbsp;</span></li>
+<li><span class="keyword">public&nbsp;<span class="keyword">class&nbsp;SpringbootDatasourceApplication&nbsp;{&nbsp;&nbsp;</span></span></li>
+<li>&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public&nbsp;<span class="keyword">static&nbsp;<span class="keyword">void&nbsp;main(String[]&nbsp;args)&nbsp;{&nbsp;&nbsp;</span></span></span></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SpringApplication.run(SpringbootDatasourceApplication.<span class="keyword">class,&nbsp;args);&nbsp;&nbsp;</span></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</li>
+<li>}&nbsp;&nbsp;</li>
+</ol></div>
+<p>&nbsp;这样就能解决多Mapper需要添加注解的麻烦。</p>
+<p>&nbsp;</p>
+<p><strong>四、测试Mapper</strong></p>
+<div id="" class="dp-highlighter">
+<div class="bar">
+<div class="tools">Java代码&nbsp;&nbsp;<a title="收藏这段代码"><img class="star" src="http://fanshuyao.iteye.com/images/icon_star.png" alt="收藏代码"></a></div>
+</div>
+<ol class="dp-j" start="1">
+<li><span class="keyword">import&nbsp;org.springframework.beans.factory.annotation.Autowired;&nbsp;&nbsp;</span></li>
+<li><span class="keyword">import&nbsp;org.springframework.web.bind.annotation.RequestMapping;&nbsp;&nbsp;</span></li>
+<li><span class="keyword">import&nbsp;org.springframework.web.bind.annotation.RestController;&nbsp;&nbsp;</span></li>
+<li>&nbsp;&nbsp;</li>
+<li><span class="keyword">import&nbsp;com.lqy.springboot.bean.User;&nbsp;&nbsp;</span></li>
+<li><span class="keyword">import&nbsp;com.lqy.springboot.mapper.UserMapper;&nbsp;&nbsp;</span></li>
+<li>&nbsp;&nbsp;</li>
+<li><span class="annotation">@RestController&nbsp;&nbsp;</span></li>
+<li><span class="keyword">public&nbsp;<span class="keyword">class&nbsp;UserController&nbsp;{&nbsp;&nbsp;</span></span></li>
+<li>&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<span class="annotation">@Autowired&nbsp;&nbsp;</span></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">private&nbsp;UserMapper&nbsp;userMapper;&nbsp;&nbsp;</span></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<span class="annotation">@RequestMapping(<span class="string">"/getUser")&nbsp;&nbsp;</span></span></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public&nbsp;User&nbsp;getUser(Integer&nbsp;userId)&nbsp;{&nbsp;&nbsp;</span></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if(userId&nbsp;==&nbsp;<span class="keyword">null)&nbsp;{&nbsp;&nbsp;</span></span></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userId&nbsp;=&nbsp;<span class="number">1;&nbsp;&nbsp;</span></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return&nbsp;userMapper.getById(userId);&nbsp;&nbsp;</span></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<span class="annotation">@RequestMapping(<span class="string">"/saveUser")&nbsp;&nbsp;</span></span></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public&nbsp;User&nbsp;saveUser(User&nbsp;user)&nbsp;{&nbsp;&nbsp;</span></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;userMapper.save(user);&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return&nbsp;user;&nbsp;&nbsp;</span></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+<li>}&nbsp;&nbsp;</li>
+</ol></div>
+<p>&nbsp;</p>
+<p><strong>五、SpringBoot Mybatis增加驼峰命名规则：</strong></p>
+<p>因为是注解版，没有配置文件，所以SpringBoot增加驼峰命名需要增加一个自定义配置类（ConfigurationCustomizer）：</p>
+<div id="" class="dp-highlighter">
+<div class="bar">
+<div class="tools">Java代码&nbsp;&nbsp;<a title="收藏这段代码"><img class="star" src="http://fanshuyao.iteye.com/images/icon_star.png" alt="收藏代码"></a></div>
+</div>
+<ol class="dp-j" start="1">
+<li><span class="keyword">import&nbsp;org.mybatis.spring.boot.autoconfigure.ConfigurationCustomizer;&nbsp;&nbsp;</span></li>
+<li><span class="keyword">import&nbsp;org.springframework.context.annotation.Bean;&nbsp;&nbsp;</span></li>
+<li><span class="keyword">import&nbsp;org.springframework.context.annotation.Configuration;&nbsp;&nbsp;</span></li>
+<li>&nbsp;&nbsp;</li>
+<li><span class="comment">/**&nbsp;</span></li>
+<li><span class="comment">&nbsp;*&nbsp;mybatis&nbsp;注解版&nbsp;&nbsp;</span></li>
+<li><span class="comment">&nbsp;*&nbsp;</span></li>
+<li><span class="comment">&nbsp;*/&nbsp;&nbsp;</span></li>
+<li><span class="annotation">@Configuration&nbsp;&nbsp;</span></li>
+<li><span class="keyword">public&nbsp;<span class="keyword">class&nbsp;MybatisConfig&nbsp;{&nbsp;&nbsp;</span></span></li>
+<li>&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<span class="annotation">@Bean&nbsp;&nbsp;</span></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public&nbsp;ConfigurationCustomizer&nbsp;configurationCustomizer()&nbsp;{&nbsp;&nbsp;</span></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return&nbsp;<span class="keyword">new&nbsp;ConfigurationCustomizer()&nbsp;{&nbsp;&nbsp;</span></span></li>
+<li>&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="annotation">@Override&nbsp;&nbsp;</span></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">public&nbsp;<span class="keyword">void&nbsp;customize(org.apache.ibatis.session.Configuration&nbsp;configuration)&nbsp;{&nbsp;&nbsp;</span></span></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;configuration.setMapUnderscoreToCamelCase(<span class="keyword">true);<span class="comment">//设置驼峰命名规则&nbsp;&nbsp;</span></span></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</li>
+<li>}&nbsp;&nbsp;</li>
+</ol></div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>================================</p>
+<p>©Copyright&nbsp;蕃薯耀 2018年4月8日</p>
+<p>http://www.cnblogs.com/fanshuyao/</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2018-04-08 15:22</span> <a href='https://www.cnblogs.com/fanshuyao/'>蕃薯耀</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=8745196" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(8745196);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=322877,cb_entryId=8745196,cb_blogApp=currentBlogApp,cb_blogUserGuid='534f6152-a0c2-e611-845c-ac853d9f53ac',cb_entryCreatedDate='2018/4/8 15:22:00';loadViewCount(cb_entryId);var cb_postType=1;</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+<script>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+</script>
+
+<script>
+  googletag.cmd.push(function() {
+    googletag.defineSlot('/1090369/C2', [468, 60], 'div-gpt-ad-1539008685004-0').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.enableServices();
+  });
+</script>
+<div id='cnblogs_c2' class='c_ad_block'>
+    <div id='div-gpt-ad-1539008685004-0' style='height:60px; width:468px;'>
+    <script>
+    if (new Date() >= new Date(2018, 9, 13)) {
+        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1539008685004-0'); });
+    }
+    </script>
+    </div>
+</div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2018 蕃薯耀
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

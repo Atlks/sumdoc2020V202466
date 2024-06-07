@@ -1,0 +1,52 @@
+paip. 提升性能---hibernate的缓存使用 总结
+
+
+作者Attilax  艾龙，  EMAIL:1466519819@qq.com 
+来源：attilax的专栏
+地址：http://blog.csdn.net/attilax
+
+
+除了延迟加载、迫切外连接、查询过滤等,可以使用在的内存缓存比如memcache
+
+
+
+
+Hibernate缓存分为二级，第一级存放于session中称为一级缓存，默认带有且不能卸载。
+ 
+第二级是由sessionFactory控制的进程级缓存。是全局共享的缓存，凡是会调用二级缓存的查询方法 都会从中受益。只有经正确的配置后二级缓存才会发挥作用。同时在进行条件查询时必须使用相应的方法才能从缓存中获取数据。比如Query.iterate()方法、load、get方法等。必须注意的是session.find方法永远是从数据库中获取数据，不会从二级缓存中获取数据，即便其中有其所需要的数据也是如此。
+（经过以前作项目的经验，一般会有3~4倍的性能提高） 对系统整体性能的改善往往具有立竿见影的效果！
+
+
+使用在的内存缓存比如memcache
+
+
+
+ ibernate提供了二级缓存的接口： 
+net.sf.hibernate.cache.Provider, 
+同时提供了一个默认的 实现net.sf.hibernate.cache.HashtableCacheProvider， 
+也可以配置 其他的实现 比如ehcache,jbosscache等。
+具体的配置位置位于hibernate.cfg.xml文件中 
+<property name="hibernate.cache.use_query_cache">true</property> 
+<property name="hibernate.cache.provider_class">net.sf.hibernate.cache.HashtableCacheProvider</property>
+很多的hibernate使用者在 配置到 这一步 就以为 完事了， 
+注意：其实光这样配，根本 就没有使用hibernate的二级缓存。同时因为他们在使用hibernate时大多时候是马上关闭session，所以，一级缓存也没有起到任何作用。结果就是没有使用任何缓存，所有的hibernate操作都是直接操作的数据库！！性能可以想见。
+正确的办法是除了以上的配置外还应该配置每一个vo对象的具体缓存策略，在影射文件中配置。例如：
+<hibernate-mapping> 
+<class name="com.sobey.sbm.model.entitySystem.vo.DataTypeVO" table="dcm_datatype"> 
+<cache usage="read-write"/> 
+<id name="id" column="TYPEID" type="java.lang.Long"> 
+<generator class="sequence"/> 
+</id>
+<property name="name" column="NAME" type="java.lang.String"/> 
+<property name="dbType" column="DBTYPE" type="java.lang.String"/> 
+</class> 
+</hibernate-mapping>
+
+关键就是这个<cache usage="read-write"/>，其有几个选择 
+read-only,read-write,transactional,等 
+然后在执行查询时 注意了 ，如果是条件查询，或者返回所有结果的查询，此时session.find()方法 不会获取缓存中的数据。只有调用query.iterate()方法时才会调缓存的数据。
+同时 get 和 load方法 是都会查询缓存中的数据 .
+
+
+参考
+关于hibernate的缓存使用 - woshichenxu的专栏 - 博客频道 - CSDN.NET.htm

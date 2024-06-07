@@ -1,0 +1,39 @@
+paip.应用程序远程WEB 接口的设计
+
+
+一个C#写的客户端软件,需要开放一个远程接口,最方便的当然是WEB URL接口了.呵.当然要是免安装的模块才好用哟.
+
+
+
+第一种方案,  WebDev.WebServer40.
+
+IIS就算了,不绿色..要安装麻烦.
+可用WebDev.WebServer40.EXE,它有CLI接口.
+
+
+第二种 ,APACHE
+可用CLI接口直接调用...也可用安装SVR方式,来调用..
+
+BOOT 
+
+"d:\jtm\wamp\apache2\bin\httpd.exe"  
+THEN WAITFOR() ...
+
+
+CLOSE THEN SHUTDOWN.
+
+
+
+
+第三种方案 TOMCAT
+有现成的BAT.
+
+
+
+
+
+参考
+
+Asp.net微型服务器原理说明
+Asp.net 2.0迷你服务器 绿色版
+如何在windows命令行（手动操作）安装 卸载apache及mysql的方法_雷子_新浪博客.htm

@@ -1,0 +1,460 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<script type="text/javascript">
+        if (window.location.toString().indexOf("shtml?") > 0) {
+            self.location = window.location.toString().replace(window.location.search.toString(), "");
+        }
+        function doccheckart(json) {
+            if (json[0].result == "1") {
+                self.location = "http://www.360doc.com/noarticle.aspx";
+            }
+        }
+    </script>
+<script src="/js/jquery1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+        if (navigator.userAgent.indexOf("iPhone") > 0 || navigator.userAgent.indexOf("Android") > 0 || navigator.userAgent.indexOf("iPod") > 0) {  //手机端跳转
+            var patt1 = new RegExp("[0-9]*_[0-9]*");
+            var url = patt1.exec(location.href);
+            if (url != "") {
+                self.location = "http://www.360doc.cn/article/" + url + ".html";
+            }
+        }
+        if ( 645828496 !=  645828496) {
+            $.ajax({
+                url: "http://www.360doc.com/ajax/getuserid.ashx",
+                cache: false,
+                dataType: "json",
+                success: function (result) {
+                    if (21706453 != result.userid) { 
+                        self.location = "http://www.360doc.com/content/17/0415/16/21706453_645828496.shtml";
+                    }
+                }
+            });
+        }
+    </script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="360doc" name="classification" /><link rel="alternate" media="only screen and (max-width: 640px)" href="http://www.360doc.cn/article/21706453_645828496.html"/><meta content="paramvalues,sql,mapper" name=keywords><meta content="Java获取Mybatis动态生成的sql" name=description><meta name="mobile-agent" content="format=html5;url=http://www.360doc.cn/article/21706453_645828496.html"/><meta content="根据sqlId获取mybatis动态生成的sql，并设置查询参数值，最终获取可以直接执行的sql。" name=360docabstract><meta content="www.360doc.com" name="author" /><title>
+Java获取Mybatis动态生成的sql
+</title>
+<script src="/js/showarticlefollow20160329.js?t=2017062101" type="text/javascript" charset="utf-8"></script>
+<script src="http://www.360doc.com/js/jQuery.md5.min.js?t=2016041501" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?d86954201130d615136257dde062a503";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+<link rel="stylesheet" type="text/css" href="http://css.360doc.com/wzhead-cleaned.css?t=2016011601" /><link rel="stylesheet" type="text/css" href="http://css.360doc.com/newArticle20160509.css?t=2017101701" />
+<script type="text/javascript" language="javascript">
+        window.onerror = ignoreError;
+        function ignoreError() {
+            return true;
+        }
+    </script>
+<link href="http://css.360doc.com/index7/newheader.css?t=2016123003" rel="stylesheet" type="text/css" /></head>
+<body onmouseup="setDragEnd()" onclick="delAllDiv(event)">
+<span id="LayerLogin"></span>
+<div style="position: fixed; width: 100%; z-index: 1000;">
+<div class="header" style="background-color: #ffffff;">
+<div class="header_1">
+<a href="http://www.360doc.com/index.html">
+<img src="http://pubimage.360doc.com/index7/nlogo.jpg" class="f_left" /></a>
+<div class="mylibrary">
+<a id="userInfoUrl" href="http://www.360doc.com/my360doc.aspx" class="a1">
+<div class="h_user">
+<img id="divuserinfonew" src="http://pubimage.360doc.com/index7/dingtu.gif" /><span></span>
+</div>
+我的图书馆
+</a>
+<ul class="hm_list hm_account" style="display: none;">
+<li><a href="http://www.360doc.com/myindex.aspx">首页</a></li>
+<li><a href="http://www.360doc.com/myfiles.aspx?app=1&type=3">馆藏</a></li>
+<li><a href="http://www.360doc.com/myreadroom.aspx">阅览室</a></li>
+<li><a href="http://www.360doc.com/mystudy.aspx">学习圈</a></li>
+<li><a href="http://www.360doc.com/mycontacts.aspx">通讯录</a></li>
+<li><a href="javascript:void(0);" onclick="displaylogin();">退出帐号</a></li>
+</ul>
+</div>
+<div class="headmail f_left" style="display: none;">
+<p class="h_icon1" id="newMsg"></p>
+<span class="h_border"></span>
+<ul class="hm_list" id="msgtips">
+<li id="msgicon"><a href="/mymsg.aspx?app=2">查看信箱</a></li>
+<li id="sysmsgicon"><a href="/mymsg.aspx?app=9">系统消息</a></li>
+<li id="sysicon"><a href="/mymsg.aspx?app=4">官方通知</a></li>
+<li class="hm_color2" style="background-color: #f4f4f4"><a href="/mymsg.aspx?app=6">设置</a></li>
+</ul>
+</div>
+<div class="headtalker f_left" style="display: none;">
+<p class="h_icon1" id="newDialog"></p>
+<span class="h_border"></span>
+<ul class="hm_list">
+<li id="li1chat"><a href="javascript:void(0)" onclick="initchatnew()">开始对话</a></li>
+<li id="li2chat" style="display: none;"><a href="javascript:void(0)" style="color: #141414;">有<span>11</span>人和你对话，<span onclick="initchatnew()" style="color: #4578b4">查看</span>&nbsp;<span onclick="clearinfochat()" style="color: #4578b4">忽略</span></a></li>
+<li><a href="http://www.360doc.com/mycontacts.aspx?app=8">历史对话记录</a></li>
+<li class="hm_color2" style="background-color: #f4f4f4"><a href="http://www.360doc.com/mycontacts.aspx?app=7">通知设置</a></li>
+</ul>
+</div>
+<a href="http://www.360doc.com/advice.html" target="_blank" class="head_talk f_right">留言交流</a>
+<div class="headsearch f_right">
+<div class="zcomdiv">
+<input type="text" class="headsearch_inp f_left" value="搜文章 找馆友" />
+<span class="headsearch_btn f_right" id="searchlinkid"></span>
+</div>
+<div class="headsearch_select">
+<p class="hs_title">请选择搜索范围</p>
+<a href="javascript:goSearch();" class="cur">含&nbsp;<span></span>&nbsp;的文章</a>
+<a href="javascript:goSearch();">昵称为&nbsp;<span></span>&nbsp;的馆友</a>
+<a href="javascript:goSearch();">兴趣为&nbsp;<span></span>&nbsp;的馆友</a>
+</div>
+</div>
+</div>
+</div>
+<div class="arti_type_shadow"></div>
+</div>
+<div style="height: 68px; _height: 0px; width: 100%;"></div>
+<div class="clear360doc"></div>
+<div class="doc360article_content">
+<div style="height: 90px; padding-top: 13px;">
+<script async src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'></script><ins class='adsbygoogle' style='display: inline-block; width: 970px; height: 90px' data-ad-client='ca-pub-6625678643128649' data-ad-slot='2709112222'></ins><script> (adsbygoogle = window.adsbygoogle || []).push({ }); </script>
+</div>
+<p class="clearboth"></p>
+<div class="a_left">
+<div id="bgchange">
+<div class="fontsize_bgcolor_controler">
+<div class="a_bgcolor">
+<img src="http://pubimage.360doc.com/NewArticle/bgcolor.jpg" />
+<div class="a_colorlist">
+<span class="a_color1" onclick="artStatistics('20-11-1');">
+<img src="http://pubimage.360doc.com/NewArticle/yes.gif" /></span>
+<span class="a_color2" onclick="artStatistics('20-11-2');">
+<img src="http://pubimage.360doc.com/NewArticle/yes.gif" /></span>
+<span class="a_color3" onclick="artStatistics('20-11-3');">
+<img src="http://pubimage.360doc.com/NewArticle/yes.gif" /></span>
+<span class="a_color4" onclick="artStatistics('20-11-4');">
+<img src="http://pubimage.360doc.com/NewArticle/yes.gif" /></span>
+<span class="a_color5" onclick="artStatistics('20-11-5');">
+<img src="http://pubimage.360doc.com/NewArticle/yes.gif" /></span>
+<span class="a_color6 cur" onclick="artStatistics('20-11-6');">
+<img src="http://pubimage.360doc.com/NewArticle/yes.gif" /></span>
+</div>
+</div>
+<div class="a_fontsize">
+<img src="http://pubimage.360doc.com/NewArticle/fontSize.jpg" />
+<div class="fschange">
+<label>
+<input type="radio" name="font_Size" id="" value="18" onclick="artStatistics('20-10-1');" />大
+</label>
+&nbsp;
+<label>
+<input type="radio" name="font_Size" id="" value="16" onclick="artStatistics('20-10-2');" />中
+</label>
+&nbsp;
+<label>
+<input type="radio" name="font_Size" id="" value="14" onclick="artStatistics('20-10-3');" />小
+</label>
+</div>
+</div>
+</div>
+<h2 id="titiletext">Java获取Mybatis动态生成的sql</h2>
+<div class="article_data">
+<div class="article_data_left">
+2017-04-15
+<span class="a_username">&nbsp;<a href="http://www.360doc.com/userhome/21706453" id="savernickname" target="_blank" onclick="artStatistics(&#39;20-7-1&#39;);">我心永恒lz</a>
+</span>
+<span id="articleinfo">
+<span id="docsource" class="a_from"></span><span id="360doc_Readnum"></span><span id="360docResaveCount"><span onclick="ShowSaverUser();artStatistics('20-13');" id="360doc_saverNum" style="cursor: pointer;"></span>
+<span id="360doc_saverUser">
+<div style="position: absolute; height: 305px; width: 144px; left: 0px; z-index: 2;" id="sameArtOuter">
+<div onclick="event.cancelBubble=true;" style="overflow-y: auto; height: 300px; overflow-x: hidden; z-index: 100; right: 0px; margin-top: -10px;" id="sameArt">
+</div>
+</div>
+</span>
+</span>
+</span>
+</div>
+<div id="resavelayer1" class="bdsharebuttonbox article_data_right">
+</div>
+</div>
+<div id="articlecontent" class="article_container" onmousedown="newhighlight = true;" onmouseup="NewHighlight(event);">
+<table>
+<tbody>
+<tr>
+<td id="artContent" width="656">
+<div style="width: 656px; margin: 0; padding: 0; height: 0;"></div>
+<b>1.dao接口与mapper.xml</b><div><b>1.1 接口：ResourceMapper.java&nbsp;</b></div><div><div><div>public interface ResourceMapper extends IBaseMapper&lt;ResourceEntity&gt; {</div><div><span style="white-space:pre"> </span></div><div><span style="white-space:pre"> </span>public List&lt;Map&lt;String, Object&gt;&gt; selectExportResEntities(</div><div><span style="white-space:pre"> </span>Map&lt;String, Object&gt; paramMap);</div><div><br></div><div>}</div></div></div><div><br></div><div><b>1.2 mapper：<span style="line-height: 1.5;">ResourceMapper.xml</span></b></div><div><div>&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div>&lt;!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"&nbsp;</div><div><span style="white-space:pre"> </span>"http://mybatis.org/dtd/mybatis-3-mapper.dtd"&gt;</div><div>&lt;mapper namespace="com.demo.core.resource.mapper.ResourceMapper"&gt;</div><div><span style="white-space:pre"> </span>&lt;sql id="conditions"&gt;&lt;!-- Search Condition --&gt;</div><div><span style="white-space:pre"> </span>&lt;where&gt;</div><div><span style="white-space:pre"> </span>&lt;if test="id != null"&gt;id = #{id}&lt;/if&gt;</div><div><span style="white-space:pre"> </span>&lt;if test="pid != null"&gt;and pid = #{pid}&lt;/if&gt;</div><div><span style="white-space:pre"> </span>&lt;if test="parentName != null and parentName != ''"&gt;</div><div><span style="white-space:pre"> </span>and parent_name = #{parentName}</div><div><span style="white-space:pre"> </span>&lt;/if&gt;</div><div><span style="white-space:pre"> </span>&lt;if test="resourceName != null and resourceName != ''"&gt;</div><div><span style="white-space:pre"> </span>and resource_name = #{resourceName}</div><div><span style="white-space:pre"> </span>&lt;/if&gt;</div><div><span style="white-space:pre"> </span>&lt;if test="resourceType != null"&gt;and resource_type = #{resourceType}&lt;/if&gt;</div><div><span style="line-height: 1.5; white-space: pre;"> </span><span style="line-height: 1.5;">&lt;if test="menuUrl != null and menuUrl != ''"&gt;and menu_url = #{menuUrl}&lt;/if&gt;</span></div><div><span style="white-space:pre"> </span>&lt;if test="addTime != null"&gt;and add_time = #{addTime}&lt;/if&gt;</div><div><span style="white-space:pre"> </span>&lt;if test="updateTime != null"&gt;and update_time = #{updateTime}&lt;/if&gt;</div><div><span style="line-height: 1.5; white-space: pre;"> </span><span style="line-height: 1.5;">&lt;/where&gt;</span></div><div><span style="white-space:pre"> </span>&lt;/sql&gt;</div><div><span style="white-space:pre"> </span></div><div><span style="white-space:pre"> </span>&lt;select id="selectExportResEntities" parameterType="Map" resultType="Map"&gt;</div><div><span style="white-space:pre"> </span>select resource_name, parent_name, menu_url, add_time, update_time&nbsp;</div><div><span style="white-space:pre"> </span>from sys_core_resource&nbsp;</div><div><span style="white-space:pre"> </span>&lt;include refid="conditions"/&gt;</div><div><span style="white-space:pre"> </span>order by pid, id&nbsp;</div><div><span style="white-space:pre"> </span>limit #{pageBegin},#{pageSize}</div><div><span style="white-space:pre"> </span>&lt;/select&gt;</div><div>&lt;/mapper&gt;</div></div><div><br></div><div><b>2.根据sqlId获取动态sql &nbsp;</b></div><div><div>import java.sql.Timestamp;</div><div>import java.util.ArrayList;</div><div>import java.util.Date;</div><div>import java.util.HashMap;</div><div>import java.util.List;</div><div>import java.util.Map;</div><div>import org.apache.ibatis.mapping.BoundSql;</div><div>import org.apache.ibatis.mapping.MappedStatement;</div><div>import org.apache.ibatis.mapping.ParameterMapping;</div><div>import org.apache.ibatis.mapping.ParameterMode;</div><div>import org.apache.ibatis.session.SqlSessionFactory;</div><div>import org.slf4j.Logger;</div><div>import org.slf4j.LoggerFactory;</div><div>import org.springframework.beans.factory.annotation.Autowired;</div><div>import org.springframework.stereotype.Component;</div><div>import com.demo.core.resource.mapper.ResourceMapper;</div><div>import com.demo.core.utils.DateUtils;</div><div><br></div><div>@Component</div><div>public class MyBatisSql {</div><div><br></div><div><span style="white-space:pre"> </span>private final Logger logger = LoggerFactory.getLogger(MyBatisSql.class);</div><div><span style="white-space:pre"> </span></div><div><span style="white-space:pre"> </span>private final String sqlId = ResourceMapper.class.getName() + ".selectExportResEntities";</div><div><span style="white-space:pre"> </span></div><div><span style="white-space:pre"> </span>@Autowired</div><div><span style="white-space:pre"> </span>private SqlSessionFactory sqlSessionFactory;</div><div><span style="white-space:pre"> </span></div><div><span style="white-space:pre"> </span>public void execute() throws Exception {</div><div><span style="white-space:pre"> </span>Map&lt;String, Object&gt; paramMap = initParamMap();</div><div><span style="white-space:pre"> </span>MappedStatement ms = sqlSessionFactory.getConfiguration()</div><div><span style="white-space:pre"> </span>.getMappedStatement(sqlId);</div><div><span style="white-space:pre"> </span>BoundSql boundSql = ms.getBoundSql(paramMap);</div><div><span style="white-space:pre"> </span>List&lt;ParameterMapping&gt; parameterMappings = boundSql.getParameterMappings();</div><div><span style="white-space:pre"> </span>List&lt;Object&gt; paramValues = getParamValues(paramMap, parameterMappings);</div><div><span style="white-space:pre"> </span>// 获取执行的sql，此时未设置参数</div><div><span style="white-space:pre"> </span>String sql = boundSql.getSql();</div><div><span style="white-space:pre"> </span>String execSql = getExecuteSql(sql, paramValues);</div><div><span style="white-space:pre"> </span>logger.info("sql：{}\n", execSql);</div><div><span style="white-space:pre"> </span>}</div><div><br></div><div><span style="white-space:pre"> </span>/**</div><div><span style="white-space:pre"> </span>* 设置查询参数值，返回可直接执行的sql</div><div><span style="white-space:pre"> </span>*/</div><div><span style="white-space:pre"> </span>private String getExecuteSql(String sql, List&lt;Object&gt; paramValues) {</div><div><span style="white-space:pre"> </span>while(sql.indexOf("?") != -1 &amp;&amp; paramValues.size() &gt; 0) {</div><div><span style="white-space:pre"> </span>Object paramValue = paramValues.get(0);</div><div><span style="white-space:pre"> </span>String value = paramValue.toString();</div><div><span style="white-space:pre"> </span>if (paramValue instanceof String) {</div><div><span style="white-space:pre"> </span>value = "'" + paramValue.toString() + "'";</div><div><span style="white-space:pre"> </span>}</div><div><span style="white-space:pre"> </span>else if (paramValue instanceof Date || paramValue instanceof Timestamp) {</div><div><span style="white-space:pre"> </span>value = DateUtils.format((Date) paramValue,</div><div><span style="white-space:pre"> </span>&nbsp;DateUtils.yyyy_MM_dd_HH_mm_ss);</div><div><span style="white-space:pre"> </span>value = "str_to_date('" + value + "','%Y-%m-%d %T')";</div><div><span style="white-space:pre"> </span>}</div><div><span style="white-space:pre"> </span>sql = sql.replaceFirst("\\?", value);</div><div><span style="white-space:pre"> </span>paramValues.remove(0);</div><div><span style="white-space:pre"> </span>}</div><div><span style="white-space:pre"> </span>return sql;</div><div><span style="white-space:pre"> </span>}</div><div><br></div><div><span style="white-space:pre"> </span>/**</div><div><span style="white-space:pre"> </span>* 根据动态查询条件获取查询参数值</div><div><span style="white-space:pre"> </span>*/</div><div><span style="white-space:pre"> </span>private List&lt;Object&gt; getParamValues(Map&lt;String, Object&gt; paramMap,&nbsp;</div><div><span style="white-space:pre"> </span>List&lt;ParameterMapping&gt; parameterMappings) {</div><div><span style="white-space:pre"> </span>if (parameterMappings == null) {</div><div><span style="white-space:pre"> </span>return new ArrayList&lt;Object&gt;();</div><div><span style="white-space:pre"> </span>}</div><div><span style="white-space:pre"> </span>List&lt;Object&gt; paramValues = new ArrayList&lt;Object&gt;();</div><div><span style="white-space:pre"> </span>for (ParameterMapping pm : parameterMappings) {</div><div><span style="white-space:pre"> </span>if (pm.getMode() != ParameterMode.OUT) {</div><div><span style="white-space:pre"> </span>String paramName = pm.getProperty();</div><div><span style="white-space:pre"> </span>Object paramValue = paramMap.get(paramName);</div><div><span style="white-space:pre"> </span>paramValues.add(paramValue);</div><div><span style="white-space:pre"> </span>}</div><div><span style="white-space:pre"> </span>}</div><div><span style="white-space:pre"> </span>return paramValues;</div><div><span style="white-space:pre"> </span>}</div><div><br></div><div><span style="white-space:pre"> </span>/**</div><div><span style="white-space:pre"> </span>* 初始化查询参数</div><div><span style="white-space:pre"> </span>*/</div><div><span style="white-space:pre"> </span>private Map&lt;String, Object&gt; initParamMap() {</div><div><span style="white-space:pre"> </span>Map&lt;String, Object&gt; paramMap = new HashMap&lt;String, Object&gt;();</div><div><span style="white-space:pre"> </span>paramMap.put("resourceName", "用户管理");</div><div><span style="white-space:pre"> </span>paramMap.put("parentName", "权限管理");</div><div><span style="white-space:pre"> </span>paramMap.put("pageBegin", 0);</div><div><span style="white-space:pre"> </span>paramMap.put("pageSize", 20);</div><div><span style="white-space:pre"> </span>//&nbsp;paramMap.put("addTime", new Date());</div><div><span style="white-space:pre"> </span>return paramMap;</div><div><span style="white-space:pre"> </span>}</div><div><br></div><div>}</div></div><div><br></div><div><b>3.执行结果</b></div><div>执行代码后打印出如下sql：</div><div><div>select resource_name, parent_name, menu_url, add_time, update_time&nbsp;</div><div>from sys_core_resource&nbsp;</div><div>where parent_name = '权限管理'</div><div>and resource_name = '用户管理'&nbsp;</div><div>order by pid, id&nbsp;</div><div>limit 0,20</div></div><div><br></div><div><br></div>
+</td>
+<script>
+                                    var html = document.getElementById("artContent").innerHTML;
+                                    document.getElementById("artContent").innerHTML = html;
+
+                                </script>
+</tr>
+</tbody>
+</table>
+<div id="viewerPlaceHolder" style="width: 717px; height: 700px; display: none; margin: 0 auto;">
+</div>
+</div>
+<table>
+<tbody>
+<tr>
+<td>
+<ul></ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div></div>
+<span></span>
+<a></a>
+<p style="margin: 0; padding: 0;"></p>
+<p class="clearboth"></p>
+<div id="divreward" style="display: none;"></div>
+<div class="bdsharebuttonbox bottombtn" style="margin-top: 33px;">
+<div class="zcommond" style="overflow: visible;">
+<a href="javascript:void(0);" class="btn_collect" onclick="SaveArt();artStatistics('20-3-2');">转藏到我的图书馆</a>
+<a id="flowimg3" href="javascript:void(0);" class="btn_good" onclick="Showflowerlayer('sendedLayer1');">献花（<span id="articleflowernum">0</span>）
+<span id="flowernumadd" style="display: none;">+1</span>
+</a>
+<span class="span1 f_left" onclick="setTimeout(function(){$('.bottombtn .sharelist_new').slideToggle(0);},10);artStatistics('20-8-3');" onmouseover="this.style.color='#0f659c'" onmouseout="this.style.color=''">分享：</span>
+<a class="sharewx f_left" href="javascript:void(0);" onclick="shareWeixin();artStatistics('20-8-6');">微信</a>
+<div class="s2 f_left" onclick="setTimeout(function(){$('.bottombtn .sharelist_new').slideToggle(0);},10);artStatistics('20-8-4');"><span></span></div>
+</div>
+<div class="sharelist_new" id="fenxiangLayer2">
+<a class="slbg1" href="javascript:void(0);" data-cmd="qzone" onclick="artStatistics('20-8-8');">QQ空间</a>
+<a class="slbg2" href="javascript:void(0);" data-cmd="sqq" onclick="artStatistics('20-8-10');">QQ好友</a>
+<a class="slbg3" href="javascript:void(0);" data-cmd="tsina" onclick="artStatistics('20-8-12');">新浪微博</a>
+<a class="slbg5" href="javascript:void(0);" onclick="showdivemail1();artStatistics('20-8-16');">推荐给朋友</a>
+</div>
+</div>
+<div class="bottom_controler">
+<p class="bottom_cleft">
+来自：
+<span class="a_username" style="width: auto;">
+<a href="http://www.360doc.com/userhome/21706453" id="savernickname2" target="_blank" onclick="artStatistics(&#39;20-7-2&#39;);">我心永恒lz</a>
+</span>
+&gt;
+<span id="cname" class="a_from"><a href='http://www.360doc.com/userhome.aspx?userid=21706453&cid=10' target='_blank' onclick='artStatistics("20-6");'>《Java》</a></span>
+</p>
+<div class="bottom_cright">
+<a href=" https://www.baidu.com/s?wd=paramvalues+sql+mapper&tn=SE_hldp01010_6r0gix1f" target="_blank" class="a1" onclick="artStatistics('20-19');">以文找文</a>
+&nbsp;&nbsp;|&nbsp;&nbsp;
+<a href="javascript:void(0);" class="a2" onclick="showAlertLayer1();artStatistics('20-18');">举报</a>
+</div>
+</div>
+<div class="prev_next">
+<p id="lastart" class="p1">
+</p>
+<p id="nextart" class="p2">
+</p>
+</div>
+</div>
+<p class="clearboth"></p>
+<div style="width: 676px; float: left;">
+<div class="str_border" style="border: none; position: relative; z-index: 2;">
+<strong>猜你喜欢</strong>
+</div>
+<ul class="youlike" style="margin-top: -18px; position: relative; z-index: 1;">
+<div style="width: 676px; height: 280px; border: 0;" id="divyoulikead">
+</div>
+</ul>
+<div class="zcommond" style="padding: 10px 0 5px;">
+<div class="bottom_article f_left">
+<div class="str_border">
+<strong>类似文章</strong>
+<a href=http://www.360doc.com/relevant/645828496_more.shtml target='_blank' class='a_more f_right' onclick='artStatistics("20-9-8");'>更多</a>
+</div>
+<ul class="barticle_list">
+<li><span><a href=http://www.360doc.com/content/15/0530/15/16070877_474437078.shtml target=_blank onclick='artStatistics("20-9-7");'>Mybatis中几个重要类</a></span></li>
+<li><span><a href=http://www.360doc.com/content/17/0225/04/37424840_631818979.shtml target=_blank onclick='artStatistics("20-9-7");'>在Spring Boot中集成Mybatis</a></span></li>
+<li><span><a href=http://www.360doc.com/content/16/0918/15/7662927_591743464.shtml target=_blank onclick='artStatistics("20-9-7");'>Mybatis 调用oracle存储过程返回结果集</a></span></li>
+<li><span><a href=http://www.360doc.com/content/15/0320/13/10675863_456676114.shtml target=_blank onclick='artStatistics("20-9-7");'>Mybatis传多个参数（三种解决方案）</a></span></li>
+<li><span><a href=http://www.360doc.com/content/15/0311/13/10675863_454281733.shtml target=_blank onclick='artStatistics("20-9-7");'>JAVA版微信支付V3-完全版</a></span></li>
+<li><span><a href=http://www.360doc.com/content/13/0125/13/4280915_262315790.shtml target=_blank onclick='artStatistics("20-9-7");'>mybatis写mapper文件注意事项</a></span></li>
+<li><span><a href=http://www.360doc.com/content/13/1219/16/8790037_338433518.shtml target=_blank onclick='artStatistics("20-9-7");'>mybatis实战教程(mybatis in action),my...</a></span></li>
+<li><span><a href=http://www.360doc.com/content/15/0907/17/12642656_497510233.shtml target=_blank onclick='artStatistics("20-9-7");'>MyBatis入门基础(一)</a></span></li>
+</ul>
+</div>
+<div class="bottom_article f_right">
+<div class="str_border">
+<strong>精选文章</strong>
+</div>
+<ul class="barticle_list">
+<li><span><a onclick="artStatistics('20-9-9');" href=http://www.360doc.com/content/13/0511/23/10284669_284613613.shtml target="_blank">二十八星宿详解</a></span></li>
+<li><span><a onclick="artStatistics('20-9-9');" href=http://www.360doc.com/content/13/0429/23/5173911_281719228.shtml target="_blank">小心了！女人常说的32句双关语</a></span></li>
+<li><span><a onclick="artStatistics('20-9-9');" href=http://www.360doc.com/content/10/0722/15/152695_40569540.shtml target="_blank">财神爷图片，太美了！【见者得财】</a></span></li>
+<li><span><a onclick="artStatistics('20-9-9');" href=http://www.360doc.com/content/13/0910/23/358381_313502766.shtml target="_blank">揭秘世上最不可思议20张图</a></span></li>
+<li><span><a onclick="artStatistics('20-9-9');" href=http://www.360doc.com/content/13/0507/22/13604_283617215.shtml target="_blank">老中医的补肾绝招</a></span></li>
+<li><span><a onclick="artStatistics('20-9-9');" href=http://www.360doc.com/content/12/0817/15/6956316_230606548.shtml target="_blank">中国百句名言及注解</a></span></li>
+<li><span><a onclick="artStatistics('20-9-9');" href=http://www.360doc.com/content/13/0617/18/4441170_293422755.shtml target="_blank">一个U盘使用小窍门*</a></span></li>
+<li><span><a onclick="artStatistics('20-9-9');" href=http://www.360doc.com/content/13/1114/07/2355900_329031304.shtml target="_blank">最赚钱的性格</a></span></li>
+</ul>
+</div>
+</div>
+<div id="divunderad">
+</div>
+<div id="ReflectionPart">
+<div style="height: 156px; margin: 0px 0px;">
+<div class="plbox">
+<div style="padding-left: 6px;">
+<div class="titwx" style="height: 23px; font-size: 16px; font-weight: bold; margin-top: 10px;">
+发表评论<a target="_blank" href="http://www.360doc.com/agreement.html" style="float: right; font-size: 12px; color: #666; font-weight: normal; line-height: 20px; padding-right: 4px;">评论公约</a>
+</div>
+<textarea name="SendRefTB" id="SendRefTB" style="width: 100%; margin-top: 6px; height: 75px; border: 1px solid #e7e7e7; background-color: #fff; overflow: auto; font-size: 12px;" onfocus="testContent(1);" onblur="testContent(2)"></textarea>
+<div style="text-align: right; padding-right: 3px; padding-top: 6px;">
+<div class="huifubt">
+<a id="ImgSendPL" href="javascript:void(0);" onclick="SubmitReflection();"></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div style="padding-top: 15px; padding-left: 15px;" id="Reflction">
+</div>
+</div>
+</div>
+<div class="a_right">
+<div class="user_info">
+<div class="user_photo f_left">
+<p class="user_photopic">
+<a href="http://www.360doc.com/userhome/21706453" id="userphotourl" target="_blank" onclick="artStatistics(&#39;20-7-4&#39;);">
+<img src="http://pubimage.360doc.com/head/cartoon/002.gif" id="userphoto" width="58" height="58" />
+</a>
+</p>
+<a href="javascript:void(0);" onclick="docTalk();artStatistics('20-15');" class="user_talk" title="与TA对话"></a>
+</div>
+<div class="user_data f_right">
+<div class="user_data_name">
+<a href="http://www.360doc.com/userhome/21706453" id="nickname" target="_blank" onclick="artStatistics(&#39;20-7-3&#39;);">我心永恒lz</a>
+<img src="http://pubimage.360doc.com/NewArticle/user_name_tag.gif" alt="图书馆" />
+</div>
+<p id="userdegree"><img src='http://pubimage.360doc.com/NewArticle/userstar1.gif' /><img src='http://pubimage.360doc.com/NewArticle/userstar3.gif' /><img src='http://pubimage.360doc.com/NewArticle/userstar3.gif' /><img src='http://pubimage.360doc.com/NewArticle/userstar3.gif' /><img src='http://pubimage.360doc.com/NewArticle/userstar3.gif' /></p>
+<div class="user_data_num">
+<a id="spanfollowstatus" class="gz_no"></a>
+<script type="text/javascript">isfollow(21706453);</script>
+<span id="follownum">6</span>&nbsp;&nbsp;&nbsp;&nbsp;
+<span>馆藏</span>&nbsp;<span id="artnum">95</span>
+</div>
+</div>
+</div>
+<div class="his_her"><ul class='his_her_type'><li class='f_left cur'>TA的推荐</li><li class='f_right'>TA的最新馆藏</li></ul><div class='his_her_div' style="height:130px;"><ul class='his_her_list'><li><div><span></span><a href=http://www.360doc.com/content/17/0416/18/21706453_646075200.shtml target=_blank onclick="artStatistics('20-9-1');">spring中logback日志详细配置</a></div><div><span></span><a href=http://www.360doc.com/content/17/0415/16/21706453_645828496.shtml target=_blank onclick="artStatistics('20-9-1');">Java获取Mybatis动态生成的sql</a></div><div><span></span><a href=http://www.360doc.com/content/15/0204/17/21706453_446251626.shtml target=_blank onclick="artStatistics('20-9-1');">单点登录CAS技术概述</a></div><div><span></span><a href=http://www.360doc.com/content/15/0127/15/21706453_444210815.shtml target=_blank onclick="artStatistics('20-9-1');">CAS实现SSO单点登录原理</a></div></li><li><div><span></span><a href=http://www.360doc.com/content/17/1009/17/21706453_693526140.shtml target=_blank onclick="artStatistics('20-9-2');">spring集成mybatis配置与源码解析</a></div><div><span></span><a href=http://www.360doc.com/content/17/0929/23/21706453_691232980.shtml target=_blank onclick="artStatistics('20-9-2');">Mybatis源码详解</a></div><div><span></span><a href=http://www.360doc.com/content/17/0919/15/21706453_688409223.shtml target=_blank onclick="artStatistics('20-9-2');">MySQL执行update时的[ERROR 1093]处理方法</a></div><div><span></span><a href=http://www.360doc.com/content/17/0819/22/21706453_680487867.shtml target=_blank onclick="artStatistics('20-9-2');">Redis 存储机制</a></div></li></ul></div></div>
+<div class="clear360doc" style="padding-top: 10px; height: 260px;">
+<div id="divifartad1">
+<script>
+            var strow = document.body.offsetWidth;
+            var strsw = document.body.scrollWidth;
+            var strsc = window.screen.width;
+
+            function aliad1() {
+                document.write('<a style="display:none!important" id="tanx-a-mm_11220363_1101997_10218757"></a>');
+                tanx_s = document.createElement("script");
+                tanx_s.type = "text/javascript";
+                tanx_s.charset = "gbk";
+                tanx_s.id = "tanx-s-mm_11220363_1101997_10218757";
+                tanx_s.async = true;
+                tanx_s.src = "http://p.tanx.com/ex?i=mm_11220363_1101997_10218757";
+                tanx_h = document.getElementsByTagName("head")[0];
+                if (tanx_h) tanx_h.insertBefore(tanx_s, tanx_h.firstChild);
+            }
+
+            function aliad2() {
+                document.write('<a style="display:none!important" id="tanx-a-mm_11220363_1101997_26568831"></a>');
+                tanx_s = document.createElement("script");
+                tanx_s.type = "text/javascript";
+                tanx_s.charset = "gbk";
+                tanx_s.id = "tanx-s-mm_11220363_1101997_26568831";
+                tanx_s.async = true;
+                tanx_s.src = "http://p.tanx.com/ex?i=mm_11220363_1101997_26568831";
+                tanx_h = document.getElementsByTagName("head")[0];
+                if (tanx_h) tanx_h.insertBefore(tanx_s, tanx_h.firstChild);
+            }
+
+
+            if (strsc <= 1024) {
+                aliad1();
+            }
+            else {
+                //300宽
+                aliad2();
+            }
+        </script>
+</div>
+<div style="height: 10px;">
+</div>
+</div>
+<div class="his_her" id="recommendArt" style="margin-top: 5px;">
+<div class="str_border" style="margin: 0;">
+<span style="font-size: 14px; float: left;">喜欢该文的人也喜欢</span>
+<a style="float: right;" class="a_more" onclick="artStatistics('20-9-4');" href="http://www.360doc.com/readroom.html" target="_blank">更多</a>
+</div>
+<div class='his_her_div' style="height: 264px;">
+<ul class='his_her_list'>
+<li id="recommendArtLists"></li>
+</ul>
+</div>
+</div>
+<div class="clear360doc" style="padding-top: 10px;" id="divifartad2">
+</div>
+<br />
+<div id="divifartrightsogou">
+</div>
+<div class="clear360doc" id="divad5" style="padding-top: 11px; zoom: 1; width: 300px;">
+<div id="divad4" style="display: none;">
+<div id="divifartad">
+</div>
+<div class="ggwz">
+<a href="javascript:void(0);" onclick="closead(2);">关闭</a>
+</div>
+<div style="height: 13px;">
+</div>
+</div>
+<div style="clear: both; display: none;" id="divad6">
+<div id="adfloatbaidu">
+</div>
+<div class="ggwz" style="left: 25px;">
+<a href="javascript:void(0);" onclick="closead(3);">关闭</a>
+</div>
+<div style="height: 13px;">
+</div>
+</div>
+<div style="height: 75px;">
+</div>
+</div>
+</div>
+</div>
+<p class="clearboth"></p>
+<input type="hidden" id="artid" value="645828496" />
+<input type="hidden" id="docarttitle" value="Java%e8%8e%b7%e5%8f%96Mybatis%e5%8a%a8%e6%80%81%e7%94%9f%e6%88%90%e7%9a%84sql" />
+<input type="hidden" id="firstartid" value="645828496" />
+<input type="hidden" id="firstuid" value="21706453" />
+<input type="hidden" id="firstarturl" value="http://www.360doc.com/content/17/0415/16/21706453_645828496.shtml" />
+<input type="hidden" id="subclassid" value="-1" />
+<input type="hidden" id="recommendart1" value="454281733" />
+<input type="hidden" id="recommendart2" value="-1" />
+<input type="hidden" id="isowner" value="False" />
+<input type="hidden" id="original" value="0" />
+<input type="hidden" id="showrewardlist" value="0" />
+<input type="hidden" id="saveruserid" value="21706453" />
+<input type="hidden" id="artreadroomid" value="0" />
+<script src="http://www.360doc.com/js/Statistics/sha1.js?t=2017092101" type="text/javascript"></script>
+<script src="http://www.360doc.com/js/Statistics/addStatistics.js?t=2017101601" type="text/javascript"></script>
+<script src="http://www.360doc.com/js/showarticle.js?t=2018030801" type="text/javascript" charset="utf-8"></script>
+<script>GerLookingUserInfo(1,21706453,1,1,'-1',-1,10,0);OutputSource('http://www.360doc.com/userhome/21706453','');OutputLastNextArt('Java+RMI%e4%b9%8bHelloWorld%e7%af%87','http://www.360doc.com/content/15/0313/14/21706453_454819809.shtml',0);</script>
+<script type="text/javascript" src="http://www.360doc.com/js/index7/newheader.js?t=2017092501"></script>
+<script src="http://blockart.360doc.com/ajax/getstatusv2.ashx?aid=645828496" type="text/javascript" charset="utf-8" async="async"></script>
+<script type="text/javascript">
+        var baiduImagePlus = {
+            noLogo: true,
+            unionId: 'u2617463',
+            maxMiniAdCount: 0,
+            formList: [{ formId: 10 }]
+        };
+    </script>
+<script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/i.js"></script>
+</body>
+</html>

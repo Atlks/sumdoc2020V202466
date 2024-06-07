@@ -1,0 +1,3136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://blog.csdn.net/zknxx/article/details/53433592"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="referrer" content="always">
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+    <script src="https://csdnimg.cn/release/phoenix/vendor/tingyun/tingyun-rum-blog.js"></script>
+
+    <link href="https://csdnimg.cn/public/favicon.ico" rel="SHORTCUT ICON">
+    <title>SpringBoot修改默认端口号 - 努力改变人生！ - CSDN博客</title>
+
+            <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/detail-2d964e4ed3.min.css">
+        <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/themes/skin-technology/skin-technology-c445da603f.min.css">
+
+    <script type="text/javascript">
+        var username = "zknxx";
+        var blog_address = "https://blog.csdn.net/zknxx";
+        var static_host = "https://csdnimg.cn/release/phoenix/";
+        var currentUserName = "";
+        var isShowAds = true;
+        var isOwner = false;
+        var loginUrl = "http://passport.csdn.net/account/login?from=https://blog.csdn.net/zknxx/article/details/53433592"
+        var blogUrl = "https://blog.csdn.net/";
+        //页面皮肤样式
+        var curSkin = "skin-technology";
+        // 第四范式所需数据
+        var articleTitles = "SpringBoot修改默认端口号 - 努力改变人生！";
+        var articleID = "53433592";
+
+        var nickName = "木叶之荣";
+    </script>
+    <script type="text/javascript">
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+    </script>
+    <script src="https://csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="https://csdnimg.cn/rabbit/exposure-click/main-1.0.6.js"></script>
+    <!-- 新版上报 -->
+    <script src="//g.csdnimg.cn/track/1.1.1/track.js" type="text/javascript"></script>
+    <!-- 新版上报end -->
+            <link rel="stylesheet" href="https://csdnimg.cn/public/sandalstrap/1.4/css/sandalstrap.min.css">
+    <style>
+        .MathJax, .MathJax_Message, .MathJax_Preview{
+            display: none
+        }
+    </style>
+</head>
+<!-- nodata 第三栏接口无数据时样式不变 -->
+<body class="nodata"> 
+    <link rel="stylesheet" href="https://csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+    <script id="toolbar-tpl-scriptId" src="https://csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="https://blog.csdn.net/"></script>
+<link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/blog_code-c3a0c33d5c.css">
+<link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/vendor/pagination/paging.css">
+<script type="text/javascript">
+	// 容错处理
+	var NEWS_FEED = function(){}
+</script>
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<script type="text/javascript" src="//g.csdnimg.cn/copyright/1.0.3/copyright.js"></script>
+<div style="display:none;">
+	<img src="" onerror='setTimeout(function(){if(!/(csdn.net|iteye.com|baiducontent.com|googleusercontent.com|360webcache.com|sogoucdn.com|bingj.com|baidu.com)$/.test(window.location.hostname)){window.location.href="\x68\x74\x74\x70\x73\x3a\x2f\x2f\x77\x77\x77\x2e\x63\x73\x64\x6e\x2e\x6e\x65\x74"}},3000);'>
+</div>
+<link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/chart-3456820cac.css" />
+
+
+
+<script src="https://dup.baidustatic.com/js/ds.js"></script>
+<div class="container clearfix" id="mainBox">
+		<div class="recommend-right">
+  <ul class="recommend-fixed-box">
+    
+  </ul>
+</div>
+    <main>
+        <div class="blog-content-box">
+	<div class="article-header-box">
+		<div class="article-header">
+			<div class="article-title-box">
+				<span class="article-type type-1 float-left">原</span>				<h1 class="title-article">SpringBoot修改默认端口号</h1>
+			</div>
+			<div class="article-info-box">
+				<div class="article-bar-top">
+																				<span class="time">2016年12月02日 19:11:55</span>
+					<a class="follow-nickName" href="https://me.csdn.net/zknxx" target="_blank">木叶之荣</a>
+						<span class="read-count">阅读数：74759</span>
+						
+														<span class="tags-box artic-tag-box">
+								<span class="label">标签：</span>
+																<a data-track-click='{"mod":"popu_626","con":"SpringBoot"}' data-track-view='{"mod":"popu_626","con":"SpringBoot"}' class="tag-link" href="http://so.csdn.net/so/search/s.do?q=SpringBoot&t=blog" target="_blank">SpringBoot																<a data-track-click='{"mod":"popu_626","con":"zknxx"}' data-track-view='{"mod":"popu_626","con":"zknxx"}' class="tag-link" href="http://so.csdn.net/so/search/s.do?q=zknxx&t=blog" target="_blank">zknxx																<a data-track-click='{"mod":"popu_626","con":"木叶之荣"}' data-track-view='{"mod":"popu_626","con":"木叶之荣"}' class="tag-link" href="http://so.csdn.net/so/search/s.do?q=木叶之荣&t=blog" target="_blank">木叶之荣																<a data-track-click='{"mod":"popu_626","con":"修改默认端口"}' data-track-view='{"mod":"popu_626","con":"修改默认端口"}' class="tag-link" href="http://so.csdn.net/so/search/s.do?q=修改默认端口&t=blog" target="_blank">修改默认端口																<a data-track-click='{"mod":"popu_626","con":"application"}' data-track-view='{"mod":"popu_626","con":"application"}' class="tag-link" href="http://so.csdn.net/so/search/s.do?q=application&t=blog" target="_blank">application																</a>
+							</span>
+																					<div class="tags-box space">
+								<span class="label">个人分类：</span>
+																<a class="tag-link" href="https://blog.csdn.net/zknxx/article/category/6147761"  target="_blank">Web																<a class="tag-link" href="https://blog.csdn.net/zknxx/article/category/6363518"  target="_blank">--------------SpringBoot																</a>
+							</div>
+																					<div class="tags-box space">
+								<span class="label">所属专栏：</span>
+																<a class="tag-link" href="https://blog.csdn.net/column/details/zkn-springboot.html" target="_blank">SpringBoot系列</a>
+																</a>
+							</div>
+																	</div>
+				<div class="operating">
+														</div>
+			</div>
+		</div>
+	</div>
+	<article>
+		<div id="article_content" class="article_content clearfix csdn-tracking-statistics" data-pid="blog"  data-mod=popu_307  data-dsm = "post" >
+								<div class="article-copyright">
+					版权声明：本文为博主原创文章，未经博主允许不得转载。					https://blog.csdn.net/zknxx/article/details/53433592				</div>
+								            <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/ck_htmledit_views-f76675cdea.css" />
+						<div class="htmledit_views">
+                
+<p>有时候我们可能需要启动不止一个SpringBoot，而SpringBoot默认的端口号是8080，所以这时候我们就需要修改SpringBoot的默认端口了。修改SpringBoot的默认端口有两种方式。下面就分别说一下这两种方式。</p>
+<h2>修改application.properties</h2>
+<p><span></span>第一种方式我们只需要在application.properties中加这样的一句话就可以了：server.port=8004。为什么这种方式可以实现修改SpringBoot的默认端口呢？因为在SpringBoot中有这样的一个类：ServerProperties。我们可以大致看一下这个类：</p>
+<p></p>
+<pre><code class="language-java">@ConfigurationProperties(prefix = "server", ignoreUnknownFields = true)
+public class ServerProperties
+		implements EmbeddedServletContainerCustomizer, EnvironmentAware, Ordered {
+
+	/**
+	 * Server HTTP port.
+	 */
+	private Integer port;</code></pre>在这个类里有一个@ConfigurationProperties注解，这个注解会读取SpringBoot的默认配置文件application.properties的值注入到bean里。这里定义了一个server的前缀和一个port字段，所以在SpringBoot启动的时候会从application.properties读取到server.port的值。我们接着往下看一下：
+<p></p>
+<p></p>
+<pre><code class="language-java">	@Override
+	public void customize(ConfigurableEmbeddedServletContainer container) {
+		if (getPort() != null) {
+			container.setPort(getPort());
+		}</code></pre>这里有一个customize的方法，这个方法里会给SpringBoot设置读取到的端口号。
+<p></p>
+<h2>实现EmbeddedServletContainerCustomizer</h2>
+<div><span></span>我们在上面看到了端口号是在customize这个方法中设置的，而这个方法是在EmbeddedServletContainerCustomizer这个接口中的，所以我们可以实现这个接口，来更改SpringBoot的默认端口号。具体代码如下：</div>
+<div><pre><code class="language-java">@RestController
+@EnableAutoConfiguration
+@ComponentScan
+public class FirstExample implements EmbeddedServletContainerCustomizer {
+
+    @RequestMapping("/first.do")
+    String home() {
+        return "Hello World！世界你好！O(∩_∩)O哈哈~！！！我不是太很好!";
+    }
+
+    public static void main(String[] args) {
+
+        SpringApplication.run(FirstExample.class, args);
+    }
+
+    @Override
+    public void customize(ConfigurableEmbeddedServletContainer configurableEmbeddedServletContainer) {
+
+        configurableEmbeddedServletContainer.setPort(8003);
+    }
+}
+</code></pre>然后你在启动SpringBoot的时候，发现端口号被改成了8003.<br /><h2>使用命令行参数</h2>
+</div>
+<div>如果你只是想在启动的时候修改一次端口号的话，可以用命令行参数来修改端口号。配置如下：java -jar 打包之后的SpringBoot.jar  --server.port=8000</div>
+<h2>使用虚拟机参数</h2>
+<div>你同样也可以把修改端口号的配置放到JVM参数里。配置如下：-Dserver.port=8009。 这样启动的端口号就被修改为8009了。</div>
+<div><br /></div>
+<p></p>
+            </div>
+                </div>
+									<div class="hide-article-box text-center">
+						<a class="btn" id="btn-readmore" data-track-view='{"mod":"popu_376","con":",https://blog.csdn.net/zknxx/article/details/53433592,"}' data-track-click='{"mod":"popu_376","con":",https://blog.csdn.net/zknxx/article/details/53433592,"}'>阅读更多</a>
+					</div>
+					<script>
+						(function(){
+							function setArticleH(btnReadmore,posi){
+								var winH = $(window).height();
+								var articleBox = $("div.article_content");
+								var artH = articleBox.height();
+								if(artH > winH*posi){
+									articleBox.css({
+										'height':winH*posi+'px',
+										'overflow':'hidden'
+									})
+									btnReadmore.click(function(){
+										articleBox.removeAttr("style");
+										$(this).parent().remove();
+									})
+								}else{
+									btnReadmore.parent().remove();
+								}
+							}
+							var btnReadmore = $("#btn-readmore");
+							if(btnReadmore.length>0){
+								if(currentUserName){
+									setArticleH(btnReadmore,3);
+								}else{
+									setArticleH(btnReadmore,1.2);
+								}
+							}
+						})()
+					</script>
+					</article>
+	
+</div>
+<script>
+		$(".MathJax").remove();
+		if($('div.markdown_views pre.prettyprint code.hljs').length > 0 ){
+				$('div.markdown_views')[0].className = 'markdown_views';
+		}
+</script>
+        <div class="t0 clearfix">
+                                                <a href="https://blog.csdn.net/whh743/article/details/65444391" target="_blank" data-track-view='{"mod":"popu_642","con": ",https://blog.csdn.net/whh743/article/details/65444391,"}' data-track-click='{"mod":"popu_642","con": ",https://blog.csdn.net/whh743/article/details/65444391,"}'>
+                                                    <div class="text-content">
+                                                        <h4><em>修改</em>spring boot<em>默认</em>的8080端口为其它端口 - java web开发(分享java web开发常用的知识点,一是做一个笔记,二是希望对初学才有所帮助,纯粹娱乐)</h4>
+                                                        <div class="description">修改spring boot默认的8080端口为其它端口</div>
+                                                    </div>
+                                                </a>
+                                            </div>        <a id="commentBox"></a>
+<div class="comment-box">
+	  	<div class="unlogin-box text-center">
+		想对作者说点什么？
+		<!-- $curl 当前地址 -->
+		<button id="btnCommentUnlogin" class="btn btn-sm btn-red">我来说一句</button>
+	</div>
+			<div class="comment-list-container">
+		<a id="comments"></a>
+		<div class="comment-list-box">
+		</div>
+		<div id="commentPage" class="pagination-box d-none"></div>
+		<div class="opt-box text-center">
+			<button class="btn btn-sm btn-link-blue" id="btnMoreComment"></button>
+		</div>
+	</div>
+</div>
+        <div class="recommend-box">
+            		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/yelllowcong/article/details/79216889,BlogCommendFromBaidu_1"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/yelllowcong/article/details/79216889,BlogCommendFromBaidu_1"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/yelllowcong/article/details/79216889" target="_blank" title="Springboot之修改启动端口的两种方式-yellowcong - yelllowcong的专栏(厚积薄发，笨鸟先飞)">
+				<h4 class="text-truncate oneline">
+						<em>Springboot</em>之<em>修改</em>启动端口的两种方式-yellowcong - yelllowcong的专栏(厚积薄发，笨鸟先飞)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/A/6/B/3_yelllowcong.jpg" alt="yelllowcong" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">yelllowcong</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">01-31</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1.3万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/yelllowcong/article/details/79216889" target="_blank" title="Springboot之修改启动端口的两种方式-yellowcong - yelllowcong的专栏(厚积薄发，笨鸟先飞)">
+							<span class="desc oneline">Springboot启动的时候，端口的设定默认是8080，这肯定是不行的，我们需要自己定义端口，Springboot提供了两种方式，第一种，我们可以通过application.yml配置文件配置，第二...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/yelllowcong">来自：	<span class="blog_title"> yelllowcong的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/shunhua19881987/article/details/75312019,BlogCommendFromBaidu_2"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/shunhua19881987/article/details/75312019,BlogCommendFromBaidu_2"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/shunhua19881987/article/details/75312019" target="_blank" title="修改Spring Boot的运行端口号 - 书剑零落">
+				<h4 class="text-truncate oneline">
+						<em>修改</em>Spring Boot的运行<em>端口号</em> - 书剑零落				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/0/C/7/3_shunhua19881987.jpg" alt="shunhua19881987" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">shunhua19881987</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">07-18</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							6843</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/shunhua19881987/article/details/75312019" target="_blank" title="修改Spring Boot的运行端口号 - 书剑零落">
+							<span class="desc oneline">（1）方法一
+右击对应的方法，选择Run as à Run Confugerations…
+选择Arguments下的VM Arguments：-Dserver.port=8280（对应的端口号）...</span>
+						</a>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/dounine/article/details/77715359,BlogCommendFromBaidu_3"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/dounine/article/details/77715359,BlogCommendFromBaidu_3"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/dounine/article/details/77715359" target="_blank" title="springboot jar方式启动修改端口 - 多一份贡献,多一份环保(https://github.com/dounine)">
+				<h4 class="text-truncate oneline">
+						<em>springboot</em> jar方式启动<em>修改</em>端口 - 多一份贡献,多一份环保(https://github.com/dounine)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/E/0/7/3_dounine.jpg" alt="dounine" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">dounine</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">08-30</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							8455</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/dounine/article/details/77715359" target="_blank" title="springboot jar方式启动修改端口 - 多一份贡献,多一份环保(https://github.com/dounine)">
+							<span class="desc oneline">使用springboot的框架，在使用shell命令进行运行的时候，如何动态修改端口？使用说明java -jar demo.jar --server.port=9090...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/dounine">来自：	<span class="blog_title"> 多一份贡献,多一份环保</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <!-- 第四范式广告开关 -->
+				<div class="p4courset3_target _4paradigm_box recommend-item-box clearfix" ></div>
+				<script>window.p4sdk_enable_recommendBox=true</script>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/argel_lj/article/details/49851625,BlogCommendFromBaidu_4"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/argel_lj/article/details/49851625,BlogCommendFromBaidu_4"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/argel_lj/article/details/49851625" target="_blank" title="Spring Boot修改内置Tomcat端口号 - 初秋土豆的博客">
+				<h4 class="text-truncate oneline">
+						Spring Boot<em>修改</em>内置Tomcat<em>端口号</em> - 初秋土豆的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/9/6/1/3_argel_lj.jpg" alt="argel_lj" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">argel_lj</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">11-15</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							7.8万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/argel_lj/article/details/49851625" target="_blank" title="Spring Boot修改内置Tomcat端口号 - 初秋土豆的博客">
+							<span class="desc oneline">Spring Boot 内置Tomcat默认端口号为8080，在开发多个应用调试时很不方便，本文介绍了修改 Spring Boot内置Tomcat端口号的方法。...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/argel_lj">来自：	<span class="blog_title"> 初秋土豆的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/y534560449/article/details/53585207,BlogCommendFromBaidu_5"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/y534560449/article/details/53585207,BlogCommendFromBaidu_5"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/y534560449/article/details/53585207" target="_blank" title="springboot 修改默认端口及application.properties常用配置 - ye_nickname(分享自己的心得体会)">
+				<h4 class="text-truncate oneline">
+						<em>springboot</em> <em>修改</em><em>默认</em>端口及application.properties常用配置 - ye_nickname(分享自己的心得体会)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/6/6/A/3_y534560449.jpg" alt="y534560449" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">y534560449</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">12-12</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							2万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/y534560449/article/details/53585207" target="_blank" title="springboot 修改默认端口及application.properties常用配置 - ye_nickname(分享自己的心得体会)">
+							<span class="desc oneline">Spring boot 默认端口是8080，如果想要进行更改的话，只需要修改applicatoin.properties文件，在配置文件中加入：
+server.port=9090
+其他常用配置：
+(一...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/y534560449">来自：	<span class="blog_title"> YE_NICKNAME</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/isea533/article/details/50281151,BlogCommendFromBaidu_6"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/isea533/article/details/50281151,BlogCommendFromBaidu_6"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/isea533/article/details/50281151" target="_blank" title="Spring Boot 属性配置和使用 - 偶尔记一下(没事看看 - mybatis工具)">
+				<h4 class="text-truncate oneline">
+						Spring Boot 属性配置和使用 - 偶尔记一下(没事看看 - mybatis工具)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/D/5/F/3_isea533.jpg" alt="isea533" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">isea533</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">12-27</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							27.1万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/isea533/article/details/50281151" target="_blank" title="Spring Boot 属性配置和使用 - 偶尔记一下(没事看看 - mybatis工具)">
+							<span class="desc oneline">Spring Boot 属性配置和使用Spring Boot 允许通过外部配置让你在不同的环境使用同一应用程序的代码，简单说就是可以通过配置文件来注入属性或者修改默认的配置。Spring Boot 入...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/isea533">来自：	<span class="blog_title"> 偶尔记一下</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/redstarofsleep/article/details/48730527,BlogCommendFromBaidu_7"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/redstarofsleep/article/details/48730527,BlogCommendFromBaidu_7"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/redstarofsleep/article/details/48730527" target="_blank" title="设置springboot启动端口 - redstarofsleep's blog(red star of sleep)">
+				<h4 class="text-truncate oneline">
+						设置<em>springboot</em>启动端口 - redstarofsleep's blog(red star of sleep)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/2/F/A/3_redstarofsleep.jpg" alt="redstarofsleep" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">redstarofsleep</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">09-25</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							3.2万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/redstarofsleep/article/details/48730527" target="_blank" title="设置springboot启动端口 - redstarofsleep's blog(red star of sleep)">
+							<span class="desc oneline">spring boot是个好东西，可以不用容器直接在main方法中启动，而且无需配置文件，方便快速搭建环境。可是当我们要同时启动2个springboot工程时，就会有问题，有可能会因为8080端口被第...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/redstarofsleep">来自：	<span class="blog_title"> RedStarOfSleep's Blog</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/david_pfw/article/details/82947353,BlogCommendFromBaidu_8"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/david_pfw/article/details/82947353,BlogCommendFromBaidu_8"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/david_pfw/article/details/82947353" target="_blank" title="Spring boot参数设置 - 互联网分布式架构技术(实用的来自中大型互联网公司的微服务分布式架构技术及管理规范......  【微信号：danwang2138】)">
+				<h4 class="text-truncate oneline">
+						Spring boot参数设置 - 互联网分布式架构技术(实用的来自中大型互联网公司的微服务分布式架构技术及管理规范......  【微信号：danwang2138】)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/9/D/8/3_david_pfw.jpg" alt="david_pfw" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">david_pfw</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">10-05</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							28</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/david_pfw/article/details/82947353" target="_blank" title="Spring boot参数设置 - 互联网分布式架构技术(实用的来自中大型互联网公司的微服务分布式架构技术及管理规范......  【微信号：danwang2138】)">
+							<span class="desc oneline">1. application.properties
+
+
+#端口号
+server.port=9010
+
+#应用名称
+spring.application.name=user-service
+
+#ssl相...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/david_pfw">来自：	<span class="blog_title"> 互联网分布式架构技术</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_43" data-pid="60" data-track-view='{"mod":"kp_popu_43","con":",,"}'><div id="three_ad8" class="mediav_ad" ></div>
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<script>
+                                               NEWS_FEED({
+                w: 900,
+                h : 84,
+                showid : 'Afihld',
+                placeholderId: "three_ad8",
+                inject : 'define',
+                define : {
+                    imagePosition : 'left',
+                    imageBorderRadius : 3,
+                    imageWidth: 90,
+                    imageHeight: 60,
+                    imageFill : 'clip',
+                    displayImage : true,
+                    displayTitle : true,
+                    titleFontSize: 16,
+                    titleFontColor: '#000',
+                    titleFontFamily : 'Microsoft Yahei',
+                    titleFontWeight: 'bold',
+                    titlePaddingTop : 0,
+                    titlePaddingRight : 0,
+                    titlePaddingBottom : 5,
+                    titlePaddingLeft : 16,
+                    displayDesc : true,
+                    descFontSize: 12,
+                    descFontColor: '#8e959a',
+                    descFontFamily : 'Microsoft Yahei',
+                    paddingTop : 10,
+                    paddingRight : 0,
+                    paddingBottom : 0,
+                    paddingLeft : 0,
+                    backgroundColor: '#fff',
+                    hoverColor: '#000'
+                      }
+                  })
+                                        </script></div><script>$(function(){csdn.track.viewCheck($("#kp_box_43"));});</script></div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/u012702547/article/details/53740047,BlogCommendFromBaidu_9"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/u012702547/article/details/53740047,BlogCommendFromBaidu_9"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u012702547/article/details/53740047" target="_blank" title="初识Spring Boot框架 - 江南一点雨的专栏(专注java一百年)">
+				<h4 class="text-truncate oneline">
+						初识Spring Boot框架 - 江南一点雨的专栏(专注java一百年)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/D/0/B/3_u012702547.jpg" alt="u012702547" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">u012702547</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">12-19</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							40.5万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u012702547/article/details/53740047" target="_blank" title="初识Spring Boot框架 - 江南一点雨的专栏(专注java一百年)">
+							<span class="desc oneline">前面的铺垫文章已经连着写了六篇了，主要是介绍了Spring和SpringMVC框架，小伙伴们在学习的过程中大概也发现了这两个框架需要我们手动配置的地方非常多，不过做JavaEE开发的小伙伴们肯定也听说...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/u012702547">来自：	<span class="blog_title"> 江南一点雨的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/saytime/article/details/74783296,BlogCommendFromBaidu_10"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/saytime/article/details/74783296,BlogCommendFromBaidu_10"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/saytime/article/details/74783296" target="_blank" title="SpringBoot（五）：SpringBoot整合MyBatis - saytime(自律、自强)">
+				<h4 class="text-truncate oneline">
+						<em>SpringBoot</em>（五）：<em>SpringBoot</em>整合MyBatis - saytime(自律、自强)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/E/3/B/3_saytime.jpg" alt="saytime" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">saytime</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">07-08</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							6.4万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/saytime/article/details/74783296" target="_blank" title="SpringBoot（五）：SpringBoot整合MyBatis - saytime(自律、自强)">
+							<span class="desc oneline">怎么说了，写博客虽然是一件很费时间的事情，而且还是个菜鸟，但是如果写的东西能够帮助到别人，还是值得开心的。
+
+
+回顾：
+
+上篇写了JdbcTemplate，但是想到使用Mybatis，JPA的人估计不...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/saytime">来自：	<span class="blog_title"> Saytime</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+            <div class="recommend-item-box blog-expert-recommend-box">
+			<div class="d-flex">
+				<div class="blog-expert-recommend">
+					<div class="blog-expert">
+						<div class="blog-expert-flexbox"></div>
+					</div>
+				</div>
+				<div class="blog-expert-load-new" data-index="3">
+					<svg version="1.1" viewBox="0 0 200 200" style="enable-background:new 0 0 200 200;" xml:space="preserve">
+					<path d="M142.5,57.5c-1.3-1.2-2.1-3.3-2.1-5.4c0-4.2,3.3-7.5,7.5-7.5h19.6c4.2,0,7.5,3.3,7.5,7.5s-3.3,7.5-7.5,7.5h-4.2
+						C170.8,71.2,175,85,175,100c0,41.7-33.8,75-75,75c-4.2,0-7.5-3.3-7.5-7.5c0-4.2,3.3-7.5,7.5-7.5c33.3,0,60-27.1,60-60
+						C160,83.7,153.8,68.7,142.5,57.5L142.5,57.5z M57.5,142.5c1.2,1.2,2.1,3.3,2.1,5.4c0,4.2-3.3,7.5-7.5,7.5H32.5
+						c-4.2,0-7.5-3.3-7.5-7.5c0-4.2,3.3-7.5,7.5-7.5h4.2C29.2,128.8,25,115,25,100c0-41.7,33.7-75,75-75c4.2,0,7.5,3.3,7.5,7.5
+						S104.2,40,100,40c-33.3,0-60,27.1-60,60C40,116.2,46.2,131.2,57.5,142.5z"/>
+					</svg>
+					<span>换一批</span>
+				</div>
+			</div>
+        </div>
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/u013248535/article/details/55100979,BlogCommendFromBaidu_11"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/u013248535/article/details/55100979,BlogCommendFromBaidu_11"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u013248535/article/details/55100979" target="_blank" title="IDEA下从零开始搭建SpringBoot工程 - 随心而笑(热爱生活，热爱学习)">
+				<h4 class="text-truncate oneline">
+						IDEA下从零开始搭建<em>SpringBoot</em>工程 - 随心而笑(热爱生活，热爱学习)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/A/2/3/3_u013248535.jpg" alt="u013248535" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">u013248535</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">02-15</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							12.2万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u013248535/article/details/55100979" target="_blank" title="IDEA下从零开始搭建SpringBoot工程 - 随心而笑(热爱生活，热爱学习)">
+							<span class="desc oneline">SpringBoot的具体介绍可以参看其他网上介绍，这里就不多说了，就这几天的学习，个人理解，简而言之： 
+  （1）它是Spring的升级版，Spring容器能做到的事情，它都能做到，而且更简便，从...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/u013248535">来自：	<span class="blog_title"> 随心而笑</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/qq_16307345/article/details/78029295,BlogCommendFromBaidu_12"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/qq_16307345/article/details/78029295,BlogCommendFromBaidu_12"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_16307345/article/details/78029295" target="_blank" title="SpringBoot报错（一）端口被占用Address already in use: bind - jiunn-nan的博客">
+				<h4 class="text-truncate oneline">
+						<em>SpringBoot</em>报错（一）端口被占用Address already in use: bind - jiunn-nan的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/2/B/8/3_qq_16307345.jpg" alt="qq_16307345" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qq_16307345</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">09-19</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							8427</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_16307345/article/details/78029295" target="_blank" title="SpringBoot报错（一）端口被占用Address already in use: bind - jiunn-nan的博客">
+							<span class="desc oneline">今天第一次配置springboot就出现一个粗心的错误，虽然我知道怎么解决，但出错，想着就不是很舒服。这个问题的原因是端口被占用，解决方法就是修改Application里边的配置，修改调端口号在app...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qq_16307345">来自：	<span class="blog_title"> Jiunn-Nan的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/fly_zhyu/article/details/76407830,BlogCommendFromBaidu_13"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/fly_zhyu/article/details/76407830,BlogCommendFromBaidu_13"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/fly_zhyu/article/details/76407830" target="_blank" title="Spring Boot浅谈(是什么/能干什么/优点和不足) - fly_zhyu的博客(别混日子啦,小心日子把你们混了.)">
+				<h4 class="text-truncate oneline">
+						Spring Boot浅谈(是什么/能干什么/优点和不足) - fly_zhyu的博客(别混日子啦,小心日子把你们混了.)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/E/D/3/3_fly_zhyu.jpg" alt="fly_zhyu" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">fly_zhyu</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">07-30</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							9.9万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/fly_zhyu/article/details/76407830" target="_blank" title="Spring Boot浅谈(是什么/能干什么/优点和不足) - fly_zhyu的博客(别混日子啦,小心日子把你们混了.)">
+							<span class="desc oneline">1. Spring Boot是什么，解决哪些问题
+     1) Spring Boot使编码变简单
+     2) Spring Boot使配置变简单
+     3) Spring Boot使...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/fly_zhyu">来自：	<span class="blog_title"> fly_zhyu的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_622" data-pid="61" data-track-view='{"mod":"kp_popu_622","con":",,"}'><script type="text/javascript" src="//rabc1.iteye.com/production/res/source/xadxpv.js?jewb=dbwkm"></script></div><script>$(function(){csdn.track.viewCheck($("#kp_box_622"));});</script></div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/qq_40087415/article/details/82497668,searchFromBaidu_14"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/qq_40087415/article/details/82497668,searchFromBaidu_14"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_40087415/article/details/82497668" target="_blank" title="SpringBoot项目修改访问端口和访问路径 - 刘鹏博的博客(付出不亚于任何人的努力)">
+				<h4 class="text-truncate oneline">
+						<em>SpringBoot</em>项目<em>修改</em>访问端口和访问路径 - 刘鹏博的博客(付出不亚于任何人的努力)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/E/5/6/3_qq_40087415.jpg" alt="qq_40087415" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qq_40087415</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">09-07</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							706</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_40087415/article/details/82497668" target="_blank" title="SpringBoot项目修改访问端口和访问路径 - 刘鹏博的博客(付出不亚于任何人的努力)">
+							<span class="desc oneline">创建SpringBoot项目，启动后，默认的访问路径即主机IP+默认端口号8080：http://localhost:8080/
+
+
+
+此时，我们就可以访问Controller层的接口了，如：http...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qq_40087415">来自：	<span class="blog_title"> 刘鹏博的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/zflovecf/article/details/78742864,BlogCommendFromGuangxin_15"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/zflovecf/article/details/78742864,BlogCommendFromGuangxin_15"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/zflovecf/article/details/78742864" target="_blank" title="springboot 修改内置端口 - 一切从零开始(集腋成裘，点点滴滴)">
+				<h4 class="text-truncate oneline">
+						<em>springboot</em> <em>修改</em>内置端口 - 一切从零开始(集腋成裘，点点滴滴)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/6/6/6/3_zflovecf.jpg" alt="zflovecf" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">zflovecf</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">12-07</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							704</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/zflovecf/article/details/78742864" target="_blank" title="springboot 修改内置端口 - 一切从零开始(集腋成裘，点点滴滴)">
+							<span class="desc oneline">Spring Boot 内置Tomcat默认端口号为8080，在开发多个应用调试时很不方便，本文介绍了修改 Spring Boot内置Tomcat端口号的方法。
+
+一、EmbeddedServle...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/zflovecf">来自：	<span class="blog_title"> 一切从零开始</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/koreyoshi326/article/details/70833414,BlogCommendFromGuangxin_16"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/koreyoshi326/article/details/70833414,BlogCommendFromGuangxin_16"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/koreyoshi326/article/details/70833414" target="_blank" title="springboot端口配置 - koreyoshi326的博客">
+				<h4 class="text-truncate oneline">
+						<em>springboot</em>端口配置 - koreyoshi326的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/E/9/A/3_koreyoshi326.jpg" alt="koreyoshi326" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">koreyoshi326</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">04-26</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							506</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/koreyoshi326/article/details/70833414" target="_blank" title="springboot端口配置 - koreyoshi326的博客">
+							<span class="desc oneline">有个项目需要用springboot，然后呢，提示  java.net.BindException: Address already in use: bind，所以需要修改默认端口。public cla...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/koreyoshi326">来自：	<span class="blog_title"> koreyoshi326的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/ywb201314/article/details/62425798,BlogCommendFromQuerySearch_17"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/ywb201314/article/details/62425798,BlogCommendFromQuerySearch_17"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/ywb201314/article/details/62425798" target="_blank" title="修改jetty的默认端口号 - ywb201314的专栏">
+				<h4 class="text-truncate oneline">
+						<em>修改</em>jetty的<em>默认</em><em>端口号</em> - ywb201314的专栏				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/1/C/6/3_ywb201314.jpg" alt="ywb201314" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">ywb201314</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">03-16</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							3399</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/ywb201314/article/details/62425798" target="_blank" title="修改jetty的默认端口号 - ywb201314的专栏">
+							<span class="desc oneline">jetty默认端口是8080，修改端口号也很简单，首先进入到jetty服务器安装目录下会看到start.ini配置文件，这里就是jetty启动时加载的配置，其中包括要加载的模块，超时时间配置还有这里的...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/ywb201314">来自：	<span class="blog_title"> ywb201314的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/qq_38423105/article/details/80886362,BlogCommendFromQuerySearch_18"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/qq_38423105/article/details/80886362,BlogCommendFromQuerySearch_18"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_38423105/article/details/80886362" target="_blank" title="IDEA 针对SpringBoot通过修改端口号多次运行 - wisdom-chen(whatever is worth doing is worth doing well.(任何值得做的事就值得把它做好！))">
+				<h4 class="text-truncate oneline">
+						IDEA 针对<em>SpringBoot</em>通过<em>修改</em><em>端口号</em>多次运行 - wisdom-chen(whatever is worth doing is worth doing well.(任何值得做的事就值得把它做好！))				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/9/7/8/3_qq_38423105.jpg" alt="qq_38423105" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qq_38423105</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">07-02</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							440</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_38423105/article/details/80886362" target="_blank" title="IDEA 针对SpringBoot通过修改端口号多次运行 - wisdom-chen(whatever is worth doing is worth doing well.(任何值得做的事就值得把它做好！))">
+							<span class="desc oneline">1.点击Edit Configurations...2.去掉箭头所指的勾（仅单一实例）3.修改所需启动多次的SpringBoot项目的端口号即可。...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qq_38423105">来自：	<span class="blog_title"> wisdom-chen</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_623" data-pid="62" data-track-view='{"mod":"kp_popu_623","con":",,"}'><script type="text/javascript" src="//rabc1.iteye.com/production/dkjgal.js?cxpuwupg=g"></script></div><script>$(function(){csdn.track.viewCheck($("#kp_box_623"));});</script></div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/qq_21683643/article/details/80662285,BlogCommendFromQuerySearch_19"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/qq_21683643/article/details/80662285,BlogCommendFromQuerySearch_19"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_21683643/article/details/80662285" target="_blank" title="修改activeMQ端口号 - fxbar的博客(做一个勤奋刻苦有实干的人)">
+				<h4 class="text-truncate oneline">
+						<em>修改</em>activeMQ<em>端口号</em> - fxbar的博客(做一个勤奋刻苦有实干的人)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/B/C/1/3_qq_21683643.jpg" alt="qq_21683643" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qq_21683643</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">06-12</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							169</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_21683643/article/details/80662285" target="_blank" title="修改activeMQ端口号 - fxbar的博客(做一个勤奋刻苦有实干的人)">
+							<span class="desc oneline">原文：http://jingyan.baidu.com/article/3ea51489fba6a152e61bbacc.html
+&amp;amp;amp;nbsp;
+　　修改TCP 61616端口
+
+
+
+...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qq_21683643">来自：	<span class="blog_title"> fxbar的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/qq_25781091/article/details/78329709,BlogCommendFromQuerySearch_20"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/qq_25781091/article/details/78329709,BlogCommendFromQuerySearch_20"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_25781091/article/details/78329709" target="_blank" title="Spring Boot 内嵌Tomcat的端口号的修改 - 呆_呆的博客(不悔过去，不畏将来...)">
+				<h4 class="text-truncate oneline">
+						Spring Boot 内嵌Tomcat的<em>端口号</em>的<em>修改</em> - 呆_呆的博客(不悔过去，不畏将来...)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/A/6/C/3_qq_25781091.jpg" alt="qq_25781091" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qq_25781091</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">10-24</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							329</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_25781091/article/details/78329709" target="_blank" title="Spring Boot 内嵌Tomcat的端口号的修改 - 呆_呆的博客(不悔过去，不畏将来...)">
+							<span class="desc oneline">操作非常的简单，不过如果从来没有操作过，也是需要查找一下资料的，所以，在此我简单的记录一下自己的操作步骤以备后用！
+
+ 
+
+1：我的Eclipse版本，不同的开发工具可能有所差异，不过大同小异...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qq_25781091">来自：	<span class="blog_title"> 呆_呆的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/sayoko06/article/details/80431064,BlogCommendFromQuerySearch_21"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/sayoko06/article/details/80431064,BlogCommendFromQuerySearch_21"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/sayoko06/article/details/80431064" target="_blank" title="spring boot设置tomcat端口号和根目录 - sayoko06的博客">
+				<h4 class="text-truncate oneline">
+						spring boot设置tomcat<em>端口号</em>和根目录 - sayoko06的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/A/6/2/3_sayoko06.jpg" alt="sayoko06" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">sayoko06</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">05-24</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1503</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/sayoko06/article/details/80431064" target="_blank" title="spring boot设置tomcat端口号和根目录 - sayoko06的博客">
+							<span class="desc oneline">添加两个配置，如下：server.port = 8888
+server.context-path = /HelloWorld
+tomcat的默认端口是8080,默认路径是根目录/。我们现在改成端口80...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/sayoko06">来自：	<span class="blog_title"> sayoko06的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/zknxx/article/details/79079639,BlogCommendFromBaidu_22"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/zknxx/article/details/79079639,BlogCommendFromBaidu_22"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/zknxx/article/details/79079639" target="_blank" title="SpringBoot之浅析TomCat端口号设置 - 努力改变人生！(加微信交流：398701344。)">
+				<h4 class="text-truncate oneline">
+						<em>SpringBoot</em>之浅析TomCat<em>端口号</em>设置 - 努力改变人生！(加微信交流：398701344。)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/4/5/7/3_zknxx.jpg" alt="zknxx" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">zknxx</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">01-16</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							4462</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/zknxx/article/details/79079639" target="_blank" title="SpringBoot之浅析TomCat端口号设置 - 努力改变人生！(加微信交流：398701344。)">
+							<span class="desc oneline">我们在之前的文章中说过怎么去修改TomCat的端口号（SpringBoot修改默认端口号），我们在这篇文章中简单的说一下SpringBoot是怎么实现修改TomCat端口号的。 
+修改TomCat的端...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/zknxx">来自：	<span class="blog_title"> 努力改变人生！</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/liaokailin/article/details/48948093,BlogCommendFromBaidu_23"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/liaokailin/article/details/48948093,BlogCommendFromBaidu_23"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/liaokailin/article/details/48948093" target="_blank" title="spring boot实战(第七篇)内嵌容器tomcat配置 - liaokailin的专栏">
+				<h4 class="text-truncate oneline">
+						spring boot实战(第七篇)内嵌容器tomcat配置 - liaokailin的专栏				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/6/B/D/3_liaokailin.jpg" alt="liaokailin" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">liaokailin</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">10-07</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							5.8万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/liaokailin/article/details/48948093" target="_blank" title="spring boot实战(第七篇)内嵌容器tomcat配置 - liaokailin的专栏">
+							<span class="desc oneline">spring boot实战(第七篇)内嵌容器tomcat配置默认容器spring boot默认web程序启用tomcat内嵌容器tomcat，监听8080端口,servletPath默认为 / 通过需...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/liaokailin">来自：	<span class="blog_title"> liaokailin的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_555" data-pid="63" data-track-view='{"mod":"kp_popu_555","con":",,"}'><div id="three_ad23" class="mediav_ad" ></div>
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<script>
+                                               NEWS_FEED({
+                w: 900,
+                h : 84,
+                showid : 'GNKXx7',
+                placeholderId: "three_ad23",
+                inject : 'define',
+                define : {
+                    imagePosition : 'left',
+                    imageBorderRadius : 3,
+                    imageWidth: 90,
+                    imageHeight: 60,
+                    imageFill : 'clip',
+                    displayImage : true,
+                    displayTitle : true,
+                    titleFontSize: 16,
+                    titleFontColor: '#000',
+                    titleFontFamily : 'Microsoft Yahei',
+                    titleFontWeight: 'bold',
+                    titlePaddingTop : 0,
+                    titlePaddingRight : 0,
+                    titlePaddingBottom : 5,
+                    titlePaddingLeft : 16,
+                    displayDesc : true,
+                    descFontSize: 12,
+                    descFontColor: '#8e959a',
+                    descFontFamily : 'Microsoft Yahei',
+                    paddingTop : 10,
+                    paddingRight : 0,
+                    paddingBottom : 0,
+                    paddingLeft : 0,
+                    backgroundColor: '#fff',
+                    hoverColor: '#000'
+                      }
+                  })
+                                        </script></div><script>$(function(){csdn.track.viewCheck($("#kp_box_555"));});</script></div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/cckevincyh/article/details/79199898,BlogCommendFromBaidu_24"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/cckevincyh/article/details/79199898,BlogCommendFromBaidu_24"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/cckevincyh/article/details/79199898" target="_blank" title="Spring Boot 修改端口号 - c.的博客(正在学习的菜鸟...github地址:https://github.com/cckevincyh)">
+				<h4 class="text-truncate oneline">
+						Spring Boot <em>修改</em><em>端口号</em> - c.的博客(正在学习的菜鸟...github地址:https://github.com/cckevincyh)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/B/0/5/3_cckevincyh.jpg" alt="cckevincyh" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">cckevincyh</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">01-29</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							478</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/cckevincyh/article/details/79199898" target="_blank" title="Spring Boot 修改端口号 - c.的博客(正在学习的菜鸟...github地址:https://github.com/cckevincyh)">
+							<span class="desc oneline">Spring Boot 修改端口号
+
+在application.properties配置
+
+server.port=8888 
+server.context-path=/cairou
+
+启动访问： 
+...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/cckevincyh">来自：	<span class="blog_title"> C.的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/qq_18748427/article/details/79528794,BlogCommendFromBaidu_25"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/qq_18748427/article/details/79528794,BlogCommendFromBaidu_25"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_18748427/article/details/79528794" target="_blank" title="springboot使用随机端口暴露的问题解决方法 - whz的博客(keep it simple and stupid)">
+				<h4 class="text-truncate oneline">
+						<em>springboot</em>使用随机端口暴露的问题解决方法 - whz的博客(keep it simple and stupid)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/8/9/B/3_qq_18748427.jpg" alt="qq_18748427" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qq_18748427</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">03-12</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1545</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_18748427/article/details/79528794" target="_blank" title="springboot使用随机端口暴露的问题解决方法 - whz的博客(keep it simple and stupid)">
+							<span class="desc oneline">随机端口
+
+我们知道为spring boot配置随机端口非常简单，有两种办法： 
+1. 设置端口为0
+
+server.port=0
+eureka.instance.instance-id=${spri...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qq_18748427">来自：	<span class="blog_title"> whz的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/jiyingying_up/article/details/51384562,BlogCommendFromBaidu_26"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/jiyingying_up/article/details/51384562,BlogCommendFromBaidu_26"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/jiyingying_up/article/details/51384562" target="_blank" title="spring boot 内置tomcat端口设置 - 乖乖派加油(day  day  up)">
+				<h4 class="text-truncate oneline">
+						spring boot 内置tomcat端口设置 - 乖乖派加油(day  day  up)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/6/9/4/3_jiyingying_up.jpg" alt="jiyingying_up" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">jiyingying_up</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">05-12</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							6305</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/jiyingying_up/article/details/51384562" target="_blank" title="spring boot 内置tomcat端口设置 - 乖乖派加油(day  day  up)">
+							<span class="desc oneline">spring boot 内置tomcat端口设置官网说明方法
+  either set server.port as system property using command line option...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/jiyingying_up">来自：	<span class="blog_title"> 乖乖派加油</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/sinat_36246371/article/details/72902406,BlogCommendFromBaidu_27"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/sinat_36246371/article/details/72902406,BlogCommendFromBaidu_27"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/sinat_36246371/article/details/72902406" target="_blank" title="Spring Boot与Spring的区别 - k.sun(用最简单的文字解释问题，用最少的步骤解决问题！)">
+				<h4 class="text-truncate oneline">
+						Spring Boot与Spring的区别 - k.sun(用最简单的文字解释问题，用最少的步骤解决问题！)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/E/4/5/3_sinat_36246371.jpg" alt="sinat_36246371" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">sinat_36246371</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">06-07</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							3.1万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/sinat_36246371/article/details/72902406" target="_blank" title="Spring Boot与Spring的区别 - k.sun(用最简单的文字解释问题，用最少的步骤解决问题！)">
+							<span class="desc oneline">Spring Boot是最近这几年才火起来的，那么它到底与Spring有啥区别呢？想了解区别，其实就是Spring Boot提供了哪些特征：
+Spring Boot可以建立独立的Spring应用程序；...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/sinat_36246371">来自：	<span class="blog_title"> K.Sun</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/my__Sun_/article/details/72866329,BlogCommendFromBaidu_28"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/my__Sun_/article/details/72866329,BlogCommendFromBaidu_28"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/my__Sun_/article/details/72866329" target="_blank" title="springboot的三种启动方式 - guxiangfly的博客">
+				<h4 class="text-truncate oneline">
+						<em>springboot</em>的三种启动方式 - guxiangfly的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/3/A/7/3_my__sun_.jpg" alt="my__Sun_" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">my__Sun_</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">06-05</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							9.7万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/my__Sun_/article/details/72866329" target="_blank" title="springboot的三种启动方式 - guxiangfly的博客">
+							<span class="desc oneline">IDE 运行Application这个类的main方法在springboot的应用的根目录下运行mvn spring-boot:run使用mvn install 生成jar后运行先到项目根目录
+mvn...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/my__Sun_">来自：	<span class="blog_title"> GuXiangFly的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_81" data-pid="64" data-track-view='{"mod":"kp_popu_81","con":",,"}'><div id="three_ad28" class="mediav_ad" ></div>
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<script>
+                                               NEWS_FEED({
+                w: 900,
+                h : 84,
+                showid : 'Afihld',
+                placeholderId: "three_ad28",
+                inject : 'define',
+                define : {
+                    imagePosition : 'left',
+                    imageBorderRadius : 3,
+                    imageWidth: 90,
+                    imageHeight: 60,
+                    imageFill : 'clip',
+                    displayImage : true,
+                    displayTitle : true,
+                    titleFontSize: 16,
+                    titleFontColor: '#000',
+                    titleFontFamily : 'Microsoft Yahei',
+                    titleFontWeight: 'bold',
+                    titlePaddingTop : 0,
+                    titlePaddingRight : 0,
+                    titlePaddingBottom : 5,
+                    titlePaddingLeft : 16,
+                    displayDesc : true,
+                    descFontSize: 12,
+                    descFontColor: '#8e959a',
+                    descFontFamily : 'Microsoft Yahei',
+                    paddingTop : 10,
+                    paddingRight : 0,
+                    paddingBottom : 0,
+                    paddingLeft : 0,
+                    backgroundColor: '#fff',
+                    hoverColor: '#000'
+                      }
+                  })
+                                        </script></div><script>$(function(){csdn.track.viewCheck($("#kp_box_81"));});</script></div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/u014421556/article/details/51671353,BlogCommendFromBaidu_29"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/u014421556/article/details/51671353,BlogCommendFromBaidu_29"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u014421556/article/details/51671353" target="_blank" title="http、https 等 常用默认端口号 - 一个人的博客">
+				<h4 class="text-truncate oneline">
+						http、https 等 常用<em>默认</em><em>端口号</em> - 一个人的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/F/1/D/3_u014421556.jpg" alt="u014421556" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">u014421556</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">06-14</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							12.1万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u014421556/article/details/51671353" target="_blank" title="http、https 等 常用默认端口号 - 一个人的博客">
+							<span class="desc oneline">⑴. HTTP协议代理服务器常用端口号：80/8080/3128/8081/9080
+⑵. SOCKS代理协议服务器常用端口号：1080
+⑶. FTP（文件传输）协议代理服务器常用端口号：21
+...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/u014421556">来自：	<span class="blog_title"> 一个人的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/isea533/article/details/50278205,BlogCommendFromBaidu_30"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/isea533/article/details/50278205,BlogCommendFromBaidu_30"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/isea533/article/details/50278205" target="_blank" title="Spring Boot 入门 - 偶尔记一下(没事看看 - mybatis工具)">
+				<h4 class="text-truncate oneline">
+						Spring Boot 入门 - 偶尔记一下(没事看看 - mybatis工具)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/D/5/F/3_isea533.jpg" alt="isea533" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">isea533</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">12-27</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							26.8万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/isea533/article/details/50278205" target="_blank" title="Spring Boot 入门 - 偶尔记一下(没事看看 - mybatis工具)">
+							<span class="desc oneline">Spring Boot入门Spring Boot是Spring社区较新的一个项目。该项目的目的是帮助开发者更容易的创建基于Spring的应用程序和服务，让更多人的人更快的对Spring进行入门体验，让...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/isea533">来自：	<span class="blog_title"> 偶尔记一下</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/qq_36330643/article/details/76568886,BlogCommendFromBaidu_31"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/qq_36330643/article/details/76568886,BlogCommendFromBaidu_31"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_36330643/article/details/76568886" target="_blank" title="spring boot创建应用 端口冲突8080 - 春华秋实(本博客所有内容仅供学习，不允许商用，如有侵权，请联系博主删除，谢谢。)">
+				<h4 class="text-truncate oneline">
+						spring boot创建应用 端口冲突8080 - 春华秋实(本博客所有内容仅供学习，不允许商用，如有侵权，请联系博主删除，谢谢。)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/1/E/9/3_qq_36330643.jpg" alt="qq_36330643" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qq_36330643</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">08-02</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							7270</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_36330643/article/details/76568886" target="_blank" title="spring boot创建应用 端口冲突8080 - 春华秋实(本博客所有内容仅供学习，不允许商用，如有侵权，请联系博主删除，谢谢。)">
+							<span class="desc oneline">如果你电脑上的8080端口号被其它程序（如jenkins）占用了，则运行lightsword会报以下错误：java.net.BindException: Address already in use....</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qq_36330643">来自：	<span class="blog_title"> 春华秋实</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/fancancan/article/details/81180610,BlogCommendFromQuerySearch_32"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/fancancan/article/details/81180610,BlogCommendFromQuerySearch_32"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/fancancan/article/details/81180610" target="_blank" title="Springboot2-修改应用启动端口和访问路径 - dev and ops(成为大神的路上，总会有那么一些坑～)">
+				<h4 class="text-truncate oneline">
+						<em>Springboot</em>2-<em>修改</em>应用启动端口和访问路径 - dev and ops(成为大神的路上，总会有那么一些坑～)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/D/A/3/3_fancancan.jpg" alt="fancancan" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">fancancan</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">07-24</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							314</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/fancancan/article/details/81180610" target="_blank" title="Springboot2-修改应用启动端口和访问路径 - dev and ops(成为大神的路上，总会有那么一些坑～)">
+							<span class="desc oneline">一、application.properties配置文件
+
+
+server.port=8081
+server.context-path=/demo1
+
+ 
+
+二、application.yml配置文件...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/fancancan">来自：	<span class="blog_title"> Dev And Ops</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/panchao888888/article/details/81474919,BlogCommendFromQuerySearch_33"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/panchao888888/article/details/81474919,BlogCommendFromQuerySearch_33"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/panchao888888/article/details/81474919" target="_blank" title="SpringBoot笔记系列：（二十一）修改端口号及项目访问路径 - panchao's bolg(把行动交给现在，把结果交给时间！)">
+				<h4 class="text-truncate oneline">
+						<em>SpringBoot</em>笔记系列：（二十一）<em>修改</em><em>端口号</em>及项目访问路径 - panchao's bolg(把行动交给现在，把结果交给时间！)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/8/4/B/3_panchao888888.jpg" alt="panchao888888" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">panchao888888</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">08-07</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							109</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/panchao888888/article/details/81474919" target="_blank" title="SpringBoot笔记系列：（二十一）修改端口号及项目访问路径 - panchao's bolg(把行动交给现在，把结果交给时间！)">
+							<span class="desc oneline">springboot中修改端口号及项目访问路径：
+
+在application.properties配置文件中添加配置信息
+
+
+
+#端口号
+server.port=8081
+#访问路径
+server.s...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/panchao888888">来自：	<span class="blog_title"> PanChao's Bolg</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_78" data-pid="65" data-track-view='{"mod":"kp_popu_78","con":",,"}'><script type="text/javascript" src="//rabc1.iteye.com/production/res/rxjg.js?pkcgstj=jm"></script></div><script>$(function(){csdn.track.viewCheck($("#kp_box_78"));});</script></div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/qiyejunlintian/article/details/82780738,BlogCommendFromQuerySearch_34"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/qiyejunlintian/article/details/82780738,BlogCommendFromQuerySearch_34"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qiyejunlintian/article/details/82780738" target="_blank" title="SpringBoot项目jar启动端口设置 - 火舞狂沙(架构源于生活，事it，爱生活。)">
+				<h4 class="text-truncate oneline">
+						<em>SpringBoot</em>项目jar启动端口设置 - 火舞狂沙(架构源于生活，事it，爱生活。)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/D/3/6/3_qiyejunlintian.jpg" alt="qiyejunlintian" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qiyejunlintian</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">09-20</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							101</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qiyejunlintian/article/details/82780738" target="_blank" title="SpringBoot项目jar启动端口设置 - 火舞狂沙(架构源于生活，事it，爱生活。)">
+							<span class="desc oneline">SpringBoot项目打包后，在target下生成的jar文件可以使用 Java - jar 直接启动，指定端口号配置
+
+java -jar eureka-server-1.0.0.jar --se...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qiyejunlintian">来自：	<span class="blog_title"> 火舞狂沙</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/oumantic/article/details/38277401,BlogCommendFromQuerySearch_35"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/oumantic/article/details/38277401,BlogCommendFromQuerySearch_35"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/oumantic/article/details/38277401" target="_blank" title="oracle更改默认端口号 - oumantic的专栏">
+				<h4 class="text-truncate oneline">
+						oracle更改<em>默认</em><em>端口号</em> - oumantic的专栏				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/E/E/4/3_oumantic.jpg" alt="oumantic" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">oumantic</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">07-29</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1269</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/oumantic/article/details/38277401" target="_blank" title="oracle更改默认端口号 - oumantic的专栏">
+							<span class="desc oneline">oracle更改默认端口号  
+2010-08-27 07:23:15|  分类：
+
+Oracle 
+|  标签：oracle  端口  
+|举报
+|字号大中小 订阅
+
+
+
+
+ ...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/oumantic">来自：	<span class="blog_title"> oumantic的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/u013850277/article/details/76563252,BlogCommendFromQuerySearch_36"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/u013850277/article/details/76563252,BlogCommendFromQuerySearch_36"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u013850277/article/details/76563252" target="_blank" title="Spring boot 实践（日志log4J,修改端口） - 错过了先飞，那就多飞......">
+				<h4 class="text-truncate oneline">
+						Spring boot 实践（日志log4J,<em>修改</em>端口） - 错过了先飞，那就多飞......				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/6/2/6/3_u013850277.jpg" alt="u013850277" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">u013850277</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">08-01</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							747</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u013850277/article/details/76563252" target="_blank" title="Spring boot 实践（日志log4J,修改端口） - 错过了先飞，那就多飞......">
+							<span class="desc oneline">直接上代码，先跑一通再具体看其原理相关的一、源代码
+SampleController 类
+package hello;import org.jboss.logging.Logger;/**
+* @au...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/u013850277">来自：	<span class="blog_title"> 错过了先飞，那就多飞......</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/YxSimple/article/details/46771123,BlogCommendFromBaidu_37"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/YxSimple/article/details/46771123,BlogCommendFromBaidu_37"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/YxSimple/article/details/46771123" target="_blank" title="spring boot web相关配置 - yxsimple的专栏">
+				<h4 class="text-truncate oneline">
+						spring boot web相关配置 - yxsimple的专栏				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/E/2/7/3_yxsimple.jpg" alt="YxSimple" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">YxSimple</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">07-06</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							9.6万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/YxSimple/article/details/46771123" target="_blank" title="spring boot web相关配置 - yxsimple的专栏">
+							<span class="desc oneline">spring
+ boot集成了servlet容器，当我们在pom文件中增加spring-boot-starter-web的maven依赖时，不做任何web相关的配置便能提供web服务，这还得归于sp...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/YxSimple">来自：	<span class="blog_title"> YxSimple的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/q383965374/article/details/80341243,BlogCommendFromBaidu_38"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/q383965374/article/details/80341243,BlogCommendFromBaidu_38"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/q383965374/article/details/80341243" target="_blank" title="SpringBoot配置文件和修改端口 - 直到世界的尽头(计算机的世界有无数道门窗  无论我们打开哪一道 都能收获无穷尽的风景)">
+				<h4 class="text-truncate oneline">
+						<em>SpringBoot</em>配置文件和<em>修改</em>端口 - 直到世界的尽头(计算机的世界有无数道门窗  无论我们打开哪一道 都能收获无穷尽的风景)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/2/0/4/3_q383965374.jpg" alt="q383965374" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">q383965374</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">05-16</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							4011</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/q383965374/article/details/80341243" target="_blank" title="SpringBoot配置文件和修改端口 - 直到世界的尽头(计算机的世界有无数道门窗  无论我们打开哪一道 都能收获无穷尽的风景)">
+							<span class="desc oneline">我们在上一篇文章中已经运行起了一个简单的基础项目并运行起来了。
+
+SpringBoot简介项目创建和运行使用
+
+但是我们发现简单版的 Spring Boot 项目没有配置文件，定制版的项目有一个配置文...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/q383965374">来自：	<span class="blog_title"> 直到世界的尽头</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_78" data-pid="66" data-track-view='{"mod":"kp_popu_78","con":",,"}'><script type="text/javascript" src="//rabc1.iteye.com/production/res/rxjg.js?pkcgstj=jm"></script></div><script>$(function(){csdn.track.viewCheck($("#kp_box_78"));});</script></div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/gebitan505/article/details/54947154,BlogCommendFromBaidu_39"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/gebitan505/article/details/54947154,BlogCommendFromBaidu_39"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/gebitan505/article/details/54947154" target="_blank" title="（10）Spring Boot修改端口号【从零开始学Spring Boot】 - andylizh的专栏(给人生一个梦，给梦一条路，给路一个方向!)">
+				<h4 class="text-truncate oneline">
+						（10）Spring Boot<em>修改</em><em>端口号</em>【从零开始学Spring Boot】 - andylizh的专栏(给人生一个梦，给梦一条路，给路一个方向!)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/9/3/8/3_gebitan505.jpg" alt="gebitan505" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">gebitan505</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">02-09</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1537</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/gebitan505/article/details/54947154" target="_blank" title="（10）Spring Boot修改端口号【从零开始学Spring Boot】 - andylizh的专栏(给人生一个梦，给梦一条路，给路一个方向!)">
+							<span class="desc oneline">Spring boot 默认端口是8080，如果想要进行更改的话，只需要修改applicatoin.properties文件，在配置文件中加入：
+
+server.port=9090
+
+ 
+常...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/gebitan505">来自：	<span class="blog_title"> AndyLizh的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/qq_36675996/article/details/78624575,BlogCommendFromBaidu_40"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/qq_36675996/article/details/78624575,BlogCommendFromBaidu_40"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_36675996/article/details/78624575" target="_blank" title="spring Boot 设置tomcat端口号 - mr.zd的专栏">
+				<h4 class="text-truncate oneline">
+						spring Boot 设置tomcat<em>端口号</em> - mr.zd的专栏				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/5/9/B/3_qq_36675996.jpg" alt="qq_36675996" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qq_36675996</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">11-24</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							570</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_36675996/article/details/78624575" target="_blank" title="spring Boot 设置tomcat端口号 - mr.zd的专栏">
+							<span class="desc oneline">spring boot 端口号</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qq_36675996">来自：	<span class="blog_title"> Mr.ZD的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/heyewu4107/article/details/79016243,BlogCommendFromBaidu_41"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/heyewu4107/article/details/79016243,BlogCommendFromBaidu_41"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/heyewu4107/article/details/79016243" target="_blank" title="SpringBoot 学习系列 配置随机端口 - vision(java后端开发职业生涯记录)">
+				<h4 class="text-truncate oneline">
+						<em>SpringBoot</em> 学习系列 配置随机端口 - vision(java后端开发职业生涯记录)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/D/C/A/3_heyewu4107.jpg" alt="heyewu4107" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">heyewu4107</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">01-09</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1176</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/heyewu4107/article/details/79016243" target="_blank" title="SpringBoot 学习系列 配置随机端口 - vision(java后端开发职业生涯记录)">
+							<span class="desc oneline">一 springboot 配置端口的方式一般有3种
+1 实现 EmbeddedServletContainerCustomizer 接口并重写 customize方法
+
+	@Override
+	...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/heyewu4107">来自：	<span class="blog_title"> Vision</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/cuipeng1019/article/details/80291136,BlogCommendFromBaidu_42"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/cuipeng1019/article/details/80291136,BlogCommendFromBaidu_42"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/cuipeng1019/article/details/80291136" target="_blank" title="SpringBoot学习二：application.porperties中的配置不生效导致改端口后不生效原因，无法加载resource下的资源文件 - smallmonkey">
+				<h4 class="text-truncate oneline">
+						<em>SpringBoot</em>学习二：application.porperties中的配置不生效导致改端口后不生效原因，无法加载resource下的资源文件 - smallmonkey				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/5/9/E/3_cuipeng1019.jpg" alt="cuipeng1019" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">cuipeng1019</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">05-12</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1567</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/cuipeng1019/article/details/80291136" target="_blank" title="SpringBoot学习二：application.porperties中的配置不生效导致改端口后不生效原因，无法加载resource下的资源文件 - smallmonkey">
+							<span class="desc oneline">springboot项目新建后，application.porperties文件放置路径为/springboot01/src/main/resources但更改端口后server.port=8081
+...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/cuipeng1019">来自：	<span class="blog_title"> smallmonkey</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/jsyxcjw/article/details/46763639,BlogCommendFromBaidu_43"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/jsyxcjw/article/details/46763639,BlogCommendFromBaidu_43"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/jsyxcjw/article/details/46763639" target="_blank" title="SpringBoot笔记一 - jsyxcjw的专栏">
+				<h4 class="text-truncate oneline">
+						<em>SpringBoot</em>笔记一 - jsyxcjw的专栏				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/1/F/8/3_jsyxcjw.jpg" alt="jsyxcjw" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">jsyxcjw</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">07-05</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							14.1万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/jsyxcjw/article/details/46763639" target="_blank" title="SpringBoot笔记一 - jsyxcjw的专栏">
+							<span class="desc oneline">1 开始
+1.1 spring介绍
+Spring Boot使开发独立的，产品级别的基于Spring的应用变得非常简单，你只需&quot;just run&quot;。 我们为Spring平台及第三方库提供开箱即用的设...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/jsyxcjw">来自：	<span class="blog_title"> jsyxcjw的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_558" data-pid="67" data-track-view='{"mod":"kp_popu_558","con":",,"}'><script
+    async="async"
+    charset="utf-8"
+    src="https://shared.ydstatic.com/js/yatdk/3.0.1/stream.js"
+    data-id="8935aa488dd58452b9e5ee3b44f1212f"
+    data-udid="24C56021-A1CB-4A07-993A-2D2A7F00FDCD"
+    data-div-Style="width:900px;height:76px;"
+    data-img-Style="float:left;margin-right:15px;width:90px;height:60px;"
+    data-tit-Style="font-size:16px;color:#f13d3d;"
+   data-des-Style="font-size:12px;color:#333;"   
+>
+</script>
+<div style="float:right;color:#ccc;font-size:10px;margin-top:-20px;">广告</div></div><script>$(function(){csdn.track.viewCheck($("#kp_box_558"));});</script></div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/bwh0520/article/details/79291920,BlogCommendFromBaidu_44"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/bwh0520/article/details/79291920,BlogCommendFromBaidu_44"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/bwh0520/article/details/79291920" target="_blank" title="SpringBoot简介-SpringBoot是什么可以做什么 - bwh0520的博客">
+				<h4 class="text-truncate oneline">
+						<em>SpringBoot</em>简介-<em>SpringBoot</em>是什么可以做什么 - bwh0520的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/3/C/8/3_bwh0520.jpg" alt="bwh0520" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">bwh0520</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">02-08</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							4192</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/bwh0520/article/details/79291920" target="_blank" title="SpringBoot简介-SpringBoot是什么可以做什么 - bwh0520的博客">
+							<span class="desc oneline"></span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/bwh0520">来自：	<span class="blog_title"> bwh0520的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/forezp/article/details/70437576,BlogCommendFromBaidu_45"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/forezp/article/details/70437576,BlogCommendFromBaidu_45"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/forezp/article/details/70437576" target="_blank" title="SpringBoot非官方教程 | 第二篇：Spring Boot配置文件详解 - 方志朋的专栏(生命不息，奋斗不止)">
+				<h4 class="text-truncate oneline">
+						<em>SpringBoot</em>非官方教程 | 第二篇：Spring Boot配置文件详解 - 方志朋的专栏(生命不息，奋斗不止)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/0/1/0/3_forezp.jpg" alt="forezp" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">forezp</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">04-22</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							7.5万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/forezp/article/details/70437576" target="_blank" title="SpringBoot非官方教程 | 第二篇：Spring Boot配置文件详解 - 方志朋的专栏(生命不息，奋斗不止)">
+							<span class="desc oneline">springboot采纳了建立生产就绪Spring应用程序的观点。 Spring Boot优先于配置的惯例，旨在让您尽快启动和运行。在一般情况下，我们不需要做太多的配置就能够让spring boot正...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/forezp">来自：	<span class="blog_title"> 方志朋的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/ityouknow/article/details/80490926,BlogCommendFromBaidu_46"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/ityouknow/article/details/80490926,BlogCommendFromBaidu_46"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/ityouknow/article/details/80490926" target="_blank" title="学习 Spring Boot 知识看这一篇就够了 - 纯洁的微笑(万事皆因忙中错，好人半自苦中来)">
+				<h4 class="text-truncate oneline">
+						学习 Spring Boot 知识看这一篇就够了 - 纯洁的微笑(万事皆因忙中错，好人半自苦中来)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/1/9/4/3_ityouknow.jpg" alt="ityouknow" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">ityouknow</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">05-28</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							2.1万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/ityouknow/article/details/80490926" target="_blank" title="学习 Spring Boot 知识看这一篇就够了 - 纯洁的微笑(万事皆因忙中错，好人半自苦中来)">
+							<span class="desc oneline">
+  
+    
+                    
+
+                    
+
+                    
+                    
+     ...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/ityouknow">来自：	<span class="blog_title"> 纯洁的微笑</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/dingdinghuoshan/article/details/81363019,BlogCommendFromQuerySearch_47"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/dingdinghuoshan/article/details/81363019,BlogCommendFromQuerySearch_47"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/dingdinghuoshan/article/details/81363019" target="_blank" title="在webstrom启动项目时，自定义端口 - dingdinghuoshan的博客">
+				<h4 class="text-truncate oneline">
+						在webstrom启动项目时，自定义端口 - dingdinghuoshan的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/9/8/5/3_dingdinghuoshan.jpg" alt="dingdinghuoshan" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">dingdinghuoshan</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">08-02</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							290</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/dingdinghuoshan/article/details/81363019" target="_blank" title="在webstrom启动项目时，自定义端口 - dingdinghuoshan的博客">
+							<span class="desc oneline">在多个项目均在启动时，如果不自定义该项目端口，那每个项目的端口都将默认为8080，所以我们需要给不同的项目配置不同的端口号
+
+步骤一：点击webstrom的edit Configrations
+
+
+
+...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/dingdinghuoshan">来自：	<span class="blog_title"> dingdinghuoshan的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/m0_37739193/article/details/83388271,BlogCommendFromQuerySearch_48"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/m0_37739193/article/details/83388271,BlogCommendFromQuerySearch_48"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/m0_37739193/article/details/83388271" target="_blank" title="修改Springboot启动端口号 - 小强签名设计 的博客(真正牛逼的生活是既可以朝九晚五又可以浪迹天涯)">
+				<h4 class="text-truncate oneline">
+						<em>修改</em><em>Springboot</em>启动<em>端口号</em> - 小强签名设计 的博客(真正牛逼的生活是既可以朝九晚五又可以浪迹天涯)				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/E/8/F/3_m0_37739193.jpg" alt="m0_37739193" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">m0_37739193</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">10-25</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							22</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/m0_37739193/article/details/83388271" target="_blank" title="修改Springboot启动端口号 - 小强签名设计 的博客(真正牛逼的生活是既可以朝九晚五又可以浪迹天涯)">
+							<span class="desc oneline">前言
+Springboot启动的时候，端口的设定默认是8080，这肯定是不行的，我们需要自己定义端口，Springboot提供了两种方式，第一种，我们可以通过application.yml配置文件配置...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/m0_37739193">来自：	<span class="blog_title"> 小强签名设计 的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_558" data-pid="68" data-track-view='{"mod":"kp_popu_558","con":",,"}'><script
+    async="async"
+    charset="utf-8"
+    src="https://shared.ydstatic.com/js/yatdk/3.0.1/stream.js"
+    data-id="8935aa488dd58452b9e5ee3b44f1212f"
+    data-udid="24C56021-A1CB-4A07-993A-2D2A7F00FDCD"
+    data-div-Style="width:900px;height:76px;"
+    data-img-Style="float:left;margin-right:15px;width:90px;height:60px;"
+    data-tit-Style="font-size:16px;color:#f13d3d;"
+   data-des-Style="font-size:12px;color:#333;"   
+>
+</script>
+<div style="float:right;color:#ccc;font-size:10px;margin-top:-20px;">广告</div></div><script>$(function(){csdn.track.viewCheck($("#kp_box_558"));});</script></div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/qq_30848071/article/details/78661859,BlogCommendFromQuerySearch_49"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/qq_30848071/article/details/78661859,BlogCommendFromQuerySearch_49"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_30848071/article/details/78661859" target="_blank" title="如何修改tomcat默认的8080端口号 - qq_30848071的博客">
+				<h4 class="text-truncate oneline">
+						如何<em>修改</em>tomcat<em>默认</em>的8080<em>端口号</em> - qq_30848071的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/3/7/6/3_qq_30848071.jpg" alt="qq_30848071" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qq_30848071</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">11-29</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							2513</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_30848071/article/details/78661859" target="_blank" title="如何修改tomcat默认的8080端口号 - qq_30848071的博客">
+							<span class="desc oneline">以前只知道当tomcat端口号冲突了如何修改tomcat默认的8080端口号
+
+今天遇到个情况，装了个BO，自带个tomcat，这时就需要修改三个地方
+
+修改Tomcat的端口号：
+
+  ...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qq_30848071">来自：	<span class="blog_title"> qq_30848071的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    
+
+            <div class="recommend-loading-box">
+                <img src='https://csdnimg.cn/release/phoenix/images/feedLoading.gif'>
+            </div>
+            <div class="recommend-end-box">
+                <p class="text-center">没有更多推荐了，<a href="https://blog.csdn.net/" class="c-blue c-blue-hover c-blue-focus">返回首页</a></p>
+            </div>
+        </div>
+    </main>
+
+    <aside>
+		    <div id="asideProfile" class="aside-box">
+    <!-- <h3 class="aside-title">个人资料</h3> -->
+    <div class="profile-intro d-flex">
+        <div class="avatar-box d-flex justify-content-center flex-column">
+            <a href="https://blog.csdn.net/zknxx">
+                <img src="https://avatar.csdn.net/4/5/7/3_zknxx.jpg" class="avatar_pic">
+            </a>
+        </div>
+        <div class="user-info d-flex justify-content-center flex-column">
+            <p class="name csdn-tracking-statistics tracking-click" data-mod="popu_379">
+                <a href="https://blog.csdn.net/zknxx" target="_blank" class="" id="uid">木叶之荣</a>
+            </p>
+                    </div>
+                <div class="opt-box d-flex justify-content-center flex-column">
+            <span  class="csdn-tracking-statistics tracking-click" data-mod="popu_379">
+                <a class="btn btn-sm btn-red-hollow attention" id="btnAttent">关注</a>
+            </span>
+                    </div>
+            </div>
+    <div class="data-info d-flex item-tiling">
+                <dl class="text-center" title="156">
+                        <dt><a href="https://blog.csdn.net/zknxx?t=1">原创</a></dt>
+            <dd><a href="https://blog.csdn.net/zknxx?t=1"><span class="count">156</span></a></dd>
+                    </dl>
+        <dl class="text-center" id="fanBox" title="242">
+            <dt>粉丝</dt>
+            <dd><span class="count" id="fan">242</span></dd>
+        </dl>
+        <dl class="text-center" title="179">
+            <dt>喜欢</dt>
+            <dd><span class="count">179</span></dd>
+        </dl>
+        <dl class="text-center" title="193">
+            <dt>评论</dt>
+            <dd><span class="count">193</span></dd>
+        </dl>
+    </div>
+    <div class="grade-box clearfix">
+        <dl>
+            <dt>等级：</dt>
+            <dd>
+                <a href="https://blog.csdn.net/home/help.html#level" title="6级,点击查看等级说明" target="_blank">
+                    <svg class="icon icon-level" aria-hidden="true">
+                        <use xlink:href="#csdnc-bloglevel-6"></use>
+                    </svg>
+                </a>
+            </dd>
+        </dl>
+        <dl>
+            <dt>访问：</dt>
+            <dd title="1028504">
+                102万+            </dd>
+        </dl>
+        <dl>
+            <dt>积分：</dt>
+            <dd title="7050">
+                7050            </dd>
+        </dl>
+        <dl title="4782">
+            <dt>排名：</dt>
+            <dd>4782</dd>
+        </dl>
+    </div>
+        <div class="badge-box d-flex">
+        <span>勋章：</span>
+                <div class="icon-badge" title="专栏达人">
+            <div class="mouse-box">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#csdnc-m-columns"></use>
+                </svg>
+                <div class="icon-arrow"></div>
+            </div>
+            <div class="grade-detail-box">
+                <div class="pos-box">
+                    <div class="left-box d-flex justify-content-center align-items-center flex-column">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#csdnc-m-columns"></use>
+                        </svg>
+                        <p>专栏达人</p>
+                    </div>
+                    <div class="right-box d-flex justify-content-center align-items-center">
+                        授予成功创建个人博客专栏的用户。专栏中添加五篇以上博文即可点亮！撰写博客专栏浓缩技术精华，专栏达人就是你！
+                    </div>
+                </div>
+            </div>
+        </div>
+                        <div class="icon-badge" title="持之以恒">
+            <div class="mouse-box">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#csdnc-m-lasting"></use>
+                </svg>
+                <div class="icon-arrow"></div>
+            </div>
+            <div class="grade-detail-box">
+                <div class="pos-box">
+                    <div class="left-box d-flex justify-content-center align-items-center flex-column">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#csdnc-m-lasting"></use>
+                        </svg>
+                        <p>持之以恒</p>
+                    </div>
+                    <div class="right-box d-flex justify-content-center align-items-center">
+                        授予每个自然月内发布4篇或4篇以上原创或翻译IT博文的用户。不积跬步无以至千里，不积小流无以成江海，程序人生的精彩需要坚持不懈地积累！
+                    </div>
+                </div>
+            </div>
+        </div>
+                                                <script>
+            (function ($) {
+                setTimeout(function(){
+                    $('div.icon-badge.show-moment').removeClass('show-moment');
+                }, 5000);
+            })(window.jQuery)
+        </script>
+    </div>
+    </div>
+		    <div class="csdn-tracking-statistics mb8 box-shadow" data-pid="blog" data-mod="popu_4" style="height:250px;">
+    <div class="aside-content text-center" id="cpro_u2734133">
+      <div id="kp_box_76" data-pid="56" data-track-view='{"mod":"kp_popu_76","con":",,"}'><script type="text/javascript" src="//rabc1.iteye.com/source/openjs/api/mbxf4.js?b=wocoltly"></script></div><script>$(function(){csdn.track.viewCheck($("#kp_box_76"));});</script>    </div>
+</div>
+		    <!--自定义模块-->
+<div id="asideCustom63256254" class="aside-box custom-box">
+    <h3 class="aside-title">Spring技术栈讨论群，欢迎加入!</h3>
+    <div class="aside-content clearfix">
+        公众号欢迎关注：
+<img src="//img-blog.csdn.net/20180914011015246?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3prbnh4/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="">
+微信群：
+<img src="//img-blog.csdn.net/20180914010801569?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3prbnh4/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="">
+</a>
+个人微信：
+<img src="//img-blog.csdn.net/20180530232546482?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3prbnh4/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="">
+</a>    </div>
+</div>
+		    <div id="asideNewArticle" class="aside-box">
+    <h3 class="aside-title">最新文章</h3>
+    <div class="aside-content">
+        <ul class="inf_list clearfix csdn-tracking-statistics tracking-click" data-mod="popu_382">
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/zknxx/article/details/82320414" target="_blank">SpringBoot之集成SpringAOP分析</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/zknxx/article/details/80822352" target="_blank">踩坑记：根据类型获取Spring容器中的Bean</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/zknxx/article/details/80808447" target="_blank">Spring系列之Spring框架和SpringAOP集成过程分析(十二)</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/zknxx/article/details/80725173" target="_blank">Spring系列之Spring框架和SpringAOP集成过程分析(十一)</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/zknxx/article/details/80724180" target="_blank">Spring系列之Spring框架和SpringAOP集成过程分析(十)</a>
+            </li>
+                    </ul>
+    </div>
+</div>
+		    <div id="asideColumn" class="aside-box">
+    <h3 class="aside-title">博主专栏</h3>
+    <div class="aside-content">
+        <ul class="column-box csdn-tracking-statistics tracking-click" data-mod="popu_520" >
+                            <li class="clearfix">
+                    <div class="img-box float-left">
+                        <a class="d-flex align-items-center" href="https://blog.csdn.net/column/details/webx-zkn.html">
+                            <img src="https://img-blog.csdn.net/column?imageView2/5/w/120/h/120" alt="">
+                        </a>
+                    </div>
+                    <div class="info">
+                        <p class="title"><a href="https://blog.csdn.net/column/details/webx-zkn.html">Webx系列讲解</a></p>
+                        <div class="data">阅读量：<span>14857</span><span class="count">6 篇</span></div>
+                    </div>
+                </li>
+                            <li class="clearfix">
+                    <div class="img-box float-left">
+                        <a class="d-flex align-items-center" href="https://blog.csdn.net/column/details/zkn-springboot.html">
+                            <img src="https://img-blog.csdn.net/column?imageView2/5/w/120/h/120" alt="">
+                        </a>
+                    </div>
+                    <div class="info">
+                        <p class="title"><a href="https://blog.csdn.net/column/details/zkn-springboot.html">SpringBoot系列</a></p>
+                        <div class="data">阅读量：<span>315125</span><span class="count">28 篇</span></div>
+                    </div>
+                </li>
+                            <li class="clearfix">
+                    <div class="img-box float-left">
+                        <a class="d-flex align-items-center" href="https://blog.csdn.net/column/details/15734.html">
+                            <img src="https://img-blog.csdn.net/column?imageView2/5/w/120/h/120" alt="">
+                        </a>
+                    </div>
+                    <div class="info">
+                        <p class="title"><a href="https://blog.csdn.net/column/details/15734.html">SpringMVC学习系列</a></p>
+                        <div class="data">阅读量：<span>124245</span><span class="count">24 篇</span></div>
+                    </div>
+                </li>
+                            <li class="clearfix">
+                    <div class="img-box float-left">
+                        <a class="d-flex align-items-center" href="https://blog.csdn.net/column/details/15736.html">
+                            <img src="https://img-blog.csdn.net/column?imageView2/5/w/120/h/120" alt="">
+                        </a>
+                    </div>
+                    <div class="info">
+                        <p class="title"><a href="https://blog.csdn.net/column/details/15736.html">JVM学习系列</a></p>
+                        <div class="data">阅读量：<span>2549</span><span class="count">6 篇</span></div>
+                    </div>
+                </li>
+                            <li class="clearfix">
+                    <div class="img-box float-left">
+                        <a class="d-flex align-items-center" href="https://blog.csdn.net/column/details/16263.html">
+                            <img src="https://img-blog.csdn.net/column?imageView2/5/w/120/h/120" alt="">
+                        </a>
+                    </div>
+                    <div class="info">
+                        <p class="title"><a href="https://blog.csdn.net/column/details/16263.html">Spring源码相关学习</a></p>
+                        <div class="data">阅读量：<span>7789</span><span class="count">21 篇</span></div>
+                    </div>
+                </li>
+                    </ul>
+    </div>
+    </div>
+		    <div id="asideCategory" class="aside-box flexible-box">
+    <h3 class="aside-title">个人分类</h3>
+    <div class="aside-content">
+        <ul>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/zknxx/article/category/3276505">
+                    <span class="title oneline">Java基础</span>
+                    <span class="count float-right">22篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/zknxx/article/category/5634383">
+                    <span class="title oneline">-------------------IO</span>
+                    <span class="count float-right">5篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/zknxx/article/category/6078948">
+                    <span class="title oneline">Java高级</span>
+                    <span class="count float-right">38篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/zknxx/article/category/6935933">
+                    <span class="title oneline">-----------------JVM</span>
+                    <span class="count float-right">6篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/zknxx/article/category/6238416">
+                    <span class="title oneline">DB</span>
+                    <span class="count float-right">7篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/zknxx/article/category/5579609">
+                    <span class="title oneline">--------Oracle</span>
+                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/zknxx/article/category/6101634">
+                    <span class="title oneline">---------SQLServer</span>
+                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/zknxx/article/category/6391567">
+                    <span class="title oneline">---------MySql</span>
+                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/zknxx/article/category/6147761">
+                    <span class="title oneline">Web</span>
+                    <span class="count float-right">77篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/zknxx/article/category/6189994">
+                    <span class="title oneline">--------------Webx</span>
+                    <span class="count float-right">6篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/zknxx/article/category/6238420">
+                    <span class="title oneline">-------------SpringMVC</span>
+                    <span class="count float-right">22篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/zknxx/article/category/6363518">
+                    <span class="title oneline">--------------SpringBoot</span>
+                    <span class="count float-right">28篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/zknxx/article/category/6567643">
+                    <span class="title oneline">-------------MyBatis</span>
+                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/zknxx/article/category/6925312">
+                    <span class="title oneline">Spring</span>
+                    <span class="count float-right">21篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/zknxx/article/category/6218510">
+                    <span class="title oneline">JavaScript</span>
+                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                    </ul>
+    </div>
+        <p class="text-center">
+        <a class="btn btn-link-blue flexible-btn" data-fbox="aside-archive">展开</a>
+    </p>
+    </div>
+		    <div id="asideArchive" class="aside-box flexible-box">
+    <h3 class="aside-title">归档</h3>
+    <div class="aside-content">
+        <ul class="archive-list">
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2018/09">
+                    2018年9月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2018/06">
+                    2018年6月                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2018/05">
+                    2018年5月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2018/04">
+                    2018年4月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2018/03">
+                    2018年3月                    <span class="count float-right">10篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2018/01">
+                    2018年1月                    <span class="count float-right">7篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2017/12">
+                    2017年12月                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2017/11">
+                    2017年11月                    <span class="count float-right">7篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2017/10">
+                    2017年10月                    <span class="count float-right">9篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2017/09">
+                    2017年9月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2017/08">
+                    2017年8月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2017/07">
+                    2017年7月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2017/06">
+                    2017年6月                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2017/05">
+                    2017年5月                    <span class="count float-right">15篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2017/04">
+                    2017年4月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2017/03">
+                    2017年3月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2017/02">
+                    2017年2月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2017/01">
+                    2017年1月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2016/12">
+                    2016年12月                    <span class="count float-right">12篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2016/11">
+                    2016年11月                    <span class="count float-right">9篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2016/10">
+                    2016年10月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2016/09">
+                    2016年9月                    <span class="count float-right">7篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2016/08">
+                    2016年8月                    <span class="count float-right">10篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2016/07">
+                    2016年7月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2016/06">
+                    2016年6月                    <span class="count float-right">5篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2016/05">
+                    2016年5月                    <span class="count float-right">9篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2016/04">
+                    2016年4月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2016/03">
+                    2016年3月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2016/02">
+                    2016年2月                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2016/01">
+                    2016年1月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2015/07">
+                    2015年7月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2015/06">
+                    2015年6月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/zknxx/article/month/2015/05">
+                    2015年5月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                    </ul>
+    </div>
+        <p class="text-center">
+        <a class="btn btn-link-blue flexible-btn" data-fbox="aside-archive">展开</a>
+    </p>
+    </div>
+		    <div id="asideHotArticle" class="aside-box">
+	<h3 class="aside-title">热门文章</h3>
+	<div class="aside-content">
+		<ul class="hotArticle-list csdn-tracking-statistics tracking-click" data-mod="popu_521">
+							<li>
+					<a href="https://blog.csdn.net/zknxx/article/details/52281220">JSON字符串转换为Map</a>
+					<p class="read">阅读量：<span>157618</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/zknxx/article/details/53433592">SpringBoot修改默认端口号</a>
+					<p class="read">阅读量：<span>74570</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/zknxx/article/details/52426771">SpringMVC使用@Valid注解进行数据验证</a>
+					<p class="read">阅读量：<span>65514</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/zknxx/article/details/53428669">SpringBoot热部署</a>
+					<p class="read">阅读量：<span>42327</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/zknxx/article/details/53240959">SpringBoot之集成Spring AOP</a>
+					<p class="read">阅读量：<span>37954</span></p>
+				</li>
+					</ul>
+	</div>
+</div>
+		    <div id="asideNewComments" class="aside-box">
+    <h3 class="aside-title">最新评论</h3>
+    <div class="aside-content">
+        <ul class="newcomment-list">
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/zknxx/article/details/53057683#comments">多线程之线程池newFixedTh...</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/fanrenxiang" class="user-name" target="_blank">fanrenxiang</a>：请问下博主，有没有深入研究过newFixedThreadPool(1)和newSingleThre...                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/zknxx/article/details/79183698#comments">SpringBoot之@Enabl...</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/Coye_zl" class="user-name" target="_blank">Coye_zl</a>：我觉得就是加了EnableConfigurationProperties之后就是会执行Config...                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/zknxx/article/details/52987216#comments">解决RocketMQ报No rou...</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/qq_32583945" class="user-name" target="_blank">qq_32583945</a>：[reply]u012210451[/reply]
+我同步发送消息也报这个错误，请问你知道怎么解决...                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/zknxx/article/details/79183698#comments">SpringBoot之@Enabl...</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/Coye_zl" class="user-name" target="_blank">Coye_zl</a>：文章写的很好，有一句话写错了
+EnableConfigurationPropertiesImpor...                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/zknxx/article/details/52987216#comments">解决RocketMQ报No rou...</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/u012210451" class="user-name" target="_blank">u012210451</a>：我自己也有碰到，自己调试了一下，发现是跟异步有关系，如果异步发送消息，但是producer已经sh...                </p>
+            </li>
+                    </ul>
+    </div>
+</div>
+		<div id="asideFooter">
+			
+		<div class="aside-box">
+			<div id="kp_box_77" data-pid="57" data-track-view='{"mod":"kp_popu_77","con":",,"}'><script type="text/javascript" src="//rabc1.iteye.com/common/web/site/9i6gu.js?av=neunkwb"></script></div><script>$(function(){csdn.track.viewCheck($("#kp_box_77"));});</script>		</div>
+				<div class="aside-box">
+			<div class="persion_article">
+			</div>
+		</div>
+	</div>
+</aside>
+<script src="https://csdnimg.cn/pubfooter/js/publib_footer-1.0.3.js" data-isfootertrack="false" type="text/javascript"></script>
+<script>
+	$("a.flexible-btn").click(function(){
+		$(this).parents('div.aside-box').removeClass('flexible-box');
+		$(this).remove();
+	})
+</script>
+</div>
+<div class="mask-dark"></div>
+<div class="pulllog-box" style="display: block;">
+	<div class="pulllog clearfix">
+		<span class="text float-left">
+            <div id="dmp_ad_69"><div id="kp_box_75" data-pid="69" data-track-view='{"mod":"kp_popu_75","con":",,"}'><div style="float:left;margin-right:5px;border:1px solid #f13d3d;padding:2px 5px 0px 5px;">
+<a href="https://www.csdn.net/2018dev/?utm_source=blogtextlink" target="_blank" style="color:#f13d3d;font-weight:bold;text-decoration:none;font-size:15px;">开发者调查</a>
+</div>
+
+<div style="float:left;margin-right:5px;border:1px solid #000;padding:2px 5px 0px 5px;background:#000;">
+<a href="http://ai2018.csdn.net/?utm_source=bkxxl" target="_blank" style="color:#fff;font-weight:bold;text-decoration:none;font-size:15px;">AI开发者大会日程曝光</a>
+</div>
+
+<div style="float:left;margin-right:5px;border:1px solid #f13d3d;padding:2px 5px 0px 5px;">
+<a href="https://microsoft-smb.cn/office365knj/home.html?code=58D0290D" target="_blank" style="color:#f13d3d;font-weight:bold;text-decoration:none;font-size:15px;">Office 365商业协作版  5折钜惠！ </a>
+</div>
+
+<div style="float:left;">
+<script type="text/javascript" src="//rabc1.iteye.com/common/js/ndr3h.js?b=wosyvccl"></script>
+</div></div><script>$(function(){csdn.track.viewCheck($("#kp_box_75"));});</script></div>            		</span>
+		<div class="pulllog-btn float-right clearfix">
+            <div class="float-left csdn-tracking-statistics tracking-click" data-mod="popu_557">
+                <a class="pulllog-login">登录</a>
+            </div>
+            <div class="pulllog-sigin float-left csdn-tracking-statistics tracking-click" data-mod="popu_558">
+                <a href="https://passport.csdn.net/account/mobileregister" target="_blank">注册</a>
+            </div>
+            <button class="btn-close">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#csdnc-times"></use>
+                </svg>
+            </button>
+		</div>
+	</div>
+</div>
+<div id="loginWrap" style="display:none"></div>
+<div class="tool-box">
+	<ul class="meau-list">
+		<li class="btn-like-box long-width">
+			<button class=" long-height hover-box btn-like " title="点赞">
+				<svg class="icon active hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-thumbsup-ok"></use>
+				</svg>
+				<svg class="icon no-active hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-thumbsup"></use>
+				</svg>
+				<span class="hover-show text-box text">
+					<span class="no-active">点赞</span>
+					<span class="active">取消点赞</span>
+				</span>
+				<p>7</p>
+			</button>
+		</li>
+		<li class="">
+						<a class="btn-comments long-height hover-box" title="写评论" href="#commentBox">
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-comments"></use>
+				</svg>
+				<span class="hover-show text">评论</span>
+				<p class="">
+						3				</p>
+			</a>
+		</li>
+		<li class="toc-container-box" id="liTocBox">
+			<button class="btn-toc low-height hover-box" title="目录">
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-contents"></use>
+				</svg>
+				<span class="hover-show text">目录</span>
+			</button>
+			<div class="toc-container">
+				<div class="pos-box">
+					<div class="icon-arrow"></div>
+					<div class="scroll-box">
+						<div class="toc-box"></div>
+					</div>
+				</div>
+				<div class="opt-box">
+					<button class="btn-opt prev nomore" title="向上">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#csdnc-chevronup"></use>
+						</svg>
+					</button>
+					<button class="btn-opt next">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#csdnc-chevrondown"></use>
+						</svg>
+					</button>
+				</div>
+			</div>
+		</li>
+		<li>
+			<button class="btn-bookmark low-height hover-box" title="收藏">
+				<svg class="icon active hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-bookmark-ok"></use>
+				</svg>
+				<svg class="icon no-active hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-bookmark"></use>
+				</svg>
+					<span class="hover-show text">收藏</span>
+				<!-- <span class="hover-show text-box text">
+					<span class="no-active">收藏</span>
+					<span class="active">取消收藏</span>
+				</span> -->
+			</button>
+		</li>
+				<li class="bdsharebuttonbox">
+			<button class="btn-comments low-height hover-box" >
+				<a href="#" class="bds_weixin clear-share-style" data-cmd="weixin" title="手机看"></a>
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-usephone"></use>
+				</svg>
+				<span class="hover-show text text3">
+					手机看
+				</span>
+			</button>
+		</li>
+							<li class="widescreen-hide">
+				<a class="btn-comments low-height hover-box" href="https://blog.csdn.net/zknxx/article/details/53428669" title="SpringBoot热部署">
+					<svg class="icon hover-hide" aria-hidden="true">
+						<use xlink:href="#csdnc-chevronleft"></use>
+					</svg>
+					<span class="hover-show text text3">上一篇</span>
+				</a>
+			</li>
+								<li class="widescreen-hide">
+			<a class="btn-comments hover-box low-height" href="https://blog.csdn.net/zknxx/article/details/53443181" title="SpringBoot多跨域请求的支持（JSONP）">
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-chevronright"></use>
+				</svg>
+				<span class="hover-show text text3">下一篇</span>
+			</a>
+		</li>
+				<li class="bdsharebuttonbox _360_interactive"style="margin-top: 8px;"><div id="kp_box_97" data-pid="73" data-track-view='{"mod":"kp_popu_97","con":",,"}'><script type="text/javascript" src="//cjhd.mediav.com/js/interactive_plugin.js"></script> 
+			<style>
+				#_360_interactive > *{
+					 margin-left: -8px;
+				}
+			</style>
+			<div id="_360_interactive" > 
+				<script> INTERACTIVE_PLUGIN.render({ showid : 'N0ufqn', w: 60, h: 60, type: 'hover', placeholderId: '_360_interactive' }); </script> 
+			</div>
+			<img src="//img-ads.csdn.net/2016/201608021757063065.png" style="margin: 0 auto;display: block;" alt=""></div><script>$(function(){csdn.track.viewCheck($("#kp_box_97"));});</script></li>		<!-- 宽屏更多按钮 -->
+		<li class="widescreen-more">
+			<a class="btn-comments chat-ask-button low-height hover-box" title="快问" href="#chatqa">
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-more"></use>
+				</svg>
+				<span class="hover-show text">更多</span>
+				
+			</a>
+			<ul class="widescreen-more-box">
+													<li class="widescreen-more">
+						<a class="btn-comments low-height hover-box" href="https://blog.csdn.net/zknxx/article/details/53428669" title="SpringBoot热部署">
+							<svg class="icon hover-hide" aria-hidden="true">
+								<use xlink:href="#csdnc-chevronleft"></use>
+							</svg>
+							<span class="hover-show text text3">上一篇</span>
+						</a>
+					</li>
+																<li class="widescreen-more">
+					<a class="btn-comments hover-box low-height" href="https://blog.csdn.net/zknxx/article/details/53443181" title="SpringBoot多跨域请求的支持（JSONP）">
+						<svg class="icon hover-hide" aria-hidden="true">
+							<use xlink:href="#csdnc-chevronright"></use>
+						</svg>
+						<span class="hover-show text text3">下一篇</span>
+					</a>
+				</li>
+							</ul>
+		</li>
+	</ul>
+</div>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'https://csdnimg.cn/static/api/js/share.js?v=89860594'];</script>
+<script>
+    var recommendCount = 49;
+    recommendCount = recommendCount > 1 ? (recommendCount + (recommendCount>6 ? 2 : 1)) : recommendCount;
+    var articleTit = articleTitles;
+    var ChannelId = 0;
+    var articleId = "53433592";
+    var commentscount = 3;
+    var islock = false;
+    var curentUrl = "https://blog.csdn.net/zknxx/article/details/53433592";
+    var myUrl = "https://my.csdn.net/";
+    //1禁止评论，2正常
+    var commentAuth = 2;
+    //百度搜索
+    var baiduKey = "spring+boot+%E9%BB%98%E8%AE%A4%E7%AB%AF%E5%8F%A3";
+    var needInsertBaidu = false;
+    // 代码段样式
+    var codeStyle = '';
+		var highlight = ["springboot","\u4fee\u6539","\u9ed8\u8ba4","\u7aef\u53e3\u53f7"];//高亮数组
+		// 相关推荐博主数据
+    var RecommendBlogExpertList = [{"user_name":"ywb201314","nick_name":"ywb201314","avatar":"https:\/\/avatar.csdn.net\/1\/C\/6\/3_ywb201314.jpg","is_expert":false,"article_count":924},{"user_name":"qq_38423105","nick_name":"wisdom-chen","avatar":"https:\/\/avatar.csdn.net\/9\/7\/8\/3_qq_38423105.jpg","is_expert":false,"article_count":47},{"user_name":"qq_21683643","nick_name":"qq_21683643","avatar":"https:\/\/avatar.csdn.net\/B\/C\/1\/3_qq_21683643.jpg","is_expert":false,"article_count":136},{"user_name":"qq_25781091","nick_name":"\u5446__\u5446","avatar":"https:\/\/avatar.csdn.net\/A\/6\/C\/3_qq_25781091.jpg","is_expert":false,"article_count":4},{"user_name":"sayoko06","nick_name":"niu_sayok","avatar":"https:\/\/avatar.csdn.net\/A\/6\/2\/3_sayoko06.jpg","is_expert":false,"article_count":122},{"user_name":"fancancan","nick_name":"__Hello_World__","avatar":"https:\/\/avatar.csdn.net\/D\/A\/3\/3_fancancan.jpg","is_expert":false,"article_count":34},{"user_name":"panchao888888","nick_name":"pcstartop","avatar":"https:\/\/avatar.csdn.net\/8\/4\/B\/3_panchao888888.jpg","is_expert":false,"article_count":59},{"user_name":"qiyejunlintian","nick_name":"\u8001\u4f2f\u2b50\ufe0f","avatar":"https:\/\/avatar.csdn.net\/D\/3\/6\/3_qiyejunlintian.jpg","is_expert":false,"article_count":50},{"user_name":"oumantic","nick_name":"oumantic","avatar":"https:\/\/avatar.csdn.net\/E\/E\/4\/3_oumantic.jpg","is_expert":false,"article_count":1},{"user_name":"u013850277","nick_name":"\u5728\u5c4b\u9876\u5531\u6b4c-","avatar":"https:\/\/avatar.csdn.net\/6\/2\/6\/3_u013850277.jpg","is_expert":false,"article_count":160}];
+
+		var articleType = 1;
+		var CopyrightContent = '本文为博主原创文章，未经博主允许不得转载。';
+</script>
+<script src="https://csdnimg.cn/public/sandalstrap/1.4/js/sandalstrap.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/vendor/pagination/paging.js"></script>
+<script src='https://csdnimg.cn/public/common/gotop/js/goTop-v1.0.min.js?v201803151422'></script>
+<script>
+    GoTop({
+        right: 8,
+        hasReport: true,
+        reportFun: function() {
+            showReport(false,articleTit);
+        }
+    })
+</script>
+<script src="https://g.csdnimg.cn/login-box/1.0.1/login-box.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/template/js/common-946dc75567.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/template/js/detail-d6b68a0672.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/themes/skin-yellow/skin-yellow-9376486353.min.js"></script>
+<script src="//g.csdnimg.cn/fixed-sidebar/1.0.6/fixed-sidebar.js" type="text/javascript"></script>
+<script src="https://csdnimg.cn/search/baidu_search-1.1.2.js?v=201802071056&autorun=true&install=true&keyword=spring+boot+%E9%BB%98%E8%AE%A4%E7%AB%AF%E5%8F%A3"  type="text/javascript"></script>
+</body>
+<!-- 第四范式SDK -->
+
+<!-- 高亮未与 markdown兼容  -->
+	<link rel="stylesheet" href="https://csdnimg.cn/release/blog_editor_html/release1.3.1/ckeditor/plugins/chart/chart.css" />
+	<script type="text/javascript" src="https://csdnimg.cn/release/blog_editor_html/release1.3.1/ckeditor/plugins/chart/lib/chart.min.js"></script>
+	<script type="text/javascript" src="https://csdnimg.cn/release/blog_editor_html/release1.3.1/ckeditor/plugins/chart/widget2chart.js"></script>
+	<link rel="stylesheet" href="https://csdnimg.cn/release/blog_editor_html/release1.3.1/ckeditor/plugins/codesnippet/lib/highlight/styles/atom-one-dark.css">
+	<script type="text/javascript" src="https://csdnimg.cn/release/phoenix/production/pc_wap_common-9e177e0136.js" /></script>
+
+	<script type="text/javascript">
+	$(function(){
+		var allEscRegex = /&(lt|gt|amp|quot|nbsp|shy|#\d{1,5});/g,
+		    namedEntities = {
+					lt: '<',
+					gt: '>',
+					amp: '&',
+					quot: '"',
+					nbsp: '\u00a0',
+					shy: '\u00ad'
+				}
+		var allEscDecode = function( match, code ) {
+				return namedEntities[ code ];
+		};
+		htmlDecodeAttr = function( text ) {
+				return text.replace( allEscRegex, allEscDecode );
+		}
+	  hljs.initHighlightingOnLoad();
+	  hljs.initCopyButtonOnLoad();
+	  hljs.initLineNumbersOnLoad();
+		if($('pre .language-plain').length>0){
+			$('pre .language-plain').each(function(i,e){
+				var highlightRe = hljs.highlightAuto(htmlDecodeAttr(e.innerHTML))
+				e.innerHTML = highlightRe.value;
+				e.className = 'language-'+highlightRe.language;
+			});
+		}
+	})
+	</script>
+<script type="text/javascript" src="//g.csdnimg.cn/check-adblock/1.0.9/check-adblock.js"></script>
+
+<script type="text/javascript" src="https://static-blog.csdn.net/mdeditor/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            "HTML-CSS": {
+                    linebreaks: { automatic: true, width: "94%container" },
+                    imageFont: null
+            },
+            tex2jax: {
+                preview: "none"
+            },
+            mml2jax: {
+                preview: 'none'
+            }
+    });
+</script>
+</html>

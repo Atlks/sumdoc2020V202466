@@ -1,0 +1,42 @@
+atitit.seo 发帖关键词以及链接的制作.doc
+
+
+11
+11
+11
+11
+11
+22
+22
+22
+2
+关键词的获得(by cate)
+删除统计数量     Cartier(144)  格式
+
+\(\d*\)  替换
+
+网站品牌link地址
+
+_http://www.menumalls.com/replica-price/replica-bvlgari-watches.html_
+
+调用
+
+public class GeneLink {
+ 
+	public static void main(String[] args) throws Exception {
+		GeneLink c = new GeneLink();
+		// c.brdtxt= pathx.classPath(GeneLink.class) + "brand.txt";
+		// c.gene("D:\\home_src\\watchesnada0\\public_html\\replica-watches");
+		c.outputSql = "c:\\menumall_links.sql";
+		c.website = "http://www.menumalls.com/replica-price/";
+		c.brdtxt = pathx.classPath(GeneLink.class) + "menumallbrand.txt";
+		// c.test=true;
+		c.gene("D:\\home_src\\menumalls0\\public_html\\replica-price");
+	}
+遍历文件and品牌list
+控制每品牌只生成两个链接..
+
+生成sql脚本
+ insert link_big(name,url,type,status)values('Okl','http://www.menumalls.com/replica-price/gt-50-meters.html',1,1) ; 
+
+

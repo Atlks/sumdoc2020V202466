@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="canonical" href="https://blog.csdn.net/u012373815/article/details/47069223"/> 
+    <script type="text/javascript">
+        var username = "u012373815";
+        var _blogger = username;
+        var blog_address = "https://blog.csdn.net/u012373815";
+        var static_host = "https://csdnimg.cn/release/phoenix/";
+        var currentUserName = "attilax"; 
+        var fileName = '47069223';
+        var commentscount = 1;
+        var islock = false;
+        window.quickReplyflag = true;
+        var totalFloor = 1;
+        var isBole = false;
+        var isDigg = false;
+        var isExpert = false;
+        var isAdm = false;
+        var baiduKey = "springmvc%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6";
+        var needInsertBaidu = false;
+        var isShowAds = true;
+        var ChannelId = 16;
+    </script>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="referrer" content="always">
+    <script src="https://csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://csdnimg.cn/public/static/css/avatar.css">
+                <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/production/main-f869aa95a4.css">
+          <link rel="stylesheet" href="https://csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+
+    <script src="https://csdnimg.cn/rabbit/exposure-click/main-1.0.5.js"></script>
+    <script type="text/javascript" src="https://csdnimg.cn/pubfooter/js/tracking-1.0.2.js" charset="utf-8"></script>
+    <script type="text/javascript" src="https://csdnimg.cn/release/phoenix/production/main-e96db8abdf.js"></script>
+
+    <script src="https://dup.baidustatic.com/js/ds.js"></script>
+    <script type="text/javascript">
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+    </script>
+    <meta name="description" content="1      查询缓存
+ 
+1.1  什么是查询缓存
+mybatis提供查询缓存，用于减轻数据压力，提高数据库性能。
+mybaits提供一级缓存，和二级缓存。
+ 
+一级缓存是SqlSession级别的缓存。在操作数据库时需要构造 sqlSession对象，在对象中有一个(内存区域)数据结构（HashMap）用于存储缓存数据。不同的sqlSession之间的缓存数据区域（HashMap）" />
+    <meta name="keywords" content="mybatis,java web" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+    <title>mybatis的缓存机制（一级缓存二级缓存和刷新缓存）和mybatis整合ehcache - CSDN博客</title>
+    <link href="https://csdnimg.cn/public/favicon.ico" rel="SHORTCUT ICON">
+              <script src="https://csdnimg.cn/search/baidu_search-1.1.2.js?v=201802071056&autorun=true&install=true&keyword=springmvc%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6"  type="text/javascript"></script>
+                      <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/production/htmledit_views-0a60691e80.css">
+            <style>
+            .MathJax, .MathJax_Message, .MathJax_Preview{
+                display: none
+            }
+      </style>
+</head>
+<body>
+<script id="toolbar-tpl-scriptId" prod="download" skin="black" src="https://csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="https://blog.csdn.net/"></script>
+<div class="container clearfix">
+  <main>
+    <div style="display:none;">
+      <img src="" onerror='setTimeout(function(){if(!/(csdn.net|iteye.com|baiducontent.com|googleusercontent.com|360webcache.com|sogoucdn.com|bingj.com|baidu.com)$/.test(window.location.hostname)){window.location.href="\x68\x74\x74\x70\x73\x3a\x2f\x2f\x77\x77\x77\x2e\x63\x73\x64\x6e\x2e\x6e\x65\x74"}},3000);'>
+    </div>
+    <article>
+        <h1 class="csdn_top">mybatis的缓存机制（一级缓存二级缓存和刷新缓存）和mybatis整合ehcache</h1>
+        <div class="article_bar clearfix">
+            <div class="artical_tag">
+                <span class="original">
+                原创                </span>
+                <span class="time">2015年07月26日 16:52:11</span>
+            </div>
+
+            <ul class="article_tags clearfix csdn-tracking-statistics tracking-click" data-mod="popu_377" >
+                <li class="tit">标签：</li>
+
+<!--          [startarticletags]-->
+                                                            <li><a href="http://so.csdn.net/so/search/s.do?q=mybatis&t=blog" target="_blank">mybatis</a> <span>/</span></li>
+                                            <li><a href="http://so.csdn.net/so/search/s.do?q=java web&t=blog" target="_blank">java web</a> <span>/</span></li>
+                                    <!--          [endarticletags]-->
+            </ul>
+            <ul class="right_bar">
+                <li><button class="btn-noborder"><i class="icon iconfont icon-read"></i><span class="txt">14113</span></button></li>
+                <li class="edit">
+                    <a class="btn-noborder" href="" >
+                        <i class="icon iconfont icon-bianji"></i><span class="txt">编辑</span>
+                    </a>
+                </li>
+                <li class="del">
+                    <a class="btn-noborder" onclick="javascript:deleteArticle(fileName);return false;">
+                        <i class="icon iconfont icon-shanchu"></i><span class="txt">删除</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div id="article_content" class="article_content csdn-tracking-statistics tracking-click" data-mod="popu_519" data-dsm="post">
+                            <div class="htmledit_views">
+                        
+<h1>1      查询缓存</h1>
+<p> </p>
+<h2>1.1  什么是查询缓存</h2>
+<p>mybatis提供查询缓存，用于减轻数据压力，提高数据库性能。</p>
+<p>mybaits提供一级缓存，和二级缓存。</p>
+<p> <img src="https://img-blog.csdn.net/20150726164148424?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="" /></p>
+<p>一级缓存是SqlSession级别的缓存。在操作数据库时需要构造 sqlSession对象，在对象中有一个(内存区域)数据结构（HashMap）用于存储缓存数据。不同的sqlSession之间的缓存数据区域<span style="color:#FF0000;">（</span><span style="color:#FF0000;">HashMap</span><span style="color:#FF0000;">）</span>是互相不影响的。</p>
+<p>一级缓存的作用域是同一个SqlSession，在同一个sqlSession中两次执行相同的sql语句，<a name="OLE_LINK95"></a><a name="OLE_LINK94"></a><a name="OLE_LINK93">第一次执行完毕会将数据库中查询的数据写到缓存（内存），第二次会从缓存中获取数据将不再从数据库查询，从而提高查询效率。</a>当一个sqlSession结束后该sqlSession中的一级缓存也就不存在了。<span style="color:#FF0000;">Mybatis</span><span style="color:#FF0000;">默认开启一级缓存</span>。</p>
+<p>二级缓存是mapper级别的缓存，多个SqlSession去操作同一个Mapper的sql语句，多个SqlSession去操作数据库得到数据会存在二级缓存区域，多个SqlSession可以共用二级缓存，二级缓存是跨SqlSession的。</p>
+<p>    二级缓存是多个SqlSession共享的，其作用域是mapper的同一个namespace<span style="font-size:12px;">，不同的sqlSession两次执行相同namespace下的sql语句且向sql中传递参数也相同即最终执行相同的sql语句，第一次执行完毕会将数据库中查询的数据写到缓存（内存），第二次会从缓存中获取数据将不再从数据库查询，从而提高查询效率。</span><span style="font-size:12px;color:#FF0000;">Mybatis</span><span style="font-size:12px;color:#FF0000;">默认没有开启二级缓</span><span style="font-size:12px;">存需要在setting全局参数中配置开启二级缓存。</span></p>
+<p>如果缓存中有数据就不用从数据库中获取，大大提高系统性能。</p>
+<h2>1.2  一级缓存</h2>
+<h3>1.2.1    一级缓存工作原理</h3>
+<p>下图是根据id查询用户的一级缓存图解</p>
+<p></p>
+<p> <img src="https://img-blog.csdn.net/20150726164134583?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="" /></p>
+<p>第一次发起查询用户id为1的用户信息，先去找缓存中是否有id为1的用户信息，如果没有，从数据库查询用户信息。</p>
+<p>得到用户信息，将用户信息存储到一级缓存中。</p>
+<p> </p>
+<p>如果<strong><span style="color:#FF0000;">sqlSession</span><span style="color:#FF0000;">去执行</span><span style="color:#FF0000;">commit</span><span style="color:#FF0000;">操作（执行插入、更新、删除），清空</span><span style="color:#FF0000;">SqlSession</span><span style="color:#FF0000;">中的一级缓</span></strong>存，这样做的目的为了让缓存中存储的是最新的信息，避免脏读。</p>
+<p> </p>
+<p>第二次发起查询用户id为1的用户信息，先去找缓存中是否有id为1的用户信息，缓存中有，直接从缓存中获取用户信息。</p>
+<h3>1.2.2    一级缓存测试</h3>
+<p>mybatis默认支持一级缓存，不需要在配置文件去配置。</p>
+<p> </p>
+<p>按照上边一级缓存原理步骤去测试。</p>
+<p> </p>
+<p align="left"><span style="color:#646464;">@Test</span></p>
+<p align="left">   <strong><span style="color:#7F0055;">public</span> <span style="color:#7F0055;">
+void</span></strong> testCache1() <strong><span style="color:#7F0055;">throws</span></strong> Exception{</p>
+<p align="left">      SqlSessionsqlSession = <span style="color:#0000C0;">sqlSessionFactory</span>.openSession();<span style="color:#3F7F5F;">//</span><span style="color:#3F7F5F;">创建代理对象</span></p>
+<p align="left">      UserMapperuserMapper = sqlSession.getMapper(UserMapper.<strong><span style="color:#7F0055;">class</span></strong>);</p>
+<p align="left">      </p>
+<p align="left">      <span style="color:#3F7F5F;">//</span><span style="color:#3F7F5F;">下边查询使用一个</span><span style="color:#3F7F5F;">SqlSession</span></p>
+<p align="left">      <span style="color:#3F7F5F;">//</span><span style="color:#3F7F5F;">第一次发起请求，查询</span><span style="color:#3F7F5F;">id</span><span style="color:#3F7F5F;">为</span><span style="color:#3F7F5F;">1</span><span style="color:#3F7F5F;">的用户</span></p>
+<p align="left">      Useruser1 = userMapper.<span>findUserById</span>(1);</p>
+<p align="left">      System.<em><span style="color:#0000C0;">out</span></em>.println(user1);</p>
+<p align="left">      </p>
+<p align="left"><span style="color:#3F7F5F;">//    </span><span style="color:#3F7F5F;">如果</span><span style="color:#3F7F5F;">sqlSession</span><span style="color:#3F7F5F;">去执行</span><span style="color:#3F7F5F;">commit</span><span style="color:#3F7F5F;">操作（执行插入、更新、删除），清空</span><span style="color:#3F7F5F;">SqlSession</span><span style="color:#3F7F5F;">中的一级缓存，这样做的目的为了让缓存中存储的是最新的信息，避免脏读。</span></p>
+<p align="left">      </p>
+<p align="left">      <span style="color:#3F7F5F;">//</span><span style="color:#3F7F5F;">更新</span><span style="color:#3F7F5F;">user1</span><span style="color:#3F7F5F;">的信息</span></p>
+<p align="left">      user1.setUsername(<span style="color:#2A00FF;">"</span><span style="color:#2A00FF;">测试用户</span><span style="color:#2A00FF;">22"</span>);</p>
+<p align="left">      userMapper.updateUser(user1);</p>
+<p align="left">      <span style="color:#3F7F5F;">//</span><span style="color:#3F7F5F;">执行</span><span style="color:#3F7F5F;">commit</span><span style="color:#3F7F5F;">操作去清空缓存</span></p>
+<p align="left">      sqlSession.commit();</p>
+<p align="left">      </p>
+<p align="left">      <span style="color:#3F7F5F;">//</span><span style="color:#3F7F5F;">第二次发起请求，查询</span><span style="color:#3F7F5F;">id</span><span style="color:#3F7F5F;">为</span><span style="color:#3F7F5F;">1</span><span style="color:#3F7F5F;">的用户</span></p>
+<p align="left">      Useruser2 = userMapper.<span>findUserById</span>(1);</p>
+<p align="left">      System.<em><span style="color:#0000C0;">out</span></em>.println(user2);</p>
+<p align="left">      </p>
+<p align="left">      sqlSession.close();</p>
+<p align="left">      </p>
+<p>   }</p>
+<h3>1.2.3    一级缓存应用</h3>
+<p>正式开发，是将mybatis和spring进行整合开发，事务控制在service中。</p>
+<p>一个service方法中包括很多mapper方法调用。</p>
+<p>service{</p>
+<p>         //开始执行时，开启事务，创建SqlSession对象</p>
+<p>         //第一次调用mapper的方法findUserById(1)</p>
+<p>         </p>
+<p>         //第二次调用mapper的方法findUserById(1)，从一级缓存中取数据</p>
+<p>         </p>
+<p>//aop控制 只要方法结束，sqlSession关闭 sqlsession关闭后就销毁数据结构，清空缓存</p>
+<p>         Service结束sqlsession关闭</p>
+<p>}</p>
+<p>如果是<span style="color:#FF0000;">执行两次</span><span style="color:#FF0000;">service</span><span style="color:#FF0000;">调用查询相同</span><span style="color:#FF0000;">的用户信息，不走一级缓存，因为</span><span style="color:#FF0000;">Service</span><span style="color:#FF0000;">方法结束，</span><span style="color:#FF0000;">sqlSession</span><span style="color:#FF0000;">就关闭，一级缓存就清空。</span></p>
+<h2>1.3  二级缓存</h2>
+<h3>1.3.1    原理</h3>
+<p></p>
+<p> <img src="https://img-blog.csdn.net/20150726164234783?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="" /></p>
+<p>首先开启mybatis的二级缓存。</p>
+<p> </p>
+<p>sqlSession1去查询用户id为1的用户信息，查询到用户信息会将查询数据存储到二级缓存中。</p>
+<p> </p>
+<p>如果<strong><span style="color:#FF0000;">SqlSession3</span><span style="color:#FF0000;">去执行相同</span><span style="color:#FF0000;"> mapper</span><span style="color:#FF0000;">下</span><span style="color:#FF0000;">sql</span><span style="color:#FF0000;">，执行</span><span style="color:#FF0000;">commit</span><span style="color:#FF0000;">提交，清空该</span><span style="color:#FF0000;">
+ mapper</span><span style="color:#FF0000;">下的二级缓存区域的数据。</span></strong></p>
+<p> </p>
+<p>sqlSession2去查询用户id为1的用户信息，去缓存中找是否存在数据，如果存在直接从缓存中取出数据。</p>
+<p> </p>
+<p>二级缓存与一级缓存区别，二级缓存的范围更大，<span style="color:#FF0000;">多个</span><span style="color:#FF0000;">sqlSession</span><span style="color:#FF0000;">可以共享一个</span><span style="color:#FF0000;">UserMapper</span><span style="color:#FF0000;">的二级缓存区域</span>。数据类型仍然为<span style="color:#FF0000;">HashMap</span></p>
+<p>UserMapper有一个二级缓存区域（<span style="color:#FF0000;">按</span><span style="color:#FF0000;">namespace</span><span style="color:#FF0000;">分，如果</span><span style="color:#FF0000;">namespace</span><span style="color:#FF0000;">相同则使用同一个相同的二级缓存区</span>），其它mapper也有自己的二级缓存区域（按namespace分）。</p>
+<p>每一个namespace的mapper都有一个二缓存区域，两个mapper的namespace如果相同，这两个mapper执行sql查询到数据将存在相同的二级缓存区域中。</p>
+<h3>1.3.2    开启二级缓存</h3>
+<p>mybaits的二级缓存是<span style="color:#FF0000;">mapper</span><span style="color:#FF0000;">范围级别，除了在</span><span style="color:#FF0000;">SqlMapConfig.xml</span><span style="color:#FF0000;">设置二级缓存的总开关</span>，<span style="color:#FF0000;">还要在具体的</span><span style="color:#FF0000;">mapper.xml</span><span style="color:#FF0000;">中开启二级缓存。</span></p>
+<p> </p>
+<p>在核心配置文件<span style="color:#FF0000;">SqlMapConfig.xml</span>中加入</p>
+<p><span style="font-size:12px;color:rgb(63,127,127);background-color:#FFFF00;">&lt;setting
+</span><span style="font-size:12px;color:rgb(127,0,127);background-color:#FFFF00;">name</span><span style="font-size:12px;">=</span><span style="font-size:12px;"><em><span style="color:#2A00FF;background:#FFFF00;">"cacheEnabled"</span></em></span><span style="font-size:12px;color:rgb(127,0,127);background-color:#FFFF00;">value</span><span style="font-size:12px;">=</span><span style="font-size:12px;"><em><span style="color:#2A00FF;background:#FFFF00;">"true"</span></em></span><span style="font-size:12px;color:#008080;background-color:#FFFF00;">/&gt;</span></p>
+<p align="left"><span style="color:#3F5FBF;">&lt;!-- </span><span style="color:#3F5FBF;">全局配置参数，需要时再设置</span><span style="color:#3F5FBF;"> --&gt;</span></p>
+<p align="left">    <span style="color:#008080;">&lt;</span><span style="color:#3F7F7F;">settings</span><span style="color:#008080;">&gt;</span></p>
+<p align="left">       <span style="color:#3F5FBF;">&lt;!-- </span><span style="color:#3F5FBF;">开启二级缓存</span><span style="color:#3F5FBF;"> 
+</span><span style="color:#3F5FBF;">默认值为</span><span style="color:#3F5FBF;">true --&gt;</span></p>
+<p align="left">    <span style="color:#008080;">&lt;</span><span style="color:#3F7F7F;">setting</span>
+<span style="color:#7F007F;">name</span>=<em><span style="color:#2A00FF;">"cacheEnabled"</span></em>
+<span style="color:#7F007F;">value</span>=<em><span style="color:#2A00FF;">"true"</span></em><span style="color:#008080;">/&gt;</span>
+</p>
+<p>    <span style="color:#008080;">&lt;/</span><span style="color:#3F7F7F;">settings</span><span style="color:#008080;">&gt;</span></p>
+<p><span style="color:#008080;"> </span></p>
+<table border="1" cellspacing="0" cellpadding="0"><tbody><tr><td>
+<p align="left">描述</p>
+</td>
+<td>
+<p align="left">允许值</p>
+</td>
+<td>
+<p align="left">默认值</p>
+</td>
+</tr><tr><td>
+<p align="left">cacheEnabled</p>
+</td>
+<td>
+<p align="left">对在此配置文件下的所有cache 进行全局性开/关设置。</p>
+</td>
+<td>
+<p align="left">true false</p>
+</td>
+<td>
+<p align="left">true</p>
+</td>
+</tr></tbody></table><p> </p>
+<p>在UserMapper.xml中开启二缓存，UserMapper.xml下的sql执行完成会存储到它的缓存区域（HashMap）。</p>
+<p align="left"><span style="color:#008080;">&lt;</span><span style="color:#3F7F7F;background:#C0C0C0;">mapper</span>
+<span style="color:#7F007F;">namespace</span>=<em><span style="color:#2A00FF;">"cn.hpu.mybatis.mapper.UserMapper"</span></em><span style="color:#008080;">&gt;</span></p>
+<p align="left"><span style="color:#3F5FBF;">&lt;!-- </span><span style="color:#3F5FBF;">开启本</span><u><span style="color:#3F5FBF;">mapper</span></u><span style="color:#3F5FBF;">
+<u>namespace</u></span><span style="color:#3F5FBF;">下的二级缓存</span><span style="color:#3F5FBF;"> --&gt;</span></p>
+<p><span style="color:#008080;">&lt;</span><span style="color:#3F7F7F;">cache</span><span style="color:#008080;">&gt;&lt;/</span><span style="color:#3F7F7F;">cache</span><span style="color:#008080;">&gt;</span></p>
+<h3><span style="color:#FF0000;">1.3.3    </span>调用pojo<span style="color:#FF0000;">类实现序列化接口</span></h3>
+<p align="left"><strong><span style="color:#7F0055;">public</span> <span style="color:#7F0055;">
+class</span></strong> <u><span style="background:#C0C0C0;">User</span></u><strong><span style="color:#7F0055;">implements</span></strong> Serializable {</p>
+<p>    <span style="color:#3F7F5F;">//<u>Serializable</u></span><span style="color:#3F7F5F;">实现序列化，为了将来反序列化</span></p>
+<p> </p>
+<p>二级缓存需要查询结果映射的pojo对象实现java.io.Serializable接口实现序列化和反序列化操作，注意如果存在父类、成员pojo都需要实现序列化接口。</p>
+<p>pojo<span style="color:#FF0000;">类实现序列化接口是</span>为了将缓存数据取出执行反序列化操作，因为二级缓存数据存储介质多种多样，不一定在内存有可能是硬盘或者远程服务器。</p>
+<h3>1.3.4    测试方法</h3>
+<p> </p>
+<p align="left"><span style="color:#3F7F5F;">// </span><span style="color:#3F7F5F;">二级缓存测试</span></p>
+<p align="left">   <span style="color:#646464;">@Test</span></p>
+<p align="left">   <strong><span style="color:#7F0055;">public</span> <span style="color:#7F0055;">
+void</span></strong> testCache2() <strong><span style="color:#7F0055;">throws</span></strong> Exception {</p>
+<p align="left">      SqlSessionsqlSession1 = <span style="color:#0000C0;">sqlSessionFactory</span>.openSession();</p>
+<p align="left">      SqlSessionsqlSession2 = <span style="color:#0000C0;">sqlSessionFactory</span>.openSession();</p>
+<p align="left">      SqlSessionsqlSession3 = <span style="color:#0000C0;">sqlSessionFactory</span>.openSession();</p>
+<p align="left">      <span style="color:#3F7F5F;">// </span><span style="color:#3F7F5F;">创建代理对象</span></p>
+<p align="left">      UserMapperuserMapper1 = sqlSession1.getMapper(UserMapper.<strong><span style="color:#7F0055;">class</span></strong>);</p>
+<p align="left">      <span style="color:#3F7F5F;">// </span><span style="color:#3F7F5F;">第一次发起请求，查询</span><span style="color:#3F7F5F;">id</span><span style="color:#3F7F5F;">为</span><span style="color:#3F7F5F;">1</span><span style="color:#3F7F5F;">的用户</span></p>
+<p align="left">      Useruser1 = userMapper1.findUserById(1);</p>
+<p align="left">      System.<em><span style="color:#0000C0;">out</span></em>.println(user1);</p>
+<p align="left">      </p>
+<p align="left">      <span style="color:#3F7F5F;">//</span><span style="color:#3F7F5F;">这里执行关闭操作，将</span><u><span style="color:#3F7F5F;">sqlsession</span></u><span style="color:#3F7F5F;">中的数据写到二级缓存区域</span></p>
+<p align="left">      sqlSession1.close();</p>
+<p align="left">      </p>
+<p align="left">      <span style="color:#3F7F5F;">//</span><span style="color:#3F7F5F;">使用</span><span style="color:#3F7F5F;">sqlSession3</span><span style="color:#3F7F5F;">执行</span><span style="color:#3F7F5F;">commit()</span><span style="color:#3F7F5F;">操作</span></p>
+<p align="left">      UserMapperuserMapper3 = sqlSession3.getMapper(UserMapper.<strong><span style="color:#7F0055;">class</span></strong>);</p>
+<p align="left">      Useruser  = userMapper3.findUserById(1);</p>
+<p align="left">      user.setUsername(<span style="color:#2A00FF;">"</span><span style="color:#2A00FF;">张明明</span><span style="color:#2A00FF;">"</span>);</p>
+<p align="left">      userMapper3.updateUser(user);</p>
+<p align="left">      <span style="color:#3F7F5F;">//</span><span style="color:#3F7F5F;">执行提交，清空</span><span style="color:#3F7F5F;">UserMapper</span><span style="color:#3F7F5F;">下边的二级缓存</span></p>
+<p align="left">      sqlSession3.commit();</p>
+<p align="left">      sqlSession3.close();</p>
+<p align="left">      </p>
+<p align="left">      UserMapperuserMapper2 = sqlSession2.getMapper(UserMapper.<strong><span style="color:#7F0055;">class</span></strong>);</p>
+<p align="left">      <span style="color:#3F7F5F;">// </span><span style="color:#3F7F5F;">第二次发起请求，查询</span><span style="color:#3F7F5F;">id</span><span style="color:#3F7F5F;">为</span><span style="color:#3F7F5F;">1</span><span style="color:#3F7F5F;">的用户</span></p>
+<p align="left">      Useruser2 = userMapper2.findUserById(1);</p>
+<p align="left">      System.<em><span style="color:#0000C0;">out</span></em>.println(user2);</p>
+<p align="left"> </p>
+<p align="left">      sqlSession2.close();</p>
+<p>   }</p>
+<h3>1.3.5  useCache配置禁用二级缓存</h3>
+<p>在statement<span style="font-size:12px;">中设置</span><span style="font-size:12px;color:#FF0000;">useCache=false</span><span style="font-size:12px;color:#FF0000;">可以禁用当前</span><span style="font-size:12px;color:#FF0000;">select</span><span style="font-size:12px;color:#FF0000;">语句的二级缓存</span><span style="font-size:12px;">，</span><span style="font-size:12px;color:#FF0000;">即每次查询都会发出</span><span style="font-size:12px;color:#FF0000;">sql</span><span style="font-size:12px;color:#FF0000;">去查询</span><span style="font-size:12px;">，默认情况是</span><span style="font-size:12px;color:#FF0000;">true</span><span style="font-size:12px;">，即该sql使用二级缓存。</span></p>
+<p>&lt;selectid="findOrderListResultMap" resultMap="ordersUserMap" <span style="color:#FF0000;">
+useCache="false"</span>&gt;</p>
+<p>总结：针对每次查询都<span style="color:#FF0000;">需要最新的数据</span><span style="color:#FF0000;">sql</span><span style="color:#FF0000;">，</span>要设置成useCache=false，禁用二级缓存。<span style="font-size:12px;"> </span></p>
+<h3>1.3.6    mybatis刷新缓存（就是清空缓存）</h3>
+<p>在mapper的同一个namespace中，如果有其它insert、update、delete操作数据后需要刷新缓存，如果不执行刷新缓存会出现脏读。</p>
+<p> 设置statement配置中的flushCache="true" 属性，<span style="color:#FF0000;">默认情况下为</span><span style="color:#FF0000;">true</span>即刷新缓存，如果改成false则不会刷新。使用缓存时如果手动修改数据库表中的查询数据会出现脏读。</p>
+<p>如下：</p>
+<p>&lt;insertid="insertUser" parameterType="cn.itcast.mybatis.po.User" <strong><span style="color:#FF0000;">flushCache="true"</span></strong>&gt;</p>
+<p> </p>
+<p>总结：一般下执行完commit操作都需要刷新缓存，<span style="color:#FF0000;">flushCache=true</span><span style="color:#FF0000;">表示刷新缓存默认情况下为</span><span style="color:#FF0000;">true,</span><span style="color:#FF0000;">我们不用去设置它</span>，这样可以避免数据库脏读。</p>
+<h3>1.3.7  Mybatis Cache参数</h3>
+<p align="left"><span style="color:#FF0000;">flushInterval</span><span style="color:#FF0000;">（刷新间隔）</span>可以被设置为任意的正整数，而且它们代表一个合理的毫秒形式的时间段。默认情况是不设置，也就是没有刷新间隔，缓存仅仅调用语句时刷新。</p>
+<p align="left">size（引用数目）可以被设置为任意正整数，要记住你缓存的对象数目和你运行环境的可用内存资源数目。默认值是1024。</p>
+<p align="left">readOnly（只读）属性可以被设置为true或false。只读的缓存会给所有调用者返回缓存对象的相同实例。因此这些对象不能被修改。这提供了很重要的性能优势。可读写的缓存会返回缓存对象的拷贝（通过序列化）。这会慢一些，但是安全，因此默认是false。</p>
+<p align="left">如下例子：</p>
+<p align="left"><span style="color:#333333;">&lt;</span>cache  eviction="FIFO" flushInterval="60000"  size="512" readOnly="true"/&gt;</p>
+<p align="left">这个更高级的配置创建了一个 FIFO 缓存,并每隔 60 秒刷新,存数结果对象或列表的 512 个引用,而且返回的对象被认为是只读的,因此在不同线程中的调用者之间修改它们会导致冲突。可用的收回策略有, 默认的是 LRU:</p>
+<p align="left">1.      LRU – 最近最少使用的:移除最长时间不被使用的对象。</p>
+<p align="left">2.      FIFO – 先进先出:按对象进入缓存的顺序来移除它们。</p>
+<p align="left">3.      SOFT – 软引用:移除基于垃圾回收器状态和软引用规则的对象。</p>
+<p align="left">4.      WEAK – 弱引用:更积极地移除基于垃圾收集器状态和弱引用规则的对象。</p>
+<h2>1.4  mybatis整合ehcache</h2>
+<p><span style="color:#FF0000;">ehcache</span><span style="color:#FF0000;">是一个分布式缓存框架。</span></p>
+<p>EhCache 是一个纯Java的进程内缓存框架，是一种广泛使用的开源Java分布式缓存，具有快速、精干等特点，是Hibernate中默认的CacheProvider。</p>
+<h3>1.4.1    分布缓存</h3>
+<p>我们系统为了<span style="color:#FF0000;">提高系统并发，性能、一般对系统进行分布式部署</span>（集群部署方式）</p>
+<p><img src="https://img-blog.csdn.net/20150726164631737?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="" /><br /></p>
+<p></p>
+<p>不使用分布缓存，缓存的数据在各各服务单独存储，不方便系统开发。所以要使用分布式缓存<span style="color:#FF0000;">对缓存数据进行集中管理。</span></p>
+<p><span style="color:#FF0000;">mybatis</span><span style="color:#FF0000;">无法实现分布式缓存，需要和其它分布式缓存框架进行整合。</span></p>
+<h3>1.4.2    整合方法(掌握无论整合谁，首先想到改type接口)</h3>
+<p>mybatis提供了一个cache接口，如果要实现自己的缓存逻辑，实现cache接口开发即可。</p>
+<p>mybatis和ehcache整合，mybatis和ehcache整合包中提供了一个cache接口的实现类。</p>
+<h3>1.4.3    第一步加入ehcache包</h3>
+<p> <img src="https://img-blog.csdn.net/20150726164616179?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt="" /></p>
+<p></p>
+<h3>1.4.4    整合ehcache</h3>
+<p>配置mapper中cache中的type为ehcache对cache接口的实现类型。</p>
+<p> </p>
+<p align="left"><span style="color:#008080;">&lt;</span><span style="color:#3F7F7F;background:#C0C0C0;">mapper</span>
+<span style="color:#7F007F;">namespace</span>=<em><span style="color:#2A00FF;">"cn.hpu.mybatis.mapper.UserMapper"</span></em><span style="color:#008080;">&gt;</span></p>
+<p align="left"><span style="color:#3F5FBF;">&lt;!-- </span><span style="color:#3F5FBF;">开启本</span><u><span style="color:#3F5FBF;">mapper</span></u><span style="color:#3F5FBF;">
+<u>namespace</u></span><span style="color:#3F5FBF;">下的二级缓存</span></p>
+<p align="left"><span style="color:#3F5FBF;">   type</span><span style="color:#3F5FBF;">：指定</span><span style="color:#3F5FBF;">cache</span><span style="color:#3F5FBF;">接口实现类，</span><u><span style="color:#3F5FBF;">mybatis</span></u><span style="color:#3F5FBF;">默认使用</span><span style="color:#3F5FBF;">PerpetualCache</span></p>
+<p align="left"><span style="color:#3F5FBF;">   </span><span style="color:#3F5FBF;">要和</span><u><span style="color:#3F5FBF;">eache</span></u><span style="color:#3F5FBF;">整合，需要配置</span><span style="color:#3F5FBF;">type</span><span style="color:#3F5FBF;">为</span><u><span style="color:#3F5FBF;">ehcahe</span></u><span style="color:#3F5FBF;">实现</span><span style="color:#3F5FBF;">cache</span><span style="color:#3F5FBF;">接口的类型</span></p>
+<p align="left"><span style="color:#3F5FBF;"> --&gt;</span></p>
+<p align="left"><span style="color:#008080;">&lt;</span><span style="color:#3F7F7F;">cache</span>
+<span style="color:#7F007F;">type</span>=<em><span style="color:#2A00FF;">"org.mybatis.caches.ehcache.EhcacheCache"</span></em><span style="color:#008080;">&gt;</span></p>
+<p><span style="color:#008080;">&lt;/</span><span style="color:#3F7F7F;">cache</span><span style="color:#008080;">&gt;</span></p>
+<p><span style="color:#008080;"> </span></p>
+<p>可以根据需求调整缓存参数：</p>
+<p align="left"><span style="color:#008080;">&lt;</span><span style="color:#3F7F7F;">cache</span>
+<span style="color:#7F007F;">type</span>=<em><span style="color:#2A00FF;">"org.mybatis.caches.ehcache.EhcacheCache"</span></em><span style="color:#008080;">&gt;</span>
+</p>
+<p align="left">        <span style="color:#008080;">&lt;</span><span style="color:#3F7F7F;">property</span>
+<span style="color:#7F007F;">name</span>=<em><span style="color:#2A00FF;">"timeToIdleSeconds"</span></em>
+<span style="color:#7F007F;">value</span>=<em><span style="color:#2A00FF;">"3600"</span></em><span style="color:#008080;">/&gt;</span></p>
+<p align="left">        <span style="color:#008080;">&lt;</span><span style="color:#3F7F7F;">property</span>
+<span style="color:#7F007F;">name</span>=<em><span style="color:#2A00FF;">"timeToLiveSeconds"</span></em>
+<span style="color:#7F007F;">value</span>=<em><span style="color:#2A00FF;">"3600"</span></em><span style="color:#008080;">/&gt;</span></p>
+<p align="left">        <span style="color:#3F5FBF;">&lt;!-- </span><span style="color:#3F5FBF;">同</span><u><span style="color:#3F5FBF;">ehcache</span></u><span style="color:#3F5FBF;">参数</span><span style="color:#3F5FBF;">maxElementsInMemory--&gt;</span></p>
+<p align="left"><span style="color:#3F5FBF;">       </span><span style="color:#008080;">&lt;</span><span style="color:#3F7F7F;">property</span>
+<span style="color:#7F007F;">name</span>=<em><span style="color:#2A00FF;">"maxEntriesLocalHeap"</span></em><span style="color:#7F007F;">value</span>=<em><span style="color:#2A00FF;">"1000"</span></em><span style="color:#008080;">/&gt;</span></p>
+<p align="left"><span style="color:#3F5FBF;">       &lt;!-- </span><span style="color:#3F5FBF;">同</span><u><span style="color:#3F5FBF;">ehcache</span></u><span style="color:#3F5FBF;">参数</span><span style="color:#3F5FBF;">maxElementsOnDisk --&gt;</span></p>
+<p align="left">        <span style="color:#008080;">&lt;</span><span style="color:#3F7F7F;">property</span>
+<span style="color:#7F007F;">name</span>=<em><span style="color:#2A00FF;">"maxEntriesLocalDisk"</span></em>
+<span style="color:#7F007F;">value</span>=<em><span style="color:#2A00FF;">"10000000"</span></em><span style="color:#008080;">/&gt;</span></p>
+<p align="left">        <span style="color:#008080;">&lt;</span><span style="color:#3F7F7F;">property</span>
+<span style="color:#7F007F;">name</span>=<em><span style="color:#2A00FF;">"memoryStoreEvictionPolicy"</span></em>
+<span style="color:#7F007F;">value</span>=<em><span style="color:#2A00FF;">"LRU"</span></em><span style="color:#008080;">/&gt;</span></p>
+<p style="background:#D9D9D9;">    <span style="color:#008080;">&lt;/</span><span style="color:#3F7F7F;">cache</span><span style="color:#008080;">&gt;</span></p>
+<h3>1.4.5    加入ehcache的配置文件</h3>
+<p>在<span style="color:#FF0000;">classpath</span>下配置<span style="color:#FF0000;">ehcache</span>.xml</p>
+<p align="left"><span style="color:#008080;">&lt;</span><span style="color:#3F7F7F;">ehcache</span>
+<span style="color:#7F007F;">xmlns:xsi</span>=<em><span style="color:#2A00FF;">"http://www.w3.org/2001/XMLSchema-instance"</span></em></p>
+<p align="left">    <span style="color:#7F007F;">xsi:noNamespaceSchemaLocation</span>=<em><span style="color:#2A00FF;">"../config/ehcache.xsd"</span></em><span style="color:#008080;">&gt;</span></p>
+<p align="left">    <span style="color:#008080;">&lt;</span><span style="color:#3F7F7F;">diskStore</span>
+<span style="color:#7F007F;">path</span>=<em><span style="color:#2A00FF;">"F:\develop\ehcache"</span></em><span style="color:#008080;">/&gt;</span></p>
+<p align="left">    <span style="color:#008080;">&lt;</span><span style="color:#3F7F7F;">defaultCache</span>
+</p>
+<p align="left"><span style="white-space:pre;"><span style="color:rgb(127,0,127);">maxElementsInMemory</span>=<em><span style="color:#2A00FF;">"1000"</span></em></span></p>
+<p align="left">       <span style="color:#7F007F;">maxElementsOnDisk</span>=<em><span style="color:#2A00FF;">"10000000"</span></em></p>
+<p align="left">       <span style="color:#7F007F;">eternal</span>=<em><span style="color:#2A00FF;">"false"</span></em>
+</p>
+<p align="left">       <span style="color:#7F007F;">overflowToDisk</span>=<em><span style="color:#2A00FF;">"false"</span></em>
+</p>
+<p align="left">       <span style="color:#7F007F;">timeToIdleSeconds</span>=<em><span style="color:#2A00FF;">"120"</span></em></p>
+<p align="left">       <span style="color:#7F007F;">timeToLiveSeconds</span>=<em><span style="color:#2A00FF;">"120"</span></em>
+</p>
+<p align="left">       <span style="color:#7F007F;">diskExpiryThreadIntervalSeconds</span>=<em><span style="color:#2A00FF;">"120"</span></em></p>
+<p align="left">       <span style="color:#7F007F;">memoryStoreEvictionPolicy</span>=<em><span style="color:#2A00FF;">"LRU"</span></em><span style="color:#008080;">&gt;</span></p>
+<p align="left">    <span style="color:#008080;">&lt;/</span><span style="color:#3F7F7F;">defaultCache</span><span style="color:#008080;">&gt;</span></p>
+<p style="background:#D9D9D9;"><span style="color:#008080;">&lt;/</span><span style="color:#3F7F7F;">ehcache</span><span style="color:#008080;">&gt;</span></p>
+<p><span style="color:rgb(51,51,51);">属性说明：</span></p>
+<p><span style="color:#FF0000;"> diskStore</span><span style="color:#FF0000;">：指定数据在磁盘中的存储位置。</span></p>
+<p><span style="color:rgb(51,51,51);"> defaultCache</span><span style="color:rgb(51,51,51);">：当借助</span><span style="color:rgb(51,51,51);">CacheManager.add("demoCache")</span><span style="color:rgb(51,51,51);">创建</span><span style="color:rgb(51,51,51);">Cache</span><span style="color:rgb(51,51,51);">时，</span><span style="color:rgb(51,51,51);">EhCache</span><span style="color:rgb(51,51,51);">便会采用</span><span style="color:rgb(51,51,51);">&lt;defalutCache/&gt;</span><span style="color:rgb(51,51,51);">指定的的管理策略</span></p>
+<p><span style="color:rgb(51,51,51);">以下属性是必须的：</span></p>
+<p><span style="color:rgb(51,51,51);">maxElementsInMemory - </span><span style="color:rgb(51,51,51);">在内存中缓存的</span><span style="color:rgb(51,51,51);">element</span><span style="color:rgb(51,51,51);">的最大数目</span></p>
+<p><span style="color:rgb(51,51,51);">maxElementsOnDisk - </span><span style="color:rgb(51,51,51);">在磁盘上缓存的</span><span style="color:rgb(51,51,51);">element</span><span style="color:rgb(51,51,51);">的最大数目，若是</span><span style="color:rgb(51,51,51);">0</span><span style="color:rgb(51,51,51);">表示无穷大</span></p>
+<p><span style="color:rgb(51,51,51);"> eternal - </span><span style="color:rgb(51,51,51);">设定缓存的</span><span style="color:rgb(51,51,51);">elements</span><span style="color:rgb(51,51,51);">是否永远不过期。如果为</span><span style="color:rgb(51,51,51);">true</span><span style="color:rgb(51,51,51);">，则缓存的数据始终有效，如果为</span><span style="color:rgb(51,51,51);">false</span><span style="color:rgb(51,51,51);">那么还要根据</span><span style="color:rgb(51,51,51);">timeToIdleSeconds</span><span style="color:rgb(51,51,51);">，</span><span style="color:rgb(51,51,51);">timeToLiveSeconds</span><span style="color:rgb(51,51,51);">判断</span></p>
+<p><span style="color:rgb(51,51,51);"> overflowToDisk- </span><span style="color:rgb(51,51,51);">设定当内存缓存溢出的时候是否将过期的</span><span style="color:rgb(51,51,51);">element</span><span style="color:rgb(51,51,51);">缓存到磁盘上</span></p>
+<p><span style="color:rgb(51,51,51);">以下属性是可选的：</span></p>
+<p><span style="color:rgb(51,51,51);">timeToIdleSeconds - </span><span style="color:rgb(51,51,51);">当缓存在</span><span style="color:rgb(51,51,51);">EhCache</span><span style="color:rgb(51,51,51);">中的数据前后两次访问的时间超过</span><span style="color:rgb(51,51,51);">timeToIdleSeconds</span><span style="color:rgb(51,51,51);">的属性取值时，这些数据便会删除，默认值是</span><span style="color:rgb(51,51,51);">0,</span><span style="color:rgb(51,51,51);">也就是<a name="OLE_LINK168"></a><a name="OLE_LINK164">可闲置时间</a>无穷大</span></p>
+<p><span style="color:rgb(51,51,51);">timeToLiveSeconds - </span><span style="color:rgb(51,51,51);">缓存</span><span style="color:rgb(51,51,51);">element</span><span style="color:rgb(51,51,51);">的有效生命期，默认是</span><span style="color:rgb(51,51,51);">0.,</span><span style="color:rgb(51,51,51);">也就是</span><span style="color:rgb(51,51,51);">element</span><span style="color:rgb(51,51,51);">存活时间无穷大</span></p>
+<p><span style="color:rgb(51,51,51);">       diskSpoolBufferSizeMB </span><span style="color:rgb(51,51,51);">这个参数设置</span><span style="color:rgb(51,51,51);">DiskStore(</span><span style="color:rgb(51,51,51);">磁盘缓存</span><span style="color:rgb(51,51,51);">)</span><span style="color:rgb(51,51,51);">的缓存区大小</span><span style="color:rgb(51,51,51);">.</span><span style="color:rgb(51,51,51);">默认是</span><span style="color:rgb(51,51,51);">30MB.</span><span style="color:rgb(51,51,51);">每个</span><span style="color:rgb(51,51,51);">Cache</span><span style="color:rgb(51,51,51);">都应该有自己的一个缓冲区</span><span style="color:rgb(51,51,51);">.</span></p>
+<p><span style="color:rgb(51,51,51);">disk<span lang="en-us" style="font-size:10.5pt;font-family:Arial, sans-serif;color:rgb(51,51,51);" xml:lang="en-us">Persistent</span></span><span style="font-size:12px;color:rgb(51,51,51);">在</span><span style="font-size:12px;color:rgb(51,51,51);">VM</span><span style="font-size:12px;color:rgb(51,51,51);">重启的时候是否启用磁盘保存</span><span style="font-size:12px;color:rgb(51,51,51);">EhCache</span><span style="font-size:12px;color:rgb(51,51,51);">中的数据，默认是</span><span style="font-size:12px;color:rgb(51,51,51);">false</span><span style="font-size:12px;color:rgb(51,51,51);">。</span></p>
+<p><span style="color:rgb(51,51,51);">diskExpiryThreadIntervalSeconds - </span><span style="color:rgb(51,51,51);">磁盘缓存的清理线程运行间隔，默认是</span><span style="color:rgb(51,51,51);">120</span><span style="color:rgb(51,51,51);">秒。每个</span><span style="color:rgb(51,51,51);">120s</span><span style="color:rgb(51,51,51);">，相应的线程会进行一次</span><span style="color:rgb(51,51,51);">EhCache</span><span style="color:rgb(51,51,51);">中数据的清理工作</span></p>
+<p><span style="color:rgb(51,51,51);">memoryStoreEvictionPolicy - </span><span style="color:rgb(51,51,51);">当内存缓存达到最大，有新的</span><span style="color:rgb(51,51,51);">element</span><span style="color:rgb(51,51,51);">加入的时候，</span><span style="color:rgb(51,51,51);">移除缓存中</span><span style="color:rgb(51,51,51);">element</span><span style="color:rgb(51,51,51);">的策略。默认是</span><span style="color:rgb(51,51,51);">LRU</span><span style="color:rgb(51,51,51);">（最近最少使用），可选的有</span><span style="color:rgb(51,51,51);">LFU</span><span style="color:rgb(51,51,51);">（最不常使用）和</span><span style="color:rgb(51,51,51);">FIFO</span><span style="color:rgb(51,51,51);">（先进先出）</span></p>
+<h2>1.5  二级应用场景</h2>
+<p>对于<span style="color:#FF0000;">访问多的查询请求且用户对查询结果实时性要求不高</span>，此时可采用mybatis二级缓存技术降低数据库访问量，提高访问速度，业务场景比如：<span style="color:#FF0000;">耗时较高的统计分析</span><span style="color:#FF0000;">sql</span>、电话账单查询sql等。</p>
+<p>         实现方法如下：通过设置刷新间隔时间，由mybatis每隔一段时间自动清空缓存，根据数据变化频率设置缓存刷新间隔<strong><span style="color:#FF0000;">flushInterval</span></strong>，比如设置为30分钟、60分钟、24小时等，根据需求而定。</p>
+<h2>1.6  二级缓存局限性</h2>
+<p>         mybatis二级缓存对<span style="color:#FF0000;">细粒度的数据级别的缓存实现不好</span>，<span style="color:#FF0000;">对同时缓存较多条数据的缓存</span>，比如如下需求：对商品信息进行缓存，由于商品信息查询访问量大，但是要求用户每次都能查询最新的商品信息，此时如果使用mybatis的二级缓存就无法实现当一个商品变化时只刷新该商品的缓存信息而不刷新其它商品的信息，因为mybaits的二级缓存区域以mapper为单位划分，当一个商品信息变化会将所有商品信息的缓存数据全部清空。<span style="color:#FF0000;">解决此类问题需要在业务层根据需求对数据有针对性缓存。需要使用三级缓存</span></p>
+<p><span style="color:#FF0000;"><br /></span></p>
+<p>摘自传智博客燕青老师的视频</p>
+                </div>
+                    </div>
+        <script>
+        $(".MathJax").remove();
+        </script>
+    </article>
+      <div class="readall_box csdn-tracking-statistics tracking-click" data-mod="popu_376">
+          <div class="read_more_mask"></div>
+          <a class="btn btn-large btn-gray-fred read_more_btn" target="_self">阅读全文</a>
+      </div>
+      <div class="article_copyright">
+
+                    版权声明：本文为博主编写文章，未经博主允许转载，转载请注明出处。            https://blog.csdn.net/u012373815/article/details/47069223              </div>
+      <ul class="article_collect clearfix csdn-tracking-statistics tracking-click"  data-mod="popu_378">
+          <li class="tit">本文已收录于以下专栏：</li>
+<!--          [startarticlecolumns]-->
+                                      <li><a href="https://blog.csdn.net/column/details/14460.html" target="_blank">springmvc＋mybatis</a></li>
+                      <!--          [endarticlecolumns]-->
+      </ul>
+      <div class="edu_promotion" style="margin: 16px 0;display:none;"></div>
+      <div class="comment_box clearfix" id="comments">
+          <div id="comment_form">
+              <div id="commentsbmitarear">
+                                  <div class="comment_area clearfix">
+                      <div class="userimg">
+                        <a href="https://my.csdn.net/attilax">
+                          <img src="https://avatar.csdn.net/3/9/1/3_attilax.jpg">
+                        </a>
+                      </div>
+
+                      <form action="https://blog.csdn.net/u012373815/phoenix/comment/submit?id=47069223" method="post" onsubmit="return subform(this);" id="commentform">
+                          <textarea class="comment_content" name="comment_content" id="comment_content" placeholder="写下你的评论…"></textarea>
+                          <div class="bot_bar clearfix">
+                              <div id="ubbtools" class="add_code">
+                                  <a href="#insertcode" code="code" target="_self"><i class="icon iconfont icon-daima"></i></a>
+                              </div>
+
+                              <input type="hidden" id="comment_replyId" name="comment_replyId">
+                              <input type="hidden" id="comment_userId" name="comment_userId" value="">
+                              <input type="hidden" id="commentId" name="commentId" value="">
+                              <input type="submit" class="btn btn-redborder" value="发表评论">
+                              <span id="tip_comment" class="tip">
+                              <div style="display: none;" class="csdn-tracking-statistics tracking-click" data-mod="popu_384"><a href="#" target="_blank" class="comment_area_btn">发表评论</a></div>
+
+                              <div id="lang_list" code="code">
+                                  <a href="#html" style="width:95px;" class="long_name" target="_self">HTML/XML</a>
+                                  <a href="#objc" style="width:95px;" class="long_name" target="_self">objective-c</a>
+                                  <a href="#delphi" style="width:58px;" class="zhong_name" target="_self">Delphi</a>
+                                  <a href="#ruby" class="zhong_name" target="_self">Ruby</a>
+                                  <a href="#php" target="_self">PHP</a>
+                                  <a href="#csharp" class="duan_name" target="_self">C#</a>
+                                  <a style=" border-right: none;" href="#cpp" class="duan_name" target="_self">C++</a>
+                                  <a style=" border-bottom:none;width:95px;" href="#javascript" class="long_name" target="_self">JavaScript</a>
+                                  <a style=" border-bottom:none;width:95px;" href="#vb" class="long_name" target="_self">Visual Basic</a>
+                                  <a style=" border-bottom:none;" href="#python" class="zhong_name" target="_self">Python</a>
+                                  <a style=" border-bottom:none;" href="#java" class="zhong_name" target="_self">Java</a>
+                                  <a style="border-bottom:none;" href="#css" class="duan_name" target="_self">CSS</a>
+                                  <a style="border-bottom:none;" href="#sql" class="duan_name" target="_self">SQL</a>
+                                  <a style="border:none; " href="#plain" class="duan_name" target="_self">其它</a>
+                                  <span class="arrb"></span>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+                              </div>
+          </div>
+      </div>
+      <div class="comment_li_outbox">
+          <div id="comment_list"></div>
+      </div>
+
+      <div class="more_comment">
+          <div id="comment_bar" class="trackgin-ad" data-mod="popu_385"></div>
+      </div>
+
+      <!-- <h3 class="recommend_tit" id="related">相关文章推荐</h3> -->
+      <div class="recommend_list clearfix" id="rasss">
+                                          <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/qq_28929589/article/details/79127268"  target="_blank" strategy="BlogCommendFromBaidu_0">
+                    <dd>
+                        <h2>springBoot中配置mybatis的二级缓存</h2>
+                        <div class="summary">
+                            在结合springBoot和mybatis的时候想用二级缓存怎么办，请耐心看完。
+
+
+
+
+什么是延迟加载 
+
+        resultMap中的association和collect...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/E/5/7/3_qq_28929589.jpg" alt="qq_28929589" title="qq_28929589"></li>
+                            <li class="user_name">qq_28929589</li>
+                            <li class="time">2018年01月22日 11:45</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>395</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/cq1982/article/details/45603263"  target="_blank" strategy="BlogCommendFromBaidu_1">
+                    <dd>
+                        <h2>spring 集成mybatis使用二级缓存</h2>
+                        <div class="summary">
+                            先看《spring 集成mybatis》和《Mybatis一级缓存》，在此基础上进行修改。
+集成了spring之后，似乎没有办法直接使用一级缓存了，但是二级缓存还是可以的。
+
+
+一、实体类
+...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/5/6/2/3_cq1982.jpg" alt="cq1982" title="cq1982"></li>
+                            <li class="user_name">cq1982</li>
+                            <li class="time">2015年05月09日 18:09</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>9089</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                          <dl class="">
+            <script>
+            (function() {
+              var s = "_" + Math.random().toString(36).slice(2);
+              document.write('<div id="' + s + '"></div>');
+              (window.slotbydup=window.slotbydup || []).push({
+                id: '4765209',
+                container: s,
+                size: '808,120',
+                display: 'inlay-fix'
+              });
+            })();
+            </script>
+          </dl>
+                                        <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/u010643307/article/details/70148723"  target="_blank" strategy="BlogCommendFromBaidu_2">
+                    <dd>
+                        <h2>Mybatis缓存介绍</h2>
+                        <div class="summary">
+                            Mybatis介绍之缓存
+Mybatis中有一级缓存和二级缓存，默认情况下一级缓存是开启的，而且是不能关闭的。一级缓存是指SqlSession级别的缓存，当在同一个SqlSession中进行相同的S...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/1/7/5/3_u010643307.jpg" alt="u010643307" title="u010643307"></li>
+                            <li class="user_name">u010643307</li>
+                            <li class="time">2017年04月12日 23:03</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>6354</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/zouxucong/article/details/68947052"  target="_blank" strategy="BlogCommendFromBaidu_3">
+                    <dd>
+                        <h2>用例子介绍mybatis的缓存机制</h2>
+                        <div class="summary">
+                            在实际的项目开发中，通常对数据库的查询性能要求很高，而mybatis提供了查询缓存来缓存数据，从而达到提高查询性能的要求。
+mybatis的查询缓存分为一级缓存和二级缓存，一级缓存是SqlSessio...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/4/F/E/3_zouxucong.jpg" alt="zouxucong" title="zouxucong"></li>
+                            <li class="user_name">zouxucong</li>
+                            <li class="time">2017年04月01日 18:51</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>4287</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/sinat_32133675/article/details/76691009"  target="_blank" strategy="BlogCommendFromBaidu_4">
+                    <dd>
+                        <h2>mybatis缓存文件的配置</h2>
+                        <div class="summary">
+                            在java程序运行过程中，每次调用都会访问数据库吗？答案是否定的，java会有缓存将访问过的存起来下次调用时就不在连接数据库了，而是从缓存中找。
+mybatis缓存详细：http://blog.csd...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/C/D/E/3_sinat_32133675.jpg" alt="sinat_32133675" title="sinat_32133675"></li>
+                            <li class="user_name">sinat_32133675</li>
+                            <li class="time">2017年08月04日 17:42</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1085</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/qq_37169817/article/details/78985527"  target="_blank" strategy="BlogCommendFromBaidu_5">
+                    <dd>
+                        <h2>深入理解MyBatis——缓存</h2>
+                        <div class="summary">
+                            MyBatis中使用缓存来提高其性能。
+
+MyBatis中的缓存分为两种：一级缓存和二级缓存。使用过MyBatis的可能听到过这样一句话“一级缓存是sqlSession级别的，二级缓存是mapper级...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/B/B/E/3_qq_37169817.jpg" alt="qq_37169817" title="qq_37169817"></li>
+                            <li class="user_name">qq_37169817</li>
+                            <li class="time">2018年01月05日 21:53</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>517</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/u010349169/article/details/41390801"  target="_blank" strategy="BlogCommendFromBaidu_6">
+                    <dd>
+                        <h2>《深入理解mybatis原理》 MyBatis缓存机制的设计与实现</h2>
+                        <div class="summary">
+                            本文主要讲解MyBatis非常棒的缓存机制的设计原理，给读者们介绍一下MyBatis的缓存机制的轮廓，然后会分别针对缓存机制中的方方面面展开讨论。...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/F/E/2/3_u010349169.jpg" alt="u010349169" title="u010349169"></li>
+                            <li class="user_name">u010349169</li>
+                            <li class="time">2014年11月23日 13:57</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>40627</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/grhlove123/article/details/47808025"  target="_blank" strategy="BlogCommendFromBaidu_7">
+                    <dd>
+                        <h2>mybatis配置自带缓存和第三方缓存</h2>
+                        <div class="summary">
+                            参考：https://mybatis.github.io/mybatis-3/zh/sqlmap-xml.html，
+http://www.yihaomen.com/article/java/428...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/8/4/E/3_grhlove123.jpg" alt="grhlove123" title="grhlove123"></li>
+                            <li class="user_name">grhlove123</li>
+                            <li class="time">2015年08月20日 15:10</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>20196</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/WenSenli/article/details/78779558"  target="_blank" strategy="BlogCommendFromBaidu_8">
+                    <dd>
+                        <h2>Mybatis二级缓存之刷新缓存的细节</h2>
+                        <div class="summary">
+                            最近在看传智的视频，发现刷新缓存的一个细节，记录下一起学习。
+先上一段老师的课堂笔记：
+
+
+ 刷新缓存（就是清空缓存）
+
+在mapper的同一个namespace中，如果有其它insert...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/4/A/8/3_wensenli.jpg" alt="WenSenli" title="WenSenli"></li>
+                            <li class="user_name">WenSenli</li>
+                            <li class="time">2017年12月12日 10:39</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>375</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/u010349169/article/details/41408341"  target="_blank" strategy="BlogCommendFromBaidu_9">
+                    <dd>
+                        <h2>《深入理解mybatis原理》 MyBatis的二级缓存的设计原理</h2>
+                        <div class="summary">
+                            MyBatis的二级缓存是Application级别的缓存，它可以提高对数据库查询的效率，以提高应用的性能。本文将全面分析MyBatis的二级缓存的设计原理。...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/F/E/2/3_u010349169.jpg" alt="u010349169" title="u010349169"></li>
+                            <li class="user_name">u010349169</li>
+                            <li class="time">2014年11月23日 13:53</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>27943</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                              </div>
+  </main>
+<aside>
+    <div class="right_box user_info">
+    <dl class="inf_bar clearfix">
+        <dt class="csdn-tracking-statistics tracking-click" data-mod="popu_381">
+                <a href="https://blog.csdn.net/u012373815" target="_blank">
+                    <img src="https://avatar.csdn.net/4/3/0/3_u012373815.jpg" class="avatar_pic">
+        </a>
+      </dt><dd>
+            <h3 class="csdn-tracking-statistics tracking-click"  data-mod="popu_380"><a href="https://blog.csdn.net/u012373815" target="_blank" id="uid">u012373815</a></h3>
+            <div class="medals" title="">
+                        <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-bokezhuanjia"></use>
+            </svg>
+            <span>博客专家</span>
+                      </div>
+                        <span  class="csdn-tracking-statistics tracking-click" data-mod="popu_379"><a class="btn btn-redborder-small "  id="span_add_follow" target="_self">关注</a></span>
+                    </dd>
+    </dl>
+    <div class="inf_number_box clearfix">
+        <dl title="316">
+            <dt>原创</dt>
+            <dd>316</dd>
+        </dl>
+        <dl title="477">
+            <dt>粉丝</dt>
+            <dd id='fan'>477</dd>
+        </dl>
+        <dl title="254">
+            <dt>喜欢</dt>
+            <dd>254</dd>
+        </dl>
+        <dl title="386">
+          <dt>评论</dt>
+          <dd>386</dd>
+        </dl>
+    </div>
+
+</div>
+<div class="interflow clearfix">
+      <div class="badge gradeAndbadge">
+        <div>
+                        <img src='https://csdnimg.cn/jifen/images/xunzhang/xunzhang/zhuanlandaren.png' alt='专栏达人'>
+                                    <img src='https://csdnimg.cn/jifen/images/xunzhang/xunzhang/chizhiyiheng.png' alt='持之以恒'>
+                                            </div>
+    </div>
+      <div class="grade gradeAndbadge gradewidths">
+      <span>等级：</span>
+      <div>
+        <a href="https://blog.csdn.net/home/help.html#level" title="7级,点击查看等级说明" target="_blank">
+          <img class="grade-img" src="https://csdnimg.cn/jifen/images/xunzhang/jianzhang/blog7.png" alt="7级,点击查看等级说明">
+        </a>
+      </div>
+    </div>
+    <div class="gradeAndbadge gradewidths" title="968434">
+        <span>访问量：</span>
+        <span class="num odd-overhidden">96万+</span>
+    </div>
+
+    <div class="gradeAndbadge gradewidths" title="11204">
+      <span>积分：</span>
+      <span  class="num odd-overhidden">1万+</span>
+    </div>
+    <div class="gradeAndbadge gradewidths" title="1773">
+        <span>排名：</span>
+        <span class="num odd-overhidden">1773</span>
+    </div>
+
+</div>
+<script type="text/javascript">
+  // 判断并设置用户名位置，没有博客专家与关注按钮时，用户名居中
+  $medals_children = $('.medals').children().length;
+  $span_add_follow = $('#span_add_follow').length;
+  if($medals_children === 0 && $span_add_follow === 0){
+    $('.inf_bar dd').css('vertical-align','10px')
+  }
+</script>          <div class="extension_other csdn-tracking-statistics tracking-click" data-mod="popu_389">
+          <!--u3032528-->
+        <div class="flashrecommend">
+                        <script type="text/javascript" src="//cee1.iteye.com/bwocoltly.js"></script>
+                    </div>
+      </div>
+            <div class="writings">
+      <div class="public_signal clearfix">
+        <h3>博主最新文章</h3>
+        <a href="https://blog.csdn.net/u012373815" target="_blank" class="more"><span>更多文章</span></a>
+      </div>
+        <ul class="inf_list clearfix csdn-tracking-statistics tracking-click" data-mod="popu_382">
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/u012373815/article/details/79852738" target="_blank">设计模式之责任链模式</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/u012373815/article/details/79774347" target="_blank">颈椎病及腰椎间盘突出病因病理</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/u012373815/article/details/79222121" target="_blank">TensorFlow 卷积神经网络之使用训练好的模型识别猫狗图片</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/u012373815/article/details/79135270" target="_blank">Kafka 集群安装脚本</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/u012373815/article/details/79047696" target="_blank">redis之Jedis-API介绍和连接池使用</a>
+            </li>
+                    </ul>
+    </div>
+                <div class="user-hotArticle sort ClassSort">
+            <h3>文章分类</h3>
+            <ul class="hotArticle-list sort-list ClassSort-list">
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/2420905" class="odd-overhidden floatL">1.android</a>
+                        <div class="read list-left floatR"><span>38篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/6529284" class="odd-overhidden floatL">2.Java</a>
+                        <div class="read list-left floatR"><span>22篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/2963629" class="odd-overhidden floatL">--&gt;2.1 Java基础</a>
+                        <div class="read list-left floatR"><span>35篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/5667147" class="odd-overhidden floatL">--&gt;2.2 springmvc+mybatis</a>
+                        <div class="read list-left floatR"><span>49篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/5899113" class="odd-overhidden floatL">--&gt;2.3 springmvc+mybatis实战</a>
+                        <div class="read list-left floatR"><span>56篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/5739055" class="odd-overhidden floatL">--&gt;2.4 设计模式</a>
+                        <div class="read list-left floatR"><span>10篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/6334501" class="odd-overhidden floatL">--&gt;2.5 springboot</a>
+                        <div class="read list-left floatR"><span>36篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/6122985" class="odd-overhidden floatL">--&gt;2.6 java小工具</a>
+                        <div class="read list-left floatR"><span>4篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/6564827" class="odd-overhidden floatL">--&gt;2.7 规则引擎Drools</a>
+                        <div class="read list-left floatR"><span>8篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/6624840" class="odd-overhidden floatL">--&gt;2.8 maven</a>
+                        <div class="read list-left floatR"><span>4篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/7204466" class="odd-overhidden floatL">--&gt;2.9 Git</a>
+                        <div class="read list-left floatR"><span>5篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/6313010" class="odd-overhidden floatL">--&gt;3.1 dubbo</a>
+                        <div class="read list-left floatR"><span>1篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/6310615" class="odd-overhidden floatL">--&gt;3.2 docker</a>
+                        <div class="read list-left floatR"><span>9篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/2739195" class="odd-overhidden floatL">4.linux</a>
+                        <div class="read list-left floatR"><span>17篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/6704544" class="odd-overhidden floatL">--&gt;4.1 nginx</a>
+                        <div class="read list-left floatR"><span>1篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/6526669" class="odd-overhidden floatL">5.大数据</a>
+                        <div class="read list-left floatR"><span>3篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/6049926" class="odd-overhidden floatL">--&gt;5.1 elk</a>
+                        <div class="read list-left floatR"><span>5篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/6385580" class="odd-overhidden floatL">--&gt;5.2 kafka</a>
+                        <div class="read list-left floatR"><span>11篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/6358146" class="odd-overhidden floatL">--&gt;5.3 zookeeper</a>
+                        <div class="read list-left floatR"><span>2篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/6489406" class="odd-overhidden floatL">---&gt;5.4 flume</a>
+                        <div class="read list-left floatR"><span>16篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/6529171" class="odd-overhidden floatL">--&gt;5.5 spark</a>
+                        <div class="read list-left floatR"><span>10篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/6529314" class="odd-overhidden floatL">--&gt;5.6 hadoop</a>
+                        <div class="read list-left floatR"><span>5篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/6529168" class="odd-overhidden floatL">--&gt;5.6 scala</a>
+                        <div class="read list-left floatR"><span>1篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/6682926" class="odd-overhidden floatL">--&gt;5.7 redis</a>
+                        <div class="read list-left floatR"><span>3篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/6961037" class="odd-overhidden floatL">6. 运维</a>
+                        <div class="read list-left floatR"><span>2篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/6961035" class="odd-overhidden floatL">--&gt;6.1 zabbix</a>
+                        <div class="read list-left floatR"><span>2篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/5739053" class="odd-overhidden floatL">--&gt;7.1 mongodb</a>
+                        <div class="read list-left floatR"><span>3篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/6368105" class="odd-overhidden floatL">--&gt;7.2 mysql</a>
+                        <div class="read list-left floatR"><span>21篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/6529281" class="odd-overhidden floatL">8. 算法</a>
+                        <div class="read list-left floatR"><span>2篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/5990957" class="odd-overhidden floatL">--&gt;8.1 acm</a>
+                        <div class="read list-left floatR"><span>18篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/7202499" class="odd-overhidden floatL">9.机器学习</a>
+                        <div class="read list-left floatR"><span>2篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/7202503" class="odd-overhidden floatL">--&gt;9.1 Tensorflow</a>
+                        <div class="read list-left floatR"><span>8篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/6961036" class="odd-overhidden floatL">--&gt;9.2 python</a>
+                        <div class="read list-left floatR"><span>7篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/5739051" class="odd-overhidden floatL">--&gt;10.1 html+jquery</a>
+                        <div class="read list-left floatR"><span>4篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/6529288" class="odd-overhidden floatL">11.杂记</a>
+                        <div class="read list-left floatR"><span>1篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/6496000" class="odd-overhidden floatL">--&gt;11.1 编译器</a>
+                        <div class="read list-left floatR"><span>6篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/6474435" class="odd-overhidden floatL">--&gt;11.2 文档</a>
+                        <div class="read list-left floatR"><span>2篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/6391185" class="odd-overhidden floatL">--&gt;11.3 life</a>
+                        <div class="read list-left floatR"><span>1篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/u012373815/article/category/7573244" class="odd-overhidden floatL">--&amp;gt;2.4 设计模式</a>
+                        <div class="read list-left floatR"><span>1篇</span></div>
+                    </li>
+                            </ul>
+            <div class="unfold-btn">
+              <span>展开</span><i class="icon iconfont icon-xiajiantou"></i>
+            </div>
+        </div>
+    <!--    [StartShowSelfColumn]-->
+            <div class="host-column">
+            <h3>博主专栏</h3>
+            <ul class="column-list csdn-tracking-statistics tracking-click" data-mod="popu_520" >
+<!--                [StartSelfColumn]-->
+                                    <li class="clearfix">
+                        <div class="img list-left">
+                            <a href="https://blog.csdn.net/column/details/14426.html">
+                                <img src="https://img-blog.csdn.net/20170209115233742" alt="">
+                                <div>33 篇</div>
+                            </a>
+                        </div>
+                        <div class="content list-left">
+                            <h4 class="title"><a href="https://blog.csdn.net/column/details/14426.html">springboot</a></h4>
+                            <div class="read list-left"><i class="icon iconfont icon-read"></i><span>266800</span></div>
+                        </div>
+                    </li>
+                                    <li class="clearfix">
+                        <div class="img list-left">
+                            <a href="https://blog.csdn.net/column/details/14460.html">
+                                <img src="https://img-blog.csdn.net/20170314231321493" alt="">
+                                <div>42 篇</div>
+                            </a>
+                        </div>
+                        <div class="content list-left">
+                            <h4 class="title"><a href="https://blog.csdn.net/column/details/14460.html">springmvc＋mybatis</a></h4>
+                            <div class="read list-left"><i class="icon iconfont icon-read"></i><span>168496</span></div>
+                        </div>
+                    </li>
+                                    <li class="clearfix">
+                        <div class="img list-left">
+                            <a href="https://blog.csdn.net/column/details/14863.html">
+                                <img src="https://img-blog.csdn.net/20170314230951714" alt="">
+                                <div>16 篇</div>
+                            </a>
+                        </div>
+                        <div class="content list-left">
+                            <h4 class="title"><a href="https://blog.csdn.net/column/details/14863.html">flume</a></h4>
+                            <div class="read list-left"><i class="icon iconfont icon-read"></i><span>30655</span></div>
+                        </div>
+                    </li>
+                <!--                [EndSelfColumn]-->
+            </ul>
+            <div class="unfold-btn">
+                <span>展开</span><i class="icon iconfont icon-xiajiantou"></i>
+            </div>
+        </div>
+    <!--    [EndShowSelfColumn]-->
+            <div class="user-hotArticle sort timeSort">
+          <h3>文章存档</h3>
+          <ul class="hotArticle-list timeSort-list">
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2018/04" class="odd-overhidden floatL">2018年4月</a>
+                  <div class="read list-left floatR"><span>1篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2018/03" class="odd-overhidden floatL">2018年3月</a>
+                  <div class="read list-left floatR"><span>1篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2018/01" class="odd-overhidden floatL">2018年1月</a>
+                  <div class="read list-left floatR"><span>4篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2017/12" class="odd-overhidden floatL">2017年12月</a>
+                  <div class="read list-left floatR"><span>5篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2017/11" class="odd-overhidden floatL">2017年11月</a>
+                  <div class="read list-left floatR"><span>1篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2017/10" class="odd-overhidden floatL">2017年10月</a>
+                  <div class="read list-left floatR"><span>3篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2017/09" class="odd-overhidden floatL">2017年9月</a>
+                  <div class="read list-left floatR"><span>4篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2017/08" class="odd-overhidden floatL">2017年8月</a>
+                  <div class="read list-left floatR"><span>10篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2017/07" class="odd-overhidden floatL">2017年7月</a>
+                  <div class="read list-left floatR"><span>8篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2017/06" class="odd-overhidden floatL">2017年6月</a>
+                  <div class="read list-left floatR"><span>7篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2017/05" class="odd-overhidden floatL">2017年5月</a>
+                  <div class="read list-left floatR"><span>8篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2017/04" class="odd-overhidden floatL">2017年4月</a>
+                  <div class="read list-left floatR"><span>4篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2017/03" class="odd-overhidden floatL">2017年3月</a>
+                  <div class="read list-left floatR"><span>16篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2017/02" class="odd-overhidden floatL">2017年2月</a>
+                  <div class="read list-left floatR"><span>11篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2017/01" class="odd-overhidden floatL">2017年1月</a>
+                  <div class="read list-left floatR"><span>20篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2016/12" class="odd-overhidden floatL">2016年12月</a>
+                  <div class="read list-left floatR"><span>24篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2016/11" class="odd-overhidden floatL">2016年11月</a>
+                  <div class="read list-left floatR"><span>13篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2016/10" class="odd-overhidden floatL">2016年10月</a>
+                  <div class="read list-left floatR"><span>7篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2016/09" class="odd-overhidden floatL">2016年9月</a>
+                  <div class="read list-left floatR"><span>10篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2016/08" class="odd-overhidden floatL">2016年8月</a>
+                  <div class="read list-left floatR"><span>15篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2016/07" class="odd-overhidden floatL">2016年7月</a>
+                  <div class="read list-left floatR"><span>8篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2016/06" class="odd-overhidden floatL">2016年6月</a>
+                  <div class="read list-left floatR"><span>1篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2016/04" class="odd-overhidden floatL">2016年4月</a>
+                  <div class="read list-left floatR"><span>2篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2016/03" class="odd-overhidden floatL">2016年3月</a>
+                  <div class="read list-left floatR"><span>5篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2016/02" class="odd-overhidden floatL">2016年2月</a>
+                  <div class="read list-left floatR"><span>2篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2016/01" class="odd-overhidden floatL">2016年1月</a>
+                  <div class="read list-left floatR"><span>2篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2015/12" class="odd-overhidden floatL">2015年12月</a>
+                  <div class="read list-left floatR"><span>40篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2015/11" class="odd-overhidden floatL">2015年11月</a>
+                  <div class="read list-left floatR"><span>21篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2015/10" class="odd-overhidden floatL">2015年10月</a>
+                  <div class="read list-left floatR"><span>17篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2015/09" class="odd-overhidden floatL">2015年9月</a>
+                  <div class="read list-left floatR"><span>4篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2015/08" class="odd-overhidden floatL">2015年8月</a>
+                  <div class="read list-left floatR"><span>36篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2015/07" class="odd-overhidden floatL">2015年7月</a>
+                  <div class="read list-left floatR"><span>19篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2015/06" class="odd-overhidden floatL">2015年6月</a>
+                  <div class="read list-left floatR"><span>4篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2015/03" class="odd-overhidden floatL">2015年3月</a>
+                  <div class="read list-left floatR"><span>8篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2014/12" class="odd-overhidden floatL">2014年12月</a>
+                  <div class="read list-left floatR"><span>3篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2014/11" class="odd-overhidden floatL">2014年11月</a>
+                  <div class="read list-left floatR"><span>3篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2014/10" class="odd-overhidden floatL">2014年10月</a>
+                  <div class="read list-left floatR"><span>1篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/u012373815/article/month/2014/09" class="odd-overhidden floatL">2014年9月</a>
+                  <div class="read list-left floatR"><span>2篇</span></div>
+                </li>
+                      </ul>
+          <div class="unfold-btn">
+            <span>展开</span><i class="icon iconfont icon-xiajiantou"></i>
+          </div>
+        </div>
+            <div class="user-hotArticle">
+        <h3>博主热门文章</h3>
+        <ul class="hotArticle-list csdn-tracking-statistics tracking-click" data-mod="popu_521">
+<!--        [StartHotArticles]-->
+                            <li>
+                    <a href="https://blog.csdn.net/u012373815/article/details/54633046">springBoot+springSecurity 数据库动态管理用户、角色、权限（二）</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>40045</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/u012373815/article/details/49539239">数据字典及其使用</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>32468</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/u012373815/article/details/54632176">springboot+mybatis＋SpringSecurity 实现用户角色数据库管理(一)</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>26652</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/u012373815/article/details/52266609">json过滤某些属性 之@jsonignore</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>26391</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/u012373815/article/details/51029826">Logstash的安装和使用</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>24083</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/u012373815/article/details/47439309">mybatis 的条件查询的三个方法实现</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>21385</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/u012373815/article/details/47111995">mybatis 的逆向工程</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>21099</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/u012373815/article/details/47684357">mongodb 的服务启动和基本操作命令</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>20760</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/u012373815/article/details/53240946">spring boot 整合spring data jpa</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>17327</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/u012373815/article/details/53266301">spark开发环境搭建（基于idea 和maven）</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>16473</span></div>
+                </li>
+            <!--        [EndHotArticles]-->
+        </ul>
+    </div>
+    
+<!--    [startcustom]-->
+    <!--    [endcustom]-->
+  <div class="fixRight_box" style="height:256px">
+    <div class="fixRight">
+                    <!--u3163270-->
+                        <script type="text/javascript" src="//cee1.iteye.com/avneunkwb.js"></script>
+                          <div class="persion_article"></div>
+    </div>
+  </div>
+</aside>
+</div>
+
+<div class="left_fixed">
+    <div class="left_show_button">
+        <span>
+          <i class="icon iconfont icon-youjiantou"></i>
+        </span>
+    </div>
+    <ul class="left_menu" id="share_box">
+        <li>
+            <button class="left-fixed-btn btn-like csdn-tracking-statistics tracking-click" data-mod="popu_373" target="_self" title="点赞">
+                <a href="javascript:void(0);" class="iconbox border_red" ><i class="icon iconfont icon-dianzan"></i></a>
+                <a class="txt" href="javascript:void(0);">1</a>
+            </button>
+        </li>
+        <li id="blog_artical_directory">
+            <button class="left-fixed-btn left_menu_btn csdn-tracking-statistics tracking-click" data-mod="popu_372" target="_self" title="目录">
+                <a href="javascript:void(0);" class="iconbox border_black" ><i class="icon iconfont icon-mulu"></i></a>
+            </button>
+        </li>
+        <li class="menu_con">
+            <div class="list_father">
+                <div class="arr_box">
+                    <button class="btn-noborder arr-btn scroll-down  left_scroll_down"><i class="icon iconfont icon-xiajiantou"></i></button>
+                    <button class="btn-noborder arr-btn scroll-up left_scroll_top"><i class="icon iconfont icon-shangjiantou"></i></button>
+                </div>
+                <div class="arr"></div>
+                <div id="csdnBlogDir"></div>
+            </div>
+        </li>
+        <!--        <li>-->
+        <!--            <button class="left-fixed-btn btn-like tracking-ad" data-mod="popu_373" target="_self">-->
+        <!--                <span class="iconbox border_red"><i class="icon iconfont icon-xihuan-"></i></span>-->
+        <!--                <span class="txt">喜欢</span>-->
+        <!--                <span class="untxt">取消喜欢</span>-->
+        <!--            </button>-->
+        <!--        </li>-->
+        <li>
+            <button class="left-fixed-btn csdn-tracking-statistics tracking-click" data-mod="popu_374"  id="com-quick-collect" target="_self" title="收藏">
+                <a href="javascript:void(0);" class="iconbox border_purple" ><i class="icon iconfont icon-shoucang"></i></a>
+            </button>
+        </li>
+        <li>
+            <button class="left-fixed-btn btn-pinglun csdn-tracking-statistics tracking-click" data-mod="popu_544" title="评论">
+                <a href="javascript:void(0);" class="iconbox border_purple" ><i class="icon iconfont icon-pinglun"></i></a>
+            </button>
+        </li>
+        <li class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+            <a class="bds_tsina outside left-fixed-btn" data-cmd="tsina" title="分享到新浪微博"></a>
+            <span class="iconbox border_red2"><i class="icon iconfont icon-xinlang"></i></span>
+        </li>
+        <li class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+            <a class="bds_weixin outside left-fixed-btn" data-cmd="weixin" title="分享到微信"></a>
+            <span class="iconbox border_green"><i class="icon iconfont icon-weixin"></i></span>
+        </li>
+        <li class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+            <a class="bds_qzone outside left-fixed-btn" data-cmd="qzone" title="分享到QQ空间"></a>
+            <span class="iconbox border_blue"><i class="icon iconfont icon-QQ"></i></span>
+        </li>
+        <li id="share_box">
+
+            <div class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+
+
+
+            </div>
+        </li>
+    </ul>
+</div>
+<div id="pop_win"></div>
+<div id="popup_mask"></div>
+<div class="pop_CA_cover" ></div>
+<div class="pop pop_CA" >
+    <div class="CA_header">
+        收藏助手
+        <span class="cancel_icon"  id="fapancle" ></span>
+    </div>
+    <iframe src="" id="collectIframe" frameborder="0" width="100%" height="360"  scrolling="no" ></iframe>
+</div>
+<!--举报-->
+<div id="report_dialog" style="top: 250px; left: 343.5px;"><div id="panel_report">
+    <div class="panel_head">不良信息举报</div>
+    <form method="post" id="frmReport" class="panel_body">
+        <table border="0" cellpadding="0" cellspacing="4" class="pop_table">
+            <tbody><tr><td colspan="2">您举报文章：<a href="https://blog.csdn.net/u012373815/article/details/47069223" target="_blank">mybatis的缓存机制（一级缓存二级缓存和刷新缓存）和mybatis整合ehcache</a></td></tr>
+            <tr>
+                <th style="width:60px;">举报原因：</th>
+                <td id="panel_reporttype">
+                    <label><input type="radio" class="report_type" id="report_sex" name="report_type" value="1">色情</label>
+                    <label><input type="radio" class="report_type" id="report_Politics" name="report_type" value="2">政治</label>
+                    <label><input type="radio" class="report_type" id="report_copy" name="report_type" value="3">抄袭</label>
+                    <label><input type="radio" class="report_type" id="report_ad" name="report_type" value="4">广告</label>
+                    <label><input type="radio" class="report_type" id="report_want" name="report_type" value="5">招聘</label>
+                    <label><input type="radio" class="report_type" id="report_call" name="report_type" value="6">骂人</label>
+                    <br>
+                    <label><input type="radio" class="report_type" id="report_other" name="report_type" value="7">其他</label>
+                    <input type="text" name="report_other_content" id="report_other_content" maxlength="30" style="display: none;">
+                </td>
+            </tr>
+            <tr id="panel_originalurl" style="display: none;">
+                <th>原文地址：</th>
+                <td>
+                    <input id="originalurl" value="http://" name="originalurl" type="text" style="width: 90%;">
+                </td>
+            </tr>
+            <tr>
+                <th id="sp_reason">原因补充：</th>
+                <td>
+                    <textarea id="report_description" style="width: 300px;" rows="3" name="report_description"></textarea>
+                    <p id="sp_n" style="color:#999;margin:0px;padding:0px;">(最多只允许输入30个字)</p>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input id="btnSubmitReport" name="submit" type="image" align="middle" class="btn_1" src="https://csdnimg.cn/release/phoenix/images/btn_submit.jpg">
+                    <span style="padding-left:20px;"></span>
+                    <img id="btnCloseReportDialog" src="https://csdnimg.cn/release/phoenix/images/btn_cancel.jpg" align="middle">
+                    <div id="error" style="color: Red">
+                    </div>
+                </td>
+            </tr>
+            </tbody></table>
+    </form>
+</div>
+    <script language="javascript" type="text/javascript">
+        var isComment=0;
+        //显示隐藏地址
+        $(function () {
+          console.log("version:phoenix");
+            if(isComment){
+                $("#report_description").attr("disabled",true);
+                $("#sp_n").hide();
+                $("#sp_reason").html("评论内容：");
+            }
+            $(".report_type").click(function () {
+                $("#panel_originalurl,#report_other_content").hide();
+                switch ($(this).val()) {
+                    case '3':
+                        $("#panel_originalurl").show();
+                        $("#originalurl").focus();
+                        break;
+                    case '7':
+                        if(isComment){
+                            $("#report_other_content").show().focus();
+                        }
+                        break;
+                }
+
+            });
+
+            $("#frmReport").submit(function () {
+                if (!currentUserName) {
+
+                    if (confirm("您的操作必须登录，是否登录？")) {
+                        location.href = "https://passport.csdn.net/account/login?from=" + encodeURIComponent(location.href);
+                        return false;
+                    }
+                    return false;
+                }
+
+                var reportType = $("input[name=report_type]:checked").val();
+                if(!reportType){
+                    alert("请选择举报原因！");
+                    return false;
+                }
+                var otherInfo = "";
+                switch (reportType) {
+                    case '3':
+                        otherInfo = $("#originalurl").val();
+                        if (otherInfo == ""||otherInfo=="http://") {
+                            alert("举报抄袭必须提供原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        } else if(!checkeURL(otherInfo)) {
+                            alert("请输入正确的原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        }
+                        break;
+                    case '7':
+                        otherInfo = $("#report_other_content").val();
+                        if (isComment && !otherInfo) {
+                            alert("请填写举报的具体原因！");
+                            $("#report_other_content").focus();
+                            return false;
+                        }
+                        if(!isComment){
+                            if(!$("#report_description").val()){
+                                alert("请填写举报的具体原因！");
+                                $("#report_description").focus();
+                                return false;
+                            }
+                        }
+                        break;
+                }
+                if(!isComment){
+                    if($("#report_description").val().length>30){
+                        alert("举报原因最多只允许输入30个字！");
+                        return false;
+                    }
+                }
+	            nowTime = {
+		            year: new Date().getFullYear(),
+		            month: parseInt(new Date().getMonth())+1,
+		            day: new Date().getDate(),
+		            hours: parseInt(new Date().getHours())+1,
+		            minutes: parseInt(new Date().getMinutes())+1,
+		            seconds: parseInt(new Date().getSeconds())+1
+	            };
+	            var data = {
+		            articleId: fileName,
+		            commentId: 0,
+		            reportType: reportType,
+		            originalurl: $("#originalurl").val(),
+		            report_other_content: $("#report_other_content").val(),
+		            report_description: $("#report_description").val(),
+		            currentUserName: currentUserName,
+		            updatetime: nowTime.year+'/'+nowTime.month+'/'+nowTime.day+' '+ nowTime.hours+':'+nowTime.minutes+':'+seconds,
+		            blogUser: username
+	            };
+	            if(!isComment){//如果是举报文章
+		            data.report_other_content = data.report_description;
+		            // data.report_description = "1. 神经网络这是一个常见的神经网络的图：这是一个常见的三层神经网络的基本构成，Layer L1是输入层，Layer L2是隐含层";
+	            }
+
+	            $.post(blog_address + "/common/report?id="+fileName+"&t=2", data, function (data) {
+		            if (data.result == 1){
+			            SetError("感谢您的举报，我们会尽快审核！");
+		            }else{
+			            if (data.content) alert(data.content);
+		            }
+
+	            });
+                return false;
+            });
+
+            $("#btnCloseReportDialog").click(function () {
+                CloseDiv();
+            });
+
+        });
+
+        //提示后关闭方法
+        function SetError(error) {
+            $("#btnCloseReportDialog").trigger("click");
+            alert(error);
+            CloseDiv();
+        }
+
+        //关闭方法
+        function CloseDiv() {
+
+            $.removeMask();
+            $("#report_dialog").hide();
+            return false;
+        }
+
+        //验证url
+        function checkeURL(url){
+            return /^http(s)?:\/\/([\w-]+\.)+[\w-]+/i.test(url);
+        }
+    </script>
+</div>
+<!--  fixme 后期清理掉  -->
+<div id="a52b5334d" style="width: 1px; height: 1px; display: none;">
+    <script id="adJs52b5334"></script>
+    <script>document.getElementById("adJs52b5334").src = "https://ads.csdn.net/js/opt/52b5334.js?t=" + Math.random();</script>
+</div>
+<script type="text/javascript" src="https://static-blog.csdn.net/mdeditor/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            linebreaks: { automatic: true, width: "94%container" },
+            imageFont: null
+        }
+    });
+</script>
+<!-- <script type="text/javascript" src="https://passport.csdn.net/content/loginbox/login.js"></script> -->
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'https://csdnimg.cn/static/api/js/share.js?v=89860594'];</script>
+<script type="text/javascript" >
+    if($(".article_collect li").length==1){$(".article_collect").hide();}
+    if($(".article_tags li").length==1){$(".article_tags").hide();}
+    $(".edit a").attr("href","https://mp.csdn.net/postedit/"+fileName);
+    $.each($(".edu_li a"),function(){$(this).attr("href",$(this).attr("href").replace("blog7","blog9"))});
+    new CNick('#uid').showNickname();
+
+    if($("#fan").html()=="")
+    {
+	    $("#fan").html(0);
+    }
+</script>
+<script src="https://csdnimg.cn/public/common/append_mark/appendMark.min.js?v=5.00.43" type="text/javascript"></script>
+<script type="text/javascript">
+    appendMark($('.recommend_list').children('a').find('dt'),$('.extension_other'),$('.yd_a_d_feed_cla'))
+</script>
+<script src='https://csdnimg.cn/pubfooter/js/publib_footer-1.0.3.js?v201804111810' data-isfootertrack="false"></script>
+<script src='https://csdnimg.cn/public/common/gotop/js/goTop-v1.0.min.js?v201803151422'></script>
+<script>
+    GoTop({
+        right: 8,
+        hasReport: true,
+        reportFun: function() {
+            $.createMask();
+            var r = blog_address + "/common/report?id=" + fileName + "&t=" + 2;
+            if (3 == 2) {
+                var s = n.parentNode.parentNode.parentNode.getAttribute("floor");
+                r += "&floor=" + s
+            }
+            var i = (document.documentElement.clientHeight - 400) / 2 + (document.documentElement.scrollTop || document.body.scrollTop),
+                a = (document.documentElement.clientWidth - 400) / 2;
+
+            $("#report_dialog").load(r).css({
+                //top: i + "px",
+                top: '20%',
+                left: a
+            }).show()
+        }
+    })
+</script>
+<script src="https://dup.baidustatic.com/js/os.js"></script>
+
+<div id="loginWrap"></div>
+<div id="dlMask"></div>
+</body>

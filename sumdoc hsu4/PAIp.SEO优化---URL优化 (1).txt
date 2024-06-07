@@ -1,0 +1,4 @@
+用关键词命名的时候，使用“-”间歇号，而不是下划线“_”来连接关键词，例如，应
+该使用low-pice-hosting.html 而不是low_pice_hosting.html。
+
+

@@ -1,0 +1,13 @@
+无法抓取自动增长值，。。
+
+可能值不是INT型的，或者XML里表名配置不对。
+
+
+
+
+配置文件session-factory元素出错,提示
+property应该在maping的前边
+
+
+
+解决:property应该在maping的前边

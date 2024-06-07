@@ -1,0 +1,829 @@
+
+<html>
+<head>
+<title>又捡一分钱:[转]struts+hibernate项目debug总结 - 新浪BLOG</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<link href="http://blogjs.sinajs.cn/css/read_mode/read_mode.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.html
+{
+	text-align:center;
+}
+body
+{
+	margin:auto;
+	padding:auto;
+	width:100%;
+	overflow:hidden;
+	text-align:center;
+	padding-bottom: 20px;
+	background:url('http://blogjs.sinajs.cn/images/read_mode/bodyBG.gif') repeat top;
+}
+
+.cl2
+{
+	background-image : url('http://image2.sina.com.cn/blog/tmpl/v3/images/read_button.gif')  ; 
+	border:none;
+	width:73px;
+	height:19px;
+	margin:1px  ;
+	padding:2px 0px 0px 0px;
+	cursor:hand;
+	cursor:pointer;
+}
+.cl3
+{
+	background-image : url('http://blogjs.sinajs.cn/images/read_mode/readModeSave.gif')  ; 
+	border:none;
+	width:73px;
+	height:19px;
+	margin:1px  ;
+	padding:2px 0px 0px 0px;
+	cursor:hand;
+	cursor:pointer;
+}
+
+.cl4
+{
+	background-image : url('http://blogjs.sinajs.cn/images/read_mode/readModeClose.gif')  ; 
+	border:none;
+	width:19px;
+	height:19px;
+	margin:1px  ;
+	padding:2px 0px 0px 0px;
+	cursor:hand;
+	cursor:pointer;
+}
+.reader_tag{color:#000;font-size:12px}
+.reader_tag a{color:#666;}
+.tagItem{
+	float:left;
+	padding:2px 4px;
+	text-align:left;
+	white-space:nowrap; 	
+}
+-->
+</style>
+ <link rel="Stylesheet" type="text/css" media="all" href="http://hits.blog.sina.com.cn/hits?act=1&aid=4e2ee42d01000ceq">
+</head>
+
+ <script>
+
+var clickobj="cl";//按钮ID
+var htmlobj="bodyid";
+var txt_type=1; //简体
+
+function _addHTML(oParentNode, sHTML) {
+ 
+	if(window.Event) 
+	{ 
+		var oRange = oParentNode.ownerDocument.createRange();
+		oRange.setStartBefore(oParentNode);
+		var oFrag = oRange.createContextualFragment(sHTML);
+		oParentNode.appendChild(oFrag);
+	}
+	else 
+	{ 
+ 
+		oParentNode.insertAdjacentHTML("BeforeEnd", sHTML);
+	}
+}
+
+function _browser_ckeck(){
+	var sUA = navigator.userAgent.toLowerCase();
+	var sIE = sUA.indexOf("msie");
+	var sOpera = sUA.indexOf("opera");
+	var sMoz = sUA.indexOf("gecko");
+	if (sOpera != -1) return "opera";
+	if (sIE != -1)
+	{
+		nIeVer = parseFloat(sUA.substr(sIE + 5));
+		if (nIeVer >= 6) return "ie6";
+		else if (nIeVer >= 5.5) return "ie55";
+		else if (nIeVer >= 5 ) return "ie5";
+	}
+	if (sMoz != -1)	return "moz";
+	return "other";
+}
+
+ function _isIE()
+ {  
+     var _o=_browser_ckeck() ;
+	 return  _o.indexOf('ie') > -1;
+ }
+
+ 
+//按钮可用
+function _enabled_button()
+{
+	  var _o=document.getElementById(clickobj) ;
+      _o.disabled = false;
+}
+
+//按钮不可用
+function _disabled_button()
+{
+	  var _o=document.getElementById(clickobj) ;
+      _o.disabled = true;
+
+}
+ 
+//实现了缓存池的作用
+function  load_js(jsdir,jsid,jsfile)
+{  
+    var HeadElement = document.getElementsByTagName("HEAD")[0];
+    var article_script_ojb=document.getElementById(jsid);
+ 
+	if (article_script_ojb!=null)
+	{   
+		_disabled_button() ;
+		_show_loadmsg("start");
+
+		setTimeout(function (){
+			_blog_tran_text();
+			_enabled_button();
+			_show_loadmsg("end"); 
+		},100)
+	}
+	else
+	{   
+		var script = document.createElement('SCRIPT');
+		script.id = jsid; 
+		script.src =jsdir  +jsfile ; 	
+		script.type ="text/javascript";
+		HeadElement.appendChild(script) ;
+	  
+		if ( _isIE())
+		{
+			 script.onreadystatechange=function()
+			{    
+  
+			  if (script.readyState == "complete"  ||  script.readyState == "loaded" ) 
+			  {  
+	 
+						_disabled_button() ;
+						_show_loadmsg("start");
+						setTimeout(function (){
+						_blog_tran_text();
+						_enabled_button();
+						_show_loadmsg("end");
+						},100)
+	 
+              }
+			 	  
+			}
+
+		}
+	  else
+		{        
+                  _disabled_button() ;
+					_show_loadmsg("start");
+				  script.onload=function()
+				 {
+				    
+						try
+						{
+						   setTimeout(function (){
+							   _blog_tran_text();
+						       _enabled_button();
+							   _show_loadmsg("end");           },100)
+							}
+						catch (e)
+						{
+						}
+						finally
+						{
+                         _show_loadmsg("end");   
+						}
+				 }
+
+		}
+
+	}
+
+}
+
+//工具目前的编码作转换,并把值改动的对象的innerHTML中
+function _blog_tran_text( )
+{
+var s=document.getElementById(htmlobj);
+var bu=document.getElementById(clickobj);
+//var tr="nobody"  ; //是一段文字转换 还是整个页面转换
+ var str=s.innerHTML; 
+  s.innerHTML="";
+  
+   //window.document.body="";
+	var _str="";
+
+	var len=str.length ;
+ 
+	if ( len>4000)
+	{   
+      
+		//var arr=Math.round(len/1000) 
+		var arr=Math.floor(len/1000) ;
+        var strarr=new Array();
+        
+       	if (txt_type==1) 
+		{
+			for (var i=0;i<= arr;i++){
+                 
+                 _str=str.substr(i*1000,1000) ;
+			 
+				 if (i==arr)
+				 {
+					if (_str!="") strarr[i] = Traditionalized(_str) ;
+				 }
+				 else
+				 {
+					strarr[i] = Traditionalized(_str) ;
+				 }
+				setTimeout("function(){}",20) ;
+			}
+		}
+		else 
+		{   
+
+			for (var i=0;i<= arr;i++){
+                 
+                 _str=str.substr(i*1000,1000) ;
+
+				  if (i==arr)
+				 {
+					if (_str!="") strarr[i] = Simplized(_str) ;
+				 }
+				 else
+				 {
+					strarr[i] = Simplized(_str) ;
+				 }
+				setTimeout("function(){}",20) ;
+ 
+			}
+ 
+
+		}//end if 
+
+		str=strarr.join("");
+                 
+	}
+	else
+	{
+		if (txt_type==1) 
+		{  
+		 
+			 
+			str=Traditionalized(str);
+		}
+		else
+		{	 
+			str=Simplized(str);
+		}
+			
+
+	}
+ 
+		_addHTML(s,str);
+  
+		if (txt_type==1) 
+		{  
+		 window.document.title= Simplized(window.document.title);
+		}
+		else
+		{
+			window.document.title=Traditionalized(window.document.title)
+		}
+ 
+ 
+}
+//提示信息
+function _show_loadmsg(str)
+{
+  
+	   var _o=document.getElementById(clickobj) ;
+	   if (_o!=null)
+		{
+		   if (txt_type==1) 
+			{  
+               if (str=="start") 
+				{
+			    _o.value="转换数据" ;  
+				}
+				else if (str=="end")
+				{
+				 _o.value="转为繁体" ;
+				}
+				else 
+				{
+					 _o.value="转换失败" ;
+				}
+			}
+			else
+			{
+				 if (str=="start") 
+				{
+			    _o.value="轉換數據" ;  
+				}
+				else if (str=="end")
+				{
+				 _o.value="轉为簡體" ;
+				}
+				else 
+				{
+					 _o.value="轉換失敗" ;
+				}
+
+			}
+		 
+
+		}
+ 
+}
+
+//硬编码加载js文件
+function _blog_load_js()
+{ 
+	load_js("http://blogjs.sinajs.cn/js/read_mode/","jsidd","big5_gb.js");
+}
+
+
+window.onload=function()
+{
+ 
+	document.getElementById(clickobj).disabled=false; 
+}
+ </script>
+
+<body>
+<table width="750" border="0" align="center" cellspacing="0" background="http://image2.sina.com.cn/blog/tmpl/v3/theme/1/images/bodyTop.gif" height="40">
+	<tr>
+		<td width="184" align="left" style="padding-left:5px;" >
+			<a href="http://blog.sina.com.cn/" target="_blank"><img src="http://image2.sina.com.cn/blog/tmpl/v3/images/logo.gif" border="0"></a>		</td>
+		<td align="left" style="padding-top:14px; font-size:12px" width="204">
+			<script language="javascript" type="text/javascript" src="http://blogjs.sinajs.cn/js/head_utf8.js" charset="utf-8" ></script>
+	  </td>
+		<td align="right" style="padding-top:14px;padding-right:10px" width="246"><span style="color:#656565; font-size:12px">
+<a target="_blank" href="http://my.blog.sina.com.cn" style="color:#656565">管理博客</a>&nbsp;┆&nbsp;<a target="search" href="http://search.blog.sina.com.cn/blog/search" style="color:#656565">搜索</a>&nbsp;┆&nbsp;<a target="help" href="/help/" style="color:#656565">帮助</a></span>		</td>
+	</tr>
+</table>
+<div id="bodyid">
+<div id="menu" class="readModeTopBox" onDblClick="javascript:cancel_bubble(event);" onMouseDown="javascript:cancel_bubble(event);">
+	<div>
+		<select id="no1" class="readModeBgColor" onChange="setBgColor(this.options[this.selectedIndex].value)">
+			<option value="#eef9fc" class="readModeDefault">文章背景</option>
+			<option value="#ffffff" class="readModeWhite">&nbsp; 雪白</option>
+			<option value="#E4EBF1" class="readModeBabyBlue">&nbsp; 淡蓝</option>
+			<option value="#eef9fc" class="readModeEEF9FC">&nbsp; 蓝色</option>
+			<option value="#EEEEEE" class="readModeGrayEEE">&nbsp; 淡灰</option>
+			<option value="#E4E1D8" class="readModeGrayE4E">&nbsp; 深灰</option>
+			<option value="#E6E6E6" class="readModeGray6E6">&nbsp; 暗灰</option>
+			<option value="#EEFAEE" class="readModeEEFAEE">&nbsp; 淡绿</option>
+			<option value="#FFFFED" class="readModeYellow">&nbsp; 明黄</option>
+		   <option value="black" class="readModeBlack">&nbsp; &nbsp;黑</option>
+			<option value="green" class="readModeGreen">&nbsp; &nbsp;绿</option>
+			<option value="darkred" class="readModeDarkred">&nbsp; 暗红</option>
+			<option value="darkslateblue" class="readModeDarkslateblue">&nbsp; 深蓝</option>
+			<option value="teal" class="readModeTeal">&nbsp; 鸭绿</option>
+			<option value="indigo" class="readModeIndigo">&nbsp; 靛青</option>
+			<option value="brown" class="readModeBrown">&nbsp; 褐色</option>
+		</select>
+ 
+		<span style="font-size:20px;">A</span>
+		<select id="no2" onChange="setFontStyle(this.options[this.selectedIndex].value)">
+			<option value="宋体">宋体</option>
+			<option value="黑体">黑体</option>
+			<option value="楷体_GB2312">楷体</option>
+			<option value="仿宋_GB2312">仿宋</option>
+			<option value="隶书">隶书</option>
+			<option value="幼圆">幼圆</option>
+		</select>
+		<select id="no3" onChange="setFontSize(this.options[this.selectedIndex].value)">
+			<option value="32px">二号</option>
+			<option value="24px">三号</option>
+			<option value="18px" selected="selected">四号</option>
+			<option value="16px">小四</option>
+			<option value="14px">五号</option>
+			<option value="12px">小五</option>
+		</select>
+		<select id="no4" onChange="setFontColor(this.options[this.selectedIndex].value)">>
+			<option value="black" class="readModeBlack">&nbsp;</option>
+			<option value="green" class="readModeGreen">&nbsp;</option>
+			<option value="darkred" class="readModeDarkred">&nbsp;</option>
+			<option value="darkslateblue" class="readModeDarkslateblue">&nbsp;</option>
+			<option value="teal" class="readModeTeal">&nbsp;</option>
+			<option value="indigo" class="readModeIndigo">&nbsp;</option>
+			<option value="brown" class="readModeBrown">&nbsp;</option>
+			
+			<option value="#ffffff" class="readModeWhite">&nbsp;</option>
+			<option value="#E4EBF1" class="readModeBabyBlue">&nbsp;</option>
+			<option value="#eef9fc" class="readModeEEF9FC">&nbsp;</option>
+			<option value="#EEEEEE" class="readModeGrayEEE">&nbsp;</option>
+			<option value="#E4E1D8" class="readModeGrayE4E">&nbsp;</option>
+			<option value="#E6E6E6" class="readModeGray6E6">&nbsp;</option>
+			<option value="#EEFAEE" class="readModeEEFAEE">&nbsp;</option>
+			<option value="#FFFFED" class="readModeYellow">&nbsp;</option>
+		</select>
+		&nbsp;  
+		鼠标双击滚屏
+		<select id="no5" onChange="setStep(this.options[this.selectedIndex].value)">
+			<option value="400">10</option>
+			<option value="300">09</option>
+			<option value="200">08</option>
+			<option value="150">07</option>
+			<option value="120">06</option>
+			<option value="100" selected="selected">05</option>
+			<option value="50">04</option>
+			<option value="40">03</option>
+			<option value="30">02</option>
+			<option value="10">01</option>
+		</select>
+		<span style="color:#737373">(1最快,10最慢)</span>   &nbsp; 
+ <button  class="cl3"   onClick="saveMode()"  alt="save" ></button>
+		&nbsp;  
+ 
+        <button  class="cl2"  id="cl" onClick="_blog_load_js();" disabled="true" >转为繁体</button>
+		&nbsp;   
+		<button  class="cl4"  id="cl" onClick="javascript:window.close()" alt="close"></button>
+
+ 
+	</div>
+</div>
+
+ 
+<div id="readModeTxt" class="readModeTxtBox">
+ 
+	<div id="ArticleTitle">
+		[转]struts+hibernate项目debug总结	</div>
+
+	 <div id="AuthorReadMode">
+		<span id="Author">作者：又捡一分钱</span>
+		<span id="PublicTime">2007-10-17 17:30:07</span>
+	</div>
+	<table width="480" border="0" cellpadding="0" cellspacing="0" class="reader_tag" align="center">
+				  <tr>
+					<td width="60" height="20" align="right">标签：</td>
+					<td colspan="4" rowspan="2" align="center" valign="top"><div class="tagItem"><a href="http://search.blog.sina.com.cn/blog/search?q=IT%2F%BF%C6%BC%BC&tag=n&t=tag" target="_blank">IT/科技</a></div>						<div style="clear:both"></div>
+					</td>
+				  </tr>
+				  <tr>
+					<td width="60" height="20">&nbsp;</td>
+				  </tr>
+	</table>
+	<div id="Content" style="word-wrap:break-word;word-break:break-all;overflow:hidden;" onselectstart="return false;">
+		<DIV>&nbsp;<SPAN CLASS="tpc_content"><FONT SIZE="2">javax.servlet.ServletException: Cannot retrieve mapping for
+action /companyNews<br/>
+<br/>
+struts-config.xml中没有写相关companyNews的action.<br/>
+<br/>
+============================================<br/>
+在myeclipse增加一个jar包时候，先打开项目properties,选择java build
+path --&gt; libraries --&gt;add external JARs
+选择到需要的jar包，加入后，发现，他这个包加载的是绝对路径，而我们的项目需要cvs共享，无法<br/>
+
+<br/>
+commit到cvs服务器。myeclipse有以下提示信息：<br/>
+2 build path entries are missing.<br/>
+<br/>
+解决办法是，关闭myeclipse,用notepad打开项目目录下的 .classpath,
+手动修改成相对路径，并且检查，指定的相对路径中是否真正添加了jar包，<br/>
+
+启动myeclipse就可以上传新添加的jar包了。<br/>
+<br/>
+<br/>
+=============================================<br/>
+在使用junit/StrutsTest时候，报错：<br/>
+java.lang.UnsupportedClassVersionError:
+junit/framework/TestListener (Unsupported major.minor version
+49.0)<br/>
+<br/>
+原因是如果是jdk1.4的话，只能使用junit3.8以下版本，如果是使用jdk1.5的话，必须使用junit4.0以上版本。<br/>
+
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+==========================================================<br/>
+<br/>
+Cannot find ActionMappings or ActionformBeans collection<br/>
+原因是：web.xml文件中没有配置struts-config.xml的相关信息。<br/>
+<br/>
+<br/>
+============================================================<br/>
+<br/>
+org.apache.jasper.JasperException: The absolute uri:</FONT>
+<A HREF="http://java.sun.com/jstl/core" TARGET="_blank"><FONT SIZE="2">http://java.sun.com/jstl/core</FONT></A> <FONT SIZE="2">cannot
+be resolved in either web.xml or the jar files deployed with this
+application<br/>
+<br/>
+<br/>
+缺少jstl的相关jar和web.xml配置<br/>
+jstl.jar<br/>
+&lt;taglib&gt;<br/>
+&nbsp; &lt;taglib-uri&gt;</FONT><A HREF="http://java.sun.com/jstl/fmt%3C/taglib-uri%3E" TARGET="_blank"><FONT SIZE="2">http://java.sun.com/jstl/fmt&lt;/taglib-uri&gt;</FONT></A><br/>
+
+<FONT SIZE="2">&nbsp;
+&lt;taglib-location&gt;/WEB-INF/fmt.tld&lt;/taglib-location&gt;<br/>
+
+&lt;/taglib&gt;<br/>
+<br/>
+&lt;taglib&gt;<br/>
+&nbsp; &lt;taglib-uri&gt;</FONT><A HREF="http://java.sun.com/jstl/fmt-rt%3C/taglib-uri%3E" TARGET="_blank"><FONT SIZE="2">http://java.sun.com/jstl/fmt-rt&lt;/taglib-uri&gt;</FONT></A><br/>
+
+<FONT SIZE="2">&nbsp;
+&lt;taglib-location&gt;/WEB-INF/fmt-rt.tld&lt;/taglib-location&gt;<br/>
+
+&lt;/taglib&gt;<br/>
+<br/>
+&lt;taglib&gt;<br/>
+&nbsp; &lt;taglib-uri&gt;</FONT><A HREF="http://java.sun.com/jstl/core%3C/taglib-uri%3E" TARGET="_blank"><FONT SIZE="2">http://java.sun.com/jstl/core&lt;/taglib-uri&gt;</FONT></A><br/>
+
+<FONT SIZE="2">&nbsp;
+&lt;taglib-location&gt;/WEB-INF/c.tld&lt;/taglib-location&gt;<br/>
+&lt;/taglib&gt;<br/>
+<br/>
+&lt;taglib&gt;<br/>
+&nbsp; &lt;taglib-uri&gt;</FONT><A HREF="http://java.sun.com/jstl/core-rt%3C/taglib-uri%3E" TARGET="_blank"><FONT SIZE="2">http://java.sun.com/jstl/core-rt&lt;/taglib-uri&gt;</FONT></A><br/>
+
+<FONT SIZE="2">&nbsp;
+&lt;taglib-location&gt;/WEB-INF/c-rt.tld&lt;/taglib-location&gt;<br/>
+
+&lt;/taglib&gt;<br/>
+<br/>
+&lt;taglib&gt;<br/>
+&nbsp; &lt;taglib-uri&gt;</FONT><A HREF="http://java.sun.com/jstl/sql%3C/taglib-uri%3E" TARGET="_blank"><FONT SIZE="2">http://java.sun.com/jstl/sql&lt;/taglib-uri&gt;</FONT></A><br/>
+
+<FONT SIZE="2">&nbsp;
+&lt;taglib-location&gt;/WEB-INF/sql.tld&lt;/taglib-location&gt;<br/>
+
+&lt;/taglib&gt;<br/>
+<br/>
+&lt;taglib&gt;<br/>
+&nbsp; &lt;taglib-uri&gt;</FONT><A HREF="http://java.sun.com/jstl/sql-rt%3C/taglib-uri%3E" TARGET="_blank"><FONT SIZE="2">http://java.sun.com/jstl/sql-rt&lt;/taglib-uri&gt;</FONT></A><br/>
+
+<FONT SIZE="2">&nbsp;
+&lt;taglib-location&gt;/WEB-INF/sql-rt.tld&lt;/taglib-location&gt;<br/>
+
+&lt;/taglib&gt;<br/>
+<br/>
+&lt;taglib&gt;<br/>
+&nbsp; &lt;taglib-uri&gt;</FONT><A HREF="http://java.sun.com/jstl/x%3C/taglib-uri%3E" TARGET="_blank"><FONT SIZE="2">http://java.sun.com/jstl/x&lt;/taglib-uri&gt;</FONT></A><br/>
+<FONT SIZE="2">&nbsp;
+&lt;taglib-location&gt;/WEB-INF/x.tld&lt;/taglib-location&gt;<br/>
+&lt;/taglib&gt;<br/>
+<br/>
+&lt;taglib&gt;<br/>
+&nbsp; &lt;taglib-uri&gt;</FONT><A HREF="http://java.sun.com/jstl/x-rt%3C/taglib-uri%3E" TARGET="_blank"><FONT SIZE="2">http://java.sun.com/jstl/x-rt&lt;/taglib-uri&gt;</FONT></A><br/>
+
+<FONT SIZE="2">&nbsp;
+&lt;taglib-location&gt;/WEB-INF/x-rt.tld&lt;/taglib-location&gt;<br/>
+
+&lt;/taglib&gt;<br/>
+<br/>
+<br/>
+==========================================================<br/>
+<br/>
+Failed to load or instantiate TagLibraryValidator class:
+org.apache.taglibs.standard.tlv.JstlCoreTLV<br/>
+<br/>
+<br/>
+standard.jar没有放在lib里面<br/>
+<br/>
+<br/>
+===========================================================<br/>
+<br/>
+创建oracle表的时候，使用了，role和comment关键字，建议不要将这两个关键字作为表名和字段名。<br/>
+
+建议用toad或plsql developer创建表，这样软件会提示关键字。<br/>
+=============================================================<br/>
+<br/>
+[ERROR] XMLHelper - Error parsing XML: XML InputStream(18)
+Attribute name "column" associated with an element type "key" must
+be followed by the ' = ' character.<br/>
+[ERROR] Configuration - Could not configure datastore from input
+stream &lt;org.dom4j.DocumentException: Error on line 18 of
+document : Attribute name "column" associated with an element type
+"key"<br/>
+<br/>
+must be followed by the ' = ' character. Nested exception:
+Attribute name "column" associated with an element type "key" must
+be followed by the ' = ' character.&gt;org.dom4j.DocumentException:
+Error<br/>
+<br/>
+on line 18 of document : Attribute name "column" associated with an
+element type "key" must be followed by the ' = ' character. Nested
+exception: Attribute name "column" associated with an element<br/>
+<br/>
+type "key" must be followed by the ' = ' character.<br/>
+<br/>
+<br/>
+<br/>
+xml 语法错误，key语法中应该类似这样的写法 &lt;key
+column="id"&gt;<br/>
+=============================================================<br/>
+hibernate3,对象中一对多的one方，必须写private Set pays=new
+HashSet();，否则包错java.lang.NullPointerException ，<br/>
+而hibernate2中private Set pays;却不报错；<br/>
+<br/>
+=============================================================<br/>
+[DEBUG] AbstractSaveEventListener - generated identifier: 1, using
+strategy: org.hibernate.id.IncrementGenerator<br/>
+org.hibernate.PropertyValueException: not-null property references
+a null or transient value: com.xxx.yyy.company<br/>
+at
+org.hibernate.engine.Nullability.checkNullability(Nullability.java:72)<br/>
+
+<br/>
+&lt;many to one &gt;中的设置应该设置为not-null="false"
+，设置为not-null="true"则报以上错误<br/>
+================================================================<br/>
+
+<br/>
+<br/>
+org.hibernate.TransientObjectException: object references an
+unsaved transient instance - save the transient instance before
+flushing: com.xxx.yyy.Company<br/>
+<br/>
+在save的同时也需要save其他的表，然后再flush()<br/>
+=========================================================================<br/>
+
+<br/>
+Parse Fatal Error at line 12 column 1<br/>
+<br/>
+struts-config.xml文件被修改，语法错误。检查语法。<br/>
+<br/>
+========================================<br/>
+<br/>
+org.hibernate.QueryException: could not resolve property: userid
+of: com.xxx.yyy.Pay<br/>
+<br/>
+使用到外键userid的时候，必须使用userinfo.userid方法才能得到。<br/>
+<br/>
+=========================================<br/>
+javax.naming.NameNotFoundException: Name
+hibernate_connection_factory is not bound in this Context<br/>
+原因：hibernate的数据库映射.xml文件有配置错误，导致hibernate_connection_factory无法绑定数据库。<br/>
+
+例如many-to-one设置了以后，仍然在其中设置相冲突的&lt;property&gt;属性。<br/>
+
+<br/>
+==========================================<br/>
+<br/>
+[WARN] RequestProcessor - Unhandled Exception thrown: class
+java.lang.NullPointerException<br/>
+必须将使用到的对象new起来。<br/>
+<br/>
+============================================<br/>
+GROUP BY 表达式的查询必须满足如下：<br/>
+select 子句后的每一项必需出现在group by
+子句中，除非该项使用了聚集函数。<br/>
+<br/>
+===========================================<br/>
+org.hibernate.TransientObjectException: object references an
+unsaved transient instance - save the transient instance before
+flushing: com.xxx.yyy.Company<br/>
+<br/>
+要级联保存，多次session.save()<br/>
+==============================================<br/>
+java.lang.IllegalArgumentException: id to load is required for
+loading<br/>
+原因：<br/>
+<br/>
+session.load(Company.class,payForm.getCompanyId());<br/>
+load()方法第二个参数必须是searlizable,并且必须是和数据库映射类的属性值类型一致，即使强制转换都不行。<br/>
+
+<br/>
+<br/>
+=============================================<br/>
+[INFO] DefaultLoadEventListener - Error performing load command
+&lt;org.hibernate.ObjectNotFoundException: No row with the given
+identifier exists: [com.xxx.yyy.Company#0]<br/>
+<br/>
+&gt;org.hibernate.ObjectNotFoundException: No row with the given
+identifier exists: [com.xxx.yyy.Company#0]<br/>
+<br/>
+<br/>
+表示你现在查询的对象所关联的对象有问题，一般是因为数据的问题（该对象所关联的对象找不到）,数据的错误，影响了程序正常执行。<br/>
+
+<br/>
+========================================================<br/>
+eclipse 3.1,myeclipse 4错误<br/>
+Deployment is out of date due to changes in the underlying project
+contents . You'll need to mannally 'Redeploy' the project to update
+the deployed archive.<br/>
+原因<br/>
+tomcat 中部署的某个文件的拒绝访问影响了部署。<br/>
+重启后，去除tomcat中部署的文件。重新在eclipse中设置部署。<br/>
+为什么需要重启？<br/>
+因为：google
+desktop软件正在对我部署的一个300MB大文件进行索引，锁定了这个大文件，我估计google
+desktop需要对这个文件索引半个小时以上。因此，eclipse无法对过去部署的文件，做先删除后重新部署的工作。<br/>
+
+<br/>
+===================================================<br/>
+ERROR LazyInitializationException:19 - could not initialize proxy -
+the owning Session was closed<br/>
+<br/>
+org.hibernate.LazyInitializationException: could not initialize
+proxy - the owning Session was closed<br/>
+解决办法。<br/>
+cmpy=(CompanyEdit)ss.load(CompanyEdit.class,companyId1);<br/>
+&nbsp;
+Hibernate.initialize(cmpy);//强制初始化cmpy,否则ss.close()后,cmpy将消失.<br/>
+
+<br/>
+====================================================<br/>
+javascript错误<br/>
+行: 56<br/>
+字符: 45<br/>
+错误: 未结束的字符串常量<br/>
+代码: 0<br/>
+<br/>
+是编码的问题！用ANSI编码另存后就好了。<br/>
+<br/>
+====================================================<br/>
+[WARN] JDBCExceptionReporter - SQL Error: 904, SQLState:
+42000<br/>
+[ERROR] JDBCExceptionReporter - ORA-00904: 无效列名<br/>
+<br/>
+[INFO] DefaultLoadEventListener - Error performing load command
+&lt;org.hibernate.exception.SQLGrammarException: could not load an
+entity: [com.xxx.yyy.Sellinfo#1]<br/>
+<br/>
+&gt;org.hibernate.exception.SQLGrammarException: could not load an
+entity: [com.xxx.yyy.Sellinfo#1]<br/>
+<br/>
+***.hbm.xml文件中的某个列名和数据库中的不同。<br/>
+<br/>
+<br/>
+=======================================================<br/>
+ConnectionManager - unclosed connection, forgot to call close() on
+your session?<br/>
+<br/>
+<br/>
+原因：没有关闭hibernate的session的transaction。或者没有关闭session<br/>
+
+<br/>
+=======================================================<br/>
+[WARN] SellCommentDAO - org.hibernate.ObjectDeletedException:
+deleted object would be re-saved by cascade (remove deleted object
+from associations): [com.xxx.yyy.SellComment#7]<br/>
+<br/>
+原因：父亲对象（one方）设置cascade="save-update"
+时，直接删除子对象时，会报错，<br/>
+处理方法：save信息需要级联操作，delete时候也要用相同的原理。<br/>
+SellComment sellComment=new SellComment();<br/>
+sellComment =
+(SellComment)session.load(SellComment.class,sellCommentId);//获取儿子对象<br/>
+
+Long
+sellInfoId=sellComment.getSellInfo().getSellId();//获取父亲id<br/>
+SellInfo
+sellinfo=(SellInfo)session.load(SellInfo.class,sellInfoId);//获取父亲对象<br/>
+
+sellInfo.getSellComments().remove(sellComment);//断绝父子关系<br/>
+sellComment.setSellInfo(null);//断绝子父关系<br/>
+session.delete(sellComment);//删除儿子<br/>
+session.flush();</FONT></SPAN><br/>
+&nbsp;<br/>
+<br/>
+<P ID="TBPingURL">Trackback:
+http://tb.blog.csdn.net/TrackBack.aspx?PostId=1814804</P>
+</DIV>
+	</div>
+
+	<div id="Declare">
+		本文仅为提供更多信息，不代表新浪BLOG同意其观点或描述。如需转载请注明出处。	</div>
+
+	<div id="CloseButton">
+		<table align="right"><tr>
+		<td><a href="javascript:close();">
+		<img src="http://blogjs.sinajs.cn/images/read_mode/readModeClose.gif" width="13" height="13" border="0" alt="close" /></a></td>
+		<td>
+			<span style="text-align: right;">
+		<a href="javascript:close();" style="text-decoration: none; font-size: 12px;">关闭阅读模式</a>
+		</span>
+		</td>
+		</tr>
+		</table> 
+	</div>
+</div>
+
+</div>
+ 
+
+<script language="javascript" src="http://blogjs.sinajs.cn/js/read_mode/read_mode.js"></script>
+<span name="pvcounter" pid="1" key="4e2ee42d01000ceq" url="http://blog.sina.com.cn/s/blog_4e2ee42d01000ceq.html" expara="" style="display:none"></span>
+<script id="PVCOUNTER_FORIE" type="text/javascript"></script>
+<script type="text/javascript" src="http://news.sina.com.cn/pvcounter/pvcounter.js"></script><img src="http://secure-cn.imrworldwide.com/cgi-bin/m?ci=cn-sina2006&amp;cg=0" alt="" /><script type="text/javascript" src="http://sina.wrating.com/a1.js"></script>
+<script type="text/javascript">
+try{
+var vjAcc="860010-0328010000"; 
+var wrUrl="http://sina.wrating.com/";
+vjTrack("");
+}catch(e){};
+</script>
+<noscript><img src="http://sina.wrating.com/a.gif?a=&amp;c=860010-0328010000" width="1" height="1"/></noscript></body>
+</html>
+

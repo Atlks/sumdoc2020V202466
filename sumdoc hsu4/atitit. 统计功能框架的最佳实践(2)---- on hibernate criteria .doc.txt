@@ -1,0 +1,111 @@
+atitit. 统计功能框架的最佳实践(1)---- on hibernate criteria 
+
+11
+11
+11
+22
+22
+33
+33
+33
+33
+3
+关键字
+Hibernate criteria 日期groupby  子对象属性groupby
+
+
+统计功能框架普通有有些条件选项...一个日期选项..一个日期类型(日,周,月份,年等)
+作者:: 老哇的爪子 Attilax 艾龙，  EMAIL:1466519819@qq.com
+转载请注明来源： http://blog.csdn.net/attilax
+
+元数据的位置,不需要绑定class
+统计的list结果是不绑定class的,,走十一个List(map>
+中间,元数据放的个拉李都行了...
+不过,放得个html黑头还要解释器了....使用注解实现走马中个麻烦的...林吧,还是使用注解实现兰...
+
+
+设置聚合字段... @reduce(" sum(timLen) "),@reduce(" Avg(timLen) ")
+	private Integer timLen;
+
+设置groupby  字段 	@GroupBy
+
+	@GroupBy
+		@CountRelt(uiFld="groupid",fld="departId")
+	Equipment eq;
+
+解释器实现
+Criteria c = new BaseSvs().getSession().createCriteria(this.saveObjClass);
+		Criteria eqCri = c.createAlias("eq", "equ", JoinType.LEFT_OUTER_JOIN);
+if(this.reqMap.get("groupid")!=null && this.reqMap.get("groupid").toString().trim().length()>0 )
+		{
+			//Projections.groupProperty(propertyName) 
+			projectionList1.add(  Projections.groupProperty("equ.departId").as("departId"));
+			projectionList1.add(  Projections.groupProperty("equ.equipmentId").as("equipmentId"));
+		//	projectionList1.add(  Projections.groupProperty("equ.mome").as("mome"));
+			int grpid = Integer.parseInt(   this.reqMap.get("groupid").toString());
+			eqCri.add( Restrictions.eq("equ.departId", grpid));
+		}
+
+设置groupbydate  字段 	@GroupBydate
+
+或者不个这个弄个自定义的fmtr比较好的.....不过这个date雅十通常使用的,,spetion弄个中个注解也行了...
+
+解释器实现
+
+	projectionList1.add(Projections.sqlGroupProjection(" count(*) as shouldDown, count(*) as actDown,  CONVERT(varchar(10), download_create_time ,23 ) as timRang ", "  CONVERT(varchar(10), download_create_time ,23 ) ", new String[] { "shouldDown", "actDown", "timRang" }, new Type[] { IntegerType.INSTANCE, IntegerType.INSTANCE, StringType.INSTANCE }));
+
+Where设置@condition
+留意子对象属性conditon 的设置...
+
+实现查询 ,,不能返回class,子能list<map>
+
+不官十使用criteria ,还是sql ,都子能回归mapList,,...还以为criteria能回归class了...
+
+  Criteria cri=	getCriteria();
+	    cri.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+			List list=	cri.list();
+
+子对象关联	@CountRelt(uiFld="groupid",fld="departId")
+	Equipment eq;
+
+解释器实现
+
+ 	setCountRelt2(list_sub);   
+
+private void setCountRelt2(List<Map> list_sub) {
+		// attilax 老哇的爪子  2_47_6   o9r 
+	//	List<String> CountReltFldsList=getCountReltFldsList();
+		for (Map map : list_sub) {
+		//	for (String fldName : CountReltFldsList) {
+		//		Class rltCls = getFldClass(fldName);      equmnet :eq  
+//				Field idFld = null;
+//				try {
+//					idFld = refx.getIdFld_EXO9o(rltCls);
+//				} catch (cantFindMatchFieldException e) {
+//					//  attilax 老哇的爪子 10_58_h   o9q   
+//					//e.printStackTrace();
+//					core.warn(e);
+//				}
+				Object idVal = map.get("equipmentId");  //eqid
+				if(idVal!=null)
+				{
+					Object rltObj = getSession().get(Equipment.class,(Integer) idVal);
+					map.put("eq", rltObj );
+				}
+		//	}
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

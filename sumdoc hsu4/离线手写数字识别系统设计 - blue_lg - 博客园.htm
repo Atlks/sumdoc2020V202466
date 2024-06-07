@@ -1,0 +1,264 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0062)http://www.cnblogs.com/blue-lg/archive/2012/03/07/2381078.html -->
+<HTML xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>离线手写数字识别系统设计 - blue_lg - 博客园</TITLE>
+<META content="text/html; charset=utf-8" http-equiv=Content-Type><LINK 
+rel=stylesheet type=text/css 
+href="离线手写数字识别系统设计%20-%20blue_lg%20-%20博客园_files/common.css"><LINK id=MainCss 
+rel=stylesheet type=text/css 
+href="离线手写数字识别系统设计%20-%20blue_lg%20-%20博客园_files/style.css"><LINK rel=stylesheet 
+type=text/css 
+href="离线手写数字识别系统设计%20-%20blue_lg%20-%20博客园_files/common2.css"><LINK 
+rel=stylesheet type=text/css 
+href="离线手写数字识别系统设计%20-%20blue_lg%20-%20博客园_files/shStyle.css"><LINK title=RSS 
+rel=alternate type=application/rss+xml 
+href="http://www.cnblogs.com/blue-lg/rss"><LINK title=RSD rel=EditURI 
+type=application/rsd+xml href="http://www.cnblogs.com/blue-lg/rsd.xml"><LINK 
+rel=wlwmanifest type=application/wlwmanifest+xml 
+href="http://www.cnblogs.com/blue-lg/wlwmanifest.xml">
+<SCRIPT type=text/javascript 
+src="离线手写数字识别系统设计%20-%20blue_lg%20-%20博客园_files/jquery.js"></SCRIPT>
+
+<SCRIPT type=text/javascript>
+var currentBlogApp = 'blue-lg';
+</SCRIPT>
+
+<SCRIPT type=text/javascript 
+src="离线手写数字识别系统设计%20-%20blue_lg%20-%20博客园_files/common.js"></SCRIPT>
+
+<SCRIPT type=text/javascript 
+src="离线手写数字识别系统设计%20-%20blue_lg%20-%20博客园_files/json2.js"></SCRIPT>
+
+<SCRIPT type=text/javascript 
+src="离线手写数字识别系统设计%20-%20blue_lg%20-%20博客园_files/syntaxHighlighter.js"></SCRIPT>
+
+<META name=GENERATOR content="MSHTML 9.00.8112.16448"></HEAD>
+<BODY><A name=top></A><!--done-->
+<DIV id=home>
+<DIV id=header>
+<DIV id=blogTitle><A id=lnkBlogLogo href="http://www.cnblogs.com/blue-lg/"><IMG 
+id=blogLogo alt=返回主页 
+src="离线手写数字识别系统设计%20-%20blue_lg%20-%20博客园_files/logo.gif"></A> <!--done-->
+<H1><A id=Header1_HeaderTitle class=headermaintitle 
+href="http://www.cnblogs.com/blue-lg/">blue_lg</A></H1>
+<H2></H2></DIV><!--end: blogTitle 博客的标题和副标题 --></DIV><!--end: header 头部 -->
+<DIV id=main>
+<DIV id=mainContent>
+<DIV class=forFlow>
+<DIV id=navigator><!--done-->
+<UL id=navList>
+  <LI><A id=MyLinks1_HomeLink class=menu href="http://www.cnblogs.com/">博客园</A> 
+  </LI>
+  <LI><A id=MyLinks1_IngLink class=menu 
+  href="http://home.cnblogs.com/ing/">闪存</A> </LI>
+  <LI><A id=MyLinks1_MyHomeLink class=menu 
+  href="http://www.cnblogs.com/blue-lg/">首页</A> </LI>
+  <LI><A id=MyLinks1_NewPostLink class=menu 
+  href="http://www.cnblogs.com/blue-lg/admin/EditPosts.aspx?opt=1" 
+  rel=nofollow>新随笔</A> </LI>
+  <LI><A accessKey=9 id=MyLinks1_ContactLink class=menu 
+  href="http://space.cnblogs.com/msg/send/blue_lg" rel=nofollow>联系</A> </LI>
+  <LI><A id=MyLinks1_Admin class=menu 
+  href="http://www.cnblogs.com/blue-lg/admin/EditPosts.aspx" rel=nofollow>管理</A> 
+  </LI>
+  <LI><A id=MyLinks1_Syndication class=menu 
+  href="http://www.cnblogs.com/blue-lg/rss">订阅</A> <A id=MyLinks1_XMLLink 
+  class=aHeaderXML href="http://www.cnblogs.com/blue-lg/rss"><IMG alt=订阅 
+  src="离线手写数字识别系统设计%20-%20blue_lg%20-%20博客园_files/rss.gif"></A> </LI></UL>
+<DIV class=blogStats><!--done-->随笔- 19&nbsp; 文章- 1&nbsp; 评论- 82&nbsp; </DIV><!--end: blogStats --></DIV><!--end: navigator 博客导航栏 --><!--done-->
+<DIV id=topics>
+<DIV class=post>
+<H1 class=postTitle><A id=cb_post_title_url class=postTitle2 
+href="http://www.cnblogs.com/blue-lg/archive/2012/03/07/2381078.html">离线手写数字识别系统设计</A> 
+</H1>
+<DIV class=clear></DIV>
+<DIV class=postBody>
+<DIV id=cnblogs_post_body>
+<P>离线手写数字识别系统设计主要分为3个部分：图像预处理、数字的分割、数字的识别。</P>
+<P>1.图像预处理</P>
+<P>图像预处理主要是指对输入的图像进行灰度化、滤波、二值化。</P>
+<P>鉴于数字的识别与色彩无关，并且考虑到噪声的影响（这里采用中值滤波），将图像进行预处理。</P>
+<DIV class=cnblogs_code><PRE><SPAN style="COLOR: #008080"> 1</SPAN> clear all;<BR><SPAN style="COLOR: #008080"> 2</SPAN> clc;<BR><SPAN style="COLOR: #008080"> 3</SPAN> test=input(<SPAN style="COLOR: #800000">'</SPAN><SPAN style="COLOR: #800000">Please input a digits image:</SPAN><SPAN style="COLOR: #800000">'</SPAN>,<SPAN style="COLOR: #800000">'</SPAN><SPAN style="COLOR: #800000">s</SPAN><SPAN style="COLOR: #800000">'</SPAN>); %输入图像<BR><SPAN style="COLOR: #008080"> 4</SPAN> x=imread(test);                          <BR><SPAN style="COLOR: #008080"> 5</SPAN> <SPAN style="COLOR: #0000ff">if</SPAN> ~isgray(x)<BR><SPAN style="COLOR: #008080"> 6</SPAN>    x=rgb2gray(x);                              %必须转换为灰度图像<BR><SPAN style="COLOR: #008080"> 7</SPAN> end<BR><SPAN style="COLOR: #008080"> 8</SPAN> xbw=im2bw(x,<SPAN style="COLOR: #800080">0.9</SPAN>);                              %再转换为二值图像<BR><SPAN style="COLOR: #008080"> 9</SPAN> xbw=medfilt2(xbw);                             %中值滤波<BR><SPAN style="COLOR: #008080">10</SPAN> bw=xbw;                                        %滤波后二值图像<BR><SPAN style="COLOR: #008080">11</SPAN> <BR><SPAN style="COLOR: #008080">12</SPAN> figure;imshow(bw);</PRE></DIV>
+<P>2.图像切割（字符分离）</P>
+<P>原理：</P>
+<P>当图像转换为二值图像后，利用边界点确定单个字符（假设每个数字之间均存在空白、间隔），如下：</P>
+<P>&nbsp;<IMG alt="" src="离线手写数字识别系统设计%20-%20blue_lg%20-%20博客园_files/o_edge.bmp" 
+width=79 height=104>当需要提取‘4’这个字符的时候，需要在横向、纵向上确定字符的上下边界点。</P>
+<P>这里需要用到函数find()和all()【find()结果为满足条件的所有值，all()：所有的点均满足某条件的值】</P>
+<P>先确定左边界，再找到全1列（<SPAN style="COLOR: #ff0000">右边红线</SPAN>），以此类推确定上下边界。</P>
+<DIV class=cnblogs_code><PRE><SPAN style="COLOR: #008080"> 1</SPAN> <SPAN style="COLOR: #0000ff">for</SPAN> n=<SPAN style="COLOR: #800080">1</SPAN>:<SPAN style="COLOR: #800080">100</SPAN><BR><SPAN style="COLOR: #008080"> 2</SPAN>     [c,l]=size(bw);                            <BR><SPAN style="COLOR: #008080"> 3</SPAN>     [i,j] = find(bw==<SPAN style="COLOR: #800080">0</SPAN>);                       <BR><SPAN style="COLOR: #008080"> 4</SPAN>     jmin1=min(j);                               <BR><SPAN style="COLOR: #008080"> 5</SPAN>     xbwt=bw(:,jmin1:l);                         %xbwt为切除左边边缘的图像 <BR><SPAN style="COLOR: #008080"> 6</SPAN>     [c,l]=size(xbwt);                           <BR><SPAN style="COLOR: #008080"> 7</SPAN>     [i,j]=find(all(xbwt(<SPAN style="COLOR: #800080">1</SPAN>:c,:)==<SPAN style="COLOR: #800080">1</SPAN>)); <BR><SPAN style="COLOR: #008080"> 8</SPAN>     jmin2=min(j);                               %找右边界<BR><SPAN style="COLOR: #008080"> 9</SPAN>     <SPAN style="COLOR: #0000ff">if</SPAN>(isempty(jmin1)||isempty(jmin2)) <SPAN style="COLOR: #0000ff">break</SPAN>;<BR><SPAN style="COLOR: #008080">10</SPAN>     end<BR><SPAN style="COLOR: #008080">11</SPAN>     xbwn{n}=xbwt(:,<SPAN style="COLOR: #800080">1</SPAN>:jmin2-<SPAN style="COLOR: #800080">1</SPAN>);                %xbwn{n+<SPAN style="COLOR: #800080">1</SPAN>}为第（n+<SPAN style="COLOR: #800080">1</SPAN>）个数字图像 <BR><SPAN style="COLOR: #008080">12</SPAN>     bw=xbwt(:,jmin2:l);                         %bw迭代循环使用<BR><SPAN style="COLOR: #008080">13</SPAN>     [i,j] = find(xbwn{n}==<SPAN style="COLOR: #800080">0</SPAN>);                %找上下边界<BR><SPAN style="COLOR: #008080">14</SPAN>     imin=min(i);                               <BR><SPAN style="COLOR: #008080">15</SPAN>     imax=max(i);                               %imin:数字最上点,imax:数字最下点<BR><SPAN style="COLOR: #008080">16</SPAN>     xbwn1{n}=xbwn{n}(imin:imax,:);         <BR><SPAN style="COLOR: #008080">17</SPAN>     <BR><SPAN style="COLOR: #008080">18</SPAN> end</PRE></DIV>
+<P>如上图所示数字太过饱满，需要骨架化一下才能方便识别，这里需要用到matlab的bwmorph()函数，详见<A 
+href="http://www.mathworks.cn/help/toolbox/images/ref/bwmorph.html">http://www.mathworks.cn/help/toolbox/images/ref/bwmorph.html</A></P>
+<P>&nbsp;</P>
+<DIV class=cnblogs_code><PRE><SPAN style="COLOR: #008080">1</SPAN> m=n-<SPAN style="COLOR: #800080">1</SPAN>;<BR><SPAN style="COLOR: #008080">2</SPAN> <SPAN style="COLOR: #0000ff">for</SPAN> n=<SPAN style="COLOR: #800080">2</SPAN>:m<BR><SPAN style="COLOR: #008080">3</SPAN>     [i,j]=size(xbwn1{n});<BR><SPAN style="COLOR: #008080">4</SPAN>     p=-<SPAN style="COLOR: #800080">1</SPAN>.*xbwn1{n}+ones(i,j);               %先将矩阵取反<BR><SPAN style="COLOR: #008080">5</SPAN>         xbwn2{n}=bwmorph(p,<SPAN style="COLOR: #800000">'</SPAN><SPAN style="COLOR: #800000">skel</SPAN><SPAN style="COLOR: #800000">'</SPAN>,Inf);<BR><SPAN style="COLOR: #008080">6</SPAN>         %figure,imshow(xbwn2{n});<BR><SPAN style="COLOR: #008080">7</SPAN> end</PRE></DIV>
+<P>3.字符的匹配识别</P>
+<P>1）统一标准</P>
+<P>将提取出来的字符图片大小全部统一为16X16</P>
+<P>2）提取特征向量</P>
+<P>特征向量x为由以下数据组成的数组，</P>
+<P>x1：数字的端点数（8邻域内黑点数目为3（包括本身）），</P>
+<P>x2：数字一般连接点（字轨迹长度），</P>
+<P>x3：数字分叉点（8邻域内黑点数目大于3（包括本身）），</P>
+<P>x4~x19：16条水平线分别与数字的交点个数，</P>
+<P>x20~x35：16条垂直线分别与数字的交点个数 。</P>
+<P>3）匹配确定数字</P>
+<P>假设标准数字(0~9)的特征向量已知为y，则匹配的准则为计算x和y的相似度r.</P>
+<P>&nbsp;</P>
+<P>r=Σ(xi*yi)/sqrt(Σ(xi^2)*Σ(yi^2));【sqrt为平方根运算】</P>
+<P><BR>r数字越接近于1，表明y和x越相似，即未知字符最有可能为y对应的标准数字。</P>
+<P>&nbsp;</P>
+<P>下面是matlab代码:</P>
+<P>solve.m</P>
+<DIV class=cnblogs_code><PRE><SPAN style="COLOR: #008080"> 1</SPAN> function x=solve(ju)<BR><SPAN style="COLOR: #008080"> 2</SPAN> x=zeros(<SPAN style="COLOR: #800080">1</SPAN>,<SPAN style="COLOR: #800080">35</SPAN>);<BR><SPAN style="COLOR: #008080"> 3</SPAN> [m,n]=size(ju);<BR><SPAN style="COLOR: #008080"> 4</SPAN> ju1=zeros(m+<SPAN style="COLOR: #800080">2</SPAN>,n+<SPAN style="COLOR: #800080">2</SPAN>);<BR><SPAN style="COLOR: #008080"> 5</SPAN> ju1(<SPAN style="COLOR: #800080">2</SPAN>:m+<SPAN style="COLOR: #800080">1</SPAN>,<SPAN style="COLOR: #800080">2</SPAN>:n+<SPAN style="COLOR: #800080">1</SPAN>)=ju(:,:);<BR><SPAN style="COLOR: #008080"> 6</SPAN> <SPAN style="COLOR: #0000ff">for</SPAN> i=<SPAN style="COLOR: #800080">2</SPAN>:m+<SPAN style="COLOR: #800080">1</SPAN><BR><SPAN style="COLOR: #008080"> 7</SPAN>     <SPAN style="COLOR: #0000ff">for</SPAN> j=<SPAN style="COLOR: #800080">2</SPAN>:n+<SPAN style="COLOR: #800080">1</SPAN><BR><SPAN style="COLOR: #008080"> 8</SPAN>         <SPAN style="COLOR: #0000ff">if</SPAN> ju1(i,j)==<SPAN style="COLOR: #800080">1</SPAN><BR><SPAN style="COLOR: #008080"> 9</SPAN>           temp=ju1(i-<SPAN style="COLOR: #800080">1</SPAN>:i+<SPAN style="COLOR: #800080">1</SPAN>,j-<SPAN style="COLOR: #800080">1</SPAN>:j+<SPAN style="COLOR: #800080">1</SPAN>);%邻域矩阵  <BR><SPAN style="COLOR: #008080">10</SPAN>           [ii,jj]=find(temp==<SPAN style="COLOR: #800080">1</SPAN>);<BR><SPAN style="COLOR: #008080">11</SPAN>           <SPAN style="COLOR: #0000ff">if</SPAN> max(size(ii))&gt;=<SPAN style="COLOR: #800080">4</SPAN><BR><SPAN style="COLOR: #008080">12</SPAN>             x(<SPAN style="COLOR: #800080">3</SPAN>)=x(<SPAN style="COLOR: #800080">3</SPAN>)+<SPAN style="COLOR: #800080">1</SPAN>;<BR><SPAN style="COLOR: #008080">13</SPAN>           <SPAN style="COLOR: #0000ff">else</SPAN> <SPAN style="COLOR: #0000ff">if</SPAN> max(size(ii))==<SPAN style="COLOR: #800080">3</SPAN><BR><SPAN style="COLOR: #008080">14</SPAN>             x(<SPAN style="COLOR: #800080">2</SPAN>)=x(<SPAN style="COLOR: #800080">2</SPAN>)+<SPAN style="COLOR: #800080">1</SPAN>;<BR><SPAN style="COLOR: #008080">15</SPAN>               <SPAN style="COLOR: #0000ff">else</SPAN><BR><SPAN style="COLOR: #008080">16</SPAN>                  x(<SPAN style="COLOR: #800080">1</SPAN>)=x(<SPAN style="COLOR: #800080">1</SPAN>)+<SPAN style="COLOR: #800080">1</SPAN>; <BR><SPAN style="COLOR: #008080">17</SPAN>               end<BR><SPAN style="COLOR: #008080">18</SPAN>           end<BR><SPAN style="COLOR: #008080">19</SPAN>           x(i+<SPAN style="COLOR: #800080">2</SPAN>)=x(i+<SPAN style="COLOR: #800080">3</SPAN>)+<SPAN style="COLOR: #800080">1</SPAN>;<BR><SPAN style="COLOR: #008080">20</SPAN>           x(j+<SPAN style="COLOR: #800080">18</SPAN>)=x(j+<SPAN style="COLOR: #800080">19</SPAN>)+<SPAN style="COLOR: #800080">1</SPAN>;<BR><SPAN style="COLOR: #008080">21</SPAN>         end<BR><SPAN style="COLOR: #008080">22</SPAN>     end<BR><SPAN style="COLOR: #008080">23</SPAN> end</PRE></DIV>
+<P><SPAN 
+style="COLOR: #ff0000">值得注意的是，上面第5行用ju1代替ju，是为了方便判断边缘上的点（ju此时寻找8邻域会出错），所以在四周加上了无关‘边’。</SPAN></P>
+<P>pipei.m</P>
+<DIV class=cnblogs_code><PRE><SPAN style="COLOR: #008080"> 1</SPAN> function result=pipei(a,j)<BR><SPAN style="COLOR: #008080"> 2</SPAN> sta=[<SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">27</SPAN> <SPAN style="COLOR: #800080">5</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">11</SPAN> <SPAN style="COLOR: #800080">5</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">9</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN><BR><SPAN style="COLOR: #008080"> 3</SPAN>      <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">14</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">15</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN><BR><SPAN style="COLOR: #008080"> 4</SPAN>      <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">18</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">5</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">6</SPAN> <SPAN style="COLOR: #800080">4</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">4</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN><BR><SPAN style="COLOR: #008080"> 5</SPAN>      <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">18</SPAN> <SPAN style="COLOR: #800080">4</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">4</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">9</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN><BR><SPAN style="COLOR: #008080"> 6</SPAN>      <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">20</SPAN> <SPAN style="COLOR: #800080">6</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">6</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">4</SPAN> <SPAN style="COLOR: #800080">4</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">4</SPAN> <SPAN style="COLOR: #800080">13</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN><BR><SPAN style="COLOR: #008080"> 7</SPAN>      <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">23</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">5</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">4</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">6</SPAN> <SPAN style="COLOR: #800080">4</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">9</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN><BR><SPAN style="COLOR: #008080"> 8</SPAN>      <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">24</SPAN> <SPAN style="COLOR: #800080">4</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">5</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">11</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">4</SPAN> <SPAN style="COLOR: #800080">5</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN><BR><SPAN style="COLOR: #008080"> 9</SPAN>      <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">17</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">6</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">5</SPAN> <SPAN style="COLOR: #800080">6</SPAN> <SPAN style="COLOR: #800080">4</SPAN> <SPAN style="COLOR: #800080">4</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN><BR><SPAN style="COLOR: #008080">10</SPAN>      <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">23</SPAN> <SPAN style="COLOR: #800080">13</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">4</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">4</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">4</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">8</SPAN> <SPAN style="COLOR: #800080">8</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">6</SPAN> <SPAN style="COLOR: #800080">8</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN><BR><SPAN style="COLOR: #008080">11</SPAN>      <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">28</SPAN> <SPAN style="COLOR: #800080">4</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">4</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">1</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">2</SPAN> <SPAN style="COLOR: #800080">4</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">9</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">3</SPAN> <SPAN style="COLOR: #800080">12</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN> <SPAN style="COLOR: #800080">0</SPAN>];<BR><SPAN style="COLOR: #008080">12</SPAN>  sx2=<SPAN style="COLOR: #800080">0</SPAN>;sy2=<SPAN style="COLOR: #800080">0</SPAN>;sxy=<SPAN style="COLOR: #800080">0</SPAN>;<BR><SPAN style="COLOR: #008080">13</SPAN>  <SPAN style="COLOR: #0000ff">for</SPAN> i=<SPAN style="COLOR: #800080">1</SPAN>:<SPAN style="COLOR: #800080">35</SPAN><BR><SPAN style="COLOR: #008080">14</SPAN>      sx2=sx2+a(i)*a(i);<BR><SPAN style="COLOR: #008080">15</SPAN>      sy2=sy2+sta(j,i)*sta(j,i);<BR><SPAN style="COLOR: #008080">16</SPAN>      sxy=sxy+a(i)*sta(j,i);<BR><SPAN style="COLOR: #008080">17</SPAN>  end<BR><SPAN style="COLOR: #008080">18</SPAN>  result=sxy/sqrt(sx2*sy2);<BR><SPAN style="COLOR: #008080">19</SPAN>   </PRE></DIV>
+<P>上面的sta数据为测试所得，由于标准有异，读者可以自己收集数据，调试。</P>
+<P>完整的主程序如下：</P>
+<DIV class=cnblogs_code 
+onclick="cnblogs_code_show('dc6997b1-0c03-45e6-badb-9206179eda62')"><IMG 
+id=code_img_closed_dc6997b1-0c03-45e6-badb-9206179eda62 class=code_img_closed 
+alt="" src="离线手写数字识别系统设计%20-%20blue_lg%20-%20博客园_files/ContractedBlock.gif"><IMG 
+style="DISPLAY: none" id=code_img_opened_dc6997b1-0c03-45e6-badb-9206179eda62 
+class=code_img_opened 
+onclick="cnblogs_code_hide('dc6997b1-0c03-45e6-badb-9206179eda62',event)" alt="" 
+src="离线手写数字识别系统设计%20-%20blue_lg%20-%20博客园_files/ExpandedBlockStart.gif"><SPAN 
+class=cnblogs_code_collapse>View Code </SPAN>
+<DIV id=cnblogs_code_open_dc6997b1-0c03-45e6-badb-9206179eda62 
+class=cnblogs_code_hide><PRE><SPAN style="COLOR: #008080"> 1</SPAN> clear all;<BR><SPAN style="COLOR: #008080"> 2</SPAN> clc;<BR><SPAN style="COLOR: #008080"> 3</SPAN> test=input(<SPAN style="COLOR: #800000">'</SPAN><SPAN style="COLOR: #800000">Please input a digits image:</SPAN><SPAN style="COLOR: #800000">'</SPAN>,<SPAN style="COLOR: #800000">'</SPAN><SPAN style="COLOR: #800000">s</SPAN><SPAN style="COLOR: #800000">'</SPAN>); %输入图像<BR><SPAN style="COLOR: #008080"> 4</SPAN> %z=input(<SPAN style="COLOR: #800000">'</SPAN><SPAN style="COLOR: #800000">z:</SPAN><SPAN style="COLOR: #800000">'</SPAN>,<SPAN style="COLOR: #800000">'</SPAN><SPAN style="COLOR: #800000">s</SPAN><SPAN style="COLOR: #800000">'</SPAN>);<BR><SPAN style="COLOR: #008080"> 5</SPAN> x=imread(test);                          <BR><SPAN style="COLOR: #008080"> 6</SPAN> <SPAN style="COLOR: #0000ff">if</SPAN> ~isgray(x)<BR><SPAN style="COLOR: #008080"> 7</SPAN>    x=rgb2gray(x);                              %必须转换为灰度图像<BR><SPAN style="COLOR: #008080"> 8</SPAN> end<BR><SPAN style="COLOR: #008080"> 9</SPAN> xbw=im2bw(x,<SPAN style="COLOR: #800080">0.9</SPAN>);                              %再转换为二值图像<BR><SPAN style="COLOR: #008080">10</SPAN> xbw=medfilt2(xbw);                             %中值滤波<BR><SPAN style="COLOR: #008080">11</SPAN> bw=xbw;                                        %滤波后二值图像<BR><SPAN style="COLOR: #008080">12</SPAN> <BR><SPAN style="COLOR: #008080">13</SPAN> figure;imshow(bw);<BR><SPAN style="COLOR: #008080">14</SPAN> <BR><SPAN style="COLOR: #008080">15</SPAN> <SPAN style="COLOR: #0000ff">for</SPAN> n=<SPAN style="COLOR: #800080">1</SPAN>:<SPAN style="COLOR: #800080">100</SPAN><BR><SPAN style="COLOR: #008080">16</SPAN>     [c,l]=size(bw);                            <BR><SPAN style="COLOR: #008080">17</SPAN>     [i,j] = find(bw==<SPAN style="COLOR: #800080">0</SPAN>);                       <BR><SPAN style="COLOR: #008080">18</SPAN>     jmin1=min(j);                               <BR><SPAN style="COLOR: #008080">19</SPAN>     xbwt=bw(:,jmin1:l);                         %xbwt为切除左边边缘的图像 <BR><SPAN style="COLOR: #008080">20</SPAN>     [c,l]=size(xbwt);                           <BR><SPAN style="COLOR: #008080">21</SPAN>     [i,j]=find(all(xbwt(<SPAN style="COLOR: #800080">1</SPAN>:c,:)==<SPAN style="COLOR: #800080">1</SPAN>)); <BR><SPAN style="COLOR: #008080">22</SPAN>     jmin2=min(j);                               %找右边界<BR><SPAN style="COLOR: #008080">23</SPAN>     <SPAN style="COLOR: #0000ff">if</SPAN>(isempty(jmin1)||isempty(jmin2)) <SPAN style="COLOR: #0000ff">break</SPAN>;<BR><SPAN style="COLOR: #008080">24</SPAN>     end<BR><SPAN style="COLOR: #008080">25</SPAN>     xbwn{n}=xbwt(:,<SPAN style="COLOR: #800080">1</SPAN>:jmin2-<SPAN style="COLOR: #800080">1</SPAN>);                  %xbwn{n+<SPAN style="COLOR: #800080">1</SPAN>}为第（n+<SPAN style="COLOR: #800080">1</SPAN>）个数字图像 <BR><SPAN style="COLOR: #008080">26</SPAN>     bw=xbwt(:,jmin2:l);                         %bw迭代循环使用<BR><SPAN style="COLOR: #008080">27</SPAN>     [i,j] = find(xbwn{n}==<SPAN style="COLOR: #800080">0</SPAN>);                   %找上下边界<BR><SPAN style="COLOR: #008080">28</SPAN>     imin=min(i);                               <BR><SPAN style="COLOR: #008080">29</SPAN>     imax=max(i);                                %imin:数字最上点,imax:数字最下点<BR><SPAN style="COLOR: #008080">30</SPAN>     xbwn1{n}=xbwn{n}(imin:imax,:);         <BR><SPAN style="COLOR: #008080">31</SPAN>     <BR><SPAN style="COLOR: #008080">32</SPAN> end<BR><SPAN style="COLOR: #008080">33</SPAN> m=n-<SPAN style="COLOR: #800080">1</SPAN>;<BR><SPAN style="COLOR: #008080">34</SPAN> <SPAN style="COLOR: #0000ff">for</SPAN> n=<SPAN style="COLOR: #800080">2</SPAN>:m<BR><SPAN style="COLOR: #008080">35</SPAN>     [i,j]=size(xbwn1{n});<BR><SPAN style="COLOR: #008080">36</SPAN>     p=-<SPAN style="COLOR: #800080">1</SPAN>.*xbwn1{n}+ones(i,j);                   %先将矩阵取反<BR><SPAN style="COLOR: #008080">37</SPAN>     x=<SPAN style="COLOR: #800080">16</SPAN>;<BR><SPAN style="COLOR: #008080">38</SPAN>     p1=ones(x,x); <BR><SPAN style="COLOR: #008080">39</SPAN>         %xbwn2{n}=bwmorph(p,<SPAN style="COLOR: #800000">'</SPAN><SPAN style="COLOR: #800000">skel</SPAN><SPAN style="COLOR: #800000">'</SPAN>,Inf);<BR><SPAN style="COLOR: #008080">40</SPAN>         xbwn2{n}=xbwn1{n};<BR><SPAN style="COLOR: #008080">41</SPAN>         %转换到x*x矩阵<BR><SPAN style="COLOR: #008080">42</SPAN>         rate=x/max(size(xbwn2{n}));             <BR><SPAN style="COLOR: #008080">43</SPAN>         xbwn3{n}=imresize(xbwn2{n},rate);      <BR><SPAN style="COLOR: #008080">44</SPAN>         [i,j]=size(xbwn3{n});              <BR><SPAN style="COLOR: #008080">45</SPAN>         i1=round((x-i)/<SPAN style="COLOR: #800080">2</SPAN>);                        <BR><SPAN style="COLOR: #008080">46</SPAN>         j1=round((x-j)/<SPAN style="COLOR: #800080">2</SPAN>);                        <BR><SPAN style="COLOR: #008080">47</SPAN>         p1(i1+<SPAN style="COLOR: #800080">1</SPAN>:i1+i,j1+<SPAN style="COLOR: #800080">1</SPAN>:j1+j)=xbwn3{n};  <BR><SPAN style="COLOR: #008080">48</SPAN>         p1=ones(x,x)-p1;<BR><SPAN style="COLOR: #008080">49</SPAN>         p1=bwmorph(p1,<SPAN style="COLOR: #800000">'</SPAN><SPAN style="COLOR: #800000">skel</SPAN><SPAN style="COLOR: #800000">'</SPAN>,Inf);<BR><SPAN style="COLOR: #008080">50</SPAN>         p2{n}=p1;<BR><SPAN style="COLOR: #008080">51</SPAN>         <BR><SPAN style="COLOR: #008080">52</SPAN>         temp1=solve(p1);<BR><SPAN style="COLOR: #008080">53</SPAN>         temp2=<SPAN style="COLOR: #800080">0</SPAN>;<BR><SPAN style="COLOR: #008080">54</SPAN>         temp_index=<SPAN style="COLOR: #800080">0</SPAN>;<BR><SPAN style="COLOR: #008080">55</SPAN>          <SPAN style="COLOR: #0000ff">for</SPAN> tt=<SPAN style="COLOR: #800080">1</SPAN>:<SPAN style="COLOR: #800080">10</SPAN><BR><SPAN style="COLOR: #008080">56</SPAN>             temp3=pipei(temp1,tt);<BR><SPAN style="COLOR: #008080">57</SPAN>             <SPAN style="COLOR: #0000ff">if</SPAN> temp3&gt;temp2<BR><SPAN style="COLOR: #008080">58</SPAN>                 temp2=temp3;<BR><SPAN style="COLOR: #008080">59</SPAN>                 temp_index=tt-<SPAN style="COLOR: #800080">1</SPAN>;<BR><SPAN style="COLOR: #008080">60</SPAN>             end<BR><SPAN style="COLOR: #008080">61</SPAN>         end<BR><SPAN style="COLOR: #008080">62</SPAN>         temp_index %显示数字<BR><SPAN style="COLOR: #008080">63</SPAN>         <BR><SPAN style="COLOR: #008080">64</SPAN>         figure,imshow(p1);<BR><SPAN style="COLOR: #008080">65</SPAN> end</PRE></DIV></DIV>
+<P>参考论文：</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 基于图像识别技术的手写数字识别方法&nbsp;&nbsp; 
+吴忠1，2，朱国龙1，2，黄葛峰1，2，吴建国1，2</P>
+<P>需要完善的地方：</P>
+<P>1.评判机制</P>
+<P>&nbsp; 可以适当调整x1~x3等的权系数，使得相似度测量更精确；</P>
+<P>2.标准手写字体的数据收集</P>
+<P>&nbsp; 本实验只是找了一个印刷体的数据得到了sta数组；</P>
+<P>3.字符的分割</P>
+<P>&nbsp; 中值滤波不一定能很好的滤去一些端状杂质，需要根据高度和宽度大小限制再进一步滤波。</P>
+<P>&nbsp;</P>
+<P>最后，有不当之处，希望园友指正。</P>
+<P>转载请注明：<A 
+href="http://www.cnblogs.com/blue-lg/archive/2012/03/05/2381078.html">http://www.cnblogs.com/blue-lg/archive/2012/03/05/2381078.html</A><BR><BR><BR><BR></P>
+<P><BR><BR></P></DIV>
+<DIV id=MySignature></DIV>
+<SCRIPT type=text/javascript>
+var isLogined = false;
+var cb_blogId = 94761;
+var cb_entryId = 2381078;
+var cb_blogApp = currentBlogApp;
+var cb_blogUserGuid = "4a997f4e-5ebf-e011-8673-842b2b196315";
+var cb_entryCreatedDate = '2012/3/7 13:51:00';
+var enableGoogleAd = true;
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+</SCRIPT>
+
+<DIV id=blog_post_info_block>
+<DIV id=blog_post_info></DIV>
+<DIV class=clear></DIV>
+<DIV id=post_next_prev></DIV></DIV>
+<SCRIPT type=text/javascript>
+    initBottomGoogleAd();
+</SCRIPT>
+
+<SCRIPT type=text/javascript>
+    $(function () {       
+        fixPostBodyFormat();
+        loadBottomGoogleAd();
+        loadBlogSignature();
+        LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+        GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+        showEditorOpt();
+        loadNewsAndKb();
+        GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);
+        loadAdUnderGoogle();
+    });
+</SCRIPT>
+</DIV>
+<DIV class=postDesc>posted @ <SPAN id=post-date>2012-03-07 13:51</SPAN> <A 
+href="http://www.cnblogs.com/blue-lg/">blue_lg</A> 阅读(1332) 评论(<SPAN 
+id=post-comment-count>4</SPAN>) <A 
+href="http://www.cnblogs.com/blue-lg/admin/EditPosts.aspx?postid=2381078" 
+rel=nofollow>编辑</A> <A onclick="AddToWz(2381078);return false;" 
+href="http://www.cnblogs.com/blue-lg/archive/2012/03/07/2381078.html#">收藏</A></DIV></DIV><IMG 
+alt="" src="离线手写数字识别系统设计%20-%20blue_lg%20-%20博客园_files/2381078.jpg" width=1 
+height=1> </DIV><!--end: topics 文章、评论容器-->
+<DIV id=blog-comments-placeholder></DIV>
+<SCRIPT type=text/javascript>var commentManager = new blogCommentManager();commentManager.loadComments();</SCRIPT>
+
+<DIV id=comment_form class=commentform>
+<DIV id=divCommentShow></DIV>
+<DIV id=comment_nav><SPAN id=span_refresh_tips></SPAN><A id=lnk_RefreshComments 
+onclick="return RefreshCommentList();" href="javascript:void(0);">刷新评论</A><A 
+onclick="return RefreshPage();" 
+href="http://www.cnblogs.com/blue-lg/archive/2012/03/07/2381078.html#">刷新页面</A><A 
+href="http://www.cnblogs.com/blue-lg/archive/2012/03/07/2381078.html#top">返回顶部</A></DIV>
+<DIV id=comment_form_container></DIV>
+<SCRIPT type=text/javascript>
+    if (typeof commentManager === 'undefined') {
+        commentManager = new blogCommentManager();
+    }
+    commentManager.loadCommentForm();   
+</SCRIPT>
+
+<DIV class=ad_text_commentbox><A href="http://q.cnblogs.com/" 
+target=_blank>程序员问答社区，解决您的技术难题</A></DIV>
+<DIV id=site_nav_under><A title=程序员的网上家园 href="http://www.cnblogs.com/" 
+target=_blank>博客园首页</A><A title=程序员问答社区 href="http://q.cnblogs.com/" 
+target=_blank>博问</A><A title=IT新闻 href="http://news.cnblogs.com/" 
+target=_blank>新闻</A><A href="http://home.cnblogs.com/ing/" 
+target=_blank>闪存</A><A href="http://job.cnblogs.com/" target=_blank>程序员招聘</A><A 
+href="http://kb.cnblogs.com/" target=_blank>知识库</A>
+<DIV id=site_editor_opt></DIV></DIV>
+<SCRIPT type=text/javascript>
+enableGoogleAd = true;
+if ($("#cnblogs_post_body").text().length < 1000) {
+    enableGoogleAd = false;
+}
+</SCRIPT>
+
+<DIV id=google_ad_c1 class=c_ad_block>
+<DIV style="WIDTH: 300px; HEIGHT: 250px" id=div-gpt-ad-1320933818841-0>
+<SCRIPT type=text/javascript>
+    if (enableGoogleAd) {
+        try {
+            googletag.cmd.push(function () { googletag.display('div-gpt-ad-1320933818841-0'); });
+        } catch (e) { }
+    } else {
+        $('#google_ad_c1').hide();
+    }
+</SCRIPT>
+</DIV></DIV>
+<DIV id=blog-news-kb></DIV>
+<DIV id=google_ad_c2 class=c_ad_block>
+<DIV style="WIDTH: 468px; HEIGHT: 60px" id=div-gpt-ad-1320933818841-1>
+<SCRIPT type=text/javascript>
+    if (enableGoogleAd) {
+        try {
+            googletag.cmd.push(function () { googletag.display('div-gpt-ad-1320933818841-1'); });
+        } catch (e) { }
+    } else {
+        $('#google_ad_c2').hide();
+    }
+</SCRIPT>
+</DIV></DIV>
+<DIV style="DISPLAY: none" id=ad_under_google class=c_ad_block></DIV>
+<DIV id=HistoryToday 
+class=c_ad_block></DIV></DIV></DIV><!--end: forFlow --></DIV><!--end: mainContent 主体内容容器-->
+<DIV id=sideBar>
+<DIV id=sideBarMain><!--done-->
+<DIV class=newsItem>
+<H3 class=catListTitle>公告</H3>
+<DIV id=blog-news></DIV></DIV>
+<DIV id=calendar>
+<DIV style="displya: none" id=blog-calendar></DIV></DIV>
+<DIV id=leftcontentcontainer>
+<DIV id=blog-sidecolumn></DIV></DIV></DIV><!--end: sideBarMain --></DIV><!--end: sideBar 侧边栏容器 -->
+<DIV class=clear></DIV></DIV><!--end: main -->
+<DIV class=clear></DIV>
+<DIV id=footer><!--done-->Copyright ©2012 blue_lg 
+</DIV><!--end: footer --></DIV><!--end: home 自定义的最大容器 -->
+<SCRIPT type=text/javascript 
+src="离线手写数字识别系统设计%20-%20blue_lg%20-%20博客园_files/google-analytics.js"></SCRIPT>
+</BODY></HTML>

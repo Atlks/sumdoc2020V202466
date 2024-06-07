@@ -1,0 +1,88 @@
+atitit.提升开发效率---MDA 软件开发方式的革命(3)----自动化建表
+ 
+11
+11
+11
+11
+22
+22
+22
+33
+33
+44
+44
+44
+44
+4
+
+建模在后自动建表
+传统上,需要首先建表,在业务编码..
+  摘要：很多程序只有源代码，没有配套的数据库sql语句。这样就很不容易演示或操作
+
+模型驱动建表---更多简化法是在建模在后自动建表
+
+作者:: 老哇的爪子 Attilax 艾龙，  EMAIL:1466519819@qq.com
+转载请注明来源： http://blog.csdn.net/attilax
+
+自动建表的原理:
+Sql生成:读取注解,生成sql,执行sql
+
+自动建表工具::hibernate.hbm2ddl 跟Hibernate4.1
+配好的hibernate库和数据库的连接驱动。
+数据库必须连接上，可以没有表。
+Hibernate4.1已经可以自动建表，所以开发时只需要自己开发类然后配置好就OK。不需要考虑怎么建表
+Hibernate配置文件生成sql文件
+
+hbm2ddl最佳实践
+update只是更新表结构，但不能生成..所以，你可以先用create属性，然后运行一次后改用update，以免数据丢收
+
+hibernate.hbm2ddl.auto
+
+<property name="hibernate.hbm2ddl.auto" value="update" />
+update： 
+最常用的属性，第一次加载hibernate时根据model类会自动建立起表的结构（前提是先建立好数据库），以后加载 hibernate时根据 model类自动更新表结构，即使表结构改变了但表中的行仍然存在不会删除以前的行。要注意的是当部署到服务器后，表结构是不会被马上建立起来的，是要等 应用第一次运行起来后才会。 
+validate ： 
+每次加载hibernate时，验证创建数据库表结构，只会和数据库中的表进行比较，不会创建新表，但是会插入新值
+
+
+hbm2ddl 工具是个jar
+
+hbm2ddl
+Java语句执行
+config = new Configuration()
+                .configure(new File("src/hibernate.cfg.xml"));
+ SchemaExport schemaExport = new SchemaExport(config);
+        schemaExport.setOutputFile("E:\\sql1.txt");
+        schemaExport.create(true, false);
+        System.out.println("Table created.");
+
+
+使用Ant 执行hbm2ddl
+
+  <!-- create ddl form  *.hbm.xml -->  
+    <target name="hbm2ddl"    
+            description="Generate DB schema from the O/R mapping files">  
+        <taskdef name="hbm2ddl"   
+            classname="org.hibernate.tool.ant.HibernateToolTask"   
+            classpathref="libraries"/>  
+        <hbm2ddl destdir="${ddlsqldir}">  
+            <configuration configurationfile="${basedir}/hibernate.cfg.xml" />   
+            <hbm2ddl export="true" console="false" create="true" update="false" drop="false" outputfilename="ddl.sql"/>   
+        </hbm2ddl>     
+    </target>  
+  
+QA
+ Table 'gialenweixin.gv_material' doesn't exist
+update只是更新表结构，但不能生成..所以，你可以先用create属性，然后运行一次后改用update，以免数据丢收
+
+hibernate Attribute "value" must be declared for element type "property".
+
+<property name="hibernate.hbm2ddl.auto"  value=”update” />
+Change to...  Hb ver  hb4
+	<property name="hibernate.hbm2ddl.auto"   >update</property>
+
+参考
+hibernate4.0+版本和3.0+版本的区别总结_xidianzxm_新浪博客.htm
+Hibernate利用@DynamicInsert和@DynamicUpdate生成动态SQL语句 - QuantSeven - 博客园.htm
+Hibernate配置文件生成sql文件_zjha4148_新浪博客.htm
+

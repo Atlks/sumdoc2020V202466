@@ -1,0 +1,370 @@
+<!DOCTYPE html PUBliC "-//W3C//dtD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/dtD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<link rel="stylesheet" href="https://statics.2cto.com/css/articles.css" type="text/css" />
+<link href="https://statics.2cto.com/css/dialog.css" rel="stylesheet" type="text/css" />
+<title>HTML5 Audio时代的MIDI音乐文件播放  - Html 5教程 技术文章 - 红黑联盟</title>
+<meta name="description" content="大家都知道，HTML5 Audio标签能够支持wav, webm, mp3, ogg, acc等格式，但是有个很重要的音乐文件格式midi(扩展名mid)却在各大浏览器中都没有内置的支持，因为mid文件并不像其他声音文件那样记录声音的采样..." />
+<meta http-equiv="mobile-agent" content="format=html5;url=https://m.2cto.com/kf/201208/145618.html" />
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link type="text/css" rel="stylesheet" href="https://statics.2cto.com/js/syntaxhighlighter/styles/shCore.css"/>
+<link type="text/css" rel="stylesheet" href="https://statics.2cto.com/js/syntaxhighlighter/styles/shThemeDefault.css"/>
+<script src="https://statics.2cto.com/js/uaredirect.js" type="text/javascript"></script>
+<script type="text/javascript">uaredirect("https://m.2cto.com/kf/201208/145618.html");</script>
+<script src="https://statics.2cto.com/js/gg.js"></script>
+</head>
+<body>
+<div class="line_top_box">
+	<dl class="top_box_left">
+		<dd class="left_logo"><a href="/"></a></dd>
+		<dd class="left_menu_link">
+																<a class="first" href="/news/">资讯</a>
+													<a href="/article/">安全</a>
+													<a href="https://bbs.2cto.com">论坛</a>
+													<a href="/soft/">下载</a>
+													<a href="https://book.2cto.com">读书</a>
+													<a href="/kf/">程序开发</a>
+													<a href="/database/">数据库</a>
+													<a href="/os/">系统</a>
+													<a href="/net/">网络</a>
+													<a href="/ebook/">电子书</a>
+													<a href="/weixin/">微信学院</a>
+													<a href="https://zz.2cto.com/">站长学院</a>
+													<a href="/qq/">QQ</a>
+													<a href="https://www.2cto.com/sj/">手机软件</a>
+													<a href="/px/">考试</a>
+														</dd>
+	</dl>
+</div>
+<div class="line_top_lmbox">
+	<dl class="lmpic"><dt><i></i>频道栏目</dt></dl>
+	<dl class="lmlinkbox"><dd>
+										<a class='Channel' href='/kf/ware/'>软件开发</a>|
+							<a class='Channel' href='/kf/qianduan/'>web前端</a>|
+							<a class='Channel' href='/kf/web/'>Web开发</a>|
+							<a class='Channel' href='/kf/yidong/'>移动开发</a>|
+							<a class='Channel' href='/kf/all/'>综合编程</a>|
+								</dd></dl>
+	<div class="login" id="userbar">
+		<div class="unlogin"><a class="loginbtn" href="//home.2cto.com/?forward=&siteid=1" target="_blank">登录</a><a class="regbtn" href="//home.2cto.com/index.php/index/regedit" target="_blank">注册</a></div>
+	</div>
+</div>
+<div class="ibox mt8 mb8">
+<!-- 2cto_通栏 -->
+<script type="text/javascript">cto_A_D("2cto_1");</script>
+</div>
+<div class="wrapper">
+	<div class="box_left">
+		
+		<dl class="box_p">
+			<dd class="pRight"><a href="/">首页</a><span> > </span><a href="https://www.2cto.com/kf/">程序开发</a> > <a href="https://www.2cto.com/kf/qianduan/">web前端</a> > <a href="https://www.2cto.com/kf/qianduan/html5/news/">HTML 5</a> >  正文</dd>
+			
+			</dl>
+		<dl class="box_t"><dd>HTML5 Audio时代的MIDI音乐文件播放 </dd></dl>
+																										<dl class="box_INFO clearfix">
+			<dd class="frinfo">2012-08-03 13:19:01 &nbsp;&nbsp;&nbsp;&nbsp;
+				<i class="comm"></i><a class="num" href="#SOHUCS" id="changyan_count_unit"></a><a href="#SOHUCS">个评论</a>
+				<script type="text/javascript" src="//assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+&nbsp;&nbsp;  &nbsp;&nbsp;  </dd>
+			<dd class="frsize">
+				<a href="javascript:;" onclick="add_favorite('HTML5 Audio时代的MIDI音乐文件播放 ');" class="t6">收藏</a>&nbsp;&nbsp;
+				<a target="_blank" href="/index.php?m=member&c=content&a=publish&modid=1&siteid=1"><i class="publish"></i>我要投稿</a>
+			</dd>
+		</dl>
+        <!-- 2cto_左一 -->
+         <div class="cont_ibox">
+         	<script type="text/javascript">cto_A_D("2cto_9");</script>
+         </div>
+		<div class="box_body" id="fontzoom">
+       <div id="Article">
+        <p>大家都知道，HTML5 Audio标签能够支持wav, webm, mp3, ogg, acc等格式，但是有个很重要的音乐文件格式midi(扩展名mid)却在各大<a href="/os/liulanqi/" target="_blank" class="keylink">浏览器</a>中都没有内置的支持，因为mid文件并不像其他声音文件那样记录声音的采样信息，而是记录了乐器的演奏指令，二者的原理截然不同。</p>
+<p>mid文件格式的最突出的有点是文件极小，几分钟的音乐可能只有几K的文件大小，mp3等其他格式则至少要几M以上，所以midi在手机和web上有很大的优势，特别是适合做各种铃声，背景音乐。</p>
+<p>&lt;bgsound&gt;标签已经过时了，很多浏览器都不再支持。</p>
+<p>无论是标准组织，还是浏览器厂商，都主张使用&lt;audio&gt;来播放音频文件。</p>
+<p>考虑到要求支持MIDI的广泛呼声，W3C有指定了一个Web MIDI API草案，但这个草案还非常新，浏览器还没有支持。</p>
+<p>为了让midi在html5 audio上播放出来，需要动用<a href="/kf/ware/Java/" target="_blank" class="keylink">Java</a>script 来处理。</p>
+<p>&nbsp;</p>
+<p><br />
+我这里推荐3个非常好的Javascript实现的audio播放midi:</p>
+<p>&nbsp;</p>
+<p><br />
+MIDI.js - Sequencing in Javascript.</p>
+<p><br />
+这是一个js库，封装了一些接口方便web开发者调用播放mid音乐文件。</p>
+<p>&nbsp;</p>
+<p>&nbsp;<img alt="\" src="http://up.2cto.com/2012/0803/20120803012209962.jpg" /></p>
+<p>&nbsp;</p>
+<p>Color Piano V2</p>
+<p>这是一个彩色钢琴，你可以手动弹奏，也可以自动弹奏动态加载的mid文件。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;<img alt="\" src="http://up.2cto.com/2012/0803/20120803012210255.jpg" /></p>
+<p>Audiotool</p>
+<p><br />
+这是一个强大的电子音乐合成工具了，没有一点器乐知识的话，可能基本不懂用了，比如我。</p>
+<p>&nbsp;<img alt="\" src="http://up.2cto.com/2012/0803/20120803012210500.jpg" /><br />
+作者：cuixiping<br />
+&nbsp;</p>
+<p><br />
+&nbsp;</p>
+						</div>
+		</div>
+	<div id="pages" class="box_body"></div>
+	<div class="cont_ibox">
+		<!-- 2cto_左二 -->
+		<script type="text/javascript">cto_A_D("2cto_5");</script>
+	</div>
+	<dl class="box_Nsc">
+		<dd class="lcopy"><a class="ckcopy" onclick="copyToClipBoard()">点击复制链接 与好友分享!</a><a class="ckhome" href="/">回本站首页</a></dd>
+		<dd class="Article-Tool">
+  		<!--<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_mshare" data-cmd="mshare" title="分享到一键分享"></a></div>                                -->
+	  </dd>
+	</dl>
+	<div class="more_tags"><span>相关TAG标签</span>
+																		<a href="https://www.2cto.com/tag/wenjian.html"  target="_blank"> 文件</a>
+								 		         															<a href="https://www.2cto.com/tag/shidai.html"  target="_blank"> 时代</a>
+								 		         															<a href="https://www.2cto.com/tag/yinle.html"  target="_blank"> 音乐</a>
+								 		             </div>
+	<dl class="box_NPre">
+		<dd class="TLineX"><strong>上一篇：</strong><a href="https://www.2cto.com/kf/201208/145588.html">html5 canvas 在不同浏览器下效率</a></dd>
+		<dd><strong>下一篇：</strong><a href="https://www.2cto.com/kf/201208/145857.html">html 5画圆</a></dd>
+	</dl>
+	<div class="inbox">
+	<div class="about">相关文章</div>
+	</div>
+	<ul class="alists clearfix">
+				<li class="alistline"><i class="dot"></i><a href="https://www.2cto.com/kf/201112/114674.html" target="_blank">用仿ActionScript的语法来编写html5&mdash;</a></li>
+			<li class="alistline"><i class="dot"></i><a href="https://www.2cto.com/kf/201205/130918.html" target="_blank">HTML5多文件选择和FileList </a></li>
+			<li class="alistline"><i class="dot"></i><a href="https://www.2cto.com/kf/201207/143908.html" target="_blank">JSF设置多个配置文件</a></li>
+			<li class="alistline"><i class="dot"></i><a href="https://www.2cto.com/kf/201208/147476.html" target="_blank">html页面导入php文件 使用include后多</a></li>
+			<li class="alistline"><i class="dot"></i><a href="https://www.2cto.com/kf/201211/167661.html" target="_blank">Chrome中利用HTML5实现具有文件&ldquo;编辑</a></li>
+			<li class="alistline"><i class="dot"></i><a href="https://www.2cto.com/kf/201303/195344.html" target="_blank">Bochs镜像文件配置</a></li>
+			<li class="alistline"><i class="dot"></i><a href="https://www.2cto.com/kf/201306/220912.html" target="_blank">html5实现拖拽文件上传 </a></li>
+			<li class="alistline"><i class="dot"></i><a href="https://www.2cto.com/kf/201306/220934.html" target="_blank">HTML5文件上传还有进度条 </a></li>
+			<li class="alistline"><i class="dot"></i><a href="https://www.2cto.com/kf/201308/238690.html" target="_blank">使用dom4j 读取XML文件 </a></li>
+			<li class="alistline"><i class="dot"></i><a href="https://www.2cto.com/kf/201311/260422.html" target="_blank">利用 HTML5 File API 写的文件存哪了</a></li>
+			</ul>
+	<div class="more_tags"><span class="t2">热门专题推荐</span>
+																														<a href="https://www.2cto.com/special/pjc/"  target="_blank"> python</a>
+													<a href="https://www.2cto.com/special/dsjc/"  target="_blank"> div+css</a>
+													<a href="https://www.2cto.com/special/css/"  target="_blank"> css教程</a>
+													<a href="https://www.2cto.com/special/html5/"  target="_blank"> html5</a>
+													<a href="https://www.2cto.com/special/html/"  target="_blank"> html教程</a>
+													<a href="https://www.2cto.com/special/jquery_ajax/"  target="_blank"> jquery</a>
+													<a href="https://www.2cto.com/special/Android_AndroidSDK/"  target="_blank"> Android SDK</a>
+													<a href="https://www.2cto.com/special/phphuanjingdajian/"  target="_blank"> php</a>
+													<a href="https://www.2cto.com/special/mysql/"  target="_blank"> mysql</a>
+													<a href="https://www.2cto.com/special/oracle/"  target="_blank"> oracle</a>
+										 				 				 	
+    </div>
+    <div class="inbox">
+	<div class="cont_ibox">
+		<!-- 2cto_左三 -->
+		<script type="text/javascript">cto_A_D("2cto_13");</script>
+	</div>
+	</div>
+	<div class="inbox">
+		<div class="about">图文推荐</div>
+	</div>
+    <div class="cont_ibox">
+	<!-- 2cto_左四 -->
+	<script type="text/javascript">cto_A_D("2cto_4");</script>
+	</div>
+	<ul class="picbox clearfix">
+						<li>
+			<a target="_blank" class="imgbox" href="https://www.2cto.com/kf/201804/740918.html"><img src="http://www.2cto.com/uploadfile/Collfiles/20180426/2018042609052818.png" /></a>
+			<a class="npictext" target="_blank" href="https://www.2cto.com/kf/201804/740918.html">HTML5下绘制动画代码</a>
+		</li>
+				<li>
+			<a target="_blank" class="imgbox" href="https://www.2cto.com/kf/201804/740916.html"><img src="http://www.2cto.com/uploadfile/Collfiles/20180426/2018042609053032.png" /></a>
+			<a class="npictext" target="_blank" href="https://www.2cto.com/kf/201804/740916.html">HTML5下Canvas save</a>
+		</li>
+				<li>
+			<a target="_blank" class="imgbox" href="https://www.2cto.com/kf/201804/739798.html"><img src="http://www.2cto.com/uploadfile/Collfiles/20180423/20180423093430104.png" /></a>
+			<a class="npictext" target="_blank" href="https://www.2cto.com/kf/201804/739798.html">HTML5绘制圆弧的代码</a>
+		</li>
+				<li>
+			<a target="_blank" class="imgbox" href="https://www.2cto.com/kf/201804/739796.html"><img src="http://www.2cto.com/uploadfile/Collfiles/20180423/20180423093432126.png" /></a>
+			<a class="npictext" target="_blank" href="https://www.2cto.com/kf/201804/739796.html">HTML5下绘制矩形教程</a>
+		</li>
+					</ul>
+	<div id="SOHUCS"></div>
+	</div>
+	<div class="box_right">
+		<div class="side-ibox h250">
+        <!-- 2cto_右一 -->
+        <script type="text/javascript">cto_A_D("2cto_6");</script>
+		</div>
+		<div class="box_right_box mt8">
+			<dl class="bTitle tabtitle borT" id="ltabTitle"><dd class="on">文章</dd><dd>推荐</dd></dl>
+                <div class="paddingbox tab_wrap" id="listTab">
+				<div class="tab_main">
+				<dl class="index tab_item">
+															<dd class="list">·&nbsp;<a target="_blank"  href="https://www.2cto.com/database/201203/125679.html">oracle like模糊查询</a></dd>
+										<dd class="list">·&nbsp;<a target="_blank"  href="https://www.2cto.com/database/201506/412260.html">oracle口令管理之允许某个用户最多尝试</a></dd>
+										<dd class="list">·&nbsp;<a target="_blank"  href="https://www.2cto.com/database/201506/412256.html">CRS显示正在运行的dbinstance是offlin</a></dd>
+										<dd class="list">·&nbsp;<a target="_blank"  href="https://www.2cto.com/database/201506/412258.html">Oracle基础（一）</a></dd>
+										<dd class="list">·&nbsp;<a target="_blank"  href="https://www.2cto.com/database/201506/412252.html">Oracle启动服务详解</a></dd>
+										<dd class="list">·&nbsp;<a target="_blank"  href="https://www.2cto.com/database/201506/412251.html">oracle设定用户密码使用时间</a></dd>
+										<dd class="list">·&nbsp;<a target="_blank"  href="https://www.2cto.com/database/201506/412230.html">Oracle开发人员守则</a></dd>
+										<dd class="list">·&nbsp;<a target="_blank"  href="https://www.2cto.com/database/201506/412227.html">玩转oracle学习第五天</a></dd>
+														</dl>
+				<dl class="index tab_item">
+					 										<dd class="list">·&nbsp;<a target="_blank" href="https://www.2cto.com/special/win7jh/">win7激活工具</a></dd>
+										<dd class="list">·&nbsp;<a target="_blank" href="https://www.2cto.com/os/201607/522176.html">win10激活工具</a></dd>
+										<dd class="list">·&nbsp;<a target="_blank" href="https://www.2cto.com/special/win7jihuogongju/">win7激活工具旗舰版</a></dd>
+										<dd class="list">·&nbsp;<a target="_blank" href="https://www.2cto.com/os/201602/489186.html">office2010激活密钥</a></dd>
+										<dd class="list">·&nbsp;<a target="_blank" href="https://www.2cto.com/os/201601/456235.html">windows7激活密钥</a></dd>
+										<dd class="list">·&nbsp;<a target="_blank" href="https://www.2cto.com/os/201601/488006.html">office2010激活工具</a></dd>
+										<dd class="list">·&nbsp;<a target="_blank" href="https://www.2cto.com/os/201601/456247.html">小马激活工具</a></dd>
+										<dd class="list">·&nbsp;<a target="_blank" href="https://www.2cto.com/os/201607/524552.html">win10激活工具</a></dd>
+														</dl>
+				</div>
+			</div>
+		</div>
+		
+		<div class="side-ibox mt8">
+		<!-- 2cto_右二 -->
+		<script type="text/javascript">cto_A_D("2cto_7");</script>
+		</div>
+		
+		<div class="box_right_box mt8">
+			<dl class="bTitle tabtitle borT"><dd class="on">点击排行</dd></dl>
+			<div class="paddingbox">
+				<dl class="index">
+					<dd class="picline"></dd>
+															<dd class="list">·&nbsp;<a target="_blank" href="https://www.2cto.com/kf/201406/308281.html">HTML学习笔记——各种居中对齐</a></dd>
+										<dd class="list">·&nbsp;<a target="_blank" href="https://www.2cto.com/kf/201504/390770.html">HTML5 Canvas绘制环形进度条</a></dd>
+										<dd class="list">·&nbsp;<a target="_blank" href="https://www.2cto.com/kf/201607/522769.html">HTML 5 制作视频直播</a></dd>
+										<dd class="list">·&nbsp;<a target="_blank" href="https://www.2cto.com/kf/201410/346787.html">HTML5：footer定位（底部+居中）的探讨</a></dd>
+										<dd class="list">·&nbsp;<a target="_blank" href="https://www.2cto.com/kf/201601/486593.html">h5端呼起摄像头扫描二维码并解析</a></dd>
+										<dd class="list">·&nbsp;<a target="_blank" href="https://www.2cto.com/kf/201607/529767.html">H5全景图-朋友圈全景图-720&amp;#176;全景</a></dd>
+										<dd class="list">·&nbsp;<a target="_blank" href="https://www.2cto.com/kf/201711/698297.html">H5代码实现调用本地摄像头实现实时视频</a></dd>
+										<dd class="list">·&nbsp;<a target="_blank" href="https://www.2cto.com/kf/201409/335779.html">html5 移动端单页面布局</a></dd>
+														</dl>
+			</div>
+		</div>
+		<div class="side-ibox mt8">
+		<!-- 2cto_右三 -->
+           <script type="text/javascript">cto_A_D("2cto_14");</script>
+		</div>
+		<div class="box_right_box mt8">
+			<div class="paddingbox">
+				<!-- <div id="cyHotnews" role="cylabs" data-use="hotnews"></div>
+				<script type="text/javascript" charset="utf-8" src="//changyan.itc.cn/js/??lib/jquery.js,changyan.labs.js?appid=cyrBEfE7C"></script> -->
+			</div>
+		</div>
+		<div class="side-ibox mt8">
+			<!-- 2cto_右四 -->
+			<script type="text/javascript">cto_A_D("2cto_8");</script>
+        </div>
+	</div><!--box_right  end-->
+</div>
+
+<script language="JavaScript" src="https://www.2cto.com/api.php?op=count&id=145618&modelid=1"></script>
+
+<div class="ibox p8">
+<!-- 2cto_通栏2 -->
+<script type="text/javascript">cto_A_D("2cto_2");</script>
+</div>
+<div class="ibox p8">
+<!-- 2cto_通栏3 -->
+<a target="_blank" href="//vip.2cto.com"><img src="/adv/980-80.gif"  width="980" height="80" class="style2" /></a>
+</div>
+</div>
+<span style="display:none"><script type="text/javascript" src="https://statics.2cto.com/js/baidu_js_push.js"></script></span>
+<div class="foot">
+<p>
+<a href="/about">关于我们</a> |
+<a href="/about/contact.html">联系我们</a> |
+<a href="/about/ads.html">广告服务</a> |
+<a href="/about/touzi.html">投资合作</a> |
+<a href="/about/Copyright.html">版权申明</a> |
+<a href="/about/faq.html">在线帮助</a> |
+<a href="/about/map.html">网站地图</a> |
+<a href="/about/tg.html">作品发布</a> |
+<a target="_blank" href="//vip.2cto.com/"><span class="c-red">Vip技术培训</span></a> |
+<a rel="nofollow" href="//www.2cto.com/member/report.php" >举报中心</a>
+</p>
+<p class="style4">版权所有: <a href="/" >红黑联盟</a>--致力于做实用的IT技术学习网站<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1258398875'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "w.cnzz.com/c.php%3Fid%3D1258398875' type='text/javascript'%3E%3C/script%3E"));</script><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260439972'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "w.cnzz.com/c.php%3Fid%3D1260439972' type='text/javascript'%3E%3C/script%3E"));</script> 
+</p>
+<div class="hidden"><script type="text/javascript" src="https://statics.2cto.com/js/tj.js"></script>
+<script type="text/javascript">usertongji("柠檬草精灵")</script>
+</div>
+<!-- 2cto_图加 -->
+<script type="text/javascript">cto_A_D("2cto_10");</script>
+<!-- 2cto_视窗 -->
+<script type="text/javascript">cto_A_D("2cto_11");</script>
+<!-- 2cto_对联 -->
+<script type="text/javascript">cto_A_D("2cto_12");</script>
+</div><script type="text/javascript" src="https://statics.2cto.com/js/jquery.min.js"></script>
+<script type="text/javascript" src="https://statics.2cto.com/js/swiper.min.js"></script>
+<script type="text/javascript" src="https://statics.2cto.com/js/init_swiper.js"></script>
+<script type="text/javascript" src="https://statics.2cto.com/js/jquery.sgallery.js"></script>
+<script charset="UTF-8" src="https://statics.2cto.com/js/zeroclipboard/jquery.zclip.min.js"></script>
+<script language="javascript" type="text/javascript" src="https://statics.2cto.com/js/dialog.js"></script>
+<script language="javascript" type="text/javascript" src="https://statics.2cto.com/js/syntaxhighlighter.js"></script>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+<script type="text/javascript" src="https://statics.2cto.com/js/login.js"></script>
+<script type="text/javascript">
+ajaxlogin(encodeURIComponent(location.href),1,3);
+
+function showLogin(){
+	window.art.dialog({id:'Login',iframe:'//www.2cto.com/index.php?m=member&c=index&a=login&tupe=mini', title:'快捷登陆', width:'450', height:'310', lock:true}, function(){var d = window.art.dialog({id:'Login'}).data.iframe;var form = d.document.getElementById('dosubmit');form.click();return false;}, function(){window.art.dialog({id:'Login'}).close()});void(0);
+}
+function add_favorite(title) {
+		$.getJSON('https://www.2cto.com/api.php?op=add_favorite&title='+encodeURIComponent(title)+'&url='+encodeURIComponent(location.href)+'&'+Math.random()+'&callback=?', function(data){
+			if(data.status==1)	{
+				$("#favorite").html('收藏成功');
+			} else {
+				alert('请登陆');
+				window.location.href='//home.2cto.com/?forward='+encodeURIComponent(location.href);
+			}
+		});
+	}
+</script>
+<script type="text/javascript">
+	$(function(){
+	  $('#Article img').LoadImage(true, 630, 560,'http://statics.2cto.com/images/s_nopic.gif');    
+	})
+</script>
+<script> 
+	function copyToClipBoard(){ 
+		var clipBoardContent=document.title + '\r\n' + document.location; 
+		clipBoardContent+='\r\n';	//内容
+
+		var copyurl = clipBoardContent;
+		$(".ckcopy").zclip({
+			path: "https://statics.2cto.com/js/zeroclipboard/ZeroClipboard.swf",
+			copy: copyurl,
+			afterCopy: function() {
+				alert('链接复制成功');
+			},
+			clickAfter: false
+		});
+	} 
+	$(function (){
+		$(".ckcopy").click();
+	});
+</script>
+<script>
+  (function(){
+    var appid = 'cyrBEfE7C',
+    conf = 'prod_830794cf494da8b808afb2994cfe0fee';
+    var doc = document,
+    s = doc.createElement('script'),
+    h = doc.getElementsByTagName('head')[0] || doc.head || doc.documentElement;
+    s.type = 'text/javascript';
+    s.charset = 'utf-8';
+    s.src =  '//assets.changyan.sohu.com/upload/changyan.js?conf='+ conf +'&appid=' + appid;
+    h.insertBefore(s,h.firstChild);
+    window.SCS_NO_IFRAME = true;
+  })()
+</script>
+<script>
+<!--window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];-->
+</script>
+</body>
+</html>

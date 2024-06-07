@@ -1,0 +1,1170 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="data-spm" content="5176" />
+            <title>使用jfugue来演奏mid音乐 - 阿里云</title>
+    
+            <meta name="keywords" content="音乐" />
+                <meta name="description" content="java真是无所不能,居然还能演奏音乐。今天要介绍的是一个用java写的演奏播放mid音乐的类库,名字叫jfugue。这个类库的优点是方便写曲谱,使得不懂javasoundapi的人也能写出程序来演奏mid音乐。环境:JDK1.7.0_72">
+                <link rel="alternate" media="only screen and(max-width: 640px)" href="https://m.aliyun.com/jiaocheng/285422.html">
+        <meta name="mobile-agent" content="format=xhtml;url=https://m.aliyun.com/jiaocheng/285422.html">
+        <meta name="mobile-agent" content="format=wml;url=https://m.aliyun.com/jiaocheng/285422.html">
+                <link rel="canonical" href="https://www.aliyun.com/jiaocheng/285422.html" >
+        <script src="//www.aliyun.com/zixun/assets/js/jquery-3.2.1.min.js"></script>
+    <link href="//www.aliyun.com/zixun/assets/css/moblie/reset.css" type="text/css" rel="stylesheet">
+    <link href="//www.aliyun.com/zixun/assets/css/moblie/pagation.css" type="text/css" rel="stylesheet">
+        <script src="//www.aliyun.com/zixun/assets/js/theme.js"></script>
+
+    <script src="https://g.alicdn.com/??aliyun/www-dpl/0.5.47/knight/js/util/aliyun-lego-system.js"></script>
+</head>
+<body data-spm="100033"><script type="text/javascript">
+(function (d) {
+var t=d.createElement("script");t.type="text/javascript";t.async=true;t.id="tb-beacon-aplus";
+t.setAttribute("exparams","category=&userid=&aplus&yunid=&yunpk=");
+t.src=("https:"==d.location.protocol?"https://s":"http://a")+".tbcdn.cn/s/aplus_v2.js";
+d.getElementsByTagName("head")[0].appendChild(t);
+})(document);
+</script>
+
+
+<link href="//www.aliyun.com/zixun/assets/css/article.css" type="text/css" rel="stylesheet">
+<link href="//www.aliyun.com/zixun/assets/css/public.css" type="text/css" rel="stylesheet">
+<link href="//www.aliyun.com/zixun/assets/css/reset.css" type="text/css" rel="stylesheet">
+
+
+<div aliyun-lego-data="//www.aliyun.com/lego/responsive/layout/menu_black"></div>
+
+<div class="banner">
+    
+
+<!-- exported styles -->
+
+
+<link rel="stylesheet" type="text/css" href="//g.alicdn.com/ali-mod/??www-aliyun-common-adv-1/0.0.9/index.css"/>
+
+
+
+
+  
+      
+  <!--region -->
+            
+                
+                <div data-spm="980815" data-moduleid="0" data-name="www-aliyun-common-adv-1" data-guid="980815" id="guid-980815" data-scene-id="1345773" data-scene-version="0" data-hidden="" data-gitgroup="ali-mod" data-ext="" data-engine="tce" class="www-aliyun-common-adv-1 J_Module" tms="www-aliyun-common-adv-1/0.0.9" tms-datakey="tce/1345773"><div class="module-wrap J_tb_lazyload dbl_tms_module_wrap" style="text-align: center;">
+  <!-- 避免用window的全局变量获取数据 -->
+  <textarea class="schemaData" style="display:none;">
+    {"moduleinfo":{"ads_count":[{"count_phone":1,"count":1}],"align":"center"},"ads":[{"canClose":"manual","padding":"0px 0px 0px 0px","img":"https://img.alicdn.com/tfs/TB17K8LhKuSBuNjy1XcXXcYjFXa-1000-110.jpg","margin":"0px 0px 0px 0px","showClose":"true","background":"#000","link":"https://free.aliyun.com/","width":"auto","flowout":"false","autoCloseDelay":"5000","height":"auto"}],"countinfo":{"ads":{"length_pc":0,"length":0}},"$tmsId":"tce/1345773"}
+  </textarea>
+  <div class="">
+  
+  <div class="add-bg" style="background: #000;">
+  <a style="width: auto; height: auto; margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; " target="_blank" href="https://free.aliyun.com/" class="adv-item">
+      <span  class="close"><i class="icon-wrong"></i></span>
+      <img src=https://img.alicdn.com/tfs/TB17K8LhKuSBuNjy1XcXXcYjFXa-1000-110.jpg>
+    </a>
+  </div>
+  
+  </div>
+</div>
+</div>
+            
+  <!--region -->
+      
+  
+
+<!-- exported scripts -->
+
+
+<script src="//g.alicdn.com/ali-mod/??www-aliyun-common-adv-1/0.0.9/index.js"></script>
+
+
+
+</div>
+<div class="ul-container" data-spm="1">
+    <ul class="article">
+        <li class="list">
+            <a href="https://www.ailyun.com" class="hover"> 阿里云 </a>&nbsp>&nbsp
+            <a href="https://www.aliyun.com/jiaocheng/">教程中心</a>&nbsp;
+            <span>&nbsp>&nbsp</span>
+            <a href="https://www.aliyun.com/jiaocheng/java"> java教程 </a>&nbsp>&nbsp
+            <a href="https://www.aliyun.com/jiaocheng/285422.html" class="hover"> 使用jfugue来演奏mid音乐 </a>&nbsp;
+        </li>
+        <li class="zhinan">
+            使用jfugue来演奏mid音乐
+        </li>
+        <li class="release-time">
+            <div>
+                <p>发布时间：2018-02-07 来源：网络 上传者：用户 </p>
+                <p style="padding-bottom: 0;">
+                    关键字:
+                                       <a href="https://www.aliyun.com/jiaocheng/topic_1025.html">音乐</a>
+                    </p>
+            </div>
+            <a href="https://yq.aliyun.com/articles/new" id="publish">发表文章</a>
+        </li>
+        <li class="li3">
+            <span class="zhaiyao">摘要：</span>java真是无所不能,居然还能演奏音乐。今天要介绍的是一个用java写的演奏播放mid音乐的类库,名字叫jfugue。这个类库的优点是方便写曲谱,使得不懂javasoundapi的人也能写出程序来演奏mid音乐。环境:JDK1.7.0_7264bit(理论上JDK1.5以上都可以)当然电脑声卡,音响耳机,客官记得自备。1.下载先要到官网下载jfugue,本文写作时最新版是jfugue-4.0.3.jar。把这个jar包下载下来,加到classpath下就能用了。2.第一个程序        </li>
+<!-- 关键字 -->
+        <li class="article-content">
+            
+           <p>java真是无所不能,居然还能演奏音乐。今天要介绍的是一个用java写的演奏播放mid音乐的类库,名字叫 jfugue 。这个类库的优点是方便写曲谱,使得不懂java sound api的人也能写出程序来演奏mid音乐。</p> 
+<p>环境:</p> 
+<p>JDK1.7.0_72 64bit (理论上JDK1.5以上都可以)</p> 
+<p>当然电脑声卡,音响耳机,客官记得自备。</p> 
+<p>1.下载</p> 
+<p>先要到 官网 下载jfugue,本文写作时最新版是jfugue-4.0.3.jar。把这个jar包下载下来,加到classpath下就能用了。</p> 
+<p>2.第一个程序</p> Player player = new Player(); player.play(&quot;C D E F G A B&quot;);
+<p>没错,就2行代码,就可以演奏出“哆来咪发索拉西”这7个音了!把耳机戴上,听到了吗?</p>
+<p>3.进阶,《两只老虎》</p>
+<img src="http://aliyunzixunbucket.oss-cn-beijing.aliyuncs.com/png/88bcff153c6df4f6cd176b16a8ec7c3d.png?x-oss-process=image/resize,p_100/auto-orient,1/quality,q_90/format,jpg/watermark,image_eXVuY2VzaGk=,t_100,g_se,x_0,y_0" alt="使用jfugue来演奏mid音乐" /> Player player = new Player();//两只老虎Pattern pattern1 = new Pattern(&quot;I[40] C5q D5q E5q C5q&quot;);//跑得快Pattern pattern2 = new Pattern(&quot;E5q F5q G5h&quot;);//一只没有眼睛Pattern pattern3 = new Pattern(&quot;G5i A5i G5i F5i E5q C5q&quot;);//真奇怪Pattern pattern4 = new Pattern(&quot;C5q G4q C5h&quot;);// Put all of the patters together to form the songPattern song = new Pattern();song.add(pattern1, 2); // Adds 'pattern1' to 'song' twicesong.add(pattern2, 2); // Adds 'pattern2' to 'song' twicesong.add(pattern3, 2); // Adds 'pattern3' to 'song' twicesong.add(pattern4, 2); // Adds 'pattern4' to 'song' twice// Play the song!player.play(song);
+<p>看不懂的话下面解释一下。</p>
+<p>4.名词理论</p>
+<p>4.1 音符</p>
+<p>note 音符</p>
+<p>rest 休止符</p>
+<p>chord 和弦</p>
+<p>jfugue里用MusicString来表示曲谱。</p>
+<p>CDEFGAB分别代表:哆来咪发索拉西</p>
+<p>R代表 :休止符</p>
+<p>sharp 升音符&nbsp; 用#表示</p>
+<p>flat 降音符&nbsp; 用b表示</p>
+<p>4.2 音阶</p>
+<p>octave 八度音阶</p>
+<img src="http://aliyunzixunbucket.oss-cn-beijing.aliyuncs.com/png/38d2b1df9b197dafa4b0f818ffea8eef.png?x-oss-process=image/resize,p_100/auto-orient,1/quality,q_90/format,jpg/watermark,image_eXVuY2VzaGk=,t_100,g_se,x_0,y_0" alt="使用jfugue来演奏mid音乐" />
+<p>如上图所示,一般常用的7个音在红色区域的第5阶。</p>
+<p>而MusicString里不写的话默认就为第5阶,比如《两只老虎》基本都是第5阶,只有1个音是第4阶。</p>
+<p>4.3 音长</p>
+<p>duration 音长</p> 
+<table> 
+ <tbody> 
+  <tr> 
+   <td>whole</td> 
+   <td>w</td> 
+  </tr> 
+  <tr> 
+   <td>half</td> 
+   <td>h</td> 
+  </tr> 
+  <tr> 
+   <td>quarter</td> 
+   <td>q</td> 
+  </tr> 
+  <tr> 
+   <td>eighth</td> 
+   <td>i</td> 
+  </tr> 
+  <tr> 
+   <td>sixteenth</td> 
+   <td>s</td> 
+  </tr> 
+  <tr> 
+   <td>thirty-second</td> 
+   <td>t</td> 
+  </tr> 
+  <tr> 
+   <td>sixty-fourth</td> 
+   <td>x</td> 
+  </tr> 
+  <tr> 
+   <td>one-twenty-eighth</td> 
+   <td>o</td> 
+  </tr> 
+ </tbody> 
+</table>
+<p>《两只老虎》里面基本都是q,表示四分之一音长,最后有个h表示二分之一音长。你可以对比上面的乐谱和代码,就能明白了。</p>
+<p>4.4 Pattern的运用</p>
+<p>Pattern其实就是为了避免重复的乐谱复制粘贴,《两只老虎》里面每段乐谱都重复2遍。所以用了4个Pattern来简化代码。</p>
+<p>4.5 乐器</p>
+<p>instrument 乐器</p>
+<p>默认: Piano</p>
+<p>这个是MIDI的一个规范</p>
+<p>MIDI定义了128种乐器,用来表现不同的音色。</p>
+<p>我这里不复制粘贴了,请自行去维基百科上查阅 General MIDI 里面的 旋律音色(Melodic sounds) 这一章节。</p>
+<p>要使用乐器,在MusicString里用I[]表示,其中中括号中是乐器的号码,不过和维基百科上的有一点不一样,它是从0开始编号的,所以是0~127</p>
+<p>如此便能解释《两只老虎》开头的那个I[40]了,查维基百科上的表可知41号乐器是小提琴。</p>
+<p>至此,你应该对《两只老虎》这首曲子的谱写方法完全明白了吧。</p>
+<p>5. mid转谱工具</p>
+<p>如果懒的话,有一个mid转谱工具可以用,而不用自己一个个把谱敲进去。</p>
+<p>这个工具jfugue自带,类名是org.jfugue.extras.Midi2JFugue</p>
+<p>比如我们已经在网上下载了一个《卡农》,文件名是canon.mid</p>
+<p>执行以下命令,便可以转为乐谱,存到canon.txt里</p>
+<p>java -cp jfugue-4.0.3.jar org.jfugue.extras.Midi2JFugue 11 canon.mid canon.txt</p>
+<p>这个命令里面的11没有任何意义,只是一个占位符,因为官方这个工具有点小bug,多了一个无用参数。。。</p>
+<p>OK,转好,最后用程序播放曲谱,试验下是否ok。(代码见music.7z里的Canon.java,文末自己找下载)</p>
+<p>在卡农的乐曲声中,这次对jfugue的介绍就到此结束了。</p> 
+<ul> 
+ <li>本文附件下载:</li> 
+ <li>jfugue-4.0.3.jar (110.9 KB)</li> 
+ <li>music.7z (9.9 KB)</li> 
+</ul>        </li>
+        <span>
+
+               以上是<a href="https://www.aliyun.com/jiaocheng/285422.html">使用jfugue来演奏mid音乐</a>的内容，更多
+                              <a href="https://www.aliyun.com/jiaocheng/topic_1025.html">音乐 </a>
+                              的内容，请您使用右上方搜索功能获取相关信息。
+
+        </span>
+
+        <li class="pagation">
+            <a href="https://www.aliyun.com/jiaocheng/285421.html" class="next">上一篇</a>
+            <a href="https://www.aliyun.com/jiaocheng/285420.html" class="one">1</a>
+            <a href="https://www.aliyun.com/jiaocheng/285419.html">2</a>
+            <a href="https://www.aliyun.com/jiaocheng/285425.html">3</a>
+            <a href="https://www.aliyun.com/jiaocheng/285424.html">4</a>
+            <a href="https://www.aliyun.com/jiaocheng/285423.html" class="next">下一篇</a>
+
+        </li>
+        <li class="p-search">
+            本文内容由互联网用户自发贡献自行上传，本网站不拥有所有权，未作人工编辑处理，也不承担相关法律责任。如果你发现本社区中有涉嫌抄袭的内容，欢迎发送邮件至：zixun-group@service.aliyun.com 进行举报，并提供相关证据，工作人员会在5个工作日内联系你，一经查实，本站将立刻删除涉嫌侵权内容。
+
+        </li>
+        <li class="relevant-article">
+            相关文章
+        </li>
+        <li id="flex">
+            <ul>
+                                                            <li><a href="https://www.aliyun.com/jiaocheng/1102.html">解决 后台播放音乐时，设置手机铃声，后台音乐不会暂停<a/></li>
+                    
+                                                            <li><a href="https://www.aliyun.com/jiaocheng/1359.html">Android基础控件&mdash;&mdash;RecyclerView实现混排效果，仿网易云音乐<a/></li>
+                    
+                                                            <li><a href="https://www.aliyun.com/jiaocheng/1426.html">Android 超简单音乐播放器（十二）换个歌词和删除歌曲<a/></li>
+                    
+                                                            <li><a href="https://www.aliyun.com/jiaocheng/2214.html">Android 自定义 View - 适用于音乐播放的&ldquo;条形与波浪&rdquo;可视化效果<a/></li>
+                    
+                                                            <li><a href="https://www.aliyun.com/jiaocheng/3537.html">Android自定义view----音乐播放动画<a/></li>
+                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                
+            </ul>
+            <ul>
+                                    
+                                    
+                                    
+                                    
+                                    
+                                                            <li><a href="https://www.aliyun.com/jiaocheng/3721.html">开机播放音乐<a/></li>
+                    
+                                                            <li><a href="https://www.aliyun.com/jiaocheng/4619.html">播放音乐案例<a/></li>
+                    
+                                                            <li><a href="https://www.aliyun.com/jiaocheng/4721.html">转： Android开发&mdash;&mdash;网易云音乐使用的开源组件集合<a/></li>
+                    
+                                                            <li><a href="https://www.aliyun.com/jiaocheng/5075.html">android新闻App源码、仿微信源码、地图音乐源码等<a/></li>
+                    
+                                                            <li><a href="https://www.aliyun.com/jiaocheng/6349.html">android音乐播放简单实现（MediaPlayer）<a/></li>
+                    
+                            </ul>
+        </li>
+    </ul>
+
+    <div class="div-right">
+        
+
+<!-- exported styles -->
+
+
+<link rel="stylesheet" type="text/css" href="//g.alicdn.com/ali-mod/??www-aliyun-common-adv-1/0.0.9/index.css"/>
+
+
+
+
+  
+      
+  <!--region -->
+            
+                
+                <div data-spm="980825" data-moduleid="0" data-name="www-aliyun-common-adv-1" data-guid="980825" id="guid-980825" data-scene-id="1345783" data-scene-version="0" data-hidden="" data-gitgroup="ali-mod" data-ext="" data-engine="tce" class="www-aliyun-common-adv-1 J_Module" tms="www-aliyun-common-adv-1/0.0.9" tms-datakey="tce/1345783"><div class="module-wrap J_tb_lazyload dbl_tms_module_wrap" style="text-align: center;">
+  <!-- 避免用window的全局变量获取数据 -->
+  <textarea class="schemaData" style="display:none;">
+    {"moduleinfo":{"ads_count":[{"count_phone":1,"count":1}],"align":"center"},"ads":[{"canClose":"manual","padding":"0px 0px 0px 0px","img":"https://img.alicdn.com/tfs/TB1ET7YhwmTBuNjy1XbXXaMrVXa-282-282.jpg","margin":"0px 0px 0px 0px","showClose":"true","background":"#000","link":"https://free.aliyun.com/","width":"282","flowout":"false","autoCloseDelay":"5000","height":"282"}],"countinfo":{"ads":{"length_pc":0,"length":0}},"$tmsId":"tce/1345783"}
+  </textarea>
+  <div class="">
+  
+  <div class="add-bg" style="background: #000;">
+  <a style="width: 282; height: 282; margin: 0px 0px 0px 0px; padding: 0px 0px 0px 0px; " target="_blank" href="https://free.aliyun.com/" class="adv-item">
+      <span  class="close"><i class="icon-wrong"></i></span>
+      <img src=https://img.alicdn.com/tfs/TB1ET7YhwmTBuNjy1XbXXaMrVXa-282-282.jpg>
+    </a>
+  </div>
+  
+  </div>
+</div>
+</div>
+            
+  <!--region -->
+      
+  
+
+<!-- exported scripts -->
+
+
+<script src="//g.alicdn.com/ali-mod/??www-aliyun-common-adv-1/0.0.9/index.js"></script>
+
+
+
+        <div class="contact-us">
+            <span>联系我们</span>
+            <p>
+                若你要投稿、删除文章请联系邮箱：</br>zixun-group@service.aliyun.com,工作人员会在五个工作日内给你回复。
+            </p>
+        </div>
+        <div class="reduce-article">
+            <p class="reduce-hr">
+                推荐文章
+            </p>
+
+            <ul>
+                                    <li><a href="https://www.aliyun.com/jiaocheng/240086.html">JAVA中ArrayList和LinkedList的区别。<a/></li>
+                                    <li><a href="https://www.aliyun.com/jiaocheng/240094.html">菜鸟硕枫设计模式系列之4 抽象工厂模式<a/></li>
+                                    <li><a href="https://www.aliyun.com/jiaocheng/240095.html">Oracle学习笔记之存储过程（2）java调用存储过程<a/></li>
+                                    <li><a href="https://www.aliyun.com/jiaocheng/240111.html">Java 日期 周 年<a/></li>
+                                    <li><a href="https://www.aliyun.com/jiaocheng/240117.html">自己写了一个通用查询方法<a/></li>
+                                    <li><a href="https://www.aliyun.com/jiaocheng/240128.html">自定义简单的AsyncTask<a/></li>
+                                    <li><a href="https://www.aliyun.com/jiaocheng/240134.html">JAVA简单工厂设计模式：Simple Factory<a/></li>
+                                    <li><a href="https://www.aliyun.com/jiaocheng/240135.html">JAVA语言运算符<a/></li>
+                                    <li><a href="https://www.aliyun.com/jiaocheng/240138.html">Jetty服务启动异常<a/></li>
+                                    <li><a href="https://www.aliyun.com/jiaocheng/240147.html">安装resin  为多个服务<a/></li>
+                            </ul>
+
+        </div>
+
+        <p class="reduce-hr">
+            推荐产品
+        </p>
+        
+
+<!-- exported styles -->
+
+
+<link rel="stylesheet" type="text/css" href="//g.alicdn.com/ali-mod/??www-aliyun-yq-productsale1/0.0.6/index.css"/>
+
+
+
+
+  
+      
+  <!--region -->
+            
+                
+                <div data-spm="978852" data-moduleid="91233" data-name="www-aliyun-yq-productsale1" data-guid="978852" id="guid-978852" data-scene-id="1343561" data-scene-version="1" data-hidden="" data-gitgroup="ali-mod" data-ext="" data-engine="tce" class="www-aliyun-yq-productsale1 J_Module" tms="www-aliyun-yq-productsale1/0.0.6" tms-datakey="tce/1343561"><div class="module-wrap J_tb_lazyload">
+  <div class="single-product">
+       		<ul class="product">
+       		
+              <li class="product-icon">
+               <i class="product-icons-32 product-icons-emapreduce product-list-icon mr20"></i>
+              </li>
+              <li class="pdb16">
+              	<div class="product-titile">
+    	          	<span class="product-title-tip">E-MapReduce</span>
+    	          	
+              	</div>
+              </li>
+              <li class="pdb16 pdl">
+              	<span class="product-desc">基于 Hadoop/Spark 的大数据处理分析服务</span>
+              </li>
+              <li class="pdb20">
+              	<div class="product-price pdl">
+              	  
+              		  <span>&yen;0.708元/小时起</span>
+              		
+              		
+              	</div>
+              </li>
+              <li class="pdb20">
+                <div class="pdl">
+                  <a class="product-buy-btn" href="https://www.aliyun.com/product/emapreduce"> 立即购买 </a>
+                  
+                </div>
+              </li>
+              
+              <li class="product-icon">
+               <i class="product-icons-32 product-icons-ecs product-list-icon mr20"></i>
+              </li>
+              <li class="pdb16">
+              	<div class="product-titile">
+    	          	<span class="product-title-tip">云服务器 ECS</span>
+    	          	
+              	</div>
+              </li>
+              <li class="pdb16 pdl">
+              	<span class="product-desc">可弹性伸缩、安全稳定、简单易用</span>
+              </li>
+              <li class="pdb20">
+              	<div class="product-price pdl">
+              	  
+              		  <span>&yen;40.8元/月起</span>
+              		
+              		
+              	</div>
+              </li>
+              <li class="pdb20">
+                <div class="pdl">
+                  <a class="product-buy-btn" href="https://www.aliyun.com/product/ecs"> 立即购买 </a>
+                  
+                </div>
+              </li>
+              
+              <li class="product-icon">
+               <i class="product-icons-32 product-icons-sas product-list-icon mr20"></i>
+              </li>
+              <li class="pdb16">
+              	<div class="product-titile">
+    	          	<span class="product-title-tip">态势感知</span>
+    	          	
+              	</div>
+              </li>
+              <li class="pdb16 pdl">
+              	<span class="product-desc">预测未发生的攻击</span>
+              </li>
+              <li class="pdb20">
+              	<div class="product-price pdl">
+              	  
+              		  <span>&yen;24元/月起</span>
+              		
+              		
+              	</div>
+              </li>
+              <li class="pdb20">
+                <div class="pdl">
+                  <a class="product-buy-btn" href="https://www.aliyun.com/product/sas"> 立即购买 </a>
+                  
+                </div>
+              </li>
+              
+              <li class="product-icon">
+               <i class="product-icons-32 product-icons-ecs product-list-icon mr20"></i>
+              </li>
+              <li class="pdb16">
+              	<div class="product-titile">
+    	          	<span class="product-title-tip">免费套餐</span>
+    	          	
+              	</div>
+              </li>
+              <li class="pdb16 pdl">
+              	<span class="product-desc">为您提供0门槛上云实践机会</span>
+              </li>
+              <li class="pdb20">
+              	<div class="product-price pdl">
+              	  
+              		
+              	</div>
+              </li>
+              <li class="pdb20">
+                <div class="pdl">
+                  <a class="product-buy-btn" href="https://free.aliyun.com/"> 立即免费购买 </a>
+                  
+                </div>
+              </li>
+              
+       		</ul>
+
+    </div>
+</div>
+</div>
+            
+  <!--region -->
+      
+  
+
+<!-- exported scripts -->
+
+
+<script src="//g.alicdn.com/ali-mod/??www-aliyun-yq-productsale1/0.0.6/index.js"></script>
+
+
+
+        <div class="you-stile-like">
+
+                    <span>你可能还喜欢</span>
+
+                    <p id="p"> 
+                        <a href="https://www.aliyun.com/jiaocheng/topic_34140.html">包名之  </a>
+                    
+                        <a href="https://www.aliyun.com/jiaocheng/topic_34231.html">成精  </a>
+                    
+                        <a href="https://www.aliyun.com/jiaocheng/topic_34297.html">恒定  </a>
+                    
+                        <a href="https://www.aliyun.com/jiaocheng/topic_34306.html">康拓  </a>
+                    
+                        <a href="https://www.aliyun.com/jiaocheng/topic_34313.html">钱转  </a>
+                    
+                        <a href="https://www.aliyun.com/jiaocheng/topic_34371.html">嫁衣  </a>
+                    
+                        <a href="https://www.aliyun.com/jiaocheng/topic_34397.html">季第一  </a>
+                    
+                        <a href="https://www.aliyun.com/jiaocheng/topic_34456.html">归宿  </a>
+                    
+                        <a href="https://www.aliyun.com/jiaocheng/topic_34471.html">马里奥  </a>
+                    
+                        <a href="https://www.aliyun.com/jiaocheng/topic_34488.html">国中  </a>
+                    
+                        <a href="https://www.aliyun.com/jiaocheng/topic_34554.html">荣八耻  </a>
+                    
+                        <a href="https://www.aliyun.com/jiaocheng/topic_34624.html">神啊  </a>
+                    
+                        <a href="https://www.aliyun.com/jiaocheng/topic_34628.html">意向  </a>
+                    
+                        <a href="https://www.aliyun.com/jiaocheng/topic_34666.html">残酷  </a>
+                    
+                        <a href="https://www.aliyun.com/jiaocheng/topic_34675.html">季节  </a>
+                                        </p>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="hot-active-content" data-spm="2">
+    
+
+<!-- exported styles -->
+
+
+<link rel="stylesheet" type="text/css" href="//g.alicdn.com/ali-mod/??wb-zc-dbl-response-hotact/0.0.9/index.css"/>
+
+
+
+
+  
+      
+  <!--region -->
+            
+                
+                <div data-spm="977962" data-moduleid="0" data-name="wb-zc-dbl-response-hotact" data-guid="977962" id="guid-977962" data-scene-id="1342675" data-scene-version="0" data-hidden="" data-gitgroup="ali-mod" data-ext="" data-engine="tce" class="wb-zc-dbl-response-hotact J_Module" tms="wb-zc-dbl-response-hotact/0.0.9" tms-datakey="tce/1342675">
+<div class="module-wrap J_tb_lazyload dbl_tms_module_wrap">
+  <!-- 避免用window的全局变量获取数据 -->
+  <textarea class="schemaData" style="display:none;">
+    {"moduleinfo":{"list_count":[{"count_phone":3,"count":3}],"link":"https://www.aliyun.com/activity#/promotionArea","title":"热门活动"},"list":[{"link":"https://promotion.aliyun.com/ntms/campus2017.html","icon":"https://img.alicdn.com/tfs/TB1QJGtQFXXXXaHXFXXXXXXXXXX-200-200.png","hicon":"https://img.alicdn.com/tfs/TB1auutQFXXXXaVXFXXXXXXXXXX-200-200.png","title":"学生专属优惠","desc":"云服务器<b style='color:#f60;'>9.9元/月</b>，大学必备"},{"link":"https://free.aliyun.com/","icon":"https://img.alicdn.com/tfs/TB10LOTQFXXXXXRXXXXXXXXXXXX-200-200.png","hicon":"https://img.alicdn.com/tfs/TB1BJCAQFXXXXb3XpXXXXXXXXXX-200-200.png","title":"阿里云免费套餐","desc":"40+产品  6个月免费"},{"link":"https://promotion.aliyun.com/ntms/act/qwbk.html","icon":"https://img.alicdn.com/tfs/TB1HkN_QFXXXXX6aXXXXXXXXXXX-200-200.png","hicon":"https://img.alicdn.com/tfs/TB14Px6QFXXXXa4aXXXXXXXXXXX-200-200.png","title":"服务器惊爆价30元/月","desc":"高质不高价，快速搭建应用"}],"countinfo":{"list":{"length_pc":0,"length":0}},"$tmsId":"tce/1342675"}
+  </textarea>
+  <div class="hotact-wrap">
+      <h3 >热门活动<a href="https://www.aliyun.com/activity#/promotionArea" target="_blank">更多&gt;</a></h3>
+      <div class="hotact-list">
+          
+                
+                <ul class="item-col3 y-clear">
+                
+                <li  ><a href="https://promotion.aliyun.com/ntms/campus2017.html" target="_blank">
+                    <p class="title" >学生专属优惠</p>
+                    <p class="desc" >云服务器<b style='color:#f60;'>9.9元/月</b>，大学必备</p>
+                    <p class="more">查看详情&gt;</p>
+                    <div class="imgs">
+                        <img src="https://img.alicdn.com/tfs/TB1QJGtQFXXXXaHXFXXXXXXXXXX-200-200.png" class="icon"><img src="https://img.alicdn.com/tfs/TB1auutQFXXXXaVXFXXXXXXXXXX-200-200.png" class="hicon">
+                    </div>
+                </a></li>
+                
+                <li  ><a href="https://free.aliyun.com/" target="_blank">
+                    <p class="title" >阿里云免费套餐</p>
+                    <p class="desc" >40+产品  6个月免费</p>
+                    <p class="more">查看详情&gt;</p>
+                    <div class="imgs">
+                        <img src="https://img.alicdn.com/tfs/TB10LOTQFXXXXXRXXXXXXXXXXXX-200-200.png" class="icon"><img src="https://img.alicdn.com/tfs/TB1BJCAQFXXXXb3XpXXXXXXXXXX-200-200.png" class="hicon">
+                    </div>
+                </a></li>
+                
+                <li class="mr0" ><a href="https://promotion.aliyun.com/ntms/act/qwbk.html" target="_blank">
+                    <p class="title" >服务器惊爆价30元/月</p>
+                    <p class="desc" >高质不高价，快速搭建应用</p>
+                    <p class="more">查看详情&gt;</p>
+                    <div class="imgs">
+                        <img src="https://img.alicdn.com/tfs/TB1HkN_QFXXXXX6aXXXXXXXXXXX-200-200.png" class="icon"><img src="https://img.alicdn.com/tfs/TB14Px6QFXXXXa4aXXXXXXXXXXX-200-200.png" class="hicon">
+                    </div>
+                </a></li>
+                
+                </ul>
+                
+          
+      </div>
+  </div>
+</div>
+</div>
+            
+  <!--region -->
+      
+  
+
+<!-- exported scripts -->
+
+
+<script src="//g.alicdn.com/ali-mod/??wb-zc-dbl-response-hotact/0.0.9/index.js"></script>
+
+
+
+</div>
+
+
+<div class="maybe" data-spm="3">
+    <div class="maybe-content-container">
+        <div class="maybe-p">
+            你可能感兴趣
+        </div>
+        <div class="maybe-ul-container">
+            <ul>
+                
+                                                                             <li><a target="_blank" href="//www.aliyun.com/ss/5bei5rmW5biC5pWZ6IKy5bGA"  style="margin-right:10px;">巢湖市教育局</a></li>
+                                                                                                             <li><a target="_blank" href="//www.aliyun.com/ss/6LaF5aOw5rOi55S15a2Q6amx6byg5Zmo"  style="margin-right:10px;">超声波电子驱鼠器</a></li>
+                                                                                                             <li><a target="_blank" href="https://yq.aliyun.com/wenji/18530"  style="margin-right:10px;">ntldr文件下</a></li>
+                                                                                                             <li><a target="_blank" href="https://yq.aliyun.com/articles/11480"  style="margin-right:10px;">周鸿祎在360新</a></li>
+                                                                                                             <li><a target="_blank" href="//www.aliyun.com/ss/5bqU55So5pyN5Yqh6LSt5Lmw"  style="margin-right:10px;">应用服务购买</a></li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                
+            </ul>
+            <ul>
+                
+                                                                                                                                                                                                                                                                                                                                                        <li><a target="_blank" href="//yq.aliyun.com/wenzhang/tag/tagid_21863"  style="margin-right:10px;">策划</a></li>
+                                                                                                                <li><a target="_blank" href="https://yq.aliyun.com/ziliao/51093"  style="margin-right:10px;">jdbc封装</a></li>
+                                                                                                                <li><a target="_blank" href="//yq.aliyun.com/wenzhang/tag/tagid_15566"  style="margin-right:10px;">图像标注</a></li>
+                                                                                                                <li><a target="_blank" href="https://help.aliyun.com/document_detail/26490.html"  style="margin-right:10px;">位运算符</a></li>
+                                                                                                                <li><a target="_blank" href="//www.aliyun.com/ss/5Z-f5ZCN5o6o6I2Q"  style="margin-right:10px;">域名推荐</a></li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                
+            </ul>
+            <ul>
+                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <li><a target="_blank" href="https://yq.aliyun.com/zt/76749"  style="margin-right:10px;">thinkphp</a></li>
+                                                                                                                <li><a target="_blank" href="//yq.aliyun.com/wenzhang/tag/tagid_21944"  style="margin-right:10px;">认证系统</a></li>
+                                                                                                                <li><a target="_blank" href="//www.aliyun.com/ss/6LSi5Yqh5YWs5Y-45Lu35qC8"  style="margin-right:10px;">财务公司价格</a></li>
+                                                                                                                <li><a target="_blank" href="//www.aliyun.com/ss/5LuA5LmI5piv5Yib5Lia5py65Lya"  style="margin-right:10px;">什么是创业机会</a></li>
+                                                                                                                <li><a target="_blank" href="//www.aliyun.com/ss/5p2O5b2m5a6P55m-5bqm"  style="margin-right:10px;">李彦宏百度</a></li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                
+            </ul>
+            <ul>
+                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <li><a target="_blank" href="https://yq.aliyun.com/zt/69417"  style="margin-right:10px;">免费云储存监控</a></li>
+                                                                                                                <li><a target="_blank" href="https://yq.aliyun.com/wenji/153421"  style="margin-right:10px;">ip白名单实现统</a></li>
+                                                                                                                <li><a target="_blank" href="//www.aliyun.com/ss/5q2l5q2l5oOK5b-D5YiG6ZuG5Ymn5oOF5LuL57uN"  style="margin-right:10px;">步步惊心分集剧情</a></li>
+                                                                                                                <li><a target="_blank" href="//www.aliyun.com/ss/5b6u5Y2a54Ot6Zeo6K-d6aKY"  style="margin-right:10px;">微博热门话题</a></li>
+                                                                                                                <li><a target="_blank" href="//www.aliyun.com/ss/OTUwMA"  style="margin-right:10px;">9500</a></li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                
+            </ul>
+            <ul>
+                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <li><a target="_blank" href="//yq.aliyun.com/product/897"  style="margin-right:10px;">存储方案</a></li>
+                                                                                                                <li><a target="_blank" href="//www.aliyun.com/ss/6L6Q5bCE"  style="margin-right:10px;">辐射</a></li>
+                                                                                                                <li><a target="_blank" href="//www.aliyun.com/ss/6Z2S5bKb54yO6IGY572R"  style="margin-right:10px;">青岛猎聘网</a></li>
+                                                                                                                <li><a target="_blank" href="https://yq.aliyun.com/wenzhang/show_23504"  style="margin-right:10px;">小型论坛系统</a></li>
+                                                                                                                <li><a target="_blank" href="https://help.aliyun.com/knowledge_list/39409.html"  style="margin-right:10px;">实例配置</a></li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+                
+            </ul>
+            <ul>
+                
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <li><a target="_blank" href="//yq.aliyun.com/wenzhang/tag/tagid_6688"  style="margin-right:10px;">vscode 运</a></li>
+                                                                                                                <li><a target="_blank" href="//www.aliyun.com/ss/56e75Yqo5LqS6IGU572RYWNj"  style="margin-right:10px;">移动互联网acc</a></li>
+                                                                                                                <li><a target="_blank" href="//www.aliyun.com/ss/RGF0YSBNYW5hZ2VtZW505Y-M5Y2B5LiA"  style="margin-right:10px;">Data Man</a></li>
+                                                                                                                <li><a target="_blank" href="https://help.aliyun.com/document_detail/28591.html"  style="margin-right:10px;">弹性公网IP监控</a></li>
+                                                                                                                <li><a target="_blank" href="https://help.aliyun.com/document_detail/42381.html"  style="margin-right:10px;">接入详细说明</a></li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                
+            </ul>
+
+
+        </div>
+    </div>
+    <div class="maybe-p-right">
+        <p>
+        阿里云教程中心为您免费提供  使用jfugue来演奏mid音乐相关信息，包括
+                    <a href="https://www.aliyun.com/jiaocheng/topic_1025.html">音乐</a> &nbsp;
+                的信息，所有使用jfugue来演奏mid音乐相关内容均不代表阿里云的意见！投稿删除文章请联系邮箱：<br>zixun-group@service.aliyun.com，工作人员会在五个工作日内答复
+        </p>
+        <span>移动版： <a href="https://m.aliyun.com/jiaocheng/285422.html"> 使用jfugue来演奏mid音乐</a></span>
+    </div>
+
+</div>
+
+
+
+<!-- exported styles -->
+
+
+<link rel="stylesheet" type="text/css" href="//g.alicdn.com/ali-mod/??www-aliyun-common-allinone/0.0.1/index.css,aliyun-common-footer-2017/0.0.81/index.css"/>
+
+
+
+
+  
+      
+  <!--region -->
+            
+                
+                <div data-spm="1058222" data-moduleid="176654" data-name="www-aliyun-common-allinone" data-guid="1058222" id="guid-1058222" data-scene-id="1482797" data-scene-version="0" data-hidden="" data-gitgroup="ali-mod" data-ext="" data-engine="tce" class="www-aliyun-common-allinone J_Module" tms="www-aliyun-common-allinone/0.0.1" tms-datakey="tce/1482797"><div class="module-wrap J_tb_lazyload dbl_tms_module_wrap">
+  <!-- 避免用window的全局变量获取数据 -->
+  <textarea class="schemaData" style="display:none;">
+    {"moduleinfo":{"javascripts_count":[{"count_phone":0,"count":0}],"styles_count":[{"count_phone":0,"count":0}],"htmls_count":[{"count_phone":1,"count":1}]},"htmls":[{"text":"<script type=\"text/javascript\" src=\"//g.alicdn.com/??aliyun/www-products/0.4.8/knight/js/footer/pinyou.js,aliyun/www-products/0.4.12/knight/js/footer/partner.js\"></script>"}],"styles":[],"javascripts":[],"countinfo":{"javascripts":{},"htmls":{"length_pc":0,"length":0},"styles":{}},"$tmsId":"tce/1482797"}
+  </textarea>
+  
+  
+    <script type="text/javascript" src="//g.alicdn.com/??aliyun/www-products/0.4.8/knight/js/footer/pinyou.js,aliyun/www-products/0.4.12/knight/js/footer/partner.js"></script>
+  
+  
+</div>
+</div>
+            
+  <!--region -->
+      
+  
+      
+  <!--region -->
+            
+                
+                <div data-spm="631162" data-moduleid="199757" data-name="aliyun-common-footer-2017" data-guid="631162" id="guid-631162" data-scene-id="753070" data-scene-version="9" data-hidden="" data-gitgroup="ali-mod" data-ext="" data-engine="tce" class="aliyun-common-footer-2017 J_Module" tms="aliyun-common-footer-2017/0.0.81" tms-datakey="tce/753070">
+
+<div class="module-wrap J_tb_lazyload dbl_tms_module_wrap">
+  <!-- 避免用window的全局变量获取数据 -->
+  <textarea class="schemaData" style="display:none;">
+    {"moduleinfo":{"link95187_count":[{"count_phone":1,"count":1}],"inter_count":[{"count_phone":4,"count":4}],"keys_count":[{"count_phone":3,"count":3}],"js":"//g.alicdn.com/??aliyun/www-products/0.4.8/knight/js/footer/pinyou.js,aliyun/www-products/0.4.12/knight/js/footer/partner.js","xiaoyun_count":[{"count_phone":0,"count":0}],"qrcode_count":[{"count_phone":5,"count":5}]},"link95187":[{"p":"95187转1","imgW":"https://img.alicdn.com/tps/TB14DpcPXXXXXaIXpXXXXXXXXXX-100-82.png","imgG":"https://img.alicdn.com/tps/TB14DpcPXXXXXaIXpXXXXXXXXXX-100-82.png","h1":"售前咨询热线","links":[{"tce_rule_count":"1","link":"https://www.aliyun.com/support/95187","text":"专业技术咨询"},{"tce_rule_count":"1","link":"https://www.aliyun.com/support/95187","text":"全方位产品解读"},{"tce_rule_count":"1","link":"https://www.aliyun.com/solution/all","text":"成熟解决方案"},{"tce_rule_count":"1","link":"https://www.aliyun.com/solution/all","text":"成功客户案例分享"}],"imgB":"https://img.alicdn.com/tps/TB1_I0aPXXXXXajXpXXXXXXXXXX-100-82.png"}],"xiaoyun":[],"inter":[{"links":[{"link":"https://www.aliyun.com/contact","text":"联系我们"},{"link":"https://www.aliyun.com/support/supportplans","text":"支持计划"},{"link":"https://help.aliyun.com/index.html?content=school","text":"新手学堂"},{"link":"https://help.aliyun.com/index.html?content=tools","text":"自助工具"},{"link":"https://www.aliyun.com/service/list","text":"咨询与设计"},{"link":"https://www.aliyun.com/service/list#f2","text":"实施与搭建"},{"link":"https://www.aliyun.com/service/list#f3","text":"运维与管理"},{"link":"https://www.aliyun.com/service/list#f4","text":"优化与提升"},{"link":"https://help.aliyun.com/noticelist.html","text":"公告"},{"link":"https://connect.aliyun.com/","text":"提交建议"}],"title":"支持与服务"},{"links":[{"tce_rule_count":"1","link":"https://home.console.aliyun.com/new#/","text":"管理控制台"},{"tce_rule_count":"1","link":"https://bsn.console.aliyun.com/?#/bsnApply/ecs","text":"备案管理"},{"tce_rule_count":"1","link":"https://netcn.console.aliyun.com/core/domain/list","text":"域名控制台"},{"tce_rule_count":"1","link":"https://netcn.console.aliyun.com/core/host/list2","text":"万网主机控制面板"},{"tce_rule_count":"1","link":"https://account.console.aliyun.com/?spm=5176.8142029.388261.1044.2c3b381fKZBdi5#/secure","text":"账号管理"},{"tce_rule_count":"1","link":"https://expense.console.aliyun.com/?#/account/recharge/alipay","text":"充值付款"},{"tce_rule_count":"1","link":"https://help.aliyun.com/knowledge_detail/37108.html","text":"线下汇款 / 电汇"},{"tce_rule_count":"1","link":"https://help.aliyun.com/knowledge_detail/37079.html","text":"合同申请"},{"tce_rule_count":"1","link":"https://help.aliyun.com/knowledge_detail/37053.html","text":"索取发票"},{"tce_rule_count":"1","link":"https://security.aliyun.com/compliance","text":"合规性"}],"title":"账户管理"},{"links":[{"tce_rule_count":"1","link":"https://whois.aliyun.com/","text":"域名信息查询（WHOIS）"},{"tce_rule_count":"1","link":"https://www.aliyun.com/price","text":"定价"},{"tce_rule_count":"1","link":"https://www.aliyun.com/product/new","text":"云产品快报"},{"tce_rule_count":"1","link":"https://www.aliyun.com/chinaglobal/home","text":"海外上云"},{"tce_rule_count":"1","link":"https://www.aliyun.com/solution/customer","text":"客户案例"},{"tce_rule_count":"1","link":"https://www.aliyun.com/analyst-reports/","text":"分析师报告"},{"tce_rule_count":"1","link":"https://club.aliyun.com/#/?_k=e2etut","text":"会员俱乐部"},{"tce_rule_count":"1","link":"https://www.aliyun.com/support/sqfwzx","text":"阿里云授权服务中心"},{"tce_rule_count":"1","link":"https://report.aliyun.com/","text":"举报中心"},{"tce_rule_count":"1","link":"https://security.aliyun.com/trust","text":"信任中心"}],"title":"快速入口"},{"links":[{"tce_rule_count":"1","link":"https://help.aliyun.com/","text":"帮助文档"},{"tce_rule_count":"1","link":"https://developer.aliyun.com/index","text":"开发者中心"},{"tce_rule_count":"1","link":"https://edu.aliyun.com/developer","text":"开发者课堂"},{"tce_rule_count":"1","link":"https://edu.aliyun.com/certification","text":"考试认证"},{"tce_rule_count":"1","link":"https://edu.aliyun.com/lab/","text":"开放实验室"},{"tce_rule_count":"1","link":"https://edu.aliyun.com/","text":"阿里云大学"},{"tce_rule_count":"1","link":"https://yq.aliyun.com/cloud","text":"阿里云头条"},{"tce_rule_count":"1","link":"https://yq.aliyun.com","text":"社区"},{"tce_rule_count":"1","link":"https://yq.aliyun.com/articles","text":"博客"},{"tce_rule_count":"1","link":"https://yq.aliyun.com/ask","text":"问答"}],"title":"资源和社区"}],"qrcode":[{"qrcode":"https://img.alicdn.com/tfs/TB19l4NQpXXXXXnXpXXXXXXXXXX-80-80.png","link":"javascript:;","text":"企业决策必读"},{"qrcode":"https://img.alicdn.com/tps/TB197yLLpXXXXciXpXXXXXXXXXX-300-300.png","link":"https://promotion.aliyun.com/ntms/mobile.html","text":"阿里云APP"},{"qrcode":"//img.alicdn.com/tps/TB12GsJLXXXXXcWXpXXXXXXXXXX-84-84.png","link":"javascript:;","text":"阿里云微信"},{"qrcode":"//img.alicdn.com/tps/TB1zE3rLXXXXXXsaXXXXXXXXXXX-84-84.png","link":"http://weibo.com/aliyun?sudaref=www.aliyun.com","text":"阿里云微博"},{"qrcode":"https://img.alicdn.com/tfs/TB1QAo5SFXXXXcvXXXXXXXXXXXX-256-256.png","link":"https://weibo.com/p/1006062935804003/home","text":"阿里云客户满意中心"}],"keys":[{"title":"热门产品","keyList":[{"tce_rule_count":"1","link":"https://free.aliyun.com/","title2":"免费套餐","text":"免费套餐"},{"tce_rule_count":"1","link":"https://www.aliyun.com/product/rds","title2":"云数据库RDS","text":"云数据库RDS"},{"tce_rule_count":"1","link":"https://www.aliyun.com/product/oss","title2":"云存储OSS","text":"云存储OSS"},{"tce_rule_count":"1","link":"https://www.aliyun.com/product/nat","title2":"NAT配置","text":"NAT网关"},{"tce_rule_count":"1","link":"https://www.aliyun.com/product/slb","title2":"负载均衡","text":"负载均衡"},{"tce_rule_count":"1","link":"https://wanwang.aliyun.com/","title2":"网站域名注册","text":"域名注册"},{"tce_rule_count":"1","link":"https://market.aliyun.com/jianzhan","title2":"网站建设","text":"网站建设"},{"tce_rule_count":"1","link":"https://data.aliyun.com/","title2":"数加大数据","text":"大数据"},{"tce_rule_count":"1","link":"https://www.aliyun.com/","title2":"云计算","text":"云计算"}]},{"title":"用户热搜","keyList":[{"tce_rule_count":"1","link":"https://beian.aliyun.com/","title2":"ICP备案","text":"网站备案"},{"tce_rule_count":"1","link":"https://market.aliyun.com/wanganfa","title2":"网络安全法解读","text":"网安法"},{"tce_rule_count":"1","link":"https://www.aliyun.com/product/cdn","title2":"网站cdn加速","text":"CDN加速"},{"tce_rule_count":"1","link":"https://www.aliyun.com/product/apigateway","title2":"API网关","text":"API网关"},{"tce_rule_count":"1","link":"https://qiye.aliyun.com/","title2":"企业邮箱","text":"企业邮箱"},{"tce_rule_count":"1","link":"https://whois.aliyun.com/","title2":"whois查询","text":"whois查询"},{"tce_rule_count":"1","link":"https://www.aliyun.com/product/live","title2":"视频直播解决方案","text":"视频直播"},{"tce_rule_count":"1","link":"https://www.aliyun.com/product/vod","title2":"视频点播","text":"视频转码"},{"tce_rule_count":"1","link":"https://market.aliyun.com/security","title2":"云安全","text":"云安全"}]},{"title":"更多推荐","keyList":[{"tce_rule_count":"1","link":"https://tianchi.aliyun.com/","title2":"数据算法竞赛","text":"数据科研社区"},{"tce_rule_count":"1","link":"https://edu.aliyun.com/","title2":"阿里云大学","text":"阿里云大学"},{"tce_rule_count":"1","link":"https://promotion.aliyun.com/ntms/campus2017.html","title2":"云翼计划","text":"学生机"},{"tce_rule_count":"1","link":"https://bbs.aliyun.com/","title2":"开发者论坛","text":"IT论坛"},{"tce_rule_count":"1","link":"https://data.aliyun.com/visual/datav","title2":"Datav数据可视化","text":"数据可视化"},{"tce_rule_count":"1","link":"https://wanwang.aliyun.com/hosting/","title2":"云虚拟主机","text":"云虚机"},{"tce_rule_count":"1","link":"https://wanwang.aliyun.com/domain/com/","title2":".com域名","text":"com域名"},{"tce_rule_count":"1","link":"https://wanwang.aliyun.com/domain/cn/","title2":".cn域名","text":"cn域名"},{"tce_rule_count":"1","link":"https://www.aliyun.com/solution/security/compliance","title2":"等保合规安全解决方案","text":"合规安全解决方案"}]}],"countinfo":{"link95187":{"length_pc":0,"length":0},"xiaoyun":{},"qrcode":{"length_pc":0,"length":0},"keys":{"length_pc":0,"length":0},"inter":{"length_pc":0,"length":0}},"$tmsId":"tce/753070"}
+  </textarea>
+
+  <div  id="J_homePageRegister" style="display:none;">
+    <div  data-spm-click="gostr=/aliyun;locaid=tongdizhuce" class="y-align-center home-page-register">
+      <a target="_blank" href="//account.aliyun.com/register/register.htm" class="register-btn">立即注册，享免费套餐</a>
+      <div class="register-background" 
+         data-image="https://img.alicdn.com/tps/TB1X5DsLXXXXXcsXpXXXXXXXXXX-1440-590.svg">
+    </div>
+  </div>
+    
+  </div>
+
+  <div class="small-footer aliyun-common-footer-small ">
+
+    <div class="ali-main-time" style="display: none;">
+      <ul class="ali-main-time-content y-row">
+        <li style="width: 27.3%;"><a rel="nofollow" href="//www.aliyun.com/support/jpfw#gold-tab-05" target="_blank" data-spm-click="gostr=/aliyun;locaid=a112">
+                <span>
+                  <img class="white" src="//img.alicdn.com/tps/TB1t1u8LXXXXXXpaXXXXXXXXXXX-100-100.png">
+                  <img class="black" src="//img.alicdn.com/tps/TB1Sj6bLXXXXXXPXVXXXXXXXXXX-100-100.png">
+                </span>
+          <span class="ali-main-time-what">100倍故障时长赔偿</span>
+        </a>
+        </li>
+        <li style="width: 27.3%;"><a rel="nofollow" href="//www.aliyun.com/support/jpfw#gold-tab-06" target="_blank" data-spm-click="gostr=/aliyun;locaid=a113">
+                <span>
+                  <img class="white" src="//img.alicdn.com/tps/TB1Jvy7LXXXXXXoaXXXXXXXXXXX-100-100.png">
+                  <img class="black" src="//img.alicdn.com/tps/TB1CZ15LXXXXXbHaXXXXXXXXXXX-100-100.png">
+                </span>
+          <span class="ali-main-time-what">7×24小时售后支持</span>
+        </a>
+        </li>
+        <li style="width: 27.3%;"><a rel="nofollow" href="//www.aliyun.com/support/jpfw#gold-tab-03" target="_blank" data-spm-click="gostr=/aliyun;locaid=a114">
+                <span>
+                  <img class="white" src="//img.alicdn.com/tps/TB17_ThLXXXXXb9XpXXXXXXXXXX-100-100.png">
+                  <img class="black" src="//img.alicdn.com/tps/TB14aHiLXXXXXcZXpXXXXXXXXXX-100-100.png">
+                </span>
+          <span class="ali-main-time-what">5天无理由退款</span>
+        </a>
+        </li>
+        <li  style="width: 17%;"><a rel="nofollow" href="//www.aliyun.com/support/jpfw#gold-tab-05" target="_blank" data-spm-click="gostr=/aliyun;locaid=a115">
+                <span>
+                  <img class="white" src="//img.alicdn.com/tps/TB13HuYLXXXXXanapXXXXXXXXXX-100-100.png">
+                  <img class="black" src="//img.alicdn.com/tps/TB1FJm0LXXXXXaVapXXXXXXXXXX-100-100.png">
+                </span>
+          <span class="ali-main-time-what">备案用时多久送多久</span>
+        </a>
+        </li>
+      </ul>
+    </div>
+
+
+    <div class="ali-main-know">
+      <div class="y-row">
+        <div class="phone-cell">
+          <div>
+            <img class="black" src="https://img.alicdn.com/tps/TB1_I0aPXXXXXajXpXXXXXXXXXX-100-82.png">
+            <img class="white" src="https://img.alicdn.com/tps/TB14DpcPXXXXXaIXpXXXXXXXXXX-100-82.png">
+            <img class="white-black" src="https://img.alicdn.com/tps/TB14DpcPXXXXXaIXpXXXXXXXXXX-100-82.png">
+            <h2>售前咨询热线</h2>
+
+            <h1>95187转1</h1>
+            <ul>
+              
+              <li><a href="https://www.aliyun.com/support/95187" target="_blank" rel="nofollow">专业技术咨询</a></li>
+              
+              <li><a href="https://www.aliyun.com/support/95187" target="_blank" rel="nofollow">全方位产品解读</a></li>
+              
+              <li><a href="https://www.aliyun.com/solution/all" target="_blank" rel="nofollow">成熟解决方案</a></li>
+              
+              <li><a href="https://www.aliyun.com/solution/all" target="_blank" rel="nofollow">成功客户案例分享</a></li>
+              
+            </ul>
+          </div>
+        </div>
+
+        <ul class="ali-main-know-content y-clear">
+          
+          <li>
+            <h3 class="ali-main-know-title">支持与服务</h3>
+            <ul class="ali-main-know-subcontent">
+              
+              <li><a title="联系我们" target="_blank" href="https://www.aliyun.com/contact" >联系我们</a></li>
+              
+              <li><a title="支持计划" target="_blank" href="https://www.aliyun.com/support/supportplans" >支持计划</a></li>
+              
+              <li><a title="新手学堂" target="_blank" href="https://help.aliyun.com/index.html?content=school" >新手学堂</a></li>
+              
+              <li><a title="自助工具" target="_blank" href="https://help.aliyun.com/index.html?content=tools" >自助工具</a></li>
+              
+              <li><a title="咨询与设计" target="_blank" href="https://www.aliyun.com/service/list" >咨询与设计</a></li>
+              
+              <li><a title="实施与搭建" target="_blank" href="https://www.aliyun.com/service/list#f2" >实施与搭建</a></li>
+              
+              <li><a title="运维与管理" target="_blank" href="https://www.aliyun.com/service/list#f3" >运维与管理</a></li>
+              
+              <li><a title="优化与提升" target="_blank" href="https://www.aliyun.com/service/list#f4" >优化与提升</a></li>
+              
+              <li><a title="公告" target="_blank" href="https://help.aliyun.com/noticelist.html" >公告</a></li>
+              
+              <li><a title="提交建议" target="_blank" href="https://connect.aliyun.com/" >提交建议</a></li>
+              
+            </ul>
+          </li>
+          
+          <li>
+            <h3 class="ali-main-know-title">账户管理</h3>
+            <ul class="ali-main-know-subcontent">
+              
+              <li><a title="管理控制台" target="_blank" href="https://home.console.aliyun.com/new#/" >管理控制台</a></li>
+              
+              <li><a title="备案管理" target="_blank" href="https://bsn.console.aliyun.com/?#/bsnApply/ecs" >备案管理</a></li>
+              
+              <li><a title="域名控制台" target="_blank" href="https://netcn.console.aliyun.com/core/domain/list" >域名控制台</a></li>
+              
+              <li><a title="万网主机控制面板" target="_blank" href="https://netcn.console.aliyun.com/core/host/list2" >万网主机控制面板</a></li>
+              
+              <li><a title="账号管理" target="_blank" href="https://account.console.aliyun.com/?spm=5176.8142029.388261.1044.2c3b381fKZBdi5#/secure" >账号管理</a></li>
+              
+              <li><a title="充值付款" target="_blank" href="https://expense.console.aliyun.com/?#/account/recharge/alipay" >充值付款</a></li>
+              
+              <li><a title="线下汇款 / 电汇" target="_blank" href="https://help.aliyun.com/knowledge_detail/37108.html" >线下汇款 / 电汇</a></li>
+              
+              <li><a title="合同申请" target="_blank" href="https://help.aliyun.com/knowledge_detail/37079.html" >合同申请</a></li>
+              
+              <li><a title="索取发票" target="_blank" href="https://help.aliyun.com/knowledge_detail/37053.html" >索取发票</a></li>
+              
+              <li><a title="合规性" target="_blank" href="https://security.aliyun.com/compliance" >合规性</a></li>
+              
+            </ul>
+          </li>
+          
+          <li>
+            <h3 class="ali-main-know-title">快速入口</h3>
+            <ul class="ali-main-know-subcontent">
+              
+              <li><a title="域名信息查询（WHOIS）" target="_blank" href="https://whois.aliyun.com/" >域名信息查询（WHOIS）</a></li>
+              
+              <li><a title="定价" target="_blank" href="https://www.aliyun.com/price" >定价</a></li>
+              
+              <li><a title="云产品快报" target="_blank" href="https://www.aliyun.com/product/new" >云产品快报</a></li>
+              
+              <li><a title="海外上云" target="_blank" href="https://www.aliyun.com/chinaglobal/home" >海外上云</a></li>
+              
+              <li><a title="客户案例" target="_blank" href="https://www.aliyun.com/solution/customer" >客户案例</a></li>
+              
+              <li><a title="分析师报告" target="_blank" href="https://www.aliyun.com/analyst-reports/" >分析师报告</a></li>
+              
+              <li><a title="会员俱乐部" target="_blank" href="https://club.aliyun.com/#/?_k=e2etut" >会员俱乐部</a></li>
+              
+              <li><a title="阿里云授权服务中心" target="_blank" href="https://www.aliyun.com/support/sqfwzx" >阿里云授权服务中心</a></li>
+              
+              <li><a title="举报中心" target="_blank" href="https://report.aliyun.com/" >举报中心</a></li>
+              
+              <li><a title="信任中心" target="_blank" href="https://security.aliyun.com/trust" >信任中心</a></li>
+              
+            </ul>
+          </li>
+          
+          <li>
+            <h3 class="ali-main-know-title">资源和社区</h3>
+            <ul class="ali-main-know-subcontent">
+              
+              <li><a title="帮助文档" target="_blank" href="https://help.aliyun.com/" >帮助文档</a></li>
+              
+              <li><a title="开发者中心" target="_blank" href="https://developer.aliyun.com/index" >开发者中心</a></li>
+              
+              <li><a title="开发者课堂" target="_blank" href="https://edu.aliyun.com/developer" >开发者课堂</a></li>
+              
+              <li><a title="考试认证" target="_blank" href="https://edu.aliyun.com/certification" >考试认证</a></li>
+              
+              <li><a title="开放实验室" target="_blank" href="https://edu.aliyun.com/lab/" >开放实验室</a></li>
+              
+              <li><a title="阿里云大学" target="_blank" href="https://edu.aliyun.com/" >阿里云大学</a></li>
+              
+              <li><a title="阿里云头条" target="_blank" href="https://yq.aliyun.com/cloud" >阿里云头条</a></li>
+              
+              <li><a title="社区" target="_blank" href="https://yq.aliyun.com" >社区</a></li>
+              
+              <li><a title="博客" target="_blank" href="https://yq.aliyun.com/articles" >博客</a></li>
+              
+              <li><a title="问答" target="_blank" href="https://yq.aliyun.com/ask" >问答</a></li>
+              
+            </ul>
+          </li>
+          
+          <li style="width: 12%;">
+            <h3 class="ali-main-know-title">关注阿里云</h3>
+            <ul class="ali-main-know-subcontent">
+              
+              <li class="ali-main-know-cell qr-code">
+                <a href="javascript:;" target="_blank" data-spm-click="gostr=/aliyun;locaid=a123p"  rel="nofollow">企业决策必读</a>
+                <img class="ali-main-know-cell-qr" style="display: block ;" src="https://img.alicdn.com/tfs/TB19l4NQpXXXXXnXpXXXXXXXXXX-80-80.png">
+              </li>
+              
+              <li class="ali-main-know-cell qr-code">
+                <a href="https://promotion.aliyun.com/ntms/mobile.html" target="_blank" data-spm-click="gostr=/aliyun;locaid=a123p"  rel="nofollow">阿里云APP</a>
+                <img class="ali-main-know-cell-qr" style="display:  none;" src="https://img.alicdn.com/tps/TB197yLLpXXXXciXpXXXXXXXXXX-300-300.png">
+              </li>
+              
+              <li class="ali-main-know-cell qr-code">
+                <a href="javascript:;" target="_blank" data-spm-click="gostr=/aliyun;locaid=a123p"  rel="nofollow">阿里云微信</a>
+                <img class="ali-main-know-cell-qr" style="display:  none;" src="//img.alicdn.com/tps/TB12GsJLXXXXXcWXpXXXXXXXXXX-84-84.png">
+              </li>
+              
+              <li class="ali-main-know-cell qr-code">
+                <a href="http://weibo.com/aliyun?sudaref=www.aliyun.com" target="_blank" data-spm-click="gostr=/aliyun;locaid=a123p"  rel="nofollow">阿里云微博</a>
+                <img class="ali-main-know-cell-qr" style="display:  none;" src="//img.alicdn.com/tps/TB1zE3rLXXXXXXsaXXXXXXXXXXX-84-84.png">
+              </li>
+              
+              <li class="ali-main-know-cell qr-code">
+                <a href="https://weibo.com/p/1006062935804003/home" target="_blank" data-spm-click="gostr=/aliyun;locaid=a123p"  rel="nofollow">阿里云客户满意中心</a>
+                <img class="ali-main-know-cell-qr" style="display:  none;" src="https://img.alicdn.com/tfs/TB1QAo5SFXXXXcvXXXXXXXXXXXX-256-256.png">
+              </li>
+              
+            </ul>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+
+
+    <div class="ali-main-hot">
+      <div class="y-row">
+        <ul class="ali-main-hot-content">
+          
+          <li>
+            <h3 class="ali-main-hot-title">热门产品</h3>
+            <ul class="ali-main-hot-subcontent y-clear">
+              
+              <li > <a href="https://free.aliyun.com/" target="_blank" title="免费套餐">免费套餐</a></li>
+              
+              <li > <a href="https://www.aliyun.com/product/rds" target="_blank" title="云数据库RDS">云数据库RDS</a></li>
+              
+              <li > <a href="https://www.aliyun.com/product/oss" target="_blank" title="云存储OSS">云存储OSS</a></li>
+              
+              <li > <a href="https://www.aliyun.com/product/nat" target="_blank" title="NAT配置">NAT网关</a></li>
+              
+              <li > <a href="https://www.aliyun.com/product/slb" target="_blank" title="负载均衡">负载均衡</a></li>
+              
+              <li > <a href="https://wanwang.aliyun.com/" target="_blank" title="网站域名注册">域名注册</a></li>
+              
+              <li > <a href="https://market.aliyun.com/jianzhan" target="_blank" title="网站建设">网站建设</a></li>
+              
+              <li > <a href="https://data.aliyun.com/" target="_blank" title="数加大数据">大数据</a></li>
+              
+              <li > <a href="https://www.aliyun.com/" target="_blank" title="云计算">云计算</a></li>
+              
+            </ul>
+          </li>
+          
+          <li>
+            <h3 class="ali-main-hot-title">用户热搜</h3>
+            <ul class="ali-main-hot-subcontent y-clear">
+              
+              <li > <a href="https://beian.aliyun.com/" target="_blank" title="ICP备案">网站备案</a></li>
+              
+              <li > <a href="https://market.aliyun.com/wanganfa" target="_blank" title="网络安全法解读">网安法</a></li>
+              
+              <li > <a href="https://www.aliyun.com/product/cdn" target="_blank" title="网站cdn加速">CDN加速</a></li>
+              
+              <li > <a href="https://www.aliyun.com/product/apigateway" target="_blank" title="API网关">API网关</a></li>
+              
+              <li > <a href="https://qiye.aliyun.com/" target="_blank" title="企业邮箱">企业邮箱</a></li>
+              
+              <li > <a href="https://whois.aliyun.com/" target="_blank" title="whois查询">whois查询</a></li>
+              
+              <li > <a href="https://www.aliyun.com/product/live" target="_blank" title="视频直播解决方案">视频直播</a></li>
+              
+              <li > <a href="https://www.aliyun.com/product/vod" target="_blank" title="视频点播">视频转码</a></li>
+              
+              <li > <a href="https://market.aliyun.com/security" target="_blank" title="云安全">云安全</a></li>
+              
+            </ul>
+          </li>
+          
+          <li>
+            <h3 class="ali-main-hot-title">更多推荐</h3>
+            <ul class="ali-main-hot-subcontent y-clear">
+              
+              <li > <a href="https://tianchi.aliyun.com/" target="_blank" title="数据算法竞赛">数据科研社区</a></li>
+              
+              <li > <a href="https://edu.aliyun.com/" target="_blank" title="阿里云大学">阿里云大学</a></li>
+              
+              <li > <a href="https://promotion.aliyun.com/ntms/campus2017.html" target="_blank" title="云翼计划">学生机</a></li>
+              
+              <li > <a href="https://bbs.aliyun.com/" target="_blank" title="开发者论坛">IT论坛</a></li>
+              
+              <li > <a href="https://data.aliyun.com/visual/datav" target="_blank" title="Datav数据可视化">数据可视化</a></li>
+              
+              <li > <a href="https://wanwang.aliyun.com/hosting/" target="_blank" title="云虚拟主机">云虚机</a></li>
+              
+              <li > <a href="https://wanwang.aliyun.com/domain/com/" target="_blank" title=".com域名">com域名</a></li>
+              
+              <li > <a href="https://wanwang.aliyun.com/domain/cn/" target="_blank" title=".cn域名">cn域名</a></li>
+              
+              <li > <a href="https://www.aliyun.com/solution/security/compliance" target="_blank" title="等保合规安全解决方案">合规安全解决方案</a></li>
+              
+            </ul>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="ali-copyright-100">
+      <div class="y-row copyright">
+        <p class="big" style="display: inline-block">
+
+          <a href="//www.aliyun.com/about" target="_blank" spm="about" data-spm-click="gostr=/aliyun;locaid=about" rel="nofollow">关于我们</a>
+
+          <a href="http://terms.aliyun.com/legal-agreement/terms/suit_bu1_ali_cloud/suit_bu1_ali_cloud201710161525_98396.html" target="_blank" spm="law" data-spm-click="gostr=/aliyun;locaid=law" rel="nofollow">法律声明及隐私权政策</a>
+
+          
+
+          <a href="https://jubao.alibaba.com/index.html?site=ALIYUN" target="_blank" spm="jubao" data-spm-click="gostr=/aliyun;locaid=jubao" rel="nofollow">廉正举报</a>
+
+          <a href="//www.aliyun.com/contact" target="_blank" spm="links" data-spm-click="gostr=/aliyun;locaid=links">联系我们</a>
+          <a href="//www.aliyun.com/careers" target="_blank" spm="links" data-spm-click="gostr=/aliyun;locaid=joinin">加入阿里云</a>
+
+        </p>
+
+        <div class="footer-search" style="display: none;">
+          <form class="frm-search" action="//www.aliyun.com/ss">
+            <input placeholder="搜索" name="k">
+            <button class="btn-search" type="submit">
+              <i class="icon-Search"></i>
+            </button>
+          </form>
+
+        </div>
+
+        <div class="select-choice y-right">
+          <img src="//img.alicdn.com/tps/TB1y5NmKFXXXXckXFXXXXXXXXXX-32-32.png">中国站
+          <i class=" icon-down3"></i>
+          <i class=" icon-up3"></i>
+          <ul>
+            <li><img src="//img.alicdn.com/tps/TB1AmBvKFXXXXazXpXXXXXXXXXX-32-32.png"> International</li>
+          </ul>
+        </div>
+
+        <p class="link-wrap">
+
+          <a class="link-item" rel="nofollow" href="http://www.alibabagroup.com/cn/global/home" target="_blank" data-spm-click="gostr=/aliyun;locaid=d8001">阿里巴巴集团</a>
+
+          <a class="link-item" rel="nofollow" href="//www.taobao.com/" target="_blank" data-spm-click="gostr=/aliyun;locaid=d8002">淘宝网</a>
+
+          <a class="link-item" rel="nofollow" href="//www.tmall.com/" target="_blank" data-spm-click="gostr=/aliyun;locaid=d8003">天猫</a>
+
+          <a class="link-item" rel="nofollow" href="//ju.taobao.com/" target="_blank" data-spm-click="gostr=/aliyun;locaid=d8004">聚划算</a>
+
+          <a class="link-item" rel="nofollow" href="//www.aliexpress.com/" target="_blank" data-spm-click="gostr=/aliyun;locaid=d8005">全球速卖通</a>
+
+          <a class="link-item" rel="nofollow" href="//www.alibaba.com/" target="_blank" data-spm-click="gostr=/aliyun;locaid=d8006">阿里巴巴国际交易市场</a>
+
+          <a class="link-item" rel="nofollow" href="//www.1688.com/" target="_blank" data-spm-click="gostr=/aliyun;locaid=d8007">1688</a>
+
+          <a class="link-item" rel="nofollow" href="//www.alimama.com/index.htm" target="_blank" data-spm-click="gostr=/aliyun;locaid=d8008">阿里妈妈</a>
+
+          <a class="link-item" rel="nofollow" href="//www.alitrip.com/" target="_blank" data-spm-click="gostr=/aliyun;locaid=d8009">飞猪</a>
+
+          <a class="link-item" rel="nofollow" href="//www.aliyun.com/" target="_blank" data-spm-click="gostr=/aliyun;locaid=d8010">阿里云计算</a>
+
+          <a class="link-item" rel="nofollow" href="//www.alios.cn/" target="_blank" data-spm-click="gostr=/aliyun;locaid=d8011">AliOS</a>
+
+          <a class="link-item" rel="nofollow" href="//aliqin.tmall.com/" target="_blank" data-spm-click="gostr=/aliyun;locaid=d8012">阿里通信</a>
+
+          <a class="link-item" rel="nofollow" href="//wanwang.aliyun.com/" target="_blank" data-spm-click="gostr=/aliyun;locaid=d8013">万网</a>
+
+          <a class="link-item" rel="nofollow" href="http://www.autonavi.com/" target="_blank" data-spm-click="gostr=/aliyun;locaid=d8014">高德</a>
+
+          <a class="link-item" rel="nofollow" href="http://www.uc.cn/" target="_blank" data-spm-click="gostr=/aliyun;locaid=d8015">UC</a>
+
+          <a class="link-item" rel="nofollow" href="//www.umeng.com/" target="_blank" data-spm-click="gostr=/aliyun;locaid=d8016">友盟</a>
+
+          <a class="link-item" rel="nofollow" href="//www.xiami.com/" target="_blank" data-spm-click="gostr=/aliyun;locaid=d8017">虾米</a>
+
+          <a class="link-item" rel="nofollow" href="//www.alibabaplanet.com" target="_blank" data-spm-click="gostr=/aliyun;locaid=d8018">阿里星球</a>
+
+          
+
+          <a class="link-item" rel="nofollow" href="//www.dingtalk.com/?lwfrom=20150205111943449" target="_blank" data-spm-click="gostr=/aliyun;locaid=d8020">钉钉</a>
+
+          <a class="link-item" rel="nofollow" href="https://www.alipay.com/" target="_blank" data-spm-click="gostr=/aliyun;locaid=d8021">支付宝</a>
+
+        </p>
+        <p class="copyright">
+          © 2009-2018 Aliyun.com 版权所有 ICP证：浙B2-20080101
+        </p>
+        <!-- <a class="link-item xin" style="display: inline-block;" href="//verify.nic.xin/xinDetail/xinAuthInfoDetail?domainName=aliyun.xin" target="_blank" data-spm-click="gostr=/aliyun;locaid=xin" style="position: relative;">
+          <img class="white" src="//img.alicdn.com/tps/TB1.fDdNpXXXXajXpXXXXXXXXXX-96-42.png" style="margin-top: 4px;height: 21px;">
+        </a> -->
+        <a target="_blank" href="http://idinfo.zjaic.gov.cn/bscx.do?method=hddoc&id=33010800001867" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img style="width: 20px;" src="//gw.alicdn.com/tfs/TB1GxwdSXXXXXa.aXXXXXXXXXXX-65-70.gif" />
+        </a>
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010002000099" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+          <img  style="float: left; width: 20px;" src="//img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png" /><span style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">浙公网安备 33010002000099号</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+
+  
+
+<!--小云帮助-->
+<div class="float-tool" data-spm="101">
+<div aliyun-lego-data="//www.aliyun.com/lego/xiaoyun/combine">
+<script type='text/javascript'>
+    try{
+      if(py) py('event','viewPage');
+    } catch(e){
+
+    }
+ </script>
+
+  <div aliyun-lego-data="//www.aliyun.com/lego/individuation/footer/95187"></div>
+  <script>
+    (function(){
+      try{
+        var ua = navigator.userAgent.toLowerCase();
+        if(/(aliapp)+[\s]*(\([aliyun|tb|tm|ap]+\/[\d|\.]+\))+/.test(ua))return; //阿里云app/手淘/手猫/支付宝不加载谷歌统计代码
+        
+        $(window).on('load', function(){
+          $("body").append('<script async src="//g.alicdn.com/aliyun/www-dpl/0.5.97/knight/js/data-statistics.js" type="text/javascript"><\/script>');
+          $("body").append('<noscript><div style="display:inline;"><img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/977293844/?value=0&guid=ON&script=0"/></div></noscript>');
+        });
+      }catch(err){ }
+    })()
+  </script>
+</div>
+</div>
+            
+  <!--region -->
+      
+  
+
+<!-- exported scripts -->
+
+
+<script src="//g.alicdn.com/ali-mod/??www-aliyun-common-allinone/0.0.1/index.js,aliyun-common-footer-2017/0.0.81/index.js"></script>
+
+
+
+</body>
+</html>
+

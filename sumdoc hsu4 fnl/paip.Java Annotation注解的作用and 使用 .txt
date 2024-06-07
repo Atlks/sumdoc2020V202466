@@ -1,0 +1,117 @@
+paip.Java Annotation注解的作用and 使用 
+
+
+作者Attilax 艾龙，  EMAIL:1466519819@qq.com 
+来源：attilax的专栏
+地址：http://blog.csdn.net/attilax
+
+注解使得我们能够以将由编译器来测试和验证的格式，存储有关程序的额外信息
+
+注解是众多引入到java SE5中的重要语言变化之一。他们可以提供用来完整地描述程序所需的信息，而这些信息是无法用java来表达的。因此，注解使得我们能够以将由编译器来测试和验证的格式，存储有关程序的额外信息。注解可以用来生成描述符文件，甚至或是新的类定义，并且有助于减轻编写样板代码的负担。通过使用注解，我们可以将这些元数据保存在java源代码中，并利用annotation API为自己的注解构造处理工具，
+
+同时，注解的优点还包括：更加干净易读的代码以及编译器类型检查等。虽然Java SE5预先定义了一些元数据，但一般来说，主要还是需要程序员自己添加新的注解，并且按自己的方式使用它们。
+
+//////////注解三大作用
+java 注解，从名字上看是注释，解释。但功能却不仅仅是注释那么简单。注解（Annotation） 为我们在代码中添加信息提供了一种形式化的方法，是我们可以在稍后某个时刻方便地使用这些数据（通过 解析注解 来使用这些数据），常见的作用有以下几种： 
+生成文档。这是最常见的，也是java 最早提供的注解。常用的有@see @param @return 等 
+跟踪代码依赖性，实现替代配置文件功能。比较常见的是spring 2.5 开始的基于注解配置。作用就是减少配置。现在的框架基本都使用了这种配置来减少配置文件的数量。也是 
+在编译时进行格式检查。如@override 放在方法前，如果你这个方法并不是覆盖了超类方法，则编译时就能检查出。 
+
+
+
+///////////////注解以及java接口的关系
+一个annotation类型可以说是一个特殊的java接口，它的成员变量是受限制的，而声明annotation类型时需要使用新语法。当我们通过java反射api访问annotation时，返回值将是一个实现了该annotation类型接口的对象，通过访问这个对象我们能方便的访问到其annotation成员。后面的章节将提到在java5.0的java.lang包里包含的3个标准annotation类型。
+
+
+
+//////////注解的类型
+按照使用者所需要传入的参数数目， 注释（Annotation）的类型可以分为三种。
+第一种是标记注释类型：
+标记注释(Marker)是最简单的注释, 不需要定义任何域。下面要介绍的Override和Deprecated都是标记类型的。当然，如果一个注释类型提供了所有域的缺省值，那么这个注释类型也可以认为是一个注释类型。使用标记类型的语法很简单。
+
+
+
+///////////////四、如何自定义Annotation？
+
+1．详解annotation与接口的异同：
+因为annotation类型是一个非凡的接口，所以两者之间存在着某些差异：
+
+A.Annotation类型使用关键字@interface而不是interface。
+这个关键字声明隐含了一个信息：它是继承了java.lang.annotation.Annotation接口，并非声明了一个interface。
+
+B.Annotation类型、方法定义是独特的、受限制的。
+Annotation类型的方法必须声明为无参数、无异常抛出的。这些方法定义了annotation的成员：方法名成为了成员名，而方法返回值成为了成员的类型。而方法返回值类型必须为primitive类型、Class类型、枚举类型、annotation类型或者由前面类型之一作为元素的一维数组。方法的后面可以使用default和一个默认数值来声明成员的默认值，null不能作为成员默认值，这与我们在非annotation类型中定义方法有很大不同。
+Annotation类型和它的方法不能使用annotation类型的参数、成员不能是generic。只有返回值类型是Class的方法可以在annotation类型中使用generic，因为此方法能够用类转换将各种类型转换为Class。
+
+C.Annotation类型又与接口有着近似之处。
+它们可以定义常量、静态成员类型（比如枚举类型定义）。Annotation类型也可以如接口一般被实现或者继承。
+
+
+
+//////////.net使用注解
+ C#的Attribute要比Java的Annotation强很多。不过加上AOP后，这种动态功能Java也不错了。 
+ 
+ 
+ 
+ 
+
+、、、、、、、、、、、、、、、、、、、、、注解的例子。。
+清单4:
+
+    @Preliminary public class TimeTravel { ... }
+
+
+C：如果在annotations中只有唯一一个成员，则该成员应命名为value：
+清单5:
+
+    /**
+     * Associates a copyright notice with the annotated API element.
+     */
+    public @interface Copyright {
+        String value();
+    }
+
+
+更为方便的是对于具有唯一成员且成员名为value的annotation（如上文），在其使用时可以忽略掉成员名和赋值号（=）：
+清单6:
+
+    @Copyright("2002 Yoyodyne Propulsion Systems")
+    public class OscillationOverthruster { ... }
+	
+	
+	
+	/////////////////////只定义了一个域，使用TODO的时候，可以简写为
+	
+	
+	
+清单2 为注释加入域
+public @interface TODO{
+String priority();
+} 
+定义了这个注释之后，我们在程序中引用就可以使用这个注释了。
+
+清单3 使用自定义的注释
+@TODO(
+priority="high"
+)
+public void calculate(){
+//body omission
+} 
+由于TODO中只定义了一个域，使用TODO的时候，可以简写为
+
+清单4 单域注释的简写 
+@TODO("high") 
+
+
+
+从上面的例子中，我们可以看出，
+
+
+
+
+
+5。Annotation的目标：
+
+annotation通常被放在类型定义和成员定义的前面。然而它也出现在package、方法参数、本地变量的前面。下面，我们来讨论一下这些不大常用的写法
+
+

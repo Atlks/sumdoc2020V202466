@@ -1,0 +1,4 @@
+
+paip.取当天记录的方法sql跟hql hibernate
+
+when web server datetime diff dbserver...

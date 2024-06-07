@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>java播放mp3/ogg/ape/flac音乐_编程百科</title>
+<meta name="KeyWords" content="音乐,mp3,播放,java,">
+<meta name="Description" content="用java sound api播放wav, aiff, au, snd这些格式是jdk原生支持的&#xff0c;本文主要介绍如何播放mp3/ogg/ape/flac音乐。">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=11">
+<meta charset="utf-8">
+
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdn.bootcss.com/jquery.perfect-scrollbar/1.3.0/css/perfect-scrollbar.min.css">
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_643724_94or05y7sq5jnhfr.css" />
+<link rel="stylesheet" href="/resources/css/common/public.min.css" />
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	var ie = /(msie\s|trident.*rv:)([\w.]+)/.test(agent);
+	if (ie) {
+		var version = (agent.match(/(msie\s|trident.*rv:)([\w.]+)/)[2] || 0) * 1;
+		if (version < 11) {
+			var html = "<div style=\"margin:200px auto 0;width:500px;height:60px;text-align:center;\"><p><strong>抱歉，本网站暂不支持IE11以下内核浏览器访问。</strong></p>"
+			html += "<p><strong>如果您用的是多核浏览器，请切换至急速模式后重新访问。</strong></p></div>"
+			document.write(html);
+			document.execCommand("Stop");
+		}
+	}
+
+	var contextPath = '';
+	var baseViewPath = '/view';
+	var baseSearchPath = '/search';
+	var baseUserPath = '/user';
+	var baseArticlePath = '/article';
+</script>
+<link rel="stylesheet" href="/resources/css/view.min.css" />
+<link rel="stylesheet" href="/resources/css/common/highlight.min.css" />
+</head>
+<body>
+	<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+	<div class="container">
+		<a class="navbar-brand" href="/"> <img alt="编程百科" src="/resources/img/logo.png" /></a>
+		<div class="collapse navbar-collapse">
+			<form class="form-inline" target="_blank" action="/search">
+				<input type="search" style="width: 300px" class="form-control mr-sm-2" name="q" value=""
+					placeholder="在编程百科中搜索...">
+				<button type="submit" class="btn btn-outline-success my-2 my-sm-0" onclick="searchCode();">搜索</button>
+			</form>
+			<ul class="navbar-nav mr-auto">
+			</ul>
+			<ul class="navbar-nav">
+				<li class="nav-item">
+						<a class="nav-link" href="/login">登 录</a>
+					</li>
+				</ul>
+		</div>
+	</div>
+	<div class="article-info navbar navbar-expand-lg">
+			<div class="container">
+				<a class="navbar-brand gotop article-title ellipsis">java播放mp3/ogg/ape/flac音乐</a>
+				<div class="collapse navbar-collapse">
+					<ul class="navbar-nav mr-auto">
+					</ul>
+					<ul class="navbar-nav">
+						<li class="nav-item dropdown">
+							<a class="qrcode" data-toggle="dropdown"><i class="iconfont icon-qrcode"></i></a>
+							<div class="dropdown-menu dropdown-menu-right">
+								<div id="article-qrcode" class="dropdown-item"></div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</nav>
+<div class="container">
+		<div class="row">
+			<article class="col-lg-8">
+				<article>
+					<h1>java播放mp3/ogg/ape/flac音乐</h1>
+					<div class="info clearfix">
+						<span class="time">2016-05-13</span><span class="dot">·</span><a class="user-info"
+							href="/user/loopcc" target="_blank">Mr.Xia</a>
+						<div class="tags d-inline ml-3">
+							<i class="iconfont icon-tags mr-1"></i>
+							<a href="/search?q=音乐" target="_blank">音乐</a>
+							<a href="/search?q=mp3" target="_blank">mp3</a>
+							<a href="/search?q=播放" target="_blank">播放</a>
+							<a href="/search?q=java" target="_blank">java</a>
+							</div>
+						<span class="pv float-right">1832 次浏览</span>
+					</div>
+					<div class="content">用java sound api播放wav, aiff, au, snd这些格式是jdk原生支持的&#xff0c;本文主要介绍如何播放mp3/ogg/ape/flac音乐。
+
+## 1.先来看一段代码&#xff1a;
+
+&#96;&#96;&#96;java
+import java.io.File;
+import java.io.IOException;
+
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.SourceDataLine;
+
+public class AudioFilePlayer {
+
+    public static void main(String[] args) {
+        final AudioFilePlayer player &#61; new AudioFilePlayer ();
+        player.play(&#34;E:\\Documents\\Music\\恋人心.mp3&#34;);
+    }
+
+    public void play(String filePath) {
+        final File file &#61; new File(filePath);
+
+        try {
+            final AudioInputStream in &#61; AudioSystem.getAudioInputStream(file);
+
+            final AudioFormat outFormat &#61; getOutFormat(in.getFormat());
+            final DataLine.Info info &#61; new DataLine.Info(SourceDataLine.class, outFormat);
+
+            final SourceDataLine line &#61; (SourceDataLine) AudioSystem.getLine(info);
+
+            if (line !&#61; null) {
+                line.open(outFormat);
+                line.start();
+                stream(AudioSystem.getAudioInputStream(outFormat, in), line);
+                line.drain();
+                line.stop();
+            }
+
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+    private AudioFormat getOutFormat(AudioFormat inFormat) {
+        final int ch &#61; inFormat.getChannels();
+        final float rate &#61; inFormat.getSampleRate();
+        return new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, rate, 16, ch, ch * 2, rate, false);
+    }
+
+    private void stream(AudioInputStream in, SourceDataLine line)
+        throws IOException {
+        final byte[] buffer &#61; new byte[65536];
+        for (int n &#61; 0; n !&#61; -1; n &#61; in.read(buffer, 0, buffer.length)) {
+            line.write(buffer, 0, n);
+        }
+    }
+}
+&#96;&#96;&#96;
+
+是的&#xff0c;你没有看错&#xff0c;代码很简单&#xff0c;就是普通的java sound api&#xff0c;和原来播放wav, aiff, au, snd没什么两样。但是光这样是运行不起来的&#xff0c;还需要一些额外的jar包来支持。
+
+## 2.相关jar包介绍
+
+| 包名 | 描述 | 支持格式 |
+| --- | --- | --- |
+| jorbis | Vorbis解码器 | ogg |
+| VorbisSPI | 支持OGG Vorbis格式的SPI封装器 |  |
+| JLayer | MP3解码器 | mp3 |
+| MP3SPI | mp3的SPI |  |
+| jflac | flac解码器和SPI | flac |
+| jspeex | speex解码器和SPI | spx |
+| jmac | Monkey&#39;s Audio解码器和SPI | ape,mac |
+| tritonus_share | tritonus底层库 |  |
+| jtta | tta解码器和SPI | tta |
+| libkj-java | 可用来绘制音乐播放时的频谱分析 |  |
+| jaudiotagger | 音乐标签读取库 |  |
+| jlGui | 音乐播放器 |  |
+| yoyoplayer | 音乐播放器 |  |
+| musique   | 音乐播放器   | . |
+
+其中&#xff0c;如果要支持mp3的话&#xff0c;需要javalayer&#xff0c;mp3spi&#xff0c;tritonus_share这3个jar包。  
+而ogg需要jorbis&#xff0c;vorbisspi&#xff0c;tritonus_share这3个jar包。  
+ape需要jmac这个jar包。  
+flac需要jflac这个jar包。
+
+链接&#xff1a;[http://pan.baidu.com/s/1dFe7lh3](http://pan.baidu.com/s/1dFe7lh3) 密码&#xff1a;0uaw
+
+## 3.maven
+
+如果用maven的话&#xff0c;加入以下dependency就有ogg和mp3的支持了。另外两个ape和flac我还没找到&#xff0c;可能要手工自己编译或者去前面的链接下载编译好的jar包。
+
+&#96;&#96;&#96;
+&lt;dependency&gt;
+  &lt;groupId&gt;com.googlecode.soundlibs&lt;/groupId&gt;
+  &lt;artifactId&gt;tritonus-share&lt;/artifactId&gt;
+  &lt;version&gt;0.3.7-2&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;com.googlecode.soundlibs&lt;/groupId&gt;
+  &lt;artifactId&gt;mp3spi&lt;/artifactId&gt;
+  &lt;version&gt;1.9.5-1&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+  &lt;groupId&gt;com.googlecode.soundlibs&lt;/groupId&gt;
+  &lt;artifactId&gt;vorbisspi&lt;/artifactId&gt;
+  &lt;version&gt;1.0.3-1&lt;/version&gt;
+&lt;/dependency&gt;
+&#96;&#96;&#96;
+
+## 4\. musique
+
+推荐下载musique&#xff0c;[http://tulskiy.github.io/musique/](http://tulskiy.github.io/musique/)。
+
+还有一个基于musique的高仿酷狗的播放器&#xff0c;效果还不错&#xff1a;[下载](https://github.com/zhangliangming/HappyPlayer-PC-musique)
+
+musique把以上一些项目的源码全部综合,还自带所有声音文件供测试。  
+编译方法也是用maven&#xff0c;然后最后会生成musique-core-0.3-SNAPSHOT.jar&#xff0c;双击运行就是一个音乐播放器。它相对jlGui和yoyoplayer的一个优点就是ogg/ape/flac格式全都支持拖进度条任意时间点播放。  
+附件有我编译好的musique&#xff0c;供不愿编译的懒人下载使用。
+
+## 5.原理
+
+可以看到&#xff0c;用java播放mp3/ogg/ape/flac音乐没什么难&#xff0c;因为别人都给封装好了。其实这还要归功于java sound api的开放性架构&#xff0c;如果有新的音乐格式&#xff0c;只需要实现新的SPI就可以了。而对用户来说&#xff0c;不必关心这些&#xff0c;代码依旧不变。
+
+## 6.名词解释
+
+如果深入学习java sound api的话&#xff0c;那就要懂一些术语了&#xff0c;这里记录若干名词。
+
+英文中文解释
+
+| 英文 | 中文   | 解释   |
+| --- | --- | --- |
+| mixer   | 混频器   | 可以把多个声音混到一起播放   |
+| reverb   | 混响   | 提供回声效果   |
+| gain   | 增益   | 放大声音   |
+| pan   | 声像平衡   | 左声道右声道调节   |
+| equalizer   | 均衡器   | 10个频段调节&#xff0c;展现不同音效   |
+| sequencer   | 音序器   | 回放MIDI用   |
+| synthesizer   | 合成器   | 合成音符&#xff0c;由不同的乐器播放   |</div>
+				</article>
+			</article>
+			<div class="col-lg-4 d-print-none">
+				<aside>
+						<h5>相关推荐</h5>
+						<ul class="relevant">
+							<li>
+									<a class="ellipsis" target="_blank" title="JAVA多媒体处理库-JAVE" href="/view/746.html">JAVA多媒体处理库-JAVE</a>
+								</li>
+							</ul>
+					</aside>
+				<aside>
+					<h5>以图搜人</h5>
+					<div class="aside-body">
+						<img class="w-100" alt="以图搜人" src="https://image.xsoftlab.net/face/resources/gh_15ec36f9d380_344.jpg">
+					</div>
+				</aside>
+				<aside class="catalog">
+					<h6>目录</h6>
+					<div class="catalog-body"></div>
+				</aside>
+			</div>
+		</div>
+	</div>
+	<div id="configModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="form-group">
+						<label>主题</label> <select class="form-control" id="theme">
+							<option value="gray">灰色</option>
+							<option value="black">黑色</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label>展开方式</label> <select class="form-control" id="expandType">
+							<option value="doubleClick">双击展开</option>
+							<option value="expandAll">默认展开</option>
+						</select>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">取 消</button>
+					<button id="saveConfig" type="button" class="btn btn-primary">完 成</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer class="container">
+	<p>
+		<a href="http://www.miitbeian.gov.cn/" target="_blank">京ICP备13053109号</a>
+	</p>
+	<p>
+		Copyright© 2013~2018 <a title="xsoftlab.net" href="http://www.xsoftlab.net" target="_blank">X软件实验室</a> | 邮箱: <a
+			title="业务邮箱" href="mailto:service@xsoftlab.net">service@xsoftlab.net</a> | QQ群: 384161896
+	</p>
+	<div class="toolbar">
+		<i class="gotop iconfont icon-arrow-alt-to-top hide-md"></i>
+	</div>
+</footer>
+<script src="https://tajs.qq.com/stats?sId=65739719"></script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.bootcss.com/handlebars.js/4.0.11/handlebars.min.js"></script>
+<script src="https://cdn.bootcss.com/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery.perfect-scrollbar/1.3.0/perfect-scrollbar.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
+<script src="/resources/js/common/public.min.js"></script>
+<script src="https://cdn.bootcss.com/marked/0.3.19/marked.min.js"></script>
+	<script src="https://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+	<script src="https://cdn.bootcss.com/clipboard.js/2.0.0/clipboard.min.js"></script>
+	<script src="/resources/js/common/highlight.min.js"></script>
+	<script src="/resources/js/view.min.js"></script>
+</body>
+</html>

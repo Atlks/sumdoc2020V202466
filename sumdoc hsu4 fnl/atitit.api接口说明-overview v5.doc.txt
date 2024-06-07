@@ -1,0 +1,403 @@
+
+atitit.api接口说明-overview  
+
+
+
+
+
+
+作者：attilax  (1466519819@qq.com)
+日期：2015.1
+版本： 
+
+
+
+
+44
+44
+44
+55
+55
+55
+55
+66
+66
+66
+66
+66
+66
+77
+77
+77
+88
+88
+99
+99
+99
+99
+99
+99
+1010
+1010
+1111
+1111
+1212
+1212
+1212
+1212
+1212
+1313
+1313
+1414
+1414
+1414
+1414
+1414
+1515
+1515
+1515
+1515
+1515
+1515
+1515
+1616
+16
+
+
+
+change histroty
+1m  v3  接口定义 
+1r   v4  新特性
+异常的识别与转化（客户端处理流程）
+接口的原理说明
+新增DSL风格接口。
+增加接口调用范例
+增加接口调用过程的伪码说明
+1u   v5   
+分离overview与详细数据格式说明。
+增加异常的处理策略说明
+部分目录结构调整
+
+
+
+
+
+
+ 
+ 
+发布对外http接口：注册api接口子方法处理器（服务端）
+
+在.injectApiHandler()里面添加新的子方法处理器...
+
+主要的添加一行...HandlerChain reg(String subMeth,Handler handler);
+
+
+
+使用实现类的方法注册..
+HandlerChain.reg("xxx", new HandlerImp1());
+
+使用闭包的方式注册:::
+ 		 
+			HandlerChain.reg("xxx", new Handler() {
+
+				@Override public Object handleReq(Object arg) throws Exception {
+					// attilax 老哇的爪子 is6 o7l
+					return " o788 test ...";
+
+				}
+			});
+		 
+ 闭包DSL:::
+导入template。xml模板。。java>editor>template>>import。。。
+输入api   生成一下大陀代码
+
+HandlerChain.reg("xxx", new Handler() {
+
+				@Override public Object handleReq(Object arg) throws Exception {
+					// attilax 老哇的爪子 is6 o7l
+					return " o788 test ...";
+
+				}
+			});
+
+Handler 的接口实现
+一个方法是不实现Handler 接口,使用闭包的方式注册
+在就是实现Handler 接口,使用class的方法注册...
+
+
+
+客户端调用接口overview 
+
+接口实现的原理
+接口的原理就是远程方法/函数api调用。。。最重要的是需要指明调用的方法名，以及参数。。。其他的加密，防篡改，安全方面的参数主要是针对http这个通道来说的。。
+
+指明调用方法名的实现方式总结
+显式指明：：   这个也是我们此接口使用的方式。。显式指明方法，可以大大减少物理接口数量，只需要一个单接口就可以实现。开发速度快。
+
+Rpc方式隐式指明：： 这个是许多web service等接口使用的方式
+Restful方式url方式指明：：  这种方式，把方法名指明或绑定在url上了。
+
+指明调用的参数的实现方式总结
+单参数：：这个也是我们这个接口使用的方式
+优点是开发速度快，方便扩展，调整参数无需改动接口。类似于map/dic/字典对象参数方式
+为了方便网络传输，复合对象一般要序列化为json等格式传输，简单字符串一类的无需序列化，直接传输
+
+多参数：：也是个常用的实现方式，但调整参数需要改动接口。。编程语言常用多参数方式，方便ide的智能感知。。
+http请求方式: GET/Post
+DSL风格（推荐）
+_http://host/urlï¼data=_method(param)__
+  http的Data参数内容说明  :: 直接指明要调用的方法名称与参数。。。参数为单参数模式，复合对象序列化为Json格式 
+
+DSL风格调用范例
+获取列表通过sql （简单参数） ：：：
+ getUserInfo (  SELECT * FROM `mall_user_info` where user_id=8 ) 
+
+-----------------------------------------------------------
+添加数据对象（复合对象参数） ：：： 
+addGoods (  {
+   "shop_id": 8,    
+  "goods_name": "prod999",  
+  "goods_intro": "商品介绍：商品介绍：商品介绍：",   
+  "goods_price": 100,   
+   "goods_thumb": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+ }
+) 
+
+
+DSL风格伪码说明
+	String	t= " getUserInfo (  SELECT * FROM `mall_user_info` where user_id=8 ) ";	 
+		String url="http://localhost:8090/shopitfs/api2.jsp?data="+URLEncoder.encode(t,"utf8");
+普通风格
+_http://host/urlï¼data={method:methodName,param:paramVal}_
+http的Data参数内容说明   
+参数	是否必须	说明
+method	是	调用的远程接口方法（ 各自模块定义）
+param	是	单参数模式，复合对象序列化为Json格式 
+paramDataType	否	参数的数据类型，默认为json,可选xml,str,urlparam等
+普通风格调用范例
+获取列表通过sql （简单param参数） ：：：
+{
+"method":"getUserInfo ",
+"param": " select * from  tablexxx "
+}
+----------------------------------------------
+添加数据对象（复合对象param参数） ：：： 
+
+{
+"method":"addGoods",
+"param":{
+   "shop_id": 8,    
+  "goods_name": "prod999",  
+  "goods_intro": "商品介绍：商品介绍：商品介绍：",   
+  "goods_price": 100,   
+   "goods_thumb": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+ }
+
+}
+
+普通风格调用伪码说明
+myObject obj=new myObject ();
+obj.method="showGoodsList";
+obj.param="select * form table111  where xxx";
+String json=Obj2json(obj);
+String url="http://hostxxxxx/api.jsp?data="+urlEncode(json)
+http参数说明
+
+Datatype：：，可选参数，数据类型：默认json，可选xml,urlparam等
+Data：：必选，  实际的数据内容
+Ziptype：可选参数， 预留，压缩方法：：默认zip，可选其他
+Encrytype：可选参数， 预留，加密方法，默认aes，可选3des,ras,des等
+zipEncOrder：  可选参数,指明加密与压缩顺序。默认先加密在压缩
+Sessionid： 可选，session会话持久模式使用
+sessionMode： 可选，  会话模式：默认cookie模式
+Accesstoken：  可选，  Accesstoken模式时需要次参数
+Ver	   否	版本号
+appid	否	appid预留，可暂时不用
+Appsecret 	否	预留，可暂时不用。。 用户唯一凭证密钥，即appsecret
+Sign  	是	签名，为方便开发测试，可暂时不用。但正式版本为了安全，应该使用
+SignType ： 默认md5 方式，可选sha模式
+
+
+通过接口的数据格式..
+ datatype：：数据类型：默认json，可选xml,urlparam，yaml等
+
+返回说明（正常情况下）
+正常情况下，服务器会返回下述JSON数据包：
+{param1:val1,param2:val2}
+ 参数含义各模块定义。。。
+
+二进制数据的上传(图片等），使用base64转码为字符串处理，统一处理
+大批量图片、或大体积二进制文件的上传，可用独立接口(ftp等）处理
+接口的数据压缩
+如参数过大，可使用zip压缩
+
+接口的数据加密
+数据内容可加密
+
+
+接口方式说明 基于rpc单url方式
+基于http  json  
+接口实现没有采用restful方式，使用了rpc单url方式，简化开发
+
+restful方式性能更高，但开发相比rpc方式较为繁琐
+
+会话持久模式 cookie模式
+常用的会话持久模式 cookie ，session, AccessToken  等
+
+此处选择cookie模式
+
+
+接口Exception异常处理机制
+ 会返回异常堆栈对象(仍然转换为json字符串格式)
+ 客户端收到后，转换为本地异常，进行处理（日志，重试，静默处理，或抛出到业务层，VIEW层处理）
+----------------------------------------------------------------
+异常机制代替返回码的优点：：
+开发速度快：：  无需人工定义返回码
+调试方便，出错信息详细：：  返回码方式，只能指定有限的返回码，其他的错误一般都都指定一个笼统的错误码，没有信息的错误信息，不方便调试。。而且返回错误堆栈，详细。。
+方便ide支持：： 异常常常都是预定义好的，方便ide智能感知。。
+
+
+-----------------------------------------------------------------
+异常的识别与转化：：
+主要查看返回的json对象是否包括cause与stackTrace 字段，，如果包括，基本可判断是异常对象，然后new一个本地异常，从接口层throw出去。。。   一般异常处理在业务层，少数在view层
+{
+  "cause": null,
+  "localizedMessage": "my exc msg",
+  "message": "my exc msg",
+  "stackTrace": [  {
+    "className": "com.attilax.api.aaa",
+    "fileName": "aaa.java",
+    "lineNumber": 17,
+    "methodName": "main",
+    "nativeMethod": false
+  }]
+}
+
+原版本某些接口如为返回码模式，依然有效。
+ 远程接口方法（通用方法）
+调用操作服务端数据(sql格式)
+
+方法名:sql
+参数:  sql语句
+调用操作服务端数据(hql格式)
+
+方法名:hql
+参数:  hql语句
+
+调用操作服务端数据(对象化map格式)
+查询操作 方法名:queryByMap
+参数:
+{
+	"ClassName": "class123",
+	"conditon": [{
+		"propName": "prop123",
+		"op": "<=",
+		"val": "val123"
+	},
+	{
+		"propName": "prop456",
+		"op": "like",
+		"val": "abc"
+	}]
+}
+
+
+--------update op 方法名:updateByMap
+参数:
+
+{
+ 	"ClassName": "class123",
+	"id": 3456,
+	"set": [{
+		"propName": "prop66",
+		"val": "val123"
+	}],
+	"where": [{
+		"propName": "prop123",
+		"op": "<=",
+		"val": "val123"
+	}]
+}
+
+
+--------delete op  方法名:delByMap
+参数:
+
+ {
+ 	"ClassName": "class123",
+	"id": 3456,
+	"where": [{
+		"propName": "prop123",
+		"op": "<=",
+		"val": "val123"
+	}]
+}
+
+
+调用操作客户端数据(sql式,异步方式)
+通过推送接口推送数据
+
+{
+    "submethod": "sql",
+    "param":"select * from   xxxTAble wherer fld1=11 order by fld2
+",
+    "sign": "xxxxxx"
+}
+
+返回json array    [{...}]
+
+调用操作客户端数据(同步方式)
+通过推送接口推送数据
+
+{
+	"submethod": "sql_syn",
+	"param": {
+		"sql": "select * from   xxxTAble wherer fld1=11 order by fld2",
+		"callback": "call123"
+	},
+	"sign": "xxxxxx"
+}
+
+返回json array    [{...}]
+
+调用操作客户端数据(同步方式)反馈
+ 
+
+调用操作客户端数据(对象化map格式)
+参考操作服务端数据(对象化map格式)
+
+版本升级接口
+
+
+ 
+
+
+ 
+通用翻页参数
+Page   第几页
+Pagesize   每页多少条数据
+
+  如果是采用sql 方式，使用 limit 0,10   此种翻页法。。
+远程接口方法（详见接口方法信息说明文档）
+ 
+常见的捕获异常后的处理策略
+
+转换为业务异常，抛出至上层处理（常用）
+从通信层异常转为业务异常，方便理解
+主要是业务层处理与view层处理
+一般是 catch 到 Lower Level Exception，但是向外抛出的却是 Higher Level Exception，对异常进行转换。
+
+根据异常种类处理异常（常用）
+事务rollback 
+能 rollback 的尽量 rollback
+日志记录，重新抛出
+主要用来统计分析稳定性情况，预警等
+
+忽略异常（较少这样处理）
+为了提升稳定性，需要冗余处理的时候，可以这样做。。。
+
+
+ QA：：
+get方式发送参数是需要url编码。
+
+

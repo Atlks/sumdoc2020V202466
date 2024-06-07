@@ -1,0 +1,16 @@
+调用方法名称： sql 
+参数：：   INSERT INTO `mall_users` ( `user_name`, `user_passwd`, `reg_time` ) VALUES ( '2',MD5('2'),NOW() )
+
+
+
+
+
+
+http://attilax.vicp.cc:39332/shopitfs/api2.jsp?data=sql ( INSERT INTO `mall_users` ( `user_name`, `user_passwd`, `reg_time` ) VALUES ( '2',MD5('2'),NOW() ) )
+
+
+http://attilax.vicp.cc:39332/wechat/pay.html
+
+INSERT INTO `mall_shop_info`( `user_id`, `shop_name` ) VALUES ( 12,'')
+
+INSERT INTO `mall_user_info`(  `user_id`, `user_truename` ) VALUES ( 13,'')

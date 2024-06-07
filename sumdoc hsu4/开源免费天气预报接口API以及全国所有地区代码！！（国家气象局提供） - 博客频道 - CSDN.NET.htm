@@ -1,0 +1,1060 @@
+<script type="text/javascript">
+    var username = "yybj";
+    var _blogger = username;
+    var blog_address = "http://blog.csdn.net/yybj";
+    var static_host = "http://static.blog.csdn.net";
+    var currentUserName = "attilax";  
+
+    var fileName = '40476939';
+    var commentscount = 0;
+    var islock = false
+
+   window.quickReplyflag = true;
+            
+             var isBole = false;
+            
+
+</script>
+
+<!DOCTYPE html>
+<html>
+  <head>    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+   
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <script type="text/javascript" src="http://c.csdnimg.cn/pubfooter/js/tracking.js" charset="utf-8"></script> 
+   <!-- <script type="text/javascript">
+        var protocol = window.location.protocol;
+        document.write('<script type="text/javascript" src="' + protocol + '//csdnimg.cn/pubfooter/js/repoAddr2.js?v=' + Math.random() + '"></' + 'script>');
+    </script>-->
+     <link rel="shortcut icon" href="http://c.csdnimg.cn/public/favicon.ico" />    
+     <link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+
+
+    <script src="http://csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+
+     <!-- ad begin -->
+         <script language="javascript" type="text/javascript" src="http://ads.csdn.net/js/tracking.js"></script>
+    <!-- ad end-->
+
+      <script src="//csdnimg.cn/rabbit/tracking-ad/main.js"></script>
+
+    <link rel="stylesheet" href="http://static.csdn.net/public/common/toolbar/css/index.css">
+    <link rel="stylesheet" href="http://csdnimg.cn/public/common/libs/bootstrap/css/bootstrap.css">
+ 	<link rel="stylesheet" href="http://csdnimg.cn/public/static/css/avatar.css">
+    <link rel="stylesheet" href="http://static.blog.csdn.net/skin/skin2-template/css/common.css">
+    <!-- [if IE 7]-->
+    <link rel="stylesheet" href="http://static.blog.csdn.net/skin/skin2-template/css/font-awesome.min.css">
+    <!-- [endif]-->
+    <link rel="stylesheet" href="http://static.blog.csdn.net/skin/skin2-template/css/main.css">
+    
+     <link rel="stylesheet" href="http://static.blog.csdn.net/skin/skin2-template/css/jquery.rollbar.css">
+    <link rel="stylesheet" href="http://static.blog.csdn.net/skin/skin2-template/css/style.css">
+    
+    
+    <!-- [if lt IE 9]-->
+    <script src="http://static.blog.csdn.net/skin/skin2-template/js/libs/html5shiv.min.js"></script>
+    <!-- [endif]-->
+	<script src="http://static.blog.csdn.net/scripts/skintemplatecommon.js" type="text/javascript"></script>
+
+    <script src="http://static.blog.csdn.net/scripts/skintemplateprovider.js" type="text/javascript"></script>      
+	<script src="http://static.blog.csdn.net/scripts/skintemplatecomment.js" type="text/javascript"></script>
+
+    <script src="http://c.csdnimg.cn/rabbit/cnick/cnick.js" type="text/javascript"></script>      
+   
+       
+    
+
+      <script type="text/javascript">
+          $(function () {
+              setTimeout(function () {
+                  $(".mess_name").each(function (index, item) {
+                      var u = $(this).text().split('：')[0].toString().replace("回复", "")
+                      var thisComment = $(this);
+                      if (u) {
+                          $.getJSON("https://passport.csdn.net/get/nick?callback=?", { users: u }, function (a) {
+                              if (a != null && a.data != null && a.data.length > 0) {
+                                  nick = a.data[0].n;
+                                  if (u != nick) {
+                                      thisComment.text(thisComment.text().replace(u, nick));
+                                  }
+                              }
+                          });
+                      }
+                  });
+
+                  $(".username").each(function (index, item) {
+                      var u = $(this).text().split('：')[0].toString().replace("回复", "")
+                      var thisComment = $(this);
+                      if (u) {
+                          $.getJSON("https://passport.csdn.net/get/nick?callback=?", { users: u }, function (a) {
+                              if (a != null && a.data != null && a.data.length > 0) {
+                                  nick = a.data[0].n;
+                                  if (u != nick) {
+                                      thisComment.text(thisComment.text().replace(u, nick));
+                                  }
+                              }
+                          });
+                      }
+                  });
+
+              }, 200);
+
+          });
+      </script>
+
+    <title>开源免费天气预报接口API以及全国所有地区代码！！（国家气象局提供） - 博客频道 - CSDN.NET</title>	
+  </head>
+  <body>
+
+       <!-- 广告位开始 -->
+        <ins data-revive-zoneid="149" data-revive-id="8c38e720de1c90a6f6ff52f3f89c4d57"></ins>
+    <!-- 广告位结束 -->
+
+   <script id="toolbar-tpl-scriptId" fixed="true" prod="blog" skin="black" src="http://c.csdnimg.cn/public/common/toolbar/js/html.js" type="text/javascript"></script>
+    <div class="blog_left">
+      <div class="blog_l_c">
+        <h2 class="blog_l_t">FUNY丶</h2>
+        <h6 class="blog_l_sign"></h6>
+        <div class="item_wrap">
+          <dl class="item_l">
+            <dt class="item">43</dt>
+            <dd class="item_name">原创</dd>
+          </dl>
+          <dl class="item_l">
+            <dt class="item">53</dt>
+            <dd class="item_name">转载</dd>
+          </dl>
+          <dl class="item_l">
+            <dt class="item">0</dt>
+            <dd class="item_name">译文</dd>
+          </dl>
+          <dl class="item_l">
+            <dt class="item">3</dt>
+            <dd class="item_name">评论</dd>
+          </dl>
+          <dl class="item_l">
+            <dt class="item">36481</dt>
+            <dd class="item_name">访问</dd>
+          </dl>
+        </div>
+      </div>
+      <div class="blog_copyright">
+        <p><span>京 ICP 证 070598 号</span><img src="http://static.blog.csdn.net/skin/skin2-template/images/copyright.png" alt="img"></p>
+        <p>
+          Copyright © 1999-2016,
+          <br/>
+          CSDN.NET, All Rights Reserved
+        </p>
+       </div>
+    </div>
+    <div id="skin_m" class="skin_m">
+      <div id="skin_center" class="skin_center">
+          <div class="skin_center_t">
+                <h2 class="mod_most"></h2>
+                <!--include ../modules/mod_list.jade-->
+                <div class="skin_list">
+                  <dl class="list_c clearfix detail_list">
+                    <dt>
+                      <div class="date">
+                        <div class="date_t"><span>2014</span><em>十月</em></div>
+                        <div class="date_b">26</div>
+                      </div>
+                    </dt>
+                    <dd>
+                      <div class="skin_icon"><a href="javascript:;" class="set_reprint">转</a></div>
+                      <h3 class="list_c_t"><a href="/yybj/article/details/40476939">开源免费天气预报接口API以及全国所有地区代码！！（国家气象局提供）</a></h3>  
+                        <div class="list_c_Title">
+                          <p class="detail_p">
+                            <label><span>分类：</span><em onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_fenlei']);">android</em></label>
+                         </p>
+                         <p class="read_r">
+                            <label><i class="fa fa-eye" style="cursor:default"></i><span style="cursor:default"> （937）</span></label>
+                            <label><i class="fa fa-comment-o"style="cursor:default"></i><span  style="cursor:default"> （0）</span></label>
+                             
+                             
+                            <label><i class="fa fa-exclamation-triangle"></i><span onclick="javascript:report(40476939,2);return false;"> 举报</span></label>
+                            <label><i class="fa fa-bookmark-o"></i><span onclick="javascript:collectArticle('开源免费天气预报接口API以及全国所有地区代码！！（国家气象局提供）','40476939');return false;"> 收藏</span></label>
+                             
+
+                             
+                          </p>
+                        </div>
+                      <div class="skin_detail" id="article_content">
+                        
+<p class="p1" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+国家气象局提供的天气预报接口</p>
+<p class="p1" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+接口地址：</p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">http:</span>//www.weather.com.cn/data/sk/101010100.html</p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">http:</span>//www.weather.com.cn/data/cityinfo/101010100.html</p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">http:</span>//m.weather.com.cn/data/101010100.html</p>
+<p class="p3" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<br>
+</p>
+<p class="p1" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+对于第三个接口，返回信息比较全面，也是以<span class="s2">json</span>&#26684;式提供，&#26684;式如下</p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">{</span>&quot;weatherinfo&quot;<span class="s1">: {</span></p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>//<span class="s3">基本信息</span>;</p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;city&quot;<span class="s1">:</span>&quot;<span class="s3">北京</span>&quot;<span class="s1">,</span>&quot;city_en&quot;<span class="s1">:</span>&quot;beijing&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;date_y&quot;<span class="s1">:</span>&quot;2012<span class="s3">年</span>2<span class="s3">月</span>16<span class="s3">日</span>&quot;<span class="s1">,</span>&quot;date&quot;<span class="s1">:</span>&quot;&quot;<span class="s1">,&nbsp;</span>&quot;week&quot;<span class="s1">:</span>&quot;<span class="s3">星期四</span>&quot;<span class="s1">,</span>&quot;fchh&quot;<span class="s1">:</span>&quot;11&quot;<span class="s1">,&nbsp;</span>&quot;cityid&quot;<span class="s1">:</span>&quot;101010100&quot;<span class="s1">,</span></p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>//<span class="s3">摄氏温度</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;temp1&quot;<span class="s1">:</span>&quot;2<span class="s4">℃</span>~-7<span class="s4">℃</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;temp2&quot;<span class="s1">:</span>&quot;1<span class="s4">℃</span>~-7<span class="s4">℃</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;temp3&quot;<span class="s1">:</span>&quot;4<span class="s4">℃</span>~-7<span class="s4">℃</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;temp4&quot;<span class="s1">:</span>&quot;7<span class="s4">℃</span>~-5<span class="s4">℃</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;temp5&quot;<span class="s1">:</span>&quot;5<span class="s4">℃</span>~-3<span class="s4">℃</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;temp6&quot;<span class="s1">:</span>&quot;5<span class="s4">℃</span>~-2<span class="s4">℃</span>&quot;<span class="s1">,</span></p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>//<span class="s3">华氏温度</span>;</p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;tempF1&quot;<span class="s1">:</span>&quot;35.6<span class="s4">℉</span>~19.4<span class="s4">℉</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;tempF2&quot;<span class="s1">:</span>&quot;33.8<span class="s4">℉</span>~19.4<span class="s4">℉</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;tempF3&quot;<span class="s1">:</span>&quot;39.2<span class="s4">℉</span>~19.4<span class="s4">℉</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;tempF4&quot;<span class="s1">:</span>&quot;44.6<span class="s4">℉</span>~23<span class="s4">℉</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;tempF5&quot;<span class="s1">:</span>&quot;41<span class="s4">℉</span>~26.6<span class="s4">℉</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;tempF6&quot;<span class="s1">:</span>&quot;41<span class="s4">℉</span>~28.4<span class="s4">℉</span>&quot;<span class="s1">,</span></p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>//<span class="s3">天气描述</span>;</p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;weather1&quot;<span class="s1">:</span>&quot;<span class="s3">晴</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;weather2&quot;<span class="s1">:</span>&quot;<span class="s3">晴</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;weather3&quot;<span class="s1">:</span>&quot;<span class="s3">晴</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;weather4&quot;<span class="s1">:</span>&quot;<span class="s3">晴转多云</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;weather5&quot;<span class="s1">:</span>&quot;<span class="s3">多云</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;weather6&quot;<span class="s1">:</span>&quot;<span class="s3">多云转阴</span>&quot;<span class="s1">,</span></p>
+<p class="p5" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s5">&nbsp; &nbsp;&nbsp;</span><span class="s2">//</span>天气描述图片序号</p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;img1&quot;<span class="s1">:</span>&quot;0&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;img2&quot;<span class="s1">:</span>&quot;99&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;img3&quot;<span class="s1">:</span>&quot;0&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;img4&quot;<span class="s1">:</span>&quot;99&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;img5&quot;<span class="s1">:</span>&quot;0&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;img6&quot;<span class="s1">:</span>&quot;99&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;img7&quot;<span class="s1">:</span>&quot;0&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;img8&quot;<span class="s1">:</span>&quot;1&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;img9&quot;<span class="s1">:</span>&quot;1&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;img10&quot;<span class="s1">:</span>&quot;99&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;img11&quot;<span class="s1">:</span>&quot;1&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;img12&quot;<span class="s1">:</span>&quot;2&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;img_single&quot;<span class="s1">:</span>&quot;0&quot;<span class="s1">,</span></p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>//<span class="s3">图片名称</span>;</p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;img_title1&quot;<span class="s1">:</span>&quot;<span class="s3">晴</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;img_title2&quot;<span class="s1">:</span>&quot;<span class="s3">晴</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;img_title3&quot;<span class="s1">:</span>&quot;<span class="s3">晴</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;img_title4&quot;<span class="s1">:</span>&quot;<span class="s3">晴</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;img_title5&quot;<span class="s1">:</span>&quot;<span class="s3">晴</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;img_title6&quot;<span class="s1">:</span>&quot;<span class="s3">晴</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;img_title7&quot;<span class="s1">:</span>&quot;<span class="s3">晴</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;img_title8&quot;<span class="s1">:</span>&quot;<span class="s3">多云</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;img_title9&quot;<span class="s1">:</span>&quot;<span class="s3">多云</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;img_title10&quot;<span class="s1">:</span>&quot;<span class="s3">多云</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;img_title11&quot;<span class="s1">:</span>&quot;<span class="s3">多云</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;img_title12&quot;<span class="s1">:</span>&quot;<span class="s3">阴</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;img_title_single&quot;<span class="s1">:</span>&quot;<span class="s3">晴</span>&quot;<span class="s1">,</span></p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>//<span class="s3">风速描述</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;wind1&quot;<span class="s1">:</span>&quot;<span class="s3">北风</span>3-4<span class="s3">级转微风</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;wind2&quot;<span class="s1">:</span>&quot;<span class="s3">微风</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;wind3&quot;<span class="s1">:</span>&quot;<span class="s3">微风</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;wind4&quot;<span class="s1">:</span>&quot;<span class="s3">微风</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;wind5&quot;<span class="s1">:</span>&quot;<span class="s3">微风</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;wind6&quot;<span class="s1">:</span>&quot;<span class="s3">微风</span>&quot;<span class="s1">,</span></p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>//<span class="s3">风速级别描述</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;fx1&quot;<span class="s1">:</span>&quot;<span class="s3">北风</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;fx2&quot;<span class="s1">:</span>&quot;<span class="s3">微风</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;fl1&quot;<span class="s1">:</span>&quot;3-4<span class="s3">级转小于</span>3<span class="s3">级</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;fl2&quot;<span class="s1">:</span>&quot;<span class="s3">小于</span>3<span class="s3">级</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;fl3&quot;<span class="s1">:</span>&quot;<span class="s3">小于</span>3<span class="s3">级</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;fl4&quot;<span class="s1">:</span>&quot;<span class="s3">小于</span>3<span class="s3">级</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;fl5&quot;<span class="s1">:</span>&quot;<span class="s3">小于</span>3<span class="s3">级</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;fl6&quot;<span class="s1">:</span>&quot;<span class="s3">小于</span>3<span class="s3">级</span>&quot;<span class="s1">,</span></p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>//<span class="s3">今天穿衣指数</span>;</p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;index&quot;<span class="s1">:</span>&quot;<span class="s3">冷</span>&quot;<span class="s1">,</span></p>
+<p class="p6" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s5">&nbsp; &nbsp;&nbsp;</span><span class="s2">&quot;index_d&quot;</span><span class="s5">:</span><span class="s2">&quot;</span>天气冷，建议着棉衣、皮夹克加羊毛衫等冬季服装。年老体弱者宜着厚棉衣或冬大衣。<span class="s2">&quot;</span><span class="s5">,</span></p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>//48<span class="s3">小时穿衣指数</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;index48&quot;<span class="s1">:</span>&quot;<span class="s3">冷</span>&quot;<span class="s1">,</span></p>
+<p class="p6" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s5">&nbsp; &nbsp;&nbsp;</span><span class="s2">&quot;index48_d&quot;</span><span class="s5">:</span><span class="s2">&quot;</span>天气冷，建议着棉衣、皮夹克加羊毛衫等冬季服装。年老体弱者宜着厚棉衣或冬大衣。<span class="s2">&quot;</span><span class="s5">,</span></p>
+<p class="p5" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s5">&nbsp; &nbsp;&nbsp;</span><span class="s2">//</span>紫外线及<span class="s2">48</span>小时紫外线</p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;index_uv&quot;<span class="s1">:</span>&quot;<span class="s3">弱</span>&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;index48_uv&quot;<span class="s1">:</span>&quot;<span class="s3">弱</span>&quot;<span class="s1">,</span></p>
+<p class="p7" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+&nbsp; &nbsp;&nbsp;<span class="s6">//</span><span class="s7">洗车</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;index_xc&quot;<span class="s1">:</span>&quot;<span class="s3">适宜</span>&quot;<span class="s1">,</span></p>
+<p class="p7" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+&nbsp; &nbsp;&nbsp;<span class="s6">//</span><span class="s7">旅游</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;index_tr&quot;<span class="s1">:</span>&quot;<span class="s3">一般</span>&quot;<span class="s1">,</span></p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>//<span class="s3">舒适指数</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;index_co&quot;<span class="s1">:</span>&quot;<span class="s3">较不舒适</span>&quot;<span class="s1">,</span></p>
+<p class="p3" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+&nbsp; &nbsp;&nbsp;</p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;st1&quot;<span class="s1">:</span>&quot;1&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;st2&quot;<span class="s1">:</span>&quot;-8&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;st3&quot;<span class="s1">:</span>&quot;2&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;st4&quot;<span class="s1">:</span>&quot;-4&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;st5&quot;<span class="s1">:</span>&quot;5&quot;<span class="s1">,</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;st6&quot;<span class="s1">:</span>&quot;-5&quot;<span class="s1">,</span></p>
+<p class="p7" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+&nbsp; &nbsp;&nbsp;<span class="s6">//</span><span class="s7">晨练</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;index_cl&quot;<span class="s1">:</span>&quot;<span class="s3">较不宜</span>&quot;<span class="s1">,</span></p>
+<p class="p7" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+&nbsp; &nbsp;&nbsp;<span class="s6">//</span><span class="s7">晾晒</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;index_ls&quot;<span class="s1">:</span>&quot;<span class="s3">基本适宜</span>&quot;<span class="s1">,</span></p>
+<p class="p7" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+&nbsp; &nbsp;&nbsp;<span class="s6">//</span><span class="s7">过敏</span></p>
+<p class="p4" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s1">&nbsp; &nbsp;&nbsp;</span>&quot;index_ag&quot;<span class="s1">:</span>&quot;<span class="s3">极不易发</span>&quot;<span class="s1">}}</span></p>
+<p class="p3" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<br>
+</p>
+<p class="p3" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<br>
+</p>
+<p class="p3" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<br>
+</p>
+<p class="p1" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+全国各城市代码如下：</p>
+<p class="p8" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span class="s8">北京</span><span class="s1">:</span>101010100<span class="s8">朝阳</span><span class="s1">:</span>101010300<span class="s8">顺义</span><span class="s1">:</span>101010400<span class="s8">怀柔</span><span class="s1">:</span>101010500<span class="s8">通州</span><span class="s1">:</span>101010600<span class="s8">昌平</span><span class="s1">:</span>101010700<span class="s8">延庆</span><span class="s1">:</span>101010800<span class="s8">丰台</span><span class="s1">:</span>101010900<span class="s8">石景山</span><span class="s1">:</span>101011000<span class="s8">大兴</span><span class="s1">:</span>101011100<span class="s8">房山</span><span class="s1">:</span>101011200<span class="s8">密云</span><span class="s1">:</span>101011300<span class="s8">门头沟</span><span class="s1">:</span>101011400<span class="s8">平谷</span><span class="s1">:</span>101011500<span class="s8">八达岭</span><span class="s1">:</span>101011600<span class="s8">佛爷顶</span><span class="s1">:</span>101011700<span class="s8">汤河口</span><span class="s1">:</span>101011800<span class="s8">密云上甸子</span><span class="s1">:</span>101011900<span class="s8">斋堂</span><span class="s1">:</span>101012000<span class="s8">霞云岭</span><span class="s1">:</span>101012100<span class="s8">北京城区</span><span class="s1">:</span>101012200<span class="s8">海淀</span><span class="s1">:</span>101010200<span class="s8">天津</span><span class="s1">:</span>101030100<span class="s8">宝坻</span><span class="s1">:</span>101030300<span class="s8">东丽</span><span class="s1">:</span>101030400<span class="s8">西青</span><span class="s1">:</span>101030500<span class="s8">北辰</span><span class="s1">:</span>101030600<span class="s8">蓟县</span><span class="s1">:</span>101031400<span class="s8">汉沽</span><span class="s1">:</span>101030800<span class="s8">静海</span><span class="s1">:</span>101030900<span class="s8">津南</span><span class="s1">:</span>101031000<span class="s8">塘沽</span><span class="s1">:</span>101031100<span class="s8">大港</span><span class="s1">:</span>101031200<span class="s8">武清</span><span class="s1">:</span>101030200<span class="s8">宁河</span><span class="s1">:</span>101030700<span class="s8">上海</span><span class="s1">:</span>101020100<span class="s8">宝山</span><span class="s1">:</span>101020300<span class="s8">嘉定</span><span class="s1">:</span>101020500<span class="s8">南汇</span><span class="s1">:</span>101020600<span class="s8">浦东</span><span class="s1">:</span>101021300<span class="s8">青浦</span><span class="s1">:</span>101020800<span class="s8">松江</span><span class="s1">:</span>101020900<span class="s8">奉贤</span><span class="s1">:</span>101021000<span class="s8">崇明</span><span class="s1">:</span>101021100<span class="s8">徐家汇</span><span class="s1">:</span>101021200<span class="s8">闵行</span><span class="s1">:</span>101020200<span class="s8">金山</span><span class="s1">:</span>101020700<span class="s8">石家庄</span><span class="s1">:</span>101090101<span class="s8">张家口</span><span class="s1">:</span>101090301<span class="s8">承德</span><span class="s1">:</span>101090402<span class="s8">唐山</span><span class="s1">:</span>101090501<span class="s8">秦皇岛</span><span class="s1">:</span>101091101<span class="s8">沧州</span><span class="s1">:</span>101090701<span class="s8">衡水</span><span class="s1">:</span>101090801<span class="s8">邢台</span><span class="s1">:</span>101090901<span class="s8">邯郸</span><span class="s1">:</span>101091001<span class="s8">保定</span><span class="s1">:</span>101090201<span class="s8">廊坊</span><span class="s1">:</span>101090601<span class="s8">郑州</span><span class="s1">:</span>101180101<span class="s8">新乡</span><span class="s1">:</span>101180301<span class="s8">许昌</span><span class="s1">:</span>101180401<span class="s8">平顶山</span><span class="s1">:</span>101180501<span class="s8">信阳</span><span class="s1">:</span>101180601<span class="s8">南阳</span><span class="s1">:</span>101180701<span class="s8">开封</span><span class="s1">:</span>101180801<span class="s8">洛阳</span><span class="s1">:</span>101180901<span class="s8">商丘</span><span class="s1">:</span>101181001<span class="s8">焦作</span><span class="s1">:</span>101181101<span class="s8">鹤壁</span><span class="s1">:</span>101181201<span class="s8">濮阳</span><span class="s1">:</span>101181301<span class="s8">周口</span><span class="s1">:</span>101181401<span class="s8">漯河</span><span class="s1">:</span>101181501<span class="s8">驻马店</span><span class="s1">:</span>101181601<span class="s8">三门峡</span><span class="s1">:</span>101181701<span class="s8">济源</span><span class="s1">:</span>101181801<span class="s8">安阳</span><span class="s1">:</span>101180201<span class="s8">合肥</span><span class="s1">:</span>101220101<span class="s8">芜湖</span><span class="s1">:</span>101220301<span class="s8">淮南</span><span class="s1">:</span>101220401<span class="s8">马鞍山</span><span class="s1">:</span>101220501<span class="s8">安庆</span><span class="s1">:</span>101220601<span class="s8">宿州</span><span class="s1">:</span>101220701<span class="s8">阜阳</span><span class="s1">:</span>101220801<span class="s8">亳州</span><span class="s1">:</span>101220901<span class="s8">黄山</span><span class="s1">:</span>101221001<span class="s8">滁州</span><span class="s1">:</span>101221101<span class="s8">淮北</span><span class="s1">:</span>101221201<span class="s8">铜陵</span><span class="s1">:</span>101221301<span class="s8">宣城</span><span class="s1">:</span>101221401<span class="s8">六安</span><span class="s1">:</span>101221501<span class="s8">巢湖</span><span class="s1">:</span>101221601<span class="s8">池州</span><span class="s1">:</span>101221701<span class="s8">蚌埠</span><span class="s1">:</span>101220201<span class="s8">杭州</span><span class="s1">:</span>101210101<span class="s8">舟山</span><span class="s1">:</span>101211101<span class="s8">湖州</span><span class="s1">:</span>101210201<span class="s8">嘉兴</span><span class="s1">:</span>101210301<span class="s8">金华</span><span class="s1">:</span>101210901<span class="s8">绍兴</span><span class="s1">:</span>101210501<span class="s8">台州</span><span class="s1">:</span>101210601<span class="s8">温州</span><span class="s1">:</span>101210701<span class="s8">丽水</span><span class="s1">:</span>101210801<span class="s8">衢州</span><span class="s1">:</span>101211001<span class="s8">宁波</span><span class="s1">:</span>101210401<span class="s8">重庆</span><span class="s1">:</span>101040100<span class="s8">合川</span><span class="s1">:</span>101040300<span class="s8">南川</span><span class="s1">:</span>101040400<span class="s8">江津</span><span class="s1">:</span>101040500<span class="s8">万盛</span><span class="s1">:</span>101040600<span class="s8">渝北</span><span class="s1">:</span>101040700<span class="s8">北碚</span><span class="s1">:</span>101040800<span class="s8">巴南</span><span class="s1">:</span>101040900<span class="s8">长寿</span><span class="s1">:</span>101041000<span class="s8">黔江</span><span class="s1">:</span>101041100<span class="s8">万州天城</span><span class="s1">:</span>101041200<span class="s8">万州龙宝</span><span class="s1">:</span>101041300<span class="s8">涪陵</span><span class="s1">:</span>101041400<span class="s8">开县</span><span class="s1">:</span>101041500<span class="s8">城口</span><span class="s1">:</span>101041600<span class="s8">云阳</span><span class="s1">:</span>101041700<span class="s8">巫溪</span><span class="s1">:</span>101041800<span class="s8">奉节</span><span class="s1">:</span>101041900<span class="s8">巫山</span><span class="s1">:</span>101042000<span class="s8">潼南</span><span class="s1">:</span>101042100<span class="s8">垫江</span><span class="s1">:</span>101042200<span class="s8">梁平</span><span class="s1">:</span>101042300<span class="s8">忠县</span><span class="s1">:</span>101042400<span class="s8">石柱</span><span class="s1">:</span>101042500<span class="s8">大足</span><span class="s1">:</span>101042600<span class="s8">荣昌</span><span class="s1">:</span>101042700<span class="s8">铜梁</span><span class="s1">:</span>101042800<span class="s8">璧山</span><span class="s1">:</span>101042900<span class="s8">丰都</span><span class="s1">:</span>101043000<span class="s8">武隆</span><span class="s1">:</span>101043100<span class="s8">彭水</span><span class="s1">:</span>101043200<span class="s8">綦江</span><span class="s1">:</span>101043300<span class="s8">酉阳</span><span class="s1">:</span>101043400<span class="s8">秀山</span><span class="s1">:</span>101043600<span class="s8">沙坪坝</span><span class="s1">:</span>101043700<span class="s8">永川</span><span class="s1">:</span>101040200<span class="s8">福州</span><span class="s1">:</span>101230101<span class="s8">泉州</span><span class="s1">:</span>101230501<span class="s8">漳州</span><span class="s1">:</span>101230601<span class="s8">龙岩</span><span class="s1">:</span>101230701<span class="s8">晋江</span><span class="s1">:</span>101230509<span class="s8">南平</span><span class="s1">:</span>101230901<span class="s8">厦门</span><span class="s1">:</span>101230201<span class="s8">宁德</span><span class="s1">:</span>101230301<span class="s8">莆田</span><span class="s1">:</span>101230401<span class="s8">三明</span><span class="s1">:</span>101230801<span class="s8">兰州</span><span class="s1">:</span>101160101<span class="s8">平凉</span><span class="s1">:</span>101160301<span class="s8">庆阳</span><span class="s1">:</span>101160401<span class="s8">武威</span><span class="s1">:</span>101160501<span class="s8">金昌</span><span class="s1">:</span>101160601<span class="s8">嘉峪关</span><span class="s1">:</span>101161401<span class="s8">酒泉</span><span class="s1">:</span>101160801<span class="s8">天水</span><span class="s1">:</span>101160901<span class="s8">武都</span><span class="s1">:</span>101161001<span class="s8">临夏</span><span class="s1">:</span>101161101<span class="s8">合作</span><span class="s1">:</span>101161201<span class="s8">白银</span><span class="s1">:</span>101161301<span class="s8">定西</span><span class="s1">:</span>101160201<span class="s8">张掖</span><span class="s1">:</span>101160701<span class="s8">广州</span><span class="s1">:</span>101280101<span class="s8">惠州</span><span class="s1">:</span>101280301<span class="s8">梅州</span><span class="s1">:</span>101280401<span class="s8">汕头</span><span class="s1">:</span>101280501<span class="s8">深圳</span><span class="s1">:</span>101280601<span class="s8">珠海</span><span class="s1">:</span>101280701<span class="s8">佛山</span><span class="s1">:</span>101280800<span class="s8">肇庆</span><span class="s1">:</span>101280901<span class="s8">湛江</span><span class="s1">:</span>101281001<span class="s8">江门</span><span class="s1">:</span>101281101<span class="s8">河源</span><span class="s1">:</span>101281201<span class="s8">清远</span><span class="s1">:</span>101281301<span class="s8">云浮</span><span class="s1">:</span>101281401<span class="s8">潮州</span><span class="s1">:</span>101281501<span class="s8">东莞</span><span class="s1">:</span>101281601<span class="s8">中山</span><span class="s1">:</span>101281701<span class="s8">阳江</span><span class="s1">:</span>101281801<span class="s8">揭阳</span><span class="s1">:</span>101281901<span class="s8">茂名</span><span class="s1">:</span>101282001<span class="s8">汕尾</span><span class="s1">:</span>101282101<span class="s8">韶关</span><span class="s1">:</span>101280201<span class="s8">南宁</span><span class="s1">:</span>101300101<span class="s8">柳州</span><span class="s1">:</span>101300301<span class="s8">来宾</span><span class="s1">:</span>101300401<span class="s8">桂林</span><span class="s1">:</span>101300501<span class="s8">梧州</span><span class="s1">:</span>101300601<span class="s8">防城港</span><span class="s1">:</span>101301401<span class="s8">贵港</span><span class="s1">:</span>101300801<span class="s8">玉林</span><span class="s1">:</span>101300901<span class="s8">百色</span><span class="s1">:</span>101301001<span class="s8">钦州</span><span class="s1">:</span>101301101<span class="s8">河池</span><span class="s1">:</span>101301201<span class="s8">北海</span><span class="s1">:</span>101301301<span class="s8">崇左</span><span class="s1">:</span>101300201<span class="s8">贺州</span><span class="s1">:</span>101300701<span class="s8">贵阳</span><span class="s1">:</span>101260101<span class="s8">安顺</span><span class="s1">:</span>101260301<span class="s8">都匀</span><span class="s1">:</span>101260401<span class="s8">兴义</span><span class="s1">:</span>101260906<span class="s8">铜仁</span><span class="s1">:</span>101260601<span class="s8">毕节</span><span class="s1">:</span>101260701<span class="s8">六盘水</span><span class="s1">:</span>101260801<span class="s8">遵义</span><span class="s1">:</span>101260201<span class="s8">凯里</span><span class="s1">:</span>101260501<span class="s8">昆明</span><span class="s1">:</span>101290101<span class="s8">红河</span><span class="s1">:</span>101290301<span class="s8">文山</span><span class="s1">:</span>101290601<span class="s8">玉溪</span><span class="s1">:</span>101290701<span class="s8">楚雄</span><span class="s1">:</span>101290801<span class="s8">普洱</span><span class="s1">:</span>101290901<span class="s8">昭通</span><span class="s1">:</span>101291001<span class="s8">临沧</span><span class="s1">:</span>101291101<span class="s8">怒江</span><span class="s1">:</span>101291201<span class="s8">香&#26684;里拉</span><span class="s1">:</span>101291301<span class="s8">丽江</span><span class="s1">:</span>101291401<span class="s8">德宏</span><span class="s1">:</span>101291501<span class="s8">景洪</span><span class="s1">:</span>101291601<span class="s8">大理</span><span class="s1">:</span>101290201<span class="s8">曲靖</span><span class="s1">:</span>101290401<span class="s8">保山</span><span class="s1">:</span>101290501<span class="s8">呼和浩特</span><span class="s1">:</span>101080101<span class="s8">乌海</span><span class="s1">:</span>101080301<span class="s8">集宁</span><span class="s1">:</span>101080401<span class="s8">通辽</span><span class="s1">:</span>101080501<span class="s8">阿拉善左旗</span><span class="s1">:</span>101081201<span class="s8">鄂尔多斯</span><span class="s1">:</span>101080701<span class="s8">临河</span><span class="s1">:</span>101080801<span class="s8">锡林浩特</span><span class="s1">:</span>101080901<span class="s8">呼伦贝尔</span><span class="s1">:</span>101081000<span class="s8">乌兰浩特</span><span class="s1">:</span>101081101<span class="s8">包头</span><span class="s1">:</span>101080201<span class="s8">赤峰</span><span class="s1">:</span>101080601<span class="s8">南昌</span><span class="s1">:</span>101240101<span class="s8">上饶</span><span class="s1">:</span>101240301<span class="s8">抚州</span><span class="s1">:</span>101240401<span class="s8">宜春</span><span class="s1">:</span>101240501<span class="s8">鹰潭</span><span class="s1">:</span>101241101<span class="s8">赣州</span><span class="s1">:</span>101240701<span class="s8">景德镇</span><span class="s1">:</span>101240801<span class="s8">萍乡</span><span class="s1">:</span>101240901<span class="s8">新余</span><span class="s1">:</span>101241001<span class="s8">九江</span><span class="s1">:</span>101240201<span class="s8">吉安</span><span class="s1">:</span>101240601<span class="s8">武汉</span><span class="s1">:</span>101200101<span class="s8">黄冈</span><span class="s1">:</span>101200501<span class="s8">荆州</span><span class="s1">:</span>101200801<span class="s8">宜昌</span><span class="s1">:</span>101200901<span class="s8">恩施</span><span class="s1">:</span>101201001<span class="s8">十堰</span><span class="s1">:</span>101201101<span class="s8">神农架</span><span class="s1">:</span>101201201<span class="s8">随州</span><span class="s1">:</span>101201301<span class="s8">荆门</span><span class="s1">:</span>101201401<span class="s8">天门</span><span class="s1">:</span>101201501<span class="s8">仙桃</span><span class="s1">:</span>101201601<span class="s8">潜江</span><span class="s1">:</span>101201701<span class="s8">襄樊</span><span class="s1">:</span>101200201<span class="s8">鄂州</span><span class="s1">:</span>101200301<span class="s8">孝感</span><span class="s1">:</span>101200401<span class="s8">黄石</span><span class="s1">:</span>101200601<span class="s8">咸宁</span><span class="s1">:</span>101200701<span class="s8">成都</span><span class="s1">:</span>101270101<span class="s8">自贡</span><span class="s1">:</span>101270301<span class="s8">绵阳</span><span class="s1">:</span>101270401<span class="s8">南充</span><span class="s1">:</span>101270501<span class="s8">达州</span><span class="s1">:</span>101270601<span class="s8">遂宁</span><span class="s1">:</span>101270701<span class="s8">广安</span><span class="s1">:</span>101270801<span class="s8">巴中</span><span class="s1">:</span>101270901<span class="s8">泸州</span><span class="s1">:</span>101271001<span class="s8">宜宾</span><span class="s1">:</span>101271101<span class="s8">内江</span><span class="s1">:</span>101271201<span class="s8">资阳</span><span class="s1">:</span>101271301<span class="s8">乐山</span><span class="s1">:</span>101271401<span class="s8">眉山</span><span class="s1">:</span>101271501<span class="s8">凉山</span><span class="s1">:</span>101271601<span class="s8">雅安</span><span class="s1">:</span>101271701<span class="s8">甘孜</span><span class="s1">:</span>101271801<span class="s8">阿坝</span><span class="s1">:</span>101271901<span class="s8">德阳</span><span class="s1">:</span>101272001<span class="s8">广元</span><span class="s1">:</span>101272101<span class="s8">攀枝花</span><span class="s1">:</span>101270201<span class="s8">银川</span><span class="s1">:</span>101170101<span class="s8">中卫</span><span class="s1">:</span>101170501<span class="s8">固原</span><span class="s1">:</span>101170401<span class="s8">石嘴山</span><span class="s1">:</span>101170201<span class="s8">吴忠</span><span class="s1">:</span>101170301<span class="s8">西宁</span><span class="s1">:</span>101150101<span class="s8">黄南</span><span class="s1">:</span>101150301<span class="s8">海北</span><span class="s1">:</span>101150801<span class="s8">果洛</span><span class="s1">:</span>101150501<span class="s8">玉树</span><span class="s1">:</span>101150601<span class="s8">海西</span><span class="s1">:</span>101150701<span class="s8">海东</span><span class="s1">:</span>101150201<span class="s8">海南</span><span class="s1">:</span>101150401<span class="s8">济南</span><span class="s1">:</span>101120101<span class="s8">潍坊</span><span class="s1">:</span>101120601<span class="s8">临沂</span><span class="s1">:</span>101120901<span class="s8">菏泽</span><span class="s1">:</span>101121001<span class="s8">滨州</span><span class="s1">:</span>101121101<span class="s8">东营</span><span class="s1">:</span>101121201<span class="s8">威海</span><span class="s1">:</span>101121301<span class="s8">枣庄</span><span class="s1">:</span>101121401<span class="s8">日照</span><span class="s1">:</span>101121501<span class="s8">莱芜</span><span class="s1">:</span>101121601<span class="s8">聊城</span><span class="s1">:</span>101121701<span class="s8">青岛</span><span class="s1">:</span>101120201<span class="s8">淄博</span><span class="s1">:</span>101120301<span class="s8">德州</span><span class="s1">:</span>101120401<span class="s8">烟台</span><span class="s1">:</span>101120501<span class="s8">济宁</span><span class="s1">:</span>101120701<span class="s8">泰安</span><span class="s1">:</span>101120801<span class="s8">西安</span><span class="s1">:</span>101110101<span class="s8">延安</span><span class="s1">:</span>101110300<span class="s8">榆林</span><span class="s1">:</span>101110401<span class="s8">铜川</span><span class="s1">:</span>101111001<span class="s8">商洛</span><span class="s1">:</span>101110601<span class="s8">安康</span><span class="s1">:</span>101110701<span class="s8">汉中</span><span class="s1">:</span>101110801<span class="s8">宝鸡</span><span class="s1">:</span>101110901<span class="s8">咸阳</span><span class="s1">:</span>101110200<span class="s8">渭南</span><span class="s1">:</span>101110501<span class="s8">太原</span><span class="s1">:</span>101100101<span class="s8">临汾</span><span class="s1">:</span>101100701<span class="s8">运城</span><span class="s1">:</span>101100801<span class="s8">朔州</span><span class="s1">:</span>101100901<span class="s8">忻州</span><span class="s1">:</span>101101001<span class="s8">长治</span><span class="s1">:</span>101100501<span class="s8">大同</span><span class="s1">:</span>101100201<span class="s8">阳泉</span><span class="s1">:</span>101100301<span class="s8">晋中</span><span class="s1">:</span>101100401<span class="s8">晋城</span><span class="s1">:</span>101100601<span class="s8">吕梁</span><span class="s1">:</span>101101100<span class="s8">乌鲁木齐</span><span class="s1">:</span>101130101<span class="s8">石河子</span><span class="s1">:</span>101130301<span class="s8">昌吉</span><span class="s1">:</span>101130401<span class="s8">吐鲁番</span><span class="s1">:</span>101130501<span class="s8">库尔勒</span><span class="s1">:</span>101130601<span class="s8">阿拉尔</span><span class="s1">:</span>101130701<span class="s8">阿克苏</span><span class="s1">:</span>101130801<span class="s8">喀什</span><span class="s1">:</span>101130901<span class="s8">伊宁</span><span class="s1">:</span>101131001<span class="s8">塔城</span><span class="s1">:</span>101131101<span class="s8">哈密</span><span class="s1">:</span>101131201<span class="s8">和田</span><span class="s1">:</span>101131301<span class="s8">阿勒泰</span><span class="s1">:</span>101131401<span class="s8">阿图什</span><span class="s1">:</span>101131501<span class="s8">博乐</span><span class="s1">:</span>101131601<span class="s8">克拉玛依</span><span class="s1">:</span>101130201<span class="s8">拉萨</span><span class="s1">:</span>101140101<span class="s8">山南</span><span class="s1">:</span>101140301<span class="s8">阿里</span><span class="s1">:</span>101140701<span class="s8">昌都</span><span class="s1">:</span>101140501<span class="s8">那曲</span><span class="s1">:</span>101140601<span class="s8">日喀则</span><span class="s1">:</span>101140201<span class="s8">林芝</span><span class="s1">:</span>101140401<span class="s8">台北县</span><span class="s1">:</span>101340101<span class="s8">高雄</span><span class="s1">:</span>101340201<span class="s8">台中</span><span class="s1">:</span>101340401<span class="s8">海口</span><span class="s1">:</span>101310101<span class="s8">三亚</span><span class="s1">:</span>101310201<span class="s8">东方</span><span class="s1">:</span>101310202<span class="s8">临高</span><span class="s1">:</span>101310203<span class="s8">澄迈</span><span class="s1">:</span>101310204<span class="s8">儋州</span><span class="s1">:</span>101310205<span class="s8">昌江</span><span class="s1">:</span>101310206<span class="s8">白沙</span><span class="s1">:</span>101310207<span class="s8">&#29756;中</span><span class="s1">:</span>101310208<span class="s8">定安</span><span class="s1">:</span>101310209<span class="s8">屯昌</span><span class="s1">:</span>101310210<span class="s8">&#29756;海</span><span class="s1">:</span>101310211<span class="s8">文昌</span><span class="s1">:</span>101310212<span class="s8">保亭</span><span class="s1">:</span>101310214<span class="s8">万宁</span><span class="s1">:</span>101310215<span class="s8">陵水</span><span class="s1">:</span>101310216<span class="s8">西沙</span><span class="s1">:</span>101310217<span class="s8">南沙岛</span><span class="s1">:</span>101310220<span class="s8">乐东</span><span class="s1">:</span>101310221<span class="s8">五指山</span><span class="s1">:</span>101310222<span class="s8">&#29756;山</span><span class="s1">:</span>101310102<span class="s8">长沙</span><span class="s1">:</span>101250101<span class="s8">株洲</span><span class="s1">:</span>101250301<span class="s8">衡阳</span><span class="s1">:</span>101250401<span class="s8">郴州</span><span class="s1">:</span>101250501<span class="s8">常德</span><span class="s1">:</span>101250601<span class="s8">益阳</span><span class="s1">:</span>101250700<span class="s8">娄底</span><span class="s1">:</span>101250801<span class="s8">邵阳</span><span class="s1">:</span>101250901<span class="s8">岳阳</span><span class="s1">:</span>101251001<span class="s8">张家界</span><span class="s1">:</span>101251101<span class="s8">怀化</span><span class="s1">:</span>101251201<span class="s8">黔阳</span><span class="s1">:</span>101251301<span class="s8">永州</span><span class="s1">:</span>101251401<span class="s8">吉首</span><span class="s1">:</span>101251501<span class="s8">湘潭</span><span class="s1">:</span>101250201<span class="s8">南京</span><span class="s1">:</span>101190101<span class="s8">镇江</span><span class="s1">:</span>101190301<span class="s8">苏州</span><span class="s1">:</span>101190401<span class="s8">南通</span><span class="s1">:</span>101190501<span class="s8">扬州</span><span class="s1">:</span>101190601<span class="s8">宿迁</span><span class="s1">:</span>101191301<span class="s8">徐州</span><span class="s1">:</span>101190801<span class="s8">淮安</span><span class="s1">:</span>101190901<span class="s8">连云港</span><span class="s1">:</span>101191001<span class="s8">常州</span><span class="s1">:</span>101191101<span class="s8">泰州</span><span class="s1">:</span>101191201<span class="s8">无锡</span><span class="s1">:</span>101190201<span class="s8">盐城</span><span class="s1">:</span>101190701<span class="s8">哈尔滨</span><span class="s1">:</span>101050101<span class="s8">牡丹江</span><span class="s1">:</span>101050301<span class="s8">佳木斯</span><span class="s1">:</span>101050401<span class="s8">绥化</span><span class="s1">:</span>101050501<span class="s8">黑河</span><span class="s1">:</span>101050601<span class="s8">双鸭山</span><span class="s1">:</span>101051301<span class="s8">伊春</span><span class="s1">:</span>101050801<span class="s8">大庆</span><span class="s1">:</span>101050901<span class="s8">七台河</span><span class="s1">:</span>101051002<span class="s8">鸡西</span><span class="s1">:</span>101051101<span class="s8">鹤岗</span><span class="s1">:</span>101051201<span class="s8">齐齐哈尔</span><span class="s1">:</span>101050201<span class="s8">大兴安岭</span><span class="s1">:</span>101050701<span class="s8">长春</span><span class="s1">:</span>101060101<span class="s8">延吉</span><span class="s1">:</span>101060301<span class="s8">四平</span><span class="s1">:</span>101060401<span class="s8">白山</span><span class="s1">:</span>101060901<span class="s8">白城</span><span class="s1">:</span>101060601<span class="s8">辽源</span><span class="s1">:</span>101060701<span class="s8">松原</span><span class="s1">:</span>101060801<span class="s8">吉林</span><span class="s1">:</span>101060201<span class="s8">通化</span><span class="s1">:</span>101060501<span class="s8">沈阳</span><span class="s1">:</span>101070101<span class="s8">鞍山</span><span class="s1">:</span>101070301<span class="s8">抚顺</span><span class="s1">:</span>101070401<span class="s8">本溪</span><span class="s1">:</span>101070501<span class="s8">丹东</span><span class="s1">:</span>101070601<span class="s8">葫芦岛</span><span class="s1">:</span>101071401<span class="s8">营口</span><span class="s1">:</span>101070801<span class="s8">阜新</span><span class="s1">:</span>101070901<span class="s8">辽阳</span><span class="s1">:</span>101071001<span class="s8">铁岭</span><span class="s1">:</span>101071101<span class="s8">朝阳</span><span class="s1">:</span>101071201<span class="s8">盘锦</span><span class="s1">:</span>101071301<span class="s8">大连</span><span class="s1">:</span>101070201<span class="s8">锦州</span><span class="s1">:</span>101070701<span class="s1">&nbsp;</span></p>
+<p class="p8" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<br>
+</p>
+<p class="p8" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+</p>
+<p class="p1" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span style="color:rgb(153,153,255)">webservice<span class="s1">工厂接口</span>&nbsp;http:<span class="s2">//www.36wu.com</span></span></p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span style="color:rgb(153,153,255)"><span class="s3">快递查询接口</span><span class="s4">http:</span>//webservice.36wu.com/ExpressService.asmx</span></p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span style="color:rgb(153,153,255)"><span class="s4">ip</span><span class="s3">查询接口</span><span class="s4">http:</span>//webservice.36wu.com/ipService.asmx</span></p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span style="color:rgb(153,153,255)"><span class="s3">天气预报接口</span><span class="s4">http:</span>//webservice.36wu.com/weatherService.asmx</span></p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span style="color:rgb(153,153,255)"><span class="s3">身份证查询接口</span><span class="s4">http:</span>//webservice.36wu.com/IdCardService.asmx</span></p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span style="color:rgb(153,153,255)"><span class="s3">手机归属地接口</span><span class="s4">http:</span>//webservice.36wu.com/MobilePhoneService.asmx</span></p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span style="color:rgb(153,153,255)"><span class="s3">翻译接口</span><span class="s4">http:</span>//webservice.36wu.com/TranslationService.asmx</span></p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span style="color:rgb(153,153,255)"><span class="s3">火车时刻接口</span><span class="s4">http:</span>//webservice.36wu.com/TrainService.asmx</span></p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span style="color:rgb(153,153,255)"><span class="s3">股票查询接口</span><span class="s4">http:</span>//webservice.36wu.com/StockService.asmx</span></p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span style="color:rgb(153,153,255)"><span class="s3">邮编接口</span><span class="s4">http:</span>//webservice.36wu.com/ZipcodeService.asmx</span></p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span style="color:rgb(153,153,255)"><span class="s3">二维码</span><span class="s4">Web</span><span class="s3">服务</span><span class="s4">http:</span>//webservice.36wu.com/DimensionalCodeService.asmx</span></p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span style="color:rgb(153,153,255)"><span class="s3">公交查询</span><span class="s4">Web</span><span class="s3">服务</span><span class="s4">http:</span>//webservice.36wu.com/mapService.asmx&nbsp;</span></p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span style="color:rgb(153,153,255)"><span class="s4">ISBN</span><span class="s3">查询</span><span class="s4">Web</span><span class="s3">服务</span><span class="s4">http:</span>//webservice.36wu.com/ISBNService.asmx</span></p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<span style="color:rgb(153,153,255)"><span class="s4">ICP</span><span class="s3">备案查询</span><span class="s4">Web</span><span class="s3">服务</span><span class="s4">http:</span>//webservice.36wu.com/ICPServic.asmx</span></p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<br>
+</p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+<br>
+</p>
+<p class="p2" style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px">
+原文网址http://g.kehou.com/t1029846752.html</p>
+
+                      </div>
+                    </dd>
+                  </dl>
+                </div>
+                <div class="skin_nav">        
+                     <div class="skin_edit"><i class="fa fa-th-list"></i>
+                     <div class="nav_list nav_list_edit"><a href="/yybj">文章列表</a></div>
+                  </div>
+                     
+                </div>
+                <div class="rssFix">
+        	        <a href="http://blog.csdn.net/yybj/rss/list" class="column"  onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_RSS'])"><i class="fa fa-rss"></i></a>
+                </div>        
+
+                <div id="goTopBtn" class="skin_backTop"><i class="fa fa-chevron-up"></i></div>
+        </div>
+        <div class="detail_b">
+          <p class="reprint_copy" style="display:none" id="copyright"></p>  
+		   <!--      
+          <div class="bole" style="display:none">
+            <h2 class="bole_t clearfix"><span>伯乐推荐</span>
+              <label>一共有<em>{bolecount}</em>位博乐进行推荐</label>
+            </h2>
+           {bolecomment}              
+          </div>		
+          -->  
+           <!-- style="color:#dd3737"style="color:#dd3737"-->
+          <h2 class="praise" >
+            <label id="digg" ArticleId="40476939" onclick="btndigga();" ><span id="btnDigg">顶</span><em>0</em></label>
+            <label id="bury" onclick="btnburya();"><span id="btnBury"   >踩</span><em>0</em></label>
+          </h2>           
+                <div class="tracking-ad" data-mod="popu_222"><a href="javascript:void(0);" >&nbsp;</a>   </div>
+                <div class="tracking-ad" data-mod="popu_223"> <a href="javascript:void(0);" >&nbsp;</a></div>
+           
+             <script type="text/javascript">
+                 function btndigga() {
+                     $(".tracking-ad[data-mod='popu_222'] a").click();
+                 }
+                 function btnburya() {
+                     $(".tracking-ad[data-mod='popu_223'] a").click();
+                 }
+
+                 $(function () {
+                     if ($(".markdown_views").length > 0) {
+                         $('pre.prettyprint code').each(function () {
+                             var lines = $(this).text().split('\n').length;
+                             var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+                             $(this).addClass('has-numbering').parent().append($numbering);
+                             for (i = 1; i <= lines; i++) {
+                                 $numbering.append($('<li/>').text(i));
+                             };
+                             $numbering.fadeIn(1700);
+                         });
+                     }
+                     else {
+                         $("#article_content pre").each(function () {
+                             var $this = $(this);
+                             if ($this.attr("class") != undefined) {
+                                 if ($this.attr("class").indexOf("brush:") != -1) {
+                                     var lang = $this.attr("class").split(';')[0].split(':')[1];
+                                     $this.attr('name', 'code');
+                                     $this.attr('class', lang);
+                                 }
+                                 if ($this.attr("class")) {
+                                     $this.attr('name', 'code');
+                                 }
+                             }
+                         });
+                         $('#article_content textarea[name=code]').each(function () {
+                             var $this = $(this);
+                             if ($this.attr("class").indexOf(":") != -1) {
+                                 $this.attr("class", $this.attr("class").split(':')[0]);
+                             }
+                         });
+                         dp.SyntaxHighlighter.HighlightAll('code');
+                         $('.highlighter').addClass('dp-highlighter');
+                         if (!window.clipboardData) {
+                             setTimeout("setCopyBtn()", 500);
+                         }
+
+                         function __get_code_toolbar(snippet_id) {
+                             return $("<span class='tracking-ad' data-mod='popu_167'><a href='https://code.csdn.net/snippets/"
+                                     + snippet_id
+                                     + "' target='_blank' title='在CODE上查看代码片'  style='text-indent:0;'><img src='https://code.csdn.net/assets/CODE_ico.png' width=12 height=12 alt='在CODE上查看代码片' style='position:relative;top:1px;left:2px;'/></a></span>"
+                                     + "<span class='tracking-ad' data-mod='popu_170'><a href='https://code.csdn.net/snippets/"
+                                     + snippet_id
+                                     + "/fork' target='_blank' title='派生到我的代码片' style='text-indent:0;'><img src='https://code.csdn.net/assets/ico_fork.svg' width=12 height=12 alt='派生到我的代码片' style='position:relative;top:2px;left:2px;'/></a></span>");
+                         }
+
+                         $("[code_snippet_id]").each(function () {
+                             __s_id = $(this).attr("code_snippet_id");
+                             if (__s_id != null && __s_id != "" && __s_id != 0 && parseInt(__s_id) > 70020) {
+                                 __code_tool = __get_code_toolbar(__s_id);
+                                 $(this).prev().find(".tools").append(__code_tool);
+                             }
+                         });
+
+                         $(".bar").show();
+                     }
+                 });
+            </script>
+          <div class="blog_share">
+              <!--<i class="fa fa-qq"></i><i class="fa fa-weixin"></i><i class="fa fa-weibo"></i><i class="fa fa-renren"></i><i class="fa fa-qq"></i><i class="fa fa-weixin"></i>
+              <i class="fa fa-weibo"></i><i class="fa fa-renren"></i>-->                
+               <div class="bdsharebuttonbox tracking-ad" style="float: right;" data-mod="popu_172">
+                <a href="#" class="bds_more" data-cmd="more" style="background-position:0 0 !important; background-image: url(http://bdimg.share.baidu.com/static/api/img/share/icons_0_16.png?v=d754dcc0.png) !important"></a>
+                <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"  style="background-position:0 -52px !important"></a>
+                <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"style="background-position:0 -104px !important"></a>
+                <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"style="background-position:0 -260px !important"></a>
+                <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"style="background-position:0 -208px !important"></a>
+                <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"style="background-position:0 -1612px !important" ></a>
+                </div>
+                <script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+                <!-- Baidu Button END -->
+          </div>
+          <div class="forward_back">
+            <div class="back fl"><a href="javascript:void(0);" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian']);location.href='/yybj/article/details/40378099';"><span><i class="fa fa-arrow-left"></i></span><em>ProgressDialog使用总结</em></a></div><div class="forward fr"><a href="javascript:void(0);" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian']);location.href='/yybj/article/details/40484697';"><em>真正的中国天气api接口xml，json（求加精） ...</em><span><i class="fa fa-arrow-right"></i></span></a></div>
+          </div>
+            <div>
+                <ins data-revive-zoneid="71" data-revive-id="8c38e720de1c90a6f6ff52f3f89c4d57"></ins>
+            </div>            
+        <!--  
+		{articleinsamecategory}
+            -->
+          <div class="comment" id="comment_form">
+              <div id="commentsbmitarear">
+                    <h2 class="comment_t">发表评论</h2>
+                    <dl class="publish_comment clearfix" id="commentbox">
+                      <dt><a href="http://my.csdn.net/attilax"><img src="http://avatar.csdn.net/3/9/1/1_attilax.jpg"></a></dt>
+                      <dd>                 
+			          <form action="/yybj/comment/submit?id=40476939" method="post" onsubmit="return subform(this);" id="commentform">
+					        <textarea class="publish_txt" id="comment_content"></textarea>
+					        <div class="publish clearfix">
+					
+					          <div class="publish_l"><i class="fa fa-code J_code"></i></div>
+
+					          <input type="hidden" id="comment_replyId" name="comment_replyId">
+					          <input type="hidden" id="comment_userId" name="comment_userId" value="">
+					          <input type="hidden" id="commentId" name="commentId" value="">
+					  
+					          <a href="javascript:void(0);" class="publish_btn"> 发表评论</a>&nbsp;&nbsp;<span id="tip_comment" style="color: Red; display: none;"></span>
+					
+					          <div class="comment-code-pop J_lang_list" id="lang_list" code="code"><a href="#html" style="width:95px;" class="long_name">HTML/XML</a><a href="#objc" style="width:95px;" class="long_name">objective-c</a><a href="#delphi" style="width:58px;" class="zhong_name">Delphi</a><a href="#ruby" class="zhong_name">Ruby</a><a href="#php">PHP</a><a href="#csharp" class="duan_name">C#</a><a style=" border-right: none;" href="#cpp" class="duan_name">C++</a><a style=" border-bottom:none;width:95px;" href="#javascript" class="long_name">JavaScript</a><a style=" border-bottom:none;width:95px;" href="#vb" class="long_name">Visual Basic</a><a style=" border-bottom:none;" href="#python" class="zhong_name">Python</a><a style=" border-bottom:none;" href="#java" class="zhong_name">Java</a><a style="border-bottom:none;" href="#css" class="duan_name">CSS</a><a style="border-bottom:none;" href="#sql" class="duan_name">SQL</a><a style="border:none; " href="#plain" class="duan_name">其它</a><span class="arrb"></span></div>
+					        </div>
+			         </form>
+                      </dd>
+                    </dl>
+               </div>
+              <a name="comments"></a>
+            <div class="comment_list" id="comment_list"></div>
+            <div  style="height:60px">&nbsp;</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="skin_right">
+      <div id="skin_r_wrap" class="skin_r_wrap">
+        <div id="skin_r" class="skin_r"><i id="arrow_r" class="fa fa-arrow-right"></i>
+          <div class="mess"><a href="http://my.csdn.net/yybj"><img src="http://avatar.csdn.net/A/6/6/1_yybj.jpg" alt="img" class="head"></a>
+            <p class="mess_name">yybj</p>
+            <div class="grade">
+                <p  title="积分：869"><span>等级：</span><img src="http://c.csdnimg.cn/jifen/images/xunzhang/jianzhang/blog3.png"></p>
+                <p><span>排名：</span><span>千里之外</span></p>
+            </div>
+            <div class="blog_medal"><a href="http://blog.csdn.net/experts/rule.html"></a>
+              <div class="medal_c"></div>
+              <div class="attention">
+			  <a href="javascript:void(0);" id="span_add_follow"><i class="fa fa-plus"></i><span>加关注</span></a>
+			  <a href="javascript:void(0);" onClick="window.open('http://msg.csdn.net/letters/model?receiver=yybj','_blank','height=350,width=700');_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_sixin'])"><i class="fa fa-envelope-o"></i><span>发私信</span></a>			  			 
+			  </div>   
+			   <div class="contact"></div>         
+            </div>
+          </div>
+          <div class="classify">     
+             <!--
+            <dl class="classify_list js_list">
+	             <dt>
+	                  <div class="js_column"><i class="fa fa-th"></i><a href="#" class="column">文章分类</a></div>
+	            </dt>
+            </dl>
+
+                  <dl class="classify_list">
+              <dt><i class="fa fa-play-circle"></i><a  href="/yybj/blog/course" class="column">我的课程</a></dt>
+            </dl> 
+		    -->	    	
+            
+            
+                
+               
+               <dl class="classify_list">
+                     <div class="article_search">
+                         <div class="article_search_c">
+                            <form id="frmSearch" action="http://so.csdn.net/search" class="form_search" target="_blank">
+                                <input type="text" id="inputSearch" placeholder="文章搜索"><i class="fa fa-search" id="btnSubmit"></i>
+                            </form>
+                         </div>
+                     </div>
+               </dl>  
+                    
+            <dl class="classify_list">
+              <dt><i class="fa fa-file-text"></i><a  href="/yybj/blog/column" class="column">博客专栏</a> </dt>
+            </dl>  
+                    
+           <dl class="classify_list js_list">
+              <dt>
+                <div class="js_column_wrap"><i class="fa fa-th"></i><span class="column">文章分类</span></div>
+                <ul id="article_list0" class="article_list">
+				  <li><a href="/yybj/article/category/3172911" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Android【基础】</a><span>（6）</span></li><li><a href="/yybj/article/category/3172917" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Android【进阶】</a><span>（1）</span></li><li><a href="/yybj/article/category/3172909" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Android【高级】</a><span>（8）</span></li><li><a href="/yybj/article/category/3172907" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Android【第三方控件】</a><span>（8）</span></li><li><a href="/yybj/article/category/2878467" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Android【微信开发】</a><span>（2）</span></li><li><a href="/yybj/article/category/5952603" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Android【工具】</a><span>（6）</span></li><li><a href="/yybj/article/category/2309467" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">数据库</a><span>（3）</span></li><li><a href="/yybj/article/category/2569451" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">java</a><span>（3）</span></li><li><a href="/yybj/article/category/2413291" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">ASP.NET</a><span>（14）</span></li><li><a href="/yybj/article/category/2432785" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">编程知识</a><span>（1）</span></li><li><a href="/yybj/article/category/2453499" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">android</a><span>（31）</span></li><li><a href="/yybj/article/category/5980243" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Html5</a><span>（1）</span></li><li><a href="/yybj/article/category/2567761" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">JavaWeb</a><span>（1）</span></li><li><a href="/yybj/article/category/2856841" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Linux</a><span>（1）</span></li><li><a href="/yybj/article/category/6199057" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">MUI设计</a><span>（4）</span></li><li><a href="/yybj/article/category/6402029" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">没来得及整理</a><span>（1）</span></li>                  
+                </ul>
+              </dt>
+              <dd style="display:none"><a href="#" class="article_add"><i class="fa fa-plus"></i></a></dd>
+            </dl>
+            
+            <dl class="classify_list js_list">
+              <dt>
+                <div class="js_column_wrap"><i class="fa fa-calendar"></i><span class="column">文章存档</span></div>
+                <ul id="article_list1" class="article_list">
+                 
+                    <li><a href="/yybj/article/month/2016/11">2016年11月</a><span>(3)</span></li>
+                
+                    <li><a href="/yybj/article/month/2016/09">2016年09月</a><span>(7)</span></li>
+                
+                    <li><a href="/yybj/article/month/2016/08">2016年08月</a><span>(1)</span></li>
+                
+                    <li><a href="/yybj/article/month/2016/06">2016年06月</a><span>(1)</span></li>
+                
+                    <li><a href="/yybj/article/month/2016/04">2016年04月</a><span>(4)</span></li>
+                
+                    <li><a href="/yybj/article/month/2016/02">2016年02月</a><span>(1)</span></li>
+                
+                    <li><a href="/yybj/article/month/2016/01">2016年01月</a><span>(1)</span></li>
+                
+                    <li><a href="/yybj/article/month/2015/11">2015年11月</a><span>(5)</span></li>
+                
+                    <li><a href="/yybj/article/month/2015/06">2015年06月</a><span>(1)</span></li>
+                
+                    <li><a href="/yybj/article/month/2015/05">2015年05月</a><span>(6)</span></li>
+                
+                    <li><a href="/yybj/article/month/2015/02">2015年02月</a><span>(2)</span></li>
+                
+                    <li><a href="/yybj/article/month/2015/01">2015年01月</a><span>(3)</span></li>
+                
+                    <li><a href="/yybj/article/month/2014/12">2014年12月</a><span>(3)</span></li>
+                
+                    <li><a href="/yybj/article/month/2014/11">2014年11月</a><span>(9)</span></li>
+                
+                    <li><a href="/yybj/article/month/2014/10">2014年10月</a><span>(14)</span></li>
+                
+                    <li><a href="/yybj/article/month/2014/09">2014年09月</a><span>(7)</span></li>
+                
+                    <li><a href="/yybj/article/month/2014/08">2014年08月</a><span>(4)</span></li>
+                
+                    <li><a href="/yybj/article/month/2014/07">2014年07月</a><span>(5)</span></li>
+                
+                    <li><a href="/yybj/article/month/2014/06">2014年06月</a><span>(4)</span></li>
+                
+                    <li><a href="/yybj/article/month/2014/05">2014年05月</a><span>(3)</span></li>
+                
+                    <li><a href="/yybj/article/month/2014/04">2014年04月</a><span>(8)</span></li>
+                
+                </ul>
+              </dt>
+            </dl>
+                 
+            <dl class="classify_list js_list">
+              <dt>
+                <div class="js_column_wrap"><i class="fa fa-eye"></i><span class="column">阅读排行</span></div>
+                <ul class="article_list">
+                
+                 <li><a href="/yybj/article/details/43488705">Android 修改Android签名证书keystore的密码、别名alias以及别名的密码</a><span>（1965）</span></li>
+                 
+                 <li><a href="/yybj/article/details/46639289">Android 【蓝牙4.0 BLE 低功耗可穿戴设备】 开发总结</a><span>（1211）</span></li>
+                 
+                 <li><a href="/yybj/article/details/38312269">混合模式程序集是针对“v1.1.4322”版的运行时生成的,在没有配置其他信息的情况下,无法在 4.0 运行时中加载该程序集。</a><span>（1117）</span></li>
+                 
+                 <li><a href="/yybj/article/details/37930647">SQL Server 分页查询通用存储过程</a><span>（1019）</span></li>
+                 
+                 <li><a href="/yybj/article/details/38037593">asp.net webconfig文件详解</a><span>（955）</span></li>
+                 
+                 <li><a href="/yybj/article/details/40476939">开源免费天气预报接口API以及全国所有地区代码！！（国家气象局提供）</a><span>（929）</span></li>
+                 
+                 <li><a href="/yybj/article/details/27662611">c# Winform 用到的一个打印控件(VBprinter.DGVprint)。</a><span>（880）</span></li>
+                 
+                 <li><a href="/yybj/article/details/51636848">Android使用ASM实现手机与PC的屏幕共享</a><span>（815）</span></li>
+                 
+                 <li><a href="/yybj/article/details/43086393">E: dpkg 被中断，您必须手工运行 sudo dpkg --configure -a 解决此问题</a><span>（796）</span></li>
+                 
+                 <li><a href="/yybj/article/details/28603853">Win7 下如何注册OCX控件？</a><span>（766）</span></li>
+                 
+                </ul>
+              </dt>
+            </dl>
+            
+            <dl class="classify_list js_list">
+              <dt>
+                <div class="js_column_wrap"><i class="fa fa-comments"></i><span class="column">评论排行</span></div>
+                <ul class="article_list">
+                  
+                  <li><a href="/yybj/article/details/46639289">Android 【蓝牙4.0 BLE 低功耗可穿戴设备】 开发总结</a><span>（2）</span></li>
+                  
+                  <li><a href="/yybj/article/details/43488705">Android 修改Android签名证书keystore的密码、别名alias以及别名的密码</a><span>（1）</span></li>
+                  
+                  <li><a href="/yybj/article/details/25024483">jQuery-强大的jQuery选择器 (详解)[转]</a><span>（0）</span></li>
+                  
+                  <li><a href="/yybj/article/details/25024153">JQuery选择器总结</a><span>（0）</span></li>
+                  
+                  <li><a href="/yybj/article/details/24795601">JQuery中$(document).ready() 与window.onload的区别</a><span>（0）</span></li>
+                  
+                  <li><a href="/yybj/article/details/24482191">C#中的Monitor类</a><span>（0）</span></li>
+                  
+                  <li><a href="/yybj/article/details/24477407">C#多线程学习(六) 互斥对象</a><span>（0）</span></li>
+                  
+                  <li><a href="/yybj/article/details/24477221">C#多线程学习(五) 多线程的自动管理(定时器)</a><span>（0）</span></li>
+                  
+                  <li><a href="/yybj/article/details/53219948">15 个 Android 通用流行框架大全</a><span>（0）</span></li>
+                  
+                  <li><a href="/yybj/article/details/24476967">C#多线程学习(三) 生产者和消费者</a><span>（0）</span></li>
+                  
+                </ul>
+              </dt>
+            </dl>
+                
+            <dl class="classify_list js_list">
+              <dt>
+                <div class="js_column_wrap"><i class="fa fa-list-ol"></i><span class="column">推荐文章</span></div>
+                <ul class="article_list">
+                 <ul>
+<li><a href="http://blog.csdn.net/blogdevteam/article/details/60473425" target="_blank">* CSDN日报20170305——《谈谈学习方法》</a></li>
+<li><a href="http://blog.csdn.net/jiangguilong2000/article/details/59514646" 
+target="_blank">* 游戏跨服架构进化之路</a></li>
+<li><a href="http://blog.csdn.net/qibin0506/article/details/60478869"target="_blank">* 第一个PWA程序-聊天室</a></li>
+<li><a href="http://blog.csdn.net/baron_leizhang/article/details/58071773" target="_blank">* 安居客Android项目架构演进</a></li>
+<li><a href="http://blog.csdn.net/foruok/article/details/60552387" 
+target="_blank">* 程序员转行为什么这么难</a></li>
+
+
+</ul>
+                </ul>
+              </dt>
+            </dl>
+                  
+            <dl class="classify_list js_list">
+              <dt>
+                <div class="js_column_wrap"><i class="fa fa-commenting"></i><span class="column">最新评论</span></div>
+                <ul class="article_list new_comment">
+                  
+                    <li>                    
+                    <p><a href="/yybj/article/details/46639289">Android 【蓝牙4.0 BLE 低功耗可穿戴设备】 开发总结</a></p>                   
+                    <p><a href="/Dreamnight1996" class="reply_name">Dreamnight1996</a><span>回复：</span></p>
+                    <p class="reply_c"><em></em><i>博主 我特地登陆账号来感谢你！抄代码害死人啊，仔细比对了好久都没看出哪里有问题 但是就是接收不到数据...</i></p>                    
+                  </li>      
+                 
+                    <li>                    
+                    <p><a href="">Android 【蓝牙4.0 BLE 低功耗可穿戴设备】 开发总结</a></p>                   
+                    <p><a href="/qq_28105941" class="reply_name">qq_28105941</a><span>回复：</span></p>
+                    <p class="reply_c"><em></em><i>楼主急求源码，邮箱2196285091@qq.com，谢谢！</i></p>                    
+                  </li>      
+                 
+                    <li>                    
+                    <p><a href="/yybj/article/details/43488705">Android 修改Android签名证书keystore的密码、别名alias以及别名的密码</a></p>                   
+                    <p><a href="/yfyyfbyfy" class="reply_name">yfyyfbyfy</a><span>回复：</span></p>
+                    <p class="reply_c"><em></em><i>很好，开发地图很有用</i></p>                    
+                  </li>      
+                           
+                </ul>
+              </dt>
+            </dl>
+                
+
+            <!--
+           [startblogcolumn]            
+             [startsearch]   
+               <dl class="classify_list">
+                     <div class="article_search">
+                         <div class="article_search_c">
+                            <form id="frmSearch" action="http://so.csdn.net/search" class="form_search" target="_blank">
+                                <input type="text" id="inputSearch" placeholder="文章搜索"><i class="fa fa-search" id="btnSubmit"></i>
+                            </form>
+                         </div>
+                     </div>
+               </dl>  
+            [endsearch]   
+            
+            [startspecialcolumn]        
+            <dl class="classify_list">
+              <dt><i class="fa fa-file-text"></i><a  href="/yybj/blog/column" class="column">博客专栏</a> </dt>
+            </dl>  
+            [endspecialcolumn]   
+            
+             [startcategory]        
+           <dl class="classify_list js_list">
+              <dt>
+                <div class="js_column_wrap"><i class="fa fa-th"></i><span class="column">文章分类</span></div>
+                <ul id="article_list0" class="article_list">
+				  {articlecategorys}                  
+                </ul>
+              </dt>
+              <dd style="display:none"><a href="#" class="article_add"><i class="fa fa-plus"></i></a></dd>
+            </dl>
+            [endcategory]
+
+            [startarchive]
+            <dl class="classify_list js_list">
+              <dt>
+                <div class="js_column_wrap"><i class="fa fa-calendar"></i><span class="column">文章存档</span></div>
+                <ul id="article_list1" class="article_list">
+                 [startlist]
+                    <li><a href="/{0}/article/month/{1}/{2}">{1}年{2}月</a><span>({3})</span></li>
+                [endlist]
+                </ul>
+              </dt>
+            </dl>
+             [endarchive]    
+                [startviewcountarticles]    
+            <dl class="classify_list js_list">
+              <dt>
+                <div class="js_column_wrap"><i class="fa fa-eye"></i><span class="column">阅读排行</span></div>
+                <ul class="article_list">
+                [startlist]
+                 <li><a href="{columnarticleurl}">{columnarticletitle}</a><span>（{columnarticlecount}）</span></li>
+                 [endlist]
+                </ul>
+              </dt>
+            </dl>
+            [endviewcountarticles]
+                [startcommentcountarticles]
+            <dl class="classify_list js_list">
+              <dt>
+                <div class="js_column_wrap"><i class="fa fa-comments"></i><span class="column">评论排行</span></div>
+                <ul class="article_list">
+                  [startlist]
+                  <li><a href="{columnarticleurl}">{columnarticletitle}</a><span>（{columnarticlecommentcount}）</span></li>
+                  [endlist]
+                </ul>
+              </dt>
+            </dl>
+                [endcommentcountarticles]
+                [starthomepagearticles]
+            <dl class="classify_list js_list">
+              <dt>
+                <div class="js_column_wrap"><i class="fa fa-list-ol"></i><span class="column">推荐文章</span></div>
+                <ul class="article_list">
+                 {cloumcontent}
+                </ul>
+              </dt>
+            </dl>
+                  [endhomepagearticles]
+                [startnewcomments]
+            <dl class="classify_list js_list">
+              <dt>
+                <div class="js_column_wrap"><i class="fa fa-commenting"></i><span class="column">最新评论</span></div>
+                <ul class="article_list new_comment">
+                  [startlist]
+                    <li>                    
+                    <p><a href="{articleurl}">开源免费天气预报接口API以及全国所有地区代码！！（国家气象局提供）</a></p>                   
+                    <p><a href="/{commentusername}" class="reply_name">{commentusername}</a><span>回复：</span></p>
+                    <p class="reply_c"><em></em><i>{commentcontent}</i></p>                    
+                  </li>      
+                 [endlist]          
+                </ul>
+              </dt>
+            </dl>
+                [endnewcomments]
+                [startcustom]
+                   <dl class="classify_list js_list">
+                      <dt>
+                        <div class="js_column_wrap"><i class="fa fa-cube"></i><span class="column">{columntitle}</span></div>
+                        <ul class="article_list">
+                         {columcontent}
+                        </ul>
+                      </dt>
+                    </dl>
+                [endcustom]
+         [endblogcolumn]    
+            -->
+
+            <!--
+            <dl class="classify_list">
+              <dt class="rss"><i class="fa fa-rss"></i>			 
+			  <span class="column">
+			   	<a href="http://blog.csdn.net/yybj/rss/list" class="column"  onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_RSS'])">RSS订阅</a>
+			   </span>
+			  </dt>
+            </dl>
+            -->
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="skin_right_small" class="skin_right_small">
+      <div class="skin_r_small"><i id="faNavicon" class="fa fa-navicon"></i>
+        <div class="head_small"><a href="http://my.csdn.net/yybj"><img src="http://avatar.csdn.net/A/6/6/1_yybj.jpg" alt="img"></a></div>
+        <ul class="rSmallList">  
+           
+                
+                  <li class="small_article"><i class="fa fa-file-text"></i><a href="/yybj/blog/column" class="small_column">博客专栏</a></li>
+                    
+                  <li class="small_article js_smallArticle"><i class="fa fa-th"></i><a href="#" class="small_column">文章分类</a></li>
+                
+                  <li class="small_article js_smallArticle"><i class="fa fa-calendar"></i><a href="#" class="small_column">文章存档</a></li>
+                
+                  <li class="small_article js_smallArticle"><i class="fa fa-eye"></i><a href="#" class="small_column">阅读排行</a></li>
+              
+                  <li class="small_article js_smallArticle"><i class="fa fa-comments"></i><a href="#" class="small_column">评论排行</a></li>
+              
+                  <li class="small_article js_smallArticle"><i class="fa fa-list-ol"></i><a href="#" class="small_column">推荐文章</a></li>
+              
+                  <li class="small_article js_smallArticle"><i class="fa fa-commenting"></i><a href="#" class="small_column">最新评论</a></li>
+                      
+          <!-- 
+           [startblogcolumnsmall]   
+               [startspecialcolumn]    
+                  <li class="small_article"><i class="fa fa-file-text"></i><a href="/yybj/blog/column" class="small_column">博客专栏</a></li>
+               [endspecialcolumn]  
+                [startcategory]     
+                  <li class="small_article js_smallArticle"><i class="fa fa-th"></i><a href="#" class="small_column">文章分类</a></li>
+                [endcategory]     
+              [startarchive]
+                  <li class="small_article js_smallArticle"><i class="fa fa-calendar"></i><a href="#" class="small_column">文章存档</a></li>
+              [endarchive]
+              [startviewcountarticles]  
+                  <li class="small_article js_smallArticle"><i class="fa fa-eye"></i><a href="#" class="small_column">阅读排行</a></li>
+              [endviewcountarticles]  
+              [startcommentcountarticles]
+                  <li class="small_article js_smallArticle"><i class="fa fa-comments"></i><a href="#" class="small_column">评论排行</a></li>
+              [endcommentcountarticles]
+              [starthomepagearticles]
+                  <li class="small_article js_smallArticle"><i class="fa fa-list-ol"></i><a href="#" class="small_column">推荐文章</a></li>
+              [endhomepagearticles]
+              [startnewcomments]
+                  <li class="small_article js_smallArticle"><i class="fa fa-commenting"></i><a href="#" class="small_column">最新评论</a></li>
+              [endnewcomments]
+              [startcustom]
+                  <li class="small_article js_smallArticle"><i class="fa fa-cube"></i><a href="#" class="small_column">{columntitle}</a></li>
+              [endcustom]
+          [endblogcolumnsmall]    
+          -->         
+        </ul>        
+      </div>
+    </div>
+    <div id="mask"></div>
+    <script type="text/javascript" src="http://static.blog.csdn.net/skin/skin2-template/js/apps/accordion.js"></script>
+    
+    <script type="text/javascript" src="http://static.blog.csdn.net/skin/skin2-template/js/apps/jquery.mousewheel.js"></script>
+    <script type="text/javascript" src="http://static.blog.csdn.net/skin/skin2-template/js/apps/jquery.rollbar.min.js"></script>
+    
+    <script type="text/javascript" src="http://static.blog.csdn.net/skin/skin2-template/js/apps/transition.js"></script>  
+     <script id="noticeScript" type="text/javascript" charset="utf-8" btnId="header_notice_num" wrapId="note1" count="5" subCount="5" src="http://c.csdnimg.cn/public/common/toolbar/js/notify.js"></script>  
+    <!--script( type="text/javascript" src="http://csdnimg.cn/pubfooter/js/publib_footer.js" )-->
+    <!--script( type="text/javascript" src="http://static.csdn.net/public/common/toolbar/js/toolbar.js" )-->
+    <script id="csdn-toolbar-id" btnId="header_notice_num" wrapId="note1" count="5" subCount="5" type="text/javascript" src="http://c.csdnimg.cn/public/common/toolbar/js/toolbar.js"></script>
+
+     <div id="pop_win" style="display:none ;position: absolute; z-index: 10000; border: 1px solid rgb(220, 220, 220); top: 222.5px; left: 630px; opacity: 1; background: none 0px 0px repeat scroll rgb(255, 255, 255);">
+    
+    </div>
+    <div id="report_dialog">
+    </div>
+
+    <div id="popup_mask"></div>
+    <style  type="text/css">
+        #popup_mask
+        {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 9999;
+            left: 0px;
+            top: 0px;
+            opacity: 0.3;
+            filter: alpha(opacity=30);
+            display: none;
+        }
+
+         .skin_list  dl dd div ol {  
+        margin-left:15px;
+            }  
+
+       .skin_list dl dd div ol li {  
+         display:list-item;list-style-type:decimal;margin-left:15px;
+            }       
+
+    </style>     
+      
+        <div id="a52b5334d" style="width: 1px; height: 1px; display: none;">
+                    <script id="adJs52b5334"></script>
+                    <script>document.getElementById("adJs52b5334").src = "http://ads.csdn.net/js/opt/52b5334.js?t=" + Math.random();</script>
+        </div> 
+
+       <!-- 广告位开始 -->
+        <ins data-revive-zoneid="72" data-revive-id="8c38e720de1c90a6f6ff52f3f89c4d57"></ins>
+    <!-- 广告位结束 -->
+
+   <link rel="stylesheet" href="http://static.blog.csdn.net/css/blog_code.css" />
+            <script type="text/javascript" src="http://static.blog.csdn.net/scripts/saveToCode.js"></script>     
+	<script type="text/javascript" src="//csdnimg.cn/rabbit/tracking-ad/main.js?75eacd8></script>
+  </body>
+</html>
+ <script language="javascript" type="text/javascript" src="http://ads.csdn.net/js/async_new.js"></script>      
+
+<script  type="text/javascript">
+    $(function(){
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },500);
+    });
+</script>
+

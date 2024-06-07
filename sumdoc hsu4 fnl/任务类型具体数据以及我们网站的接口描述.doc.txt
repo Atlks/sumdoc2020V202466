@@ -1,0 +1,185 @@
+
+11
+11
+22
+22
+33
+33
+44
+55
+66
+6
+我们网站登录接口
+主要username 与pwd与sign
+
+_Http://host/api?_username=u11&pwd=0000&sing=askdjfaskdjfkasld;jfk
+
+返回用户信息，json结构。。根据我们网站目前的数据表结构返回就可。。
+另外，登录可以使用session机制。。。需要多返回一个session_id字段。。
+
+其他额外的安全机制可以后期添加。。前期集中功能为主就可。。
+获取任务通用结构
+Http://host/api_gettask?session_id=xxxajlkdjaflkdjfls
+
+返回json格式，具体：：
+字段	说明	
+
+taskid:	
+	任务id
+	
+
+task_type: 	。
+	reg/pub    注册任务，与发布数据任务。	
+
+task_data: 	任务数据结构。。json格式。
+	
+
+create_time	
+	:任务创建时间
+	
+
+other：其他需要的字段	
+	
+
+
+
+
+注册任务详细字段
+
+{
+  "action": "8112539d2b6622162dc847ec82b4fa88",
+  "answer": "9",
+  "captcha": "p7bm",
+  "forward": "http://demo.destoon.com/v5.0/member/login.php",
+  "post[areaid]": "2",
+  "post[company]": "我们的公司名称",
+  "post[cpassword]": "000000",
+  "post[email]": "attilax2@qq.com",
+  "post[gender]": "1",
+  "post[mobile]": "13640685012",
+  "post[password]": "000000",
+  "post[qq]": "1466519819",
+  "post[regid]": "6",
+  "post[telephone]": "020-88888888",
+  "post[truename]": "艾龙",
+  "post[type]": "私营独资企业",
+  "post[username]": "attilax2",
+  "submit": "同意以下服务条款，提交"
+}
+
+
+
+
+注册时问题题库的抓取
+
+
+
+数据任务
+供应信息数据结构
+
+{
+  "action": "add",
+  "mid": "5",
+  "itemid": "0",
+  "forward": "http://demo.destoon.com/v5.0/member/my.php",
+  "post[typeid]": "0",
+  "post[title]": " 信息标题 信息标题",
+  "color": "",
+  "post[catid]": "4483",
+  "post[brand]": "产品品牌",
+  "post[content]": "详细说明详细说明详细说明详细说明详细说明详细说明",
+  "post[thumb]": "http://demo.destoon.com/v5.0/file/upload/201504/03/19-45-06-42-8677.png.thumb.png",
+  "post[thumb1]": "",
+  "post[thumb2]": "",
+  "post[totime]": "",
+  "post[n1]": "参数1",
+  "post[v1]": "v1",
+  "post[n2]": "参数2",
+  "post[v2]": "v2",
+  "post[n3]": "",
+  "post[v3]": "",
+  "post[unit]": "个",
+  "post[price]": "9",
+  "post[minamount]": "100",
+  "post[amount]": "9999",
+  "post[days]": "3",
+  "post[mycatid]": "0",
+  "post[elite]": "0",
+  "answer": "3",
+  "captcha": "cxwp",
+  "post[sync_sina]": "0",
+  "post[sync_qq]": "0",
+  "post[sync_qzone]": "0",
+  "submit": " 提 交 "
+}
+.
+
+求购信息
+
+{
+  "action": "add",
+  "mid": "6",
+  "itemid": "0",
+  "forward": "http://demo.destoon.com/v5.0/member/my.php?mid=5&action=add",
+  "post[typeid]": "0",
+  "post[title]": "信息标题信息标题",
+  "color": "",
+  "post[catid]": "3252",
+  "post[content]": "详细说明详细说明详细说明详细说明详细说明",
+  "post[thumb]": "http://demo.destoon.com/v5.0/file/upload/201504/03/20-02-06-57-21.png.thumb.png",
+  "post[thumb1]": "",
+  "post[thumb2]": "",
+  "post[totime]": "2015-04-30",
+  "post[n1]": "参数1",
+  "post[v1]": "v1",
+  "post[n2]": "参数2",
+  "post[v2]": "v2",
+  "post[n3]": "",
+  "post[v3]": "",
+  "post[amount]": "100",
+  "post[price]": "9.9",
+  "post[pack]": "有包装",
+  "post[sync_sina]": "0",
+  "post[sync_qq]": "0",
+  "post[sync_qzone]": "0",
+  "submit": " 提 交 "
+}
+
+
+行情信息
+
+{
+  "action": "add",
+  "mid": "7",
+  "itemid": "0",
+  "forward": "http://demo.destoon.com/v5.0/member/my.php?mid=6&status=3",
+  "post[catid]": "453",
+  "post[title]": "行情标题行情标题",
+  "color": "",
+  "post[content]": "报价单报价单报价单报价单报价单",
+  "post[areaid]": "2",
+  "post[sync_sina]": "0",
+  "post[sync_qq]": "0",
+  "post[sync_qzone]": "0",
+  "submit": " 提 交 "
+}
+
+反馈接口
+
+发送数据如下：：
+
+	
+	
+
+taskid	任务id	
+
+exe_rzt	任务执行结果0为成功，1为失败	
+
+msg	任务失败详细详细描述	
+
+taskid_in_website	第三方网站的数据发布id	
+
+
+返回无。。
+如有异常，返回异常。。
+

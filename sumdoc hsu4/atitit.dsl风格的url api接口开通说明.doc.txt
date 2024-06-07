@@ -1,0 +1,39 @@
+atitit.dsl风格的url api接口开通说明
+
+11
+11
+11
+11
+22
+22
+2
+ 
+dsl风格的url api接口开通啦。
+为了便于html,js, flash前端的数据调用,添加了这个url api接口..原来只有个js 接口..
+规则
+http://112.74.110.80:8880/vdx/api_dsl.jsp?http_param=sql语句。。
+
+例子
+http://112.74.110.80:8880/vdx/api_dsl.jsp?http_param=select * from gv_material limit 0,10
+我:
+
+注解::http_param要urlencode...
+
+分页
+mysql数据库使用limit 格式
+mssql 数据库使用mssql的格式..
+后期规划统一为limit格式（需要做sql的解析与转换，暂时放后）。。。
+返回json格式
+
+{ "total": 1, "rows": [ { "application_type": 0, "update_user": null, "can_down_org": null, "file_path": "uploadf/01.mp4", "effectie_time": { "date": 27, "day": 1, "hours": 7, "minutes": 44, "month": 9, "nanos": 0, "seconds": 50, "time": 1414367090000, "timezoneOffset": -480, "year": 114 }, "material_type": 0, "material_id": 1, "logicDel": null, "size": null, "material_description": "aaaa", "update_time": null, "play_time": 3600, "create_time": { "date": 10, "day": 2, "hours": 14, "minutes": 53, "month": 2, "nanos": 0, "seconds": 25, "time": 1425970405000, "timezoneOffset": -480, "year": 115 }, "create_user": null, "thumb": "uploadf/0310_145225_161.jpg", "failure_time": { "date": 27, "day": 4, "hours": 7, "minutes": 44, "month": 7, "nanos": 0, "seconds": 50, "time": 1440632690000, "timezoneOffset": -480, "year": 115 } }] }
+
+异常的返回,也是json格式
+可以转换成个前台语言的异常,继续抛出...
+
+
+
+抓取分类数据
+
+设置application_type 属性条件（视频数据），where 语句
+
+

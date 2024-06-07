@@ -1,0 +1,25 @@
+Atitit.hibernate 翻页总记录数的问题
+
+需要独立查询。。
+
+简单的办法是默认999，在sublist
+	int pageSize = PageUtil.getPageSize(QueryPropertyssMap.get("pagesize"));
+	 		c.setFirstResult(PageUtil.getStartIndexFirstResult( QueryPropertyssMap.get("page_page"),pageSize)); 		 	
+			c.setMaxResults(999); //should be pageSize 
+			List  list = c.list();
+			
+			//	this.req.getSession().setAttribute("", list);
+		  	threadLocal_rowsCount.set(list.size());
+			Object page = QueryPropertyssMap.get("page_page");
+ 		List  list_sub = PagingUtil.getList(list,
+ 				QueryPropertyssMap.get("pagesize"), page);
+
+要是使用crieria查询的.可以使用 Projections.rowCount()分页
+
+Hql 查询的，使用hql查询总记录。。。
+
+参考
+hibernate统计单表记录数量 - 无边包围 - ITeye技术网站
+翻页 hibernate中criteria 的Projections.rowCount()分页查询满足条件的总记录数注意的地方 - z-one - ITeye技术网站
+
+

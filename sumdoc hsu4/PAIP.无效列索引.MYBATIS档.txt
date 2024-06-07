@@ -1,0 +1,20 @@
+PAIP.无效列索引.MYBATIS档.txt
+
+
+at org.apache.ibatis.type.BaseTypeHandler.setParameter(BaseTypeHandler.java:15)
+
+public abstract class BaseTypeHandler implements TypeHandler {
+
+  public void setParameter(PreparedStatement ps, int i, Object parameter, JdbcType jdbcType)
+ 
+
+
+ps中.columnMap 
+{1=null, 2=null, 3=0120106846C, 4=ROHS-底钢板板材0.5*460*450(DC53D无特殊深  热镀锌板, 5=, 6=null, 7=null, 8=DC53D, 9=0.5, 10=460, 11=450, 12=0.81, 13=, 14=null, 15=null, 17=null, 16=null, 19=null, 18=null, 21=null, 20=null, 23=null, 22=null, 25=null, 24=null, 27=null, 26=null, 28=null}
+
+
+DEBUG,如果I=28,则第28个参数有问题.
+
+
+解决：
+#{ERROR_TEXT2:VARCHAR}

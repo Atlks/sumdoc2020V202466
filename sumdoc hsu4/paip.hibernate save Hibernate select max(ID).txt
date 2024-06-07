@@ -1,0 +1,27 @@
+paip.hibernate save 失败的解决
+
+  打开log  debug  level,,看不见insert 代码...
+  
+  Hibernate select max(ID).txt
+  
+  
+  值得注意的是，save()方法并不立即执行SQL insert语句。只有当Session清理缓存时，才会执行SQL insert语句。如果在save()方法之后，又修改了持久化对象的属性，这会使得Session在清理缓存时，额外执行SQL update语句。以下两段代码尽管都能完成相同的功能，但是左边代码仅执行一条SQL insert语句，而右边代码执行一条SQL insert和一条SQL update语句。
+  
+  作者 老哇的爪子 Attilax 艾龙，  EMAIL:1466519819@qq.com
+来源： http://blog.csdn.net/attilax
+  
+  TProbeCustom o=new TProbeCustom();
+		o.setName("namexx");
+		TProbeCustomDAO d=new TProbeCustomDAO();
+		 Session session = d.getSession();
+		 Session session2 = d.getSession();
+		 //lyag session address yyeo .sh yg obj.
+		 core.log("---"+session.hashCode()+"---"+session2.hashCode() );
+	        Transaction tx = session.beginTransaction();
+		
+		d.save(o);
+		tx.commit();
+		System.out.println("f");
+		
+		
+就ok兰...也能看见insert sql兰...

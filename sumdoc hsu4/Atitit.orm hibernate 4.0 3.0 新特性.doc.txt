@@ -1,0 +1,27 @@
+Atitit.orm hibernate 4.0 3.0 新特性
+
+hibernate4.0+版本和3.0
+
+1.数据库方言设置
+<property name=”dialect”>org.hibernate.dialect.MySQL5Dialect</property>
+在3.3版本中连接MySQL数据库只需要指明MySQLDialect即可。在4.1版本中可以指出MySQL5Dialect
+2.buildSessionFactory
+4.1版本中buildSessionFactory()已经被buildSessionFactory(ServiceRegistry ServiceRegistry)取代
+解决办法：
+Configuration cfg = new Configuration();
+ServiceRegistry serviceRegistry =new ServiceRegistryBuilder().applySettings(cfg.getProperties()).buildServiceRegistry();
+SessionFactory sf = cfg.configure().buildSessionFactory(serviceRegistry);
+3.annotation
+org.hibernate.cfg.AnnotationConfiguration;
+Deprecated. All functionality has been moved to _Configuration_
+这个注解读取配置的class已经废弃，现在读取配置不需要特别注明是注解，直接用Configuration cfg = new Configuration();就可以读取注解。
+Hibernate4.1版本中推荐使用annotation配置，所以在引进jar包时把requested里面的包全部引进来就已经包含了annotation必须包了
+4.Hibernate4.1已经可以自动建表，所以开发时只需要自己开发类然后配置好就OK。不需要考虑怎么建表
+
+
+Hibernate 3.3主要的新特性 - newworld - BlogJava.htm
+hibernate4 使用及 新特性.htm
+
+hibernate4.0+版本和3.0+版本的区别总结_xidianzxm_新浪博客.htm
+
+

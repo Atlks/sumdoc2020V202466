@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="canonical" href="https://blog.csdn.net/xuezhimeng/article/details/7378096"/> 
+    <script type="text/javascript">
+        var username = "xuezhimeng";
+        var _blogger = username;
+        var blog_address = "https://blog.csdn.net/xuezhimeng";
+        var static_host = "https://csdnimg.cn/release/phoenix/";
+        var currentUserName = "attilax"; 
+        var fileName = '7378096';
+        var commentscount = 4;
+        var islock = false;
+        window.quickReplyflag = true;
+        var totalFloor = 4;
+        var isBole = false;
+        var isDigg = false;
+        var isExpert = false;
+        var isAdm = false;
+        var baiduKey = "could+not+instantiate+cache+implementation";
+        var needInsertBaidu = false;
+        var isShowAds = true;
+        var ChannelId = 0;
+    </script>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="referrer" content="always">
+    <script src="https://csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://csdnimg.cn/public/static/css/avatar.css">
+                <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/production/main-f869aa95a4.css">
+          <link rel="stylesheet" href="https://csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+
+    <script src="https://csdnimg.cn/rabbit/exposure-click/main-1.0.5.js"></script>
+    <script type="text/javascript" src="https://csdnimg.cn/pubfooter/js/tracking-1.0.2.js" charset="utf-8"></script>
+    <script type="text/javascript" src="https://csdnimg.cn/release/phoenix/production/main-e96db8abdf.js"></script>
+
+    <script src="https://dup.baidustatic.com/js/ds.js"></script>
+    <script type="text/javascript">
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+    </script>
+    <meta name="description" content="转载的一篇文章。
+出于新项目一定要求要用jsp，让我这个习惯写窗体应用程序的去搞web开发，让我好生为难。半路出家，遇到问题很多，转载些文章，自己顺便修改些，留备忘。
+说意义不大是在于：
+a、面对一定规模的数据量，内置的cache方式就派不上用场了；
+b、对查询结果集做缓存并不是MyBatis框架擅长的，它专心做的应该是sql mapper。采用此框架的Application去构建缓存更合" />
+    <meta name="keywords" content="cache,parsing" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+    <title>MyBatis的Cache实际意义不大 - CSDN博客</title>
+    <link href="https://csdnimg.cn/public/favicon.ico" rel="SHORTCUT ICON">
+              <script src="https://csdnimg.cn/search/baidu_search-1.1.2.js?v=201802071056&autorun=true&install=true&keyword=could+not+instantiate+cache+implementation"  type="text/javascript"></script>
+                      <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/production/htmledit_views-0a60691e80.css">
+            <style>
+            .MathJax, .MathJax_Message, .MathJax_Preview{
+                display: none
+            }
+      </style>
+</head>
+<body>
+<script id="toolbar-tpl-scriptId" prod="download" skin="black" src="https://csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="https://blog.csdn.net/"></script>
+<div class="container clearfix">
+  <main>
+    <div style="display:none;">
+      <img src="" onerror='setTimeout(function(){if(!/(csdn.net|iteye.com|baiducontent.com|googleusercontent.com|360webcache.com|sogoucdn.com|bingj.com|baidu.com)$/.test(window.location.hostname)){window.location.href="\x68\x74\x74\x70\x73\x3a\x2f\x2f\x77\x77\x77\x2e\x63\x73\x64\x6e\x2e\x6e\x65\x74"}},3000);'>
+    </div>
+    <article>
+        <h1 class="csdn_top">MyBatis的Cache实际意义不大</h1>
+        <div class="article_bar clearfix">
+            <div class="artical_tag">
+                <span class="original">
+                转载                </span>
+                <span class="time">2012年03月21日 15:05:48</span>
+            </div>
+
+            <ul class="article_tags clearfix csdn-tracking-statistics tracking-click" data-mod="popu_377" >
+                <li class="tit">标签：</li>
+
+<!--          [startarticletags]-->
+                                                            <li><a href="http://so.csdn.net/so/search/s.do?q=cache&t=blog" target="_blank">cache</a> <span>/</span></li>
+                                            <li><a href="http://so.csdn.net/so/search/s.do?q=parsing&t=blog" target="_blank">parsing</a> <span>/</span></li>
+                                            <li><a href="http://so.csdn.net/so/search/s.do?q=application&t=blog" target="_blank">application</a> <span>/</span></li>
+                                            <li><a href="http://so.csdn.net/so/search/s.do?q=web开发&t=blog" target="_blank">web开发</a> <span>/</span></li>
+                                            <li><a href="http://so.csdn.net/so/search/s.do?q=memcached&t=blog" target="_blank">memcached</a> <span>/</span></li>
+                                            <li><a href="http://so.csdn.net/so/search/s.do?q=xml&t=blog" target="_blank">xml</a> <span>/</span></li>
+                                    <!--          [endarticletags]-->
+            </ul>
+            <ul class="right_bar">
+                <li><button class="btn-noborder"><i class="icon iconfont icon-read"></i><span class="txt">7104</span></button></li>
+                <li class="edit">
+                    <a class="btn-noborder" href="" >
+                        <i class="icon iconfont icon-bianji"></i><span class="txt">编辑</span>
+                    </a>
+                </li>
+                <li class="del">
+                    <a class="btn-noborder" onclick="javascript:deleteArticle(fileName);return false;">
+                        <i class="icon iconfont icon-shanchu"></i><span class="txt">删除</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div id="article_content" class="article_content csdn-tracking-statistics tracking-click" data-mod="popu_519" data-dsm="post">
+                            <div class="htmledit_views">
+                        
+<p>转载的一篇文章。</p>
+<p>出于新项目一定要求要用jsp，让我这个习惯写窗体应用程序的去搞web开发，让我好生为难。半路出家，遇到问题很多，转载些文章，自己顺便修改些，留备忘。</p>
+<p><span style="color:rgb(51,51,51);font-family:Arial;font-size:14px;line-height:20px;">说意义不大是在于：<br style="line-height:normal;" /><span style="color:#ff0000;line-height:normal;">a、面对一定规模的数据量，内置的cache方式就派不上用场了；<br style="line-height:normal;" />
+b、对查询结果集做缓存并不是MyBatis框架擅长的，它专心做的应该是sql mapper。采用此框架的Application去构建缓存更合理，比如采用OSCache、Memcached啥的。</span><br style="line-height:normal;" /><br style="line-height:normal;" />
+一、MyBatis的Cache配置<br style="line-height:normal;" />
+1、全局开关：默认是true，如果它配成false，其余各个Mapper XML文件配成支持cache也没用。<br style="line-height:normal;" />
+&lt;settings&gt;<br style="line-height:normal;" /><span style="color:#0000ff;line-height:normal;">&lt;setting name="cacheEnabled" value="true"/&gt;</span><br style="line-height:normal;" />
+&lt;/settings&gt;<br style="line-height:normal;" /><br style="line-height:normal;" />
+2、各个Mapper XML文件，默认是不采用cache。在配置文件加一行就可以支持cache：<br style="line-height:normal;" /><span style="color:#0000ff;line-height:normal;"> &lt;cache /&gt;  就这个网上找了个java应用程序的例子，用的是&lt;cache type="org.mybatis.caches.ehcache.LoggingEhcache"/&gt;或者&lt;cache type="org.mybatis.caches.ehcache.EhcacheCache"/&gt; ，然后我把这个缓存功能也弄到自己的web中，老报错：</span></span></p>
+<p><span style="font-family:Arial;font-size:14px;line-height:20px;"><span style="color:#0000ff;"><span style="font-family:Tahoma, Arial, sans-serif;font-size:16px;"></span></span></span></p>
+<pre>org.apache.jasper.JasperException: org.apache.ibatis.exceptions.PersistenceException: 
+### Error building SqlSession.
+### The error may exist in yeah/person.xml
+### Cause: org.apache.ibatis.builder.BuilderException: Error parsing SQL Mapper Configuration. Cause: java.lang.RuntimeException: Error parsing Mapper XML. Cause: org.apache.ibatis.cache.CacheException: Could not instantiate cache implementation (class org.mybatis.caches.ehcache.EhcacheCache). Cause: java.lang.reflect.InvocationTargetException
+	org.apache.jasper.servlet.JspServletWrapper.handleJspException(JspServletWrapper.java:549)
+	org.apache.jasper.servlet.JspServletWrapper.service(JspServletWrapper.java:470)
+	org.apache.jasper.servlet.JspServlet.serviceJspFile(JspServlet.java:390)
+	org.apache.jasper.servlet.JspServlet.service(JspServlet.java:334)
+	javax.servlet.http.HttpServlet.service(HttpServlet.java:722)</pre>
+一堆错误，底下还有。直接换成<span style="color:rgb(0,0,255);font-family:Arial;font-size:14px;">&lt;cache /&gt;就ok了，在看到这篇文章说MyBatis的Cache意义不大，我看还是算了不折腾这个了，没那么多闲工夫。</span><br style="line-height:normal;" /><br style="line-height:normal;" /><br style="line-height:normal;" /><span style="color:#333333;">3、Mapper XML文件配置支持cache后，文件中所有的Mapper statement就支持了。此时要个别对待某条，需要：</span><br style="line-height:normal;" /><span style="color:#333333;">&lt;select id="inetAton" parameterType="string" resultType="integer" </span><span style="color:rgb(0,0,255);line-height:normal;">useCache=“false”</span><span style="color:#333333;">&gt;    </span><br style="line-height:normal;" /><span style="color:#333333;">select inet_aton(#{name})</span><br style="line-height:normal;" /><span style="color:#333333;">&lt;/select&gt;</span><br style="line-height:normal;" /><br style="line-height:normal;" /><span style="color:#333333;">二、注意的几个细节</span><br style="line-height:normal;" /><span style="color:#333333;">1、如果readOnly为false，此时要结果集对象是可序列化的。</span><br style="line-height:normal;" /><span style="color:#333333;">&lt;cache readOnly="false"/&gt;</span><br style="line-height:normal;" /><br style="line-height:normal;" /><span style="color:#333333;">2、在SqlSession未关闭之前，如果对于同样条件进行重复查询，此时采用的是local session cache，而不是上面说的这些cache。</span><br /><p></p>
+                </div>
+                    </div>
+        <script>
+        $(".MathJax").remove();
+        </script>
+    </article>
+      <div class="readall_box csdn-tracking-statistics tracking-click" data-mod="popu_376">
+          <div class="read_more_mask"></div>
+          <a class="btn btn-large btn-gray-fred read_more_btn" target="_self">阅读全文</a>
+      </div>
+      <div class="article_copyright">
+
+              </div>
+      <ul class="article_collect clearfix csdn-tracking-statistics tracking-click"  data-mod="popu_378">
+          <li class="tit">本文已收录于以下专栏：</li>
+<!--          [startarticlecolumns]-->
+                                <!--          [endarticlecolumns]-->
+      </ul>
+      <div class="edu_promotion" style="margin: 16px 0;display:none;"></div>
+      <div class="comment_box clearfix" id="comments">
+          <div id="comment_form">
+              <div id="commentsbmitarear">
+                                  <div class="comment_area clearfix">
+                      <div class="userimg">
+                        <a href="https://my.csdn.net/attilax">
+                          <img src="https://avatar.csdn.net/3/9/1/3_attilax.jpg">
+                        </a>
+                      </div>
+
+                      <form action="https://blog.csdn.net/xuezhimeng/phoenix/comment/submit?id=7378096" method="post" onsubmit="return subform(this);" id="commentform">
+                          <textarea class="comment_content" name="comment_content" id="comment_content" placeholder="写下你的评论…"></textarea>
+                          <div class="bot_bar clearfix">
+                              <div id="ubbtools" class="add_code">
+                                  <a href="#insertcode" code="code" target="_self"><i class="icon iconfont icon-daima"></i></a>
+                              </div>
+
+                              <input type="hidden" id="comment_replyId" name="comment_replyId">
+                              <input type="hidden" id="comment_userId" name="comment_userId" value="">
+                              <input type="hidden" id="commentId" name="commentId" value="">
+                              <input type="submit" class="btn btn-redborder" value="发表评论">
+                              <span id="tip_comment" class="tip">
+                              <div style="display: none;" class="csdn-tracking-statistics tracking-click" data-mod="popu_384"><a href="#" target="_blank" class="comment_area_btn">发表评论</a></div>
+
+                              <div id="lang_list" code="code">
+                                  <a href="#html" style="width:95px;" class="long_name" target="_self">HTML/XML</a>
+                                  <a href="#objc" style="width:95px;" class="long_name" target="_self">objective-c</a>
+                                  <a href="#delphi" style="width:58px;" class="zhong_name" target="_self">Delphi</a>
+                                  <a href="#ruby" class="zhong_name" target="_self">Ruby</a>
+                                  <a href="#php" target="_self">PHP</a>
+                                  <a href="#csharp" class="duan_name" target="_self">C#</a>
+                                  <a style=" border-right: none;" href="#cpp" class="duan_name" target="_self">C++</a>
+                                  <a style=" border-bottom:none;width:95px;" href="#javascript" class="long_name" target="_self">JavaScript</a>
+                                  <a style=" border-bottom:none;width:95px;" href="#vb" class="long_name" target="_self">Visual Basic</a>
+                                  <a style=" border-bottom:none;" href="#python" class="zhong_name" target="_self">Python</a>
+                                  <a style=" border-bottom:none;" href="#java" class="zhong_name" target="_self">Java</a>
+                                  <a style="border-bottom:none;" href="#css" class="duan_name" target="_self">CSS</a>
+                                  <a style="border-bottom:none;" href="#sql" class="duan_name" target="_self">SQL</a>
+                                  <a style="border:none; " href="#plain" class="duan_name" target="_self">其它</a>
+                                  <span class="arrb"></span>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+                              </div>
+          </div>
+      </div>
+      <div class="comment_li_outbox">
+          <div id="comment_list"></div>
+      </div>
+
+      <div class="more_comment">
+          <div id="comment_bar" class="trackgin-ad" data-mod="popu_385"></div>
+      </div>
+
+      <!-- <h3 class="recommend_tit" id="related">相关文章推荐</h3> -->
+      <div class="recommend_list clearfix" id="rasss">
+                                          <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/woshisap/article/details/6825714"  target="_blank" strategy="BlogCommendFromBaidu_0">
+                    <dd>
+                        <h2>MyBatis的缓存配置(Cache)</h2>
+                        <div class="summary">
+                            一、MyBatis的Cache配置
+1、全局开关：默认是true，如果它配成false，其余各个Mapper XML文件配成支持cache也没用。
+
+
+
+
+2、各个Mapper XML文件...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/7/4/6/3_woshisap.jpg" alt="woshisap" title="woshisap"></li>
+                            <li class="user_name">woshisap</li>
+                            <li class="time">2011年09月27日 12:57</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>24470</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/hupanfeng/article/details/16950161"  target="_blank" strategy="BlogCommendFromBaidu_1">
+                    <dd>
+                        <h2>深入浅出Mybatis-改造Cache</h2>
+                        <div class="summary">
+                            在前面的文章里，我开发了两个插件：根据注解实现的sql自动生成插件和分页插件。这两个插件在没有开启cache的情况下可以很好的使用，但开启cache后却出现了一些问题，为了解决这些问题，我编写了拦截c...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/C/D/4/3_hupanfeng.jpg" alt="hupanfeng" title="hupanfeng"></li>
+                            <li class="user_name">hupanfeng</li>
+                            <li class="time">2013年11月25日 20:14</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>17387</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                          <dl class="">
+            <script>
+            (function() {
+              var s = "_" + Math.random().toString(36).slice(2);
+              document.write('<div id="' + s + '"></div>');
+              (window.slotbydup=window.slotbydup || []).push({
+                id: '4765209',
+                container: s,
+                size: '808,120',
+                display: 'inlay-fix'
+              });
+            })();
+            </script>
+          </dl>
+                                        <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/canot/article/details/51491732"  target="_blank" strategy="BlogCommendFromBaidu_2">
+                    <dd>
+                        <h2>MyBatis缓存机制学习笔记</h2>
+                        <div class="summary">
+                            与Hibernate一样，MyBatis 同样提供了一级缓存和二级缓存的支持。
+  
+  一级缓存: 基于PerpetualCache 的 HashMap本地缓存，其存储作用域为 Session，当 ...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/6/5/2/3_canot.jpg" alt="canot" title="canot"></li>
+                            <li class="user_name">canot</li>
+                            <li class="time">2016年05月24日 16:58</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>8656</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/mqf163/article/details/52514015"  target="_blank" strategy="BlogCommendFromBaidu_3">
+                    <dd>
+                        <h2>Mybatis（二）-----settings配置</h2>
+                        <div class="summary">
+                                                    </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/0/F/4/3_mqf163.jpg" alt="mqf163" title="mqf163"></li>
+                            <li class="user_name">mqf163</li>
+                            <li class="time">2016年09月12日 15:32</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>10054</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/realskyzou/article/details/54137051"  target="_blank" strategy="BlogCommendFromBaidu_4">
+                    <dd>
+                        <h2>MyBatis（3.4.2）的Cache机制完全解析</h2>
+                        <div class="summary">
+                            基于MyBatis3.4.2源码深度解析缓存机制，包括一级缓存和二级缓存。                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/A/1/B/3_realskyzou.jpg" alt="realskyzou" title="realskyzou"></li>
+                            <li class="user_name">realskyzou</li>
+                            <li class="time">2017年01月06日 13:32</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1046</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/educast/article/details/55209660"  target="_blank" strategy="BlogCommendFromBaidu_5">
+                    <dd>
+                        <h2>Mybatis介绍之缓存</h2>
+                        <div class="summary">
+                            Mybatis介绍之缓存                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/C/8/E/3_educast.jpg" alt="educast" title="educast"></li>
+                            <li class="user_name">educast</li>
+                            <li class="time">2017年02月15日 14:57</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1527</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/isea533/article/details/44566257"  target="_blank" strategy="BlogCommendFromBaidu_6">
+                    <dd>
+                        <h2>深入了解MyBatis二级缓存</h2>
+                        <div class="summary">
+                            MyBatis深入了解二级缓存                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/D/5/F/3_isea533.jpg" alt="isea533" title="isea533"></li>
+                            <li class="user_name">isea533</li>
+                            <li class="time">2015年03月30日 08:57</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>69783</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/z69183787/article/details/76239747"  target="_blank" strategy="BlogCommendFromBaidu_7">
+                    <dd>
+                        <h2>Mybatis Cache探究</h2>
+                        <div class="summary">
+                            这里先不讨论第三方的cache集成（有memcache/oscache集成，控制力度跟下面说的一样比较粗，也可以跟spring3的cache做集成， spring3的cache是基于方法的缓存,具体可...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/0/6/0/3_z69183787.jpg" alt="z69183787" title="z69183787"></li>
+                            <li class="user_name">z69183787</li>
+                            <li class="time">2017年07月28日 11:25</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>477</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/qq_28114645/article/details/78652710"  target="_blank" strategy="BlogCommendFromBaidu_8">
+                    <dd>
+                        <h2>mybatis cache 设置</h2>
+                        <div class="summary">
+                            开启cache：
+
+
+
+    
+
+
+说明:
+eviction是缓存的淘汰算法，可选值有"LRU"、"FIFO"、"SOFT"、"WEAK"，缺省值是LRU
+
+
+flashInt...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/0/8/9/3_qq_28114645.jpg" alt="qq_28114645" title="qq_28114645"></li>
+                            <li class="user_name">qq_28114645</li>
+                            <li class="time">2017年11月28日 10:56</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>204</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/qq_17612199/article/details/52100466"  target="_blank" strategy="BlogCommendFromBaidu_9">
+                    <dd>
+                        <h2>Mybatis Cache 源码</h2>
+                        <div class="summary">
+                            Cache接口：public interface Cache {  String getId();  void putObject(Object key, Object value);  Object...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/8/F/0/3_qq_17612199.jpg" alt="qq_17612199" title="qq_17612199"></li>
+                            <li class="user_name">qq_17612199</li>
+                            <li class="time">2016年08月03日 10:03</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>427</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                              </div>
+  </main>
+<aside>
+    <div class="right_box user_info">
+    <dl class="inf_bar clearfix">
+        <dt class="csdn-tracking-statistics tracking-click" data-mod="popu_381">
+                <a href="https://blog.csdn.net/xuezhimeng" target="_blank">
+                    <img src="https://avatar.csdn.net/E/C/E/3_xuezhimeng.jpg" class="avatar_pic">
+        </a>
+      </dt><dd>
+            <h3 class="csdn-tracking-statistics tracking-click"  data-mod="popu_380"><a href="https://blog.csdn.net/xuezhimeng" target="_blank" id="uid">xuezhimeng</a></h3>
+            <div class="medals" title="">
+                      </div>
+                        <span  class="csdn-tracking-statistics tracking-click" data-mod="popu_379"><a class="btn btn-redborder-small "  id="span_add_follow" target="_self">关注</a></span>
+                    </dd>
+    </dl>
+    <div class="inf_number_box clearfix">
+        <dl title="25">
+            <dt>原创</dt>
+            <dd>25</dd>
+        </dl>
+        <dl title="32">
+            <dt>粉丝</dt>
+            <dd id='fan'>32</dd>
+        </dl>
+        <dl title="1">
+            <dt>喜欢</dt>
+            <dd>1</dd>
+        </dl>
+        <dl title="26">
+          <dt>评论</dt>
+          <dd>26</dd>
+        </dl>
+    </div>
+
+</div>
+<div class="interflow clearfix">
+      <div class="grade gradeAndbadge gradewidths">
+      <span>等级：</span>
+      <div>
+        <a href="https://blog.csdn.net/home/help.html#level" title="4级,点击查看等级说明" target="_blank">
+          <img class="grade-img" src="https://csdnimg.cn/jifen/images/xunzhang/jianzhang/blog4.png" alt="4级,点击查看等级说明">
+        </a>
+      </div>
+    </div>
+    <div class="gradeAndbadge gradewidths" title="94777">
+        <span>访问量：</span>
+        <span class="num odd-overhidden">9万+</span>
+    </div>
+
+    <div class="gradeAndbadge gradewidths" title="1242">
+      <span>积分：</span>
+      <span  class="num odd-overhidden">1242</span>
+    </div>
+    <div class="gradeAndbadge gradewidths" title="40986">
+        <span>排名：</span>
+        <span class="num odd-overhidden">4万+</span>
+    </div>
+
+</div>
+<script type="text/javascript">
+  // 判断并设置用户名位置，没有博客专家与关注按钮时，用户名居中
+  $medals_children = $('.medals').children().length;
+  $span_add_follow = $('#span_add_follow').length;
+  if($medals_children === 0 && $span_add_follow === 0){
+    $('.inf_bar dd').css('vertical-align','10px')
+  }
+</script>          <div class="extension_other csdn-tracking-statistics tracking-click" data-mod="popu_389">
+          <!--u3032528-->
+        <div class="flashrecommend">
+                        <script type="text/javascript" src="//cee1.iteye.com/bwocoltly.js"></script>
+                    </div>
+      </div>
+            <div class="writings">
+      <div class="public_signal clearfix">
+        <h3>博主最新文章</h3>
+        <a href="https://blog.csdn.net/xuezhimeng" target="_blank" class="more"><span>更多文章</span></a>
+      </div>
+        <ul class="inf_list clearfix csdn-tracking-statistics tracking-click" data-mod="popu_382">
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/xuezhimeng/article/details/7884227" target="_blank">解决Pushlet无法发送中文的问题</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/xuezhimeng/article/details/7506176" target="_blank">QQ2012 Beta1协议之登录部分</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/xuezhimeng/article/details/7423003" target="_blank">QQ2012 Beta1登录协议之重定向</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/xuezhimeng/article/details/7392733" target="_blank">QQ2012Beta1登录协议(异地需要验证码，且密码错误的情况)</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/xuezhimeng/article/details/7382079" target="_blank">为了避免乱码应尽量少用GB2312编码</a>
+            </li>
+                    </ul>
+    </div>
+                <div class="user-hotArticle sort ClassSort">
+            <h3>文章分类</h3>
+            <ul class="hotArticle-list sort-list ClassSort-list">
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/xuezhimeng/article/category/752503" class="odd-overhidden floatL">SVG专题</a>
+                        <div class="read list-left floatR"><span>4篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/xuezhimeng/article/category/665396" class="odd-overhidden floatL">一般技术</a>
+                        <div class="read list-left floatR"><span>3篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/xuezhimeng/article/category/538407" class="odd-overhidden floatL">休闲搞笑</a>
+                        <div class="read list-left floatR"><span>4篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/xuezhimeng/article/category/538408" class="odd-overhidden floatL">程序类</a>
+                        <div class="read list-left floatR"><span>11篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/xuezhimeng/article/category/538409" class="odd-overhidden floatL">非技术类</a>
+                        <div class="read list-left floatR"><span>1篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/xuezhimeng/article/category/1105106" class="odd-overhidden floatL">Java/JSP</a>
+                        <div class="read list-left floatR"><span>2篇</span></div>
+                    </li>
+                                    <li class="clearfix">
+                        <a href="https://blog.csdn.net/xuezhimeng/article/category/1108278" class="odd-overhidden floatL">QQ协议</a>
+                        <div class="read list-left floatR"><span>3篇</span></div>
+                    </li>
+                            </ul>
+            <div class="unfold-btn">
+              <span>展开</span><i class="icon iconfont icon-xiajiantou"></i>
+            </div>
+        </div>
+    <!--    [StartShowSelfColumn]-->
+    <!--    [EndShowSelfColumn]-->
+            <div class="user-hotArticle sort timeSort">
+          <h3>文章存档</h3>
+          <ul class="hotArticle-list timeSort-list">
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/xuezhimeng/article/month/2012/08" class="odd-overhidden floatL">2012年8月</a>
+                  <div class="read list-left floatR"><span>1篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/xuezhimeng/article/month/2012/04" class="odd-overhidden floatL">2012年4月</a>
+                  <div class="read list-left floatR"><span>2篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/xuezhimeng/article/month/2012/03" class="odd-overhidden floatL">2012年3月</a>
+                  <div class="read list-left floatR"><span>4篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/xuezhimeng/article/month/2011/09" class="odd-overhidden floatL">2011年9月</a>
+                  <div class="read list-left floatR"><span>1篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/xuezhimeng/article/month/2011/07" class="odd-overhidden floatL">2011年7月</a>
+                  <div class="read list-left floatR"><span>2篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/xuezhimeng/article/month/2011/06" class="odd-overhidden floatL">2011年6月</a>
+                  <div class="read list-left floatR"><span>2篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/xuezhimeng/article/month/2011/05" class="odd-overhidden floatL">2011年5月</a>
+                  <div class="read list-left floatR"><span>1篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/xuezhimeng/article/month/2011/03" class="odd-overhidden floatL">2011年3月</a>
+                  <div class="read list-left floatR"><span>2篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/xuezhimeng/article/month/2010/12" class="odd-overhidden floatL">2010年12月</a>
+                  <div class="read list-left floatR"><span>1篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/xuezhimeng/article/month/2010/11" class="odd-overhidden floatL">2010年11月</a>
+                  <div class="read list-left floatR"><span>3篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/xuezhimeng/article/month/2010/10" class="odd-overhidden floatL">2010年10月</a>
+                  <div class="read list-left floatR"><span>1篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/xuezhimeng/article/month/2010/06" class="odd-overhidden floatL">2010年6月</a>
+                  <div class="read list-left floatR"><span>1篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/xuezhimeng/article/month/2010/05" class="odd-overhidden floatL">2010年5月</a>
+                  <div class="read list-left floatR"><span>2篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/xuezhimeng/article/month/2010/04" class="odd-overhidden floatL">2010年4月</a>
+                  <div class="read list-left floatR"><span>1篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/xuezhimeng/article/month/2010/03" class="odd-overhidden floatL">2010年3月</a>
+                  <div class="read list-left floatR"><span>1篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/xuezhimeng/article/month/2009/07" class="odd-overhidden floatL">2009年7月</a>
+                  <div class="read list-left floatR"><span>1篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/xuezhimeng/article/month/2009/05" class="odd-overhidden floatL">2009年5月</a>
+                  <div class="read list-left floatR"><span>1篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/xuezhimeng/article/month/2009/04" class="odd-overhidden floatL">2009年4月</a>
+                  <div class="read list-left floatR"><span>2篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/xuezhimeng/article/month/2009/01" class="odd-overhidden floatL">2009年1月</a>
+                  <div class="read list-left floatR"><span>2篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/xuezhimeng/article/month/2008/12" class="odd-overhidden floatL">2008年12月</a>
+                  <div class="read list-left floatR"><span>1篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/xuezhimeng/article/month/2008/10" class="odd-overhidden floatL">2008年10月</a>
+                  <div class="read list-left floatR"><span>1篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/xuezhimeng/article/month/2008/09" class="odd-overhidden floatL">2008年9月</a>
+                  <div class="read list-left floatR"><span>6篇</span></div>
+                </li>
+                            <li class="clearfix">
+                  <a href="https://blog.csdn.net/xuezhimeng/article/month/2008/07" class="odd-overhidden floatL">2008年7月</a>
+                  <div class="read list-left floatR"><span>1篇</span></div>
+                </li>
+                      </ul>
+          <div class="unfold-btn">
+            <span>展开</span><i class="icon iconfont icon-xiajiantou"></i>
+          </div>
+        </div>
+            <div class="user-hotArticle">
+        <h3>博主热门文章</h3>
+        <ul class="hotArticle-list csdn-tracking-statistics tracking-click" data-mod="popu_521">
+<!--        [StartHotArticles]-->
+                            <li>
+                    <a href="https://blog.csdn.net/xuezhimeng/article/details/7392733">QQ2012Beta1登录协议(异地需要验证码，且密码错误的情况)</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>14600</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/xuezhimeng/article/details/7378096">MyBatis的Cache实际意义不大</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>7100</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/xuezhimeng/article/details/2644979">[转]winRAR破解方法</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>6084</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/xuezhimeng/article/details/7506176">QQ2012 Beta1协议之登录部分</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>6001</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/xuezhimeng/article/details/3851844">Base64编码、解码的实现</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>4903</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/xuezhimeng/article/details/2927516">VC 6.0中读取XML文件</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>4631</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/xuezhimeng/article/details/6797656">windows下获取MAC地址的三种方法</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>3362</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/xuezhimeng/article/details/3445820">超级哄女孩工具之一千枝会动的玫瑰实现</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>3321</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/xuezhimeng/article/details/6058973">SVG与html的交互(svg的js与html的js互调用)</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>3056</span></div>
+                </li>
+                            <li>
+                    <a href="https://blog.csdn.net/xuezhimeng/article/details/5955006">MBR引导代码反汇编分析(XP系统)</a>
+                    <div class="read list-left"><i class="icon iconfont icon-read"></i><span>2670</span></div>
+                </li>
+            <!--        [EndHotArticles]-->
+        </ul>
+    </div>
+    
+<!--    [startcustom]-->
+    <!--    [endcustom]-->
+  <div class="fixRight_box" style="height:256px">
+    <div class="fixRight">
+                    <!--u3163270-->
+                        <script type="text/javascript" src="//cee1.iteye.com/avneunkwb.js"></script>
+                          <div class="persion_article"></div>
+    </div>
+  </div>
+</aside>
+</div>
+
+<div class="left_fixed">
+    <div class="left_show_button">
+        <span>
+          <i class="icon iconfont icon-youjiantou"></i>
+        </span>
+    </div>
+    <ul class="left_menu" id="share_box">
+        <li>
+            <button class="left-fixed-btn btn-like csdn-tracking-statistics tracking-click" data-mod="popu_373" target="_self" title="点赞">
+                <a href="javascript:void(0);" class="iconbox border_red" ><i class="icon iconfont icon-dianzan"></i></a>
+                <a class="txt" href="javascript:void(0);">0</a>
+            </button>
+        </li>
+        <li id="blog_artical_directory">
+            <button class="left-fixed-btn left_menu_btn csdn-tracking-statistics tracking-click" data-mod="popu_372" target="_self" title="目录">
+                <a href="javascript:void(0);" class="iconbox border_black" ><i class="icon iconfont icon-mulu"></i></a>
+            </button>
+        </li>
+        <li class="menu_con">
+            <div class="list_father">
+                <div class="arr_box">
+                    <button class="btn-noborder arr-btn scroll-down  left_scroll_down"><i class="icon iconfont icon-xiajiantou"></i></button>
+                    <button class="btn-noborder arr-btn scroll-up left_scroll_top"><i class="icon iconfont icon-shangjiantou"></i></button>
+                </div>
+                <div class="arr"></div>
+                <div id="csdnBlogDir"></div>
+            </div>
+        </li>
+        <!--        <li>-->
+        <!--            <button class="left-fixed-btn btn-like tracking-ad" data-mod="popu_373" target="_self">-->
+        <!--                <span class="iconbox border_red"><i class="icon iconfont icon-xihuan-"></i></span>-->
+        <!--                <span class="txt">喜欢</span>-->
+        <!--                <span class="untxt">取消喜欢</span>-->
+        <!--            </button>-->
+        <!--        </li>-->
+        <li>
+            <button class="left-fixed-btn csdn-tracking-statistics tracking-click" data-mod="popu_374"  id="com-quick-collect" target="_self" title="收藏">
+                <a href="javascript:void(0);" class="iconbox border_purple" ><i class="icon iconfont icon-shoucang"></i></a>
+            </button>
+        </li>
+        <li>
+            <button class="left-fixed-btn btn-pinglun csdn-tracking-statistics tracking-click" data-mod="popu_544" title="评论">
+                <a href="javascript:void(0);" class="iconbox border_purple" ><i class="icon iconfont icon-pinglun"></i></a>
+            </button>
+        </li>
+        <li class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+            <a class="bds_tsina outside left-fixed-btn" data-cmd="tsina" title="分享到新浪微博"></a>
+            <span class="iconbox border_red2"><i class="icon iconfont icon-xinlang"></i></span>
+        </li>
+        <li class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+            <a class="bds_weixin outside left-fixed-btn" data-cmd="weixin" title="分享到微信"></a>
+            <span class="iconbox border_green"><i class="icon iconfont icon-weixin"></i></span>
+        </li>
+        <li class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+            <a class="bds_qzone outside left-fixed-btn" data-cmd="qzone" title="分享到QQ空间"></a>
+            <span class="iconbox border_blue"><i class="icon iconfont icon-QQ"></i></span>
+        </li>
+        <li id="share_box">
+
+            <div class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+
+
+
+            </div>
+        </li>
+    </ul>
+</div>
+<div id="pop_win"></div>
+<div id="popup_mask"></div>
+<div class="pop_CA_cover" ></div>
+<div class="pop pop_CA" >
+    <div class="CA_header">
+        收藏助手
+        <span class="cancel_icon"  id="fapancle" ></span>
+    </div>
+    <iframe src="" id="collectIframe" frameborder="0" width="100%" height="360"  scrolling="no" ></iframe>
+</div>
+<!--举报-->
+<div id="report_dialog" style="top: 250px; left: 343.5px;"><div id="panel_report">
+    <div class="panel_head">不良信息举报</div>
+    <form method="post" id="frmReport" class="panel_body">
+        <table border="0" cellpadding="0" cellspacing="4" class="pop_table">
+            <tbody><tr><td colspan="2">您举报文章：<a href="https://blog.csdn.net/xuezhimeng/article/details/7378096" target="_blank">MyBatis的Cache实际意义不大</a></td></tr>
+            <tr>
+                <th style="width:60px;">举报原因：</th>
+                <td id="panel_reporttype">
+                    <label><input type="radio" class="report_type" id="report_sex" name="report_type" value="1">色情</label>
+                    <label><input type="radio" class="report_type" id="report_Politics" name="report_type" value="2">政治</label>
+                    <label><input type="radio" class="report_type" id="report_copy" name="report_type" value="3">抄袭</label>
+                    <label><input type="radio" class="report_type" id="report_ad" name="report_type" value="4">广告</label>
+                    <label><input type="radio" class="report_type" id="report_want" name="report_type" value="5">招聘</label>
+                    <label><input type="radio" class="report_type" id="report_call" name="report_type" value="6">骂人</label>
+                    <br>
+                    <label><input type="radio" class="report_type" id="report_other" name="report_type" value="7">其他</label>
+                    <input type="text" name="report_other_content" id="report_other_content" maxlength="30" style="display: none;">
+                </td>
+            </tr>
+            <tr id="panel_originalurl" style="display: none;">
+                <th>原文地址：</th>
+                <td>
+                    <input id="originalurl" value="http://" name="originalurl" type="text" style="width: 90%;">
+                </td>
+            </tr>
+            <tr>
+                <th id="sp_reason">原因补充：</th>
+                <td>
+                    <textarea id="report_description" style="width: 300px;" rows="3" name="report_description"></textarea>
+                    <p id="sp_n" style="color:#999;margin:0px;padding:0px;">(最多只允许输入30个字)</p>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input id="btnSubmitReport" name="submit" type="image" align="middle" class="btn_1" src="https://csdnimg.cn/release/phoenix/images/btn_submit.jpg">
+                    <span style="padding-left:20px;"></span>
+                    <img id="btnCloseReportDialog" src="https://csdnimg.cn/release/phoenix/images/btn_cancel.jpg" align="middle">
+                    <div id="error" style="color: Red">
+                    </div>
+                </td>
+            </tr>
+            </tbody></table>
+    </form>
+</div>
+    <script language="javascript" type="text/javascript">
+        var isComment=0;
+        //显示隐藏地址
+        $(function () {
+          console.log("version:phoenix");
+            if(isComment){
+                $("#report_description").attr("disabled",true);
+                $("#sp_n").hide();
+                $("#sp_reason").html("评论内容：");
+            }
+            $(".report_type").click(function () {
+                $("#panel_originalurl,#report_other_content").hide();
+                switch ($(this).val()) {
+                    case '3':
+                        $("#panel_originalurl").show();
+                        $("#originalurl").focus();
+                        break;
+                    case '7':
+                        if(isComment){
+                            $("#report_other_content").show().focus();
+                        }
+                        break;
+                }
+
+            });
+
+            $("#frmReport").submit(function () {
+                if (!currentUserName) {
+
+                    if (confirm("您的操作必须登录，是否登录？")) {
+                        location.href = "https://passport.csdn.net/account/login?from=" + encodeURIComponent(location.href);
+                        return false;
+                    }
+                    return false;
+                }
+
+                var reportType = $("input[name=report_type]:checked").val();
+                if(!reportType){
+                    alert("请选择举报原因！");
+                    return false;
+                }
+                var otherInfo = "";
+                switch (reportType) {
+                    case '3':
+                        otherInfo = $("#originalurl").val();
+                        if (otherInfo == ""||otherInfo=="http://") {
+                            alert("举报抄袭必须提供原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        } else if(!checkeURL(otherInfo)) {
+                            alert("请输入正确的原创文章地址！");
+                            $("#originalurl").focus();
+                            return false;
+                        }
+                        break;
+                    case '7':
+                        otherInfo = $("#report_other_content").val();
+                        if (isComment && !otherInfo) {
+                            alert("请填写举报的具体原因！");
+                            $("#report_other_content").focus();
+                            return false;
+                        }
+                        if(!isComment){
+                            if(!$("#report_description").val()){
+                                alert("请填写举报的具体原因！");
+                                $("#report_description").focus();
+                                return false;
+                            }
+                        }
+                        break;
+                }
+                if(!isComment){
+                    if($("#report_description").val().length>30){
+                        alert("举报原因最多只允许输入30个字！");
+                        return false;
+                    }
+                }
+	            nowTime = {
+		            year: new Date().getFullYear(),
+		            month: parseInt(new Date().getMonth())+1,
+		            day: new Date().getDate(),
+		            hours: parseInt(new Date().getHours())+1,
+		            minutes: parseInt(new Date().getMinutes())+1,
+		            seconds: parseInt(new Date().getSeconds())+1
+	            };
+	            var data = {
+		            articleId: fileName,
+		            commentId: 0,
+		            reportType: reportType,
+		            originalurl: $("#originalurl").val(),
+		            report_other_content: $("#report_other_content").val(),
+		            report_description: $("#report_description").val(),
+		            currentUserName: currentUserName,
+		            updatetime: nowTime.year+'/'+nowTime.month+'/'+nowTime.day+' '+ nowTime.hours+':'+nowTime.minutes+':'+seconds,
+		            blogUser: username
+	            };
+	            if(!isComment){//如果是举报文章
+		            data.report_other_content = data.report_description;
+		            // data.report_description = "1. 神经网络这是一个常见的神经网络的图：这是一个常见的三层神经网络的基本构成，Layer L1是输入层，Layer L2是隐含层";
+	            }
+
+	            $.post(blog_address + "/common/report?id="+fileName+"&t=2", data, function (data) {
+		            if (data.result == 1){
+			            SetError("感谢您的举报，我们会尽快审核！");
+		            }else{
+			            if (data.content) alert(data.content);
+		            }
+
+	            });
+                return false;
+            });
+
+            $("#btnCloseReportDialog").click(function () {
+                CloseDiv();
+            });
+
+        });
+
+        //提示后关闭方法
+        function SetError(error) {
+            $("#btnCloseReportDialog").trigger("click");
+            alert(error);
+            CloseDiv();
+        }
+
+        //关闭方法
+        function CloseDiv() {
+
+            $.removeMask();
+            $("#report_dialog").hide();
+            return false;
+        }
+
+        //验证url
+        function checkeURL(url){
+            return /^http(s)?:\/\/([\w-]+\.)+[\w-]+/i.test(url);
+        }
+    </script>
+</div>
+<!--  fixme 后期清理掉  -->
+<div id="a52b5334d" style="width: 1px; height: 1px; display: none;">
+    <script id="adJs52b5334"></script>
+    <script>document.getElementById("adJs52b5334").src = "https://ads.csdn.net/js/opt/52b5334.js?t=" + Math.random();</script>
+</div>
+<script type="text/javascript" src="https://static-blog.csdn.net/mdeditor/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            linebreaks: { automatic: true, width: "94%container" },
+            imageFont: null
+        }
+    });
+</script>
+<!-- <script type="text/javascript" src="https://passport.csdn.net/content/loginbox/login.js"></script> -->
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'https://csdnimg.cn/static/api/js/share.js?v=89860594'];</script>
+<script type="text/javascript" >
+    if($(".article_collect li").length==1){$(".article_collect").hide();}
+    if($(".article_tags li").length==1){$(".article_tags").hide();}
+    $(".edit a").attr("href","https://mp.csdn.net/postedit/"+fileName);
+    $.each($(".edu_li a"),function(){$(this).attr("href",$(this).attr("href").replace("blog7","blog9"))});
+    new CNick('#uid').showNickname();
+
+    if($("#fan").html()=="")
+    {
+	    $("#fan").html(0);
+    }
+</script>
+<script src="https://csdnimg.cn/public/common/append_mark/appendMark.min.js?v=5.00.43" type="text/javascript"></script>
+<script type="text/javascript">
+    appendMark($('.recommend_list').children('a').find('dt'),$('.extension_other'),$('.yd_a_d_feed_cla'))
+</script>
+<script src='https://csdnimg.cn/pubfooter/js/publib_footer-1.0.3.js?v201804111810' data-isfootertrack="false"></script>
+<script src='https://csdnimg.cn/public/common/gotop/js/goTop-v1.0.min.js?v201803151422'></script>
+<script>
+    GoTop({
+        right: 8,
+        hasReport: true,
+        reportFun: function() {
+            $.createMask();
+            var r = blog_address + "/common/report?id=" + fileName + "&t=" + 2;
+            if (3 == 2) {
+                var s = n.parentNode.parentNode.parentNode.getAttribute("floor");
+                r += "&floor=" + s
+            }
+            var i = (document.documentElement.clientHeight - 400) / 2 + (document.documentElement.scrollTop || document.body.scrollTop),
+                a = (document.documentElement.clientWidth - 400) / 2;
+
+            $("#report_dialog").load(r).css({
+                //top: i + "px",
+                top: '20%',
+                left: a
+            }).show()
+        }
+    })
+</script>
+<script src="https://dup.baidustatic.com/js/os.js"></script>
+
+<div id="loginWrap"></div>
+<div id="dlMask"></div>
+</body>

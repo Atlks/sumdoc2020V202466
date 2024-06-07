@@ -1,0 +1,57 @@
+Atitit。Mysql 执行多条语句的测试报告in hibernate  
+
+Hibernate:  SELECT * FROM  mall_user_info   where  user_id=6 ; SELECT * FROM  mall_user_info   where  user_id=8 
+只是出来第一个结果。Dbutil的也是这样。。
+[{
+  "user_zipcode": null,
+  "user_country": null,
+  "user_gender": false,
+  "user_marry": false,
+  "user_telphone": null,
+  "user_city": null,
+  "user_address": null,
+  "user_district": null,
+  "user_skype": null,
+  "user_msn": null,
+  "user_ico": null,
+  "id": 6,
+  "user_qq": null,
+  "user_truename": "",
+  "user_province": null,
+  "user_mobile": null,
+  "user_id": 6,
+  "user_birthday": null
+}]
+
+
+
+
+Hibernate:  update mall_shop_info set shop_intro='myintro5' where shop_id=8 ; SELECT * FROM  mall_user_info   where  user_id=8 
+[]
+
+
+
+Hibernate:   SELECT * FROM  mall_user_info   where  user_id=8 ; update mall_shop_info set shop_intro='myintro6' where shop_id=8 
+[{
+  "user_zipcode": "",
+  "user_country": 1,
+  "user_gender": false,
+  "user_marry": false,
+  "user_telphone": "",
+  "user_city": 0,
+  "user_address": "地址信息2",
+  "user_district": 0,
+  "user_skype": "",
+  "user_msn": "",
+  "user_ico": null,
+  "id": 8,
+  "user_qq": "",
+  "user_truename": "名字5",
+  "user_province": 0,
+  "user_mobile": "1358891563",
+  "user_id": 8,
+  "user_birthday": null
+}]
+
+
+

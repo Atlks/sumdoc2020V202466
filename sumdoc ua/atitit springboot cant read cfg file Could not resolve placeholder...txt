@@ -1,0 +1,12 @@
+﻿¿¿ÉÄÜ
+
+
+user  //@PropertySource("classpath:application.properties")
+tips cant fine the cfg file....
+
+可能是ide cant copy file to class dir...
+
+yke jend ..
+
+manual cpyt gok zo ok le ..
+

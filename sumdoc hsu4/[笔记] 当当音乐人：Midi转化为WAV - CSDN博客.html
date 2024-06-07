@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://blog.csdn.net/prog_6103/article/details/48972583"/> 
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="referrer" content="always">
+    <meta name="description" content="这几天新写好的歌曲用MIDI软件把曲子都编辑好成MID文件了。
+打开原来安装的MIDI to MP3软件，竟然过期了要注册码。
+记得这玩意是个静态注册码，已经懒到不想下个OllyDBG再跟着调试了。
+唉，硬盘挂过一次，那个注册码原来是直接和安装文件名写一起的。再者这个软件其实是把MID文件播放一遍，然后从buffer里把raw编码成MP3，效率太低。
+算了，果断卸载，到网上找找一劳永逸的方" />
+    <meta name="keywords" content="mid,wav" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+    <script src="https://csdnimg.cn/release/phoenix/vendor/tingyun/tingyun-rum-blog.js"></script>
+
+    <link href="https://csdnimg.cn/public/favicon.ico" rel="SHORTCUT ICON">
+    <title>[笔记] 当当音乐人：Midi转化为WAV - CSDN博客</title>
+    
+            <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/detail-7697f17a56.min.css">
+        <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/themes/skin3-template/skin3-template-02ffddfbf5.min.css">
+
+    <script type="text/javascript">
+        var username = "prog_6103";
+        var blog_address = "https://blog.csdn.net/prog_6103";
+        var static_host = "https://csdnimg.cn/release/phoenix/";
+        var currentUserName = ""; 
+        var isShowAds = true;
+        var isOwner = false;
+        var loginUrl = "https://passport.csdn.net/account/login?from=https://blog.csdn.net/prog_6103/article/details/48972583"
+        var blogUrl = "https://blog.csdn.net/";
+        var curSkin = "skin3-template";
+    </script>
+    <script type="text/javascript">
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+    </script>
+    <script src="https://csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="https://csdnimg.cn/rabbit/exposure-click/main-1.0.6.js"></script>
+        <script type="text/javascript" src="https://csdnimg.cn/pubfooter/js/tracking-1.0.2.js" charset="utf-8"></script>
+        <link rel="stylesheet" href="https://csdnimg.cn/public/sandalstrap/1.2/css/sandalstrap.min.css"> 
+    <style>
+        .MathJax, .MathJax_Message, .MathJax_Preview{
+            display: none
+        }
+    </style>
+</head>
+<body>    
+    <link rel="stylesheet" href="https://csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+    <script id="toolbar-tpl-scriptId" src="https://csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="https://blog.csdn.net/"></script>
+    <script src="https://csdnimg.cn/public/sandalstrap/1.2/fonts/csdnc/csdnc.js"></script><link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/blog_code-c3a0c33d5c.css">
+<link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/vendor/pagination/paging.css">
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<script>
+    var recommendCount = 10;
+    recommendCount = recommendCount > 1 ? (recommendCount + (recommendCount>6 ? 2 : 1)) : recommendCount;
+    var articleTit = '[笔记] 当当音乐人：Midi转化为WAV';
+    var ChannelId = 7;
+    var articleId = '48972583';
+    var commentscount = 0;
+    var islock = false;
+    var curentUrl = "https://blog.csdn.net/prog_6103/article/details/48972583";
+    var myUrl = "https://my.csdn.net/";
+    //1禁止评论，2正常
+    var commentAuth = 2;
+    //百度搜索
+    var baiduKey = "midi%E5%AF%BC%E5%87%BA%E4%B8%BAwav";
+    var needInsertBaidu = false;
+</script>
+
+<header>
+	<div class="container d-flex clearfix">
+		<div class="title-box">
+			<h6 class="title-blog">
+				<a href="https://blog.csdn.net/prog_6103">匆匆往站</a>
+			</h6>
+			<p class="description">向往与过往交织，一切在匆匆流逝</p>
+		</div>
+		<div class="opt-box d-flex justify-content-end">
+			<a class="btn btn-sm" href="https://blog.csdn.net/prog_6103/rss/list">
+					<svg class="icon" aria-hidden="true">
+						<use xlink:href="#csdnc-rss"></use>
+					</svg>RSS订阅</a>
+					</div>
+	</div>
+</header><script src="https://dup.baidustatic.com/js/ds.js"></script>
+<div class="container clearfix pt0" id="mainBox">
+    <aside>
+		    <div id="asideProfile" class="aside-box">
+    <h3 class="aside-title">个人资料</h3>
+    <div class="profile-intro d-flex">
+        <div class="avatar-box d-flex justify-content-center flex-column">
+            <a href="https://blog.csdn.net/prog_6103">
+                <img src="https://avatar.csdn.net/F/5/E/3_prog_6103.jpg" class="avatar_pic">
+            </a>
+        </div>
+        <div class="user-info d-flex justify-content-center flex-column">
+            <p class="name csdn-tracking-statistics tracking-click" data-mod="popu_379">
+                <a href="https://blog.csdn.net/prog_6103" target="_blank" class="text-truncate" id="uid">prog_6103</a>
+            </p>
+                    </div>
+                <div class="opt-box d-flex justify-content-center flex-column">
+            <span  class="csdn-tracking-statistics tracking-click" data-mod="popu_379">
+                                <a class="btn btn-sm btn-red-hollow" href="https://passport.csdn.net/account/login?from=https://blog.csdn.net/prog_6103/article/details/48972583" target="_self">关注</a>
+                            </span>
+            
+        </div>
+            </div>
+    <div class="data-info d-flex item-tiling">
+        <dl class="text-center" title="47">
+            <dt>原创</dt>
+            <dd><span class="count">47</span></dd>
+        </dl>
+        <dl class="text-center" title="47">
+            <dt>粉丝</dt>
+            <dd><span class="count" id="fan">47</span></dd>
+        </dl>
+        <dl class="text-center" title="14">
+            <dt>喜欢</dt>
+            <dd><span class="count">14</span></dd>
+        </dl>
+        <dl class="text-center" title="45">
+            <dt>评论</dt>
+            <dd><span class="count">45</span></dd>
+        </dl>
+    </div>
+    <div class="grade-box clearfix">
+        <dl>
+            <dt>等级：</dt>
+            <dd>
+                <a href="https://blog.csdn.net/home/help.html#level" title="4级,点击查看等级说明" target="_blank">
+                    <svg class="icon icon-level" aria-hidden="true">
+                        <use xlink:href="#csdnc-bloglevel-4"></use>
+                    </svg>
+                </a>
+            </dd>
+        </dl>
+        <dl>
+            <dt>访问：</dt>
+            <dd title="153151">
+                15万+            </dd>
+        </dl>
+        <dl>
+            <dt>积分：</dt>
+            <dd title="1935">
+                1935            </dd>
+        </dl>
+        <dl title="25576">
+            <dt>排名：</dt>
+            <dd>2万+</dd>
+        </dl>
+    </div>
+    </div>		    <div class="csdn-tracking-statistics mb8 box-shadow" data-pid="blog" data-mod="popu_4" style="height:250px;">
+    <div class="aside-content text-center" id="cpro_u2734133">
+        <!-- 投放代码 -->
+        <script type="text/javascript" src="//cee1.iteye.com/lgyyovfyh.js"></script>
+    </div>
+</div>
+		    <div id="asideNewArticle" class="aside-box">
+    <h3 class="aside-title">最新文章</h3>
+    <div class="aside-content">
+        <ul class="inf_list clearfix csdn-tracking-statistics tracking-click" data-mod="popu_382">
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/prog_6103/article/details/80024828" target="_blank">[笔记] [ToY] Android相机程序：把Android变成Kinect第一步</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/prog_6103/article/details/79741371" target="_blank">[笔记] Unikernel原型：Docker镜像秒变虚拟机镜像以及无ssh开terminal调试</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/prog_6103/article/details/79496670" target="_blank">[给JavaScript一个机会] 10min从0写一个简单搜索引擎</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/prog_6103/article/details/78569510" target="_blank">nslookup在静态编译的busybox上如何正常解析域名</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/prog_6103/article/details/78184642" target="_blank">[笔记] CentOS 7 部署 Kubernetes 集群自动化脚本部分</a>
+            </li>
+                    </ul>
+    </div>
+</div>
+		    <div id="asideArchive" class="aside-box flexible-box">
+    <h3 class="aside-title">归档</h3>
+    <div class="aside-content">
+        <ul class="archive-list">
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2018/04">
+                    2018年4月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2018/03">
+                    2018年3月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2017/11">
+                    2017年11月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2017/10">
+                    2017年10月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2017/07">
+                    2017年7月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2016/12">
+                    2016年12月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2016/10">
+                    2016年10月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2016/05">
+                    2016年5月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2016/04">
+                    2016年4月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2016/03">
+                    2016年3月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2015/11">
+                    2015年11月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2015/10">
+                    2015年10月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2015/09">
+                    2015年9月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2015/08">
+                    2015年8月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2014/12">
+                    2014年12月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2014/11">
+                    2014年11月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2014/10">
+                    2014年10月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2014/09">
+                    2014年9月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2014/08">
+                    2014年8月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2014/06">
+                    2014年6月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2013/07">
+                    2013年7月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2013/06">
+                    2013年6月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2013/05">
+                    2013年5月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2012/02">
+                    2012年2月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2011/07">
+                    2011年7月                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2011/05">
+                    2011年5月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2011/04">
+                    2011年4月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2011/03">
+                    2011年3月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2011/02">
+                    2011年2月                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2011/01">
+                    2011年1月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2010/12">
+                    2010年12月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2010/09">
+                    2010年9月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2010/01">
+                    2010年1月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/prog_6103/article/month/2009/05">
+                    2009年5月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                    </ul>
+    </div>
+        <p class="text-center">
+        <a class="btn btn-link-blue flexible-btn" data-fbox="aside-archive">展开</a>
+    </p>
+    </div>
+		    		    <div id="asideCategory" class="aside-box flexible-box">
+    <h3 class="aside-title">个人分类</h3>
+    <div class="aside-content">
+        <ul>
+                        <li>
+                <a href="https://blog.csdn.net/prog_6103/article/category/1409584">
+                    Android                    <span class="count float-right">9篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/prog_6103/article/category/2598667">
+                    linux                    <span class="count float-right">6篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/prog_6103/article/category/2598869">
+                    逆向工程                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/prog_6103/article/category/5727981">
+                    javascript                    <span class="count float-right">12篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/prog_6103/article/category/5848973">
+                    仙剑奇侠传5                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/prog_6103/article/category/5848975">
+                    C#                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/prog_6103/article/category/5848977">
+                    Java                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/prog_6103/article/category/5848989">
+                    C++                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/prog_6103/article/category/5848991">
+                    CPU                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/prog_6103/article/category/5848995">
+                    编译器                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/prog_6103/article/category/5849001">
+                    VBA                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/prog_6103/article/category/5849007">
+                    3DMax                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/prog_6103/article/category/5849013">
+                    NodeJS                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/prog_6103/article/category/5849019">
+                    中医                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/prog_6103/article/category/5849021">
+                    数据处理                    <span class="count float-right">7篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/prog_6103/article/category/5849023">
+                    Kernel                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/prog_6103/article/category/5849029">
+                    娱乐                    <span class="count float-right">2篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/prog_6103/article/category/5849035">
+                    可视化                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/prog_6103/article/category/6177867">
+                    Platform                    <span class="count float-right">3篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/prog_6103/article/category/6442226">
+                    golang                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/prog_6103/article/category/6444398">
+                    Tools                    <span class="count float-right">4篇</span>
+                </a>
+            </li>
+                        <li>
+                <a href="https://blog.csdn.net/prog_6103/article/category/6444399">
+                    ruby                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                    </ul>
+    </div>
+        <p class="text-center">
+        <a class="btn btn-link-blue flexible-btn" data-fbox="aside-archive">展开</a>
+    </p>
+    </div>
+		<div id="asideFooter">
+			
+		<div class="aside-box">
+						<script type="text/javascript" src="//cee1.iteye.com/avneunkwb.js"></script>
+					</div>
+				<div class="aside-box">
+			<div class="persion_article">
+			</div>
+		</div>
+	</div>
+</aside>
+<script src="https://csdnimg.cn/pubfooter/js/publib_footer-1.0.3.js?20180309" data-isfootertrack="false" type="text/javascript"></script>
+<script>
+	$("a.flexible-btn").click(function(){
+		$(this).parents('div.aside-box').removeClass('flexible-box');
+		$(this).remove();
+	})
+</script>
+    <main>
+        <div class="blog-content-box">
+	<div class="article-title-box">
+			<span class="article-type type-1 float-left">原</span>		<h6 class="title-article">[笔记] 当当音乐人：Midi转化为WAV</h6>
+	</div>
+	<div class="article-info-box">
+		<div class="article-bar-top d-flex">
+												<span class="time">2015年10月08日 15:12:27</span>
+			<div class="float-right">
+				<span class="read-count">阅读数：850</span>
+											</div>
+		</div>
+	</div>
+	<article>
+		<div id="article_content clearfix" class="article_content csdn-tracking-statistics" data-pid="blog"  data-mod=popu_307  data-dsm = "post" >
+                    <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/htmledit_views-0a60691e80.css" />
+            <div class="htmledit_views">
+                
+<p>这几天新写好的歌曲用MIDI软件把曲子都编辑好成MID文件了。</p>
+<p>打开原来安装的MIDI to MP3软件，竟然过期了要注册码。</p>
+<p>记得这玩意是个静态注册码，已经懒到不想下个OllyDBG再跟着调试了。</p>
+<p>唉，硬盘挂过一次，那个注册码原来是直接和安装文件名写一起的。再者这个软件其实是把MID文件播放一遍，然后从buffer里把raw编码成MP3，效率太低。</p>
+<p>算了，果断卸载，到网上找找一劳永逸的方法吧。于是发现了timidity。古董网站都下载不到源代码了，好吧，想代码找github。</p>
+<p><a href="https://github.com/geofft/timidity">https://github.com/geofft/timidity</a><br /></p>
+<p>很好很强大，下载下来</p>
+<p>./configure --enable-ncurses --enable-audio=darwin --with-default-output=wav</p>
+<p>make</p>
+<p>得到了timidity</p>
+<p>运行竟然要cfg，然而代码repo里没有例子，网上搜索下吧。哦，需要音乐字体库。那就选一个吧，这个网址给的音乐字体真全啊：<a href="https://musescore.org/en/handbook/soundfont">https://musescore.org/en/handbook/soundfont</a>。</p>
+<p>选了个最大的，音效应该不错吧：</p>
+<p>wget http://www.musescore.org/download/fluid-soundfont.tar.gz</p>
+<p>好，解压，然后写个cfg：soundfont path/to/fluidr3.sf2</p>
+<p>最后 ./timidity -c path/to/conf.cfg -o path/to/output.wav -Ow path/to/input.mid</p>
+<p>搞定，以后成曲就可以用它了。让我再编译个ffmpeg把wav转化下。呃，还是直接录歌，用cool editor合成吧，走起。可以去研究音乐搜索了，FFT～</p>
+            </div>
+                </div>
+				<div class="hide-article-box text-center csdn-tracking-statistics tracking-click" data-mod="popu_376">
+			<a class="btn btn-red-hollow" id="btn-readmore">阅读更多</a>
+		</div>
+        	</article>
+	
+		<div class="article-bar-bottom">
+						<div class="tags-box artic-tag-box">
+			<span class="label">文章标签：</span>
+						<a class="tag-link" href="http://so.csdn.net/so/search/s.do?q=mid&t=blog" target="_blank">mid						<a class="tag-link" href="http://so.csdn.net/so/search/s.do?q=wav&t=blog" target="_blank">wav						<a class="tag-link" href="http://so.csdn.net/so/search/s.do?q=转化&t=blog" target="_blank">转化						<a class="tag-link" href="http://so.csdn.net/so/search/s.do?q=timidity&t=blog" target="_blank">timidity						<a class="tag-link" href="http://so.csdn.net/so/search/s.do?q=sf2&t=blog" target="_blank">sf2						</a>
+		</div>
+						<div class="tags-box">
+			<span class="label">个人分类：</span>
+						<a class="tag-link" href="https://blog.csdn.net/prog_6103/article/category/5849021"  target="_blank">数据处理						<a class="tag-link" href="https://blog.csdn.net/prog_6103/article/category/5849029"  target="_blank">娱乐						</a>
+		</div>
+					</div>
+	
+	<!-- !empty($pre_next_article[0]) -->
+		</div>
+<script>
+    $(".MathJax").remove();
+</script>
+<script type="text/javascript" src="https://static-blog.csdn.net/mdeditor/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config"> 
+    MathJax.Hub.Config({ 
+			"HTML-CSS": { 
+					linebreaks: { automatic: true, width: "94%container" },
+					imageFont: null
+			},
+			tex2jax: {
+				preview: "none"
+			},
+			mml2jax: {
+				preview: 'none'
+			}
+	});
+</script>
+<script>
+	(function(){
+		var btnReadmore = $("#btn-readmore");
+		if(btnReadmore.length>0){
+			var winH = $(window).height();
+			var articleBox = $("div.article_content");
+			var artH = articleBox.height();
+			if(artH > winH*2){
+				articleBox.css({
+					'height':winH*2+'px',
+					'overflow':'hidden'
+				})
+				btnReadmore.click(function(){
+					articleBox.removeAttr("style");
+					$(this).parent().remove();
+				})
+			}else{
+				btnReadmore.parent().remove();
+			}
+		}
+	})()
+</script>        <div class="edu-promotion"></div>
+        <a id="commentBox"></a>
+<div class="comment-box">
+	  	<div class="unlogin-box text-center">
+		想对作者说点什么？
+		<!-- $curl 当前地址 -->
+		<a href="https://passport.csdn.net/account/login?from=https://blog.csdn.net/prog_6103/article/details/48972583#commentBox" class="btn btn-sm btn-red">我来说一句</a>
+	</div>
+			<div class="comment-list-container">
+		<a id="comments"></a>
+		<div class="comment-list-box">
+		</div>
+		<div id="commentPage" class="pagination-box d-none"></div>
+		<div class="opt-box text-center">
+			<button class="btn btn-sm btn-link-blue" id="btnMoreComment"></button>
+		</div>
+	</div>
+</div>        <div class="recommend-box">
+            		<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/hehui211/article/details/51776010" target="_blank" strategy="BlogCommendFromQuerySearch_24">
+				matlab 将<em>wav</em>文件转成 C 数组			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/hehui211/article/details/51776010" target="_blank" >
+				嵌入式开发时，需要做一些提示音。那么网上下载的mp3如何转换成C语言数组，
+此文是实际项目的应用，供参考。...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/hehui211" title="hehui211" target="_blank">
+					<img src="https://avatar.csdn.net/4/5/F/3_hehui211.jpg" alt="hehui211" class="avatar-pic">
+					<span class="name">hehui211</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2016-06-28 14:57:33</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：636</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/mengyafei43/article/details/41048603" target="_blank" strategy="BlogCommendFromBaidu_0">
+				ffmpeg 15条使用命令			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/mengyafei43/article/details/41048603" target="_blank" >
+				帖子比较长，建议Ctrl+D bookmark一下，或者提交到别的什么Social bookmark sites,不想看mencoder/ffmpeg详细技术手册的，可以把它当快速简易参考看，主要的功...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/mengyafei43" title="mengyafei43" target="_blank">
+					<img src="https://avatar.csdn.net/D/F/9/3_mengyafei43.jpg" alt="mengyafei43" class="avatar-pic">
+					<span class="name">mengyafei43</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2014-11-12 19:31:28</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：1462</span>
+			</p>
+		</div>
+	</div>
+				<div class="recommend-item-box recommend-ad-box" id="ad1">
+
+							<script>
+				(function() {
+					var s = "_" + Math.random().toString(36).slice(2);
+					document.write('<div id="' + s + '"></div>');
+					(window.slotbydup=window.slotbydup || []).push({
+						id: '4765209',
+						container: s,
+						size: '808,120',
+						display: 'inlay-fix'
+					});
+				})();
+				</script>
+				<script src="http://dup.baidustatic.com/js/os.js"></script>
+
+			
+		</div>
+				<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/gc_gongchao/article/details/46740237" target="_blank" strategy="BlogCommendFromBaidu_1">
+				FFmpeg基础库编程开发学习<em>笔记</em>——音频常见格式及字幕格式			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/gc_gongchao/article/details/46740237" target="_blank" >
+				声明一下：这些关于ffmpeg的文章只是用于记录我的学习历程和以便于以后查阅，文章中的一些文字可能是直接摘自于其他文章、书籍或者文献，学习ffmpeg相关知识是为了使用在Android上，我也才是刚开...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/gc_gongchao" title="gc_gongchao" target="_blank">
+					<img src="https://avatar.csdn.net/4/7/A/3_gc_gongchao.jpg" alt="gc_gongchao" class="avatar-pic">
+					<span class="name">gc_gongchao</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2015-07-03 12:31:56</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：2048</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://download.csdn.net/download/qq416262060/2102464" target="_blank" strategy="BlogCommendFromBaidu_2">
+				<em>midi</em> 格式转换为mp3或者<em>wav</em>工具			</a>
+		</h4>
+		<p class="content">
+			<a href="https://download.csdn.net/download/qq416262060/2102464" target="_blank" strategy="BlogCommendFromBaidu_2">
+				<em>midi</em> 格式转换为mp3或者<em>wav</em>工具，喜欢和弦的朋友可以在 http://www.mobile3g.cn/ring/152/137177.asp 现在mid格式的和弦铃音，然后去移动彩铃DIY ，			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+							<span class="read-num">下载</span>
+				
+			</p>
+			<p>
+				<span class="date">2010年03月06日 22:31</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/wxlinwzl/article/details/8472720" target="_blank" strategy="BlogCommendFromBaidu_3">
+				音频和<em>Midi</em>基础支持			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/wxlinwzl/article/details/8472720" target="_blank" >
+				第一部分  模拟声音-数字声音原理
+p6?_@$tF0` 一、模拟声音数字化原理
+Q bG8p w-\ 声音是通过空气传播的一种连续的波，叫声波。声音的强弱体现在声波压力的大小上，音调的...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/wxlinwzl" title="wxlinwzl" target="_blank">
+					<img src="https://avatar.csdn.net/9/C/7/3_wxlinwzl.jpg" alt="wxlinwzl" class="avatar-pic">
+					<span class="name">wxlinwzl</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2013-01-06 13:46:24</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：4963</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://download.csdn.net/download/herockgame/4505434" target="_blank" strategy="BlogCommendFromBaidu_4">
+				最好的MID转换成<em>WAV</em>音频文件的工具			</a>
+		</h4>
+		<p class="content">
+			<a href="https://download.csdn.net/download/herockgame/4505434" target="_blank" strategy="BlogCommendFromBaidu_4">
+				著名的<em>MIDI</em>软音源播放工具,音响效果一流. 还可以把.mid文件转换为.<em>wav</em>文件。			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+							<span class="read-num">下载</span>
+				
+			</p>
+			<p>
+				<span class="date">2012年08月16日 21:44</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box recommend-ad-box" id="a_d_feed_0">
+			<script>
+				var width = $("div.recommend-box").outerWidth() - 48;
+				NEWS_FEED({
+					w: width,
+					h: 90,
+					showid: 'Afihld',
+					placeholderId: 'a_d_feed_0',
+					inject: 'define',
+					define: {
+						imagePosition: 'right',
+						imageBorderRadius: 0,
+						imageWidth: 120,
+						imageHeight: 90,
+						imageFill: 'clip',
+						displayImage: true,
+						displayTitle: true,
+						titleFontSize: 20,
+						titleFontColor: '#333',
+						titleFontFamily: 'Microsoft Yahei',
+						titleFontWeight: 'bold',
+						titlePaddingTop: 0,
+						titlePaddingRight: 0,
+						titlePaddingBottom: 10,
+						titlePaddingLeft: 0,
+						displayDesc: true,
+						descFontSize: 14,
+						descFontColor: '#6b6b6b',
+						descFontFamily: 'Microsoft Yahei',
+						paddingTop: 0,
+						paddingRight: 0,
+						paddingBottom: 0,
+						paddingLeft: 0,
+						backgroundColor: '#fff',
+						hoverColor: '#ca0c16'
+					}
+				})
+			</script>
+		</div>
+			<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/xiaobo16/article/details/9730323" target="_blank" strategy="searchFromBaidu_5">
+				FFMPEG源码分析			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/xiaobo16/article/details/9730323" target="_blank" >
+				以FFMPEG 1.0为参考，对FFMPEG源码分析，其中调用以H264为例
+
+
+
+
+一、main（）中；在ffmpeg.c文件中
+
+1、OptionsContext o ={ 0 }:...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/xiaobo16" title="xiaobo16" target="_blank">
+					<img src="https://avatar.csdn.net/E/C/5/3_xiaobo16.jpg" alt="xiaobo16" class="avatar-pic">
+					<span class="name">xiaobo16</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2013-08-03 10:38:15</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：3440</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/shuyong1999/article/details/7176329" target="_blank" strategy="searchFromBaidu_6">
+				ffmpeg与TS			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/shuyong1999/article/details/7176329" target="_blank" >
+				0. 简介
+        FFmpeg是一个集录制、转换、音/视频编码解码功能为一体的完整的开源解决方案。FFmpeg的开发是基于Linux操作系统，但是可以在大多数操作系统中编译和使用。FFmp...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/shuyong1999" title="shuyong1999" target="_blank">
+					<img src="https://avatar.csdn.net/3/C/E/3_shuyong1999.jpg" alt="shuyong1999" class="avatar-pic">
+					<span class="name">shuyong1999</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2012-01-04 20:51:52</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：7641</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://blog.csdn.net/weixin_35804181/article/details/57079884" target="_blank" strategy="searchFromBaidu_7">
+				[FFMPEG-功能]Device			</a>
+		</h4>
+		<p class="content">
+			<a href="https://blog.csdn.net/weixin_35804181/article/details/57079884" target="_blank" >
+				libavdevice库提供和libavformat相同的接口。即输入设备被认为是一个demuxer，而输出设备被认为是一个muxer。 
+此外，每个输入输出设备都支持私有选项。1.输入Devices...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+				<a class="avatar" src="https://blog.csdn.net/weixin_35804181" title="weixin_35804181" target="_blank">
+					<img src="https://avatar.csdn.net/2/6/6/3_weixin_35804181.jpg" alt="weixin_35804181" class="avatar-pic">
+					<span class="name">weixin_35804181</span>
+				</a>
+			</p>
+			<p>
+				<span class="date">2017-02-25 14:08:47</span>
+			</p>
+			<p>
+				<span class="read-num">阅读数：548</span>
+			</p>
+		</div>
+	</div>
+					<div class="recommend-item-box csdn-tracking-statistics" data-mod="popu_387" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+		<h4 class="text-truncate">
+			<a href="https://download.csdn.net/download/xyc9038/4422475" target="_blank" strategy="searchFromBaidu_8">
+				&lt;em&gt;<em>midi</em>&lt;/em&gt;播放库,可转mp3使用不同的音色库			</a>
+		</h4>
+		<p class="content">
+			<a href="https://download.csdn.net/download/xyc9038/4422475" target="_blank" strategy="searchFromBaidu_8">
+				C-C++&lt;em&gt;<em>midi</em>&lt;/em&gt;播放库,可转mp3使用不同的音色库 综合评分:0 收藏(1)评论举报 所...MP3播放器(利用&lt;em&gt;ffmpeg&lt;/em&gt;库,可以播放mp3,wma) 立即下载  上传者: hushoubo 时间:...			</a>
+		</p>
+		<div class="info-box d-flex align-content-center">
+			<p>
+							<span class="read-num">下载</span>
+				
+			</p>
+			<p>
+				<span class="date">2018年04月18日 00:00</span>
+			</p>
+		</div>
+	</div>
+			            <div class="recommend-loading-box">
+                <img src='https://csdnimg.cn/release/phoenix/images/feedLoading.gif'>
+            </div>
+            <div class="recommend-end-box">
+                <p class="text-center">没有更多推荐了，<a href="https://blog.csdn.net/" class="c-blue c-blue-hover c-blue-focus">返回首页</a></p>
+            </div>
+        </div>
+    </main>
+</div>
+<div class="mask-dark"></div>
+<div class="report-box">
+    <div class="pos-box">
+        <h2 class="title">不良信息举报</h2>
+        <a class="btn-close">
+            <svg class="icon" aria-hidden="true">
+                <use xlink:href="#csdnc-times"></use>
+            </svg>
+        </a>
+        <form id="frmReport">
+            <div class="form-box">
+                <div class="txt-row-box">
+                    <label class="title" id="reptTit">举报内容：</label>
+                    <p class="rpt-title text-truncate">[笔记] 当当音乐人：Midi转化为WAV</p>
+                </div>
+                <div class="txt-row-box">
+                    <label class="title">举报原因：</label>
+                    <div class="rdo-box">
+                        <label><input type="radio" class="rdo-chk report-type" id="report_sex" name="report_type" value="1">色情</label>
+                        <label><input type="radio" class="rdo-chk report-type" id="report_Politics" name="report_type" value="2">政治</label>
+                        <label><input type="radio" class="rdo-chk report-type" id="report_copy" name="report_type" value="3">抄袭</label>
+                        <label><input type="radio" class="rdo-chk report-type" id="report_ad" name="report_type" value="4">广告</label>
+                        <label><input type="radio" class="rdo-chk report-type" id="report_want" name="report_type" value="5">招聘</label>
+                        <label><input type="radio" class="rdo-chk report-type" id="report_call" name="report_type" value="6">骂人</label>
+                        <label><input type="radio" class="rdo-chk report-type" id="report_other" name="report_type" value="7">其他</label>
+                    </div>
+                </div>
+                <div class="txt-row-box" id="rptOriginalurl">
+                    <label class="title">原文地址：</label>
+                    <div class="txt-box">
+                        <input class="ipt" type="text" name="originalurl">
+                    </div>
+                </div>
+                <div class="txt-row-box">
+                    <label class="title">原因补充：</label>
+                    <div class="txt-box">
+                        <textarea class="ipt ipt-textarea" name="description" maxlength="30"></textarea>
+                        <p class="remark">最多只允许输入30个字</p>
+                    </div>
+                </div>
+            </div>
+            <div class="opt-box text-right">
+                <input type="reset" class="btn btn-link-gray btn-close" value="取消">
+                <input type="submit" class="btn btn-red btn-submit" value="提交">
+            </div>
+        </form>
+    </div>
+</div>
+<div class="pulllog-box" style="display: block;">
+	<div class="pulllog clearfix">
+		<span class="text float-left">加入CSDN，享受更精准的内容推荐，与500万程序员共同成长！</span>
+		<div class="pulllog-btn float-right clearfix">
+            <button class="pulllog-login float-left csdn-tracking-statistics tracking-click" data-mod="popu_557">
+                登录
+            </button>
+            <div class="pulllog-sigin float-left csdn-tracking-statistics tracking-click" data-mod="popu_558">
+                <a href="https://passport.csdn.net/account/mobileregister" target="_blank">注册</a>
+            </div>
+            <button class="btn-close">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#csdnc-times"></use>
+                </svg>
+            </button>
+		</div>
+	</div>
+</div>
+<div id="loginWrap" style="display:none"></div>
+<div class="tool-box">
+	<ul class="meau-list">
+		<li>
+			<button class="btn-like " title="点赞">
+				<svg class="icon active" aria-hidden="true">
+					<use xlink:href="#csdnc-thumbsup-ok"></use>
+				</svg><svg class="icon no-active" aria-hidden="true">
+					<use xlink:href="#csdnc-thumbsup"></use>
+				</svg>
+				<p>0</p>
+			</button>
+		</li>
+		<li class="toc-container-box" id="liTocBox">
+			<button class="btn-toc" title="目录">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-contents"></use>
+				</svg><br>目录
+			</button>
+			<div class="toc-container">
+				<div class="pos-box">
+					<div class="icon-arrow"></div>
+					<div class="scroll-box">
+						<div class="toc-box"></div>
+					</div>
+				</div>
+				<div class="opt-box">
+					<button class="btn-opt prev nomore" title="向上">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#csdnc-chevronup"></use>
+						</svg>
+					</button>
+					<button class="btn-opt next">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#csdnc-chevrondown"></use>
+						</svg>
+					</button>
+				</div>
+			</div>
+		</li>
+		<li>
+			<button class="btn-bookmark" title="收藏">
+				<svg class="icon active" aria-hidden="true">
+					<use xlink:href="#csdnc-bookmark-ok"></use>
+				</svg><svg class="icon no-active" aria-hidden="true">
+					<use xlink:href="#csdnc-bookmark"></use>
+				</svg><br>收藏
+			</button>
+		</li>
+		<li>
+			<a class="btn-comments" title="评论" href="#commentBox">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-comments"></use>
+				</svg><br>评论
+			</a>
+		</li>
+				<li class="bdsharebuttonbox">
+			<a class="btn-comments bds_weixin" data-cmd="weixin" title="微信分享">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-wechat"></use>
+				</svg><br>微信
+			</a>
+		</li>
+		<li class="bdsharebuttonbox">
+			<a class="btn-comments bds_tsina" data-cmd="tsina" title="微博分享">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-weibo"></use>
+				</svg><br>微博
+			</a>
+		</li>
+		<li class="bdsharebuttonbox">
+			<a class="btn-comments bds_qzone" data-cmd="qzone" title="QQ分享">
+				<svg class="icon" aria-hidden="true">
+					<use xlink:href="#csdnc-qq"></use>
+				</svg><br>QQ
+			</a>
+		</li>
+	</ul>
+</div>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'https://csdnimg.cn/static/api/js/share.js?v=89860594'];</script>
+<script src="https://csdnimg.cn/public/sandalstrap/1.2/js/sandalstrap.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/vendor/pagination/paging.js"></script>
+<script src='https://csdnimg.cn/public/common/gotop/js/goTop-v1.0.min.js?v201803151422'></script>
+<script>
+    GoTop({
+        right: 8,
+        hasReport: true,
+        reportFun: function() {
+            showReport(false,'[笔记] 当当音乐人：Midi转化为WAV');
+        }
+    })
+</script>
+<script src="https://csdnimg.cn/release/phoenix/template/js/common-bd54b21308.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/template/js/detail-18414583a5.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/themes/skin3-template/skin3-template-46c7bd3d86.min.js"></script>
+<script src="https://csdnimg.cn/search/baidu_search-1.1.2.js?v=201802071056&autorun=true&install=true&keyword=midi%E5%AF%BC%E5%87%BA%E4%B8%BAwav"  type="text/javascript"></script>
+</body>
+<div class="box-box-default">
+    <a class="btn-remove">
+        关闭
+    </a>
+    <script type="text/javascript" src="//cee1.iteye.com/mhzzjepzz.js"></script>
+</div>
+<div class="box-box-large">
+    <a class="btn-remove">
+        关闭
+    </a>
+    <script type="text/javascript" src="//cee1.iteye.com/idvveasfs.js"></script>
+</div>
+</html>

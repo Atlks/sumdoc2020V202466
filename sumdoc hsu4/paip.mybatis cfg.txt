@@ -1,0 +1,110 @@
+
+paip.环境设置 mybatis ibatis cfg 环境设置
+
+三部分
+//////////1. 电泳。。。。
+、、、、、、、、、、、、2. 猪配置文件  com/mijie/homi/search/util/ibatiascfg.xml
+、、、、、、、、、、、、、、、、、3.mappers 配置文件  ibatis/index.xml
+
+---------------------------------------------------------------------------
+
+//////////1. 电泳。。。。
+ public static void main(String[] args) {
+	        // TODO Auto-generated method stub
+	        try {
+	            String resource = "com/mijie/homi/search/util/ibatiascfg.xml";
+	            Reader reader;
+
+	            reader = Resources.getResourceAsReader(resource);
+
+	            SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder()
+	                    .build(reader);
+	            SqlSession sqlSession = sqlSessionFactory.openSession();
+	         List li=   sqlSession.selectList("getRecently100", 9999999);
+//	            StudentDao studentDao =sqlSession.getMapper(StudentDao.class);
+//	            Student st = studentDao.getstudent(1);
+	            System.out.println( li.size());
+				
+	
+作者Attilax  艾龙，  EMAIL:1466519819@qq.com
+来源：attilax的专栏
+地址：http://blog.csdn.net/attilax
+			
+、、、、、、、、、、、、2. 猪配置文件  com/mijie/homi/search/util/ibatiascfg.xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!--  
+	<properties resource="config/config.properties"></properties>
+	-->
+	<typeAliases>
+	<!--  
+		<package name="pojo" />
+		-->
+		<typeAlias alias="Topic" type="com.mijie.homi.search.domain.topic.Topic" />
+		<typeAlias alias="Topic" type="com.mijie.homi.search.domain.topic.Topic"  />
+		<typeAlias alias="TopicOptions" type="com.mijie.homi.search.domain.topic.TopicOptions"  />
+	 	<typeAlias alias="User" type="com.mijie.homi.common.domain.user.User"  />
+	 	<typeAlias alias="UserExtInfo" type="com.mijie.homi.common.domain.user.UserExtInfo"  />
+	 	<typeAlias alias="Mood" type="com.mijie.homi.common.domain.mood.Mood"  />
+	 	<typeAlias alias="MoodUser" type="com.mijie.homi.search.domain.user.MoodUser"  />
+	</typeAliases>
+
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://192.168.0.132:3306/homi" />
+				<property name="username" value="root" />
+				<property name="password" value="password" />
+				<property name="poolMaximumActiveConnections" value="15" />
+				<property name="poolMaximumCheckoutTime" value="5000" />
+					<!-- 
+					<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+				 -->
+			</dataSource>
+		</environment>
+	</environments>
+	
+	   <mappers>
+        <mapper resource="ibatis/index.xml" />
+    </mappers>
+</configuration> 	
+
+、、、、、、、、、、、、、、、、、3.mappers 配置文件  ibatis/index.xml
+
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="com.mijie.homi.domain.mood.Mood4full">
+   
+   <!-- where id  <=#{id} and timelineId=0 -->
+   <select id="getRecently100" parameterType="int" resultType="java.util.HashMap">
+   		   
+   		      <![CDATA[ select    * from mood4full  where id  <=#{id}  
+   		      order by id desc   limit 100  ]]>
+   </select>
+   
+      <select id="listRecentlyLoginUserMood" parameterType="map" resultType="Mood">
+   		select m.* from  userExtInfo as e join mood as m
+		on m.id=e.moodId
+		where e.lastLoginAt >= #{atleastLastLoginAt}
+		order by e.lastLoginAt desc 
+		limit #{offset},#{limit}
+   </select>
+   
+   
+      <select id="moodsByIds" parameterType="string" resultType="java.util.HashMap">
+   	 select *,u.id uid,e.lastloginat from mood m,user u,userExtInfo e  where  m.userid=u.id and u.id=e.id and m.id in ( ${_parameter} ) order by m.id desc limit 100 
+	
+   </select>
+   
+   </mapper>
+   
+			

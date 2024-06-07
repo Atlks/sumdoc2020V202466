@@ -1,0 +1,27 @@
+GUI 脚本
+GUI出现带来一种专业的控制计算机的脚本语言。它在用户和图形界面，菜单，按钮等之间互动。它经常用来自动化重复性动作，或设置一个标准状态。理论上它可以用来控制运行于基于GUI的计算机上的所有应用程序，但实际上这些语言是否被支持还要看应用程序和操作系统本身。当通过键盘进行互动时，这些语言也被称为宏语言。
+具体分类有：
+1.AutoHotkey
+2.AutoIt
+3.Expect
+
+
+;WinWait "DevSuite Admin"
+;if ErrorLevel
+{
+;    MsgBox, WinWait err out.
+ ;   return
+}
+
+
+IfWinNotExist,  DevSuite Admin
+{
+msgbox startloop.
+Loop 30
+{ 
+
+Sleep 300  ; 等待60秒 
+;msgbox slp
+}  
+
+} 

@@ -1,0 +1,667 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" dir="ltr">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>让Java轻松乐动起来，使用JFugue制作自己的音乐  - 活出快乐的自己！ - ITeye博客</title>
+    <meta name="description" content="学过或用过 Basic 的朋友大约还会记得，在 Basic 里要演奏(当时还是从 PC 喇叭里发出的，现在也能走声卡了)一段 哆来咪发唆拉西哆 可以写成：   PLAY &quot;C D E F G A B O6C&quot;   直接用 JDK 可没有这么简单，虽然 JDK 1.3 开始就引入了 Java Sound API 处理 MIDI(Musical Instrument Digital  ..." />
+    <meta name="keywords" content="音乐, Java, C#, C++, C 让Java轻松乐动起来，使用JFugue制作自己的音乐 " />
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+    <link rel="search" type="application/opensearchdescription+xml" href="/open_search.xml" title="ITeye" />
+    <link href="/rss" rel="alternate" title="活出快乐的自己！" type="application/rss+xml" />
+    <link href="http://www.iteye.com/stylesheets/blog.css?1517972557" media="screen" rel="stylesheet" type="text/css" />
+<link href="http://www.iteye.com/stylesheets/themes/blog/blue.css?1448702469" media="screen" rel="stylesheet" type="text/css" />
+    <script src="http://www.iteye.com/javascripts/application.js?1448702469" type="text/javascript"></script>    
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?e19a8b00cf63f716d774540875007664";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+
+
+        //自动推送工具代码
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+
+
+      <link href="http://www.iteye.com/javascripts/syntaxhighlighter/SyntaxHighlighter.css?1448702469" media="screen" rel="stylesheet" type="text/css" />
+  <script src="http://www.iteye.com/javascripts/syntaxhighlighter/shCoreCommon.js?1448702469" type="text/javascript"></script>
+<script src="http://www.iteye.com/javascripts/hotkey.js?1448702469" type="text/javascript"></script>
+  <script src="http://www.iteye.com/javascripts/code_favorites.js?1448702469" type="text/javascript"></script>
+<script src="http://www.iteye.com/javascripts/weiboshare.js?1448702469" type="text/javascript"></script>
+
+    <!-- 请置于所有广告位代码之前 -->
+    <script src="http://dup.baidustatic.com/js/ds.js"></script>
+    <link ref="canonical" href="http://hdxiong.iteye.com/blog/487698">
+    <script src="//msite.baidu.com/sdk/c.js?appid=1563894916825412"></script>
+  </head>
+  <body>
+    <div id="header">
+	      <div id="blog_site_nav">
+  <a href="http://www.iteye.com/" class="homepage">首页</a>
+  <a href="http://www.iteye.com/news">资讯</a>
+  <a href="http://www.iteye.com/magazines">精华</a>
+  <a href="http://www.iteye.com/forums">论坛</a>
+  <a href="http://www.iteye.com/ask">问答</a>
+  <a href="http://www.iteye.com/blogs">博客</a>
+  <a href="http://www.iteye.com/blogs/subjects">专栏</a>
+  <a href="http://www.iteye.com/groups">群组</a>
+  <a href="#" onclick="return false;" id="msna"><u>更多</u> <small>▼</small></a>
+  <div class="quick_menu" style="display:none;">
+    <a target="_blank" href="http://job.iteye.com/iteye">知识库</a>
+    <a href="http://www.iteye.com/search">搜索</a>
+  </div>
+</div>
+
+	      <div id="user_nav">
+
+      <a href="/login" class="welcome" title="登录">您还未登录 !</a>
+    <a href="/login">登录</a>
+    <!--<a href="/signup" class="nobg">注册</a>-->
+    <!--<a href="http://passport.csdn.net/account/mobileregister?from=http://www.iteye.com">注册</a>-->
+  </div>
+
+	    
+    </div>
+
+    <div id="page">
+        <div id="branding" class="clearfix" style="overflow: hidden;background: none;padding:0 0 2px;">
+          <!-- 广告位：PC端-iteye博客详情页顶部banner-960*90 -->
+          <script>
+              (function() {
+                  var s = "_" + Math.random().toString(36).slice(2);
+                  document.write('<div id="' + s + '"></div>');
+                  (window.slotbydup=window.slotbydup || []).push({
+                      id: '4773198',
+                      container: s,
+                      size: '960,60',
+                      display: 'inlay-fix'
+                  });
+              })();
+          </script>
+        </div>
+      <div id="branding" class="clearfix">
+        <div id="blog_name">
+          <h1><a href="/">活出快乐的自己！</a></h1>
+        </div>
+        <div id='fd'></div>
+        <div id="blog_navbar">
+          <ul>
+            <li class='blog_navbar_for'><a href="http://hdxiong.iteye.com"><strong>博客</strong></a></li>
+            <li ><a href="/weibo">微博</a></li>
+            <li ><a href="/album">相册</a></li>
+            <li ><a href="/link">收藏</a></li>
+            <li ><a href="/blog/guest_book">留言</a></li>
+            <li ><a href="/blog/profile">关于我</a></li>
+          </ul>
+    
+          <div class="search">
+            <form action="/blog/search" method="get">
+              <input class="search_text" id="query" name="query" style="margin-left: 10px;width: 110px;" type="text" value="" />
+              <input class="submit_search" type="submit" value="" />
+            </form>
+          </div> 
+          <div id="fd"></div>         
+        </div>
+      </div>
+      
+      <div id="content" class="clearfix">
+        <div id="main">
+          
+
+
+
+          
+
+
+<div class="h-entry" style='display:none'>
+  <a href="http://hdxiong.iteye.com" class="p-author" target="_blank">hdxiong</a>
+</div>
+
+
+<div class="blog_main">
+  <script type="application/ld+json">
+    {
+        "@context": "https://zhanzhang.baidu.com/contexts/cambrian.jsonld",
+        "@id": "http://hdxiong.iteye.com/blog/487698",
+        "title": "让Java轻松乐动起来，使用JFugue制作自己的音乐 ",
+        "images": [],
+        "description": "",
+        "pubDate": "2009-10-14T10:43:26"
+    }
+  </script>
+  <div class="blog_title">
+    <h3>
+      <a href="/blog/487698">让Java轻松乐动起来，使用JFugue制作自己的音乐 </a>
+      <em class="actions">      </em>
+    </h3>
+    <ul class='blog_categories'><strong>博客分类：</strong> <li><a href="/category/75660">Java</a></li> </ul>
+        <div class='news_tag'><a href="http://www.iteye.com/blogs/tag/%E9%9F%B3%E4%B9%90">音乐</a><a href="http://www.iteye.com/blogs/tag/Java">Java</a><a href="http://www.iteye.com/blogs/tag/C%23">C#</a><a href="http://www.iteye.com/blogs/tag/C++">C++</a><a href="http://www.iteye.com/blogs/tag/C">C</a>&nbsp;</div>
+  </div>
+
+  <div id="blog_content" class="blog_content">
+    学过或用过 Basic 的朋友大约还会记得，在 Basic 里要演奏(当时还是从 PC 喇叭里发出的，现在也能走声卡了)一段 哆来咪发唆拉西哆 可以写成：<br /><pre class="VB" name="code">
+PLAY "C D E F G A B O6C"
+</pre><br />直接用 JDK 可没有这么简单，虽然 JDK 1.3 开始就引入了 Java Sound API 处理 MIDI(Musical Instrument Digital Interface)，可是它的接口很难使用，另外，Sun 也专为视、音频的捕获、回放、格式转换提供了 Java Media Framework API (JMF)，但不能用来创作。有一个开源的组件 JFugue(http://www.jfugue.org/)，它能让你尽显音乐方面的天赋，给你一个高级易用的接口来操作 Java Sound，制作自己的 MIDI 音乐。<br /><br /><br />一：JFugue Hello World<br /><br />JFugue 使用字符串来描述音乐表现，然后将其转换成 MIDI 指令并通过 Java Sound 接口对其进行处理。JFugue 可以播放音乐本身，或是保存为一个 MIDI 文件。使用它的 API 非常的容易，比如完成上面 Basic 代码的功能，只要写成<br /><pre class="java" name="code">
+Player player = new Player(); 
+player.play("C D E F G A B C6W");
+</pre><br />其中的 "C D E F G A B C6W" 就是一个 MIDI 指令集，字符串描述不区分大小写，对音乐有所了解的朋友一眼就能看明白。每一项是一个音符，音符由三部分组成，分别是：<br /><br />1. 音符名 －－ 即唱名，如 CDEFGAB<br />2. 音高 －－ 默认为 5(表示第五个八度－中央 C 所在的八度)，如 C7 就是简谱的 ⅰ。您能够用#和b字符分别表示升半音和降半音。<br />3. 音长 －－ 默认为 Q(quartar)，表示四分之一符，还有 W(whole)，全音符，H(half)，半音符。其他如：1/8("i")、1/16("s")、1/32("t")、1/64("x")和1/128音值("n")。您能够通过在音值字符后面加上一个点(".")来表示一个点音值。<br /><br />除了用音符字母来指定音符名之外，还可直接使用“音符值（note value）”，同时表达音符名和音高。MIDI 有128个音符，编号是从0到127，以半音为间距。第60号音符是Middle-C。要指定音符值，就要在一个方括号里加上数值，比如 [60]。例如前面的 哆来咪发唆拉西哆 可以写成:<br /><pre class="java" name="code">
+player.play("T120 I[24] [60] D [64] F I[Piccolo] G A B C6W");
+</pre><br />所以前面的 C 其实是 C5Q 的缩写，音符名为 C，音高 5 表示第五个八度，音长为 Q，表示四分之一符。<br /><br /><br />二：音色与节拍<br /><br />此外，MIDI 可以指定音色(即乐器) 和节拍，JFugue 也当仁不让的支持，例如我们依次用吉他和短笛以每分钟 120 拍演奏上面的序列：<br /><pre class="java" name="code">
+player.play("T120 I[Guitar] C D E F I[Piccolo] G A B C6W");
+</pre><br />上面的 T 是 Tempo 拍子的缩写，I 是 Instrument 乐器的缩写。General Midi(GM) 音色表里有 128 种乐器(名称和编号)可选，参见：★GM 音色表★常用MIDI控制器一览表★专业术语字典★常用术语。I[] 中括号里可以用乐器名，也可以用编号，如 I[Guitar] 可用 i[24] 替换。只是对于中国民族乐器，如二胡、琵琶的支持还得研究一下。<br /><br /><br />三：和弦支持<br /><br />用字符串来描述音乐的另一个优良特性是能够制作和弦。例如用下面的代码方便时创建一个和弦编组（使用了 Pattern 的写法）：<br /><pre class="java" name="code">
+Pattern progression = new Pattern(); 
+progression.add("T160 I[Guitar] c5majw g5majw a5minw f5majw g5majw c5majw"); 
+Player jukebox = new Player(); 
+jukebox.play(progression);
+</pre><br />关于和弦的命名可参考：常用和弦的分类和命名，针对 JFugue 的准确命名还得看 JFugue 提供的文档。说明一下，c5majw 中的 c5 表示根音为中央 C，maj 表示大三和弦，w 为全音符。上面执行后发出来的是和弦齐奏的声音，还要研究一下和弦如何进行分解。<br /><br />可用 Player 来保存成一个 Midi 文件：<br /><pre class="java" name="code">
+jukebox.save(progression,"c:/music/chord.mid");
+</pre><br />四：请您欣赏<br /><br />最后来欣赏一段用 JFugue 演奏的节奏感很强的鼓点的音乐(beat16.mid)，这段音乐的代码如下：<br /><pre class="java" name="code">
+Rhythm rhythm = new Rhythm(); 
+//Bang out your drum beat  
+rhythm.setLayer(1, "O..oO...O..oOO.."); 
+rhythm.setLayer(2, "..*...*...*...*."); 
+rhythm.setLayer(3, "^^^^^^^^^^^^^^^^"); 
+rhythm.setLayer(4, "...............!"); 
+ 
+//Associate percussion notes with your beat  
+rhythm.addSubstitution('O', "[BASS_DRUM]i"); 
+rhythm.addSubstitution('o', "Rs [BASS_DRUM]s"); 
+rhythm.addSubstitution('*', "[ACOUSTIC_SNARE]i"); 
+rhythm.addSubstitution('^', "[PEDAL_HI_HAT]s Rs"); 
+rhythm.addSubstitution('!', "[CRASH_CYMBAL_1]s Rs"); 
+rhythm.addSubstitution('.', "Ri");   
+ 
+//Play the rhythm!  
+Pattern pattern = rhythm.getPattern(); 
+pattern.repeat(4); 
+Player player = new Player(); 
+player.play(pattern);
+</pre><br />接下来就是研究一下的是如何把多音乐进行合成，得到更发烧一级的效果。更详细的 JFugue 使用请浏览它的官网 http://www.jfugue.org/index.html。<br /><br />参考：1. 用Java JFugue进行快速音乐编程&nbsp; 英文原文：Rapid music programming with Java JFugue<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. Code To Joy: myTunes: Groovy and JFugue<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3. Interview: JFugue Goes Hip Hop<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4. Swing application that uses JFugue API for MIDI files<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5. JFugue User's Guide<br />
+  </div>
+
+  
+
+  <div>
+    <!-- 广告位：PC端-iteye博客详情页底部banner2-728*90 -->
+    <script>
+        (function() {
+            var s = "_" + Math.random().toString(36).slice(2);
+            document.write('<div id="' + s + '"></div>');
+            (window.slotbydup=window.slotbydup || []).push({
+                id: '4774193',
+                container: s,
+                size: '728,90',
+                display: 'inlay-fix'
+            });
+        })();
+    </script>
+  </div>
+
+
+
+  <div id="bottoms" class="clearfix">
+    
+    <div id="share_weibo">分享到：
+      <a data-type='sina' href="javascript:;" title="分享到新浪微博"><img src="/images/sina.jpg"></a>
+      <a data-type='qq' href="javascript:;" title="分享到腾讯微博"><img src="/images/tec.jpg"></a>
+    </div>
+  </div>
+
+  <div class="blog_nav">
+    <div class="pre_next">
+      <a href="/blog/497701" class="next" title="CopyUtils执行从read到write的数据拷贝">CopyUtils执行从read到write的数据拷贝</a>
+      |
+      <a href="/blog/478706" class="pre" title="DOS命令失效了">DOS命令失效了</a>
+    </div>
+  </div>
+  <div class="blog_bottom">
+    <ul>
+      <li>2009-10-14 10:43</li>
+      <li>浏览 2388</li>
+      <li><a href="#comments">评论(0)</a></li>
+      
+      
+            
+      <li class='last'><a href="http://www.iteye.com/wiki/blog/487698" target="_blank" class="more">查看更多</a></li>
+    </ul>    
+  </div>
+
+	
+    
+    
+<div class="boutique-curr-box blog_comment">
+	  <div class="boutique-curr clearfix">
+	    <h5 class="h3titles">相关资源推荐</h5>
+			<ul style="margin-top: 15px">
+				
+						<li style="width: 50%;float: left;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+							<a href="https://blog.csdn.net/a925763055/article/details/51427919" target="_blank" title="使用线程使图片动起来">使用线程使图片动起来</a>
+						</li>
+				
+						<li style="width: 50%;float: left;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+							<a href="https://blog.csdn.net/u010509143/article/details/12003771" target="_blank" title="让一个游戏人物动起来，">让一个游戏人物动起来，</a>
+						</li>
+				
+						<li style="width: 50%;float: left;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+							<a href="https://blog.csdn.net/jintianhen1/article/details/38539989" target="_blank" title="使用js实现图画人物动起来的方法">使用js实现图画人物动起来的方法</a>
+						</li>
+				
+						<li style="width: 50%;float: left;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+							<a href="https://blog.csdn.net/lfhfut/article/details/4392147" target="_blank" title="让对象在Unity3D中动起来">让对象在Unity3D中动起来</a>
+						</li>
+				
+						<li style="width: 50%;float: left;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+							<a href="https://blog.csdn.net/yt2054/article/details/51406601" target="_blank" title="java中的如何使物体动起来">java中的如何使物体动起来</a>
+						</li>
+				
+						<li style="width: 50%;float: left;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+							<a href="https://blog.csdn.net/jiulan1996/article/details/51291087" target="_blank" title="javaScript学习笔记——如何让&lt;canvas&gt;动起来">javaScript学习笔记——如何让<canvas>动起来</a>
+						</li>
+				
+						<li style="width: 50%;float: left;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+							<a href="https://download.csdn.net/download/mayulei163/2094863" target="_blank" title="jfugue-4.0.3.jar">jfugue-4.0.3.jar</a>
+						</li>
+				
+						<li style="width: 50%;float: left;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+							<a href="https://download.csdn.net/download/mayulei163/2094869" target="_blank" title="jfugue-chapter1.pdf">jfugue-chapter1.pdf</a>
+						</li>
+				
+						<li style="width: 50%;float: left;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+							<a href="https://blog.csdn.net/zgqtxwd/article/details/2356954" target="_blank" title="让你的图标动起来">让你的图标动起来</a>
+						</li>
+				
+						<li style="width: 50%;float: left;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+							<a href="https://blog.csdn.net/elena20170326/article/details/72954215" target="_blank" title="让图片动起来">让图片动起来</a>
+						</li>
+				
+						<li style="width: 50%;float: left;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+							<a href="https://blog.csdn.net/An_Illusion/article/details/47957255" target="_blank" title="使用javascript让图片人物动起来">使用javascript让图片人物动起来</a>
+						</li>
+				
+						<li style="width: 50%;float: left;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+							<a href="https://blog.csdn.net/bloodletter8/article/details/73614774" target="_blank" title="如何让你的蠢小人动起来——C++中包含优先级复杂条件FSM的实现">如何让你的蠢小人动起来——C++中包含优先级复杂条件FSM的实现</a>
+						</li>
+				
+						<li style="width: 50%;float: left;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+							<a href="https://blog.csdn.net/zhuxueliao/article/details/79455161" target="_blank" title="opengl  实现一个图形动 一个图形不动">opengl  实现一个图形动 一个图形不动</a>
+						</li>
+				
+						<li style="width: 50%;float: left;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+							<a href="https://blog.csdn.net/huangxuanheng/article/details/25310979" target="_blank" title="利用Java线程Thread实现接口Runnable接口使图片动起来">利用Java线程Thread实现接口Runnable接口使图片动起来</a>
+						</li>
+				
+						<li style="width: 50%;float: left;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+							<a href="https://blog.csdn.net/qq_22823581/article/details/78079520" target="_blank" title="css怎么让div动起来，实现动画效果一直在动">css怎么让div动起来，实现动画效果一直在动</a>
+						</li>
+				
+						<li style="width: 50%;float: left;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+							<a href="https://download.csdn.net/download/zhouwuhua/3260104" target="_blank" title="屏保制作工具让自己的靓照动起来">屏保制作工具让自己的靓照动起来</a>
+						</li>
+				
+						<li style="width: 50%;float: left;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+							<a href="https://download.csdn.net/download/lingguozhen/3010537" target="_blank" title="[轻松制作自己的音乐].ChordPulse.v1.4_jfsky汉化版">[轻松制作自己的音乐].ChordPulse.v1.4_jfsky汉化版</a>
+						</li>
+				
+						<li style="width: 50%;float: left;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+							<a href="https://blog.csdn.net/marSmile_tbo/article/details/27874195" target="_blank" title="仅用CSS让你的div动起来-------Day23">仅用CSS让你的div动起来-------Day23</a>
+						</li>
+				
+						<li style="width: 50%;float: left;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+							<a href="https://blog.csdn.net/mocn26169/article/details/7519490" target="_blank" title="安卓游戏开发------让游戏人物动起来(游戏帧动画的处理 )（一）">安卓游戏开发------让游戏人物动起来(游戏帧动画的处理 )（一）</a>
+						</li>
+				
+						<li style="width: 50%;float: left;margin: 0;line-height: 25px;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+							<a href="https://blog.csdn.net/ElinaVampire/article/details/52143777" target="_blank" title="Android自定义控件：如何使view动起来？">Android自定义控件：如何使view动起来？</a>
+						</li>
+				
+			</ul>
+	  </div>
+</div>
+
+      
+  <div class="blog_comment">
+    <h5>评论</h5>
+    <a id="comments" name="comments"></a>
+    
+    
+    
+  </div>
+
+  <div class="blog_comment">
+    <h5>发表评论</h5>
+            <p style="text-align:center; margin-top:30px;margin-bottom:0px;"><a href="/login" style="background-color:white;"> <img src="/images/login_icon.png" style="vertical-align:middle; margin-right: 10px;" /></a><a href="/login">  您还没有登录,请您登录后再发表评论 </a></p>
+      </div>
+</div>
+
+
+<script type="text/javascript">
+  dp.SyntaxHighlighter.HighlightAll('code', true, true);
+
+  $$('#main .blog_content pre[name=code]').each(function(pre, index){ // blog content
+    var post_id = 487698;
+    var location = window.location;
+    source_url = location.protocol + "//" + location.host + location.pathname + location.search;
+    pre.writeAttribute('codeable_id', post_id);
+    pre.writeAttribute('codeable_type', "Blog");
+    pre.writeAttribute('source_url', source_url);
+    pre.writeAttribute('pre_index', index);
+    pre.writeAttribute('title', '让Java轻松乐动起来，使用JFugue制作自己的音乐 ');
+  });
+
+  fix_image_size($$('div.blog_content img'), 700);
+
+  function processComment() {
+    $$('#main .blog_comment > div').each(function(comment){// comment
+      var post_id = comment.id.substr(2);
+      $$("#"+comment.id+" pre[name=code]").each(function(pre, index){
+        var location = window.location;
+        source_url = location.protocol + "//" + location.host + location.pathname + location.search;
+        source_url += "#" + comment.id;
+        pre.writeAttribute('codeable_id', post_id);
+        pre.writeAttribute('codeable_type', "BlogComment");
+        pre.writeAttribute('source_url', source_url);
+        pre.writeAttribute('pre_index', index);
+        pre.writeAttribute('title', '让Java轻松乐动起来，使用JFugue制作自己的音乐 ');
+      });
+    });
+  }
+
+  function quote_comment(id) {
+    new Ajax.Request('/editor/quote', {
+      parameters: {'id':id, 'type':'BlogComment'},
+      onSuccess:function(response){editor.bbcode_editor.textarea.insertAfterSelection(response.responseText);
+        Element.scrollTo(editor.bbcode_editor.textarea.element);}
+    });
+  }
+
+  code_favorites_init();
+  processComment();
+  new WeiboShare({share_buttons: $('share_weibo'), img_scope: $('blog_content')});
+</script>
+
+
+
+
+        </div>
+
+        <div id="local">
+          <div class="local_top"></div>
+          <div id="blog_owner">
+  <div id="blog_owner_logo"><a href='http://hdxiong.iteye.com'><img alt="hdxiong的博客" class="logo" src="http://www.iteye.com/upload/logo/user/479377/50cc1d5b-af62-3424-a2d2-984a1cc3bbdf.jpg" title="hdxiong的博客: 活出快乐的自己！" width="" /></a></div>
+  <div id="blog_owner_name">hdxiong</div>
+</div>
+
+          <div id="blog_actions">
+            <ul>
+              <li>浏览: 278445 次</li>
+              <li>性别: <img alt="Icon_minigender_1" src="http://www.iteye.com/images/icon_minigender_1.gif?1448702469" title="男" /></li>
+              <li>来自: 北京</li>
+              <li><img src='/images/status/offline.gif'/></li>
+              
+            </ul>
+          </div>
+          <div id="user_visits" class="clearfix">
+            <h5>最近访客 <span style='font-weight:normal;font-size:12px;padding-left:30px;'><a href="/blog/user_visits">更多访客&gt;&gt;</a></span></h5>
+            
+              <div class="user_visit">
+                <div class="logo"><a href='http://wangning8075.iteye.com' target='_blank'><img alt="wangning8075的博客" class="logo" src="http://www.iteye.com/upload/logo/user/1277204/adc757ec-82f5-3f39-9f91-a4eab215d6b8-thumb.png" title="wangning8075的博客: " width="48px" /></a></div>
+                <div class="left"><a href='http://wangning8075.iteye.com' target='_blank' title='wangning8075'>wangning8075</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href='http://centos64.iteye.com' target='_blank'><img alt="CentOS64的博客" class="logo" src="http://www.iteye.com/images/user-logo-thumb.gif?1448702469" title="CentOS64的博客: " width="48px" /></a></div>
+                <div class="left"><a href='http://centos64.iteye.com' target='_blank' title='CentOS64'>CentOS64</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href='http://jnjzzjd.iteye.com' target='_blank'><img alt="jnjzzjd的博客" class="logo" src="http://www.iteye.com/images/user-logo-thumb.gif?1448702469" title="jnjzzjd的博客: jnjzzjd" width="48px" /></a></div>
+                <div class="left"><a href='http://jnjzzjd.iteye.com' target='_blank' title='jnjzzjd'>jnjzzjd</a></div>
+              </div>
+            
+              <div class="user_visit">
+                <div class="logo"><a href='http://aub.iteye.com' target='_blank'><img alt="aubdiy的博客" class="logo" src="http://www.iteye.com/upload/logo/user/1143676/a864a2f5-9633-3da0-99c5-f2882c461f91-thumb.png" title="aubdiy的博客: AUB" width="48px" /></a></div>
+                <div class="left"><a href='http://aub.iteye.com' target='_blank' title='aubdiy'>aubdiy</a></div>
+              </div>
+            
+          </div>
+
+          
+
+                      <div id="blog_menu">
+              <h5>文章分类</h5>
+              <ul>
+                <li><a href="/">全部博客 (97)</a></li>
+                
+                  <li><a href="/category/75660">Java (30)</a></li>
+                
+                  <li><a href="/category/75653">SSH (15)</a></li>
+                
+                  <li><a href="/category/75656">Lucene (8)</a></li>
+                
+                  <li><a href="/category/86412">Semantic Web (4)</a></li>
+                
+                  <li><a href="/category/75659">Algorithm (1)</a></li>
+                
+                  <li><a href="/category/75654">JavaScript (6)</a></li>
+                
+                  <li><a href="/category/75666">DataBase (11)</a></li>
+                
+                  <li><a href="/category/75658">Others (3)</a></li>
+                
+                  <li><a href="/category/101206">Linux (15)</a></li>
+                
+                  <li><a href="/category/101207">Flex (3)</a></li>
+                
+                  <li><a href="/category/101208">Network (1)</a></li>
+                
+                  <li><a href="/category/193741">办公软件 (1)</a></li>
+                
+                  <li><a href="/category/216226">ISO/Android (1)</a></li>
+                
+                  <li><a href="/category/221477">Oracle (1)</a></li>
+                
+                  <li><a href="/category/222707">solr (1)</a></li>
+                
+                  <li><a href="/category/222708">paoding (1)</a></li>
+                
+                  <li><a href="/category/342526">SVN IOS (0)</a></li>
+                
+                  <li><a href="/category/342527">SVN (1)</a></li>
+                
+              </ul>
+            </div>
+            <div id='month_blogs'>
+              <h5>社区版块</h5>
+              <ul>
+                <li><a href="/blog/news">我的资讯</a> (0)</li>
+                <li>
+                  <a href="/blog/post">我的论坛</a> (7)
+                </li>
+                <li><a href="/blog/answered_problems">我的问答</a> (1)</li>
+              </ul>
+            </div>
+            <div id="month_blogs">
+              <h5>存档分类</h5>
+              <ul>
+                
+                  <li><a href="/blog/monthblog/2015-07">2015-07</a> (1)</li>
+                
+                  <li><a href="/blog/monthblog/2012-12">2012-12</a> (1)</li>
+                
+                  <li><a href="/blog/monthblog/2012-10">2012-10</a> (1)</li>
+                
+                <li><a href="/blog/monthblog_more">更多存档...</a></li>
+              </ul>
+            </div>
+            
+            
+
+            <div id="guest_books">
+              <h5>最新评论</h5>
+              <ul>
+                
+                <li>
+                  <a href='http://n3verl4nd.iteye.com' target='_blank' title='lgh1992314'>lgh1992314</a>： 
+                  scugxl 写道这个java.ext.dirs属于加载的JR ...<br />
+                  <a href="/blog/1707139#bc2401866">classpath 和 java.ext.dirs 的区别</a>
+                </li>
+                
+                <li>
+                  <a href='http://oneforher.iteye.com' target='_blank' title='Oneforher'>Oneforher</a>： 
+                  java -Djava.ext.dirs 加载Lib后，%JA ...<br />
+                  <a href="/blog/1707139#bc2392210">classpath 和 java.ext.dirs 的区别</a>
+                </li>
+                
+                <li>
+                  <a href='http://cxw1128.iteye.com' target='_blank' title='cxw1128'>cxw1128</a>： 
+                  java -Djava.ext.dirs=/home/ice/ ...<br />
+                  <a href="/blog/1707139#bc2381374">classpath 和 java.ext.dirs 的区别</a>
+                </li>
+                
+                <li>
+                  <a href='http://suosuo230.iteye.com' target='_blank' title='suosuo230'>suosuo230</a>： 
+                  同感，纠结了一天了，才发现，比你们晚发现2-4年<br />
+                  <a href="/blog/997132#bc2371743">com.ibm.icu.text.SimpleDateFormat 的陷阱</a>
+                </li>
+                
+                <li>
+                  <a href='http://scugxl.iteye.com' target='_blank' title='scugxl'>scugxl</a>： 
+                  这个java.ext.dirs属于加载的JRE/LIB/EXT ...<br />
+                  <a href="/blog/1707139#bc2367172">classpath 和 java.ext.dirs 的区别</a>
+                </li>
+                
+              </ul>
+            </div>
+
+            <div class="local_bottom"></div>
+          
+        </div>
+
+        <div id="nav_show_top_stop" style="height: 500px;z-index:1000;margin-top: 10px;float: left;clear: left;">
+          <div>
+            <!-- 广告位：PC端-iteye博客详情页左侧Button1-200*200 -->
+            <script>
+                (function() {
+                    var s = "_" + Math.random().toString(36).slice(2);
+                    document.write('<div id="' + s + '"></div>');
+                    (window.slotbydup=window.slotbydup || []).push({
+                        id: '4773203',
+                        container: s,
+                        size: '200,200',
+                        display: 'inlay-fix'
+                    });
+                })();
+            </script>
+          </div>
+          <div>
+            <!-- 广告位：PC端-iteye博客详情页左侧Button2-200*200 -->
+            <script>
+                (function() {
+                    var s = "_" + Math.random().toString(36).slice(2);
+                    document.write('<div id="' + s + '"></div>');
+                    (window.slotbydup=window.slotbydup || []).push({
+                        id: '4773205',
+                        container: s,
+                        size: '200,200',
+                        display: 'inlay-fix'
+                    });
+                })();
+            </script>
+          </div>
+        </div>
+        <script>
+
+            setTimeout(function () {
+                var naviga_offsetTop = 0;
+
+                function onload_function() {
+                    naviga_offsetTop = jQuery("#nav_show_top_stop").position().top;
+                    jQuery(window).bind("scroll", naviga_stay_top);
+                    jQuery(window).bind("mousewheel", naviga_stay_top);
+                    jQuery(document).bind("scroll", naviga_stay_top);
+                    jQuery(document).bind("mousewheel", naviga_stay_top);
+                }
+                function naviga_stay_top() {
+
+                    var scrollTop = jQuery(document).scrollTop();
+                    if (scrollTop > (naviga_offsetTop+250)) {
+                        jQuery("#nav_show_top_stop").css({ "position": "fixed" });
+                        jQuery("#nav_show_top_stop").css({ "top": "0px" });
+                    } else {
+                        jQuery("#nav_show_top_stop").css({ "position": "fixed" });
+                        jQuery("#nav_show_top_stop").css({ "top": naviga_offsetTop+250 - scrollTop + "px" }); }
+                }
+                jQuery(document).ready(onload_function());
+            }, 200);
+
+        </script>
+      </div>    
+
+      <div id="footer" class="clearfix">
+        <div id="copyright">
+          <hr/>
+          声明：ITeye文章版权属于作者，受法律保护。没有作者书面许可不得转载。若作者同意转载，必须以超链接形式标明文章原始出处和作者。<br />
+          &copy; 2003-2018 ITeye.com.   All rights reserved.  [ 京ICP证110151号  京公网安备110105010620 ]
+        </div>
+        <div id="ad_pop">
+          <div class="J_adv" data-view="true" data-mod="ad_popu_64" data-mtp="62" data-order="21" data-con="ad_content_2070">
+            <script id="popuLayer_js_q" src="http://ads.csdn.net/js/popuLayer.js" defer="" type="text/javascript"></script>
+            <div id="layerd" style="position: fixed; bottom: 0px; right: 0px; line-height: 0px; z-index: 1000; width: 300px; height: 278px;">
+              <div onclick="jQuery('#ad_abc').hide();jQuery('.J_close').hide();" class="J_close layer_close" style="display:block;background-color:#efefef;padding:0px;color:#333;font:12px/24px Helvetica,Tahoma,Arial,sans-serif;text-align:right;">
+                关闭
+              </div>
+              <div id="ad_abc">
+                <!-- 广告位：PC端-iteye博客详情右侧弹窗-300*250 -->
+                <script>
+                    (function() {
+                        var s = "_" + Math.random().toString(36).slice(2);
+                        document.write('<div id="' + s + '"></div>');
+                        (window.slotbydup=window.slotbydup || []).push({
+                            id: '4756560',
+                            container: s,
+                            size: '300,250',
+                            display: 'inlay-fix'
+                        });
+                    })();
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <script type="text/javascript">
+  document.write("<img src='http://stat.iteye.com/?url="+ encodeURIComponent(document.location.href) + "&referrer=" + encodeURIComponent(document.referrer) + "&user_id=' width='0' height='0' />");
+</script>
+
+
+
+    
+    
+    <script src="http://c.csdnimg.cn/public/common/libs/jquery/jquery-1.11.1.min.js" type="text/javascript"></script>
+<script src="http://csdnimg.cn/asdf/tracking-1.0.1.js" type="text/javascript"></script>
+<script language="javascript" type="text/javascript" src="http://csdnimg.cn/asdf/async-1.0.1.js"></script>
+<script src="http://csdnimg.cn/pubfooter/js/tracking-1.0.3.js?version=20130923164150" type="text/javascript"></script>
+<script type="text/javascript">var $csdn_iteye_jq = jQuery.noConflict();// 解决jq与prototype.js命名空间冲突的问题</script>
+    
+	    
+	    <script src="http://www.iteye.com/javascripts/web-storage-cache.min.js?1461122670" type="text/javascript"></script>
+	    <script src="http://www.iteye.com/javascripts/replace.min.js?1517972556" type="text/javascript"></script>
+    
+    
+  </body>
+</html>

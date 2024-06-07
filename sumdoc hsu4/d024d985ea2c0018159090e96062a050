@@ -1,0 +1,20 @@
+package com.attilax.util.rm;
+
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+public class server implements Remote {
+	
+	public static void main(String[] args) throws RemoteException {
+	 
+		 
+			Registry    registry = LocateRegistry.createRegistry(1099);
+		    server server1 = new server();
+		    registry.rebind("timeObj1", server1);
+		    System.out.println(" rmi server is ready ...");
+		 
+	}
+
+}

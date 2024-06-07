@@ -1,0 +1,170 @@
+nohup: 忽略输入
+2020-04-22 13:42:07.020  INFO [sport-service,,,] 2033 --- [           main] Post-processing PropertySource instances
+2020-04-22 13:42:07.113  INFO [sport-service,,,] 2033 --- [           main] Converting PropertySource configurationProperties [org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource] to AOP Proxy
+2020-04-22 13:42:07.114  INFO [sport-service,,,] 2033 --- [           main] Converting PropertySource bootstrap [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+2020-04-22 13:42:07.114  INFO [sport-service,,,] 2033 --- [           main] Converting PropertySource systemProperties [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+2020-04-22 13:42:07.114  INFO [sport-service,,,] 2033 --- [           main] Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableMapPropertySourceWrapper
+2020-04-22 13:42:07.114  INFO [sport-service,,,] 2033 --- [           main] Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
+2020-04-22 13:42:07.115  INFO [sport-service,,,] 2033 --- [           main] Converting PropertySource springCloudClientHostInfo [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+2020-04-22 13:42:07.115  INFO [sport-service,,,] 2033 --- [           main] Converting PropertySource applicationConfig: [classpath:/bootstrap-dev.yml] [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+2020-04-22 13:42:07.115  INFO [sport-service,,,] 2033 --- [           main] Converting PropertySource applicationConfig: [classpath:/bootstrap.yml] [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+2020-04-22 13:42:07.115  INFO [sport-service,,,] 2033 --- [           main] Converting PropertySource defaultProperties [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+2020-04-22 13:42:07.148  INFO [sport-service,,,] 2033 --- [           main] Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$2059bcc3] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-04-22 13:42:07.189  INFO [sport-service,,,] 2033 --- [           main] Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
+2020-04-22 13:42:07.193  INFO [sport-service,,,] 2033 --- [           main] Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
+2020-04-22 13:42:07.195  INFO [sport-service,,,] 2033 --- [           main] Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
+2020-04-22 13:42:07.626  INFO [sport-service,,,] 2033 --- [           main] Setting initial instance status as: STARTING
+2020-04-22 13:42:07.693  INFO [sport-service,,,] 2033 --- [           main] Initializing Eureka in region us-east-1
+2020-04-22 13:42:07.893  INFO [sport-service,,,] 2033 --- [           main] Using JSON encoding codec LegacyJacksonJson
+2020-04-22 13:42:07.893  INFO [sport-service,,,] 2033 --- [           main] Using JSON decoding codec LegacyJacksonJson
+2020-04-22 13:42:08.036  INFO [sport-service,,,] 2033 --- [           main] Using XML encoding codec XStreamXml
+2020-04-22 13:42:08.037  INFO [sport-service,,,] 2033 --- [           main] Using XML decoding codec XStreamXml
+2020-04-22 13:42:08.460  INFO [sport-service,,,] 2033 --- [           main] Resolving eureka endpoints via configuration
+2020-04-22 13:42:08.484  INFO [sport-service,,,] 2033 --- [           main] Disable delta property : false
+2020-04-22 13:42:08.484  INFO [sport-service,,,] 2033 --- [           main] Single vip registry refresh property : null
+2020-04-22 13:42:08.484  INFO [sport-service,,,] 2033 --- [           main] Force full registry fetch : false
+2020-04-22 13:42:08.484  INFO [sport-service,,,] 2033 --- [           main] Application is null : false
+2020-04-22 13:42:08.484  INFO [sport-service,,,] 2033 --- [           main] Registered Applications size is zero : true
+2020-04-22 13:42:08.484  INFO [sport-service,,,] 2033 --- [           main] Application version is -1: true
+2020-04-22 13:42:08.484  INFO [sport-service,,,] 2033 --- [           main] Getting all instance registry info from the eureka server
+2020-04-22 13:42:08.806  INFO [sport-service,,,] 2033 --- [           main] The response status is 200
+2020-04-22 13:42:08.811  INFO [sport-service,,,] 2033 --- [           main] Not registering with Eureka server per configuration
+2020-04-22 13:42:08.817  INFO [sport-service,,,] 2033 --- [           main] Discovery Client initialized at timestamp 1587534128815 with initial instances count: 5
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.1.5.RELEASE)
+
+2020-04-22 13:42:09.015  INFO [sport-service,,,] 2033 --- [           main] Fetching config from server at : http://112.121.163.125:8111/
+2020-04-22 13:42:09.215  INFO [sport-service,,,] 2033 --- [           main] Located environment: name=sport-service, profiles=[dev], label=null, version=null, state=null
+2020-04-22 13:42:09.215  INFO [sport-service,,,] 2033 --- [           main] Located property source: CompositePropertySource {name='configService', propertySources=[MapPropertySource {name='classpath:/configs/dev/sport-service.properties'}]}
+2020-04-22 13:42:09.238  INFO [sport-service,,,] 2033 --- [           main] Bootstraping jasypt-string-boot auto configuration in context: sport-service-1
+2020-04-22 13:42:09.238  INFO [sport-service,,,] 2033 --- [           main] The following profiles are active: dev
+2020-04-22 13:42:11.062  INFO [sport-service,,,] 2033 --- [           main] Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-04-22 13:42:11.065  INFO [sport-service,,,] 2033 --- [           main] Bootstrapping Spring Data repositories in DEFAULT mode.
+2020-04-22 13:42:11.137  INFO [sport-service,,,] 2033 --- [           main] Finished Spring Data repository scanning in 59ms. Found 0 repository interfaces.
+2020-04-22 13:42:11.319  WARN [sport-service,,,] 2033 --- [           main] Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format.
+2020-04-22 13:42:11.844  INFO [sport-service,,,] 2033 --- [           main] BeanFactory id=a5540445-e69d-359e-87f5-e7c52ad80626
+2020-04-22 13:42:11.864  INFO [sport-service,,,] 2033 --- [           main] Post-processing PropertySource instances
+2020-04-22 13:42:11.889  INFO [sport-service,,,] 2033 --- [           main] Converting PropertySource bootstrapProperties [org.springframework.core.env.CompositePropertySource] to EncryptableEnumerablePropertySourceWrapper
+2020-04-22 13:42:11.890  INFO [sport-service,,,] 2033 --- [           main] Converting PropertySource configurationProperties [org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource] to AOP Proxy
+2020-04-22 13:42:11.890  INFO [sport-service,,,] 2033 --- [           main] Converting PropertySource servletConfigInitParams [org.springframework.core.env.PropertySource$StubPropertySource] to EncryptablePropertySourceWrapper
+2020-04-22 13:42:11.890  INFO [sport-service,,,] 2033 --- [           main] Converting PropertySource servletContextInitParams [org.springframework.core.env.PropertySource$StubPropertySource] to EncryptablePropertySourceWrapper
+2020-04-22 13:42:11.890  INFO [sport-service,,,] 2033 --- [           main] Converting PropertySource systemProperties [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+2020-04-22 13:42:11.890  INFO [sport-service,,,] 2033 --- [           main] Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableMapPropertySourceWrapper
+2020-04-22 13:42:11.890  INFO [sport-service,,,] 2033 --- [           main] Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
+2020-04-22 13:42:11.890  INFO [sport-service,,,] 2033 --- [           main] Converting PropertySource applicationConfig: [classpath:/application.properties] [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+2020-04-22 13:42:11.890  INFO [sport-service,,,] 2033 --- [           main] Converting PropertySource springCloudClientHostInfo [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+2020-04-22 13:42:11.890  INFO [sport-service,,,] 2033 --- [           main] Converting PropertySource class path resource [conf/errorCode.properties] [org.springframework.core.io.support.ResourcePropertySource] to EncryptableMapPropertySourceWrapper
+2020-04-22 13:42:11.890  INFO [sport-service,,,] 2033 --- [           main] Converting PropertySource defaultProperties [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+2020-04-22 13:42:11.941  INFO [sport-service,,,] 2033 --- [           main] Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
+2020-04-22 13:42:12.271  INFO [sport-service,,,] 2033 --- [           main] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$43fb9c6] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-04-22 13:42:12.323  INFO [sport-service,,,] 2033 --- [           main] Bean 'org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration' of type [org.springframework.security.config.annotation.configuration.ObjectPostProcessorConfiguration$$EnhancerBySpringCGLIB$$9ced8200] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-04-22 13:42:12.333  INFO [sport-service,,,] 2033 --- [           main] Bean 'objectPostProcessor' of type [org.springframework.security.config.annotation.configuration.AutowireBeanFactoryObjectPostProcessor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-04-22 13:42:12.341  INFO [sport-service,,,] 2033 --- [           main] Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@5016f1a' of type [org.springframework.security.oauth2.provider.expression.OAuth2MethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-04-22 13:42:12.346  INFO [sport-service,,,] 2033 --- [           main] Bean 'org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration' of type [org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration$$EnhancerBySpringCGLIB$$c1c224b2] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-04-22 13:42:12.359  INFO [sport-service,,,] 2033 --- [           main] Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-04-22 13:42:12.391  INFO [sport-service,,,] 2033 --- [           main] Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$2059bcc3] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-04-22 13:42:12.400  INFO [sport-service,,,] 2033 --- [           main] Bean 'org.springframework.cloud.sleuth.instrument.web.client.TraceWebClientAutoConfiguration$TraceOAuthConfiguration' of type [org.springframework.cloud.sleuth.instrument.web.client.TraceWebClientAutoConfiguration$TraceOAuthConfiguration$$EnhancerBySpringCGLIB$$493c4c25] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-04-22 13:42:12.915  INFO [sport-service,,,] 2033 --- [           main] Tomcat initialized with port(s): 9601 (http)
+2020-04-22 13:42:12.946  INFO [sport-service,,,] 2033 --- [           main] Starting service [Tomcat]
+2020-04-22 13:42:12.947  INFO [sport-service,,,] 2033 --- [           main] Starting Servlet engine: [Apache Tomcat/9.0.19]
+2020-04-22 13:42:13.115  INFO [sport-service,,,] 2033 --- [           main] Initializing Spring embedded WebApplicationContext
+2020-04-22 13:42:13.115  INFO [sport-service,,,] 2033 --- [           main] Root WebApplicationContext: initialization completed in 3853 ms
+2020-04-22 13:42:13.383  WARN [sport-service,,,] 2033 --- [           main] No URLs will be polled as dynamic configuration sources.
+2020-04-22 13:42:13.383  INFO [sport-service,,,] 2033 --- [           main] To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-04-22 13:42:13.404  INFO [sport-service,,,] 2033 --- [           main] DynamicPropertyFactory is initialized with configuration sources: com.netflix.config.ConcurrentCompositeConfiguration@1504b493
+2020-04-22 13:42:13.456  INFO [sport-service,,,] 2033 --- [           main] Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
+2020-04-22 13:42:13.457  INFO [sport-service,,,] 2033 --- [           main] Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
+ _ _   |_  _ _|_. ___ _ |    _ 
+| | |\/|_)(_| | |_\  |_)||_|_\ 
+     /               |         
+                        3.1.0 
+2020-04-22 13:42:15.673  INFO [sport-service,,,] 2033 --- [           main] HikariPool-1 - Starting...
+2020-04-22 13:42:15.953  INFO [sport-service,,,] 2033 --- [           main] HikariPool-1 - Start completed.
+2020-04-22 13:42:18.768  INFO [sport-service,,,] 2033 --- [           main] Autowired annotation is not supported on static fields: private static com.kok.auth.config.AntUrlManager com.kok.auth.utils.ApplicationUtil.antUrlManager
+2020-04-22 13:42:18.768  INFO [sport-service,,,] 2033 --- [           main] Autowired annotation is not supported on static fields: private static org.springframework.security.oauth2.provider.token.TokenStore com.kok.auth.utils.ApplicationUtil.tokenStore
+2020-04-22 13:42:19.505  INFO [sport-service,,,] 2033 --- [           main] Exposing 20 endpoint(s) beneath base path '/actuator'
+2020-04-22 13:42:19.673  INFO [sport-service,,,] 2033 --- [           main] Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2020-04-22 13:42:20.349  INFO [sport-service,,,] 2033 --- [           main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7388d94d, org.springframework.security.web.context.SecurityContextPersistenceFilter@724e483f, org.springframework.security.web.header.HeaderWriterFilter@17e7cc67, org.springframework.security.web.authentication.logout.LogoutFilter@641001c2, org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationProcessingFilter@79690a0a, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@558fa64a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@483f19c0, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@296a350, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6da14f7f, org.springframework.security.web.session.SessionManagementFilter@17931cc0, org.springframework.security.web.access.ExceptionTranslationFilter@23c24c0e, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@40ff56f7]
+2020-04-22 13:42:20.401  WARN [sport-service,,,] 2033 --- [           main] No URLs will be polled as dynamic configuration sources.
+2020-04-22 13:42:20.401  INFO [sport-service,,,] 2033 --- [           main] To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-04-22 13:42:20.776  INFO [sport-service,,,] 2033 --- [           main] Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-22 13:42:22.799  INFO [sport-service,,,] 2033 --- [           main] Shutting down DiscoveryClient ...
+2020-04-22 13:42:22.810  INFO [sport-service,,,] 2033 --- [           main] Completed shut down of DiscoveryClient
+2020-04-22 13:42:23.106  INFO [sport-service,,,] 2033 --- [           main] Setting initial instance status as: STARTING
+2020-04-22 13:42:23.114  INFO [sport-service,,,] 2033 --- [           main] Initializing Eureka in region us-east-1
+2020-04-22 13:42:23.116  INFO [sport-service,,,] 2033 --- [           main] Using JSON encoding codec LegacyJacksonJson
+2020-04-22 13:42:23.116  INFO [sport-service,,,] 2033 --- [           main] Using JSON decoding codec LegacyJacksonJson
+2020-04-22 13:42:23.116  INFO [sport-service,,,] 2033 --- [           main] Using XML encoding codec XStreamXml
+2020-04-22 13:42:23.116  INFO [sport-service,,,] 2033 --- [           main] Using XML decoding codec XStreamXml
+2020-04-22 13:42:23.178  INFO [sport-service,,,] 2033 --- [           main] Resolving eureka endpoints via configuration
+2020-04-22 13:42:23.180  INFO [sport-service,,,] 2033 --- [           main] Disable delta property : false
+2020-04-22 13:42:23.180  INFO [sport-service,,,] 2033 --- [           main] Single vip registry refresh property : null
+2020-04-22 13:42:23.180  INFO [sport-service,,,] 2033 --- [           main] Force full registry fetch : false
+2020-04-22 13:42:23.180  INFO [sport-service,,,] 2033 --- [           main] Application is null : false
+2020-04-22 13:42:23.180  INFO [sport-service,,,] 2033 --- [           main] Registered Applications size is zero : true
+2020-04-22 13:42:23.180  INFO [sport-service,,,] 2033 --- [           main] Application version is -1: true
+2020-04-22 13:42:23.180  INFO [sport-service,,,] 2033 --- [           main] Getting all instance registry info from the eureka server
+2020-04-22 13:42:23.285  INFO [sport-service,,,] 2033 --- [           main] The response status is 200
+2020-04-22 13:42:23.286  INFO [sport-service,,,] 2033 --- [           main] Starting heartbeat executor: renew interval is: 5
+2020-04-22 13:42:23.291  INFO [sport-service,,,] 2033 --- [           main] InstanceInfoReplicator onDemand update allowed rate per min is 4
+2020-04-22 13:42:23.293  INFO [sport-service,,,] 2033 --- [           main] Discovery Client initialized at timestamp 1587534143292 with initial instances count: 5
+2020-04-22 13:42:23.302  INFO [sport-service,,,] 2033 --- [           main] Registering application SPORT-SERVICE with eureka with status UP
+2020-04-22 13:42:23.303  INFO [sport-service,,,] 2033 --- [           main] Saw local status change event StatusChangeEvent [timestamp=1587534143303, current=UP, previous=STARTING]
+2020-04-22 13:42:23.305  INFO [sport-service,,,] 2033 --- [           main] Context refreshed
+2020-04-22 13:42:23.305  INFO [sport-service,,,] 2033 --- [nfoReplicator-0] DiscoveryClient_SPORT-SERVICE/112.121.163.125:9601: registering service...
+2020-04-22 13:42:23.326  INFO [sport-service,,,] 2033 --- [           main] Found 1 custom documentation plugin(s)
+2020-04-22 13:42:23.355  INFO [sport-service,,,] 2033 --- [nfoReplicator-0] DiscoveryClient_SPORT-SERVICE/112.121.163.125:9601 - registration status: 204
+2020-04-22 13:42:23.373  INFO [sport-service,,,] 2033 --- [           main] Scanning for api listing references
+2020-04-22 13:42:23.506  INFO [sport-service,,,] 2033 --- [           main] Generating unique operation named: queryPageUsingGET_1
+2020-04-22 13:42:23.582  INFO [sport-service,,,] 2033 --- [           main] Generating unique operation named: getByIdUsingGET_1
+2020-04-22 13:42:23.600  INFO [sport-service,,,] 2033 --- [           main] Generating unique operation named: getByIdUsingGET_2
+2020-04-22 13:42:23.616  INFO [sport-service,,,] 2033 --- [           main] Generating unique operation named: getByIdUsingGET_3
+2020-04-22 13:42:23.709  INFO [sport-service,,,] 2033 --- [           main] Tomcat started on port(s): 9601 (http) with context path ''
+2020-04-22 13:42:23.711  INFO [sport-service,,,] 2033 --- [           main] Updating port to 9601
+2020-04-22 13:42:23.713  INFO [sport-service,,,] 2033 --- [           main] Started SportApplication in 18.272 seconds (JVM running for 18.757)
+[{frm CommandLineRunnerImp =frm CommandLineRunnerImp }]
+______________=================******************atti::
+[{frm appmain=frm appmain}]
+java.lang.ArrayIndexOutOfBoundsException: 0
+	at com.kok.SportApplication.main(SportApplication.java:38)
+--
+2020-04-22 13:43:01.568  INFO [sport-service,,,] 2033 --- [nio-9601-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-04-22 13:43:01.568  INFO [sport-service,,,] 2033 --- [nio-9601-exec-1] Initializing Servlet 'dispatcherServlet'
+2020-04-22 13:43:01.595  INFO [sport-service,,,] 2033 --- [nio-9601-exec-1] Completed initialization in 27 ms
+我是前置通知!!!
+方法：queryPage
+方法所在包:com.kok.sport.controller.ApiController
+参数名：[]
+参数值ARGS : []
+请求URL : http://112.121.163.125:9601/queryPage
+HTTP_METHOD : GET
+IP : 112.201.71.218
+CLASS_METHOD : com.kok.sport.controller.ApiController.queryPage
+select  count(*) as cnt from foot_match_ex          limit 500
+2020-04-22 13:43:01.726  INFO [sport-service,f0fe0286b289681b,f0fe0286b289681b,false] 2033 --- [nio-9601-exec-1] select  count(*) as cnt from foot_match_ex          limit 500
+{foot_match_ex=Select}
+2020-04-22 13:43:01.964  INFO [sport-service,f0fe0286b289681b,f0fe0286b289681b,false] 2033 --- [nio-9601-exec-1] {select=*, pagesize=10, from=foot_match_ex, page=1}
+1
+10
+select * from foot_match_ex          limit 10 offset  0
+2020-04-22 13:43:01.966  INFO [sport-service,f0fe0286b289681b,f0fe0286b289681b,false] 2033 --- [nio-9601-exec-1] select * from foot_match_ex          limit 10 offset  0
+{foot_match_ex=Select}
+方法的返回值 : {count=37, data=[{id=1585671306, match_id=3380166, team_id=10000, team_type=1, league_ranking=0, regular_time_score=0, half_court_score=0, score=0, red_card=0, yellow_card=0, corner_kick=-1, overtime_score=0, point_score=0, remark=null, create_time=2020-04-01 00:15:06.0, delete_flag=0, teamname_zhudui=萨尔茨堡红牛, event_saishi=欧洲U21国家杯资格赛, fav=n, match_status=9, kedui_bifen=0, kedui=马特斯堡, match_status1=9, match_time=1585324800, home_odds=0.9600000000, tie_odds=1.5000000000, away_odds=0.8200000000, home_odds2=1.2800000000, tie_odds2=5.2500000000, away_odds2=7.7500000000, video=0, animation=0, league_ranking_kedui=0, half_court_score_kedui=0, red_card_kedui=0, yellow_card_kedui=0, corner_kick_kedui=-1, point_score_kedui=0, logo=https://cdn.sportnanoapi.com/football/team/d8ddbbdf082b5c469b4e1f9e998690dd.png, logo_kedui=https://cdn.sportnanoapi.com/football/team/d8ddbbdf082b5c469b4e1f9e998690dd.png, pressure=764mmHg, temperature=12°C, wind=2.0m/s, humidity=61%, weather=晴}, {id=1585671307, match_id=3380166, team_id=10001, team_type=2, league_ranking=0, regular_time_score=0, half_court_score=0, score=0, red_card=0, yellow_card=0, corner_kick=-1, overtime_score=0, point_score=0, remark=null, create_time=2020-04-01 00:15:07.0, delete_flag=0, teamname_zhudui=马特斯堡, event_saishi=欧洲U21国家杯资格赛, fav=n, match_status=9, kedui_bifen=0, kedui=马特斯堡, match_status1=9, match_time=1585324800, home_odds=0.9600000000, tie_odds=1.5000000000, away_odds=0.8200000000, home_odds2=1.2800000000, tie_odds2=5.2500000000, away_odds2=7.7500000000, video=0, animation=0, league_ranking_kedui=0, half_court_score_kedui=0, red_card_kedui=0, yellow_card_kedui=0, corner_kick_kedui=-1, point_score_kedui=0, logo=https://cdn.sportnanoapi.com/football/team/1a2f6e7b3750b444d8e39122eada179f.png, logo_kedui=https://cdn.sportnanoapi.com/football/team/1a2f6e7b3750b444d8e39122eada179f.png, pressure=764mmHg, temperature=12°C, wind=2.0m/s, humidity=61%, weather=晴}, {id=1585672206387867, match_id=3380166, team_id=0, team_type=1, league_ranking=0, regular_time_score=0, half_court_score=0, score=0, red_card=0, yellow_card=0, corner_kick=-1, overtime_score=0, point_score=0, remark=null, create_time=2020-04-01 00:30:06.0, delete_flag=0, event_saishi=欧洲U21国家杯资格赛, fav=n, match_status=9, kedui_bifen=0, kedui=马特斯堡, match_status1=9, match_time=1585324800, home_odds=0.9600000000, tie_odds=1.5000000000, away_odds=0.8200000000, home_odds2=1.2800000000, tie_odds2=5.2500000000, away_odds2=7.7500000000, video=0, animation=0, league_ranking_kedui=0, half_court_score_kedui=0, red_card_kedui=0, yellow_card_kedui=0, corner_kick_kedui=-1, point_score_kedui=0, pressure=764mmHg, temperature=12°C, wind=2.0m/s, humidity=61%, weather=晴}, {id=1585672206447810, match_id=3380166, team_id=0, team_type=2, league_ranking=0, regular_time_score=0, half_court_score=0, score=0, red_card=0, yellow_card=0, corner_kick=-1, overtime_score=0, point_score=0, remark=null, create_time=2020-04-01 00:30:06.0, delete_flag=0, event_saishi=欧洲U21国家杯资格赛, fav=n, match_status=9, kedui_bifen=0, kedui=马特斯堡, match_status1=9, match_time=1585324800, home_odds=0.9600000000, tie_odds=1.5000000000, away_odds=0.8200000000, home_odds2=1.2800000000, tie_odds2=5.2500000000, away_odds2=7.7500000000, video=0, animation=0, league_ranking_kedui=0, half_court_score_kedui=0, red_card_kedui=0, yellow_card_kedui=0, corner_kick_kedui=-1, point_score_kedui=0, pressure=764mmHg, temperature=12°C, wind=2.0m/s, humidity=61%, weather=晴}, {id=1585672599214902, match_id=3380166, team_id=0, team_type=1, league_ranking=0, regular_time_score=0, half_court_score=0, score=0, red_card=0, yellow_card=0, corner_kick=-1, overtime_score=0, point_score=0, remark=null, create_time=2020-04-01 00:36:39.0, delete_flag=0, event_saishi=欧洲U21国家杯资格赛, fav=n, match_status=9, kedui_bifen=0, kedui=马特斯堡, match_status1=9, match_time=1585324800, home_odds=0.9600000000, tie_odds=1.5000000000, away_odds=0.8200000000, home_odds2=1.2800000000, tie_odds2=5.2500000000, away_odds2=7.7500000000, video=0, animation=0, league_ranking_kedui=0, half_court_score_kedui=0, red_card_kedui=0, yellow_card_kedui=0, corner_kick_kedui=-1, point_score_kedui=0, pressure=764mmHg, temperature=12°C, wind=2.0m/s, humidity=61%, weather=晴}, {id=1585672599278467, match_id=3380166, team_id=0, team_type=2, league_ranking=0, regular_time_score=0, half_court_score=0, score=0, red_card=0, yellow_card=0, corner_kick=-1, overtime_score=0, point_score=0, remark=null, create_time=2020-04-01 00:36:39.0, delete_flag=0, event_saishi=欧洲U21国家杯资格赛, fav=n, match_status=9, kedui_bifen=0, kedui=马特斯堡, match_status1=9, match_time=1585324800, home_odds=0.9600000000, tie_odds=1.5000000000, away_odds=0.8200000000, home_odds2=1.2800000000, tie_odds2=5.2500000000, away_odds2=7.7500000000, video=0, animation=0, league_ranking_kedui=0, half_court_score_kedui=0, red_card_kedui=0, yellow_card_kedui=0, corner_kick_kedui=-1, point_score_kedui=0, pressure=764mmHg, temperature=12°C, wind=2.0m/s, humidity=61%, weather=晴}, {id=1585672645025863, match_id=3380166, team_id=0, team_type=1, league_ranking=0, regular_time_score=0, half_court_score=0, score=0, red_card=0, yellow_card=0, corner_kick=-1, overtime_score=0, point_score=0, remark=null, create_time=2020-04-01 00:37:25.0, delete_flag=0, event_saishi=欧洲U21国家杯资格赛, fav=n, match_status=9, kedui_bifen=0, kedui=马特斯堡, match_status1=9, match_time=1585324800, home_odds=0.9600000000, tie_odds=1.5000000000, away_odds=0.8200000000, home_odds2=1.2800000000, tie_odds2=5.2500000000, away_odds2=7.7500000000, video=0, animation=0, league_ranking_kedui=0, half_court_score_kedui=0, red_card_kedui=0, yellow_card_kedui=0, corner_kick_kedui=-1, point_score_kedui=0, pressure=764mmHg, temperature=12°C, wind=2.0m/s, humidity=61%, weather=晴}, {id=1585672645077613, match_id=3380166, team_id=0, team_type=2, league_ranking=0, regular_time_score=0, half_court_score=0, score=0, red_card=0, yellow_card=0, corner_kick=-1, overtime_score=0, point_score=0, remark=null, create_time=2020-04-01 00:37:25.0, delete_flag=0, event_saishi=欧洲U21国家杯资格赛, fav=n, match_status=9, kedui_bifen=0, kedui=马特斯堡, match_status1=9, match_time=1585324800, home_odds=0.9600000000, tie_odds=1.5000000000, away_odds=0.8200000000, home_odds2=1.2800000000, tie_odds2=5.2500000000, away_odds2=7.7500000000, video=0, animation=0, league_ranking_kedui=0, half_court_score_kedui=0, red_card_kedui=0, yellow_card_kedui=0, corner_kick_kedui=-1, point_score_kedui=0, pressure=764mmHg, temperature=12°C, wind=2.0m/s, humidity=61%, weather=晴}, {id=1585672707463920, match_id=3380166, team_id=0, team_type=1, league_ranking=0, regular_time_score=0, half_court_score=0, score=0, red_card=0, yellow_card=0, corner_kick=-1, overtime_score=0, point_score=0, remark=null, create_time=2020-04-01 00:38:27.0, delete_flag=0, event_saishi=欧洲U21国家杯资格赛, fav=n, match_status=9, kedui_bifen=0, kedui=马特斯堡, match_status1=9, match_time=1585324800, home_odds=0.9600000000, tie_odds=1.5000000000, away_odds=0.8200000000, home_odds2=1.2800000000, tie_odds2=5.2500000000, away_odds2=7.7500000000, video=0, animation=0, league_ranking_kedui=0, half_court_score_kedui=0, red_card_kedui=0, yellow_card_kedui=0, corner_kick_kedui=-1, point_score_kedui=0, pressure=764mmHg, temperature=12°C, wind=2.0m/s, humidity=61%, weather=晴}, {id=1585672707513819, match_id=3380166, team_id=0, team_type=2, league_ranking=0, regular_time_score=0, half_court_score=0, score=0, red_card=0, yellow_card=0, corner_kick=-1, overtime_score=0, point_score=0, remark=null, create_time=2020-04-01 00:38:27.0, delete_flag=0, event_saishi=欧洲U21国家杯资格赛, fav=n, match_status=9, kedui_bifen=0, kedui=马特斯堡, match_status1=9, match_time=1585324800, home_odds=0.9600000000, tie_odds=1.5000000000, away_odds=0.8200000000, home_odds2=1.2800000000, tie_odds2=5.2500000000, away_odds2=7.7500000000, video=0, animation=0, league_ranking_kedui=0, half_court_score_kedui=0, red_card_kedui=0, yellow_card_kedui=0, corner_kick_kedui=-1, point_score_kedui=0, pressure=764mmHg, temperature=12°C, wind=2.0m/s, humidity=61%, weather=晴}], pageCount=4, page=1, pagesize=10, extData={}}
+2020-04-22 13:45:37.144  INFO [sport-service,,,] 2033 --- [       Thread-6] Unregistering application SPORT-SERVICE with eureka with status DOWN
+2020-04-22 13:45:37.144  WARN [sport-service,,,] 2033 --- [       Thread-6] Saw local status change event StatusChangeEvent [timestamp=1587534337144, current=DOWN, previous=UP]
+2020-04-22 13:45:37.145  INFO [sport-service,,,] 2033 --- [nfoReplicator-0] DiscoveryClient_SPORT-SERVICE/112.121.163.125:9601: registering service...
+2020-04-22 13:45:37.151  INFO [sport-service,,,] 2033 --- [nfoReplicator-0] DiscoveryClient_SPORT-SERVICE/112.121.163.125:9601 - registration status: 204
+2020-04-22 13:45:37.155  INFO [sport-service,,,] 2033 --- [       Thread-6] Shutting down ExecutorService 'applicationTaskExecutor'
+2020-04-22 13:45:37.198  INFO [sport-service,,,] 2033 --- [       Thread-6] Shutting down DiscoveryClient ...
+2020-04-22 13:45:40.199  INFO [sport-service,,,] 2033 --- [       Thread-6] Unregistering ...
+2020-04-22 13:45:40.199  WARN [sport-service,,,] 2033 --- [scoveryClient-0] task supervisor shutting down, can't accept the task
+2020-04-22 13:45:40.206  INFO [sport-service,,,] 2033 --- [       Thread-6] DiscoveryClient_SPORT-SERVICE/112.121.163.125:9601 - deregister  status: 200
+2020-04-22 13:45:40.215  INFO [sport-service,,,] 2033 --- [       Thread-6] Completed shut down of DiscoveryClient
+2020-04-22 13:45:40.215  INFO [sport-service,,,] 2033 --- [       Thread-6] HikariPool-1 - Shutdown initiated...
+2020-04-22 13:45:40.230  INFO [sport-service,,,] 2033 --- [       Thread-6] HikariPool-1 - Shutdown completed.

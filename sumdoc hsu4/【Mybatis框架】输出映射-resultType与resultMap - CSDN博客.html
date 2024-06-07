@@ -1,0 +1,1754 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+<meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="referrer" content="always">
+<link href="https://csdnimg.cn//public/favicon.ico" rel="shortcut icon" />
+<link href="https://blog.csdn.net/acmman/article/details/46509375"  rel="canonical" />
+<link href="https://blog.csdn.net/acmman/rss/list" id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" />
+<script src="https://csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="https://dup.baidustatic.com/js/ds.js" type="text/javascript"></script>
+<script type="text/javascript">
+    var CFG={
+        BASE_URL : "https://csdnimg.cn/release/phoenix/",    //当前页面对应的虚拟路径,静态资源对应目录同<base href="">
+        API_URL  : "https://blog.csdn.net/",                 //当前项目默认的后端API地址
+        ROOT_URL  : "https://blog.csdn.net/",          //当前项目根路径, JS跳转
+        STATIC_URL : "https://csdnimg.cn/release/phoenix/",          //本项目静态资源根目录
+        STATIC_GLOBAL_URL : "https://csdnimg.cn/",    //公共静态资源根目录
+        CUR_URL : "https://blog.csdn.net/acmman/article/details/46509375",
+        SO_URL : "http://so.csdn.net/so/search/s.do"  // 站内搜索路径
+    }
+</script>
+    <title>【Mybatis框架】输出映射-resultType与resultMap - CSDN博客</title>
+    <meta name="keywords" content="mybatis,Mapper" />
+    <meta name="description" content="输出映射
+接下来说说有关Mapper.xml配置文件中查询标签中关于返回值类型resultType与resultMap的一些内容
+
+1.resultType
+使用resultType进行输出映射，只有查询出来的列名和pojo中的属性名一致，该列才可以映射成功。
+如果查询出来的列名和pojo中的属性名全部不一致，没有创建pojo对象。
+只要查询出来的列名和pojo中的属性有一个一致，就会" />
+    <meta name="referrer" content="always">
+    <link href="https://csdnimg.cn/blog/csdn_public_blog_detail.min.css" type="text/css" rel="stylesheet"/>
+    <link href="https://csdnimg.cn/release/phoenix/dotnet/css/blog_detail-b723826c92.css" type="text/css" rel="stylesheet" />
+    <link href="https://csdnimg.cn/release/phoenix/bloglist/iconfont/iconfont.css" type="text/css" rel="stylesheet"/>
+    <link href="https://csdnimg.cn/release/phoenix/dotnet/skin/skin-yellow/css/style.css?v=201803221741"  type="text/css" rel="stylesheet" />
+    <script>
+        var username = "u013517797";
+        var _blogger = username;
+        var blog_address = "https://blog.csdn.net/acmman";
+        var static_host = "https://csdnimg.cn/release/phoenix/";
+        var currentUserName = "attilax";
+        var islock = false;
+        var fileName = "46509375";
+        var commentscount = 7;
+        var curUserFace = "https://avatar.csdn.net/3/9/1/3_attilax.jpg";
+
+        document.domain = "csdn.net";
+        var title="【Mybatis框架】输出映射-resultType与resultMap";
+        window.quickReplyflag = true;
+        var isBole = false;
+        var fasrc="https://my.csdn.net//my/favoriteminiadd?dt=【Mybatis框架】输出映射-resultType与resultMap&u=https://blog.csdn.net/u013517797/article/details/46509375";
+        var baiduKey = "mybatis+resulttype%E7%B1%BB%E5%9E%8B";
+        var needInsertBaidu = false;
+        var ChannelId = 15;
+    </script>
+      <script src="https://csdnimg.cn/search/baidu_search-1.1.2.js?v=201802071056&autorun=true&install=true&keyword=java"  type="text/javascript"></script>
+      <script src="https://csdnimg.cn/release/phoenix/dotnet/js/blog_detail-df0e23fa9e.js" type="text/javascript"></script>
+    <style type="text/css">
+        .embody{
+            padding:10px 10px 10px;
+            margin:0 -20px;
+            border-bottom:solid 1px #ededed;
+        }
+        .embody_b{
+            margin:0 ;
+            padding:10px 0;
+        }
+        .embody .embody_t,.embody .embody_c{
+            display: inline-block;
+            margin-right:10px;
+        }
+        .embody_t{
+            font-size: 12px;
+            color:#999;
+        }
+        .embody_c{
+            font-size: 12px;
+        }
+        .embody_c img,.embody_c em{
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .embody_c img{
+            width:30px;
+            height:30px;
+        }
+        .embody_c em{
+            margin: 0 20px 0 10px;
+            color:#333;
+            font-style: normal;
+        }
+    </style>
+    <style>
+        .MathJax, .MathJax_Message, .MathJax_Preview{
+            display: none
+        }
+    </style>
+</head>
+<body>
+<link rel="stylesheet" href="https://csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+<script id="toolbar-tpl-scriptId" src="https://csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="https://blog.csdn.net/"></script>
+<div id="container">
+    <!--header+navigator-->
+    <div id="header">
+    <div class="header">
+        <div id="blog_title">
+            <h2>
+                <a href="https://blog.csdn.net/acmman">程序猿之洞</a>
+            </h2>
+            <h3>
+                虽然程序猿总是被游客调戏，但是仍坚定不移的追寻它的香蕉             </h3>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+</div>
+<div id="navigator">
+    <div class="navigator_bg">
+    </div>
+    <div class="navigator">
+        <ul>
+            <li id="btnContents"><a href="https://blog.csdn.net/acmman?viewmode=contents"><span
+                    onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_mulu'])">
+                    <img src="https://csdnimg.cn/release/phoenix/images/ico_list.gif">目录视图</span></a></li>
+            <li id="btnView"><a href="https://blog.csdn.net/acmman?viewmode=list"><span
+                    onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_zhaiyao'])">
+                    <img src="https://csdnimg.cn/release/phoenix/images/ico_summary.gif">摘要视图</span></a></li>
+            <li id="btnRss"><a href="https://blog.csdn.net/acmman/rss/list"><span
+                    onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_RSS'])">
+                    <img src="https://csdnimg.cn/release/phoenix/images/ico_rss.gif">订阅</span></a></li>
+                    </ul>
+    </div>
+</div>
+    <div id="body">
+        <div id="main">
+            <div class="main">
+               <div class="main">
+    <div class="ad_class">
+    </div>
+    <!--文章详情-->
+    <div id="article_details" class="details">
+        <div class="article_title">
+            <span class="ico ico_type_Original"></span>
+            <h1>
+                <span class="link_title">
+                    <a href="https://blog.csdn.net/u013517797/article/details/46509375">
+                        
+                                                【Mybatis框架】输出映射-resultType与resultMap                    </a>
+                </span>
+            </h1>
+        </div>
+        <div class="article_manage clearfix">
+        <div class="article_l">
+        <span class="link_categories">
+        标签：
+                            <a href="http://so.csdn.net/so/search/s.do?q=mybatis&t=blog" target="_blank">mybatis</a>
+                    <a href="http://so.csdn.net/so/search/s.do?q=Mapper&t=blog" target="_blank">Mapper</a>
+                    <a href="http://so.csdn.net/so/search/s.do?q=resultType&t=blog" target="_blank">resultType</a>
+                    <a href="http://so.csdn.net/so/search/s.do?q=resultMap&t=blog" target="_blank">resultMap</a>
+                    <a href="http://so.csdn.net/so/search/s.do?q=pojo&t=blog" target="_blank">pojo</a>
+                        </span>
+    </div>
+        <div class="article_r">
+        <span class="link_postdate">2015年06月15日 23:07:18</span>
+        <span class="link_view" title="阅读次数">14257人阅读</span>
+        <span class="link_comments" title="评论次数"> <a href="javascript:void(0);" class="btn-pinglun">评论</a>(7)</span>
+        <span class="link_collect csdn-tracking-statistics" data-pid="blog"  data-mod="popu_171">
+            <a href="javascript:void(0);" onclick="javascript:collectArticle('【Mybatis框架】输出映射-resultType与resultMap','46509375');return false;" title="收藏">收藏</a>
+        </span>
+                <span class="link_report">
+            <a href="javascript:void(0);" onclick="javascript:report(46509375, 2);return false;" title="举报">举报</a>
+        </span>
+                    </div>
+</div>
+<script  type="text/javascript">
+    $(function () {
+        try
+        {
+            var lib = eval("("+$("#lib").attr("value")+")");
+            var html = "";
+            if (lib.err == 0) {
+                $.each(lib.data, function (i) {
+                    var obj = lib.data[i];
+                    //html += '<img src="' + obj.logo + '"/>' + obj.name + "&nbsp;&nbsp;";
+                    html += ' <a href="' + obj.url + '" target="_blank">';
+                    html += ' <img src="' + obj.logo + '">';
+                    html += ' <em><b>' + obj.name + '</b></em>';
+                    html += ' </a>';
+                });
+                if (html != "") {
+                    setTimeout(function () {
+                        $("#lib").html(html);
+                        $("#embody").show();
+                    }, 100);
+                }
+            }
+        } catch (err)
+        { }
+
+    });
+</script>
+                <div class="category clearfix">
+            <div class="category_l">
+                <img src="https://csdnimg.cn/release/phoenix/images/category_icon.jpg">
+                <span>分类：</span>
+            </div>
+            <div class="category_r">
+                                            <label  onclick="GetCategoryArticles('5567535','u013517797','top','46509375');">
+                    <span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_fenlei']);">
+                       MyBatis框架<em>（22）</em>
+                    </span>
+                    <img class="arrow-down" src="https://csdnimg.cn/release/phoenix/images/arrow_triangle _down.jpg" style="display:inline;">
+                    <img class="arrow-up" src="https://csdnimg.cn/release/phoenix/images/arrow_triangle_up.jpg" style="display:none;">
+                    <div class="subItem">
+                        <div class="subItem_t">
+                            <a  href="https://blog.csdn.net/u013517797/article/category/5567535"  target="_blank">作者同类文章</a>
+                            <i class="J_close">X</i>
+                        </div>
+                        <ul class="subItem_l" id="top_5567535"></ul>
+                    </div>
+                </label>
+                                        </div>
+        </div>
+                <div class="bog_copyright">
+                        <p class="copyright_p" >
+                版权声明：本文为博主原创文章，未经博主允许不得转载。                https://blog.csdn.net/u013517797/article/details/46509375            </p>
+                    </div>
+        <div id="article_content" class="article_content csdn-tracking-statistics" data-pid="blog"  data-mod=popu_307  data-dsm = "post" >
+                    <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/production/htmledit_views-1f9cf0a071.css" />
+            <div class="htmledit_views">
+                
+输出映射<br />
+接下来说说有关Mapper.xml配置文件中查询标签中关于返回值类型resultType与resultMap的一些内容<br /><br />
+1.resultType<br />
+使用resultType进行输出映射，只有查询出来的列名和pojo中的属性名一致，该列才可以映射成功。<br />
+如果查询出来的列名和pojo中的属性名全部不一致，没有创建pojo对象。<br />
+只要查询出来的列名和pojo中的属性有一个一致，就会创建pojo对象。<br /><br />
+1.1输出简单类型<br />
+1.1.1需求<br />
+用户信息的综合查询列表总数，通过查询总数和上边用户综合查询列表才可以实现分页。<br /><br />
+1.1.2mapper.xml<br /><pre class="html">&lt;mapper namespace="cn.edu.hpu.mybatis.mapper.UserMapper"&gt;
+	
+	&lt;!-- 用户信息综合查询 
+	#{UserCustom.sex}取出包装对象中性别值
+	${UserCustom.username}取得pojo包装对象中用户名称
+	--&gt;
+	&lt;select id="findUserList" parameterType="cn.edu.hpu.mybatis.PO.UserQueryVo" 
+								resultType="cn.edu.hpu.mybatis.PO.UserCustom"&gt;
+		select * from user where user.sex=#{userCustom.sex} and user.username like '%${userCustom.username}%'
+	&lt;/select&gt;
+	
+	&lt;!-- 用户信息综合查询总数 --&gt;
+	&lt;select id="findUserCount" parameterType="cn.edu.hpu.mybatis.PO.UserQueryVo" resultType="int"&gt;
+		select count(*) from user where user.sex=#{userCustom.sex} and user.username like '%${userCustom.username}%'
+	&lt;/select&gt;
+	......
+&lt;/mapper&gt;</pre><br />
+1.1.3mapper.java<br /><pre class="java">//用户管理的Dao接口
+public interface UserMapper {
+	
+	//用户信息综合查询
+	public List&lt;UserCustom&gt; findUserList(UserQueryVo userQueryVo) throws Exception;
+	
+	//用户信息综合查询总数
+	public int findUserCount(UserQueryVo userQueryVo) throws Exception;
+	......
+}</pre><br />
+1.1.4测试代码<br /><pre class="java">//用户信息综合查询总数
+	@Test
+	public void testFindUserCount() throws Exception{
+		
+		SqlSession sqlSession=sqlSessionFactory.openSession();
+		
+		//创建UserMapper代理对象
+		UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
+		
+		//创建包装对象，设置查询条件
+		UserQueryVo userQueryVo=new UserQueryVo();
+		UserCustom userCustom=new UserCustom();
+		userCustom.setSex("男");
+		userCustom.setUsername("张三");
+		userQueryVo.setUserCustom(userCustom);
+		
+		//调用userMapper的方法
+		int count=userMapper.findUserCount(userQueryVo);
+		
+		System.out.println("总数为:"+count);
+	}</pre><br />
+测试结果：<br />
+总数为:2<br /><br />
+输出日志：<br /><pre class="plain">DEBUG [main] - Opening JDBC Connection
+DEBUG [main] - Created connection 7832149.
+DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.Connection@778255]
+DEBUG [main] - ==&gt;  Preparing: select count(*) from user where user.sex=? and user.username like '%张三%' 
+DEBUG [main] - ==&gt; Parameters: 男(String)
+DEBUG [main] - &lt;==      Total: 1</pre><br />
+1.1.5小结<br />
+查询出来的结果集只有一行且一列，可以使用简单类型进行输出映射。（输出简单类型的要求）<br /><br />
+1.2输出pojo对象和pojo列表<br /><br />
+不管是输出的pojo单个对象还是一个列表（list中包括pojo），在mapper.xml中resultType指定的类型是一样的。<br />
+在mapper.java指定的方法返回值类型不一样：<br />
+(1)输出单个pojo对象，方法返回值是单个对象类型<br />
+ <br />
+(2)输出pojo对象list，方法返回值是List&lt;Pojo&gt;<br /><br />
+生成的动态代理对象中是根据mapper方法的返回值类型确定是调用selectOne(返回单个对象调用)还是selectList （返回集合对象调用 ）.<br /><br />
+(3)输出hashmap<br />
+输出pojo对象可以改用hashmap输出类型，将输出的字段名称作为map的key，value为字段值。如果是集合，那就是list里面套了HashMap。<br /><br />
+2.resultMap<br />
+mybatis中使用resultMap完成高级输出结果映射。<br /><br />
+2.1resultMap使用方法<br />
+如果查询出来的列名和pojo的属性名不一致，通过定义一个resultMap对列名和pojo属性名之间作一个映射关系。<br /><br />
+下面来进行实验，实验需求<br />
+2.2将下边的sql使用User完成映射<br />
+SELECT id id_,username username_ FROM USER WHERE id=#{value}<br /><br />
+User类中属性名和上边查询列名不一致。<br /><br />
+resultMap使用方法:(一下属性均定义在Mapper.xml映射文件中)<br />
+(1)定义resultMap<br /><br /><pre class="html">&lt;!-- 定义resultType
+将select id id_,username _username from user和User类中的属性做一个映射关系
+	
+type:resultMap最终所映射的Java对象类型，可以使用别名
+id:对resultMap的唯一标识 
+--&gt;
+&lt;resultMap type="user" id="userResultMap"&gt;
+	&lt;!-- id表示查询结果集中唯一标识 
+	column:查询出的列名
+	property:type所指定的POJO中的属性名
+	最终reslutMap对column和property做一个映射关系(对应关系)
+	--&gt;
+	&lt;id column="_id" property="id"/&gt;
+	&lt;!-- 对普通列的映射定义 --&gt;
+	&lt;result column="_username" property="username"/&gt;
+&lt;/resultMap&gt;</pre><br />
+(2)使用resultMap作为statement的输出映射类型<br /><pre class="html">&lt;!-- 使用resultMap进行输出映射 
+	resultMap:指定定义的resultMap的id，如果这个resultMap在其它的mapper文件，前面需要加namespace
+	--&gt;
+&lt;select id="findUserByResultMap" parameterType="int" resultMap="userResultMap"&gt;
+	select id _id,username _username from user where id=#{value}
+&lt;/select&gt;
+</pre><br /><p>(3)mapper接口类中添加相应方法</p>
+<p></p>
+<pre class="java">//用户管理的Dao接口
+public interface UserMapper {
+	
+	public User findUserByResultMap(int id) throws Exception;
+	......
+}
+</pre><br /><p></p>
+测试：<br /><pre class="java">@Test
+public void testFindUserByResultMap() throws Exception{
+		
+	SqlSession sqlSession=sqlSessionFactory.openSession();
+		
+	//创建UserMapper代理对象
+	UserMapper userMapper=sqlSession.getMapper(UserMapper.class);
+		
+	//调用userMapper的方法
+	User user=userMapper.findUserByResultMap(1);
+		
+	System.out.println(user.getUsername());
+}</pre><br />
+测试结果：<br />
+张三<br /><br /><p>输出日志：</p>
+<p></p>
+<pre class="plain">EBUG [main] - Opening JDBC Connection
+DEBUG [main] - Created connection 1465214.
+DEBUG [main] - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.Connection@165b7e]
+DEBUG [main] - ==&gt;  Preparing: select id _id,username _username from user where id=? 
+DEBUG [main] - ==&gt; Parameters: 1(Integer)
+DEBUG [main] - &lt;==      Total: 1</pre>
+<p></p>
+<br />
+小结<br />
+使用resultType进行输出映射，只有查询出来的列名和pojo中的属性名一致，该列才可以映射成功。<br /><p>如果查询出来的列名和pojo的属性名不一致，通过定义一个resultMap对列名和pojo属性名之间作一个映射关系。</p>
+<p><strong><span style="color:#ff0000;">转载请注明出处：<a href="http://blog.csdn.net/acmman/article/details/46509375">http://blog.csdn.net/acmman/article/details/46509375</a></span></strong></p>
+            </div>
+                </div>
+        <div class="readall_box csdn-tracking-statistics tracking-click"  data-pid="blog"  data-mod="popu_596">
+        <div class="read_more_mask"></div>
+            <a class="btn btn-large btn-gray-fred read_more_btn" target="_self">阅读全文</a>
+        </div>
+        <ul class="article_next_prev">
+                                    <li class="prev_article">
+                <span  onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian']);location.href='https://blog.csdn.net/acmman/article/details/46509307';">上一篇</span>
+                <a href="https://blog.csdn.net/acmman/article/details/46509307" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian'])">【Mybatis框架】输入映射-pojo包装类型</a>
+            </li>
+            
+                                    <li class="next_article">
+                <span  onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian']);location.href='https://blog.csdn.net/acmman/article/details/46509511';">下一篇</span>
+                <a href="https://blog.csdn.net/acmman/article/details/46509511" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian'])">【Android开发】网络编程及Internet应用-获取天气预报</a>
+            </li>
+                    </ul>
+        <div style="clear:both; height:10px;"></div>
+    </div>
+    <div class="edu_promotion" style="margin: 16px 0;"></div>
+    <script>
+    $(".MathJax").remove();
+    </script>
+        <!--文章底部广告位-->
+    <div id="article_ad">
+        <!-- 广告位：PC端-博客详情页底部banner-760*90 -->
+        <script type="text/javascript" src="//cee1.iteye.com/pkccmgslc.js"></script>
+    </div>
+    
+    <!--评论区-->
+    <div class="comment_class">
+        <div class="commentform" id="comments"></div>
+        <div id="comment_form">
+
+        </div>
+        <div id="comment_title" class="panel_head">
+            <span class="see_comment">查看评论</span><a name="comments" ></a></div>
+        <div id="comment_list">
+
+        </div>
+        <div id="comment_bar">
+        </div>
+    </div>
+
+    <!--推荐列表-->
+    <div class="recommend_list">
+                                            <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/dancheng1/article/details/53981183"  target="_blank" strategy="BlogCommendFromBaidu_0">
+                    <dd>
+                        <h2>Mybatis中resultMap输出mapper中的配置</h2>
+                        <div class="summary">
+                            
+    
+                                </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/9/8/E/3_dancheng1.jpg" alt="dancheng1" title="dancheng1"></li>
+                            <li class="user_name">dancheng1</li>
+                            <li class="time">2017年01月02日 18:41</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1023</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/haozhugogo/article/details/54835569"  target="_blank" strategy="BlogCommendFromBaidu_1">
+                    <dd>
+                        <h2>Mybatis mapper.xml 中的resultMap用法</h2>
+                        <div class="summary">
+                            mapper.xml配置文件里面，这俩是要对应的。                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/6/9/7/3_haozhugogo.jpg" alt="haozhugogo" title="haozhugogo"></li>
+                            <li class="user_name">haozhugogo</li>
+                            <li class="time">2017年02月02日 13:37</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>1278</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                          <dl class="">
+            <script>
+            (function() {
+              var s = "_" + Math.random().toString(36).slice(2);
+              document.write('<div id="' + s + '"></div>');
+              (window.slotbydup=window.slotbydup || []).push({
+                id: '4765209',
+                container: s,
+                size: '808,120',
+                display: 'inlay-fix'
+              });
+            })();
+            </script>
+          </dl>
+                                        <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/kkdelta/article/details/7430998"  target="_blank" strategy="BlogCommendFromBaidu_2">
+                    <dd>
+                        <h2>MyBatis映射文件的resultMap如何做表关联</h2>
+                        <div class="summary">
+                            MyBatis的核心是其映射文件,SqlMap文件,里面配置了项目中用到了什么SQL语句,和数据库相关的逻辑都在这个映射文件里.顾名思义,映射文件就是对Java对象和SQL的映射.这里简单介绍一下映射...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/0/2/7/3_kkdelta.jpg" alt="kkdelta" title="kkdelta"></li>
+                            <li class="user_name">kkdelta</li>
+                            <li class="time">2012年04月06日 12:16</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>38531</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/CASER_HDMI/article/details/76064542"  target="_blank" strategy="BlogCommendFromBaidu_3">
+                    <dd>
+                        <h2>mybatis 不同Mapper文件引用resultMap</h2>
+                        <div class="summary">
+                            ClassesMapper.xml:    
+        
+        
+                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/6/E/8/3_caser_hdmi.jpg" alt="CASER_HDMI" title="CASER_HDMI"></li>
+                            <li class="user_name">CASER_HDMI</li>
+                            <li class="time">2017年07月25日 12:35</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>3421</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/wj903829182/article/details/73196699"  target="_blank" strategy="BlogCommendFromBaidu_4">
+                    <dd>
+                        <h2>mybatis-映射器-resultMap结果集映射3collection一对多级联&amp;鉴别器</h2>
+                        <div class="summary">
+                            一个学生可能有多门课程，在学生确定的前提下每门课程都会有自己的分数，所以一个学生的课程成绩只能对应一门课程。所以这里有两个级联，一个是学生和课程成绩的级联，这是一对多的关系；一个是课程成绩和课程的级联...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/E/7/E/3_wj903829182.jpg" alt="wj903829182" title="wj903829182"></li>
+                            <li class="user_name">wj903829182</li>
+                            <li class="time">2017年06月17日 09:55</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>2782</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/frankenjoy123/article/details/55271271"  target="_blank" strategy="BlogCommendFromBaidu_5">
+                    <dd>
+                        <h2>MyBatis之返回类型</h2>
+                        <div class="summary">
+                            MyBatis的返回参数类型分两种
+
+1. 对应的分类为：
+
+1.1.resultMap:
+
+1.2.resultType:
+
+
+
+
+2 .对应返回值类型：
+
+
+2.1.r...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/6/4/B/3_frankenjoy123.jpg" alt="frankenjoy123" title="frankenjoy123"></li>
+                            <li class="user_name">frankenjoy123</li>
+                            <li class="time">2017年02月16日 19:55</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>8802</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/u010235716/article/details/51698787"  target="_blank" strategy="BlogCommendFromBaidu_6">
+                    <dd>
+                        <h2>MyBatis的返回参数类型</h2>
+                        <div class="summary">
+                            MyBatis的返回参数类型分两种
+1.  对应的分类为：
+1.1. resultMap :
+1.2. resultType :
+
+
+2 . 对应返回值类型：
+
+2.1. result...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/6/9/B/3_u010235716.jpg" alt="u010235716" title="u010235716"></li>
+                            <li class="user_name">u010235716</li>
+                            <li class="time">2016年06月17日 11:53</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>42922</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/weixin_38570967/article/details/70918472"  target="_blank" strategy="BlogCommendFromBaidu_7">
+                    <dd>
+                        <h2>mybatis 返回基本类型</h2>
+                        <div class="summary">
+                            接口mapper 类
+ public Long getUserIdByOpenId(String openid);
+
+
+
+
+
+mapper.xml文件
+ 
+    select id...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/8/E/0/3_weixin_38570967.jpg" alt="weixin_38570967" title="weixin_38570967"></li>
+                            <li class="user_name">weixin_38570967</li>
+                            <li class="time">2017年04月28日 16:30</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>441</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/baicp3/article/details/50508584"  target="_blank" strategy="BlogCommendFromBaidu_8">
+                    <dd>
+                        <h2>mybatis resultType返回类型汇总。</h2>
+                        <div class="summary">
+                            1.返回List>
+
+
+
+
+
+
+
+
+
+
+
+1
+
+2
+
+
+
+
+select id="getMyCredit"  parameterClass="java.util.Map" resultClass="j...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/A/6/A/3_baicp3.jpg" alt="baicp3" title="baicp3"></li>
+                            <li class="user_name">baicp3</li>
+                            <li class="time">2016年01月13日 10:02</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>40173</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                                                    <dl class="clearfix csdn-tracking-statistics recommend_article" data-mod="popu_614" data-poputype="feed"  data-feed-show="false"  data-dsm="post">
+                <a href="https://blog.csdn.net/suzhouhe1991/article/details/52224273"  target="_blank" strategy="BlogCommendFromBaidu_9">
+                    <dd>
+                        <h2>mybatis返回类型resulttype之string和java.lang.string的不同点</h2>
+                        <div class="summary">
+                            项目部署到linux系统上，其实select语句返回类型resulttype使用string或者java.lang.string差别其实应该是没有的，但是最好使用string，不然可能会出现异常，而且...                        </div>
+
+                        <ul>
+                            <li class="avatar_img"><img src="https://avatar.csdn.net/4/E/7/3_suzhouhe1991.jpg" alt="suzhouhe1991" title="suzhouhe1991"></li>
+                            <li class="user_name">suzhouhe1991</li>
+                            <li class="time">2016年08月16日 19:37</li>
+                            <li class="visited_num"><i class="icon iconfont icon-read"></i><span>17126</span></li>
+                        </ul>
+                    </dd>
+                </a>
+            </dl>
+                            </div>
+   <div id="ad_bot"></div>
+    <div id="report_dialog"></div>
+    <div id="pop_win" style="display:none ;position: absolute; z-index: 10000; border: 1px solid rgb(220, 220, 220); top: 222.5px; left: 630px; opacity: 1; background: none 0px 0px repeat scroll rgb(255, 255, 255);">
+    </div>
+    <div id="popup_mask"></div>
+    <style>
+        #popup_mask
+        {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 9999;
+            left: 0px;
+            top: 0px;
+            opacity: 0.3;
+            filter: alpha(opacity=30);
+            display: none;
+        }
+
+    </style>
+    <div class="clear">
+    </div>
+</div>
+            </div>
+        </div>
+        <div id="side" class="side">
+    <div>
+                    <div id="panel_Profile" class="panel">
+    <ul class="panel_head"><span>个人资料</span></ul>
+    <ul class="panel_body profile">
+        <div class=" user_info">
+    <dl class="inf_bar clearfix">
+        <dt class="csdn-tracking-statistics tracking-click" data-mod="popu_381">
+                <a href="https://blog.csdn.net/u013517797" target="_blank">
+                    <img src="https://avatar.csdn.net/B/B/9/3_u013517797.jpg" class="avatar_pic">
+        </a>
+      </dt><dd>
+            <h3 class="csdn-tracking-statistics tracking-click"  data-mod="popu_380"><a href="https://blog.csdn.net/u013517797" target="_blank" id="uid">u013517797</a></h3>
+            <div class="medals" title="">
+                      </div>
+                        <span  class="csdn-tracking-statistics tracking-click" data-mod="popu_379"><a class="btn btn-redborder-small "  id="span_add_follow" target="_self">关注</a></span>
+                    </dd>
+    </dl>
+    <div class="inf_number_box clearfix">
+        <dl title="866">
+            <dt>原创</dt>
+            <dd>866</dd>
+        </dl>
+        <dl title="1287">
+            <dt>粉丝</dt>
+            <dd id='fan'>1287</dd>
+        </dl>
+        <dl title="399">
+            <dt>喜欢</dt>
+            <dd>399</dd>
+        </dl>
+        <dl title="655">
+          <dt>评论</dt>
+          <dd>655</dd>
+        </dl>
+    </div>
+
+</div>
+<div class="interflow clearfix">
+      <div class="badge gradeAndbadge">
+        <div>
+                        <img src='https://csdnimg.cn/jifen/images/xunzhang/xunzhang/zhuanlandaren.png' alt='专栏达人'>
+                                    <img src='https://csdnimg.cn/jifen/images/xunzhang/xunzhang/chizhiyiheng.png' alt='持之以恒'>
+                                            </div>
+    </div>
+      <div class="grade gradeAndbadge gradewidths">
+      <span>等级：</span>
+      <div>
+        <a href="https://blog.csdn.net/home/help.html#level" title="7级,点击查看等级说明" target="_blank">
+          <img class="grade-img" src="https://csdnimg.cn/jifen/images/xunzhang/jianzhang/blog7.png" alt="7级,点击查看等级说明">
+        </a>
+      </div>
+    </div>
+    <div class="gradeAndbadge gradewidths" title="1537420">
+        <span>访问量：</span>
+        <span class="num odd-overhidden">153万+</span>
+    </div>
+
+    <div class="gradeAndbadge gradewidths" title="23361">
+      <span>积分：</span>
+      <span  class="num odd-overhidden">2万+</span>
+    </div>
+    <div class="gradeAndbadge gradewidths" title="365">
+        <span>排名：</span>
+        <span class="num odd-overhidden">365</span>
+    </div>
+
+</div>
+<script type="text/javascript">
+  // 判断并设置用户名位置，没有博客专家与关注按钮时，用户名居中
+  $medals_children = $('.medals').children().length;
+  $span_add_follow = $('#span_add_follow').length;
+  if($medals_children === 0 && $span_add_follow === 0){
+    $('.inf_bar dd').css('vertical-align','10px')
+  }
+</script>    </ul>
+</div>
+
+                            <div id="homepageArticles" class="panel csdn-tracking-statistics" data-pid="blog" data-mod="popu_4" style="height:250px;">
+    <div id="cpro_u2734133" style="text-align:center;">
+        <!-- 投放代码 -->
+        <script type="text/javascript" src="//cee1.iteye.com/lgyyovfyh.js"></script>
+    </div>
+</div>
+                                <!--自定义模块-->
+<div id="custom_column_62462446" class="panel">
+    <ul class="panel_head"><span>博主信息</span></ul>
+    <ul class="panel_body">
+        
+<div style="background-color:#006699; width:6px; height:16px; display:inline-block; vertical-align:text-bottom">
+</div>
+<b style="font-size:15px">个人信息</b> <br>
+<br>
+就职： <a href="http://www.jxcode.com" target="_blank"><font color="#ca0000">聚项信息科技有限公司</font></a><br>
+职位：<font color="#ca0000">中级Java开发工程师</font><br>
+负责：<font color="#ca0000">上汽系统开发与维护</font><br>
+院校：<a href="http://www.hpu.edu.cn/www/index.html" target="_black"><font color="#ca0000">河南理工大学</font></a><br>
+专业：<font color="#ca0000">软件工程12级</font><br>
+邮箱：<a href="mailto:jackZhuCoder@126.com"><font color="#ca0000">jackZhuCoder@126.com</font></a><br>
+Q Q ：<font color="#ca0000" title="提示:二进制转十进制">10101000101001010111<br>
+<div style="margin-left:35px">1101111010</div>
+</font><br>
+<hr>
+<div style="background-color:#006699; width:6px; height:16px; display:inline-block; vertical-align:text-bottom">
+</div>
+<b style="font-size:15px">我的书籍</b> <br>
+<br>
+<a href="http://product.dangdang.com/25227419.html" target="_blank">
+<center><img src="http://img.blog.csdn.net/20180306202203379" style="width:240px; height:260px">
+</center>
+<br>
+</a>
+<center><a href="http://product.dangdang.com/25227419.html" target="_blank"><b style="font-size:13px">Spring MVC&#43;MyBatis</b><br>
+<b style="font-size:13px">开发从入门到项目实战</b><br>
+</a><br>
+</center>
+<b>书　　号</b>：978-7-121-33390-3<br>
+<br>
+<b>出版日期</b>：2018-01-29<br>
+<br>
+<b>书籍特色</b>：<br>
+<br>
+<b>· 经验多：</b>百万访问量博主倾囊相授，带你走进Web开发的方方面面。<br>
+<b>· 零基础：</b>从简单的样例做起，逐渐深入技术核心。<br>
+<b>· 内容全：</b>涵盖Spring MVC与MyBatis的33个技巧，56个实例。<br>
+<b>· 重实战：</b>与真实项目案例相结合，深入实战开发的5层架构。<br>
+    </ul>
+</div>
+
+                                <div id="panel_Category" class="panel">
+    <ul class="panel_head">
+        <span>博客专栏</span>
+    </ul>
+    <ul class="panel_body" id="sp_column">
+                <table cellpadding="0" cellspacing="0">
+                        <tr>
+                <td style="padding:10px 10px 0 0;">
+                	<a href="https://blog.csdn.net/column/details/lanqiaobeiacm.html" target="_blank">
+                        <img src="https://img-blog.csdn.net/20151123175726067" style="width:75px;height:75px;" />
+                    </a>
+                </td>
+                <td style="padding:10px 0; vertical-align:top;">
+                    <a href="https://blog.csdn.net/column/details/lanqiaobeiacm.html" target="_blank">蓝桥杯历届试题</a>
+                    <p>文章：31篇</p>
+                    <span>阅读：68243</span>
+                </td>
+            </tr>
+                        <tr>
+                <td style="padding:10px 10px 0 0;">
+                	<a href="https://blog.csdn.net/column/details/java-web.html" target="_blank">
+                        <img src="https://img-blog.csdn.net/20151123180215677" style="width:75px;height:75px;" />
+                    </a>
+                </td>
+                <td style="padding:10px 0; vertical-align:top;">
+                    <a href="https://blog.csdn.net/column/details/java-web.html" target="_blank">JSP基础开发技术</a>
+                    <p>文章：37篇</p>
+                    <span>阅读：75031</span>
+                </td>
+            </tr>
+                        <tr>
+                <td style="padding:10px 10px 0 0;">
+                	<a href="https://blog.csdn.net/column/details/hibernate-java.html" target="_blank">
+                        <img src="https://img-blog.csdn.net/20151123180222536" style="width:75px;height:75px;" />
+                    </a>
+                </td>
+                <td style="padding:10px 0; vertical-align:top;">
+                    <a href="https://blog.csdn.net/column/details/hibernate-java.html" target="_blank">Hibernate框架学习</a>
+                    <p>文章：51篇</p>
+                    <span>阅读：59564</span>
+                </td>
+            </tr>
+                        <tr>
+                <td style="padding:10px 10px 0 0;">
+                	<a href="https://blog.csdn.net/column/details/spring-java.html" target="_blank">
+                        <img src="https://img-blog.csdn.net/20151123180226349" style="width:75px;height:75px;" />
+                    </a>
+                </td>
+                <td style="padding:10px 0; vertical-align:top;">
+                    <a href="https://blog.csdn.net/column/details/spring-java.html" target="_blank">Spring框架学习</a>
+                    <p>文章：21篇</p>
+                    <span>阅读：29782</span>
+                </td>
+            </tr>
+                        <tr>
+                <td style="padding:10px 10px 0 0;">
+                	<a href="https://blog.csdn.net/column/details/android-java.html" target="_blank">
+                        <img src="https://img-blog.csdn.net/20151123180240177" style="width:75px;height:75px;" />
+                    </a>
+                </td>
+                <td style="padding:10px 0; vertical-align:top;">
+                    <a href="https://blog.csdn.net/column/details/android-java.html" target="_blank">Android开发技术</a>
+                    <p>文章：87篇</p>
+                    <span>阅读：158042</span>
+                </td>
+            </tr>
+                        <tr>
+                <td style="padding:10px 10px 0 0;">
+                	<a href="https://blog.csdn.net/column/details/mybatis-springmvc.html" target="_blank">
+                        <img src="https://img-blog.csdn.net/20151123180351270" style="width:75px;height:75px;" />
+                    </a>
+                </td>
+                <td style="padding:10px 0; vertical-align:top;">
+                    <a href="https://blog.csdn.net/column/details/mybatis-springmvc.html" target="_blank">MyBatis+SpringMVC</a>
+                    <p>文章：81篇</p>
+                    <span>阅读：310482</span>
+                </td>
+            </tr>
+                        <tr>
+                <td style="padding:10px 10px 0 0;">
+                	<a href="https://blog.csdn.net/column/details/struts2-javaee.html" target="_blank">
+                        <img src="https://img-blog.csdn.net/20151123180406552" style="width:75px;height:75px;" />
+                    </a>
+                </td>
+                <td style="padding:10px 0; vertical-align:top;">
+                    <a href="https://blog.csdn.net/column/details/struts2-javaee.html" target="_blank">Struts2框架学习</a>
+                    <p>文章：24篇</p>
+                    <span>阅读：31836</span>
+                </td>
+            </tr>
+                        <tr>
+                <td style="padding:10px 10px 0 0;">
+                	<a href="https://blog.csdn.net/column/details/javascript-dom.html" target="_blank">
+                        <img src="https://img-blog.csdn.net/20151123180436974" style="width:75px;height:75px;" />
+                    </a>
+                </td>
+                <td style="padding:10px 0; vertical-align:top;">
+                    <a href="https://blog.csdn.net/column/details/javascript-dom.html" target="_blank">JavaScript的基础与DOM编程</a>
+                    <p>文章：27篇</p>
+                    <span>阅读：30303</span>
+                </td>
+            </tr>
+                        <tr>
+                <td style="padding:10px 10px 0 0;">
+                	<a href="https://blog.csdn.net/column/details/javae-javaweb.html" target="_blank">
+                        <img src="https://img-blog.csdn.net/20151207151601132" style="width:75px;height:75px;" />
+                    </a>
+                </td>
+                <td style="padding:10px 0; vertical-align:top;">
+                    <a href="https://blog.csdn.net/column/details/javae-javaweb.html" target="_blank">SSH项目实战</a>
+                    <p>文章：35篇</p>
+                    <span>阅读：82747</span>
+                </td>
+            </tr>
+                        <tr>
+                <td style="padding:10px 10px 0 0;">
+                	<a href="https://blog.csdn.net/column/details/java-maven.html" target="_blank">
+                        <img src="https://img-blog.csdn.net/20160203111854148" style="width:75px;height:75px;" />
+                    </a>
+                </td>
+                <td style="padding:10px 0; vertical-align:top;">
+                    <a href="https://blog.csdn.net/column/details/java-maven.html" target="_blank">Maven由浅入深</a>
+                    <p>文章：6篇</p>
+                    <span>阅读：9252</span>
+                </td>
+            </tr>
+                        <tr>
+                <td style="padding:10px 10px 0 0;">
+                	<a href="https://blog.csdn.net/column/details/osgi-bundle.html" target="_blank">
+                        <img src="https://img-blog.csdn.net/20160320103948342" style="width:75px;height:75px;" />
+                    </a>
+                </td>
+                <td style="padding:10px 0; vertical-align:top;">
+                    <a href="https://blog.csdn.net/column/details/osgi-bundle.html" target="_blank">osgi经典入门</a>
+                    <p>文章：6篇</p>
+                    <span>阅读：51324</span>
+                </td>
+            </tr>
+                        <tr>
+                <td style="padding:10px 10px 0 0;">
+                	<a href="https://blog.csdn.net/column/details/13249.html" target="_blank">
+                        <img src="https://img-blog.csdn.net/20161028113438691" style="width:75px;height:75px;" />
+                    </a>
+                </td>
+                <td style="padding:10px 0; vertical-align:top;">
+                    <a href="https://blog.csdn.net/column/details/13249.html" target="_blank">Linux全面学习</a>
+                    <p>文章：16篇</p>
+                    <span>阅读：18625</span>
+                </td>
+            </tr>
+                        <tr>
+                <td style="padding:10px 10px 0 0;">
+                	<a href="https://blog.csdn.net/column/details/13404.html" target="_blank">
+                        <img src="https://img-blog.csdn.net/20161102091259696" style="width:75px;height:75px;" />
+                    </a>
+                </td>
+                <td style="padding:10px 0; vertical-align:top;">
+                    <a href="https://blog.csdn.net/column/details/13404.html" target="_blank">Oracle基础与提高</a>
+                    <p>文章：12篇</p>
+                    <span>阅读：11634</span>
+                </td>
+            </tr>
+                        <tr>
+                <td style="padding:10px 10px 0 0;">
+                	<a href="https://blog.csdn.net/column/details/13811.html" target="_blank">
+                        <img src="https://img-blog.csdn.net/20161205092251390" style="width:75px;height:75px;" />
+                    </a>
+                </td>
+                <td style="padding:10px 0; vertical-align:top;">
+                    <a href="https://blog.csdn.net/column/details/13811.html" target="_blank">Java多线程与并发库</a>
+                    <p>文章：19篇</p>
+                    <span>阅读：14980</span>
+                </td>
+            </tr>
+                        <tr>
+                <td style="padding:10px 10px 0 0;">
+                	<a href="https://blog.csdn.net/column/details/13948.html" target="_blank">
+                        <img src="https://img-blog.csdn.net/20161219093042096" style="width:75px;height:75px;" />
+                    </a>
+                </td>
+                <td style="padding:10px 0; vertical-align:top;">
+                    <a href="https://blog.csdn.net/column/details/13948.html" target="_blank">Redis缓存机制</a>
+                    <p>文章：14篇</p>
+                    <span>阅读：86118</span>
+                </td>
+            </tr>
+                        <tr>
+                <td style="padding:10px 10px 0 0;">
+                	<a href="https://blog.csdn.net/column/details/15894.html" target="_blank">
+                        <img src="https://img-blog.csdn.net/20170606170631329" style="width:75px;height:75px;" />
+                    </a>
+                </td>
+                <td style="padding:10px 0; vertical-align:top;">
+                    <a href="https://blog.csdn.net/column/details/15894.html" target="_blank">Java邮件开发</a>
+                    <p>文章：7篇</p>
+                    <span>阅读：7978</span>
+                </td>
+            </tr>
+                        <tr>
+                <td style="padding:10px 10px 0 0;">
+                	<a href="https://blog.csdn.net/column/details/17655.html" target="_blank">
+                        <img src="https://img-blog.csdn.net/20171009155812340" style="width:75px;height:75px;" />
+                    </a>
+                </td>
+                <td style="padding:10px 0; vertical-align:top;">
+                    <a href="https://blog.csdn.net/column/details/17655.html" target="_blank">Git快速使用和入门</a>
+                    <p>文章：6篇</p>
+                    <span>阅读：3204</span>
+                </td>
+            </tr>
+                        <tr>
+                <td style="padding:10px 10px 0 0;">
+                	<a href="https://blog.csdn.net/column/details/18895.html" target="_blank">
+                        <img src="https://img-blog.csdn.net/20180114140755063" style="width:75px;height:75px;" />
+                    </a>
+                </td>
+                <td style="padding:10px 0; vertical-align:top;">
+                    <a href="https://blog.csdn.net/column/details/18895.html" target="_blank">Shiro权限控制</a>
+                    <p>文章：21篇</p>
+                    <span>阅读：10902</span>
+                </td>
+            </tr>
+                        <tr>
+                <td style="padding:10px 10px 0 0;">
+                	<a href="https://blog.csdn.net/column/details/20751.html" target="_blank">
+                        <img src="//img-blog.csdn.net/20180321202843633" style="width:75px;height:75px;" />
+                    </a>
+                </td>
+                <td style="padding:10px 0; vertical-align:top;">
+                    <a href="https://blog.csdn.net/column/details/20751.html" target="_blank">MongoDb探究</a>
+                    <p>文章：9篇</p>
+                    <span>阅读：4708</span>
+                </td>
+            </tr>
+                    </table>
+            </ul>
+</div>
+
+                                <div id="panel_Category" class="panel">
+    <ul class="panel_head"><span>文章分类</span></ul>
+    <ul class="panel_body">
+                        <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/1865763" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                杂谈            </a>
+            <span>(11)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2159841" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                技术篇            </a>
+            <span>(2)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2440523" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                算法小总结            </a>
+            <span>(8)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2887683" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                JAVA基础            </a>
+            <span>(6)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2501691" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                Android开发            </a>
+            <span>(89)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2714307" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                网页设计            </a>
+            <span>(3)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2763909" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                Hibernate框架            </a>
+            <span>(53)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2503551" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                JSP开发            </a>
+            <span>(49)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2877839" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                Spring框架            </a>
+            <span>(29)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/5670995" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                SpringMVC整合MyBatis            </a>
+            <span>(52)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/5666237" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                SpringMVC            </a>
+            <span>(7)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/7099163" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                SpringBoot            </a>
+            <span>(2)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/5567535" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                MyBatis框架            </a>
+            <span>(23)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2899629" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                Struts2框架            </a>
+            <span>(24)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2898955" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                JavaScript            </a>
+            <span>(27)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/5697469" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                Ajax            </a>
+            <span>(9)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/5860953" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                jQuery            </a>
+            <span>(3)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/6087489" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                Maven            </a>
+            <span>(6)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/6625351" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                mongodb            </a>
+            <span>(9)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/6128357" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                OSGI            </a>
+            <span>(5)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/6163337" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                SQL            </a>
+            <span>(16)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/6242792" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                WebService            </a>
+            <span>(7)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/6296815" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                iReport            </a>
+            <span>(3)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/6966175" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                Dubbo            </a>
+            <span>(5)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/7030610" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                Zookeeper            </a>
+            <span>(3)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/6304667" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                Linux            </a>
+            <span>(18)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/7224613" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                Shiro权限管理            </a>
+            <span>(21)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/7191960" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                Nginx            </a>
+            <span>(4)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/6843840" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                Java邮件            </a>
+            <span>(7)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/5782905" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                javaEE项目实战            </a>
+            <span>(71)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/6432248" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                Java线程与并发            </a>
+            <span>(19)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/6732665" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                Activiti工作流            </a>
+            <span>(12)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/6854832" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                WebLogic            </a>
+            <span>(5)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/7130759" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                Git版本管理            </a>
+            <span>(6)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2895161" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                设计模式            </a>
+            <span>(16)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/6520636" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                缓存机制            </a>
+            <span>(14)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/5853105" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                Web安全与防御            </a>
+            <span>(6)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/6027443" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                软件工程            </a>
+            <span>(6)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/1865781" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                程序代码            </a>
+            <span>(83)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2065097" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                蓝桥杯            </a>
+            <span>(31)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2221523" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                第六届河南省程序设计大赛            </a>
+            <span>(1)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2393843" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                北大夏令营笔记            </a>
+            <span>(10)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2473203" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                排序            </a>
+            <span>(10)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2473193" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                数学题            </a>
+            <span>(41)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2473195" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                图论            </a>
+            <span>(14)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2473197" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                贪心            </a>
+            <span>(7)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2473199" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                字典树            </a>
+            <span>(3)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2473201" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                母函数            </a>
+            <span>(2)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2473209" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                高精度            </a>
+            <span>(6)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2473207" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                字符串处理            </a>
+            <span>(19)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2473205" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                模拟            </a>
+            <span>(4)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2473213" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                线段树            </a>
+            <span>(4)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2473211" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                动态规划DP            </a>
+            <span>(18)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2473219" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                计算几何            </a>
+            <span>(2)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2473221" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                数据结构            </a>
+            <span>(12)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2473237" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                搜索            </a>
+            <span>(21)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2473255" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                矩阵            </a>
+            <span>(7)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2473259" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                背包问题            </a>
+            <span>(11)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2473285" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                树            </a>
+            <span>(5)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2473321" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                博弈论            </a>
+            <span>(1)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2473297" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                并查集            </a>
+            <span>(3)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2473413" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                STL            </a>
+            <span>(1)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2480181" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                二分匹配            </a>
+            <span>(3)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2480187" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                KMP            </a>
+            <span>(1)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2481857" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                优先队列            </a>
+            <span>(3)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/2485293" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                哈夫曼编码            </a>
+            <span>(2)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/7400626" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                FreeMarker            </a>
+            <span>(5)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/category/7466601" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">
+                消息中间件            </a>
+            <span>(12)</span>
+        </li>
+                    </ul>
+</div>
+
+                                <div id="hotarticls" class="panel csdn-tracking-statistics" data-pid="blog" data-mod="popu_340">
+    <ul class="panel_head"><span>阅读排行</span></ul>
+    <ul class="panel_body itemlist">
+                        <li>
+            <a href="https://blog.csdn.net/u013517797/article/details/53167917" title="【Redis缓存机制】1.Redis介绍和使用场景">
+                【Redis缓存机制】1.Redis介绍和使用场景            </a>
+            <span>(41233)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/details/50848595" title="【OSGI】1.初识OSGI-到底什么是OSGI">
+                【OSGI】1.初识OSGI-到底什么是OSGI            </a>
+            <span>(35248)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/details/70093877" title="【WebLogic使用】1.WebLogic的下载与安装">
+                【WebLogic使用】1.WebLogic的下载与安装            </a>
+            <span>(21571)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/details/46906871" title="【MyBatis框架】mybatis逆向工程自动生成代码">
+                【MyBatis框架】mybatis逆向工程自动生成代码            </a>
+            <span>(17605)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/details/43675393" title="【JSP开发】JSP的forward标签使用">
+                【JSP开发】JSP的forward标签使用            </a>
+            <span>(16054)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/details/46509375" title="【Mybatis框架】输出映射-resultType与resultMap">
+                【Mybatis框架】输出映射-resultType与resultMap            </a>
+            <span>(14219)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/details/47680517" title="【SpringMVC整合MyBatis】springmvc拦截器-定义和配置">
+                【SpringMVC整合MyBatis】springmvc拦截器-定义和配置            </a>
+            <span>(12730)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/details/46980543" title="【SpringMVC框架】小结+视图解析器配置前缀和后缀">
+                【SpringMVC框架】小结+视图解析器配置前缀和后缀            </a>
+            <span>(12050)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/details/46980427" title="【SpringMVC框架】注解的处理器映射器和适配器配置">
+                【SpringMVC框架】注解的处理器映射器和适配器配置            </a>
+            <span>(11703)</span>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/details/47604099" title="【SpringMVC整合MyBatis】springmvc异常处理-全局异常处理器开发">
+                【SpringMVC整合MyBatis】springmvc异常处理-全局异常处理器开发            </a>
+            <span>(10659)</span>
+        </li>
+                    </ul>
+</div>
+
+                                <div id="newcomments" class="panel">
+    <ul class="panel_head"><span>最新评论</span></ul>
+    <ul class="panel_body itemlist">
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/details/66473148#comments">【Activiti工作流】9.连线</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/u013517797" class="user_name">u013517797</a>:
+                [reply]qq_29374433[/reply]
+检查一下你的taskId是否是当前流程中的            </p>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/details/51814243#comments">【iReport+JasperRe...</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/u013517797" class="user_name">u013517797</a>:
+                [reply]xzh1988917[/reply]
+是的            </p>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/details/51814243#comments">【iReport+JasperRe...</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/xzh1988917" class="user_name">xzh1988917</a>:
+                制作的jasper文件中 含有子报表 javaBean 是要把子报表的字段也写进去吗            </p>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/details/66473148#comments">【Activiti工作流】9.连线</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/qq_29374433" class="user_name">qq_29374433</a>:
+                我复制你的代码，执行不重要的后，end后在数据库会多一个总经理 在act_hi_actinst里，...            </p>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/details/70093877#comments">【WebLogic使用】1.Web...</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/u013517797" class="user_name">u013517797</a>:
+                [reply]yubangfan[/reply]
+恩恩，首先要确定JDK的安装是成功的(通过CMD...            </p>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/details/70093877#comments">【WebLogic使用】1.Web...</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/yubangfan" class="user_name">yubangfan</a>:
+                谢谢您的关注，问题找出来了！安装JDK一定要选择jdk1,8.0.101以上，并且在CMD中，ja...            </p>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/details/70093877#comments">【WebLogic使用】1.Web...</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/yubangfan" class="user_name">yubangfan</a>:
+                [reply]u013517797[/reply]一般是默认的勾选的，我就自然的下一步！声明我是w...            </p>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/details/70093877#comments">【WebLogic使用】1.Web...</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/u013517797" class="user_name">u013517797</a>:
+                [reply]yubangfan[/reply]
+是不是在安装完成的界面上没有勾选“自动启动配置向...            </p>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/details/70093877#comments">【WebLogic使用】1.Web...</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/yubangfan" class="user_name">yubangfan</a>:
+                请问安装完后，没有弹出自动配置！是什么原因造成的呢？            </p>
+        </li>
+                <li>
+            <a href="https://blog.csdn.net/u013517797/article/details/51814243#comments">【iReport+JasperRe...</a>
+            <p style="margin:0px;"><a href="https://my.csdn.net/bb88384" class="user_name">bb88384</a>:
+                [reply]u013517797[/reply]
++QQ:604036862 ,能给我一个JAV...            </p>
+        </li>
+            </ul>
+</div>
+
+                            <div id="nav_show_top_stop" class="clearfix" style="z-index:1000;width:300px;">
+                          <div id="cpro_u3031286" class="csdn-tracking-statistics" data-pid="blog" data-view="true" data-mod="ad_popu_189" data-mtp="63"
+                    data-order="40" data-con="ad_content_1259" style="text-align:center;background-color:#fff;">
+                   <!-- 投放代码 -->
+                   <script type="text/javascript" src="//cee1.iteye.com/mhzzpwgzj.js"></script>
+               </div>
+                        <div class="persion_article"></div>
+        </div>
+        <script type="text/javascript">
+            var naviga_offsetTop;
+            $(function(){
+                resetleftTop();
+                $(window).scroll(function(){
+                    var scrollTop = $(document).scrollTop();
+
+                    if (scrollTop > naviga_offsetTop) {
+                        jQuery("#nav_show_top_stop").css({"position": "fixed"});
+                        jQuery("#nav_show_top_stop").css({"top": "2px"});
+                    } else {
+                        jQuery("#nav_show_top_stop").css({"position": "static"});
+                    }
+                });
+            });
+
+            function resetleftTop(){
+                naviga_offsetTop = $("#nav_show_top_stop").position().top;
+            }
+
+        </script>
+    </div>
+    <div class="clear"></div>
+</div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="left_fixed">
+  <div class="left_show_button">
+    <span>
+      <i class="icon iconfont icon-youjiantou"></i>
+    </span>
+</div>
+
+    <ul class="left_menu" id="share_box">
+        <li>
+            <button class="left-fixed-btn btn-like csdn-tracking-statistics tracking-click" data-mod="popu_373" target="_self" title="点赞">
+                <a href="javascript:void(0);" class="iconbox border_red" ><i class="icon iconfont icon-dianzan"></i></a>
+                <a class="txt" href="javascript:void(0);">3</a>
+            </button>
+        </li>
+        <li>
+            <button class="left-fixed-btn csdn-tracking-statistics tracking-click btn-collect" data-mod="popu_374"  target="_self" title="收藏">
+                <a href="javascript:void(0);" class="iconbox border_purple" ><i class="icon iconfont icon-shoucang"></i></a>
+            </button>
+        </li>
+        <li>
+            <button class="left-fixed-btn btn-pinglun csdn-tracking-statistics tracking-click" data-mod="popu_544" title="评论">
+            <a href="javascript:void(0);" class="iconbox border_purple" ><i class="icon iconfont icon-pinglun"></i></a>
+            </button>
+        </li>
+        <li class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+            <a class="bds_tsina outside left-fixed-btn" data-cmd="tsina" title="分享到新浪微博"></a>
+            <span class="iconbox border_red2"><i class="icon iconfont icon-xinlang"></i></span>
+        </li>
+        <li class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+            <a class="bds_weixin outside left-fixed-btn" data-cmd="weixin" title="分享到微信"></a>
+            <span class="iconbox border_green"><i class="icon iconfont icon-weixin"></i></span>
+        </li>
+        <li class="bdsharebuttonbox csdn-tracking-statistics tracking-click" data-mod="popu_172">
+            <a class="bds_qzone outside left-fixed-btn" data-cmd="qzone" title="分享到QQ空间"></a>
+            <span class="iconbox border_blue"><i class="icon iconfont icon-QQ"></i></span>
+        </li>
+    </ul>
+</div>
+<div id="a52b5334d" style="width: 1px; height: 1px; display: none;">
+    <script id="adJs52b5334"></script>
+    <script>document.getElementById("adJs52b5334").src = "https://ads.csdn.net/js/opt/52b5334.js?t=" + Math.random();</script>
+</div>
+<script src="https://csdnimg.cn/public/common/append_mark/appendMark.min.js?v=5.00.43" type="text/javascript"></script>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'https://csdnimg.cn/static/api/js/share.js?v=89860594'];</script>
+<script type="text/javascript">
+    $(function(){
+        setTimeout(function(){
+            $(".comment_body:contains('回复')").each(function(index,item){
+                var u=$(this).text().split('：')[0].toString().replace("回复","")
+                var thisComment=$(this);
+                if(u)
+                {
+                    $.getJSON("https://passport.csdn.net/get/nick?callback=?", {users: u}, function(a) {
+                        if(a!=null&&a.data!=null&&a.data.length>0)
+                        {
+                            nick=a.data[0].n;
+                            if(u!=nick)
+                            {
+                                thisComment.text(thisComment.text().replace(u,nick));
+                            }
+                        }
+                    });
+                }
+            });
+
+        },200);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },5000);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },10000);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },15000);
+
+    });
+
+    appendMark($('.recommend_list').children('a').find('dt'),$('.extension_other'));
+
+    $(function () {
+        $('pre.prettyprint code').each(function () {
+            var lines = $(this).text().split('\n').length;
+            var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+            $(this).addClass('has-numbering').parent().append($numbering);
+            for (i = 1; i <= lines; i++) {
+                $numbering.append($('<li/>').text(i));
+            };
+            $numbering.fadeIn(1700);
+        });
+    });
+</script>
+     <!--右下角弹窗广告-->
+<div class="csdn-tracking-statistics" data-pid="blog" data-view="true" data-mod="ad_popu_72" data-mtp="62"
+     data-order="40" data-con="ad_content_2072">
+    <!--右下角弹窗广告-->
+    <script id="popuLayer_js_q" src="//ads.csdn.net/js/popuLayer.js" defer="defer" type="text/javascript"></script>
+    <div id="layerd" style="position: fixed;bottom:0px;right:0px;line-height:0px;display:none;z-index:1000;" >
+        <div class="J_close layer_close"
+             style="background-color:#efefef;padding:0px;color:#333;font:12px/24px Helvetica,Tahoma,Arial,sans-serif;text-align:right;">
+            关闭
+        </div>
+        <!-- 广告占位容器 -->
+        <div id="cpro_u3026784">
+            <!-- 列表页广告 -->
+                    <!-- 详情页iteye广告-->
+            <script>
+              (function() {
+              var s = "_" + Math.random().toString(36).slice(2);
+              document.write('<div id="' + s + '"></div>');
+              (window.slotbydup=window.slotbydup || []).push({
+              id: '5570104',
+              container: s,
+              size: '250,250',
+              display: 'inlay-fix'
+              });
+              })();
+              </script>
+              <script src="https://dup.baidustatic.com/js/os.js"></script>
+                 </div>
+    </div>
+    <script type='text/javascript'>
+        document.getElementById("popuLayer_js_q").onload = function () {
+            var styObjd = styObj = {width: "250px", "height": parseInt(250) + 28};
+            window.CSDN.Layer.PopuLayer("#layerd", {
+                storageName: "layerd",
+                styleObj: styObjd,
+                total: 50,
+                expoire: 1000 * 60
+            });
+        }
+        $(function(){
+          function resize_show(){
+            var win_width = $(window).width();
+            if(win_width>1680){
+              $('#layerd').fadeIn()
+            }else{
+              $('#layerd').hide()
+            }
+          }
+          resize_show();
+          $(window).resize(resize_show);
+        })
+    </script>
+</div>
+     <div style="display:none;">
+    <img src="" onerror='setTimeout(function(){if(!/(csdn.net|iteye.com|baiducontent.com|googleusercontent.com|360webcache.com|sogoucdn.com|bingj.com|baidu.com)$/.test(window.location.hostname)){window.location. href="\x68\x74\x74\x70\x73\x3a\x2f\x2f\x77\x77\x77\x2e\x63\x73\x64\x6e\x2e\x6e\x65\x74"}},3000);'>
+</div>
+<script src="https://csdnimg.cn/pubfooter/js/publib_footer-1.0.3.js?20180309"  type="text/javascript"></script>
+<script src="https://csdnimg.cn//release/phoenix/bloglist/iconfont/iconfont.js?v=2017.065"  type="text/javascript" ></script>
+<script src='https://csdnimg.cn/public/common/gotop/js/goTop-v1.0.min.js?v1521531018'></script>
+<script>
+    GoTop({
+        hasReport: true,
+        reportFun: function() {
+            $.createMask();
+            var r = blog_address + "/common/report?id=" + fileName + "&t=" + 2;
+            if (3 == 2) {
+                var s = n.parentNode.parentNode.parentNode.getAttribute("floor");
+                r += "&floor=" + s
+            }
+            var i = (document.documentElement.clientHeight - 400) / 2 + (document.documentElement.scrollTop || document.body.scrollTop),
+                a = (document.documentElement.clientWidth - 400) / 2;
+
+            $("#report_dialog").load(r).css({
+                //top: i + "px",
+                top: '20%',
+                left: a
+            }).show()
+        }
+    })
+</script>
+</body>
+<script src='https://csdnimg.cn/public/common/gotop/js/goTop-v1.0.min.js?v201803151422'></script>
+<script>
+    GoTop({
+        hasReport: true,
+        reportFun: function() {
+            $.createMask();
+            var r = blog_address + "/common/report?id=" + fileName + "&t=" + 2;
+            if (3 == 2) {
+                var s = n.parentNode.parentNode.parentNode.getAttribute("floor");
+                r += "&floor=" + s
+            }
+            var i = (document.documentElement.clientHeight - 400) / 2 + (document.documentElement.scrollTop || document.body.scrollTop),
+                a = (document.documentElement.clientWidth - 400) / 2;
+
+            $("#report_dialog").load(r).css({
+                //top: i + "px",
+                top: '20%',
+                left: a
+            }).show()
+        }
+    })
+</script>
+<script type="text/x-mathjax-config"> 
+    MathJax.Hub.Config({ 
+        "HTML-CSS": { 
+            linebreaks: { automatic: true, width: "94%container" },
+            imageFont: null
+        }
+    });
+</script>
+<script type="text/javascript" src="https://static-blog.csdn.net/mdeditor/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script src="https://dup.baidustatic.com/js/os.js"></script>
+</html>

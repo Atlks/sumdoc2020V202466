@@ -1,0 +1,20 @@
+虽然在hibernate中有show_sql选项，但是显示出来的语句大多类似
+    select * from xxx where value=?
+    但是有时候我们需要得到完整的SQL语句，怎么办呢？使用P6SPY就可以完成这个任务
+
+    p6spy是一个开源软件，它可以跟踪任何使用jdbc的应用产生的数据库操作。特别适合于监控ejb服务器产生的 sql statements。
+    官方网址：http://www.p6spy.com/
+    目前p6spy 适用的应用服务器包括jboss, atg, orion, jonas, iplanet, weblogic, websphere, resin and tomcat.
+
+下面我介绍一下p6spy在tomcat应用程序上安装的步骤：
+（1）http://www.p6spy.com/download.html，下载zip包
+（2）解压出p6spy.jar spy.properties两个文件
+（3）将p6spy.jar 放入应用程序的WEB-INF/lib目录，将spy.properties放入WEB-INF/classes目录
+（4）修改spy.properties
+
+    realdriver  =com.mysql.jdbc.Driver  将这行前面的#去掉
+    logfile     = c:/spy.log  修改一个你需要的日志文件名
+   
+（5）修改hibernate.xml，修改connection.driver_class的值为com.p6spy.engine.spy.P6SpyDriver
+（6）重启tomcat
+（7）这样在c:/下的spy.log记录了数据库的访问情况。

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<!--[if IE 6]><html class="ie lt-ie8"><![endif]-->
+<!--[if IE 7]><html class="ie lt-ie8"><![endif]-->
+<!--[if IE 8]><html class="ie ie8"><![endif]-->
+<!--[if IE 9]><html class="ie ie9"><![endif]-->
+<!--[if !IE]><!--> <html> <!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+
+  <!-- Start of Baidu Transcode -->
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta name="applicable-device" content="pc,mobile">
+  <meta name="MobileOptimized" content="width"/>
+  <meta name="HandheldFriendly" content="true"/>
+  <meta name="mobile-agent" content="format=html5;url=https://www.jianshu.com/p/fa85d500abc8">
+  <!-- End of Baidu Transcode -->
+
+    <meta name="description"  content="转载 （http://blog.csdn.net/sudiluo_java/article/details/51858978） @ConditionalOnBean 配置了某个特定Bean@ConditionalOnMissingBean 没有配置特定的Bean@ConditionalOnClass Classpath里有指定的类@ConditionalOnMissingClass Clas...">
+
+  <meta name="360-site-verification" content="604a14b53c6b871206001285921e81d8" />
+  <meta property="wb:webmaster" content="294ec9de89e7fadb" />
+  <meta property="qc:admins" content="104102651453316562112116375" />
+  <meta property="qc:admins" content="11635613706305617" />
+  <meta property="qc:admins" content="1163561616621163056375" />
+  <meta name="google-site-verification" content="cV4-qkUJZR6gmFeajx_UyPe47GW9vY6cnCrYtCHYNh4" />
+  <meta name="google-site-verification" content="HF7lfF8YEGs1qtCE-kPml8Z469e2RHhGajy6JPVy5XI" />
+  <meta http-equiv="mobile-agent" content="format=html5; url=https://www.jianshu.com/p/fa85d500abc8">
+
+  <!-- Apple -->
+  <meta name="apple-mobile-web-app-title" content="简书">
+
+    <!--  Meta for Smart App Banner -->
+  <meta name="apple-itunes-app" content="app-id=888237539, app-argument=jianshu://notes/6848420">
+  <!-- End -->
+
+  <!--  Meta for Twitter Card -->
+  <meta content="summary" property="twitter:card">
+  <meta content="@jianshucom" property="twitter:site">
+  <meta content="Spring 各种注解备注" property="twitter:title">
+  <meta content="转载 （http://blog.csdn.net/sudiluo_java/article/details/51858978） @ConditionalOnBean 配置了某..." property="twitter:description">
+  <meta content="https://www.jianshu.com/p/fa85d500abc8" property="twitter:url">
+  <!-- End -->
+
+  <!--  Meta for OpenGraph -->
+  <meta property="fb:app_id" content="865829053512461">
+  <meta property="og:site_name" content="简书">
+  <meta property="og:title" content="Spring 各种注解备注">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.jianshu.com/p/fa85d500abc8">
+  <meta property="og:description" content="转载 （http://blog.csdn.net/sudiluo_java/article/details/51858978） @ConditionalOnBean 配置了某个特定Bean@Co...">
+  <!-- End -->
+
+  <!--  Meta for Facebook Applinks -->
+  <meta property="al:ios:url" content="jianshu://notes/6848420" />
+  <meta property="al:ios:app_store_id" content="888237539" />
+  <meta property="al:ios:app_name" content="简书" />
+
+  <meta property="al:android:url" content="jianshu://notes/6848420" />
+  <meta property="al:android:package" content="com.jianshu.haruki" />
+  <meta property="al:android:app_name" content="简书" />
+  <!-- End -->
+
+
+    <title>Spring 各种注解备注 - 简书</title>
+
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="L3KclL/lNbax1MfSMe4CPZoIYK0rPIzsTSRYy5iIrMXWMo9jwr/DqHU6vi8nCMG8+95A/VvAaqJvWsa2s39yAg==" />
+
+  <link rel="stylesheet" media="all" href="//cdn2.jianshu.io/assets/web-9cd48403b6d78c77ef9e.css" />
+  
+  <link rel="stylesheet" media="all" href="//cdn2.jianshu.io/assets/web/pages/notes/show/entry-468d5669dc55b0d2a6c2.css" />
+
+  <link href="//cdn2.jianshu.io/assets/favicons/favicon-e743bfb1821442341c3ab15bdbe804f7ad97676bd07a770ccc9483473aa76f06.ico" rel="shortcut icon" type="image/x-icon">
+      <link rel="apple-touch-icon-precomposed" href="//cdn2.jianshu.io/assets/apple-touch-icons/57-a6f1f1ee62ace44f6dc2f6a08575abd3c3b163288881c78dd8d75247682a4b27.png" sizes="57x57" />
+      <link rel="apple-touch-icon-precomposed" href="//cdn2.jianshu.io/assets/apple-touch-icons/72-fb9834bcfce738fd7b9c5e31363e79443e09a81a8e931170b58bc815387c1562.png" sizes="72x72" />
+      <link rel="apple-touch-icon-precomposed" href="//cdn2.jianshu.io/assets/apple-touch-icons/76-49d88e539ff2489475d603994988d871219141ecaa0b1a7a9a1914f4fe3182d6.png" sizes="76x76" />
+      <link rel="apple-touch-icon-precomposed" href="//cdn2.jianshu.io/assets/apple-touch-icons/114-24252fe693524ed3a9d0905e49bff3cbd0228f25a320aa09053c2ebb4955de97.png" sizes="114x114" />
+      <link rel="apple-touch-icon-precomposed" href="//cdn2.jianshu.io/assets/apple-touch-icons/120-1bb7371f5e87f93ce780a5f1a05ff1b176828ee0d1d130e768575918a2e05834.png" sizes="120x120" />
+      <link rel="apple-touch-icon-precomposed" href="//cdn2.jianshu.io/assets/apple-touch-icons/152-bf209460fc1c17bfd3e2b84c8e758bc11ca3e570fd411c3bbd84149b97453b99.png" sizes="152x152" />
+
+  <!-- Start of 访问统计 -->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?0c0e9d9b1e7d617b3e6842e85b9fb068";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+  <!-- End of 访问统计 -->
+</head>
+
+  <body lang="zh-CN" class="reader-black-font">
+    <!-- 全局顶部导航栏 -->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="width-limit">
+    <!-- 左上方 Logo -->
+    <a class="logo" href="/"><img src="//cdn2.jianshu.io/assets/web/nav-logo-4c7bbafe27adc892f3046e6978459bac.png" alt="Nav logo" /></a>
+
+    <!-- 右上角 -->
+      <!-- 未登录显示登录/注册/写文章 -->
+      <a class="btn write-btn" target="_blank" href="/writer#/">
+        <i class="iconfont ic-write"></i>写文章
+</a>      <a class="btn sign-up" href="/sign_up">注册</a>
+      <a class="btn log-in" href="/sign_in">登录</a>
+
+    <!-- 如果用户登录，显示下拉菜单 -->
+
+    <div id="view-mode-ctrl">
+    </div>
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu" aria-expanded="false">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="nav navbar-nav">
+            <li class="tab ">
+              <a href="/">
+                <span class="menu-text">首页</span><i class="iconfont ic-navigation-discover menu-icon"></i>
+</a>            </li>
+            <li class="tab ">
+              <a id="web-nav-app-download-btn" class="app-download-btn" href="/apps?utm_medium=desktop&amp;utm_source=navbar-apps"><span class="menu-text">下载App</span><i class="iconfont ic-navigation-download menu-icon"></i></a>
+            </li>
+          <li class="search">
+            <form target="_blank" action="/search" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" />
+              <input type="text" name="q" id="q" value="" autocomplete="off" placeholder="搜索" class="search-input" />
+              <a class="search-btn" href="javascript:void(null)"><i class="iconfont ic-search"></i></a>
+</form>          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+    
+<div class="note">
+  <a target="_blank" href="/apps/download?utm_source=sbc" id="web-note-ad-fixed"><span class="close">&times;</span></a>
+  <div class="post">
+    <div class="article">
+        <h1 class="title">Spring 各种注解备注</h1>
+
+        <!-- 作者区域 -->
+        <div class="author">
+          <a class="avatar" href="/u/05d6ca9e4fc7">
+            <img src="//cdn2.jianshu.io/assets/default_avatar/1-04bbeead395d74921af6a4e8214b4f61.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96" alt="96" />
+</a>          <div class="info">
+            <span class="name"><a href="/u/05d6ca9e4fc7">felix_feng</a></span>
+            <!-- 关注用户按钮 -->
+            <div props-data-classes="user-follow-button-header" data-author-follow-button></div>
+            <!-- 文章数据信息 -->
+            <div class="meta">
+              <!-- 如果文章更新时间大于发布时间，那么使用 tooltip 显示更新时间 -->
+                <span class="publish-time" data-toggle="tooltip" data-placement="bottom" title="最后编辑于 2017.12.04 07:54">2016.12.28 10:34*</span>
+              <span class="wordage">字数 2092</span>
+            </div>
+          </div>
+          <!-- 如果是当前作者，加入编辑按钮 -->
+        </div>
+
+        <!-- 文章内容 -->
+        <div data-note-content class="show-content">
+          <div class="show-content-free">
+            <p>转载 （<a href="https://link.jianshu.com?t=http://blog.csdn.net/sudiluo_java/article/details/51858978" target="_blank" rel="nofollow">http://blog.csdn.net/sudiluo_java/article/details/51858978</a>）</p>
+<p>@ConditionalOnBean 配置了某个特定Bean<br>
+@ConditionalOnMissingBean 没有配置特定的Bean<br>
+@ConditionalOnClass Classpath里有指定的类<br>
+@ConditionalOnMissingClass Classpath里缺少指定的类<br>
+@ConditionalOnExpression 给定的Spring Expression Language（SpEL）表达式计算结果为true<br>
+@ConditionalOnJava Java的版本匹配特定值或者一个范围值<br>
+@ConditionalOnJndi 参数中给定的JNDI位置必须存在一个，如果没有给参数，则要有JNDI<br>
+InitialContext<br>
+@ConditionalOnProperty 指定的配置属性要有一个明确的值<br>
+@ConditionalOnResource Classpath里有指定的资源<br>
+@ConditionalOnWebApplication 这是一个Web应用程序<br>
+@ConditionalOnNotWebApplication 这不是一个Web应用程序</p>
+<p><strong>声明Bean的注解</strong>:<br>
+@Component : 组件,没有明确的角色<br>
+@Service : 在业务逻辑层(service层)使用<br>
+@Repository : 在数据访问层(dao层)使用.<br>
+@Controller : 在展现层(MVC--SpringMVC)使用</p>
+<p><strong>注入Bean的注解:</strong><br>
+@Aautowired : Spring提供的注解.<br>
+@Inject : JSR-330提供的注解<br>
+@Resource : JSR-250提供的注解<br>
+@Primary 注入时优先使用此注解下的实现类，对应org.springframework.beans.factory.NoUniqueBeanDefinitionException异常</p>
+<p><strong>配置文件的注解:</strong><br>
+@Configuration : 声明当前类是个配置类,相当于一个Spring配置的xml文件.<br>
+@ComponentScan (cn.test.demo): 自动扫描包名下所有使用 @Component @Service  @Repository @Controller 的类,并注册为Bean<br>
+@WiselyConfiguration : 组合注解 可以替代 @Configuration和@ComponentScan<br>
+@Bean : 注解在方法上,声明当前方法的返回值为一个Bean.<br>
+@Bean(initMethod="aa",destroyMethod="bb")--&gt; 指定 aa和bb方法在构造之后.Bean销毁之前执行.</p>
+<p><strong>AOP切面编程注解:</strong><br>
+@Aspect : 声明这是一个切面<br>
+@After @Before. @Around 定义切面,可以直接将拦截规则(切入点 PointCut)作为参数<br>
+@PointCut : 专门定义拦截规则 然后在 @After @Before. @Around 中调用<br>
+@Transcational : 事务处理<br>
+@Cacheable : 数据缓存<br>
+@EnableAaspectJAutoProxy : 开启Spring 对 这个切面(Aspect )的支持<br>
+@Target (ElementType.TYPE):元注解,用来指定注解修饰类的那个成员 --&gt;指定拦截规则<br>
+@Retention(RetentionPolicy.RUNTIME)<br>
+---&gt;当定义的注解的@Retention为RUNTIME时，才能够通过运行时的反射机制来处理注解.--&gt;指定拦截规则</p>
+<p><strong>Spring 常用配置:</strong><br>
+@import :导入配置类<br>
+@Scope : 新建Bean的实例 @Scope("prototype") 声明Scope 为 Prototype<br>
+@Value : 属性注入<br>
+@Value ("我爱你")  --&gt; 普通字符串注入<br>
+@Value ("#{systemProperties['<a href="https://link.jianshu.com?t=http://os.name'%5D" target="_blank" rel="nofollow">os.name']</a>}") --&gt;注入操作系统属性<br>
+@Value ("#{ T (java.lang.Math).random()  * 100.0 }") --&gt; 注入表达式结果<br>
+@Value ("#{demoService.another}") --&gt; 注入其他Bean属性<br>
+@Value ( "<a href="https://link.jianshu.com?t=classpath:com/wisely/highlight_spring4/ch2/el/test.txt" target="_blank" rel="nofollow">classpath:com/wisely/highlight_spring4/ch2/el/test.txt</a>" ) --&gt; 注入文件资源<br>
+@Value ("<a href="https://link.jianshu.com?t=http://www.baidu.com" target="_blank" rel="nofollow">http://www.baidu.com</a>")--&gt;注入网址资源<br>
+@Value ("${<a href="https://link.jianshu.com?t=http://book.name" target="_blank" rel="nofollow">book.name</a>}" ) --&gt; 注入配置文件  注意: 使用的是$ 而不是 #</p>
+<p>@PostConstruct : 在构造函数执行完之后执行<br>
+@PreDestroy  : 在 Bean 销毁之前执行<br>
+@ActiveProfiles : 用来声明活动的 profile<br>
+@profile: 为不同环境下使用不同的配置提供了支持<br>
+@Profile("dev") .......对方法名为 dev-xxxx的方法提供实例化Bean</p>
+<p>@EnableAsync : 开启异步任务的支持(多线程)<br>
+@Asyns : 声明这是一个异步任务,可以在类级别 和方法级别声明.<br>
+@EnableScheduling : 开启对计划任务的支持(定时器)<br>
+@Scheduled : 声明这是一个计划任务 支持多种计划任务,包含 cron. fixDelay fixRate<br>
+@Scheduled (dixedDelay = 5000) 通过注解 定时更新</p>
+<p>@Conditional : 条件注解,根据满足某一特定条件创建一个特定的Bean<br>
+@ContextConfiguration : 加载配置文件<br>
+@ContextConfiguration(classes = {TestConfig.class})<br>
+@ContextConfiguration用来加载ApplicationContext<br>
+classes属性用来加载配置类</p>
+<p>@WebAppCofiguration : 指定加载 ApplicationContext是一个WebApplicationContext</p>
+<p><em><em>@Enable</em>注解:</em>*<br>
+@EnableAsync : 开启异步任务的支持(多线程)<br>
+@EnableScheduling : 开启对计划任务的支持(定时器)<br>
+@EnableWebMVC : 开启对Web MVC 的配置支持<br>
+@EnableAaspectJAutoProxy : 开启Spring 对 这个切面(Aspect )的支持<br>
+@EnableConfigurationProperties 开启对@ConfigurationProperties注解配置Bean的支持<br>
+@EnableJpaRepositories : 开启对Spring Data JAP Repository 的支持<br>
+@EnableTransactionManagement 开启对注解式事物的支持<br>
+@EnableCaching开启注解是缓存的支持.<br>
+@EnableDiscoveryClient 让服务发现服务器,使用服务器.Spring cloud 实现服务发现<br>
+@EnableEurekaServer 注册服务器 spring cloud 实现服务注册@<br>
+@EnableScheduling 让spring可以进行任务调度,功能类似于spring.xml文件中的命名空间&lt;task:*&gt;<br>
+@EnableCaching 开启Cache缓存支持;</p>
+<p><strong>SpringMVC 常用注解:</strong><br>
+@Controller : 注解在类上 声明这个类是springmvc里的Controller,将其声明为一个spring的Bean.<br>
+@RequestMapping :可以注解在类上和方法上 映射WEB请求(访问路径和参数)<br>
+@RequestMapping(value= "/convert",produces+{"application/x-wisely"}) 设置访问URL 返回值类型</p>
+<p>@ResponseBody : 支持将返回值放入response体内 而不是返回一个页面(返回的是一个组数据)<br>
+@RequestBody : 允许request的参数在request体中,而不是直接连接在地址后面 次注解放置在参数前<br>
+@Path Variable : 用来接收路径参数 如/test/001,001为参数,次注解放置在参数前<br>
+@RestController : @Controller + @ResponseBody 组合注解<br>
+@ControllerAdvice : 通过@ControllerAdvice可以将对已控制器的全局配置放置在同一个位置<br>
+@ExceptionHandler : 用于全局处理控制器的异常<br>
+@ExceptionHandier(value=Exception.class) --&gt;通过value属性可过滤拦截器条件,拦截所有的异常</p>
+<p>@InitBinder : 用来设置WebDataBinder , WebDataBinder用来自动绑定前台请求参数到Model中.<br>
+@ModelAttrbuute : 绑定键值对到Model中,<br>
+@RunWith : 运行器<br>
+@RunWith(JUnit4.class)就是指用JUnit4来运行<br>
+@RunWith(SpringJUnit4ClassRunner.class),让测试运行于Spring测试环境<br>
+@RunWith(Suite.class)的话就是一套测试集合，</p>
+<p>@WebAppConfiguration("src/main/resources") : 注解在类上,用来声明加载的ApplicationContex 是一个WebApplicationContext ,它的属性指定的是Web资源的位置,默认为 src/main/webapp ,自定义修改为 resource</p>
+<p>@Before : 在 xxx 前初始化</p>
+<p><strong>Spring Boot 注解</strong>:<br>
+@SpringBootApplication : 是Spring Boot 项目的核心注解 主要目的是开启自动配置<br>
+@SpringBootApplication注解是一个组合注解,主要组合了@Configuration .+@EnableAutoConfiguration.+@ComponentScan</p>
+<p>@Value : 属性注入,读取properties或者 Yml 文件中的属性<br>
+@ConfigurationProperties : 将properties属性和一个Bean及其属性关联,从而实现类型安全的配置<br>
+@ConfigurationProperties(prefix = "author",locations = {"<a href="https://link.jianshu.com?t=classpath:config/author.properties" target="_blank" rel="nofollow">classpath:config/author.properties</a>"})<br>
+通过@ConfigurationProperties加载配置,通过prefix属性指定配置前缀,通过location指定配置文件位置</p>
+<p>@EnableAutoConfiguration 注解:作用在于让 Spring Boot   根据应用所声明的依赖来对 Spring 框架进行自动配置        这个注解告诉Spring Boot根据添加的jar依赖猜测你想如何配置Spring。由于spring-boot-starter-web<br>
+添加了Tomcat和Spring MVC，所以auto-configuration将假定你正在开发一个web应用并相应地对Spring进行设置。<br>
+@ Configuration 注解，以明确指出该类是 Bean 配置的信息源<br>
+@ComponentScan 注解会告知Spring扫描指定的包来初始化Spring Bean这能够确保我们声明的Bean能够被发现。<br>
+@ImportResource 注解加载XML配置文件<br>
+@EnableAutoConfiguration (exclude={xxxx.class}) 禁用特定的自动配置<br>
+@SpringBootApplication   注解等价于以默认属性使用 @Configuration，@EnableAutoConfiguration和     @ComponentScan。</p>
+<p><strong>@SuppressWarnings注解</strong><br>
+@SuppressWarnings("unchecked")<br>
+告诉编译器忽略 unchecked 警告信息,如使用 list ArrayList等未进行参数化产生的警告信息</p>
+<p>@SuppressWarnings("serial")<br>
+如果编译器出现这样的警告信息: The serializable class WmailCalendar does not declare a static final serialVersionUID field of type long     使用这个注释将警告信息去掉。</p>
+<p>@SuppressWarnings("deprecation")<br>
+如果使用了使用@Deprecated注释的方法，编译器将出现警告信息。使用这个注释将警告信息去掉。</p>
+<p>@SuppressWarnings("unchecked", "deprecation")<br>
+告诉编译器同时忽略unchecked和deprecation的警告信息。</p>
+<p>@SuppressWarnings(value={"unchecked", "deprecation"})<br>
+等同于@SuppressWarnings("unchecked", "deprecation")</p>
+<p><strong>案例</strong></p>
+<p>@Entity<br>
+@Table(name = "S_PRODUCEINFO" )<br>
+@Data<br>
+@NoArgsConstructor<br>
+@AllArgsConstructor<br>
+<strong>public</strong> <strong>class</strong> ProduceInfoEntity {</p>
+<pre><code>@Id
+@Column(name = "app_name", unique = **true**, length = 50)
+**private** String name;
+
+@Column(name = "status")
+@Enumerated(EnumType. ***STRING***)
+**private** ProduceStatus status;
+
+@Column(name = "create_time", updatable = **false**)
+@Temporal(TemporalType. ***TIMESTAMP***)
+@CreationTimestamp
+**private** Date createTime;
+
+@Column(name = "update_time")
+@Temporal(TemporalType. ***TIMESTAMP***)
+@UpdateTimestamp
+**private** Date updateTime;
+</code></pre>
+<hr>
+<p>@Entity : 映射数据库实体类<br>
+@Table(name = "S_PRODUCEINFO" ) : 表名为 "S_PRODUCEINFO"<br>
+@Id : 声明主键ID<br>
+@Column(name = "app_name", unique = <strong>true</strong>, length = 50) :对应数据库字段,属性<br>
+@Enumerated(EnumType. <strong><em>STRING</em></strong>) : 采用枚举值类型和数据库字段进行交互<br>
+@Temporal : 时间格式 映射数据库会得到规定时间格式的日期<br>
+@Enumerted(EnumType.STRING)  HH:MM:SS 格式的日期<br>
+@Enumerted(EnumType.DATE) 获取年月日  yyyy-MM-dd<br>
+@Enumerted(EnumType.TIME) 获取时分秒  HH:MM:SS<br>
+-------Mr.Ge提供以上资源</p>
+
+          </div>
+        </div>
+    </div>
+
+    <!-- 连载目录项 -->
+
+    <!-- 打赏文章、购买文章、购买连载 -->
+        <div data-vcomp="free-reward-panel"></div>
+
+      <div class="show-foot">
+        <a class="notebook" href="/nb/7462669">
+          <i class="iconfont ic-search-notebook"></i>
+          <span>spring boot学习笔记</span>
+</a>        <div class="copyright" data-toggle="tooltip" data-html="true" data-original-title="转载请联系作者获得授权，并标注“简书作者”。">
+          © 著作权归作者所有
+        </div>
+        <div class="modal-wrap" data-report-note>
+          <a id="report-modal">举报文章</a>
+        </div>
+      </div>
+
+      <!-- 文章底部作者信息 -->
+        <div class="follow-detail">
+          <div class="info">
+            <a class="avatar" href="/u/05d6ca9e4fc7">
+              <img src="//cdn2.jianshu.io/assets/default_avatar/1-04bbeead395d74921af6a4e8214b4f61.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/96/h/96" alt="96" />
+</a>            <div props-data-classes="user-follow-button-footer" data-author-follow-button></div>
+            <a class="title" href="/u/05d6ca9e4fc7">felix_feng</a>
+            
+          </div>
+        </div>
+
+    <div class="meta-bottom">
+      <div class="btn like-group"></div>
+      <div class="share-group">
+        <a class="share-circle" data-action="weixin-share" data-toggle="tooltip" data-original-title="分享到微信">
+          <i class="iconfont ic-wechat"></i>
+        </a>
+        <a class="share-circle" data-action="weibo-share" data-toggle="tooltip" href="javascript:void((function(s,d,e,r,l,p,t,z,c){var%20f=&#39;http://v.t.sina.com.cn/share/share.php?appkey=1881139527&#39;,u=z||d.location,p=[&#39;&amp;url=&#39;,e(u),&#39;&amp;title=&#39;,e(t||d.title),&#39;&amp;source=&#39;,e(r),&#39;&amp;sourceUrl=&#39;,e(l),&#39;&amp;content=&#39;,c||&#39;gb2312&#39;,&#39;&amp;pic=&#39;,e(p||&#39;&#39;)].join(&#39;&#39;);function%20a(){if(!window.open([f,p].join(&#39;&#39;),&#39;mb&#39;,[&#39;toolbar=0,status=0,resizable=1,width=440,height=430,left=&#39;,(s.width-440)/2,&#39;,top=&#39;,(s.height-430)/2].join(&#39;&#39;)))u.href=[f,p].join(&#39;&#39;);};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else%20a();})(screen,document,encodeURIComponent,&#39;&#39;,&#39;&#39;,&#39;&#39;, &#39;推荐 felix_feng 的文章《Spring 各种注解备注》（ 分享自 @简书 ）&#39;,&#39;https://www.jianshu.com/p/fa85d500abc8?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=weibo&#39;,&#39;页面编码gb2312|utf-8默认gb2312&#39;));" data-original-title="分享到微博">
+          <i class="iconfont ic-weibo"></i>
+        </a>
+          <a class="share-circle" data-toggle="tooltip" href="http://cwb.assets.jianshu.io/notes/images/6848420/weibo/image_ac13b21c4808.jpg" target="_blank" data-original-title="下载长微博图片">
+            <i class="iconfont ic-picture"></i>
+          </a>
+        <a class="share-circle more-share" tabindex="0" data-toggle="popover" data-placement="top" data-html="true" data-trigger="focus" href="javascript:void(0);" data-content='
+          <ul class="share-list">
+            <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=&#39;+e(&#39;https://www.jianshu.com/p/fa85d500abc8?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=qzone&#39;)+&#39;&amp;title=&#39;+e(&#39;推荐 felix_feng 的文章《Spring 各种注解备注》&#39;),x=function(){if(!window.open(r,&#39;qzone&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();"><i class="social-icon-sprite social-icon-zone"></i><span>分享到QQ空间</span></a></li>
+            <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://twitter.com/share?url=&#39;+e(&#39;https://www.jianshu.com/p/fa85d500abc8?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=twitter&#39;)+&#39;&amp;text=&#39;+e(&#39;推荐 felix_feng 的文章《Spring 各种注解备注》（ 分享自 @jianshucom ）&#39;)+&#39;&amp;related=&#39;+e(&#39;jianshucom&#39;),x=function(){if(!window.open(r,&#39;twitter&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=600,height=600&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();"><i class="social-icon-sprite social-icon-twitter"></i><span>分享到Twitter</span></a></li>
+            <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://www.facebook.com/dialog/share?app_id=483126645039390&amp;display=popup&amp;href=https://www.jianshu.com/p/fa85d500abc8?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=facebook&#39;,x=function(){if(!window.open(r,&#39;facebook&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();"><i class="social-icon-sprite social-icon-facebook"></i><span>分享到Facebook</span></a></li>
+            <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,r=&#39;https://plus.google.com/share?url=&#39;+e(&#39;https://www.jianshu.com/p/fa85d500abc8?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=google_plus&#39;),x=function(){if(!window.open(r,&#39;google_plus&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})();"><i class="social-icon-sprite social-icon-google"></i><span>分享到Google+</span></a></li>
+            <li><a href="javascript:void(function(){var d=document,e=encodeURIComponent,s1=window.getSelection,s2=d.getSelection,s3=d.selection,s=s1?s1():s2?s2():s3?s3.createRange().text:&#39;&#39;,r=&#39;http://www.douban.com/recommend/?url=&#39;+e(&#39;https://www.jianshu.com/p/fa85d500abc8?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=reader_share&amp;utm_source=douban&#39;)+&#39;&amp;title=&#39;+e(&#39;Spring 各种注解备注&#39;)+&#39;&amp;sel=&#39;+e(s)+&#39;&amp;v=1&#39;,x=function(){if(!window.open(r,&#39;douban&#39;,&#39;toolbar=0,resizable=1,scrollbars=yes,status=1,width=450,height=330&#39;))location.href=r+&#39;&amp;r=1&#39;};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})()"><i class="social-icon-sprite social-icon-douban"></i><span>分享到豆瓣</span></a></li>
+          </ul>
+        '>更多分享</a>
+      </div>
+    </div>
+      <a id="web-note-ad-1" target="_blank" href="/apps/download?utm_source=nbc"><img src="//cdn2.jianshu.io/assets/web/web-note-ad-1-10f08e404d3887d2d45a4bc8f1831403.png" alt="Web note ad 1" /></a>
+    <div id="vue_comment"></div>
+  </div>
+
+  <div class="vue-side-tool" props-data-props-show-qr-code="0"></div>
+</div>
+<div class="note-bottom">
+  <div class="js-included-collections"></div>
+  <div data-vcomp="recommended-notes" data-lazy="1.5" data-note-id="6848420"></div>
+  <!-- 相关文章 -->
+  <div class="seo-recommended-notes">
+
+        <div class="note have-img">
+          <a class="cover" target="_blank" href="/p/46fd0faecac1?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <img src="//upload-images.jianshu.io/upload_images/7328262-54f7992145380c10.png?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240" alt="240" />
+</a>          <a class="title" target="_blank" href="/p/46fd0faecac1?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">Spring Cloud</a>
+          <p class="description">Spring Cloud为开发人员提供了快速构建分布式系统中一些常见模式的工具（例如配置管理，服务发现，断路器，智能路由，微代理，控制总线）。分布式系统的协调导致了样板模式, 使用Spring Cloud开发人员可以快速地支持实现这些模式的服务和应用程序。他们将在任何分布式...</p>
+          <a class="author" target="_blank" href="/u/d90908cb0d85?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//cdn2.jianshu.io/assets/default_avatar/2-9636b13945b9ccf345bc98d0d81074eb.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">卡卡罗2017</span>
+</a>        </div>
+
+        <div class="note ">
+                    <a class="title" target="_blank" href="/p/67a0e41dfe05?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">Spring boot参考指南</a>
+          <p class="description">Spring Boot 参考指南 介绍 转载自:https://www.gitbook.com/book/qbgbook/spring-boot-reference-guide-zh/details带目录浏览地址:http://www.maoyupeng.com/sprin...</p>
+          <a class="author" target="_blank" href="/u/d3ea915e1e0f?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//upload.jianshu.io/users/upload_avatars/1687958/9b5b9b6de8b7.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">毛宇鹏</span>
+</a>        </div>
+
+        <div class="note ">
+                    <a class="title" target="_blank" href="/p/1e89c6ba506d?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">Spring 5.0.0框架介绍_中英文对照_3.4</a>
+          <p class="description">文章作者：Tyan博客：noahsnail.com 3.4 Dependencies A typical enterprise application does not consist of a single object (or bean in the Spring pa...</p>
+          <a class="author" target="_blank" href="/u/7731e83f3a4e?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//upload.jianshu.io/users/upload_avatars/3232548/242eb25c-3001-4411-a856-74b33312fdff.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">SnailTyan</span>
+</a>        </div>
+
+        <div class="note ">
+                    <a class="title" target="_blank" href="/p/b82ceb084adf?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">Spring中常见面试题</a>
+          <p class="description">什么是Spring Spring是一个开源的Java EE开发框架。Spring框架的核心功能可以应用在任何Java应用程序中，但对Java EE平台上的Web应用程序有更好的扩展性。Spring框架的目标是使得Java EE应用程序的开发更加简捷，通过使用POJO为基础的...</p>
+          <a class="author" target="_blank" href="/u/1544630c98c8?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//cdn2.jianshu.io/assets/default_avatar/8-a356878e44b45ab268a3b0bbaaadeeb7.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">jemmm</span>
+</a>        </div>
+
+        <div class="note ">
+                    <a class="title" target="_blank" href="/p/cd64da7d26e3?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">spring 知识点整理</a>
+          <p class="description">1.什么是Spring？ Spring是一个开源的Java EE开发框架。Spring框架的核心功能可以应用在任何Java应用程序中，但对Java EE平台上的Web应用程序有更好的扩展性。Spring框架的目标是使得Java EE应用程序的开发更加简捷，通过使用POJO为...</p>
+          <a class="author" target="_blank" href="/u/df21659521b8?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//upload.jianshu.io/users/upload_avatars/4980622/70505893-b04c-436d-8b4c-d3c7d2edd32a.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">羽白yubai</span>
+</a>        </div>
+
+        <div class="note have-img">
+          <a class="cover" target="_blank" href="/p/90eeaa867cc0?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <img src="//upload-images.jianshu.io/upload_images/4217471-bc8eda96e8516476.png?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240" alt="240" />
+</a>          <a class="title" target="_blank" href="/p/90eeaa867cc0?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">当时只道是寻常</a>
+          <p class="description">对于生活在北方的我来说，每年春天开始的时候，心里总是很开心，沉睡了一个冬天的城市醒来了，冰雪消融，绿叶吐芽，万物都充满了生机，世界仿佛又活过来一样。在这美丽的季节，我开始了新的生活。 前几天读到一句话，我们的幸福往往不是来自我们强大的地方，而是来自我们的微弱之处得到了弥补。...</p>
+          <a class="author" target="_blank" href="/u/e136c5391ee1?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//upload.jianshu.io/users/upload_avatars/4217471/c3360fc1ab8d.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">立夏暖暖</span>
+</a>        </div>
+
+        <div class="note have-img">
+          <a class="cover" target="_blank" href="/p/580039c30943?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <img src="//upload-images.jianshu.io/upload_images/2928675-aa83d413cbcf3414.JPG?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240" alt="240" />
+</a>          <a class="title" target="_blank" href="/p/580039c30943?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">1中秋随笔</a>
+          <p class="description">每年的八月十五日，是记忆最深刻的中秋节。说深刻，绝非因为要团圆，吃月饼这个习俗上面。重要的是，中秋是收获的季节。印象里不是特别深刻，但记忆中的假期绝非现在说的寒暑假和中秋节什么的。主要应该是收麦子和收玉米花生的时候放假。 乖一些的孩子可以帮家里看晾晒的麦子或者玉米花生，而合...</p>
+          <a class="author" target="_blank" href="/u/6de5fba1c2a1?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//upload.jianshu.io/users/upload_avatars/2928675/60c9df8fde7a.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">Bushizhang</span>
+</a>        </div>
+
+        <div class="note have-img">
+          <a class="cover" target="_blank" href="/p/30fe040fa084?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <img src="//upload-images.jianshu.io/upload_images/7964308-f3811abc02453360.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240" alt="240" />
+</a>          <a class="title" target="_blank" href="/p/30fe040fa084?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">本周统计员总结</a>
+          <p class="description">大家好，我是9组的统计员，时间过的飞快，我们的孵化营差不多还有一个星期就完美的结束了，本周我们的小伙伴们都表现的不错，特别是依之梦盈小姐姐，她明天的输出以及每个星期星期四的工具制作也是特别的快，一般在12点以后她的签到和简书输出就已经完成了，我们应该向她学习这种精神。在这，...</p>
+          <a class="author" target="_blank" href="/u/ccf7c77c0298?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//upload.jianshu.io/users/upload_avatars/7964308/70b438c9-991a-48d9-b98a-440d061871c2.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">你若未央</span>
+</a>        </div>
+
+        <div class="note have-img">
+          <a class="cover" target="_blank" href="/p/0a16a66c5431?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <img src="//upload-images.jianshu.io/upload_images/8653131-5ddeead30c5629f4.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240" alt="240" />
+</a>          <a class="title" target="_blank" href="/p/0a16a66c5431?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">企业绩效管理是应该“单独考核”还是“系统平衡”?</a>
+          <p class="description">本文转自绩效红官网www.jxh01.com 很多企业在施行绩效管理都会遇到这样一个问题，企业绩效考核到底是单独考核呢还是采取系统平衡的方式呢?其实绩效红认为：单独考核和系统平衡各有各的优势，企业要结合自己的实际情况来确定采取怎样的绩效考核方式。 企业针对不同部门进行“单独...</p>
+          <a class="author" target="_blank" href="/u/7e2d3c9ba059?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//upload.jianshu.io/users/upload_avatars/8653131/ce05efff-f6e6-4a99-8267-83e46c68a7b0.png?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">绩效红</span>
+</a>        </div>
+
+        <div class="note have-img">
+          <a class="cover" target="_blank" href="/p/8fc8c9d59a55?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <img src="//upload-images.jianshu.io/upload_images/3997650-c1946e01a3f4c8f4.jpg?imageMogr2/auto-orient/strip|imageView2/1/w/300/h/240" alt="240" />
+</a>          <a class="title" target="_blank" href="/p/8fc8c9d59a55?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">翡翠玉心玫瑰、花心大萝卜</a>
+          <p class="description"></p>
+          <a class="author" target="_blank" href="/u/479d585e5bee?utm_campaign=maleskine&amp;utm_content=user&amp;utm_medium=seo_notes&amp;utm_source=recommendation">
+            <div class="avatar">
+              <img src="//upload.jianshu.io/users/upload_avatars/3997650/118bbba233b1.jpeg?imageMogr2/auto-orient/strip|imageView2/1/w/48/h/48" alt="48" />
+            </div>
+            <span class="name">房顶一弯弦月</span>
+</a>        </div>
+  </div>
+</div>
+
+    <script type="application/json" data-name="page-data">{"user_signed_in":false,"locale":"zh-CN","os":"windows","read_mode":"day","read_font":"font2","note_show":{"is_martin_user":false,"is_author":false,"is_following_author":false,"is_liked_note":false,"follow_state":0,"uuid":"7ecbd217-5bea-4cce-bb6d-0869d1c34c32"},"note":{"id":6848420,"slug":"fa85d500abc8","user_id":2425811,"notebook_id":7462669,"commentable":true,"likes_count":6,"views_count":956,"public_wordage":2092,"comments_count":0,"total_rewards_count":0,"is_author":false,"paid_type":"free","paid_content_accessible":false,"author":{"nickname":"felix_feng","total_wordage":38075,"followers_count":11,"total_likes_count":29}}}</script>
+    
+    <script src="//cdn2.jianshu.io/assets/babel-polyfill-2bec152a537b07763933.js" crossorigin="anonymous"></script>
+    <script src="//cdn2.jianshu.io/assets/web-base-4f40bf08a1ad02de6c07.js" crossorigin="anonymous"></script>
+<script src="//cdn2.jianshu.io/assets/web-96d9f21c1450c9bf0a08.js" crossorigin="anonymous"></script>
+    
+    <script src="//cdn2.jianshu.io/assets/web/pages/notes/show/entry-b99d51d01942cd465175.js" crossorigin="anonymous"></script>
+    <script>
+  (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+          bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      }
+      else {
+          bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+  </body>
+</html>

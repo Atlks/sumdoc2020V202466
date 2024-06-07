@@ -1,0 +1,100 @@
+package com.attilax.dbutil;
+
+ 
+
+import org.apache.commons.io.FileUtils;
+
+import com.attilax.date.DateUtil;
+import com.attilax.io.pathx;
+
+public class partiTableUtil {
+	
+	public static void main(String[] args) {
+		
+		
+		//partiTableUtil.createPartByYearMonth(2017,1,12,"vaf1_p@month@","vaf1");
+		
+		droptable(" drop table vaf1_p",1,12);
+		
+		deattach("vaf1");
+		
+		addPriKey("vaf1_p");
+		
+		//addIndex("vaf1_p","		 CREATE INDEX \"index_vaf1_bda01_p@p@\" ON @tab@ USING btree (\"bda01\"); CREATE INDEX \"index_vaf1_vaf01_p@p@\" ON @tab@ USING btree (\"vaa01\"); ");
+		
+		
+		addIndex("vaf1_p", FileUtils.readFileToString(pathx.classPath(partiTableUtil.class)+"/index.txt"));
+		
+	}
+
+	private static void addIndex(String tab, String idxTmplt) {
+		 for(int i=1;i<=12;i++)
+		 {
+			// String x = "alter table @tab@ ADD PRIMARY KEY(\"vaf01\");  ";
+		String	 idxTmplt2=idxTmplt.replaceAll("@tab@", tab+String.valueOf(i)); 
+		//idxTmplt=idxTmplt.replaceAll("@pt@", String.valueOf(i));
+		
+		idxTmplt2=idxTmplt2.replaceAll("@p@", String.valueOf(i));
+			 
+			 
+		//	 CREATE INDEX "index_vaf1_bda01" ON "public"."vaf1_ori" USING btree ("bda01"); CREATE INDEX "index_vaf1_vaf01" ON "public"."vaf1_ori" USING btree ("vaa01");
+			System.out.println(idxTmplt2);
+		 }
+		
+	}
+
+	private static void addPriKey(String string) {
+		
+		 for(int i=1;i<=12;i++)
+		 {
+			 String x = "alter table @tab@ ADD PRIMARY KEY(\"vaf01\");  ";
+			 x=x.replaceAll("@tab@", string+String.valueOf(i)); x=x.replaceAll("@pt@", String.valueOf(i));
+			 
+			 
+		//	 CREATE INDEX "index_vaf1_bda01" ON "public"."vaf1_ori" USING btree ("bda01"); CREATE INDEX "index_vaf1_vaf01" ON "public"."vaf1_ori" USING btree ("vaa01");
+			System.out.println(x);
+		 }
+		 
+		
+	}
+
+	private static void deattach(String string) {
+		 for(int i=1;i<=12;i++)
+		 {
+			 String x = "alter table @tab@ DETACH PARTITION @tab@_p@pt@;";
+			 x=x.replaceAll("@tab@", string); x=x.replaceAll("@pt@", String.valueOf(i));
+			System.out.println(x);
+		 }
+		
+	}
+
+	private static void droptable(String string, int i, int j) {
+		for(int m=i;m<j;m++)
+		{
+			System.out.println(" drop table vaf1_p"+String.valueOf(m)+";");
+		}
+		
+	}
+
+	private static void createPartByYearMonth(int year, int month_start, int month_end, String partTabNamePrefix, String tab) {
+		
+	
+		
+		for(int curmonth=month_start;curmonth<month_end;curmonth++)
+		{
+			String crtratPartTableTmplt="CREATE TABLE @tab@ PARTITION OF @tab_maintab@ FOR VALUES FROM ('@startdate@') TO ('@endtdate@');";
+			crtratPartTableTmplt=crtratPartTableTmplt.replaceAll("@tab@", partTabNamePrefix);
+			crtratPartTableTmplt=crtratPartTableTmplt.replaceAll("@month@", String.valueOf(curmonth));
+			crtratPartTableTmplt=crtratPartTableTmplt.replaceAll("@tab_maintab@", tab);
+			String startdate=DateUtil.getdate_monthstart(year,curmonth );
+			String endtdate=DateUtil.getdate_monthstart(year,curmonth+1 );
+			crtratPartTableTmplt=crtratPartTableTmplt.replaceAll("@startdate@", startdate);
+			crtratPartTableTmplt=crtratPartTableTmplt.replaceAll("@endtdate@", endtdate);
+			System.out.println( crtratPartTableTmplt  );
+			
+		}
+		
+		
+	}
+
+}

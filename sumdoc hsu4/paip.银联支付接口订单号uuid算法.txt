@@ -1,0 +1,48 @@
+paip.银联支付接口订单号uuid算法
+
+这几天给项目接了个银联支付接口,接口订单号uuid算法按文档说明如下:
+
+在银联支付时，商户提交给银联支付系统的订单号(长度为16 个字节的数字串)前4是自定义的，商户可以根据商户业务的不同，头四位不同。例如ET业务为4000，邮件业务为5000，实物销售业务为6000等。此外订单号的5-9位必须为商户号MerId的最后5位。
+
+也就是说，共16位，其中5位被占用..有效利用的只能是11位了。。
+
+而我的项目订单号格式是yyyyMMdd_HHmmssfff,比如20120816_1918011234
+
+长度达19位，看来在传参时需要转为银联格式的订单号,因为时间要精确到MS，所以最短也是yyMMddHHMMssfff格式，需要15位..
+
+看来只能使用相对ms数了。我先定一个基准时间，我用2012-01-01 00:00:00.000，然后现在时间减去这个基准时间,得到毫秒总数,先用11位9算了下，可以得到了最大载止时间是 2015-03-03 09:46:39 ,可以循环使用..到头再从0开始..
+
+然后把这11订单号分成两部分，中间插入商户号MerId的最后5位。。就拼成了符合银联接口标准的订单号了..
+
+ 
+
+------得到11位订单号，精确到MS..
+   // from 2012.1.1    
+        public static string getUUID11(string uuid)
+        {
+//20120816_1918011234
+            uuid = uuid.Substring(0, 18);  
+            DateTime dt1 = new DateTime(2012, 1, 1);
+            DateTime dt2 = DateTime.ParseExact(uuid, "yyyyMMdd_HHmmssfff", null);
+        //    dt2.Ticks = "634807414811230000";
+            TimeSpan ts = dt2 - dt1;
+            string ms = ts.TotalMilliseconds.ToString();
+            ms = pad0left(ms, 11);
+            return ms;
+        }
+
+
+
+//计算最大最大载止时间 ，
+    private static string test2( )
+        {
+            string TotalMilliseconds = "99999999999";
+            long ticks =long.Parse( TotalMilliseconds) * 10000;
+            TimeSpan ts = new TimeSpan(ticks);
+            DateTime dt1 = new DateTime(2012, 1, 1);
+
+            DateTime dt2 = dt1.Add(ts);    //{2015-03-03 09:46:39
+
+           
+            return "";
+        }

@@ -1,0 +1,44 @@
+paip.日期时间操作以及时间戳uapi php java python 总结
+
+///uapi
+Date 函数 | Day 函数 | Hour 函数 | Minute 函数 | Month 函数 | Second 函数 | Time 函数 | Weekday 函数 | Year 函数
+timestamp()   返回当前的 Unix 时间戳
+date -- 格式化一个本地时间／日期
+
+作者Attilax 艾龙， EMAIL:1466519819@qq.com
+来源：attilax的专栏
+地址：http://blog.csdn.net/attilax
+
+////////php
+目录
+checkdate -- 验证一个格里高里日期
+date_default_timezone_get -- 取得一个脚本中所有日期时间函数所使用的默认时区
+date_default_timezone_set -- 设定用于一个脚本中所有日期时间函数的默认时区
+date_sunrise -- 返回给定的日期与地点的日出时间
+date_sunset -- 返回给定的日期与地点的日落时间
+date -- 格式化一个本地时间／日期
+getdate -- 取得日期／时间信息
+gettimeofday -- 取得当前时间
+gmdate -- 格式化一个 GMT/UTC 日期／时间
+gmmktime -- 取得 GMT 日期的 UNIX 时间戳
+gmstrftime --  根据区域设置格式化 GMT/UTC 时间／日期 
+idate -- 将本地时间日期格式化为整数
+localtime -- 取得本地时间
+microtime -- 返回当前 Unix 时间戳和微秒数
+mktime -- 取得一个日期的 Unix 时间戳
+strftime -- 根据区域设置格式化本地时间／日期
+strptime -- 解析由 strftime() 生成的日期／时间
+strtotime -- 将任何英文文本的日期时间描述解析为 Unix 时间戳
+time -- 返回当前的 Unix 时间戳
+
+//////////python
+1)例如格式2012-07-31 00:01:18，根据该时间计算时间戳：
+
+将"2012-03-28 06:53:40"转化为时间戳
+s = time.mktime(time.strptime('2012-03-28 06:53:40', '%Y-%m-%d %H:%M:%S'))
+
+(2)根据时间戳得到如2012-07-31 00:01:18的时间格式，显示的时间形式可以根据format指定的
+
+import time
+
+timestamp = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime("2012-07-31 00:01:18"))

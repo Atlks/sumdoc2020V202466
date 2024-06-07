@@ -1,0 +1,109 @@
+paip.QQ音乐导出歌单总结 
+
+作者Attilax ，  EMAIL:1466519819@qq.com 
+来源：attilax的专栏
+地址：http://blog.csdn.net/attilax
+
+QQ音乐歌单已经越来越多兰.要不个哪导出备份一哈了....
+
+哪本身马支持export功能..,只能自己想方法兰..
+先是spylite查看累挂,歌单南儿不是个标准的控件..不管子瓦间还是拿个Aqua.Deskperience试达累挂.三,不行..
+
+看来要从内存上想办法了,拿个winhex不个qq music 的process catch累挂,search累挂,型是欣赏兰.RA.开头儿的...就是不是弄规律..不好哈手阿.
+
+看来要从网络通信上想办法了.拿wsexpolore 试达累挂,捕获到兰,就是叫哪狗儿加密兰..赃给儿.
+
+估计哪本地雅缓存着了,从直上想办法..拿个processmonitor不个哪监视累挂..袖管加磊个歌儿,就发现兰.C:\\Documents and Settings\\Administrator\\Application Data\\Tencent\\QQMusic\\qmdb  欣赏兰阿.
+
+看累挂,SQLITE的哈..SQLiteExpertPro.exe打开一看,规律..就是仄兰..不过,分类跟个歌单不直接关联的个一达..就是内个catelog哈面儿的歌单是个逗号分割字段..还是要休整给挂了...
+
+mysql的find_in_set, mssql都有逗号分割字段的函数了..sqlite三马..只好存储过程兰,三,查看累挂,sqlite不支持,连个函数雅不支持..不过事务倒是支持直了...触发器也有了..外键也能支持..
+
+看来,只好拿个C++写个程序兰..查看累挂SQLiteExpertPro的手册,还支持LUA跟Pascal 的扩展直了..就拿个LUA脚本写算兰吧..editplus不支持lua,下载累挂notepad++,算是有语法高亮兰..就是sqlitedatabase class ,The sqlitequery class ,The sqlitefield class 语法不发亮..不个哪扩展累挂,仿照QT,类red,方法蓝色的...设置>语言格式设置...设置好好后,查看更改.打开stylers.xml, <LexerType name="lua" desc="Lua" ext=""> 
+   <WordsStyle name="FUNC1" styleID="13" fgColor="0080C0" bgColor="FFFFFF" fontName="" fontStyle="1" fontSize="12" keywordClass="instre2">new sql active first eof  connected filename  database edit getfield value  displaydata open free</WordsStyle>
+            <WordsStyle name="FUNC2" styleID="14" fgColor="8000FF" bgColor="FFFFFF" fontName="" fontStyle="1" fontSize="" keywordClass="type1" />
+            <WordsStyle name="FUNC3" styleID="15" fgColor="FF8040" bgColor="FFFFFF" fontName="" fontStyle="3" fontSize="" keywordClass="type2">sqlitedatabase sqlitequery sqlitefield attilaxc920</WordsStyle>
+
+
+
+
+关于逗号分割字段
+--------------------
+
+由于很多业务表因为历史原因或者性能原因，都使用了违反第一范式的设计模式。即同一个列中存储了多个属性值（具体结构见下表）。
+还有个优点,就是 in () 操作的时候方便..
+有时候需要将这个列依据分隔符进行分割，并得到列转行的结果。
+
+
+最后的lua脚本:
+------------------
+--参数设置区---
+---author: attilax   date:c920
+qq="1466519819"
+catname_export="我喜欢"    
+dbpath='C:\\Documents and Settings\\Administrator\\Application Data\\Tencent\\QQMusic\\qmdb'
+---------  pragram start 
+
+databasex = sqlitedatabase:new() 
+
+
+print(dbpath);
+print("halo");
+
+
+    
+
+print("3333");
+databasex:filename(dbpath) 
+
+databasex:connected(true) 
+
+query = sqlitequery:new() 
+
+query:database(databasex) 
+
+sqlc920a=" SELECT [Cat].[Cat_textSongs]   FROM [Cat] where  Cat_strCatName='"..catname_export.."' and cat_nuser="..qq;
+--sqlc920a=" select 'aa' ";
+print ("\n-- sql---"..sqlc920a);
+query:sql(sqlc920a) 
+
+query:active(true) 
+
+print ("\naquery is eof ----",query:eof() );
+query:first() 
+
+ while (query:eof() == false) do 
+print ("\n has record query is eof 222 ----",query:eof() );
+query:edit() 
+
+ 
+catname=    query:getfield('Cat_textSongs'):value()
+--:value();
+  
+
+ query:next() 
+
+ end 
+
+sqlc920=[[select s.*,m.[dwOutSigID] from  [SongInfo] s,[SongMap] m 
+where s.dwSigID=dwInSigID and dwOutSigID in  (]]..catname ..") ";
+
+print(sqlc920);
+displaydata(query) 
+
+-----select songes
+query:sql(sqlc920) 
+query:open();
+displaydata(query) 
+
+query:free() 
+
+databasex:free() 
+
+
+
+参考\
+MySQL逗号分割字段的行列转换技巧 - cenalulu - 博客园.htm
+5款免费好用的SQLite管理工具_数据库_西部e网.htm
+SQLite 函数大全 - - ITeye技术网站.htm
+Lua程序设计.chm

@@ -1,0 +1,13 @@
+hql or sql ¥ÌŒÛ£¨‘Ï≥…session close...
+
+hql error....
+
+
+	Query cq = ss.createSQLQuery(checkHql);
+
+
+
+	Query cq = ss.createQuery(checkHql);
+
+
+

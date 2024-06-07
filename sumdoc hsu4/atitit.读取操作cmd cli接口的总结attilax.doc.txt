@@ -1,0 +1,14 @@
+atitit.读取操作cmd cli接口的总结attilax
+
+   String cmd = "cmd /c adb devices" ;  
+
+一定的是cmd /c  ,假如/k ,,,reader.readLine()老是block,等待在的output...
+
+
+	   // 循环读取  
+ 		   while ((line = reader.readLine()) != null) {  
+ 		    // 循环写入  
+ 		  r=r+(line + "\n");  
+ 		   }  
+
+

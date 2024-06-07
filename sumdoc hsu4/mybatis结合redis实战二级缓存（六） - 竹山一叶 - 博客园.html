@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>mybatis结合redis实战二级缓存（六） - 竹山一叶 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=-hy83QNg62d4qYibixJzxMJkbf1P9fTBlqv7SK5zVL01"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/Cogitation/bundle-Cogitation.css?v=KxzCsGje7vptXKdp2HZBpXmgRp_h-PvgHFxMy8F9r3o1"/>
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/Cogitation/bundle-Cogitation-mobile.css?v=oTjri5RX_QRtLNHcaESDEdMPbu1XWWdEv3lmk8oEazU1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/jeffen/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/jeffen/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/jeffen/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript">var currentBlogApp = 'jeffen', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=taItysi72HxMPeH9Xg5nAYabRul6hhgahi3tVIMIKV81" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<div id="top">
+	
+<div>
+	<table>
+		<tr>
+			<td class="HeaderTitles">
+				<h1 class="HeaderTitle"><a id="Header1_HeaderTitle" class="HeaderMainTitle" href="http://www.cnblogs.com/jeffen/">竹山一叶</a></h1>
+				<p id="tagline"></p>
+			</td>
+		</tr>
+	</table>
+</div>
+<div class="HeaderBar">
+	<table id="HeaderBar" class="HeaderBar" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="HeaderBarTab" nowrap>
+&nbsp;
+<a id="blog_nav_sitehome" href="http://www.cnblogs.com/">博客园</a> ::
+<a id="blog_nav_myhome" href="http://www.cnblogs.com/jeffen/">首页</a> ::
+<a href="http://q.cnblogs.com" class="menu">博问</a> ::
+<a href="http://home.cnblogs.com/ing/" class="menu">闪存</a> ::
+<a id="blog_nav_newpost" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a> ::
+<a id="blog_nav_contact" accesskey="9" rel="nofollow" href="https://msg.cnblogs.com/send/%E7%AB%B9%E5%B1%B1%E4%B8%80%E5%8F%B6">联系</a> ::
+<a id="blog_nav_rss" href="http://www.cnblogs.com/jeffen/rss">订阅</a>
+<a id="blog_nav_rss_image" class="XMLLink" href="http://www.cnblogs.com/jeffen/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a> ::
+<a id="blog_nav_admin" rel="nofollow" href="https://i.cnblogs.com/">管理</a> ::
+
+</td>
+			<td><img id="Header1_BlueTab" src="/skins/Cogitation/Images/BlueTabRight.gif" align="absmiddle" /></td>
+			<td class="HeaderBarTabBack" nowrap width="100%">
+				<div id="blog_stats">
+<div class="BlogStatsBar">
+	<table class="BlogStatsBar">
+		<tr>
+			<td width="100%">
+			</td>
+			<td class="BlogStatsBar" nowrap>
+				&nbsp;
+				383 
+				随笔&nbsp;::
+				0 文章
+				::
+				0 评论
+				::
+				0 引用
+			</td>
+		</tr>
+	</table>
+</div>
+</div>
+			</td>
+		</tr>
+	</table>
+</div>
+
+</div>
+<div id="leftmenu">	
+
+	    <div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+		
+<h3>公告</h3>
+<div class="News">
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+		<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+	
+</div>
+<div id="main">
+	
+<div id="post_detail">
+<div class="post">
+	<div class="postTitle">
+		<a id="cb_post_title_url" href="http://www.cnblogs.com/jeffen/p/6286324.html">mybatis结合redis实战二级缓存（六）</a>
+	</div>
+	
+	<div class="postText">
+		<div id="cnblogs_post_body" class="blogpost-body"><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)"><span class="Apple-tab-span" style="margin: 0px; padding: 0px; white-space: pre">	</span>之前的文章中我们意见分析了一级缓存、二级缓存的相关源码和基本原理，今天我们来分享下了mybatis二级缓存和redis的结合，当然mybatis二级缓存也可以和<span style="margin: 0px; padding: 0px; color: rgb(255, 0, 0)">ehcache、memcache、OSCache、Hazelcast</span>结合使用。二级缓存相关的源码分享请参考《<a href="http://www.ccblog.cn/90.htm" target="_self" style="margin: 0px; padding: 0px; color: black; text-decoration: none; background: transparent">Mybatis源码分析之Cache二级缓存原理</a>》。我们通过两种方式来实战，一种是自己编写缓存、另外一种是官方给出的demo地址：<a href="http://www.mybatis.org/redis-cache/" target="_self" style="margin: 0px; padding: 0px; color: black; text-decoration: none; background: transparent">http://www.mybatis.org/redis-cache/</a></p><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)"><span class="Apple-tab-span" style="margin: 0px; padding: 0px; white-space: pre">	</span></p><h2 style="margin-top: 0px; margin-bottom: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-weight: normal; line-height: 1.1; font-size: 30px; background-color: rgb(255, 255, 255)">一：自定义mybatis缓存</h2><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)"><br style="margin: 0px; padding: 0px"></p><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)">&nbsp; &nbsp; 我们知道任何mybatis二级缓存都需要实现一个接口，这个接口就是<span style="margin: 0px; padding: 0px; color: rgb(255, 0, 0)">org.apache.ibatis.cache.Cache</span>,代码如下：</p><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)"><span class="Apple-tab-span" style="margin: 0px; padding: 0px; white-space: pre">	</span></p><pre class="brush:java;toolbar:false" style="margin-top: 0px; margin-bottom: 10px; padding: 9.5px; overflow: auto; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 13px; line-height: 1.42857; color: rgb(51, 51, 51); border: 1px solid rgb(204, 204, 204); background-color: rgb(245, 245, 245)">	package&nbsp;com.demo.spring.mybatis.cache;
+
+	import&nbsp;java.util.concurrent.locks.ReadWriteLock;
+	import&nbsp;java.util.concurrent.locks.ReentrantReadWriteLock;
+
+	import&nbsp;org.apache.ibatis.cache.Cache;
+	import&nbsp;org.slf4j.Logger;
+	import&nbsp;org.slf4j.LoggerFactory;
+
+	import&nbsp;com.demo.spring.mybatis.util.SerializeUtil;
+
+	import&nbsp;redis.clients.jedis.Jedis;
+	import&nbsp;redis.clients.jedis.JedisPool;
+
+	public&nbsp;class&nbsp;MybatisRedisCache&nbsp;implements&nbsp;Cache&nbsp;{
+		private&nbsp;static&nbsp;Logger&nbsp;logger&nbsp;=&nbsp;LoggerFactory.getLogger(MybatisRedisCache.class);
+
+		private&nbsp;Jedis&nbsp;redisClient&nbsp;=&nbsp;createReids();
+
+		private&nbsp;final&nbsp;ReadWriteLock&nbsp;readWriteLock&nbsp;=&nbsp;new&nbsp;ReentrantReadWriteLock();
+
+		private&nbsp;String&nbsp;id;
+
+		public&nbsp;MybatisRedisCache(final&nbsp;String&nbsp;id)&nbsp;{
+			if&nbsp;(id&nbsp;==&nbsp;null)&nbsp;{
+				throw&nbsp;new&nbsp;IllegalArgumentException("Cache&nbsp;instances&nbsp;require&nbsp;an&nbsp;ID");
+			}
+			logger.debug("&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;MybatisRedisCache:id="&nbsp;+&nbsp;id);
+			this.id&nbsp;=&nbsp;id;
+		}
+
+		@Override
+		public&nbsp;String&nbsp;getId()&nbsp;{
+			return&nbsp;this.id;
+		}
+
+		@Override
+		public&nbsp;int&nbsp;getSize()&nbsp;{
+
+			return&nbsp;Integer.valueOf(redisClient.dbSize().toString());
+		}
+
+		@Override
+		public&nbsp;void&nbsp;putObject(Object&nbsp;key,&nbsp;Object&nbsp;value)&nbsp;{
+			logger.debug("&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;putObject:"&nbsp;+&nbsp;key&nbsp;+&nbsp;"="&nbsp;+&nbsp;value);
+			redisClient.set(SerializeUtil.serialize(key.toString()),&nbsp;SerializeUtil.serialize(value));
+		}
+
+		@Override
+		public&nbsp;Object&nbsp;getObject(Object&nbsp;key)&nbsp;{
+			Object&nbsp;value&nbsp;=&nbsp;SerializeUtil.unserialize(redisClient.get(SerializeUtil.serialize(key.toString())));
+			logger.debug("&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;getObject:"&nbsp;+&nbsp;key&nbsp;+&nbsp;"="&nbsp;+&nbsp;value);
+			return&nbsp;value;
+		}
+
+		@Override
+		public&nbsp;Object&nbsp;removeObject(Object&nbsp;key)&nbsp;{
+			return&nbsp;redisClient.expire(SerializeUtil.serialize(key.toString()),&nbsp;0);
+		}
+
+		@Override
+		public&nbsp;void&nbsp;clear()&nbsp;{
+			redisClient.flushDB();
+		}
+
+		@Override
+		public&nbsp;ReadWriteLock&nbsp;getReadWriteLock()&nbsp;{
+			return&nbsp;readWriteLock;
+		}
+
+		protected&nbsp;static&nbsp;Jedis&nbsp;createReids()&nbsp;{
+			JedisPool&nbsp;pool&nbsp;=&nbsp;new&nbsp;JedisPool("127.0.0.1",&nbsp;6379);
+			return&nbsp;pool.getResource();
+		}
+	}	</pre><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)"><span class="Apple-tab-span" style="margin: 0px; padding: 0px; white-space: pre">	</span><br style="margin: 0px; padding: 0px"></p><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)"><span class="Apple-tab-span" style="margin: 0px; padding: 0px; white-space: pre">	</span></p><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)">以上代码很简单就是基本的Cache实现，在定义一个序列化的工具类</p><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)"><br style="margin: 0px; padding: 0px"></p><pre class="brush:java;toolbar:false" style="margin-top: 0px; margin-bottom: 10px; padding: 9.5px; overflow: auto; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 13px; line-height: 1.42857; color: rgb(51, 51, 51); border: 1px solid rgb(204, 204, 204); background-color: rgb(245, 245, 245)">&nbsp;&nbsp;package&nbsp;com.demo.spring.mybatis.util;
+
+import&nbsp;java.io.ByteArrayInputStream;
+import&nbsp;java.io.ByteArrayOutputStream;
+import&nbsp;java.io.ObjectInputStream;
+import&nbsp;java.io.ObjectOutputStream;
+
+public&nbsp;class&nbsp;SerializeUtil&nbsp;{
+	public&nbsp;static&nbsp;byte[]&nbsp;serialize(Object&nbsp;object)&nbsp;{
+		ObjectOutputStream&nbsp;oos&nbsp;=&nbsp;null;
+		ByteArrayOutputStream&nbsp;baos&nbsp;=&nbsp;null;
+		try&nbsp;{
+			//&nbsp;序列化
+			baos&nbsp;=&nbsp;new&nbsp;ByteArrayOutputStream();
+			oos&nbsp;=&nbsp;new&nbsp;ObjectOutputStream(baos);
+			oos.writeObject(object);
+			byte[]&nbsp;bytes&nbsp;=&nbsp;baos.toByteArray();
+			return&nbsp;bytes;
+		}&nbsp;catch&nbsp;(Exception&nbsp;e)&nbsp;{
+			e.printStackTrace();
+		}
+		return&nbsp;null;
+	}
+
+	public&nbsp;static&nbsp;Object&nbsp;unserialize(byte[]&nbsp;bytes)&nbsp;{
+		ByteArrayInputStream&nbsp;bais&nbsp;=&nbsp;null;
+		try&nbsp;{
+			//&nbsp;反序列化
+			bais&nbsp;=&nbsp;new&nbsp;ByteArrayInputStream(bytes);
+			ObjectInputStream&nbsp;ois&nbsp;=&nbsp;new&nbsp;ObjectInputStream(bais);
+			return&nbsp;ois.readObject();
+		}&nbsp;catch&nbsp;(Exception&nbsp;e)&nbsp;{
+
+		}
+		return&nbsp;null;
+	}
+}</pre><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)"><br style="margin: 0px; padding: 0px"></p><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)"><br style="margin: 0px; padding: 0px"></p><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)">然后在mapper.xml配置</p><pre class="brush:xml;toolbar:false" style="margin-top: 0px; margin-bottom: 10px; padding: 9.5px; overflow: auto; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 13px; line-height: 1.42857; color: rgb(51, 51, 51); border: 1px solid rgb(204, 204, 204); background-color: rgb(245, 245, 245)">&lt;cache&nbsp;eviction="LRU"&nbsp;type="com.demo.spring.mybatis.cache.MybatisRedisCache"/&gt;</pre><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)">当然在主配置文件里面还需要配置如下代码，代表开启二级缓存，默认是不开启的</p><pre class="brush:xml;toolbar:false" style="margin-top: 0px; margin-bottom: 10px; padding: 9.5px; overflow: auto; font-family: Menlo, Monaco, Consolas, &quot;Courier New&quot;, monospace; font-size: 13px; line-height: 1.42857; color: rgb(51, 51, 51); border: 1px solid rgb(204, 204, 204); background-color: rgb(245, 245, 245)">&lt;setting&nbsp;name="cacheEnabled"&nbsp;value="true"&nbsp;/&gt;</pre><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)"><br style="margin: 0px; padding: 0px"></p><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)">所以得配置和代码都已经完成了运行结果如下：</p><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)"><br style="margin: 0px; padding: 0px"></p><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)"><img width="950" height="800" title="" alt="" src="https://images2015.cnblogs.com/blog/1040703/201701/1040703-20170114225926322-832367811.png" border="0" vspace="0" style="margin-top: 0px; margin-bottom: 0px; padding: 0px; vertical-align: middle; width: 950px; height: 800px"></p><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)"><br style="margin: 0px; padding: 0px"></p><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)">为什么第二次走的是一级缓存呢？</p><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)">这个在讲二级缓存源码的时候分析过，只有当执行commit的时候才把之前查询的结果放入缓存。</p><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)"><br style="margin: 0px; padding: 0px"></p><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)"><br style="margin: 0px; padding: 0px"></p><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)">打开吗redis查看如下，因为存入的是序列化的结果，不过我们隐约还是能看到一些信息到下图</p><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)"><img src="https://images2015.cnblogs.com/blog/1040703/201701/1040703-20170114225931775-265275061.png" style="margin-top: 0px; margin-bottom: 0px; padding: 0px; vertical-align: middle"></p><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)"><br style="margin: 0px; padding: 0px"></p><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)"><br style="margin: 0px; padding: 0px"></p><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)"><br style="margin: 0px; padding: 0px"></p><h2 style="margin-top: 0px; margin-bottom: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-weight: normal; line-height: 1.1; font-size: 30px; background-color: rgb(255, 255, 255)">二：官方的实例</h2><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)"><br style="margin: 0px; padding: 0px"></p><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)">&nbsp;地址:&nbsp;<a href="http://www.mybatis.org/redis-cache/" style="margin: 0px; padding: 0px; color: black; text-decoration: none; background: transparent">http://www.mybatis.org/redis-cache/</a></p><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)"><br style="margin: 0px; padding: 0px"></p><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)">&nbsp;其实和我们自定义的差不多的，不过使用的时候需要注意redis客户端版本要和它的版本兼容，否则或报错。</p><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)"><span style="margin: 0px; padding: 0px; color: rgb(255, 0, 0)">&nbsp;mybatis-redis 1.0.0-beta2 对应负redis.clients » jedis 2.8.0 &nbsp;目前的最高版本2.9.0不支持</span></p><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)"><span style="margin: 0px; padding: 0px; color: rgb(255, 0, 0)"><br></span></p><p style="margin-bottom: 10px; padding: 0px; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px; background-color: rgb(255, 255, 255)"><span style="margin: 0px; padding: 0px; color: rgb(255, 0, 0)"><br></span></p><div style="color: gray"><small>来源：&nbsp;<a href="http://www.ccblog.cn/91.htm">http://www.ccblog.cn/91.htm</a></small></div><p></p><br><br><div><a title="null" href="http://www.wiz.cn/i/3dfbbd54">null</a></div><br><br></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+	</div>
+	
+	<div class="postfoot">
+		posted on <span id="post-date">2017-01-14 23:00</span> <a href='http://www.cnblogs.com/jeffen/'>竹山一叶</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=6286324" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(6286324);return false;">收藏</a>
+	</div>
+</div>
+<script type="text/javascript">var allowComments=false,cb_blogId=310609,cb_entryId=6286324,cb_blogApp=currentBlogApp,cb_blogUserGuid='200c786e-2890-e611-845c-ac853d9f53ac',cb_entryCreatedDate='2017/1/14 23:00:00';loadViewCount(cb_entryId);var cb_postType=1;</script>
+
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+</div>
+<div class="footer">
+
+<p id="footer">
+	Powered by: 
+	<br />
+	
+	<a id="Footer1_Hyperlink3" NAME="Hyperlink1" href="http://www.cnblogs.com/" style="font-family:Verdana;font-size:12px;">博客园</a>
+	<br />
+	Copyright &copy; 竹山一叶
+</p>
+</div>
+</body>
+</html>

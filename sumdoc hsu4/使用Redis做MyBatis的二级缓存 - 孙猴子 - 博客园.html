@@ -1,0 +1,554 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>使用Redis做MyBatis的二级缓存 - 孙猴子 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=-hy83QNg62d4qYibixJzxMJkbf1P9fTBlqv7SK5zVL01"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/coffee/bundle-coffee.css?v=NnZbvdgFaQNhu3t8P4Wsaz98sDQkgRt7Qxq2rzF0ZRU1"/>
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/coffee/bundle-coffee-mobile.css?v=EhLLUe5NHsx18JODVZscd5ef3A8WbJHKTlTvuKQjsl01"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/springlight/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/springlight/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/springlight/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript">var currentBlogApp = 'springlight', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=taItysi72HxMPeH9Xg5nAYabRul6hhgahi3tVIMIKV81" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="http://www.cnblogs.com/springlight/"><img id="blogLogo" src="/Skins/custom/images/logo.gif" alt="返回主页" /></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/springlight/">孙猴子</a></h1>
+<h2>生如夏花</h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="navigator">
+			
+<ul id="navList">
+	<li><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+	<li><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/springlight/">首页</a></li>
+	<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+	<li><a id="blog_nav_contact" accesskey="9" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E5%AD%99%E7%8C%B4%E5%AD%90">联系</a></li>
+	<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+	<li><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/springlight/rss">订阅</a>
+	<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/springlight/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a></li>
+</ul>
+
+
+			<div class="blogStats">
+				
+				<div id="blog_stats">
+<!--done-->
+随笔- 119&nbsp;
+文章- 0&nbsp;
+评论- 11&nbsp;
+</div>
+				
+			</div><!--end: blogStats -->
+		</div><!--end: navigator 博客导航栏 -->
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/springlight/p/6374372.html">使用Redis做MyBatis的二级缓存</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body"><p><strong>1. 介绍</strong></p>
+<p>　　使用mybatis时可以使用二级缓存提高查询速度，进而改善用户体验。</p>
+<p>　　使用redis做mybatis的二级缓存可是内存可控&lt;如将单独的服务器部署出来用于二级缓存&gt;，管理方便。</p>
+<p>&nbsp;</p>
+<p><strong>2. 使用思路</strong></p>
+<p>　　2.1 配置redis.xml 设置redis服务连接各参数</p>
+<p>　　2.1 在配置文件中使用 &lt;setting&gt; 标签，设置开启二级缓存；</p>
+<p>　　2.2 在mapper.xml 中使用&lt;cache type="com.demo.RedisCacheClass" /&gt; 将cache映射到指定的RedisCacheClass类中；</p>
+<p>　　2.3 映射类RedisCacheClass 实现 MyBatis包中的Cache类，并重写其中各方法；</p>
+<p>　　　　在重写各方法体中，使用redisFactory和redis服务建立连接，将缓存的数据加载到指定的redis内存中(putObject方法)或将redis服务中的数据从缓存中读取出来(getObject方法)；</p>
+<p>　　　　在redis服务中写入和加载数据时需要借用spring-data-redis.jar中JdkSerializationRedisSerializer.class中的序列化(serialize)和反序列化方法(deserialize),此为包中封装的redis默认的序列化方法；</p>
+<p>　　2.4 映射类中的各方法重写完成后即可实现mybatis数据二级缓存到redis服务中；</p>
+<p>&nbsp;</p>
+<p><strong>3. 代码实践</strong></p>
+<p>　　3.1 配置redis.xml</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff">&lt;?</span><span style="color: #ff00ff">xml version="1.0" encoding="UTF-8"</span><span style="color: #0000ff">?&gt;</span>
+<span style="color: #0000ff">&lt;</span><span style="color: #800000">beans </span><span style="color: #ff0000">xmlns</span><span style="color: #0000ff">="http://www.springframework.org/schema/beans"</span><span style="color: #ff0000">
+    xmlns:xsi</span><span style="color: #0000ff">="http://www.w3.org/2001/XMLSchema-instance"</span><span style="color: #ff0000">
+    xmlns:p</span><span style="color: #0000ff">="http://www.springframework.org/schema/p"</span><span style="color: #ff0000">
+    xmlns:mvc</span><span style="color: #0000ff">="http://www.springframework.org/schema/mvc"</span><span style="color: #ff0000">
+    xmlns:aop</span><span style="color: #0000ff">="http://www.springframework.org/schema/aop"</span><span style="color: #ff0000">
+    xmlns:tx</span><span style="color: #0000ff">="http://www.springframework.org/schema/tx"</span><span style="color: #ff0000">
+    xmlns:context</span><span style="color: #0000ff">="http://www.springframework.org/schema/context"</span><span style="color: #ff0000">
+    xmlns:task</span><span style="color: #0000ff">="http://www.springframework.org/schema/task"</span><span style="color: #ff0000">
+    xsi:schemaLocation</span><span style="color: #0000ff">="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+    http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/task
+    http://www.springframework.org/schema/task/spring-task-3.0.xsd"</span> <span style="color: #0000ff">&gt;</span>
+    <span style="color: #008000">&lt;!--</span><span style="color: #008000"> enable autowire </span><span style="color: #008000">--&gt;</span>
+    <span style="color: #0000ff">&lt;</span><span style="color: #800000">context:annotation-config </span><span style="color: #0000ff">/&gt;</span> 
+       
+    <span style="color: #0000ff">&lt;</span><span style="color: #800000">task:annotation-driven</span><span style="color: #0000ff">/&gt;</span>
+    
+    <span style="color: #0000ff">&lt;</span><span style="color: #800000">context:component-scan </span><span style="color: #ff0000">base-package</span><span style="color: #0000ff">="demo.util,demo.salesorder,demo.person"</span> <span style="color: #0000ff">/&gt;</span>
+    <span style="color: #008000">&lt;!--</span><span style="color: #008000"> Configures the @Controller programming model 必须加上这个，不然请求controller时会出现no mapping url错误</span><span style="color: #008000">--&gt;</span>
+    <span style="color: #0000ff">&lt;</span><span style="color: #800000">mvc:annotation-driven </span><span style="color: #0000ff">/&gt;</span>
+    <span style="color: #008000">&lt;!--</span><span style="color: #008000"> 引入数据库配置文件 </span><span style="color: #008000">--&gt;</span>
+    <span style="color: #0000ff">&lt;</span><span style="color: #800000">bean </span><span style="color: #ff0000">id</span><span style="color: #0000ff">="propertyConfigurer"</span><span style="color: #ff0000">    class</span><span style="color: #0000ff">="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"</span><span style="color: #0000ff">&gt;</span>
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">property </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="locations"</span><span style="color: #0000ff">&gt;</span>
+            <span style="color: #0000ff">&lt;</span><span style="color: #800000">list</span><span style="color: #0000ff">&gt;</span>
+                <span style="color: #0000ff">&lt;</span><span style="color: #800000">value</span><span style="color: #0000ff">&gt;</span>classpath:sysconfig/jdbc.properties<span style="color: #0000ff">&lt;/</span><span style="color: #800000">value</span><span style="color: #0000ff">&gt;</span>
+                <span style="color: #0000ff">&lt;</span><span style="color: #800000">value</span><span style="color: #0000ff">&gt;</span>classpath:sysconfig/redis.properties<span style="color: #0000ff">&lt;/</span><span style="color: #800000">value</span><span style="color: #0000ff">&gt;</span>
+            <span style="color: #0000ff">&lt;/</span><span style="color: #800000">list</span><span style="color: #0000ff">&gt;</span>
+        <span style="color: #0000ff">&lt;/</span><span style="color: #800000">property</span><span style="color: #0000ff">&gt;</span>
+    <span style="color: #0000ff">&lt;/</span><span style="color: #800000">bean</span><span style="color: #0000ff">&gt;</span>
+    <span style="color: #008000">&lt;!--</span><span style="color: #008000"> JDBC </span><span style="color: #008000">--&gt;</span>
+    <span style="color: #0000ff">&lt;</span><span style="color: #800000">bean </span><span style="color: #ff0000">id</span><span style="color: #0000ff">="defaultDataSource"</span><span style="color: #ff0000">   class</span><span style="color: #0000ff">="org.apache.commons.dbcp.BasicDataSource"</span><span style="color: #ff0000"> destroy-method</span><span style="color: #0000ff">="close"</span><span style="color: #ff0000">
+        p:driverClassName</span><span style="color: #0000ff">="${jdbc.driverClassName}"</span><span style="color: #ff0000">
+        p:url</span><span style="color: #0000ff">="${jdbc.databaseurl}"</span><span style="color: #ff0000">
+        p:username</span><span style="color: #0000ff">="${jdbc.username}"</span><span style="color: #ff0000">
+        p:password</span><span style="color: #0000ff">="${jdbc.password}"</span> <span style="color: #0000ff">&gt;</span>
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">property </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="maxActive"</span><span style="color: #0000ff">&gt;</span>
+            <span style="color: #0000ff">&lt;</span><span style="color: #800000">value</span><span style="color: #0000ff">&gt;</span>${jdbc.maxActive}<span style="color: #0000ff">&lt;/</span><span style="color: #800000">value</span><span style="color: #0000ff">&gt;</span>
+        <span style="color: #0000ff">&lt;/</span><span style="color: #800000">property</span><span style="color: #0000ff">&gt;</span>  
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">property </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="initialSize"</span><span style="color: #0000ff">&gt;</span>
+            <span style="color: #0000ff">&lt;</span><span style="color: #800000">value</span><span style="color: #0000ff">&gt;</span>${jdbc.initialSize}<span style="color: #0000ff">&lt;/</span><span style="color: #800000">value</span><span style="color: #0000ff">&gt;</span>
+        <span style="color: #0000ff">&lt;/</span><span style="color: #800000">property</span><span style="color: #0000ff">&gt;</span>  
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">property </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="maxWait"</span><span style="color: #0000ff">&gt;</span>
+            <span style="color: #0000ff">&lt;</span><span style="color: #800000">value</span><span style="color: #0000ff">&gt;</span>${jdbc.maxWait}<span style="color: #0000ff">&lt;/</span><span style="color: #800000">value</span><span style="color: #0000ff">&gt;</span>
+        <span style="color: #0000ff">&lt;/</span><span style="color: #800000">property</span><span style="color: #0000ff">&gt;</span>  
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">property </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="maxIdle"</span><span style="color: #0000ff">&gt;</span>
+            <span style="color: #0000ff">&lt;</span><span style="color: #800000">value</span><span style="color: #0000ff">&gt;</span>${jdbc.maxIdle}<span style="color: #0000ff">&lt;/</span><span style="color: #800000">value</span><span style="color: #0000ff">&gt;</span>
+        <span style="color: #0000ff">&lt;/</span><span style="color: #800000">property</span><span style="color: #0000ff">&gt;</span>
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">property </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="minIdle"</span><span style="color: #0000ff">&gt;</span>
+            <span style="color: #0000ff">&lt;</span><span style="color: #800000">value</span><span style="color: #0000ff">&gt;</span>${jdbc.minIdle}<span style="color: #0000ff">&lt;/</span><span style="color: #800000">value</span><span style="color: #0000ff">&gt;</span>
+        <span style="color: #0000ff">&lt;/</span><span style="color: #800000">property</span><span style="color: #0000ff">&gt;</span>
+        <span style="color: #008000">&lt;!--</span><span style="color: #008000"> 只要下面两个参数设置成小于8小时(MySql默认)，就能避免MySql的8小时自动断开连接问题 </span><span style="color: #008000">--&gt;</span>
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">property </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="timeBetweenEvictionRunsMillis"</span><span style="color: #0000ff">&gt;</span>
+            <span style="color: #0000ff">&lt;</span><span style="color: #800000">value</span><span style="color: #0000ff">&gt;</span>18000000<span style="color: #0000ff">&lt;/</span><span style="color: #800000">value</span><span style="color: #0000ff">&gt;</span>
+        <span style="color: #0000ff">&lt;/</span><span style="color: #800000">property</span><span style="color: #0000ff">&gt;</span><span style="color: #008000">&lt;!--</span><span style="color: #008000"> 5小时 </span><span style="color: #008000">--&gt;</span>
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">property </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="minEvictableIdleTimeMillis"</span><span style="color: #0000ff">&gt;</span>
+            <span style="color: #0000ff">&lt;</span><span style="color: #800000">value</span><span style="color: #0000ff">&gt;</span>10800000<span style="color: #0000ff">&lt;/</span><span style="color: #800000">value</span><span style="color: #0000ff">&gt;</span>
+        <span style="color: #0000ff">&lt;/</span><span style="color: #800000">property</span><span style="color: #0000ff">&gt;</span><span style="color: #008000">&lt;!--</span><span style="color: #008000"> 3小时 </span><span style="color: #008000">--&gt;</span>
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">property </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="validationQuery"</span><span style="color: #0000ff">&gt;</span>
+            <span style="color: #0000ff">&lt;</span><span style="color: #800000">value</span><span style="color: #0000ff">&gt;</span>SELECT 1<span style="color: #0000ff">&lt;/</span><span style="color: #800000">value</span><span style="color: #0000ff">&gt;</span>
+        <span style="color: #0000ff">&lt;/</span><span style="color: #800000">property</span><span style="color: #0000ff">&gt;</span>
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">property </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="testOnBorrow"</span><span style="color: #0000ff">&gt;</span>
+            <span style="color: #0000ff">&lt;</span><span style="color: #800000">value</span><span style="color: #0000ff">&gt;</span>true<span style="color: #0000ff">&lt;/</span><span style="color: #800000">value</span><span style="color: #0000ff">&gt;</span>
+        <span style="color: #0000ff">&lt;/</span><span style="color: #800000">property</span><span style="color: #0000ff">&gt;</span>
+    <span style="color: #0000ff">&lt;/</span><span style="color: #800000">bean</span><span style="color: #0000ff">&gt;</span>
+    
+    <span style="color: #008000">&lt;!--</span><span style="color: #008000"> define the SqlSessionFactory </span><span style="color: #008000">--&gt;</span>
+    <span style="color: #0000ff">&lt;</span><span style="color: #800000">bean </span><span style="color: #ff0000">id</span><span style="color: #0000ff">="sqlSessionFactory"</span><span style="color: #ff0000"> class</span><span style="color: #0000ff">="org.mybatis.spring.SqlSessionFactoryBean"</span><span style="color: #0000ff">&gt;</span>
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">property </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="dataSource"</span><span style="color: #ff0000"> ref</span><span style="color: #0000ff">="defaultDataSource"</span> <span style="color: #0000ff">/&gt;</span>
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">property </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="typeAliasesPackage"</span><span style="color: #ff0000"> value</span><span style="color: #0000ff">="demo.salesorder,demo.person"</span> <span style="color: #0000ff">/&gt;</span>
+        <span style="color: #008000">&lt;!--</span><span style="color: #008000"> 可以单独指定mybatis的配置文件，或者写在本文件里面。 用下面的自动扫描装配(推荐)或者单独mapper </span><span style="color: #008000">--&gt;</span> 
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">property </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="configLocation"</span><span style="color: #ff0000"> value</span><span style="color: #0000ff">="classpath:sysconfig/mybatis-config.xml"</span> <span style="color: #0000ff">/&gt;</span>
+    <span style="color: #0000ff">&lt;/</span><span style="color: #800000">bean</span><span style="color: #0000ff">&gt;</span>
+    
+    
+    <span style="color: #008000">&lt;!--</span><span style="color: #008000"> 自动扫描并组装MyBatis的映射文件和接口</span><span style="color: #008000">--&gt;</span>
+    <span style="color: #0000ff">&lt;</span><span style="color: #800000">bean </span><span style="color: #ff0000">class</span><span style="color: #0000ff">="org.mybatis.spring.mapper.MapperScannerConfigurer"</span><span style="color: #0000ff">&gt;</span>
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">property </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="basePackage"</span><span style="color: #ff0000"> value</span><span style="color: #0000ff">="demo.*.data"</span> <span style="color: #0000ff">/&gt;</span>
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">property </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="sqlSessionFactoryBeanName"</span><span style="color: #ff0000"> value</span><span style="color: #0000ff">="sqlSessionFactory"</span><span style="color: #0000ff">&gt;&lt;/</span><span style="color: #800000">property</span><span style="color: #0000ff">&gt;</span>
+    <span style="color: #0000ff">&lt;/</span><span style="color: #800000">bean</span><span style="color: #0000ff">&gt;</span>
+    
+    <span style="color: #008000">&lt;!--</span><span style="color: #008000"> JDBC END </span><span style="color: #008000">--&gt;</span>
+    
+    <span style="color: #008000">&lt;!--</span><span style="color: #008000"> redis数据源 </span><span style="color: #008000">--&gt;</span>
+    <span style="color: #0000ff">&lt;</span><span style="color: #800000">bean </span><span style="color: #ff0000">id</span><span style="color: #0000ff">="poolConfig"</span><span style="color: #ff0000"> class</span><span style="color: #0000ff">="redis.clients.jedis.JedisPoolConfig"</span><span style="color: #0000ff">&gt;</span>  
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">property </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="maxIdle"</span><span style="color: #ff0000"> value</span><span style="color: #0000ff">="${redis.maxIdle}"</span> <span style="color: #0000ff">/&gt;</span>  
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">property </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="maxTotal"</span><span style="color: #ff0000"> value</span><span style="color: #0000ff">="${redis.maxActive}"</span> <span style="color: #0000ff">/&gt;</span>  
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">property </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="maxWaitMillis"</span><span style="color: #ff0000"> value</span><span style="color: #0000ff">="${redis.maxWait}"</span> <span style="color: #0000ff">/&gt;</span>  
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">property </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="testOnBorrow"</span><span style="color: #ff0000"> value</span><span style="color: #0000ff">="${redis.testOnBorrow}"</span> <span style="color: #0000ff">/&gt;</span>  
+    <span style="color: #0000ff">&lt;/</span><span style="color: #800000">bean</span><span style="color: #0000ff">&gt;</span>
+    
+    <span style="color: #008000">&lt;!--</span><span style="color: #008000"> Spring-redis连接池管理工厂 </span><span style="color: #008000">--&gt;</span>
+    <span style="color: #0000ff">&lt;</span><span style="color: #800000">bean </span><span style="color: #ff0000">id</span><span style="color: #0000ff">="jedisConnectionFactory"</span><span style="color: #ff0000"> class</span><span style="color: #0000ff">="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"</span><span style="color: #0000ff">&gt;</span>
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">property </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="hostName"</span><span style="color: #ff0000"> value</span><span style="color: #0000ff">="${redis.host}"</span> <span style="color: #0000ff">/&gt;</span>
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">property </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="port"</span><span style="color: #ff0000"> value</span><span style="color: #0000ff">="${redis.port}"</span> <span style="color: #0000ff">/&gt;</span>
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">property </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="password"</span><span style="color: #ff0000"> value</span><span style="color: #0000ff">="${redis.pass}"</span> <span style="color: #0000ff">/&gt;</span>
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">property </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="timeout"</span><span style="color: #ff0000"> value</span><span style="color: #0000ff">="${redis.timeout}"</span> <span style="color: #0000ff">/&gt;</span>
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">property </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="poolConfig"</span><span style="color: #ff0000"> ref</span><span style="color: #0000ff">="poolConfig"</span> <span style="color: #0000ff">/&gt;</span>
+    <span style="color: #0000ff">&lt;/</span><span style="color: #800000">bean</span><span style="color: #0000ff">&gt;</span>      
+    <span style="color: #008000">&lt;!--</span><span style="color: #008000"> 使用中间类解决RedisCache.jedisConnectionFactory的静态注入，从而使MyBatis实现第三方缓存 </span><span style="color: #008000">--&gt;</span>
+    <span style="color: #0000ff">&lt;</span><span style="color: #800000">bean </span><span style="color: #ff0000">id</span><span style="color: #0000ff">="redisCacheTransfer"</span><span style="color: #ff0000"> class</span><span style="color: #0000ff">="demo.redis.RedisCacheTransfer"</span><span style="color: #0000ff">&gt;</span>
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">property </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="jedisConnectionFactory"</span><span style="color: #ff0000"> ref</span><span style="color: #0000ff">="jedisConnectionFactory"</span><span style="color: #0000ff">/&gt;</span>
+    <span style="color: #0000ff">&lt;/</span><span style="color: #800000">bean</span><span style="color: #0000ff">&gt;</span>      
+    
+    <span style="color: #0000ff">&lt;</span><span style="color: #800000">bean </span><span style="color: #ff0000">class</span><span style="color: #0000ff">="demo.util.UTF8StringBeanPostProcessor"</span><span style="color: #0000ff">&gt;&lt;/</span><span style="color: #800000">bean</span><span style="color: #0000ff">&gt;</span>          
+<span style="color: #0000ff">&lt;/</span><span style="color: #800000">beans</span><span style="color: #0000ff">&gt;</span>    </pre>
+</div>
+<p>&nbsp;</p>
+<p>　　3.2 mybatis.xml 配置开启二级缓存</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff">&lt;?</span><span style="color: #ff00ff">xml version="1.0" encoding="UTF-8" </span><span style="color: #0000ff">?&gt;</span>  
+<span style="color: #0000ff">&lt;!</span><span style="color: #ff00ff">DOCTYPE configuration 
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd"</span><span style="color: #0000ff">&gt;</span>
+<span style="color: #0000ff">&lt;</span><span style="color: #800000">configuration</span><span style="color: #0000ff">&gt;</span>
+    <span style="color: #008000">&lt;!--</span><span style="color: #008000"> 配置mybatis的缓存，延迟加载等等一系列属性 </span><span style="color: #008000">--&gt;</span>
+    <span style="color: #0000ff">&lt;</span><span style="color: #800000">settings</span><span style="color: #0000ff">&gt;</span>
+
+        <span style="color: #008000">&lt;!--</span><span style="color: #008000"> 全局映射器启用缓存 <span style="color: #ff0000">*</span>主要将此属性设置完成即可</span><span style="color: #008000">--&gt;</span>
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">setting </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="cacheEnabled"</span><span style="color: #ff0000"> value</span><span style="color: #0000ff">="true"</span><span style="color: #0000ff">/&gt;</span>
+
+        <span style="color: #008000">&lt;!--</span><span style="color: #008000"> 查询时，关闭关联对象即时加载以提高性能 </span><span style="color: #008000">--&gt;</span>
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">setting </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="lazyLoadingEnabled"</span><span style="color: #ff0000"> value</span><span style="color: #0000ff">="false"</span><span style="color: #0000ff">/&gt;</span>
+
+        <span style="color: #008000">&lt;!--</span><span style="color: #008000"> 对于未知的SQL查询，允许返回不同的结果集以达到通用的效果 </span><span style="color: #008000">--&gt;</span>
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">setting </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="multipleResultSetsEnabled"</span><span style="color: #ff0000"> value</span><span style="color: #0000ff">="true"</span><span style="color: #0000ff">/&gt;</span>
+
+        <span style="color: #008000">&lt;!--</span><span style="color: #008000"> 设置关联对象加载的形态，此处为按需加载字段(加载字段由SQL指 定)，不会加载关联表的所有字段，以提高性能 </span><span style="color: #008000">--&gt;</span>
+        <span style="color: #0000ff">&lt;</span><span style="color: #800000">setting </span><span style="color: #ff0000">name</span><span style="color: #0000ff">="aggressiveLazyLoading"</span><span style="color: #ff0000"> value</span><span style="color: #0000ff">="true"</span><span style="color: #0000ff">/&gt;</span>
+
+    <span style="color: #0000ff">&lt;/</span><span style="color: #800000">settings</span><span style="color: #0000ff">&gt;</span>
+<span style="color: #0000ff">&lt;/</span><span style="color: #800000">configuration</span><span style="color: #0000ff">&gt;</span></pre>
+</div>
+<p>&nbsp;</p>
+<p>　　&nbsp;3.3 在mapper.xml中映射缓存类RedisCacheClass</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff">&lt;?</span><span style="color: #ff00ff">xml version="1.0" encoding="UTF-8"</span><span style="color: #0000ff">?&gt;</span>
+<span style="color: #0000ff">&lt;!</span><span style="color: #ff00ff">DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span><span style="color: #0000ff">&gt;</span>
+
+<span style="color: #0000ff">&lt;</span><span style="color: #800000">mapper </span><span style="color: #ff0000">namespace</span><span style="color: #0000ff">="demo.person.data.UserMapper"</span><span style="color: #0000ff">&gt;</span>
+<span style="color: #0000ff">&lt;</span><span style="color: #800000">cache </span><span style="color: #ff0000">type</span><span style="color: #0000ff">="demo.redis.cache.RedisCache"</span><span style="color: #0000ff">/&gt;</span> &lt;!-- <span style="color: #ff0000">*</span>映射语句 --&gt;
+
+<span style="color: #0000ff">&lt;</span><span style="color: #800000">select </span><span style="color: #ff0000">id</span><span style="color: #0000ff">="getPersonList"</span><span style="color: #ff0000"> parameterType</span><span style="color: #0000ff">="map"</span><span style="color: #ff0000"> resultType</span><span style="color: #0000ff">="Person"</span><span style="color: #0000ff">&gt;</span><span style="color: #000000">
+    select *    
+     from person
+    </span><span style="color: #0000ff">&lt;</span><span style="color: #800000">where</span><span style="color: #0000ff">&gt;</span><span style="color: #000000">
+        1=1
+        </span><span style="color: #0000ff">&lt;</span><span style="color: #800000">if </span><span style="color: #ff0000">test</span><span style="color: #0000ff">="user_name!=null"</span><span style="color: #0000ff">&gt;</span><span style="color: #000000">
+            and user_name=#{user_name}
+        </span><span style="color: #0000ff">&lt;/</span><span style="color: #800000">if</span><span style="color: #0000ff">&gt;</span>    
+    <span style="color: #0000ff">&lt;/</span><span style="color: #800000">where</span><span style="color: #0000ff">&gt;</span>
+<span style="color: #0000ff">&lt;/</span><span style="color: #800000">select</span><span style="color: #0000ff">&gt;</span>
+<span style="color: #0000ff">&lt;</span><span style="color: #800000">insert </span><span style="color: #ff0000">id</span><span style="color: #0000ff">="addPerson"</span><span style="color: #ff0000"> parameterType</span><span style="color: #0000ff">="Person"</span><span style="color: #ff0000"> keyProperty</span><span style="color: #0000ff">="id"</span><span style="color: #ff0000"> useGeneratedKeys</span><span style="color: #0000ff">="true"</span><span style="color: #0000ff">&gt;</span><span style="color: #000000">
+    insert into person(
+        login_id,
+        user_name,
+        gender,
+        birthday,
+        remark
+    )values(
+        #{login_id},
+        #{user_name},
+        #{gender},
+        #{birthday},
+        #{remark}
+    )
+</span><span style="color: #0000ff">&lt;/</span><span style="color: #800000">insert</span><span style="color: #0000ff">&gt;</span>
+
+<span style="color: #0000ff">&lt;/</span><span style="color: #800000">mapper</span><span style="color: #0000ff">&gt;</span></pre>
+</div>
+<p>&nbsp;</p>
+<p>　　3.4 实现Mybatis中的Cache接口</p>
+<p>　　　　Cache.class源码：</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008000">/*</span><span style="color: #008000">
+ *    Copyright 2009-2012 the original author or authors.
+ *    </span><span style="color: #008000; text-decoration: underline">http://www.apache.org/licenses/LICENSE-2.0</span><span style="color: #008000">*/</span>
+<span style="color: #0000ff">package</span><span style="color: #000000"> org.apache.ibatis.cache;
+
+</span><span style="color: #0000ff">import</span><span style="color: #000000"> java.util.concurrent.locks.ReadWriteLock;
+
+</span><span style="color: #0000ff">public</span> <span style="color: #0000ff">interface</span><span style="color: #000000"> Cache {
+
+  String getId();
+
+  </span><span style="color: #0000ff">int</span><span style="color: #000000"> getSize();
+
+  </span><span style="color: #0000ff">void</span><span style="color: #000000"> putObject(Object key, Object value);
+
+  Object getObject(Object key);
+
+  Object removeObject(Object key);
+
+  </span><span style="color: #0000ff">void</span><span style="color: #000000"> clear();
+
+  ReadWriteLock getReadWriteLock();
+
+}</span></pre>
+</div>
+<p>&nbsp;</p>
+<p>　　　　RedisCache.java</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff">package</span><span style="color: #000000"> demo.redis.cache;
+
+</span><span style="color: #0000ff">import</span><span style="color: #000000"> java.util.concurrent.locks.ReadWriteLock;
+</span><span style="color: #0000ff">import</span><span style="color: #000000"> java.util.concurrent.locks.ReentrantReadWriteLock;
+
+</span><span style="color: #0000ff">import</span><span style="color: #000000"> org.apache.ibatis.cache.Cache;
+</span><span style="color: #0000ff">import</span><span style="color: #000000"> org.slf4j.Logger;
+</span><span style="color: #0000ff">import</span><span style="color: #000000"> org.slf4j.LoggerFactory;
+</span><span style="color: #0000ff">import</span><span style="color: #000000"> org.springframework.data.redis.connection.jedis.JedisConnection;
+</span><span style="color: #0000ff">import</span><span style="color: #000000"> org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+</span><span style="color: #0000ff">import</span><span style="color: #000000"> org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
+</span><span style="color: #0000ff">import</span><span style="color: #000000"> org.springframework.data.redis.serializer.RedisSerializer;
+
+</span><span style="color: #0000ff">import</span><span style="color: #000000"> redis.clients.jedis.exceptions.JedisConnectionException;
+
+
+</span><span style="color: #0000ff">public</span> <span style="color: #0000ff">class</span> RedisCache <span style="color: #0000ff">implements</span><span style="color: #000000"> Cache <span style="color: #008080">//实现类</span>
+{
+    </span><span style="color: #0000ff">private</span> <span style="color: #0000ff">static</span> <span style="color: #0000ff">final</span> Logger logger = LoggerFactory.getLogger(RedisCache.<span style="color: #0000ff">class</span><span style="color: #000000">);
+
+    </span><span style="color: #0000ff">private</span> <span style="color: #0000ff">static</span><span style="color: #000000"> JedisConnectionFactory jedisConnectionFactory;
+
+    </span><span style="color: #0000ff">private</span> <span style="color: #0000ff">final</span><span style="color: #000000"> String id;
+
+    </span><span style="color: #008000">/**</span><span style="color: #008000">
+     * The {</span><span style="color: #808080">@code</span><span style="color: #008000"> ReadWriteLock}.
+     </span><span style="color: #008000">*/</span>
+    <span style="color: #0000ff">private</span> <span style="color: #0000ff">final</span> ReadWriteLock readWriteLock = <span style="color: #0000ff">new</span><span style="color: #000000"> ReentrantReadWriteLock();
+
+    </span><span style="color: #0000ff">public</span> RedisCache(<span style="color: #0000ff">final</span><span style="color: #000000"> String id) {
+        </span><span style="color: #0000ff">if</span> (id == <span style="color: #0000ff">null</span><span style="color: #000000">) {
+            </span><span style="color: #0000ff">throw</span> <span style="color: #0000ff">new</span> IllegalArgumentException("Cache instances require an ID"<span style="color: #000000">);
+        }
+        logger.debug(</span>"MybatisRedisCache:id=" +<span style="color: #000000"> id);
+        </span><span style="color: #0000ff">this</span>.id =<span style="color: #000000"> id;
+    }
+
+    @Override
+    </span><span style="color: #0000ff">public</span> <span style="color: #0000ff">void</span><span style="color: #000000"><span style="color: #ff0000"> clear</span>()
+    {
+        JedisConnection connection </span>= <span style="color: #0000ff">null</span><span style="color: #000000">;
+        </span><span style="color: #0000ff">try</span><span style="color: #000000">
+        {
+            connection </span>=<span style="color: #000000"> jedisConnectionFactory.getConnection(); <span style="color: #008080">//连接清除数据</span>
+            connection.flushDb();
+            connection.flushAll();
+        }
+        </span><span style="color: #0000ff">catch</span><span style="color: #000000"> (JedisConnectionException e)
+        {
+            e.printStackTrace();
+        }
+        </span><span style="color: #0000ff">finally</span><span style="color: #000000">
+        {
+            </span><span style="color: #0000ff">if</span> (connection != <span style="color: #0000ff">null</span><span style="color: #000000">) {
+                connection.close();
+            }
+        }
+    }
+
+    @Override
+    </span><span style="color: #0000ff">public</span><span style="color: #000000"> String getId()
+    {
+        </span><span style="color: #0000ff">return</span> <span style="color: #0000ff">this</span><span style="color: #000000">.id;
+    }
+
+    @Override
+    </span><span style="color: #0000ff">public</span><span style="color: #000000"> Object <span style="color: #ff0000">getObject</span>(Object key)
+    {
+        Object result </span>= <span style="color: #0000ff">null</span><span style="color: #000000">;
+        JedisConnection connection </span>= <span style="color: #0000ff">null</span><span style="color: #000000">;
+        </span><span style="color: #0000ff">try</span><span style="color: #000000">
+        {
+            connection </span>=<span style="color: #000000"> jedisConnectionFactory.getConnection();
+            RedisSerializer</span>&lt;Object&gt; serializer = <span style="color: #0000ff">new</span><span style="color: #000000"> JdkSerializationRedisSerializer(); <span style="color: #008080">//借用spring_data_redis.jar中的JdkSerializationRedisSerializer.class</span>
+            result </span>=<span style="color: #000000"> serializer.deserialize(connection.get(serializer.serialize(key))); <span style="color: #008080">//利用其反序列化方法获取值</span>
+        }
+        </span><span style="color: #0000ff">catch</span><span style="color: #000000"> (JedisConnectionException e)
+        {
+            e.printStackTrace();
+        }
+        </span><span style="color: #0000ff">finally</span><span style="color: #000000">
+        {
+            </span><span style="color: #0000ff">if</span> (connection != <span style="color: #0000ff">null</span><span style="color: #000000">) {
+                connection.close();
+            }
+        }
+        </span><span style="color: #0000ff">return</span><span style="color: #000000"> result;
+    }
+
+    @Override
+    </span><span style="color: #0000ff">public</span><span style="color: #000000"> ReadWriteLock getReadWriteLock()
+    {
+        </span><span style="color: #0000ff">return</span> <span style="color: #0000ff">this</span><span style="color: #000000">.readWriteLock;
+    }
+
+    @Override
+    </span><span style="color: #0000ff">public</span> <span style="color: #0000ff">int</span><span style="color: #000000"> getSize()
+    {
+        </span><span style="color: #0000ff">int</span> result = 0<span style="color: #000000">;
+        JedisConnection connection </span>= <span style="color: #0000ff">null</span><span style="color: #000000">;
+        </span><span style="color: #0000ff">try</span><span style="color: #000000">
+        {
+            connection </span>=<span style="color: #000000"> jedisConnectionFactory.getConnection();
+            result </span>=<span style="color: #000000"> Integer.valueOf(connection.dbSize().toString());
+        }
+        </span><span style="color: #0000ff">catch</span><span style="color: #000000"> (JedisConnectionException e)
+        {
+            e.printStackTrace();
+        }
+        </span><span style="color: #0000ff">finally</span><span style="color: #000000">
+        {
+            </span><span style="color: #0000ff">if</span> (connection != <span style="color: #0000ff">null</span><span style="color: #000000">) {
+                connection.close();
+            }
+        }
+        </span><span style="color: #0000ff">return</span><span style="color: #000000"> result;
+    }
+
+    @Override
+    </span><span style="color: #0000ff">public</span> <span style="color: #0000ff">void</span><span style="color: #000000"><span style="color: #ff0000"> putObject</span>(Object key, Object value)
+    {
+        JedisConnection connection </span>= <span style="color: #0000ff">null</span><span style="color: #000000">;
+        </span><span style="color: #0000ff">try</span><span style="color: #000000">
+        {
+            logger.info(</span>"&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;putObject:"+key+"="+<span style="color: #000000">value);
+            connection </span>=<span style="color: #000000"> jedisConnectionFactory.getConnection();
+            RedisSerializer</span>&lt;Object&gt; serializer = <span style="color: #0000ff">new</span><span style="color: #000000"> JdkSerializationRedisSerializer(); <span style="color: #008080">//借用spring_data_redis.jar中的JdkSerializationRedisSerializer.class</span>
+            connection.set(serializer.serialize(key), serializer.serialize(value)); <span style="color: #008080">//利用其序列化方法将数据写入redis服务的缓存中</span>
+            
+        }
+        </span><span style="color: #0000ff">catch</span><span style="color: #000000"> (JedisConnectionException e)
+        {
+            e.printStackTrace();
+        }
+        </span><span style="color: #0000ff">finally</span><span style="color: #000000">
+        {
+            </span><span style="color: #0000ff">if</span> (connection != <span style="color: #0000ff">null</span><span style="color: #000000">) {
+                connection.close();
+            }
+        }
+    }
+
+    @Override
+    </span><span style="color: #0000ff">public</span><span style="color: #000000"> Object <span style="color: #ff0000">removeObject</span>(Object key)
+    {
+        JedisConnection connection </span>= <span style="color: #0000ff">null</span><span style="color: #000000">
+        Object result </span>= <span style="color: #0000ff">null</span><span style="color: #000000">;
+        </span><span style="color: #0000ff">try</span><span style="color: #000000">
+        {
+            connection </span>=<span style="color: #000000"> jedisConnectionFactory.getConnection();
+            RedisSerializer</span>&lt;Object&gt; serializer = <span style="color: #0000ff">new</span><span style="color: #000000"> JdkSerializationRedisSerializer();
+            result </span>=connection.expire(serializer.serialize(key), 0<span style="color: #000000">);
+        }
+        </span><span style="color: #0000ff">catch</span><span style="color: #000000"> (JedisConnectionException e)
+        {
+            e.printStackTrace();
+        }
+        </span><span style="color: #0000ff">finally</span><span style="color: #000000">
+        {
+            </span><span style="color: #0000ff">if</span> (connection != <span style="color: #0000ff">null</span><span style="color: #000000">) {
+                connection.close();
+            }
+        }
+        </span><span style="color: #0000ff">return</span><span style="color: #000000"> result;
+    }
+
+    </span><span style="color: #0000ff">public</span> <span style="color: #0000ff">static</span> <span style="color: #0000ff">void</span><span style="color: #000000"> setJedisConnectionFactory(JedisConnectionFactory jedisConnectionFactory) {
+        RedisCache.jedisConnectionFactory </span>=<span style="color: #000000"> jedisConnectionFactory;
+    }
+
+}</span></pre>
+</div>
+<p>&nbsp;</p>
+<p><strong>　　4. 总结</strong></p>
+<p>　　　　通过重写Cache类中的方法，将mybatis中默认的缓存空间映射到redis空间中。</p>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2017-02-07 15:32</span> <a href='http://www.cnblogs.com/springlight/'>孙猴子</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=6374372" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(6374372);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=290126,cb_entryId=6374372,cb_blogApp=currentBlogApp,cb_blogUserGuid='12b6475c-58b4-e511-9fc1-ac853d9f53cc',cb_entryCreatedDate='2017/2/7 15:32:00';loadViewCount(cb_entryId);var cb_postType=1;</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<DIV id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</DIV>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2018 孙猴子
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+</body>
+</html>

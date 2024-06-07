@@ -1,0 +1,3223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link rel="canonical" href="https://blog.csdn.net/xuyuzhuang1991/article/details/54143945"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="renderer" content="webkit"/>
+    <meta name="force-rendering" content="webkit"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="referrer" content="always">
+    <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848">
+    <script src="https://csdnimg.cn/release/phoenix/vendor/tingyun/tingyun-rum-blog.js"></script>
+
+    <link href="https://csdnimg.cn/public/favicon.ico" rel="SHORTCUT ICON">
+    <title>Spring Boot集成MyBatis——注解方式 - 大壮的博客 - CSDN博客</title>
+
+        
+                    <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/detail-850fd67a6d.min.css">
+            
+            <script type="application/ld+json">{"@context":"https:\/\/ziyuan.baidu.com\/contexts\/cambrian.jsonld","@id":"https:\/\/blog.csdn.net\/xuyuzhuang1991\/article\/details\/54143945","appid":"1563894916825412","title":"Spring Boot\u96c6\u6210MyBatis\u2014\u2014\u6ce8\u89e3\u65b9\u5f0f - \u5927\u58ee\u7684\u535a\u5ba2","images":["http:\/\/ojd1sao9v.bkt.clouddn.com\/spring-mybatis-project-structure.jpg","http:\/\/ojd1sao9v.bkt.clouddn.com\/run-success.jpg","http:\/\/ojd1sao9v.bkt.clouddn.com\/show-service.jpg"],"pubDate":"2018-11-28T13:41:55"}</script>
+        
+          <link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/themes/skin-yellow/skin-yellow-2eefd34acf.min.css">
+        <script type="text/javascript">
+        var username = "xuyuzhuang1991";
+        var blog_address = "https://blog.csdn.net/xuyuzhuang1991";
+        var static_host = "https://csdnimg.cn/release/phoenix/";
+        var currentUserName = "attilax";
+        var isShowAds = true;
+        var isOwner = false;
+        var loginUrl = "http://passport.csdn.net/account/login?from=https://blog.csdn.net/xuyuzhuang1991/article/details/54143945"
+        var blogUrl = "https://blog.csdn.net/";
+        //页面皮肤样式
+        var curSkin = "skin-yellow";
+        // 第四范式所需数据
+        var articleTitles = "Spring Boot集成MyBatis——注解方式 - 大壮的博客";
+        var articleID = "54143945";
+
+        var nickName = "大壮-_-";
+        var isCorporate = false;
+    </script>
+    <script type="text/javascript">
+        // Traffic Stats of the entire Web site By baidu
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?6bcd52f51e9b3dce32bec4a3997715ac";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+        // Traffic Stats of the entire Web site By baidu end
+    </script>
+    <script src="https://csdnimg.cn/public/common/libs/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <script src="https://csdnimg.cn/rabbit/exposure-click/main-1.0.6.js"></script>
+    <!-- 新版上报 -->
+    <script src="//g.csdnimg.cn/track/1.1.1/track.js" type="text/javascript"></script>
+    <!-- 新版上报end -->
+            <link rel="stylesheet" href="https://csdnimg.cn/public/sandalstrap/1.4/css/sandalstrap.min.css">
+    <style>
+        .MathJax, .MathJax_Message, .MathJax_Preview{
+            display: none
+        }
+    </style>
+</head>
+<!-- nodata 第三栏接口无数据时样式不变 -->
+<body class="nodata " > 
+    <link rel="stylesheet" href="https://csdnimg.cn/public/common/toolbar/content_toolbar_css/content_toolbar.css">
+    <script id="toolbar-tpl-scriptId" src="https://csdnimg.cn/public/common/toolbar/js/content_toolbar.js" type="text/javascript" domain="https://blog.csdn.net/"></script>
+<link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/blog_code-c3a0c33d5c.css">
+<link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/vendor/pagination/paging.css">
+<script type="text/javascript">
+	// 容错处理
+	var NEWS_FEED = function(){}
+</script>
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<script type="text/javascript" src="//g.csdnimg.cn/copyright/1.0.3/copyright.js"></script>
+<div style="display:none;">
+	<img src="" onerror='setTimeout(function(){if(!/(csdn.net|iteye.com|baiducontent.com|googleusercontent.com|360webcache.com|sogoucdn.com|bingj.com|baidu.com)$/.test(window.location.hostname)){window.location.href="\x68\x74\x74\x70\x73\x3a\x2f\x2f\x77\x77\x77\x2e\x63\x73\x64\x6e\x2e\x6e\x65\x74"}},3000);'>
+</div>
+<link rel="stylesheet" href="https://csdnimg.cn/release/phoenix/template/css/chart-3456820cac.css" />
+<script src="https://dup.baidustatic.com/js/ds.js"></script>
+<div class="container clearfix" id="mainBox">
+			<div class="recommend-right">
+  <ul class="recommend-fixed-box">
+    
+  </ul>
+</div>	
+    <main>
+        <div class="blog-content-box">
+	<div class="article-header-box">
+		<div class="article-header">
+			<div class="article-title-box">
+				<span class="article-type type-1 float-left">原</span>				<h1 class="title-article">Spring Boot集成MyBatis——注解方式</h1>
+			</div>
+			<div class="article-info-box">
+				<div class="article-bar-top">
+																				<span class="time">2018年03月21日 12:07:16</span>
+					<a class="follow-nickName" href="https://me.csdn.net/xuyuzhuang1991" target="_blank">大壮-_-</a>
+						<span class="read-count">阅读数：5333</span>
+						
+														<span class="tags-box artic-tag-box">
+								<span class="label">标签：</span>
+																<a data-track-click='{"mod":"popu_626","con":"Mybatis"}' data-track-view='{"mod":"popu_626","con":"Mybatis"}' class="tag-link" href="http://so.csdn.net/so/search/s.do?q=Mybatis&t=blog" target="_blank">Mybatis																<a data-track-click='{"mod":"popu_626","con":"注解"}' data-track-view='{"mod":"popu_626","con":"注解"}' class="tag-link" href="http://so.csdn.net/so/search/s.do?q=注解&t=blog" target="_blank">注解																<a data-track-click='{"mod":"popu_626","con":"SpringBoot"}' data-track-view='{"mod":"popu_626","con":"SpringBoot"}' class="tag-link" href="http://so.csdn.net/so/search/s.do?q=SpringBoot&t=blog" target="_blank">SpringBoot																</a>
+							</span>
+																					<div class="tags-box space">
+								<span class="label">个人分类：</span>
+																<a class="tag-link" href="https://blog.csdn.net/xuyuzhuang1991/article/category/6668985"  target="_blank">Java																</a>
+							</div>
+																								</div>
+				<div class="operating">
+														</div>
+			</div>
+		</div>
+	</div>
+	<article class="baidu_pl">
+		<div id="article_content" class="article_content clearfix csdn-tracking-statistics" data-pid="blog"  data-mod=popu_307  data-dsm = "post" >
+								            <div id="content_views" class="markdown_views prism-atom-one-dark">
+							<!-- flowchart 箭头图标 勿删 -->
+							<svg xmlns="http://www.w3.org/2000/svg" style="display: none;"><path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path></svg>
+							<p><strong>MyBatis</strong>是支持定制化SQL、存储过程以及高级映射的优秀的持久层框架，避免了几乎所有的JDBC代码和手动设置参数以及获取结果集。Spring Boot是能支持快速创建Spring应用的Java框架。本文通过一个例子来学习Spring Boot如何集成MyBatis，而且过程中不需要XML配置。</p>
+
+
+
+<hr>
+
+
+
+<h2 id="创建数据库">创建数据库</h2>
+
+<p>本文的例子使用Mysql数据库，首先创建一个用户表，执行sql语句如下：</p>
+
+
+
+<pre class="prettyprint"><code class="language-sql hljs "><span class="hljs-operator"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> <span class="hljs-keyword">user</span> (
+  <span class="hljs-string">`id`</span> <span class="hljs-keyword">INT</span>(<span class="hljs-number">10</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> AUTO_INCREMENT,
+  <span class="hljs-string">`name`</span> <span class="hljs-keyword">VARCHAR</span>(<span class="hljs-number">50</span>) <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> ,
+  <span class="hljs-string">`age`</span> <span class="hljs-keyword">INT</span>(<span class="hljs-number">2</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> ,
+  <span class="hljs-keyword">PRIMARY</span> <span class="hljs-keyword">KEY</span> (id)
+)</span></code></pre>
+
+
+
+<h2 id="工程目录结构与依赖配置">工程目录结构与依赖配置</h2>
+
+<p>首先新建一个Maven工程，并配置Pom依赖，本例中所用到的依赖如下：</p>
+
+
+
+<pre class="prettyprint"><code class="language-xml hljs "><span class="hljs-tag">&lt;<span class="hljs-title">parent</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-title">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="hljs-tag">&lt;/<span class="hljs-title">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">version</span>&gt;</span>1.4.2.RELEASE<span class="hljs-tag">&lt;/<span class="hljs-title">version</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">relativePath</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">parent</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-title">dependencies</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">dependency</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-title">groupId</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">artifactId</span>&gt;</span>spring-boot-starter-web<span class="hljs-tag">&lt;/<span class="hljs-title">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">dependency</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="hljs-tag">&lt;/<span class="hljs-title">groupId</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="hljs-tag">&lt;/<span class="hljs-title">artifactId</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">version</span>&gt;</span>1.1.1<span class="hljs-tag">&lt;/<span class="hljs-title">version</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">dependency</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">groupId</span>&gt;</span>mysql<span class="hljs-tag">&lt;/<span class="hljs-title">groupId</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">artifactId</span>&gt;</span>mysql-connector-java<span class="hljs-tag">&lt;/<span class="hljs-title">artifactId</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">version</span>&gt;</span>5.1.40<span class="hljs-tag">&lt;/<span class="hljs-title">version</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">dependency</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">dependencies</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-title">build</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">plugins</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">plugin</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-title">groupId</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="hljs-tag">&lt;/<span class="hljs-title">artifactId</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">plugin</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">plugins</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">build</span>&gt;</span></code></pre>
+
+<p>然后创建一下工程目录结构，如下图所示：</p>
+
+<p><img src="http://ojd1sao9v.bkt.clouddn.com/spring-mybatis-project-structure.jpg" alt="project-structure" title=""></p>
+
+
+
+<h2 id="代码文件内容">代码文件内容</h2>
+
+
+
+<h3 id="0-创建配置文件applicationproperties">0. 创建配置文件——application.properties</h3>
+
+<p>写入一下内容：</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs ">spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+spring.datasource.url=jdbc:mysql:<span class="hljs-comment">//localhost:3306/test?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8</span>
+spring.datasource.username=root
+spring.datasource.password=<span class="hljs-number">123456</span></code></pre>
+
+
+
+<h3 id="1-创建pojoentityuserjava">1. 创建POJO——entity/User.java</h3>
+
+<p>这是一个POJO，包含了id, name, age三个属性，代码如下：</p>
+
+
+
+<pre class="prettyprint"><code class="language-Java hljs cs">package com.xyz.dbtest.entity;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> User {
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> id;
+    <span class="hljs-keyword">private</span> String name;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> age;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getId</span>() {    <span class="hljs-keyword">return</span> id;    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setId</span>(<span class="hljs-keyword">int</span> id) { <span class="hljs-keyword">this</span>.id = id;    }
+
+    <span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span>() {   <span class="hljs-keyword">return</span> name;    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setName</span>(String name) {  <span class="hljs-keyword">this</span>.name = name;    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getAge</span>() {   <span class="hljs-keyword">return</span> age;    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setAge</span>(<span class="hljs-keyword">int</span> age) {   <span class="hljs-keyword">this</span>.age = age;    }
+}</code></pre>
+
+
+
+<h3 id="2-创建一个数据层接口serviceuserservicejava">2. 创建一个数据层接口——service/UserService.java</h3>
+
+<p>这是一个Mapper类，代码如下：</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs "><span class="hljs-keyword">package</span> com.xyz.dbtest.dao;
+
+<span class="hljs-keyword">import</span> com.xyz.dbtest.entity.User;
+<span class="hljs-keyword">import</span> org.apache.ibatis.annotations.Mapper;
+<span class="hljs-keyword">import</span> org.apache.ibatis.annotations.Result;
+<span class="hljs-keyword">import</span> org.apache.ibatis.annotations.Results;
+<span class="hljs-keyword">import</span> org.apache.ibatis.annotations.Select;
+<span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-annotation">@Mapper</span> <span class="hljs-comment">//1</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">UserDao</span> {</span>
+    <span class="hljs-annotation">@Results</span>({ <span class="hljs-comment">//2</span>
+            <span class="hljs-annotation">@Result</span>(property = <span class="hljs-string">"id"</span>, column = <span class="hljs-string">"id"</span>), <span class="hljs-comment">//2</span>
+            <span class="hljs-annotation">@Result</span>(property = <span class="hljs-string">"name"</span>, column = <span class="hljs-string">"name"</span>),
+            <span class="hljs-annotation">@Result</span>(property = <span class="hljs-string">"age"</span>, column = <span class="hljs-string">"age"</span>)
+    })
+    <span class="hljs-annotation">@Select</span>(<span class="hljs-string">"SELECT * FROM user WHERE age = #{age}"</span>) <span class="hljs-comment">//3</span>
+    List&lt;User&gt; get(<span class="hljs-keyword">int</span> age);
+
+    <span class="hljs-annotation">@Insert</span>(<span class="hljs-string">"INSERT INTO user(name, age) VALUES (#{name}, #{age})"</span>) <span class="hljs-comment">//3</span>
+    <span class="hljs-keyword">void</span> insert(User user);
+}</code></pre>
+
+<p>//1 @Mapper将UserDao声明为一个Mapper接口 <br>
+//2 @Results是结果映射列表，@Result中property是User类的属性名，colomn是数据库表的字段名 <br>
+//3 @Select, @Insert 分别代表了执行的真实SQL</p>
+
+
+
+<h3 id="3-创建一个用户服务serviceuserservicejava">3. 创建一个用户服务——service/UserService.java</h3>
+
+<p>这是一个服务类Bean，提供三个函数功能，代码如下：</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs "><span class="hljs-keyword">package</span> com.xyz.dbtest.service;
+
+<span class="hljs-keyword">import</span> com.xyz.dbtest.dao.UserDao;
+<span class="hljs-keyword">import</span> com.xyz.dbtest.entity.User;
+<span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;
+<span class="hljs-keyword">import</span> org.springframework.stereotype.Service;
+<span class="hljs-keyword">import</span> java.util.List;
+
+<span class="hljs-annotation">@Service</span> <span class="hljs-comment">//声明成一个spring bean</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserService</span> {</span>
+
+    <span class="hljs-annotation">@Autowired</span> <span class="hljs-comment">//连接到UserDao Bean</span>
+    <span class="hljs-keyword">private</span> UserDao userDao;
+
+    <span class="hljs-keyword">public</span> String <span class="hljs-title">show</span>() {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"Hello World!"</span>;
+    }
+
+    <span class="hljs-keyword">public</span> List&lt;User&gt; <span class="hljs-title">showDao</span>(<span class="hljs-keyword">int</span> age) {
+        <span class="hljs-keyword">return</span> userDao.get(age);
+    }
+
+    <span class="hljs-keyword">public</span> String <span class="hljs-title">insert</span>(String name, <span class="hljs-keyword">int</span> age) { <span class="hljs-comment">//插入一条记录</span>
+        User user = <span class="hljs-keyword">new</span> User();
+        user.setName(name);
+        user.setAge(age);
+        userDao.insert(user);
+        <span class="hljs-keyword">return</span> <span class="hljs-string">"Insert ( \""</span>+name+<span class="hljs-string">"\", age"</span>+age+<span class="hljs-string">") OK!"</span>;
+    }
+}</code></pre>
+
+
+
+<h3 id="4-常见一个web-controllercontrollerusercontrollerjava">4. 常见一个Web Controller——controller/UserController.java</h3>
+
+<p>这是一个Spring Web的Controller类，引入了<strong>spring-boot-starter-web</strong>依赖，代码如下：</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs "><span class="hljs-keyword">package</span> com.xyz.dbtest.controller;
+
+<span class="hljs-keyword">import</span> com.xyz.dbtest.service.UserService;
+<span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;
+<span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;
+<span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.ResponseBody;
+<span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RestController;
+
+<span class="hljs-annotation">@RestController</span> <span class="hljs-comment">//声明为一个Restful的Controller</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserController</span> {</span>
+    <span class="hljs-annotation">@Autowired</span> <span class="hljs-comment">//自动连接到UserService Bean</span>
+    <span class="hljs-keyword">private</span> UserService userService;
+
+    <span class="hljs-annotation">@RequestMapping</span>(value = <span class="hljs-string">"/show"</span>)
+    <span class="hljs-keyword">public</span> String <span class="hljs-title">show</span>() {
+        <span class="hljs-keyword">return</span> userService.show();
+    }
+
+    <span class="hljs-annotation">@RequestMapping</span>(value = <span class="hljs-string">"/showDao"</span>)
+    <span class="hljs-keyword">public</span> Object <span class="hljs-title">showDao</span>(<span class="hljs-keyword">int</span> age) {
+        <span class="hljs-keyword">return</span> userService.showDao(age);
+    }
+
+    <span class="hljs-annotation">@RequestMapping</span>(value=<span class="hljs-string">"/insert"</span>)
+    <span class="hljs-keyword">public</span> String <span class="hljs-title">insert</span>(String name, <span class="hljs-keyword">int</span> age) {
+        <span class="hljs-keyword">return</span> userService.insert(name, age);
+    }
+}</code></pre>
+
+
+
+<h3 id="5-创建启动类mainstartappjava">5. 创建启动类——main/StartApp.java</h3>
+
+<p>这是一个spring boot启动类。代码如下：</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs "><span class="hljs-keyword">package</span> com.xyz.dbtest.main;
+
+<span class="hljs-keyword">import</span> org.mybatis.spring.annotation.MapperScan;
+<span class="hljs-keyword">import</span> org.springframework.boot.SpringApplication;
+<span class="hljs-keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;
+
+<span class="hljs-annotation">@SpringBootApplication</span>(scanBasePackages = <span class="hljs-string">"com.xyz.dbtest"</span>) <span class="hljs-comment">//1</span>
+<span class="hljs-annotation">@MapperScan</span>(basePackages = <span class="hljs-string">"com.xyz.dbtest.dao"</span>) <span class="hljs-comment">//2</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StartApp</span> {</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span>(String[] args) {
+        SpringApplication.run(StartApp.class, args);
+    }
+}</code></pre>
+
+<p>//1 由于StartApp类位于基础包的自包中，因此需要设置scanBasePackage <br>
+//2 设置Mapper接口所在的包</p>
+
+
+
+<h2 id="运行结果">运行结果</h2>
+
+<ul>
+<li>运行Sql语句创建数据库表后，运行StartApp类。启动成功如下图所示</li>
+</ul>
+
+<p><img src="http://ojd1sao9v.bkt.clouddn.com/run-success.jpg" alt="run-success" title=""></p>
+
+<ul>
+<li>测试show服务，结果如下：</li>
+</ul>
+
+<p><img src="http://ojd1sao9v.bkt.clouddn.com/show-service.jpg" alt="show-service" title=""></p>
+
+<ul>
+<li>测试showDao服务，在输入URL时需要将参数打包进url，结果如下: <br>
+<code>不带参数时，访问错误：</code></li>
+</ul>
+
+<p><img src="http://ojd1sao9v.bkt.clouddn.com/showDao-fail.jpg" alt="showDao-fail" title=""></p>
+
+<p><code>带参数时，访问成功,由于数据库中没有记录，所以结果是一个空列表：</code></p>
+
+<p><img src="http://ojd1sao9v.bkt.clouddn.com/showDao-success.jpg" alt="showDao-fail" title=""></p>
+
+<ul>
+<li>测试insert服务</li>
+</ul>
+
+<p><img src="http://ojd1sao9v.bkt.clouddn.com/insert-abc20.jpg" alt="insert-abc20" title=""></p>
+
+<p><img src="http://ojd1sao9v.bkt.clouddn.com/insert-xyz20.jpg" alt="insert-xyz20" title=""></p>
+
+<ul>
+<li>再次测试showDao服务</li>
+</ul>
+
+<p><img src="http://ojd1sao9v.bkt.clouddn.com/showdao-again.jpg" alt="showDao-agin" title=""></p>
+
+
+
+<h2 id="结语">结语</h2>
+
+<p>通过本文的例子可以看出，使用Spring boot集成MyBatis几乎不用任何配置工作，能有效加快开发效率！</p>
+
+<p>代码库地址：<a href="https://github.com/dazhxu/mybatis-test" rel="nofollow">github地址</a></p>
+
+<p>作者：许玉壮 <br>
+2017年1月6日</p>            </div>
+						<link href="https://csdnimg.cn/release/phoenix/mdeditor/markdown_views-2787195726.css" rel="stylesheet">
+                </div>
+									<div class="hide-article-box text-center">
+						<a class="btn" id="btn-readmore" data-track-view='{"mod":"popu_376","con":",https://blog.csdn.net/xuyuzhuang1991/article/details/54143945,"}' data-track-click='{"mod":"popu_376","con":",https://blog.csdn.net/xuyuzhuang1991/article/details/54143945,"}'>阅读更多</a>
+					</div>
+					<script>
+						(function(){
+							function setArticleH(btnReadmore,posi){
+								var winH = $(window).height();
+								var articleBox = $("div.article_content");
+								var artH = articleBox.height();
+								if(artH > winH*posi){
+									articleBox.css({
+										'height':winH*posi+'px',
+										'overflow':'hidden'
+									})
+									btnReadmore.click(function(){
+										
+										if(!window.csdn.anonymousUserLimit.judgment()){
+											window.csdn.anonymousUserLimit.Jumplogin();
+											return false;
+										}else if(!currentUserName){
+											window.csdn.anonymousUserLimit.updata();
+										}
+										
+										articleBox.removeAttr("style");
+										$(this).parent().remove();
+									})
+								}else{
+									btnReadmore.parent().remove();
+								}
+							}
+							var btnReadmore = $("#btn-readmore");
+							if(btnReadmore.length>0){
+								if(currentUserName){
+									setArticleH(btnReadmore,3);
+								}else{
+									setArticleH(btnReadmore,1.2);
+								}
+							}
+						})()
+					</script>
+					</article>
+	
+</div>
+<script>
+		$(".MathJax").remove();
+		if($('div.markdown_views pre.prettyprint code.hljs').length > 0 ){
+				$('div.markdown_views')[0].className = 'markdown_views';
+		}
+</script>
+        <div id="dmp_ad_58"><div id="kp_box_58" data-pid="58" data-track-view='{"mod":"kp_popu_58-402","con":",,"}' data-track-click='{"mod":"kp_popu_58-402","con":",,"}'><div style="width:100%;background:#fff;border:3px solid #fff;">
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<div id="three_ad1" class="mediav_ad" ></div>
+<script>
+                                               NEWS_FEED({
+                w: 900,
+                h : 100,
+                showid : 'ztvJV8',
+                placeholderId: "three_ad1",
+                inject : 'define',
+                define : {
+                    imagePosition : 'left',
+                    imageBorderRadius : 0,
+                    imageWidth: 90,
+                    imageHeight: 68,
+                    imageFill : 'clip',
+                    displayImage : true,
+                    displayTitle : true,
+                    titleFontSize: 18,
+                    titleFontColor: '#000',
+                    titleFontFamily : 'Lato,-apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif',
+                    titleFontWeight: 'bold',
+                    titlePaddingTop : 0,
+                    titlePaddingRight : 0,
+                    titlePaddingBottom : 5,
+                    titlePaddingLeft : 16,
+                    displayDesc : true,
+                    descFontSize: 14,
+                    descFontColor: '#8e959a',
+                    descFontFamily : 'Microsoft YaHei',
+                    paddingTop : 20,
+                    paddingRight : 0,
+                    paddingBottom : 0,
+                    paddingLeft : 20,
+                    backgroundColor: '#fff',
+                    hoverColor: '#000'
+                      }
+                  })
+                                        </script>
+</div></div></div>        <a id="commentBox"></a>
+<div class="comment-box">
+	
+	<div class="comment-edit-box d-flex">
+		<a id="commentsedit"></a>
+		<div class="user-img">
+			<a href="//me.csdn.net/attilax" target="_blank">
+				<img class="" src="https://avatar.csdn.net/3/9/1/3_attilax.jpg">
+			</a>
+		</div>
+		<form id="commentform">
+			<input type="hidden" id="comment_replyId">
+			<textarea class="comment-content" name="comment_content" id="comment_content" placeholder="想对作者说点什么"></textarea>
+			<div class="opt-box"> <!-- d-flex -->
+				<div id="ubbtools" class="add_code">
+					<a href="#insertcode" code="code" target="_self"><i class="icon iconfont icon-daima"></i></a>
+				</div>
+				<input type="hidden" id="comment_replyId" name="comment_replyId">
+				<input type="hidden" id="comment_userId" name="comment_userId" value="">
+				<input type="hidden" id="commentId" name="commentId" value="">
+				<div style="display: none;" class="csdn-tracking-statistics tracking-click" data-mod="popu_384"><a href="#" target="_blank" class="comment_area_btn">发表评论</a></div>
+				<div class="dropdown" id="myDrap">
+					<a class="dropdown-face d-flex align-items-center" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+					<div class="txt-selected text-truncate">添加代码片</div>
+					<svg class="icon d-block" aria-hidden="true">
+						<use xlink:href="#csdnc-triangledown"></use>
+					</svg>
+					</a>
+					<ul class="dropdown-menu" id="commentCode" aria-labelledby="drop4">
+						<li><a data-code="html">HTML/XML</a></li>
+						<li><a data-code="objc">objective-c</a></li>
+						<li><a data-code="ruby">Ruby</a></li>
+						<li><a data-code="php">PHP</a></li>
+						<li><a data-code="csharp">C</a></li>
+						<li><a data-code="cpp">C++</a></li>
+						<li><a data-code="javascript">JavaScript</a></li>
+						<li><a data-code="python">Python</a></li>
+						<li><a data-code="java">Java</a></li>
+						<li><a data-code="css">CSS</a></li>
+						<li><a data-code="sql">SQL</a></li>
+						<li><a data-code="plain">其它</a></li>
+					</ul>
+				</div>  
+				<div class="right-box">
+					<span id="tip_comment" class="tip">还能输入<em>1000</em>个字符</span>
+					<input type="submit" class="btn btn-sm btn-red btn-comment" value="发表评论">
+				</div>
+			</div>
+		</form>
+	</div>
+
+		<div class="comment-list-container">
+		<a id="comments"></a>
+		<div class="comment-list-box">
+		</div>
+		<div id="commentPage" class="pagination-box d-none"></div>
+		<div class="opt-box text-center">
+			<button class="btn btn-sm btn-link-blue" id="btnMoreComment"></button>
+		</div>
+	</div>
+</div>
+        <div class="recommend-box">
+            		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/wangb_java/article/details/72974473,BlogCommendFromBaidu_0"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/wangb_java/article/details/72974473,BlogCommendFromBaidu_0"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/wangb_java/article/details/72974473" target="_blank" title="spring boot(7)-mybatis全注解化 - JAVA博客">
+				<h4 class="text-truncate oneline">
+						<em>spring</em> <em>boot</em>(7)-<em>mybatis</em>全注解化 - JAVA博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/B/E/0/3_wangb_java.jpg" alt="wangb_java" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">wangb_java</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">06-10</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1.5万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/wangb_java/article/details/72974473" target="_blank" title="spring boot(7)-mybatis全注解化 - JAVA博客">
+							<span class="desc oneline">关于配置数据库可以参考上一篇文章，这里只讲mybatis
+pom.xml
+
+
+
+    org.mybatis.spring.boot
+    mybatis-spring-boot-starter
+...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/wangb_java">来自：	<span class="blog_title"> JAVA博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/coco2d_x2014/article/details/75452143,BlogCommendFromBaidu_1"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/coco2d_x2014/article/details/75452143,BlogCommendFromBaidu_1"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/coco2d_x2014/article/details/75452143" target="_blank" title="Springboot集成Mybatis之注解篇 - 仗剑行于江湖，执笔记江湖事。">
+				<h4 class="text-truncate oneline">
+						<em>Spring</em><em>boot</em><em>集成</em><em>Mybatis</em>之注解篇 - 仗剑行于江湖，执笔记江湖事。				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/A/9/F/3_coco2d_x2014.jpg" alt="coco2d_x2014" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">coco2d_x2014</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">07-19</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							6009</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/coco2d_x2014/article/details/75452143" target="_blank" title="Springboot集成Mybatis之注解篇 - 仗剑行于江湖，执笔记江湖事。">
+							<span class="desc oneline">Springboot集成Mybatis与 Springboot实现JPA 
+类似。 
+项目结构图如下： 
+ 
+pom.xml文件如下&amp;lt;?xml version=&amp;quot;1.0&amp;quo...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/coco2d_x2014">来自：	<span class="blog_title"> 仗剑行于江湖，执笔记江湖事。</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/Winter_chen001/article/details/78622141,BlogCommendFromBaidu_2"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/Winter_chen001/article/details/78622141,BlogCommendFromBaidu_2"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/Winter_chen001/article/details/78622141" target="_blank" title="Spring boot Mybatis 整合（注解版） - LuisChen的博客">
+				<h4 class="text-truncate oneline">
+						<em>Spring</em> <em>boot</em> <em>Mybatis</em> 整合（注解版） - LuisChen的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/1/A/6/3_winter_chen001.jpg" alt="Winter_chen001" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">Winter_chen001</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">11-24</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							6.7万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/Winter_chen001/article/details/78622141" target="_blank" title="Spring boot Mybatis 整合（注解版） - LuisChen的博客">
+							<span class="desc oneline">之前写过一篇关于springboot 与 mybatis整合的博文，使用了一段时间spring-data-jpa，发现那种方式真的是太爽了，mybatis的xml的映射配置总觉得有点麻烦。接口定义和映...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/Winter_chen001">来自：	<span class="blog_title"> LuisChen的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_59" data-pid="59" data-track-view='{"mod":"kp_popu_59-78","con":",,"}' data-track-click='{"mod":"kp_popu_59-78","con":",,"}'><script type="text/javascript" src="//rabc1.iteye.com/production/res/rxjg.js?pkcgstj=jm"></script></div></div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/zhaoyachao123/article/details/78089116,BlogCommendFromBaidu_3"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/zhaoyachao123/article/details/78089116,BlogCommendFromBaidu_3"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/zhaoyachao123/article/details/78089116" target="_blank" title="springboot整合mybatis 注解实现 - 啊大海全是水的博客">
+				<h4 class="text-truncate oneline">
+						<em>spring</em><em>boot</em>整合<em>mybatis</em> 注解实现 - 啊大海全是水的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/2/F/6/3_zhaoyachao123.jpg" alt="zhaoyachao123" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">zhaoyachao123</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">09-25</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1276</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/zhaoyachao123/article/details/78089116" target="_blank" title="springboot整合mybatis 注解实现 - 啊大海全是水的博客">
+							<span class="desc oneline">springboot 整合myabtis sql预警xml 配置文件实现请见spring-boot整合myabtis
+本节中将实现注解完成sql
+首先需要了解几个注解@Select ，@Updat...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/zhaoyachao123">来自：	<span class="blog_title"> 啊大海全是水的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/qq_41690306/article/details/79304506,BlogCommendFromBaidu_4"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/qq_41690306/article/details/79304506,BlogCommendFromBaidu_4"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_41690306/article/details/79304506" target="_blank" title="springboot整合mybatis注解版与XML配置版 - 慕云白博客">
+				<h4 class="text-truncate oneline">
+						<em>spring</em><em>boot</em>整合<em>mybatis</em>注解版与XML配置版 - 慕云白博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/2/C/8/3_qq_41690306.jpg" alt="qq_41690306" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qq_41690306</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">02-10</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							3711</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_41690306/article/details/79304506" target="_blank" title="springboot整合mybatis注解版与XML配置版 - 慕云白博客">
+							<span class="desc oneline">在spring中，构建一个项目，最麻烦也最容易出错的莫过于各种xml文件的配置，即使是一个简单的demo也需要花费一定量的时间去搭建与配置环境，而springboot可以直接理解为一个轻量级但功能依旧...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qq_41690306">来自：	<span class="blog_title"> 慕云白博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/daihuimaozideren/article/details/78751768,BlogCommendFromBaidu_5"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/daihuimaozideren/article/details/78751768,BlogCommendFromBaidu_5"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/daihuimaozideren/article/details/78751768" target="_blank" title="Spring Boot学习笔记----mybatis注解（二） - breakloop">
+				<h4 class="text-truncate oneline">
+						<em>Spring</em> <em>Boot</em>学习笔记----<em>mybatis</em>注解（二） - breakloop				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/7/9/E/3_daihuimaozideren.jpg" alt="daihuimaozideren" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">daihuimaozideren</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">12-10</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							3014</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/daihuimaozideren/article/details/78751768" target="_blank" title="Spring Boot学习笔记----mybatis注解（二） - breakloop">
+							<span class="desc oneline">之前的博文讲述了mybatis注解的简单用法，包括@Select，@Insert，@Update，@Delete，@Result，@Param和@Options。本文将记录@SelectProvide...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/daihuimaozideren">来自：	<span class="blog_title"> breakloop</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/qq_26562641/article/details/53332348,BlogCommendFromBaidu_6"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/qq_26562641/article/details/53332348,BlogCommendFromBaidu_6"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_26562641/article/details/53332348" target="_blank" title="Spring Boot中使用MyBatis注解配置详解 - 小飞侠的博客">
+				<h4 class="text-truncate oneline">
+						<em>Spring</em> <em>Boot</em>中使用<em>MyBatis</em>注解配置详解 - 小飞侠的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/2/8/A/3_qq_26562641.jpg" alt="qq_26562641" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qq_26562641</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">11-25</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							4212</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_26562641/article/details/53332348" target="_blank" title="Spring Boot中使用MyBatis注解配置详解 - 小飞侠的博客">
+							<span class="desc oneline">之前在Spring Boot中整合MyBatis时，采用了注解的配置方式，相信很多人还是比较喜欢这种优雅的方式的，也收到不少读者朋友的反馈和问题，主要集中于针对各种场景下注解如何使用，下面就对几种常见...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qq_26562641">来自：	<span class="blog_title"> 小飞侠的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/KingBoyWorld/article/details/78948304,BlogCommendFromBaidu_7"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/KingBoyWorld/article/details/78948304,BlogCommendFromBaidu_7"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/KingBoyWorld/article/details/78948304" target="_blank" title="SpringBoot使用Mybatis注解开发教程-分页-动态sql - KingBoyWorld的博客">
+				<h4 class="text-truncate oneline">
+						<em>Spring</em><em>Boot</em>使用<em>Mybatis</em>注解开发教程-分页-动态sql - KingBoyWorld的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/7/5/F/3_kingboyworld.jpg" alt="KingBoyWorld" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">KingBoyWorld</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">01-02</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							7391</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/KingBoyWorld/article/details/78948304" target="_blank" title="SpringBoot使用Mybatis注解开发教程-分页-动态sql - KingBoyWorld的博客">
+							<span class="desc oneline">代码示例可以参考个人GitHub项目kingboy-springboot-data
+
+一、环境配置
+
+1.引入mybatis依赖
+
+
+
+    compile(
+            //Sprin...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/KingBoyWorld">来自：	<span class="blog_title"> KingBoyWorld的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_60" data-pid="60" data-track-view='{"mod":"kp_popu_60-43","con":",,"}' data-track-click='{"mod":"kp_popu_60-43","con":",,"}'><div id="three_ad8" class="mediav_ad" ></div>
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<script>
+                                               NEWS_FEED({
+                w: 900,
+                h : 84,
+                showid : 'Afihld',
+                placeholderId: "three_ad8",
+                inject : 'define',
+                define : {
+                    imagePosition : 'left',
+                    imageBorderRadius : 3,
+                    imageWidth: 90,
+                    imageHeight: 60,
+                    imageFill : 'clip',
+                    displayImage : true,
+                    displayTitle : true,
+                    titleFontSize: 18,
+                    titleFontColor: '#000',
+                    titleFontFamily : 'Lato,-apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif',
+                    titleFontWeight: 'bold',
+                    titlePaddingTop : 0,
+                    titlePaddingRight : 0,
+                    titlePaddingBottom : 5,
+                    titlePaddingLeft : 16,
+                    displayDesc : true,
+                    descFontSize: 14,
+                    descFontColor: '#8e959a',
+                    descFontFamily : 'Microsoft Yahei',
+                    paddingTop : 10,
+                    paddingRight : 0,
+                    paddingBottom : 0,
+                    paddingLeft : 0,
+                    backgroundColor: '#fff',
+                    hoverColor: '#000'
+                      }
+                  })
+                                        </script></div></div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/didi7696/article/details/80117238,BlogCommendFromBaidu_8"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/didi7696/article/details/80117238,BlogCommendFromBaidu_8"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/didi7696/article/details/80117238" target="_blank" title="SpringBoot整合Mybatis注解版 - 翱翔的天空的博客">
+				<h4 class="text-truncate oneline">
+						<em>Spring</em><em>Boot</em>整合<em>Mybatis</em>注解版 - 翱翔的天空的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/B/A/6/3_didi7696.jpg" alt="didi7696" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">didi7696</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">04-28</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							300</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/didi7696/article/details/80117238" target="_blank" title="SpringBoot整合Mybatis注解版 - 翱翔的天空的博客">
+							<span class="desc oneline">javax.persistence jar的作用 实体类采用注解版&amp;amp;lt;!-- https://mvnrepository.com/artifact/javax.persistence/pe...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/didi7696">来自：	<span class="blog_title"> 翱翔的天空的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+			<div class="recommend-item-box type_hot_word">
+						<div class="content clearfix oneline">
+				<h5 class="float-left">文章热词</h5>
+				<div class="word float-left">
+													<span>
+						<a href="https://edu.csdn.net/courses/o5329_s5330_k " target="_blank">
+						机器学习					</a></span>
+																	<span>
+						<a href="https://edu.csdn.net/courses/o5329_s5330_k " target="_blank">
+						机器学习课程					</a></span>
+																	<span>
+						<a href="https://edu.csdn.net/courses/o5329_s5330_k " target="_blank">
+						机器学习教程					</a></span>
+																	<span>
+						<a href="https://edu.csdn.net/combos/o5329_s5331_l0_t " target="_blank">
+						深度学习视频教程					</a></span>
+																	<span>
+						<a href="https://edu.csdn.net/combos/o5329_s5331_l0_t " target="_blank">
+						深度学习学习					</a></span>
+												</div>
+			</div>
+									<div class="content clearfix oneline">
+				<h5 class="float-left">相关热词</h5>
+				<div class="float-left">
+									<span>
+						<a href="https://www.csdn.net/gather_2a/NtzaMg5sODg3LWJsb2cO0O0O.html" target="_blank">
+						bootstrap与spring</a>
+					</span>
+									<span>
+						<a href="https://www.csdn.net/gather_25/MtTakg4sODM5MC1ibG9n.html" target="_blank">
+						android boot文件在哪</a>
+					</span>
+									<span>
+						<a href="https://www.csdn.net/gather_27/NtzacgwsNjQzLWJsb2cO0O0O.html" target="_blank">
+						bootstrap mybatis分页</a>
+					</span>
+									<span>
+						<a href="https://www.csdn.net/gather_2f/NtzaUgysMzk2LWJsb2cO0O0O.html" target="_blank">
+						+spring bootstrap</a>
+					</span>
+									<span>
+						<a href="https://www.csdn.net/gather_22/NtzaUgzsNDg1LWJsb2cO0O0O.html" target="_blank">
+						bootstrap mv spring</a>
+					</span>
+									<span>
+						<a href="https://www.csdn.net/gather_4a/NtTaUgzsMi1lZHUO0O0O.html" target="_blank">
+						机器学习python集成</a>
+					</span>
+									<span>
+						<a href="https://www.csdn.net/gather_4a/MtSa1glsZHUO0O0O.html" target="_blank">
+						python教程+chm</a>
+					</span>
+								</div>
+			</div>
+					</div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/qq_36027670/article/details/79606402,BlogCommendFromBaidu_9"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/qq_36027670/article/details/79606402,BlogCommendFromBaidu_9"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_36027670/article/details/79606402" target="_blank" title="Spring Boot整合mybatis全注解入门教程 - yyhnap的博客">
+				<h4 class="text-truncate oneline">
+						<em>Spring</em> <em>Boot</em>整合<em>mybatis</em>全注解入门教程 - yyhnap的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/4/B/6/3_qq_36027670.jpg" alt="qq_36027670" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qq_36027670</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">03-19</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1206</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_36027670/article/details/79606402" target="_blank" title="Spring Boot整合mybatis全注解入门教程 - yyhnap的博客">
+							<span class="desc oneline">一、简介 
+MyBatis是支持自定义SQL，存储过程和高级映射的第一类持久性框架。MyBatis消除了几乎所有的JDBC代码以及手动设置参数和检索结果。MyBatis可以使用简单的XML或Annot...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qq_36027670">来自：	<span class="blog_title"> yyhnap的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+            <div class="recommend-item-box blog-expert-recommend-box">
+			<div class="d-flex">
+				<div class="blog-expert-recommend">
+					<div class="blog-expert">
+						<div class="blog-expert-flexbox"></div>
+					</div>
+				</div>
+				<div class="blog-expert-load-new" data-index="3">
+					<svg version="1.1" viewBox="0 0 200 200" style="enable-background:new 0 0 200 200;" xml:space="preserve">
+					<path d="M142.5,57.5c-1.3-1.2-2.1-3.3-2.1-5.4c0-4.2,3.3-7.5,7.5-7.5h19.6c4.2,0,7.5,3.3,7.5,7.5s-3.3,7.5-7.5,7.5h-4.2
+						C170.8,71.2,175,85,175,100c0,41.7-33.8,75-75,75c-4.2,0-7.5-3.3-7.5-7.5c0-4.2,3.3-7.5,7.5-7.5c33.3,0,60-27.1,60-60
+						C160,83.7,153.8,68.7,142.5,57.5L142.5,57.5z M57.5,142.5c1.2,1.2,2.1,3.3,2.1,5.4c0,4.2-3.3,7.5-7.5,7.5H32.5
+						c-4.2,0-7.5-3.3-7.5-7.5c0-4.2,3.3-7.5,7.5-7.5h4.2C29.2,128.8,25,115,25,100c0-41.7,33.7-75,75-75c4.2,0,7.5,3.3,7.5,7.5
+						S104.2,40,100,40c-33.3,0-60,27.1-60,60C40,116.2,46.2,131.2,57.5,142.5z"/>
+					</svg>
+					<span>换一批</span>
+				</div>
+			</div>
+        </div>
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/zhanglinlang/article/details/78662268,BlogCommendFromBaidu_10"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/zhanglinlang/article/details/78662268,BlogCommendFromBaidu_10"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/zhanglinlang/article/details/78662268" target="_blank" title="spring boot 注解版 ( 一 ) 集成 mybatis：如何优雅的使用mybatis - zhanglinlang的专栏">
+				<h4 class="text-truncate oneline">
+						<em>spring</em> <em>boot</em> 注解版 ( 一 ) <em>集成</em> <em>mybatis</em>：如何优雅的使用<em>mybatis</em> - zhanglinlang的专栏				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/4/C/E/3_zhanglinlang.jpg" alt="zhanglinlang" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">zhanglinlang</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">11-29</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							4272</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/zhanglinlang/article/details/78662268" target="_blank" title="spring boot 注解版 ( 一 ) 集成 mybatis：如何优雅的使用mybatis - zhanglinlang的专栏">
+							<span class="desc oneline">转载 2017年02月08日 17:07:01 44680 
+这两天启动了一个新项目因为项目组成员一直都使用的是mybatis，虽然个人比较喜欢jpa这种极简的模式，但是为了项目保持统一性技术选型还是...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/zhanglinlang">来自：	<span class="blog_title"> zhanglinlang的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/zt_fucker/article/details/60140241,BlogCommendFromBaidu_11"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/zt_fucker/article/details/60140241,BlogCommendFromBaidu_11"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/zt_fucker/article/details/60140241" target="_blank" title="SpringBoot之Mybatis篇（注解&amp;配置文件）（MVC版） - ZT的专栏">
+				<h4 class="text-truncate oneline">
+						<em>Spring</em><em>Boot</em>之<em>Mybatis</em>篇（注解&amp;配置文件）（MVC版） - ZT的专栏				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/C/6/F/3_zt_fucker.jpg" alt="zt_fucker" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">zt_fucker</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">03-03</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							5579</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/zt_fucker/article/details/60140241" target="_blank" title="SpringBoot之Mybatis篇（注解&amp;配置文件）（MVC版） - ZT的专栏">
+							<span class="desc oneline">整体的项目结构，遵循MVC架构。红框内的是此次需要用到的文件。
+  src/main/java/com/zhu/DemoApplication.java
+package com.zhu;import ...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/zt_fucker">来自：	<span class="blog_title"> ZT的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/xindoo/article/details/78867843,BlogCommendFromBaidu_12"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/xindoo/article/details/78867843,BlogCommendFromBaidu_12"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/xindoo/article/details/78867843" target="_blank" title="Springboot 中同时使用mybatis注解和springbean-xml配置方式 - xindoo">
+				<h4 class="text-truncate oneline">
+						<em>Spring</em><em>boot</em> 中同时使用<em>mybatis</em>注解和<em>spring</em>bean-xml配置方式 - xindoo				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/C/E/C/3_xindoo.jpg" alt="xindoo" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">xindoo</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">12-21</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							3124</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/xindoo/article/details/78867843" target="_blank" title="Springboot 中同时使用mybatis注解和springbean-xml配置方式 - xindoo">
+							<span class="desc oneline">因为自己新建了一个应用，为了开发的速度，直接选用了springboot，但后来发现大部分读库的代码和同事已有的代码重复， 索性直接拿过来用。但问题是我已有的代码是通过纯注解的方式使用mybatis，同...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/xindoo">来自：	<span class="blog_title"> xindoo</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_61" data-pid="61" data-track-view='{"mod":"kp_popu_61-557","con":",,"}' data-track-click='{"mod":"kp_popu_61-557","con":",,"}'><div id="three_ad13" class="mediav_ad" ></div>
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<script>
+                                               NEWS_FEED({
+                w: 852,
+                h : 60,
+                showid : 'GNKXx7',
+                placeholderId: "three_ad13",
+                inject : 'define',
+                define : {
+                    imagePosition : 'left',
+                    imageBorderRadius : 3,
+                    imageWidth: 90,
+                    imageHeight: 60,
+                    imageFill : 'clip',
+                    displayImage : true,
+                    displayTitle : true,
+                    titleFontSize: 18,
+                    titleFontColor: '#000',
+                    titleFontFamily : 'Lato,-apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif',
+                    titleFontWeight: 'bold',
+                    titlePaddingTop : 0,
+                    titlePaddingRight : 0,
+                    titlePaddingBottom : 5,
+                    titlePaddingLeft : 16,
+                    displayDesc : true,
+                    descFontSize: 14,
+                    descFontColor: '#8e959a',
+                    descFontFamily : 'Microsoft Yahei',
+                    paddingTop : 0,
+                    paddingRight : 0,
+                    paddingBottom : 0,
+                    paddingLeft : 0,
+                    backgroundColor: '#fff',
+                    hoverColor: '#000'
+                      }
+                  })
+                                        </script></div></div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/clj198606061111/article/details/51793484,BlogCommendFromBaidu_13"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/clj198606061111/article/details/51793484,BlogCommendFromBaidu_13"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/clj198606061111/article/details/51793484" target="_blank" title="spring mybatis  mapper接口注解方式注入 - 都是浮云">
+				<h4 class="text-truncate oneline">
+						<em>spring</em> <em>mybatis</em>  mapper接口<em>注解方式</em>注入 - 都是浮云				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/6/B/C/3_clj198606061111.jpg" alt="clj198606061111" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">clj198606061111</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">06-30</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							6万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/clj198606061111/article/details/51793484" target="_blank" title="spring mybatis  mapper接口注解方式注入 - 都是浮云">
+							<span class="desc oneline">最近做项目使用mybatis-generator生成mybatis的mapper.xml映射文件和mapper接口。</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/clj198606061111">来自：	<span class="blog_title"> 都是浮云</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/CrazyLai1996/article/details/79366140,searchFromBaidu_14"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/CrazyLai1996/article/details/79366140,searchFromBaidu_14"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/CrazyLai1996/article/details/79366140" target="_blank" title="SpringBoot+Mybatis（注解开发）整合实例 - 一天到晚游泳的鱼不停地游">
+				<h4 class="text-truncate oneline">
+						<em>Spring</em><em>Boot</em>+<em>Mybatis</em>（注解开发）整合实例 - 一天到晚游泳的鱼不停地游				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/8/5/6/3_crazylai1996.jpg" alt="CrazyLai1996" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">CrazyLai1996</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">02-24</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							725</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/CrazyLai1996/article/details/79366140" target="_blank" title="SpringBoot+Mybatis（注解开发）整合实例 - 一天到晚游泳的鱼不停地游">
+							<span class="desc oneline">添加依赖：pom.xml
+
+
+
+&amp;amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;amp;gt;
+&amp;amp;lt;pro...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/CrazyLai1996">来自：	<span class="blog_title"> 一天到晚游泳的鱼不停地游</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/u010318474/article/details/81143594,searchFromBaidu_15"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/u010318474/article/details/81143594,searchFromBaidu_15"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u010318474/article/details/81143594" target="_blank" title="Springboot整合mybatis注解版实现 - u010318474的专栏">
+				<h4 class="text-truncate oneline">
+						<em>Spring</em><em>boot</em>整合<em>mybatis</em>注解版实现 - u010318474的专栏				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/1/C/3/3_u010318474.jpg" alt="u010318474" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">u010318474</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">07-21</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							257</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u010318474/article/details/81143594" target="_blank" title="Springboot整合mybatis注解版实现 - u010318474的专栏">
+							<span class="desc oneline">一、前言
+
+Springboot的使用极大程度上减少了相关文件的配置，将繁琐的类似于spring+mybatis+spring mvc的配置简化到只需要一些简单的数据库资源链接资源配置，剩下的相关配置...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/u010318474">来自：	<span class="blog_title"> u010318474的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/seashouwang/article/details/80210603,searchFromBaidu_16"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/seashouwang/article/details/80210603,searchFromBaidu_16"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/seashouwang/article/details/80210603" target="_blank" title="springboot-mybatis 注解 - 奋斗的小鸟专栏">
+				<h4 class="text-truncate oneline">
+						<em>spring</em><em>boot</em>-<em>mybatis</em> 注解 - 奋斗的小鸟专栏				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/5/D/2/3_seashouwang.jpg" alt="seashouwang" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">seashouwang</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">05-06</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							45</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/seashouwang/article/details/80210603" target="_blank" title="springboot-mybatis 注解 - 奋斗的小鸟专栏">
+							<span class="desc oneline">    MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/seashouwang">来自：	<span class="blog_title"> 奋斗的小鸟专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/satan91/article/details/80958925,searchFromBaidu_17"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/satan91/article/details/80958925,searchFromBaidu_17"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/satan91/article/details/80958925" target="_blank" title="学习Springboot一之Springboot+Mybatis（注解形式）+Mysql+Web简单Demo - satan91的博客">
+				<h4 class="text-truncate oneline">
+						学习<em>Spring</em><em>boot</em>一之<em>Spring</em><em>boot</em>+<em>Mybatis</em>（注解形式）+Mysql+Web简单Demo - satan91的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/3/B/E/3_satan91.jpg" alt="satan91" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">satan91</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">07-08</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							700</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/satan91/article/details/80958925" target="_blank" title="学习Springboot一之Springboot+Mybatis（注解形式）+Mysql+Web简单Demo - satan91的博客">
+							<span class="desc oneline">学习SpringBoot，通过Springboot简单配置连接Mysql数据库，采用Mybatis注解方式实现数据库“增、删、改、查”，结合Spring web实现页面呈现后，。
+
+IDE及相关环境：...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/satan91">来自：	<span class="blog_title"> satan91的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_62" data-pid="62" data-track-view='{"mod":"kp_popu_62-556","con":",,"}' data-track-click='{"mod":"kp_popu_62-556","con":",,"}'><div id="three_ad18" class="mediav_ad" ></div>
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<script>
+                                               NEWS_FEED({
+                w: 852,
+                h : 60,
+                showid : 'Afihld',
+                placeholderId: "three_ad18",
+                inject : 'define',
+                define : {
+                    imagePosition : 'left',
+                    imageBorderRadius : 3,
+                    imageWidth: 90,
+                    imageHeight: 60,
+                    imageFill : 'clip',
+                    displayImage : true,
+                    displayTitle : true,
+                    titleFontSize: 18,
+                    titleFontColor: '#000',
+                    titleFontFamily : 'Lato,-apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif',
+                    titleFontWeight: 'bold',
+                    titlePaddingTop : 0,
+                    titlePaddingRight : 0,
+                    titlePaddingBottom : 5,
+                    titlePaddingLeft : 16,
+                    displayDesc : true,
+                    descFontSize: 14,
+                    descFontColor: '#8e959a',
+                    descFontFamily : 'Microsoft Yahei',
+                    paddingTop : 0,
+                    paddingRight : 0,
+                    paddingBottom : 0,
+                    paddingLeft : 0,
+                    backgroundColor: '#fff',
+                    hoverColor: '#000'
+                      }
+                  })
+                                        </script></div></div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident" data-track-view='{"mod":"popu_614","con":",https://download.csdn.net/download/qq_25927437/10502386,searchFromBaidu_18"}' data-track-click='{"mod":"popu_614","con":",https://download.csdn.net/download/qq_25927437/10502386,searchFromBaidu_18"}'>
+		<a href="https://download.csdn.net/download/qq_25927437/10502386" target="_blank">
+			<h4 class="text-truncate oneline">
+					<em>spring</em><em>boot</em><em>集成</em><em>mybatis</em>的<em>注解方式</em>完整例子 - 狡猾的bug			</h4>
+			<div class="info-box d-flex align-content-center">
+				<p>
+									<span class="read-num">下载</span>
+								</p>
+				<p>
+					<span class="date">06-27</span>
+				</p>
+			</div>
+			<p class="content oneline">
+					springboot集成mybatis，注解的集成方式，使用maven搭建的完整例子			</p>
+		</a>
+
+	</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/gebitan505/article/details/70145657,BlogCommendFromGuangxin_19"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/gebitan505/article/details/70145657,BlogCommendFromGuangxin_19"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/gebitan505/article/details/70145657" target="_blank" title="Spring Boot系列之六 以注解方式整合MyBatis - AndyLizh的专栏">
+				<h4 class="text-truncate oneline">
+						<em>Spring</em> <em>Boot</em>系列之六 以<em>注解方式</em>整合<em>MyBatis</em> - AndyLizh的专栏				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/9/3/8/3_gebitan505.jpg" alt="gebitan505" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">gebitan505</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">04-12</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							2111</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/gebitan505/article/details/70145657" target="_blank" title="Spring Boot系列之六 以注解方式整合MyBatis - AndyLizh的专栏">
+							<span class="desc oneline">选择Mybatis的原因
+
+
+
+本人技术历史背景原因,使用MyBatis更多.
+
+
+在某个阶段使用Spring-Data-JPA的过程中踩到了很多很多坑,比如说各种级联产生的json序列...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/gebitan505">来自：	<span class="blog_title"> AndyLizh的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/wolf909867753/article/details/73920474,BlogCommendFromGuangxin_20"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/wolf909867753/article/details/73920474,BlogCommendFromGuangxin_20"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/wolf909867753/article/details/73920474" target="_blank" title="springboot之整合mybatis-annotation(注解方式) - wolf909867753的专栏">
+				<h4 class="text-truncate oneline">
+						<em>spring</em><em>boot</em>之整合<em>mybatis</em>-annotation(<em>注解方式</em>) - wolf909867753的专栏				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/A/4/4/3_wolf909867753.jpg" alt="wolf909867753" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">wolf909867753</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">06-29</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							5763</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/wolf909867753/article/details/73920474" target="_blank" title="springboot之整合mybatis-annotation(注解方式) - wolf909867753的专栏">
+							<span class="desc oneline">本例将采用maven管理，代码托管在github上，地址：https://github.com/wolf909867753/springboot。
+1。创建maven-module，propertie...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/wolf909867753">来自：	<span class="blog_title"> wolf909867753的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/ZZ2713634772/article/details/79542518,BlogCommendFromGuangxin_21"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/ZZ2713634772/article/details/79542518,BlogCommendFromGuangxin_21"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/ZZ2713634772/article/details/79542518" target="_blank" title="SpringBoot----用MyBatis注解实现数据的增删查改 - 小梦想的博客">
+				<h4 class="text-truncate oneline">
+						<em>Spring</em><em>Boot</em>----用<em>MyBatis</em>注解实现数据的增删查改 - 小梦想的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/B/5/5/3_zz2713634772.jpg" alt="ZZ2713634772" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">ZZ2713634772</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">03-13</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							2036</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/ZZ2713634772/article/details/79542518" target="_blank" title="SpringBoot----用MyBatis注解实现数据的增删查改 - 小梦想的博客">
+							<span class="desc oneline">SpringBoot----用MyBatis注解实现数据的增删查改1、新建一个Maven项目，使用jdk1.8，在pom.xml中添加依赖如下：&amp;amp;lt;project xmlns=&amp;quot;...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/ZZ2713634772">来自：	<span class="blog_title"> 小梦想的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/oSunXu/article/details/78262965,BlogCommendFromGuangxin_22"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/oSunXu/article/details/78262965,BlogCommendFromGuangxin_22"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/oSunXu/article/details/78262965" target="_blank" title="全注解方式整合spring+mybatis模拟springboot整合 - Todd的专栏">
+				<h4 class="text-truncate oneline">
+						全<em>注解方式</em>整合<em>spring</em>+<em>mybatis</em>模拟<em>spring</em><em>boot</em>整合 - Todd的专栏				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/C/4/6/3_osunxu.jpg" alt="oSunXu" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">oSunXu</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">10-17</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							2849</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/oSunXu/article/details/78262965" target="_blank" title="全注解方式整合spring+mybatis模拟springboot整合 - Todd的专栏">
+							<span class="desc oneline">实习工作中的项目使用到了springboot。虽然springboot使用简单但是默认配置和注解挺多。如果boot想使用熟练前提要对ssm整合比较熟悉。以前开发习惯使用xml配置文件，但是使用boot...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/oSunXu">来自：	<span class="blog_title"> Todd的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_63" data-pid="63" data-track-view='{"mod":"kp_popu_63-555","con":",,"}' data-track-click='{"mod":"kp_popu_63-555","con":",,"}'><div id="three_ad23" class="mediav_ad" ></div>
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<script>
+                                               NEWS_FEED({
+                w: 852,
+                h : 60,
+                showid : 'GNKXx7',
+                placeholderId: "three_ad23",
+                inject : 'define',
+                define : {
+                    imagePosition : 'left',
+                    imageBorderRadius : 3,
+                    imageWidth: 90,
+                    imageHeight: 60,
+                    imageFill : 'clip',
+                    displayImage : true,
+                    displayTitle : true,
+                    titleFontSize: 18,
+                    titleFontColor: '#000',
+                    titleFontFamily : 'Lato,-apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif',
+                    titleFontWeight: 'bold',
+                    titlePaddingTop : 0,
+                    titlePaddingRight : 0,
+                    titlePaddingBottom : 5,
+                    titlePaddingLeft : 16,
+                    displayDesc : true,
+                    descFontSize: 14,
+                    descFontColor: '#8e959a',
+                    descFontFamily : 'Microsoft Yahei',
+                    paddingTop : 0,
+                    paddingRight : 0,
+                    paddingBottom : 0,
+                    paddingLeft : 0,
+                    backgroundColor: '#fff',
+                    hoverColor: '#000'
+                      }
+                  })
+                                        </script></div></div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/baidu_16757561/article/details/75669589,BlogCommendFromGuangxin_23"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/baidu_16757561/article/details/75669589,BlogCommendFromGuangxin_23"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/baidu_16757561/article/details/75669589" target="_blank" title="SpringBoot+Mybatis 完整实例 增删查改 - baidu_16757561的博客">
+				<h4 class="text-truncate oneline">
+						<em>Spring</em><em>Boot</em>+<em>Mybatis</em> 完整实例 增删查改 - baidu_16757561的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/4/A/D/3_baidu_16757561.jpg" alt="baidu_16757561" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">baidu_16757561</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">07-21</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1.8万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/baidu_16757561/article/details/75669589" target="_blank" title="SpringBoot+Mybatis 完整实例 增删查改 - baidu_16757561的博客">
+							<span class="desc oneline">SpringBoot+Mybatis 完整实例 增删查改本文章主要是结合SpringBoot+MyBatis+MySQL来实现数据库的CRUD操作（增删查改），Maven项目工程中主要包括以下6个文件...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/baidu_16757561">来自：	<span class="blog_title"> baidu_16757561的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/a123demi/article/details/75329235,BlogCommendFromQuerySearch_24"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/a123demi/article/details/75329235,BlogCommendFromQuerySearch_24"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/a123demi/article/details/75329235" target="_blank" title="四.SpringBoot集成实例系列-注解型多数据源mybatis - if(true){ I love it }">
+				<h4 class="text-truncate oneline">
+						四.<em>Spring</em><em>Boot</em><em>集成</em>实例系列-注解型多数据源<em>mybatis</em> - if(true){ I love it }				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/9/5/1/3_a123demi.jpg" alt="a123demi" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">a123demi</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">07-18</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1140</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/a123demi/article/details/75329235" target="_blank" title="四.SpringBoot集成实例系列-注解型多数据源mybatis - if(true){ I love it }">
+							<span class="desc oneline">文章列表
+
+本系列将通过实例分别实现Springboot集成mybatis(mysql),mail,mongodb,cassandra,scheduler,redis,kafka,shiro,webs...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/a123demi">来自：	<span class="blog_title"> if(true){ I love it }</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    			<div class="recommend-item-box recommend-box-ident recommend-download-box clearfix" data-track-view='{"mod":"popu_614","con":",https://download.csdn.net/download/qq_23127269/10051580,BlogCommendFromQuerySearch_25"}' data-track-click='{"mod":"popu_614","con":",https://download.csdn.net/download/qq_23127269/10051580,BlogCommendFromQuerySearch_25"}'>
+			<a href="https://download.csdn.net/download/qq_23127269/10051580" target="_blank">
+				<div class="content">
+					<div class="">
+						<span class="type">下载</span>
+						<h4 class="text-truncate oneline clearfix">
+							<em>Spring</em> <em>Boot</em> <em>集成</em><em>mybatis</em> - 一生忠橙						</h4>
+						<span class="data float-right">11-03</span>
+					</div>
+					<div class="desc oneline">
+							Spring Boot 集成mybatis,Spring Boot和mybatis整合的开发					</div>
+				</div>
+			</a>
+		</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/J080624/article/details/80817225,BlogCommendFromQuerySearch_26"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/J080624/article/details/80817225,BlogCommendFromQuerySearch_26"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/J080624/article/details/80817225" target="_blank" title="SpringBoot - 整合MyBatis注解版并开启二级缓存 - 小小默：进无止境">
+				<h4 class="text-truncate oneline">
+						<em>Spring</em><em>Boot</em> - 整合<em>MyBatis</em>注解版并开启二级缓存 - 小小默：进无止境				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/0/3/6/3_j080624.jpg" alt="J080624" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">J080624</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">06-26</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							260</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/J080624/article/details/80817225" target="_blank" title="SpringBoot - 整合MyBatis注解版并开启二级缓存 - 小小默：进无止境">
+							<span class="desc oneline">【1】pom文件添加依赖
+
+依赖如下所示：
+
+    &amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;amp;lt;dependency&amp;amp;amp;am...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/J080624">来自：	<span class="blog_title"> 小小默：进无止境</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/woniu211111/article/details/54562307,BlogCommendFromQuerySearch_27"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/woniu211111/article/details/54562307,BlogCommendFromQuerySearch_27"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/woniu211111/article/details/54562307" target="_blank" title="Spring Boot系列教程十一： Mybatis使用分页插件PageHelper - woniu211111专栏">
+				<h4 class="text-truncate oneline">
+						<em>Spring</em> <em>Boot</em>系列教程十一： <em>Mybatis</em>使用分页插件PageHelper - woniu211111专栏				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/D/6/9/3_woniu211111.jpg" alt="woniu211111" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">woniu211111</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">01-15</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							2.7万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/woniu211111/article/details/54562307" target="_blank" title="Spring Boot系列教程十一： Mybatis使用分页插件PageHelper - woniu211111专栏">
+							<span class="desc oneline">上一篇我们学习了MapReduce的原理，今天我们使用代码来加深对MapReduce原理的理解。 wordcount是Hadoop入门的经典例子，我们也不能免俗，也使用这个例子作为学习Hadoop的第...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/woniu211111">来自：	<span class="blog_title"> woniu211111专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_64" data-pid="64" data-track-view='{"mod":"kp_popu_64-81","con":",,"}' data-track-click='{"mod":"kp_popu_64-81","con":",,"}'><div id="three_ad28" class="mediav_ad" ></div>
+<script type="text/javascript" src="//static.mediav.com/js/mvf_news_feed.js"></script>
+<script>
+                                               NEWS_FEED({
+                w: 852,
+                h : 60,
+                showid : 'Afihld',
+                placeholderId: "three_ad28",
+                inject : 'define',
+                define : {
+                    imagePosition : 'left',
+                    imageBorderRadius : 3,
+                    imageWidth: 90,
+                    imageHeight: 60,
+                    imageFill : 'clip',
+                    displayImage : true,
+                    displayTitle : true,
+                    titleFontSize: 18,
+                    titleFontColor: '#000',
+                    titleFontFamily : 'Lato,-apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif',
+                    titleFontWeight: 'bold',
+                    titlePaddingTop : 0,
+                    titlePaddingRight : 0,
+                    titlePaddingBottom : 5,
+                    titlePaddingLeft : 16,
+                    displayDesc : true,
+                    descFontSize: 14,
+                    descFontColor: '#8e959a',
+                    descFontFamily : 'Microsoft Yahei',
+                    paddingTop : 0,
+                    paddingRight : 0,
+                    paddingBottom : 0,
+                    paddingLeft : 0,
+                    backgroundColor: '#fff',
+                    hoverColor: '#000'
+                      }
+                  })
+                                        </script></div></div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/goldenfish1919/article/details/51706316,BlogCommendFromQuerySearch_28"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/goldenfish1919/article/details/51706316,BlogCommendFromQuerySearch_28"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/goldenfish1919/article/details/51706316" target="_blank" title="Spring Boot集成MyBatis与分页插件 - 若鱼的专栏">
+				<h4 class="text-truncate oneline">
+						<em>Spring</em> <em>Boot</em><em>集成</em><em>MyBatis</em>与分页插件 - 若鱼的专栏				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/A/C/D/3_goldenfish1919.jpg" alt="goldenfish1919" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">goldenfish1919</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">06-18</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							2.5万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/goldenfish1919/article/details/51706316" target="_blank" title="Spring Boot集成MyBatis与分页插件 - 若鱼的专栏">
+							<span class="desc oneline">1.MyBatisConfig.java
+@Configuration
+@EnableTransactionManagement
+public class MyBatisConfig implemen...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/goldenfish1919">来自：	<span class="blog_title"> 若鱼的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/gebitan505/article/details/54929287,BlogCommendFromBaidu_29"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/gebitan505/article/details/54929287,BlogCommendFromBaidu_29"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/gebitan505/article/details/54929287" target="_blank" title="spring boot(六)：如何优雅的使用mybatis - AndyLizh的专栏">
+				<h4 class="text-truncate oneline">
+						<em>spring</em> <em>boot</em>(六)：如何优雅的使用<em>mybatis</em> - AndyLizh的专栏				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/9/3/8/3_gebitan505.jpg" alt="gebitan505" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">gebitan505</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">02-08</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							13.3万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/gebitan505/article/details/54929287" target="_blank" title="spring boot(六)：如何优雅的使用mybatis - AndyLizh的专栏">
+							<span class="desc oneline">这两天启动了一个新项目因为项目组成员一直都使用的是mybatis，虽然个人比较喜欢jpa这种极简的模式，但是为了项目保持统一性技术选型还是定了 mybatis。到网上找了一下关于spring boot...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/gebitan505">来自：	<span class="blog_title"> AndyLizh的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/sinat_36203615/article/details/53759935,BlogCommendFromBaidu_30"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/sinat_36203615/article/details/53759935,BlogCommendFromBaidu_30"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/sinat_36203615/article/details/53759935" target="_blank" title="spring-boot 注解配置mybatis+druid（新手上路） - Cocoanut_MT 的博客">
+				<h4 class="text-truncate oneline">
+						<em>spring</em>-<em>boot</em> 注解配置<em>mybatis</em>+druid（新手上路） - Cocoanut_MT 的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/4/6/6/3_sinat_36203615.jpg" alt="sinat_36203615" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">sinat_36203615</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">12-20</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1.9万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/sinat_36203615/article/details/53759935" target="_blank" title="spring-boot 注解配置mybatis+druid（新手上路） - Cocoanut_MT 的博客">
+							<span class="desc oneline">spring-boot 注解配置mybatis+druid（新手上路）
+
+之前已经介绍了新手如何搭建一个简单的springboot，接下来介绍一下springboot+mybatis+druid的配置...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/sinat_36203615">来自：	<span class="blog_title"> Cocoanut_MT 的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/mickjoust/article/details/51646658,BlogCommendFromBaidu_31"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/mickjoust/article/details/51646658,BlogCommendFromBaidu_31"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/mickjoust/article/details/51646658" target="_blank" title="Spring Boot 实践折腾记（三）：三板斧，Spring Boot下使用Mybatis - mickjoust的技术小屋">
+				<h4 class="text-truncate oneline">
+						<em>Spring</em> <em>Boot</em> 实践折腾记（三）：三板斧，<em>Spring</em> <em>Boot</em>下使用<em>Mybatis</em> - mickjoust的技术小屋				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/6/5/6/3_mickjoust.jpg" alt="mickjoust" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">mickjoust</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">06-12</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							8万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/mickjoust/article/details/51646658" target="_blank" title="Spring Boot 实践折腾记（三）：三板斧，Spring Boot下使用Mybatis - mickjoust的技术小屋">
+							<span class="desc oneline">你要搞清楚自己人生的剧本：不是你父母的续集，不是你子女的前传，更不是你朋友的外篇。对待生命你不妨大胆冒险一点，因为好歹你要失去它。——尼采...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/mickjoust">来自：	<span class="blog_title"> mickjoust的技术小屋</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/qq_22327273/article/details/53422608,BlogCommendFromBaidu_32"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/qq_22327273/article/details/53422608,BlogCommendFromBaidu_32"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_22327273/article/details/53422608" target="_blank" title="spring boot 整合mybatis 中用注解实现的查询 - 乌鸦东南飞的博客">
+				<h4 class="text-truncate oneline">
+						<em>spring</em> <em>boot</em> 整合<em>mybatis</em> 中用注解实现的查询 - 乌鸦东南飞的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/1/D/A/3_qq_22327273.jpg" alt="qq_22327273" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qq_22327273</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">12-01</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							3723</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_22327273/article/details/53422608" target="_blank" title="spring boot 整合mybatis 中用注解实现的查询 - 乌鸦东南飞的博客">
+							<span class="desc oneline">package com.bysj.dao;
+
+import com.bysj.model.User;
+import org.apache.ibatis.annotations.*;
+import or...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qq_22327273">来自：	<span class="blog_title"> 乌鸦东南飞的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_65" data-pid="65" data-track-view='{"mod":"kp_popu_65-84","con":",,"}' data-track-click='{"mod":"kp_popu_65-84","con":",,"}'><div id="three_ad33" class="mediav_ad" ></div>
+<script>
+                                               NEWS_FEED({
+                w: 852,
+                h : 60,
+                showid : 'GNKXx7',
+                placeholderId: "three_ad33",
+                inject : 'define',
+                define : {
+                    imagePosition : 'left',
+                    imageBorderRadius : 3,
+                    imageWidth: 90,
+                    imageHeight: 60,
+                    imageFill : 'clip',
+                    displayImage : true,
+                    displayTitle : true,
+                    titleFontSize: 18,
+                    titleFontColor: '#000',
+                    titleFontFamily : 'Lato,-apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif',
+                    titleFontWeight: 'bold',
+                    titlePaddingTop : 0,
+                    titlePaddingRight : 0,
+                    titlePaddingBottom : 5,
+                    titlePaddingLeft : 16,
+                    displayDesc : true,
+                    descFontSize: 14,
+                    descFontColor: '#8e959a',
+                    descFontFamily : 'Microsoft Yahei',
+                    paddingTop : 0,
+                    paddingRight : 0,
+                    paddingBottom : 0,
+                    paddingLeft : 0,
+                    backgroundColor: '#fff',
+                    hoverColor: '#000'
+                      }
+                  })
+                                        </script></div></div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/weixin_42165041/article/details/80242813,BlogCommendFromBaidu_33"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/weixin_42165041/article/details/80242813,BlogCommendFromBaidu_33"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/weixin_42165041/article/details/80242813" target="_blank" title="mybatis注解Select查询List，返回有对象个数，但是为null - weixin_42165041的博客">
+				<h4 class="text-truncate oneline">
+						<em>mybatis</em>注解Select查询List，返回有对象个数，但是为null - weixin_42165041的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/A/0/1/3_weixin_42165041.jpg" alt="weixin_42165041" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">weixin_42165041</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">05-08</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1856</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/weixin_42165041/article/details/80242813" target="_blank" title="mybatis注解Select查询List，返回有对象个数，但是为null - weixin_42165041的博客">
+							<span class="desc oneline">用mybatis注解Select查询List，返回有对象个数，但是为null，代码如下public interface SysRoleMapper {
+	
+    @Select(&amp;quot;sele...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/weixin_42165041">来自：	<span class="blog_title"> weixin_42165041的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/fwk19840301/article/details/79327784,BlogCommendFromBaidu_34"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/fwk19840301/article/details/79327784,BlogCommendFromBaidu_34"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/fwk19840301/article/details/79327784" target="_blank" title="Springboot  MyBatis查询表全部的两种方法：XML与注解 - fwk19840301的博客">
+				<h4 class="text-truncate oneline">
+						<em>Spring</em><em>boot</em>  <em>MyBatis</em>查询表全部的两种方法：XML与注解 - fwk19840301的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/C/7/B/3_fwk19840301.jpg" alt="fwk19840301" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">fwk19840301</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">02-15</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1997</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/fwk19840301/article/details/79327784" target="_blank" title="Springboot  MyBatis查询表全部的两种方法：XML与注解 - fwk19840301的博客">
+							<span class="desc oneline">pom文件 &amp;amp;lt;dependency&amp;amp;gt;
+   &amp;amp;lt;groupId&amp;amp;gt;org.mybatis.spring.boot&amp;amp;lt;/groupId&amp;a...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/fwk19840301">来自：	<span class="blog_title"> fwk19840301的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/hao65103940/article/details/78667260,BlogCommendFromBaidu_35"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/hao65103940/article/details/78667260,BlogCommendFromBaidu_35"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/hao65103940/article/details/78667260" target="_blank" title="Spring Boot MyBatis升级篇-注解-动态SQL(if test)-方案二:@Provider - boge专栏">
+				<h4 class="text-truncate oneline">
+						<em>Spring</em> <em>Boot</em> <em>MyBatis</em>升级篇-注解-动态SQL(if test)-方案二:@Provider - boge专栏				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/9/B/1/3_hao65103940.jpg" alt="hao65103940" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">hao65103940</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">11-29</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							5985</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/hao65103940/article/details/78667260" target="_blank" title="Spring Boot MyBatis升级篇-注解-动态SQL(if test)-方案二:@Provider - boge专栏">
+							<span class="desc oneline">视频&amp;交流平台：
+
+à SpringBoot网易云课堂视频
+
+http://study.163.com/course/introduction.htm?courseId=1004329008
+
+à S...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/hao65103940">来自：	<span class="blog_title"> boge专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/fengsi2009/article/details/78900557,BlogCommendFromBaidu_36"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/fengsi2009/article/details/78900557,BlogCommendFromBaidu_36"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/fengsi2009/article/details/78900557" target="_blank" title="SpringBoot入门-21(springboot集成mybatis注解形式增删查改properties配置，利用@Provider实现动态SQL) - chinajava_org">
+				<h4 class="text-truncate oneline">
+						<em>Spring</em><em>Boot</em>入门-21(<em>spring</em><em>boot</em><em>集成</em><em>mybatis</em>注解形式增删查改properties配置，利用@Provider实现动态SQL) - chinajava_org				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/1/5/F/3_fengsi2009.jpg" alt="fengsi2009" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">fengsi2009</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">12-26</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1021</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/fengsi2009/article/details/78900557" target="_blank" title="SpringBoot入门-21(springboot集成mybatis注解形式增删查改properties配置，利用@Provider实现动态SQL) - chinajava_org">
+							<span class="desc oneline">系列教程都是从网络上收集和本人的理解所编辑而成，仅供广大爱好者学习所用，请尊重本人的劳动成果。欢迎评论指正和转帖！（请保留连接谢谢！）
+
+
+
+
+
+一、CatController.java...</span>
+						</a>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/u014527058/article/details/76095875,BlogCommendFromBaidu_37"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/u014527058/article/details/76095875,BlogCommendFromBaidu_37"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u014527058/article/details/76095875" target="_blank" title="Spring+MyBatis纯注解零XML整合 - 求知若饥，虚心若愚">
+				<h4 class="text-truncate oneline">
+						<em>Spring</em>+<em>MyBatis</em>纯注解零XML整合 - 求知若饥，虚心若愚				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/9/A/3/3_u014527058.jpg" alt="u014527058" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">u014527058</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">07-25</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							3871</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u014527058/article/details/76095875" target="_blank" title="Spring+MyBatis纯注解零XML整合 - 求知若饥，虚心若愚">
+							<span class="desc oneline">不得不说，利用XML作为配置文件是一个非常好的想法，它可以轻松地实现配置集中化，而且修改之后无需再次编译。然而，由于大多数情况下开发者基本都会拿到程序的源码，加之对于各种XML配置文件一般情况下也只有...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/u014527058">来自：	<span class="blog_title"> 求知若饥，虚心若愚</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_66" data-pid="66" data-track-view='{"mod":"kp_popu_66-87","con":",,"}' data-track-click='{"mod":"kp_popu_66-87","con":",,"}'><div id="three_ad38" class="mediav_ad" ></div>
+<script>
+                                               NEWS_FEED({
+                w: 852,
+                h : 60,
+                showid : 'Afihld',
+                placeholderId: "three_ad38",
+                inject : 'define',
+                define : {
+                    imagePosition : 'left',
+                    imageBorderRadius : 3,
+                    imageWidth: 90,
+                    imageHeight: 60,
+                    imageFill : 'clip',
+                    displayImage : true,
+                    displayTitle : true,
+                    titleFontSize: 18,
+                    titleFontColor: '#000',
+                    titleFontFamily : 'Lato,-apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif',
+                    titleFontWeight: 'bold',
+                    titlePaddingTop : 0,
+                    titlePaddingRight : 0,
+                    titlePaddingBottom : 5,
+                    titlePaddingLeft : 16,
+                    displayDesc : true,
+                    descFontSize: 14,
+                    descFontColor: '#8e959a',
+                    descFontFamily : 'Microsoft Yahei',
+                    paddingTop : 0,
+                    paddingRight : 0,
+                    paddingBottom : 0,
+                    paddingLeft : 0,
+                    backgroundColor: '#fff',
+                    hoverColor: '#000'
+                      }
+                  })
+                                        </script></div></div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/youseenoonehere/article/details/81055693,BlogCommendFromQuerySearch_38"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/youseenoonehere/article/details/81055693,BlogCommendFromQuerySearch_38"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/youseenoonehere/article/details/81055693" target="_blank" title="spring boot 与mybatis整合 采用注解方式进行拼接sql - youseenoonehere的博客">
+				<h4 class="text-truncate oneline">
+						<em>spring</em> <em>boot</em> 与<em>mybatis</em>整合 采用<em>注解方式</em>进行拼接sql - youseenoonehere的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/4/2/F/3_youseenoonehere.jpg" alt="youseenoonehere" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">youseenoonehere</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">07-15</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							322</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/youseenoonehere/article/details/81055693" target="_blank" title="spring boot 与mybatis整合 采用注解方式进行拼接sql - youseenoonehere的博客">
+							<span class="desc oneline">spring boot 与mybatis 整合 首先先引入依赖 去maven 中央仓库查找mybatis依赖 &amp;amp;lt;!-- 引入mybatis--&amp;amp;gt;
+        &amp;amp;...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/youseenoonehere">来自：	<span class="blog_title"> youseenoonehere的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/qq_18206683/article/details/80907433,BlogCommendFromQuerySearch_39"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/qq_18206683/article/details/80907433,BlogCommendFromQuerySearch_39"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/qq_18206683/article/details/80907433" target="_blank" title="spring boot mybatis 使用注解的方式访问 带返回结果集和输出参数的存储过程 - qq_18206683的博客">
+				<h4 class="text-truncate oneline">
+						<em>spring</em> <em>boot</em> <em>mybatis</em> 使用注解的方式访问 带返回结果集和输出参数的存储过程 - qq_18206683的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/8/1/5/3_qq_18206683.jpg" alt="qq_18206683" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">qq_18206683</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">07-04</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							614</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/qq_18206683/article/details/80907433" target="_blank" title="spring boot mybatis 使用注解的方式访问 带返回结果集和输出参数的存储过程 - qq_18206683的博客">
+							<span class="desc oneline">需要使用到两个注解：org.apache.ibatis.annotations.Optionsorg.apache.ibatis.annotations.Selectmapper 写法：使用的注解和查...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/qq_18206683">来自：	<span class="blog_title"> qq_18206683的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    			<div class="recommend-item-box recommend-box-ident recommend-download-box clearfix" data-track-view='{"mod":"popu_614","con":",https://download.csdn.net/download/liqi_q/9986817,BlogCommendFromQuerySearch_40"}' data-track-click='{"mod":"popu_614","con":",https://download.csdn.net/download/liqi_q/9986817,BlogCommendFromQuerySearch_40"}'>
+			<a href="https://download.csdn.net/download/liqi_q/9986817" target="_blank">
+				<div class="content">
+					<div class="">
+						<span class="type">下载</span>
+						<h4 class="text-truncate oneline clearfix">
+							<em>spring</em><em>boot</em>整合<em>mybatis</em><em>集成</em>分页查询事务配置，页面模板 - 冰雪Love齐迹						</h4>
+						<span class="data float-right">09-20</span>
+					</div>
+					<div class="desc oneline">
+							springboot项目进行整合了mybtis配置dbcp数据源，拦截器配置，静态资源访问，集成的分页查询和相关的事务配置，以及前端跳转的模板选择等，					</div>
+				</div>
+			</a>
+		</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/wender/article/details/79851225,BlogCommendFromQuerySearch_41"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/wender/article/details/79851225,BlogCommendFromQuerySearch_41"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/wender/article/details/79851225" target="_blank" title="Spring Boot2.0整合Mybatis(自动生成注解方式,多环境配置) - wender的专栏">
+				<h4 class="text-truncate oneline">
+						<em>Spring</em> <em>Boot</em>2.0整合<em>Mybatis</em>(自动生成<em>注解方式</em>,多环境配置) - wender的专栏				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/E/0/E/3_wender.jpg" alt="wender" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">wender</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">04-08</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1903</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/wender/article/details/79851225" target="_blank" title="Spring Boot2.0整合Mybatis(自动生成注解方式,多环境配置) - wender的专栏">
+							<span class="desc oneline">本介绍Spring Boot2.0整合Mybatis，通过MyBatis Generator插件自动生成mapper的sql注解及Provider类的过程，支持多环境的yml配置文件首先用IDE开发工...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/wender">来自：	<span class="blog_title"> wender的专栏</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/u011197448/article/details/53023208,BlogCommendFromQuerySearch_42"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/u011197448/article/details/53023208,BlogCommendFromQuerySearch_42"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u011197448/article/details/53023208" target="_blank" title="SpringBoot+Maven项目实战（4）：集成Mybatis - 七彩狼的博客">
+				<h4 class="text-truncate oneline">
+						<em>Spring</em><em>Boot</em>+Maven项目实战（4）：<em>集成</em><em>Mybatis</em> - 七彩狼的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/9/F/A/3_u011197448.jpg" alt="u011197448" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">u011197448</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">11-03</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							7613</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u011197448/article/details/53023208" target="_blank" title="SpringBoot+Maven项目实战（4）：集成Mybatis - 七彩狼的博客">
+							<span class="desc oneline">1.构建测试数据库（Mysql）CREATE TABLE `message` (
+  `ID` int(50) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `NIC...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/u011197448">来自：	<span class="blog_title"> 七彩狼的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_67" data-pid="67" data-track-view='{"mod":"kp_popu_67-658","con":",,"}' data-track-click='{"mod":"kp_popu_67-658","con":",,"}'><script type="text/javascript">
+    (function() {
+        var s = "_" + Math.random().toString(36).slice(2);
+        document.write('<div style="" id="' + s + '"></div>');
+        (window.slotbydup = window.slotbydup || []).push({
+            id: "u3573058",
+            container:  s
+        });
+    })();
+</script>
+<!-- 多条广告如下脚本只需引入一次 -->
+<script type="text/javascript" src="//cpro.baidustatic.com/cpro/ui/c.js" async="async" defer="defer" ></script></div></div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/Winter_chen001/article/details/77249029,BlogCommendFromBaidu_43"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/Winter_chen001/article/details/77249029,BlogCommendFromBaidu_43"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/Winter_chen001/article/details/77249029" target="_blank" title="Spring boot Mybatis 整合（完整版） - LuisChen的博客">
+				<h4 class="text-truncate oneline">
+						<em>Spring</em> <em>boot</em> <em>Mybatis</em> 整合（完整版） - LuisChen的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/1/A/6/3_winter_chen001.jpg" alt="Winter_chen001" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">Winter_chen001</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">08-16</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							38.5万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/Winter_chen001/article/details/77249029" target="_blank" title="Spring boot Mybatis 整合（完整版） - LuisChen的博客">
+							<span class="desc oneline">
+  对Mybatis注解方式有兴趣的，可以查看我的另一篇：Spring boot Mybatis 整合（注解版）   注解方式更加简洁简单，极大程度的提高了开发速度。如果大家需要使用更高的版本比如s...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/Winter_chen001">来自：	<span class="blog_title"> LuisChen的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/u011320740/article/details/79256807,BlogCommendFromBaidu_44"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/u011320740/article/details/79256807,BlogCommendFromBaidu_44"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/u011320740/article/details/79256807" target="_blank" title="springboot系列 | 与mybatis整合 - Menco的博客">
+				<h4 class="text-truncate oneline">
+						<em>spring</em><em>boot</em>系列 | 与<em>mybatis</em>整合 - Menco的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/A/3/9/3_u011320740.jpg" alt="u011320740" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">u011320740</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">02-05</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							3.1万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/u011320740/article/details/79256807" target="_blank" title="springboot系列 | 与mybatis整合 - Menco的博客">
+							<span class="desc oneline">springboot与mybatis整合及其简单，与传统SSM框架整合少了很多烦人的配置，springboot与mybatis整合只需导入mybatis包，这样springboot就会帮我们自动配置及...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/u011320740">来自：	<span class="blog_title"> Menco的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/saytime/article/details/74783296,BlogCommendFromBaidu_45"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/saytime/article/details/74783296,BlogCommendFromBaidu_45"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/saytime/article/details/74783296" target="_blank" title="SpringBoot（五）：SpringBoot整合MyBatis - Saytime">
+				<h4 class="text-truncate oneline">
+						<em>Spring</em><em>Boot</em>（五）：<em>Spring</em><em>Boot</em>整合<em>MyBatis</em> - Saytime				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/E/3/B/3_saytime.jpg" alt="saytime" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">saytime</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">07-08</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							6.7万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/saytime/article/details/74783296" target="_blank" title="SpringBoot（五）：SpringBoot整合MyBatis - Saytime">
+							<span class="desc oneline">怎么说了，写博客虽然是一件很费时间的事情，而且还是个菜鸟，但是如果写的东西能够帮助到别人，还是值得开心的。
+
+
+回顾：
+
+上篇写了JdbcTemplate，但是想到使用Mybatis，JPA的人估计不...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/saytime">来自：	<span class="blog_title"> Saytime</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/iku5200/article/details/82856621,BlogCommendFromBaidu_46"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/iku5200/article/details/82856621,BlogCommendFromBaidu_46"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/iku5200/article/details/82856621" target="_blank" title="SpringBoot整合Mybatis完整详细版 - 海岛拾贝">
+				<h4 class="text-truncate oneline">
+						<em>Spring</em><em>Boot</em>整合<em>Mybatis</em>完整详细版 - 海岛拾贝				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/6/D/D/3_iku5200.jpg" alt="iku5200" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">iku5200</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">09-27</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1184</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/iku5200/article/details/82856621" target="_blank" title="SpringBoot整合Mybatis完整详细版 - 海岛拾贝">
+							<span class="desc oneline">记得刚接触SpringBoot时，大吃一惊，世界上居然还有这么省事的框架，立马感叹：SpringBoot是世界上最好的框架。哈哈！
+
+当初跟着教程练习搭建了一个框架，传送门：spring boot +...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/iku5200">来自：	<span class="blog_title"> 海岛拾贝</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/guobinhui/article/details/79289189,BlogCommendFromBaidu_47"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/guobinhui/article/details/79289189,BlogCommendFromBaidu_47"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/guobinhui/article/details/79289189" target="_blank" title="最全面的springBoot集成mybatis+mysql项目搭建经验分享 - 奋斗的青春最美">
+				<h4 class="text-truncate oneline">
+						最全面的<em>spring</em><em>Boot</em><em>集成</em><em>mybatis</em>+mysql项目搭建经验分享 - 奋斗的青春最美				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/E/9/3/3_guobinhui.jpg" alt="guobinhui" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">guobinhui</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">02-08</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							1.5万</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/guobinhui/article/details/79289189" target="_blank" title="最全面的springBoot集成mybatis+mysql项目搭建经验分享 - 奋斗的青春最美">
+							<span class="desc oneline">大家都知道，现在Spring框架几乎无处不用，目前最新版本据说是Spring5，现在常用的基本还是Spring4.X，很多公司甚至用的还是Spring3.x，而Spring领域其中最好用的莫过于Spr...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/guobinhui">来自：	<span class="blog_title"> 奋斗的青春最美</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    <div class="recommend-item-box recommend-ad-box"><div id="kp_box_68" data-pid="68" data-track-view='{"mod":"kp_popu_68-659","con":",,"}' data-track-click='{"mod":"kp_popu_68-659","con":",,"}'><script type="text/javascript">
+    (function() {
+        var s = "_" + Math.random().toString(36).slice(2);
+        document.write('<div style="" id="' + s + '"></div>');
+        (window.slotbydup = window.slotbydup || []).push({
+            id: "u3573059",
+            container:  s
+        });
+    })();
+</script></div></div>
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/danchejikafo/article/details/52949186,BlogCommendFromBaidu_48"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/danchejikafo/article/details/52949186,BlogCommendFromBaidu_48"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/danchejikafo/article/details/52949186" target="_blank" title="mybatis注解方式写 in语句 - danchejikafo的博客">
+				<h4 class="text-truncate oneline">
+						<em>mybatis</em><em>注解方式</em>写 in语句 - danchejikafo的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/C/F/E/3_danchejikafo.jpg" alt="danchejikafo" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">danchejikafo</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">10-27</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							3740</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/danchejikafo/article/details/52949186" target="_blank" title="mybatis注解方式写 in语句 - danchejikafo的博客">
+							<span class="desc oneline">/**
+ * @param detailIds'1,2,3'
+ */
+
+@Update(&quot;update web_1rmb_snatch_detail set status = 2 where ...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/danchejikafo">来自：	<span class="blog_title"> danchejikafo的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    		<div class="recommend-item-box recommend-box-ident type_blog clearfix" data-track-view='{"mod":"popu_614","con":",https://blog.csdn.net/KingBoyWorld/article/details/78966789,BlogCommendFromBaidu_49"}' data-track-click='{"mod":"popu_614","con":",https://blog.csdn.net/KingBoyWorld/article/details/78966789,BlogCommendFromBaidu_49"}'>
+			<div class="content">
+				<a href="https://blog.csdn.net/KingBoyWorld/article/details/78966789" target="_blank" title="SpringBoot使用Mybatis注解进行一对多和多对多查询 - KingBoyWorld的博客">
+				<h4 class="text-truncate oneline">
+						<em>Spring</em><em>Boot</em>使用<em>Mybatis</em>注解进行一对多和多对多查询 - KingBoyWorld的博客				</h4>
+				<div class="info-box d-flex align-content-center">
+					<!-- <p class="avatar">
+							<img src="https://avatar.csdn.net/7/5/F/3_kingboyworld.jpg" alt="KingBoyWorld" class="avatar-pic">
+							<span class="namebox">
+								<span class="name">KingBoyWorld</span>
+								<span class="triangle"></span>
+							</span>
+					</p> -->
+					<p class="date-and-readNum">
+						<span class="date hover-show">01-04</span>
+						<span class="read-num hover-hide">
+							<svg class="icon csdnc-yuedushu" aria-hidden="true">
+								<use xlink:href="#csdnc-m-passwords-visible"></use>
+							</svg>
+							8384</span>
+						</p>
+					</div>
+				</a>
+					<p class="content">
+						<a href="https://blog.csdn.net/KingBoyWorld/article/details/78966789" target="_blank" title="SpringBoot使用Mybatis注解进行一对多和多对多查询 - KingBoyWorld的博客">
+							<span class="desc oneline">SpringBoot使用Mybatis注解进行一对多和多对多查询
+
+GitHub的完整示例项目地址kingboy-springboot-data
+
+
+
+一、模拟的业务查询
+
+系统中的用户user都有唯...</span>
+						</a>
+                        						<span class="blog_title_box oneline"><a target="_blank" href="https://blog.csdn.net/KingBoyWorld">来自：	<span class="blog_title"> KingBoyWorld的博客</span></a></span>
+                        					</p>
+			</div>
+					</div>
+	
+    
+	
+    
+    
+
+            <div class="recommend-loading-box">
+                <img src='https://csdnimg.cn/release/phoenix/images/feedLoading.gif'>
+            </div>
+            <div class="recommend-end-box">
+                <p class="text-center">没有更多推荐了，<a href="https://blog.csdn.net/" class="c-blue c-blue-hover c-blue-focus">返回首页</a></p>
+            </div>
+        </div>
+    </main>
+
+    <aside>
+		    <div id="asideProfile" class="aside-box">
+    <!-- <h3 class="aside-title">个人资料</h3> -->
+    <div class="profile-intro d-flex">
+        <div class="avatar-box d-flex justify-content-center flex-column">
+            <a href="https://blog.csdn.net/xuyuzhuang1991">
+                <img src="https://avatar.csdn.net/8/0/0/3_xuyuzhuang1991.jpg" class="avatar_pic">
+            </a>
+                    </div>
+        <div class="user-info d-flex justify-content-center flex-column">
+            <p class="name csdn-tracking-statistics tracking-click" data-mod="popu_379">
+                <a href="https://blog.csdn.net/xuyuzhuang1991" target="_blank" class="" id="uid">大壮-_-</a>
+            </p>
+                    </div>
+                <div class="opt-box d-flex justify-content-center flex-column">
+            <span  class="csdn-tracking-statistics tracking-click" data-mod="popu_379">
+                <a class="btn btn-sm btn-red-hollow attention" id="btnAttent">关注</a>
+            </span>
+                    </div>
+            </div>
+    <div class="data-info d-flex item-tiling">
+                <dl class="text-center" title="9">
+                        <dt><a href="https://blog.csdn.net/xuyuzhuang1991?t=1">原创</a></dt>
+            <dd><a href="https://blog.csdn.net/xuyuzhuang1991?t=1"><span class="count">9</span></a></dd>
+                    </dl>
+        <dl class="text-center" id="fanBox" title="7">
+            <dt>粉丝</dt>
+            <dd><span class="count" id="fan">7</span></dd>
+        </dl>
+        <dl class="text-center" title="2">
+            <dt>喜欢</dt>
+            <dd><span class="count">2</span></dd>
+        </dl>
+        <dl class="text-center" title="5">
+            <dt>评论</dt>
+            <dd><span class="count">5</span></dd>
+        </dl>
+    </div>
+    <div class="grade-box clearfix">
+        <dl>
+            <dt>等级：</dt>
+            <dd>
+                <a href="https://blog.csdn.net/home/help.html#level" title="2级,点击查看等级说明" target="_blank">
+                    <svg class="icon icon-level" aria-hidden="true">
+                        <use xlink:href="#csdnc-bloglevel-2"></use>
+                    </svg>
+                </a>
+            </dd>
+        </dl>
+        <dl>
+            <dt>访问：</dt>
+            <dd title="11573">
+                1万+            </dd>
+        </dl>
+        <dl>
+            <dt>积分：</dt>
+            <dd title="124">
+                124            </dd>
+        </dl>
+        <dl title="1246260">
+            <dt>排名：</dt>
+            <dd>124万+</dd>
+        </dl>
+    </div>
+        <div class="badge-box d-flex">
+        <span>勋章：</span>
+                        <div class="icon-badge" title="持之以恒">
+            <div class="mouse-box">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#csdnc-m-lasting"></use>
+                </svg>
+                <div class="icon-arrow"></div>
+            </div>
+            <div class="grade-detail-box">
+                <div class="pos-box">
+                    <div class="left-box d-flex justify-content-center align-items-center flex-column">
+                        <svg class="icon" aria-hidden="true">
+                            <use xlink:href="#csdnc-m-lasting"></use>
+                        </svg>
+                        <p>持之以恒</p>
+                    </div>
+                    <div class="right-box d-flex justify-content-center align-items-center">
+                        授予每个自然月内发布4篇或4篇以上原创或翻译IT博文的用户。不积跬步无以至千里，不积小流无以成江海，程序人生的精彩需要坚持不懈地积累！
+                    </div>
+                </div>
+            </div>
+        </div>
+                                                <script>
+            (function ($) {
+                setTimeout(function(){
+                    $('div.icon-badge.show-moment').removeClass('show-moment');
+                }, 5000);
+            })(window.jQuery)
+        </script>
+    </div>
+    </div>
+		    <div class="csdn-tracking-statistics mb8 box-shadow" data-pid="blog" data-mod="popu_4" style="height:250px;">
+    <div class="aside-content text-center" id="cpro_u2734133">
+      <div id="kp_box_56" data-pid="56" data-track-view='{"mod":"kp_popu_56-76","con":",,"}' data-track-click='{"mod":"kp_popu_56-76","con":",,"}'><script type="text/javascript">
+    (function() {
+        var s = "_" + Math.random().toString(36).slice(2);
+        document.write('<div style="" id="' + s + '"></div>');
+        (window.slotbydup = window.slotbydup || []).push({
+            id: "u3032528",
+            container:  s
+        });
+    })();
+</script>
+<!-- 多条广告如下脚本只需引入一次 -->
+<script type="text/javascript" src="//cpro.baidustatic.com/cpro/ui/c.js" async="async" defer="defer" ></script></div>    </div>
+</div>
+		    <div id="asideNewArticle" class="aside-box">
+    <h3 class="aside-title">最新文章</h3>
+    <div class="aside-content">
+        <ul class="inf_list clearfix csdn-tracking-statistics tracking-click" data-mod="popu_382">
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/xuyuzhuang1991/article/details/81538029" target="_blank">【翻译】Hyperledger Fabric v1.1 中的系统链码</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/xuyuzhuang1991/article/details/79820946" target="_blank">拜占庭将军问题（四）——非全连接下的算法演变</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/xuyuzhuang1991/article/details/79672887" target="_blank">拜占庭将军问题（三）——书面协议</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/xuyuzhuang1991/article/details/79638051" target="_blank">拜占庭将军问题（二）——口头协议</a>
+            </li>
+                        <li class="clearfix">
+                <a href="https://blog.csdn.net/xuyuzhuang1991/article/details/79637990" target="_blank">拜占庭将军问题（一）—— 引言与结论</a>
+            </li>
+                    </ul>
+    </div>
+</div>
+		    		    <div id="asideCategory" class="aside-box">
+    <h3 class="aside-title">个人分类</h3>
+    <div class="aside-content">
+        <ul>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/xuyuzhuang1991/article/category/6668985">
+                    <span class="title oneline">Java</span>
+                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/xuyuzhuang1991/article/category/6668987">
+                    <span class="title oneline">区块链</span>
+                    <span class="count float-right">8篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/xuyuzhuang1991/article/category/7092172">
+                    <span class="title oneline">hyperledger</span>
+                    <span class="count float-right">5篇</span>
+                </a>
+            </li>
+                        <li>
+                <a class="clearfix" href="https://blog.csdn.net/xuyuzhuang1991/article/category/7120101">
+                    <span class="title oneline">运维</span>
+                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                    </ul>
+    </div>
+    </div>
+		    <div id="asideArchive" class="aside-box">
+    <h3 class="aside-title">归档</h3>
+    <div class="aside-content">
+        <ul class="archive-list">
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/xuyuzhuang1991/article/month/2018/08">
+                    2018年8月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/xuyuzhuang1991/article/month/2018/04">
+                    2018年4月                    <span class="count float-right">1篇</span>
+                </a>
+            </li>
+                        <!--归档统计-->
+            <li>
+                <a href="https://blog.csdn.net/xuyuzhuang1991/article/month/2018/03">
+                    2018年3月                    <span class="count float-right">8篇</span>
+                </a>
+            </li>
+                    </ul>
+    </div>
+    </div>
+		    <div id="asideHotArticle" class="aside-box">
+	<h3 class="aside-title">热门文章</h3>
+	<div class="aside-content">
+		<ul class="hotArticle-list csdn-tracking-statistics tracking-click" data-mod="popu_521">
+							<li>
+					<a href="https://blog.csdn.net/xuyuzhuang1991/article/details/54143945">Spring Boot集成MyBatis——注解方式</a>
+					<p class="read">阅读量：<span>5332</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/xuyuzhuang1991/article/details/77482659">CentOS7.2离线安装docker-ce最新版</a>
+					<p class="read">阅读量：<span>1919</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/xuyuzhuang1991/article/details/77092619">CentOS搭建Fabric-1.0</a>
+					<p class="read">阅读量：<span>1305</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/xuyuzhuang1991/article/details/79637990">拜占庭将军问题（一）—— 引言与结论</a>
+					<p class="read">阅读量：<span>832</span></p>
+				</li>
+							<li>
+					<a href="https://blog.csdn.net/xuyuzhuang1991/article/details/79672887">拜占庭将军问题（三）——书面协议</a>
+					<p class="read">阅读量：<span>507</span></p>
+				</li>
+					</ul>
+	</div>
+</div>
+		    <div id="asideNewComments" class="aside-box">
+    <h3 class="aside-title">最新评论</h3>
+    <div class="aside-content">
+        <ul class="newcomment-list">
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/xuyuzhuang1991/article/details/79672887#comments">拜占庭将军问题（三）——书面协议</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/qq_17071187" class="user-name" target="_blank">qq_17071187</a>：如果司令是叛徒，那么忠诚的副官在两两交换命令时，可以立马发现。可是如果副官中有叛徒，那么如何发现？...                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/xuyuzhuang1991/article/details/79672887#comments">拜占庭将军问题（三）——书面协议</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/qq_17071187" class="user-name" target="_blank">qq_17071187</a>：请问SM(m)算法中，是不是各忠诚副官提前都知道了他们中具体有多少个叛徒了(m个)？？ 可是他们如...                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/xuyuzhuang1991/article/details/79672887#comments">拜占庭将军问题（三）——书面协议</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/u012369140" class="user-name" target="_blank">u012369140</a>：谢谢 博主分享                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/xuyuzhuang1991/article/details/77092619#comments">CentOS搭建Fabric-1.0</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/xuyuzhuang1991" class="user-name" target="_blank">xuyuzhuang1991</a>：[reply]cyberspecter[/reply]
+你把节点的admincerts换成admi...                </p>
+            </li>
+                        <li>
+                <a class="title text-truncate" target="_blank" href="https://blog.csdn.net/xuyuzhuang1991/article/details/77092619#comments">CentOS搭建Fabric-1.0</a>
+                <p class="comment">
+                    <a href="https://my.csdn.net/cyberspecter" class="user-name" target="_blank">cyberspecter</a>：你好。第5.2节的最后一句话“则生成了peer0的证书和orderer0的证书，将localMsp...                </p>
+            </li>
+                    </ul>
+    </div>
+</div>
+		<div id="asideFooter">
+			
+		<div class="aside-box">
+			<div id="kp_box_57" data-pid="57" data-track-view='{"mod":"kp_popu_57-77","con":",,"}' data-track-click='{"mod":"kp_popu_57-77","con":",,"}'><script type="text/javascript">
+    (function() {
+        var s = "_" + Math.random().toString(36).slice(2);
+        document.write('<div style="" id="' + s + '"></div>');
+        (window.slotbydup = window.slotbydup || []).push({
+            id: "u3163270",
+            container:  s
+        });
+    })();
+</script>
+<!-- 多条广告如下脚本只需引入一次 -->
+<script type="text/javascript" src="//cpro.baidustatic.com/cpro/ui/c.js" async="async" defer="defer" ></script></div>		</div>
+				<div class="aside-box">
+			<div class="persion_article">
+			</div>
+		</div>
+	</div>
+</aside>
+<script src="https://csdnimg.cn/pubfooter/js/publib_footer-1.0.3.js" data-isfootertrack="false" type="text/javascript"></script>
+<script>
+	$("a.flexible-btn").click(function(){
+		$(this).parents('div.aside-box').removeClass('flexible-box');
+		$(this).remove();
+	})
+</script>
+</div>
+<div class="mask-dark"></div>
+<div class="tool-box">
+	<ul class="meau-list">
+		<li class="btn-like-box long-width">
+			<button class=" long-height hover-box btn-like " title="点赞">
+				<svg class="icon active hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-thumbsup-ok"></use>
+				</svg>
+				<svg class="icon no-active hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-thumbsup"></use>
+				</svg>
+				<span class="hover-show text-box text">
+					<span class="no-active">点赞</span>
+					<span class="active">取消点赞</span>
+				</span>
+				<p>2</p>
+			</button>
+		</li>
+		<li class="">
+						<a class="btn-comments low-height hover-box" title="写评论" href="#commentBox">
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-comments"></use>
+				</svg>
+				<span class="hover-show text">评论</span>
+				<p class="">
+										</p>
+			</a>
+		</li>
+		<li class="toc-container-box" id="liTocBox">
+			<button class="btn-toc low-height hover-box" title="目录">
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-contents"></use>
+				</svg>
+				<span class="hover-show text">目录</span>
+			</button>
+			<div class="toc-container">
+				<div class="pos-box">
+					<div class="icon-arrow"></div>
+					<div class="scroll-box">
+						<div class="toc-box"></div>
+					</div>
+				</div>
+				<div class="opt-box">
+					<button class="btn-opt prev nomore" title="向上">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#csdnc-chevronup"></use>
+						</svg>
+					</button>
+					<button class="btn-opt next">
+						<svg class="icon" aria-hidden="true">
+							<use xlink:href="#csdnc-chevrondown"></use>
+						</svg>
+					</button>
+				</div>
+			</div>
+		</li>
+		<li>
+			<button class="btn-bookmark low-height hover-box" title="收藏">
+				<svg class="icon active hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-bookmark-ok"></use>
+				</svg>
+				<svg class="icon no-active hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-bookmark"></use>
+				</svg>
+					<span class="hover-show text">收藏</span>
+				<!-- <span class="hover-show text-box text">
+					<span class="no-active">收藏</span>
+					<span class="active">取消收藏</span>
+				</span> -->
+			</button>
+		</li>
+				<li class="bdsharebuttonbox">
+			<button class="btn-comments low-height hover-box" >
+				<a href="#" class="bds_weixin clear-share-style" data-cmd="weixin" title="手机看"></a>
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-usephone"></use>
+				</svg>
+				<span class="hover-show text text3">
+					手机看
+				</span>
+			</button>
+		</li>
+								<li class="widescreen-hide">
+			<a class="btn-comments hover-box low-height" href="https://blog.csdn.net/xuyuzhuang1991/article/details/77092619" title="CentOS搭建Fabric-1.0">
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-chevronright"></use>
+				</svg>
+				<span class="hover-show text text3">下一篇</span>
+			</a>
+		</li>
+						<!-- 宽屏更多按钮 -->
+		<li class="widescreen-more">
+			<a class="btn-comments chat-ask-button low-height hover-box" title="快问" href="#chatqa">
+				<svg class="icon hover-hide" aria-hidden="true">
+					<use xlink:href="#csdnc-more"></use>
+				</svg>
+				<span class="hover-show text">更多</span>
+				
+			</a>
+			<ul class="widescreen-more-box">
+																<li class="widescreen-more">
+					<a class="btn-comments hover-box low-height" href="https://blog.csdn.net/xuyuzhuang1991/article/details/77092619" title="CentOS搭建Fabric-1.0">
+						<svg class="icon hover-hide" aria-hidden="true">
+							<use xlink:href="#csdnc-chevronright"></use>
+						</svg>
+						<span class="hover-show text text3">下一篇</span>
+					</a>
+				</li>
+							</ul>
+		</li>
+	</ul>
+</div>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'https://csdnimg.cn/static/api/js/share.js?v=89860594'];</script>
+<script>
+    var recommendCount = 50;
+    recommendCount = recommendCount > 1 ? (recommendCount + (recommendCount>6 ? 2 : 1)) : recommendCount;
+    var articleTit = articleTitles;
+    var ChannelId = 16;
+    var articleId = "54143945";
+    var commentscount = 0;
+    var islock = false;
+    var curentUrl = "https://blog.csdn.net/xuyuzhuang1991/article/details/54143945";
+    var myUrl = "https://my.csdn.net/";
+    //1禁止评论，2正常
+    var commentAuth = 2;
+    //百度搜索
+    var baiduKey = "springboot+mybatis+%E5%85%A8%E6%B3%A8%E8%A7%A3";
+    var needInsertBaidu = false;
+    // 代码段样式
+    var codeStyle = '';
+		var highlight = ["spring","boot","\u96c6\u6210","mybatis","\u6ce8\u89e3\u65b9\u5f0f"];//高亮数组
+		// 相关推荐博主数据
+    var RecommendBlogExpertList = [{"user_name":"woniu211111","nick_name":"\u8717\u725b201","avatar":"https:\/\/avatar.csdn.net\/D\/6\/9\/3_woniu211111.jpg","is_expert":true,"article_count":77},{"user_name":"a123demi","nick_name":"IT\u72d7\u63a2\u6c42","avatar":"https:\/\/avatar.csdn.net\/9\/5\/1\/3_a123demi.jpg","is_expert":false,"article_count":176},{"user_name":"J080624","nick_name":"\u6d41\u70df\u9ed8","avatar":"https:\/\/avatar.csdn.net\/0\/3\/6\/3_j080624.jpg","is_expert":false,"article_count":671},{"user_name":"goldenfish1919","nick_name":"\u82e5\u9c7c1919","avatar":"https:\/\/avatar.csdn.net\/A\/C\/D\/3_goldenfish1919.jpg","is_expert":false,"article_count":154},{"user_name":"youseenoonehere","nick_name":"it_noone","avatar":"https:\/\/avatar.csdn.net\/4\/2\/F\/3_youseenoonehere.jpg","is_expert":false,"article_count":12},{"user_name":"wender","nick_name":"cjrjc","avatar":"https:\/\/avatar.csdn.net\/E\/0\/E\/3_wender.jpg","is_expert":false,"article_count":122},{"user_name":"u011197448","nick_name":"\u4e03\u5f69\u72fc","avatar":"https:\/\/avatar.csdn.net\/9\/F\/A\/3_u011197448.jpg","is_expert":false,"article_count":25},{"user_name":"armarm9","nick_name":"\u9a6c\u53d4\u53d4\u4e0d\u574f","avatar":"https:\/\/avatar.csdn.net\/6\/9\/F\/3_armarm9.jpg","is_expert":false,"article_count":16},{"user_name":"qq_20408843","nick_name":"qq_20408843","avatar":"https:\/\/avatar.csdn.net\/B\/D\/0\/3_qq_20408843.jpg","is_expert":false,"article_count":3},{"user_name":"yangliuhbhd","nick_name":"yangliuhbhd","avatar":"https:\/\/avatar.csdn.net\/D\/C\/8\/3_yangliuhbhd.jpg","is_expert":false,"article_count":86}];
+
+		var articleType = 1;
+		var CopyrightContent = '';
+</script>
+<script src="https://csdnimg.cn/public/sandalstrap/1.4/js/sandalstrap.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/vendor/pagination/paging.js"></script>
+<script src='https://csdnimg.cn/public/common/gotop/js/goTop-v1.0.min.js?v201811201455'></script>
+<script>
+    GoTop({
+        right: 8,
+        hasReport: true,
+        reportFun: function() {
+            showReport(false,articleTit);
+        }
+    })
+</script>
+
+<script src="https://csdnimg.cn/search/baidu_search-1.1.2.js?v=201802071056&autorun=true&install=true&keyword=springboot+mybatis+%E5%85%A8%E6%B3%A8%E8%A7%A3"  type="text/javascript"></script>
+</body>
+
+<!-- 右侧第四栏 -->
+<div class="fourth_column">
+	<div class="title-box">
+		<b class="title">猿学习</b>
+		<span class="fourth_column_close">    
+			<svg class="icon" aria-hidden="true">
+				<use xlink:href="#csdnc-times"></use>
+			</svg>
+		</span>
+		
+	</div>
+	<ul class="">
+		<li><div id="kp_box_456" data-pid="456" data-track-view='{"mod":"kp_popu_456-639","con":",,"}' data-track-click='{"mod":"kp_popu_456-639","con":",,"}'><a href="https://edu.csdn.net/topic/python115?utm_source=blogright" target="_blank"><div class="blogkp2"><img src="https://img-ads.csdn.net/2018/201811070945058586.png"width="100" height="100"><h6>Python全栈工程师免费试听</h6>
+    </div></a></div></li>		<li><div id="kp_box_457" data-pid="457" data-track-view='{"mod":"kp_popu_457-681","con":",,"}' data-track-click='{"mod":"kp_popu_457-681","con":",,"}'><img src="http://img-ads.csdn.net/2018/201811231407218611.jpg"width="100" height="100"></div></li>		<li><div id="kp_box_458" data-pid="458" data-track-view='{"mod":"kp_popu_458-640","con":",,"}' data-track-click='{"mod":"kp_popu_458-640","con":",,"}'><a href="https://gitchat.csdn.net/column/5a7d1a13a7f22b3dffca7e49?utm_source=csdn100" target="_blank"><div class="blogkp3"><img src="http://img-ads.csdn.net/2018/201811091452349556.png"width="100" height="100"><h6>Python 爬虫和数据分析实战</h6><span style="position:absolute;right:0;bottom:0;background:url(https://img-ads.csdn.net/2016/201608021757063065.png) no-repeat;width:33px;height:18px;display:block;z-index: 9999;"></span></div></a></div></li>		<li><div id="kp_box_459" data-pid="459" data-track-view='{"mod":"kp_popu_459-687","con":",,"}' data-track-click='{"mod":"kp_popu_459-687","con":",,"}'><img src="http://img-ads.csdn.net/2018/201811231432284520.jpg"width="100" height="100"></div></li>	</ul>
+</div>
+<script type="text/javascript">
+	$('.fourth_column_close').click(function(){
+		$('.fourth_column').remove();
+	})
+</script>
+<!-- 右侧第四栏end -->
+<!-- 高亮未与 markdown兼容  -->
+	<link rel="stylesheet" href="https://csdnimg.cn/release/blog_editor_html/release1.3.3/ckeditor/plugins/codesnippet/lib/highlight/styles/atom-one-dark.css">
+	<script type="text/javascript" src="https://csdnimg.cn/release/phoenix/production/pc_wap_common-9e177e0136.js" /></script>
+	
+	<!-- <script type="text/javascript" src="https://csdnimg.cn/release/phoenix/production/markdownCopy-3e5d9ef4b0.js" /></script> -->
+
+
+<script src="https://g.csdnimg.cn/login-box/1.0.2/login-box.js?t=1542363472"></script>
+<script src="https://csdnimg.cn/release/phoenix/template/js/common-1c6034e07d.min.js"></script>
+<script src="https://csdnimg.cn/release/phoenix/template/js/detail-60fb5508d0.min.js"></script>
+	<script src="https://csdnimg.cn/release/phoenix/themes/skin-yellow/skin-yellow-9376486353.min.js"></script>
+<script src="//g.csdnimg.cn/fixed-sidebar/1.1.1/fixed-sidebar.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="//g.csdnimg.cn/check-adblock/1.0.9/check-adblock.js"></script>
+
+<script type="text/javascript" src="https://static-blog.csdn.net/mdeditor/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            "HTML-CSS": {
+                    linebreaks: { automatic: true, width: "94%container" },
+                    imageFont: null
+            },
+            tex2jax: {
+                preview: "none"
+            },
+            mml2jax: {
+                preview: 'none'
+            }
+    });
+</script>
+<script type="text/javascript">
+window.baidu_hh_hotword = {
+    di:'24004469_1_oem_dg',
+		id:['content_views'],
+    isMobile:false,
+    page_url:'https://blog.csdn.net/xuyuzhuang1991/article/details/54143945',
+    title:'Spring Boot集成MyBatis——注解方式',
+    sid:""
+}
+</script>
+<script src="https://gh.bdstatic.com/static/gh/js/ll/m_word.js"></script>
+</html>

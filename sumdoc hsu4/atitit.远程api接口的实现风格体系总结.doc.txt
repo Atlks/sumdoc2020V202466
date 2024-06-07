@@ -1,0 +1,9 @@
+atitit.远程api接口的实现风格体系总结
+
+dsl体系  method(param)
+sql体系  
+json体系  method(param)   param是个sql req json
+full http 体系。。
+
+
+

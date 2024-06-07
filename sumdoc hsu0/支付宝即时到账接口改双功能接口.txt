@@ -1,0 +1,18 @@
+
+
+paip.支付宝即时到账接口改双功能接口.txt
+$service =  "reate_direct_pay_by_user 即时到账交易
+改成
+$service =  "trade_create_by_buyer";
+
+
+增加以下参数
+ //ati c317
+  $this->parameter['price']= $this->parameter['total_fee'];
+   $this->parameter['logistics_fee']="0.00";
+   $this->parameter['logistics_payment']="SELLER_PAY";
+   $this->parameter['logistics_type']="EXPRESS";
+      $this->parameter['quantity']="1";
+   
+ 
+  ////

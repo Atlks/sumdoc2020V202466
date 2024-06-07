@@ -1,0 +1,245 @@
+atitit.验证码识别step3----去除边框---- 图像处理类库 attilax总结java版本
+ 
+
+
+11
+22
+22
+22
+22
+55
+99
+99
+99
+1010
+1010
+1111
+1212
+1212
+12
+
+去除边框思路原理
+图像裁剪：：从图片的Positions.CENTER, wid, hit)裁剪。。从中心点开始,慢慢夸大宽高。。
+去除边框z走十减少border*2  
+prj..atibrow
+
+	public static void main(String[] args) throws IOException {
+		String jpg="c:\\0415_105633_801.jpg";
+		String deboxJpg = jpg+"_debox.jpg";
+		int border=1;
+		// BufferedImage extends java.awt.Image
+		ImgXbyThumbnail.deBorder(jpg, deboxJpg, border);
+System.out.println("----f");
+	}
+
+
+作者:: 老哇的爪子 Attilax 艾龙，  EMAIL:1466519819@qq.com
+转载请注明来源： http://blog.csdn.net/attilax
+
+Thumbnailator 是一个用来生成图像缩略图、裁切、旋转、添加水印等操作
+
+OpenCL的Java库 JavaCL 
+ JavaCL 是一个封装了 OpenCL 图形API的 Java 类库，提供很多高级的图像处理功能。该项目的 JavaDoc 文档。 示例代码
+_Java_Image_Filters_是一款基于Java的图像处理类库，特别是在图像滤镜特效方面，
+Java Image Filters简直就是强大到天衣无缝。它几乎提供了PS上大部分的图像特效。比如反色特效、图像扭曲、水波和纹理等效果。
+ 
+更多特效大家可以去它的官方网站，也可以下载这个类库使用。链接见文末的_è½¯ä»¶é¦é¡µåè½¯ä»¶ä¸è½½_。
+以下是Java Image Filters提供的所有图像滤镜特效以及每一种特效实现算法思路：
+色彩调整
+
+_ChannelMixFilter_ - 混合RGB通道
+
+_ContrastFilter_ - 调整亮度和对比度
+
+_CurvesFilter_ - 调整曲线的图像
+
+_DiffusionFilter_ - 抖动
+
+_DitherFilter_ - 有序抖动
+
+_ExposureFilter_ - 改变图像的曝光度
+
+_GainFilter_ - 调节增益和偏置
+
+_GammaFilter_ - 调整图像伽玛
+
+_GrayFilter_ - 图像灰度
+
+_GrayscaleFilter_ - 转换成灰度图
+
+_HSBAdjustFilter_ - 调节色调，饱和度和亮度
+
+_InvertAlphaFilter_ - 反转Alpha通道
+
+_InvertFilter_ - 反转图像色彩
+
+_LevelsFilter_ - 调整图像的水平度
+
+_LookupFilter_ - 改变图像色彩查询表
+
+_MapColorsFilter_ - 颜色替换
+
+_MaskFilter_ - 遮罩
+
+_PosterizeFilter_ - 分色
+
+_QuantizeFilter_ - 量化的图像为256色，比如说，GIF出口
+
+_RescaleFilter_ - 颜色缩放因子
+
+_RGBAdjustFilter_ - 调整红、绿、蓝三个分量
+
+_SolarizeFilter_ - 过渡曝光
+
+_ThresholdFilter_ - 颜色阈值
+
+_TritoneFilter_ - 创建一个三色调图像
+变形和扭曲
+
+_BicubicScaleFilter_ - Scaling with bicubic interpolation
+
+_CircleFilter_ - 让图像扭曲成圆环
+
+_CropFilter_ - 图像区域剪裁
+
+_DiffuseFilter_ - Diffuse the pixels of an image
+
+_DisplaceFilter_ - 玻璃效果
+
+_DissolveFilter_ - 随机像素透明溶解的图像
+
+_FieldWarpFilter_ - Warp images using a field warp algorithm
+
+_FlipFilter_ - 翻转和旋转图像
+
+_KaleidoscopeFilter_ - 万花筒效果
+
+_MarbleFilter_ - 大理石纹效果
+
+_MirrorFilter_ - 镜像效果
+
+_OffsetFilter_ - 偏移平铺图像
+
+_PerspectiveFilter_ - 透视畸变
+
+_PinchFilter_ - Whirl-and-pinch distortion
+
+_PolarFilter_ - 极坐标转换效果
+
+_RippleFilter_ - 纹波失真
+
+_RotateFilter_ - 翻转图像
+
+_ScaleFilter_ - 原点缩放图像
+
+_ShearFilter_ - Shear an image
+
+_SphereFilter_ - 镜头畸变
+
+_SwimFilter_ - 水下波纹效果
+
+_TileImageFilter_ - 图像平铺效果
+
+_TwirlFilter_ - 扭曲变形
+
+_WarpFilter_ - A general grid image warp
+
+_WaterFilter_ - 模拟水波效果
+
+
+JJIL 是一个Java 的图像处理类库,有超过60个的图像处理任务,例如可以用来识别条形码之类。
+
+
+Apache Commons Imaging 之前是著名的 Apache Commons Sanselan ，
+用于读写各种图像格式的 Java 类库，包括快速解析图片的基本信息（size, color space, ICC profile等）和元数据。 非常好的可移植性。比起 ImageIO/JAI/Toolkit 更容易使用，支持更多的格式，提供简单访问元数据的方法
+
+
+Java Image I/O API 
+的主要包。使用 ImageIO 类的_éææ¹æ³_可以执行许多常见的图像 I/O 操作。
+_è½¯ä»¶å_ javax.imageio 的描述
+此包包含一些基本类和接口，有的用来描述图像文件内容（包括元数据和缩略图）(IIOImage)；有的用来控制图像读取过程（ImageReader、ImageReadParam 和 ImageTypeSpecifier）和控制图像写入过程（ImageWriter 和 ImageWriteParam）；还有的用来执行格式之间的代码转换 (ImageTranscoder) 和报告错误 (IIOException)。
+javax.imageio 的所有实现都提供以下标准_å¾åæ ¼å¼_插件：
+读取 写入
+JPEG 是 是
+PNG 是 是
+BMP 是 是
+WBMP 是 是
+GIF 是 否
+从以下版本开始：
+1.4
+
+SimpleImage是阿里巴巴的一个Java图片处理的类库，可以实现图片缩略、水印等处理。
+
+_å¾çææå¶ä½çJaråâEasyImage_
+EasyImage是一个图片制作的第三方Jar包，可以做所有基础的图片操作：转换，裁剪，缩放，选择等；可以结合很多总操作，创造出很酷的效果；操作 简单等…… 例如要融合两张图片，代码如下： Image image  = new Image("c:/pics/p1.jpg"); image.combineWit.
+
+other
+_Javaå¾åå¤çç±»åº_Java_Image_Filters_
+_æçº¹è¯å«å¼åå_SourceAFIS_
+_å¾çææå¶ä½çJarå_EasyImage_
+_çº¯JavaçVP8è§£ç å¨_Java_VP8_Decoder_
+_ImageMagickçJavaæ¥å£_JMagick_
+_ImageJ_
+_Javaå¾åå¤çåº_Sanselan_
+_ImageMagickçJava_æ¥å£_im4java_
+_Javaå¾åå¤çç±»åº_JJIL_
+_åè´¹Java_çå¾åå¤çåº_Imagero_
+_åä¸ç»å¾åº_DISLIN_
+_Javaå¾åç¼©ç¥å¾ç±»åº_Thumbnailator_
+_JAI-ImageIO_
+_Javaçpngå¾åçæåº_PNG_Encoder_
+_GIF4J_
+_jPCT-AE_
+_Javaå¾åå¤çæ¡æ¶_Marvin_
+_å¾çEXIFæ¥çå·¥å·_JExifViewer_
+_java-image-scaling_
+_Java_å¾åå¤çæ¡æ¶_Processing_
+_â_
+_JGraph_Layout_Pro_
+_GIFå¨ç»å¶ä½å·¥å·_GiftedMotion_
+_äºç»´çGUIæ¡æ¶_JHotDraw_
+_Jimi_
+_Batik_
+_Project_Wonderland_
+_Java2Då¾å½¢å_G_
+_GIFEncoder_
+_JavaçOpenGLå¼åå_JOGL_
+_metadata-extractor_
+_Javaå¾åå¤çåº_jrawio_
+_å¾åå¤çæ ç­¾åº_JImageTaglib_
+_OpenCLçJavaåº_JavaCL_
+_ogre4j_
+_JAI_
+_ä¸ç»´åºæ¯å¾å¼åç±»åº_jReality_
+_å¯ç¼©æ¾çUIå·¥å·å_ZVTM_
+_JavaçOpenCLåº_JOCL_
+_å­¦ä¹ Webå¾å½¢çæ¡æ¶_WebGraph_
+_å¾åçæåå¤ç_Evolvo_
+_SVG2EMF_
+_Jirr_
+_EXIF_J2ME_
+_JIU_
+_å¨æå¾å½¢ç®¡çåº_GraphStream_
+_å¯è§åæ¡æ¶_MuLaViTo_
+_jgravatar_
+_ImageFilterForAndroid_
+_Pipes_
+code
+
+	public static void deBorder(String jpg, String deboxJpg, int border)
+			throws IOException {
+		Image img=ImageIO.read(new File(jpg));
+	
+		int wid = img.getWidth(null)-(border*2);
+		int hit = img.getHeight(null)-(border*2);
+		Thumbnails.of(jpg)
+	    //从原图哪里开始裁剪   裁减多少
+	    .sourceRegion(Positions.CENTER, wid, hit)
+	    //新图的大小
+	    .size(wid,hit).toFile(deboxJpg);
+	}
+
+参考：：
+atitit.thumb生成高质量缩略图 php .net c++ java - attilax的专栏 - 博客频道 - CSDN.NET.htm
+java方面图形 图像处理 - it_man的专栏 - 博客频道 - CSDN.NET.htm
+

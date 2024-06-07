@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mybatis——缓存机制 - Wayne杨 - 博客园</title>
+<link type="text/css" rel="stylesheet" href="/bundles/blog-common.css?v=-hy83QNg62d4qYibixJzxMJkbf1P9fTBlqv7SK5zVL01"/>
+<link id="MainCss" type="text/css" rel="stylesheet" href="/skins/SimpleMemory/bundle-SimpleMemory.css?v=EanP3quXYv9G0oFCmz4BNBHvmK7M_Si1iD1EpUHL_441"/>
+<link type="text/css" rel="stylesheet" href="/blog/customcss/390186.css?v=vYbvNcQ9UMRg8MrPo2Utg42E3Sc%3d"/>
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/SimpleMemory/bundle-SimpleMemory-mobile.css?v=XGOE8_i3XCsAIQHcgl5c_8VAMMKRkj0W3Eckyc8qbso1"/>
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/realshijing/rss"/>
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/realshijing/rsd.xml"/>
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/realshijing/wlwmanifest.xml"/>
+<script src="//common.cnblogs.com/scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript">var currentBlogApp = 'realshijing', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="/bundles/blog-common.js?v=taItysi72HxMPeH9Xg5nAYabRul6hhgahi3tVIMIKV81" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="http://www.cnblogs.com/realshijing/"><img id="blogLogo" src="/Skins/custom/images/logo.gif" alt="返回主页" /></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/realshijing/">Wayne杨</a></h1>
+<h2>工作、学习笔记</h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li><a id="blog_nav_sitehome" class="menu" href="http://www.cnblogs.com/">博客园</a></li>
+<li><a id="blog_nav_myhome" class="menu" href="http://www.cnblogs.com/realshijing/">首页</a></li>
+<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/Wayne%E6%9D%A8">联系</a></li>
+<li><a id="blog_nav_rss" class="menu" href="http://www.cnblogs.com/realshijing/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="http://www.cnblogs.com/realshijing/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<span id="stats_post_count">随笔 - 101&nbsp; </span>
+<span id="stats_article_count">文章 - 0&nbsp; </span>
+<span id="stats-comment_count">评论 - 0</span>
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+<div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class = "post">
+		<h1 class = "postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/realshijing/p/8082598.html">Mybatis——缓存机制</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body"><p>MyBatis 包含一个非常强大的查询缓存特性,它可以非常方便地配置和定制。缓存可以极大的提升查询效率。</p>
+<ul>
+<li>MyBatis系统中默认定义了两级缓存。</li>
+<li>一级缓存和二级缓存。</li>
+</ul>
+<p>1、默认情况下，只有一级缓存（SqlSession级别的缓存，也称为本地缓存）开启。<br />2、二级缓存需要手动开启和配置，他是基于namespace级别的缓存。<br />3、为了提高扩展性。MyBatis定义了缓存接口Cache。我们可以通过实现Cache接口来自定义二级缓存</p>
+<h2>一、一级缓存</h2>
+<p>一级缓存(local cache), 即本地缓存, 作用域默认为sqlSession。当 Session flush 或 close 后, 该Session 中的所有 Cache 将被清空。本地缓存不能被关闭, 但可以调用clearCache(清空本地缓存, 或者改变缓存的作用域.在mybatis3.1之后, 可以配置本地缓存的作用域.在 mybatis.xml 中配置</p>
+<table border="0">
+<tbody>
+<tr>
+<td>localCacheScope &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>MyBatis 利用本地缓存机制（Local Cache）防止循环引用（circular references）和加速重复嵌套查询。 默认值为 SESSION，这种情况下会缓存一个会话中执行的所有查询。 若设置值为 STATEMENT，本地会话仅用在语句执行上，对相同 SqlSession 的不同调用将不会共享数据。</td>
+
+
+
+
+
+
+
+
+</tr>
+
+
+
+
+
+
+
+
+</tbody>
+
+
+
+
+
+
+
+
+</table>
+<h2>二、一级缓存演示&amp;失效情况</h2>
+<p>同一次会话期间只要查询过的数据都会保存在当前SqlSession的一个Map中</p>
+<ul>
+<li>key:hashCode+查询的SqlId+编写的sql查询语句+参数</li>
+<li>一级缓存失效的四种情况</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+<p>1、不同的SqlSession对应不同的一级缓存<br />2、同一个SqlSession但是查询条件不同<br />3、同一个SqlSession两次查询期间执行了任何一次增删改操作<br />4、同一个SqlSession两次查询期间手动清空了缓存</p>
+<h2>三、二级缓存&nbsp;</h2>
+<ol>
+<li>二级缓存(second level cache)，全局作用域缓存；二级缓存默认不开启，需要手动配置</li>
+<li>MyBatis提供二级缓存的接口以及实现，缓存实现要求 POJO实现Serializable接口 </li>
+<li>二级缓存在 SqlSession 关闭或提交之后才会生效 </li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ol>
+<h3>使用步骤</h3>
+<ol>
+<li>全局配置文件中开启二级缓存 </li>
+<li>需要使用二级缓存的映射文件处使用cache配置缓存</li>
+<li>注意：POJO需要实现Serializable接口</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ol>
+<h2>四、缓存相关属性</h2>
+<div class="cnblogs_code">
+<pre> <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">cache </span><span style="color: #ff0000;">eviction</span><span style="color: #0000ff;">="FIFO"</span><span style="color: #ff0000;"> flushInterval</span><span style="color: #0000ff;">="60000"</span><span style="color: #ff0000;"> readOnly</span><span style="color: #0000ff;">="false"</span><span style="color: #ff0000;"> size</span><span style="color: #0000ff;">="1024"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">cache</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<p>1、eviction=&ldquo;FIFO&rdquo;：缓存回收策略：&bull; 默认的是 LRU。</p>
+<ul>
+<li>LRU &ndash; 最近最少使用的：移除最长时间不被使用的对象。</li>
+<li>FIFO &ndash; 先进先出：按对象进入缓存的顺序来移除它们。</li>
+<li>SOFT &ndash; 软引用：移除基于垃圾回收器状态和软引用规则的对象。</li>
+<li>WEAK &ndash; 弱引用：更积极地移除基于垃圾收集器状态和弱引用规则的对象。</li>
+</ul>
+<p>2、flushInterval：刷新间隔，单位毫秒</p>
+<ul>
+<li>默认情况是不设置，也就是没有刷新间隔，缓存仅仅调用语句时刷新</li>
+</ul>
+<p>3、size：引用数目，正整数</p>
+<ul>
+<li>代表缓存最多可以存储多少个对象，太大容易导致内存溢出</li>
+</ul>
+<p>4、readOnly：只读，true/false</p>
+<ul>
+<li>true：只读缓存；会给所有调用者返回缓存对象的相同实例。因此这些对象不能被修改。这提供了很重要的性能优势。</li>
+<li>false：读写缓存；会返回缓存对象的拷贝（通过序列化）。这会慢一些，但是安全，因此默认是 false。</li>
+</ul>
+<h2>五、缓存有关设置</h2>
+<p>1、全局setting的cacheEnable：</p>
+<ul>
+<li>配置二级缓存的开关。一级缓存一直是打开的。</li>
+</ul>
+<p>2、select标签的useCache属性：</p>
+<ul>
+<li>配置这个select是否使用二级缓存。一级缓存一直是使用的</li>
+</ul>
+<p>3、sql标签的flushCache属性：</p>
+<ul>
+<li>增删改默认flushCache=true。sql执行以后，会同时清空一级和二级缓存。</li>
+<li>查询默认flushCache=false。</li>
+</ul>
+<p>4、sqlSession.clearCache()：</p>
+<ul>
+<li>只是用来清除一级缓存。</li>
+</ul>
+<p>5、当在某一个作用域 (一级缓存Session/二级缓存Namespaces) 进行了 C/U/D 操作后，默认该作用域下所有 select 中的缓存将被clear。</p>
+<h2>六、第三方缓存整合</h2>
+<ul>
+<li>EhCache 是一个纯Java的进程内缓存框架，具有快速、精干等特点，是Hibernate中默认的CacheProvider。</li>
+<li>MyBatis定义了Cache接口方便我们进行自定义扩展。</li>
+<li>步骤：</li>
+</ul>
+<p>　　1、导入ehcache包，以及整合包，日志包</p>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">ehcache-core-2.6.8.jar、mybatis-ehcache-1.0.3.jar
+slf4j-api-1.6.1.jar、slf4j-log4j12-1.6.2.jar</span></pre>
+</div>
+<p>　　2、编写ehcache.xml配置文件<br />　　3、配置cache标签</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">cache </span><span style="color: #ff0000;">type</span><span style="color: #0000ff;">="org.mybatis.caches.ehcache.EhcacheCache"</span><span style="color: #0000ff;">&gt;&lt;/</span><span style="color: #800000;">cache</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+<ul>
+<li>参照缓存：若想在命名空间中共享相同的缓存配置和实例。可以使用 cache-ref 元素来引用另外一个缓存。</li>
+</ul></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info">
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"></div>
+</div>
+
+
+		</div>
+		<div class = "postDesc">posted @ <span id="post-date">2017-12-22 14:05</span> <a href='http://www.cnblogs.com/realshijing/'>Wayne杨</a> 阅读(<span id="post_view_count">...</span>) 评论(<span id="post_comment_count">...</span>)  <a href ="https://i.cnblogs.com/EditPosts.aspx?postid=8082598" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(8082598);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=390186,cb_entryId=8082598,cb_blogApp=currentBlogApp,cb_blogUserGuid='712202ef-22ff-4b94-5d8c-08d49c352df3',cb_entryCreatedDate='2017/12/22 14:05:00';loadViewCount(cb_entryId);var cb_postType=1;</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id='comment_form' class='commentform'>
+<a name='commentform'></a>
+<div id='divCommentShow'></div>
+<div id='comment_nav'><span id='span_refresh_tips'></span><a href='javascript:void(0);' onclick='return RefreshCommentList();' id='lnk_RefreshComments' runat='server' clientidmode='Static'>刷新评论</a><a href='#' onclick='return RefreshPage();'>刷新页面</a><a href='#top'>返回顶部</a></div>
+<div id='comment_form_container'></div>
+<div class='ad_text_commentbox' id='ad_text_under_commentbox'></div>
+<div id='ad_t2'></div>
+<div id='opt_under_post'></div>
+<div id='cnblogs_c1' class='c_ad_block'></div>
+<div id='under_post_news'></div>
+<div id='cnblogs_c2' class='c_ad_block'></div>
+<div id='under_post_kb'></div>
+<div id='HistoryToday' class='c_ad_block'></div>
+<script type='text/javascript'>
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style="display:none"></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright &copy;2018 Wayne杨
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+<!--PageEndHtml Block Begin-->
+<script src="https://cdn.bootcss.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link href="https://files.cnblogs.com/files/mingjiatang/mystyle.css" rel="stylesheet">
+<script type="text/javascript" src="https://files.cnblogs.com/files/mingjiatang/mycnblogs.js"></script>
+<!--PageEndHtml Block End-->
+</body>
+</html>
